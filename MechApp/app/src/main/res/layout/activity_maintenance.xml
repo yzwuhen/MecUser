@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/layout_title"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ly_ec_type"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_ec_type"
+                android:text="机械类型"
+                android:textSize="@dimen/sp_16"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/sel_tip"
+                android:textColor="@color/color_222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_parts_type"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_parts_type"
+                android:text="配件类型"
+                android:textSize="@dimen/sp_16"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/sel_tip"
+                android:textColor="@color/color_222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_sort"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_sort"
+                android:text="智能排序"
+                android:textSize="@dimen/sp_16"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/sel_tip"
+                android:textColor="@color/color_222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:layout_marginLeft="@dimen/dp_17"
+            android:layout_marginRight="@dimen/dp_17"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:background="@drawable/rect_radio_6_y"
+            android:text="提交发布"
+            android:textColor="@color/color_222"
+            android:layout_height="56dp"/>
+
+
+    </FrameLayout>
+</LinearLayout>

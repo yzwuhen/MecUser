@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_hot_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@mipmap/clear_icon"
+        android:padding="@dimen/dp_5"
+        android:textColor="#999999"
+        android:textSize="@dimen/sp_16"
+        android:text="热门搜索"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hot_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

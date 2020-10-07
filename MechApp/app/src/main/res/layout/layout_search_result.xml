@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_mec_rent"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv1" />
+        <TextView
+            android:id="@+id/tv_apparatus"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv2" />
+        <TextView
+            android:id="@+id/tv_parts"
+            android:gravity="center"
+            style="@style/tv_style_22_b5"
+            android:text="@string/search_mec_tv3" />
+        <TextView
+            android:id="@+id/tv_recruit"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv4" />
+        <TextView
+            android:id="@+id/tv_repair"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv5" />
+    </LinearLayout>
+    <View
+        style="@style/h_view_1"/>
+    <RelativeLayout
+        android:id="@+id/rl_screen"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <TextView
+            android:layout_marginLeft="@dimen/dp_63"
+            android:id="@+id/tv_screen_left"
+            android:text="出租"
+            android:background="@drawable/tc_screen_bg"
+            android:gravity="center"
+            style="@style/tv_screen_style"/>
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_screen_right"
+            android:layout_marginRight="@dimen/dp_63"
+            android:text="求租"
+            android:background="@drawable/tc_screen_bg"
+            android:gravity="center"
+            style="@style/tv_screen_style"/>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="#F6F7FB"
+        android:textSize="12sp"
+        android:textColor="@color/color_222"
+        android:gravity="center"
+        android:text="共为您找到100条搜索结果"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:id="@+id/ly_user_pic"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            style="@style/tv_style_right"
+            android:text="头像" />
+
+        <com.example.mechanicalapp.ui.view.CusImageView
+            android:id="@+id/iv_user_pic"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginRight="@dimen/dp_17"
+            android:src="@mipmap/ic_launcher"
+            app:shape_type="round" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=">" />
+
+    </LinearLayout>
+
+    <View style="@style/h_view_10" />
+
+
+    <LinearLayout
+        android:id="@+id/ly_nick"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            style="@style/tv_style_right"
+            android:text="昵称" />
+
+        <TextView
+            android:id="@+id/tv_user_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_17"
+            android:text="昵称"
+            android:textColor="@color/color_999"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=">" />
+
+    </LinearLayout>
+
+
+    <View style="@style/h_view_10" />
+
+
+    <LinearLayout
+        android:id="@+id/ly_sex"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            style="@style/tv_style_right"
+            android:text="性别" />
+
+        <TextView
+            android:id="@+id/tv_user_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_17"
+            android:text="男"
+            android:textColor="@color/color_999"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=">" />
+
+    </LinearLayout>
+
+
+
+    <View style="@style/h_view_10" />
+
+
+    <LinearLayout
+        android:id="@+id/tv_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            style="@style/tv_style_right"
+            android:text="电话" />
+
+        <TextView
+            android:id="@+id/tv_user_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_17"
+            android:text="1222*****2212"
+            android:textColor="@color/color_999"
+            android:textSize="@dimen/sp_16" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

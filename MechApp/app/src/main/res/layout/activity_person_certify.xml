@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_title"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_222"
+            android:paddingLeft="@dimen/dp_17"
+            android:textSize="16sp"
+            android:text="真实姓名"/>
+        <EditText
+            android:id="@+id/et_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="请输入真实姓名"
+            android:textColor="@color/color_222"
+            android:textColorHint="#cacaca"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+    <View
+        style="@style/h_view_10"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_17"
+            android:textColor="@color/color_222"
+            android:textSize="16sp"
+            android:text="身份证号码"/>
+        <EditText
+            android:id="@+id/et_user_code"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="请输入身份证号码"
+            android:textColor="@color/color_222"
+            android:textColorHint="#cacaca"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+    <View
+        style="@style/h_view_10"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_17"
+            android:textColor="@color/color_222"
+            android:textSize="16sp"
+            android:text="性别"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:drawablePadding="@dimen/dp_17"
+            android:drawableRight="@drawable/circle_check_s"
+            android:textColor="@color/color_222"
+            android:textSize="16sp"
+            android:text="男"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:textColor="@color/color_222"
+            android:drawablePadding="@dimen/dp_17"
+            android:drawableRight="@drawable/circle_check_s"
+            android:textSize="16sp"
+            android:text="性别"/>
+
+    </LinearLayout>
+    <View
+        style="@style/h_view_10"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_certify"
+            android:layout_marginLeft="@dimen/dp_17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_height="50dp"
+            android:textColor="@color/color_222"
+            android:textSize="16sp"
+            android:text="身份认证"/>
+        <TextView
+            android:id="@+id/tv_sketch"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="50dp"
+            android:drawablePadding="@dimen/dp_10"
+            android:drawableLeft="@mipmap/take_picture_tip"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="@dimen/dp_17"
+            android:textSize="12sp"
+            android:textColor="#FC3D38"
+            android:text="拍照示例图"/>
+
+        <ImageView
+            android:id="@+id/iv_positive_pic"
+            app:layout_constraintTop_toBottomOf="@+id/tv_certify"
+            app:layout_constraintStart_toStartOf="@+id/tv_certify"
+            android:layout_width="179dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/take_picture_add"/>
+
+        <ImageView
+            android:id="@+id/iv_side_pic"
+            app:layout_constraintTop_toBottomOf="@+id/tv_certify"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="@dimen/dp_17"
+            android:layout_width="179dp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/take_picture_add"/>
+
+        <TextView
+            android:layout_width="179dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@+id/iv_positive_pic"
+            app:layout_constraintTop_toBottomOf="@+id/iv_positive_pic"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_666"
+            android:textSize="13sp"
+            android:text="手持身份证正面照"/>
+
+        <TextView
+            android:layout_width="179dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@+id/iv_side_pic"
+            app:layout_constraintTop_toBottomOf="@+id/iv_side_pic"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_666"
+            android:textSize="13sp"
+            android:text="手持身份证反面照"/>
+
+        <TextView
+            app:layout_constraintStart_toStartOf="@+id/iv_positive_pic"
+            app:layout_constraintEnd_toEndOf="@id/iv_side_pic"
+            app:layout_constraintTop_toBottomOf="@+id/iv_positive_pic"
+            android:layout_marginTop="90dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#FC3D38"
+            android:textSize="12sp"
+            android:text="提示： 虚假信息认证承担相应法律责任，本平台将严格保密用户身份 信息。"/>
+
+
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:textSize="17sp"
+            android:textColor="@color/color_222"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="@dimen/dp_17"
+            android:layout_marginRight="@dimen/dp_17"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:text="提交申请"
+            android:gravity="center"
+            android:background="@drawable/rect_radio_6_y"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

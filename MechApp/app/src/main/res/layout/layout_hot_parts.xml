@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F6F7FB"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/tv_hot_parts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="24dp"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="热门配件"/>
+
+    <TextView
+        android:id="@+id/tv_parts_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="100dp"
+        android:drawablePadding="7dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical|right"
+        android:drawableRight="@mipmap/more"
+        android:textSize="15sp"
+        android:textColor="#B5B5B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="更多"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/recy_hot_parts"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hot_parts"
+        app:layout_constraintStart_toStartOf="@id/tv_hot_parts"
+        app:layout_constraintEnd_toEndOf="@+id/tv_parts_more"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

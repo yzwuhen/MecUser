@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/dp_57"
+        >
+        <FrameLayout
+            android:id="@+id/main_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_gravity="bottom"
+    android:background="@mipmap/tab_bg"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_70">
+    <LinearLayout
+        android:id="@+id/ly_home"
+        android:contentDescription="@string/tab_main"
+        style="@style/main_tab_ly_style">
+
+        <TextView
+            android:id="@+id/tv_home"
+            style="@style/main_tab_tv_style_other"
+            android:drawableTop="@drawable/tab_main_icon"
+            android:text="@string/tab_main"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_store"
+        android:contentDescription="@string/tab_store"
+        style="@style/main_tab_ly_style">
+
+        <TextView
+            android:id="@+id/tv_store"
+            style="@style/main_tab_tv_style_other"
+            android:drawableTop="@drawable/tab_store"
+            android:text="@string/tab_store"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_release"
+        android:contentDescription="@string/tab_release"
+        style="@style/main_tab_ly_style">
+
+        <TextView
+            android:id="@+id/tv_release"
+            style="@style/main_tab_tv_style"
+            android:drawableTop="@drawable/tab_release"
+            android:text="@string/tab_release"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_msg"
+        android:contentDescription="@string/tab_msg"
+        style="@style/main_tab_ly_style">
+
+        <TextView
+            android:id="@+id/tv_msg"
+            style="@style/main_tab_tv_style_other"
+            android:drawableTop="@drawable/tab_msg"
+            android:text="@string/tab_msg"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ly_mine"
+        android:contentDescription="@string/tab_mine"
+        style="@style/main_tab_ly_style">
+
+        <TextView
+            android:id="@+id/tv_mine"
+            style="@style/main_tab_tv_style_other"
+            android:drawableTop="@drawable/tab_mine"
+            android:text="@string/tab_mine"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+</FrameLayout>

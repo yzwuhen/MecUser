@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_search_et" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="#F6F7FB"
+        android:gravity="center"
+        android:text="共为您找到100条搜索结果"
+        android:textColor="@color/color_222"
+        android:textSize="12sp" />
+
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/spring_list"
+        android:layout_marginRight="@dimen/dp_17"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.liaoinstan.springview.widget.SpringView>
+
+</LinearLayout>

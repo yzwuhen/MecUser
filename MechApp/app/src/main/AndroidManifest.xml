@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.mechanicalapp">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_SOCIAL_STREAM"/>
+    <uses-permission android:name="android.permission.READ_SOCIAL_STREAM"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:name=".App"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.SearchCityActivity"/>
+        <activity android:name=".ui.activity.HistorySearchActivity"/>
+        <activity android:name=".ui.activity.SearchMecActivity"/>
+        <activity android:name=".ui.activity.CloudBoxActivity"/>
+        <activity android:name=".ui.activity.MoreDataActivity"/>
+        <activity android:name=".ui.activity.SearchResultActivity"/>
+        <activity android:name=".ui.activity.EcModel"/>
+        <activity android:name=".ui.activity.EcType"/>
+        <activity android:name=".ui.activity.Brand"/>
+        <activity android:name=".ui.activity.ReportActivity"/>
+        <activity android:name=".ui.activity.MoreRecruitActivity"/>
+        <activity android:name=".ui.activity.WorkType"/>
+        <activity android:name=".ui.activity.ReleaseActivity"/>
+        <activity android:name=".ui.activity.EcLeaseActivity"/>
+        <activity android:name=".ui.activity.AskingRentActivity"/>
+        <activity android:name=".ui.activity.EcSellActivity"/>
+        <activity android:name=".ui.activity.EcBuyActivity"/>
+        <activity android:name=".ui.activity.PartsRentalActivity"/>
+        <activity android:name=".ui.activity.AskingRentPatsActivity"/>
+        <activity android:name=".ui.activity.RecruitActivity"/>
+        <activity android:name=".ui.activity.JobWantActivity"/>
+        <activity android:name=".ui.activity.GoodsListActivity"/>
+        <activity android:name=".ui.activity.SearchGoodsResult"/>
+        <activity android:name=".ui.activity.MorePartsActivity"/>
+        <activity android:name=".ui.activity.ShopCarActivity"/>
+        <activity android:name=".ui.activity.SysMsgActivity"/>
+        <activity android:name=".ui.activity.BlackListActivity"/>
+        <activity android:name=".ui.activity.BlackListSettActivity"/>
+        <activity android:name=".ui.activity.CreateRepairActivity"/>
+        <activity android:name=".ui.activity.MaintenanceActivity"/>
+        <activity android:name=".ui.activity.UserDataActivity"/>
+        <activity android:name=".ui.activity.ModifyNickActivity"/>
+        <activity android:name=".ui.activity.PersonalCertification"/>
+        <activity android:name=".ui.activity.CompanyCertifyActivity"/>
+        <activity android:name=".ui.activity.MyIntegralActivity"/>
+        <activity android:name=".ui.activity.IntegralInfoActivity"/>
+        <activity android:name=".ui.activity.SketchActivity"/>
+    </application>
+
+</manifest>

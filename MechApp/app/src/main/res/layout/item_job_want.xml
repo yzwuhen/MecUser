@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_job_pic"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:layout_marginTop="@dimen/dp_17"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_job_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="挖掘机驾驶员求职"
+        android:gravity="center_vertical"
+        android:textSize="17sp"
+        android:textColor="@color/color_222"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginLeft="@dimen/dp_10"
+        app:layout_constraintEnd_toStartOf="@+id/tv_want"
+        app:layout_constraintTop_toTopOf="@+id/iv_job_pic"
+        app:layout_constraintStart_toEndOf="@+id/iv_job_pic"
+        />
+
+    <TextView
+        android:id="@+id/tv_want"
+        android:text="期望薪资"
+        android:textColor="@color/color_b5b"
+        android:layout_marginTop="2dp"
+        android:textSize="12sp"
+        android:layout_marginRight="@dimen/dp_17"
+        app:layout_constraintTop_toTopOf="@+id/iv_job_pic"
+        app:layout_constraintEnd_toStartOf="@+id/tv_salary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/tv_salary"
+        android:text="15K以上"
+        android:textColor="#FC3D38"
+        android:textSize="17sp"
+        android:layout_marginRight="@dimen/dp_17"
+        app:layout_constraintTop_toTopOf="@+id/iv_job_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        />
+    <TextView
+        android:id="@+id/tv_job_seekers"
+        android:text="陈先生·求职者"
+        android:textColor="@color/color_666"
+        android:textSize="13sp"
+        android:layout_marginTop="@dimen/dp_5"
+        app:layout_constraintStart_toStartOf="@+id/tv_job_info"
+        app:layout_constraintTop_toBottomOf="@+id/tv_job_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/tv_address"
+        style="@style/recuit_tv_label_style"
+        android:background="@drawable/rect_radio_2_g"
+        android:layout_marginTop="@dimen/dp_8"
+        android:gravity="center"
+        android:text="广西"
+        app:layout_constraintTop_toBottomOf="@+id/tv_job_seekers"
+        app:layout_constraintStart_toStartOf="@+id/tv_job_info"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_recruit_exp"
+        style="@style/recuit_tv_label_style"
+        android:background="@drawable/rect_radio_2_g"
+        android:gravity="center"
+        android:text="1-3年经验"
+        android:layout_marginLeft="@dimen/dp_5"
+        app:layout_constraintStart_toEndOf="@+id/tv_address"
+        app:layout_constraintTop_toTopOf="@+id/tv_address"
+        />
+    <TextView
+        android:id="@+id/tv_age"
+        style="@style/recuit_tv_label_style"
+        android:background="@drawable/rect_radio_2_g"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:gravity="center"
+        android:text="32岁"
+        app:layout_constraintStart_toEndOf="@+id/tv_recruit_exp"
+        app:layout_constraintTop_toTopOf="@+id/tv_address"
+        />
+
+    <TextView
+        android:id="@+id/tv_sex"
+        style="@style/recuit_tv_label_style"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:background="@drawable/rect_radio_2_g"
+        android:gravity="center"
+        android:text="男"
+        app:layout_constraintStart_toEndOf="@+id/tv_age"
+        app:layout_constraintTop_toTopOf="@+id/tv_address"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/jl"
+        android:layout_marginTop="@dimen/dp_5"
+        android:drawablePadding="3dp"
+        android:textColor="#3A7EFF"
+        android:textSize="13sp"
+        android:text="距离205km"
+        app:layout_constraintStart_toStartOf="@id/tv_job_info"
+        app:layout_constraintTop_toBottomOf="@+id/tv_address"
+        />
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_666"
+        android:textSize="12sp"
+        android:text="刚刚"
+        app:layout_constraintEnd_toEndOf="@id/tv_salary"
+        app:layout_constraintTop_toTopOf="@+id/tv_distance"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        android:layout_marginTop="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/tv_distance"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

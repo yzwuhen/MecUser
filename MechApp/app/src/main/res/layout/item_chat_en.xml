@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/dp_17"
+    android:paddingTop="@dimen/dp_17"
+    android:paddingRight="@dimen/dp_17">
+
+    <ImageView
+        android:id="@+id/iv_user_pic"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_user_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:gravity="center"
+        android:text="用户名"
+        android:textColor="@color/color_222"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_pic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:gravity="center"
+        android:text="上午8：00"
+        android:textColor="#9a9a9a"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:gravity="center_vertical"
+        android:maxWidth="258dp"
+        android:maxLines="1"
+        android:text="这海鲜很鲜美，很棒很棒，我下次再来..."
+        android:textColor="#9a9a9a"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_user_nick"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_nick" />
+
+
+    <TextView
+        android:id="@+id/tv_msg_num"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="@dimen/dp_17"
+        android:background="@drawable/circle_red"
+        android:gravity="center"
+        android:text="99"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/ly_attr"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_user_nick"
+        app:layout_constraintTop_toBottomOf="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_en_type"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:background="@drawable/rect_radio_6_fff_cacaca"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17"
+            android:text="工种：焊接工"
+            android:textColor="#9a9a9a"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_marginLeft="7dp"
+            android:id="@+id/tv_en_company"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:background="@drawable/rect_radio_6_fff_cacaca"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17"
+            android:text="公司：广州莹宝维修"
+            android:textColor="#9a9a9a"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <View
+        style="@style/h_view_1"
+        android:layout_marginTop="@dimen/dp_17"
+        app:layout_constraintStart_toStartOf="@+id/iv_user_pic"
+        app:layout_constraintTop_toBottomOf="@+id/ly_attr" />
+</androidx.constraintlayout.widget.ConstraintLayout>

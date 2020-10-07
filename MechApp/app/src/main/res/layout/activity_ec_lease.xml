@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_17">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="出租详情"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_18" />
+
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="机械名称" />
+                <EditText android:id="@+id/et_ec_name" android:hint="请输入机械名称" style="@style/et_style" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left"
+                    android:text="计费方式" />
+                <EditText android:id="@+id/et_way"
+                    android:hint="请输入计费方式"
+                    style="@style/et_style" />
+
+                <View
+                   style="@style/v_view_1"/>
+                <TextView
+                    android:id="@+id/tv_way"
+                    style="@style/tv_style_left"
+                    android:layout_gravity="center"
+                    android:text="元/月" />
+
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout
+                android:id="@+id/ly_ec_type"
+                style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left"
+                    android:text="机械类型" />
+
+                <TextView
+                    android:hint="请选择机械类型"
+                    android:id="@+id/et_ec_type"
+                    style="@style/et_style" />
+                <TextView
+                    android:text=">"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout
+                android:id="@+id/ly_ec_brand"
+                style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left"
+                    android:text="机械品牌" />
+                <TextView
+                    android:hint="请选择机械品牌"
+                    android:id="@+id/et_ec_brand"
+                    style="@style/et_style" />
+                <TextView
+                    android:text=">"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout
+                android:id="@+id/ly_ec_model"
+                style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left"
+                    android:text="机械型号" />
+                <TextView
+                    android:hint="请选择机械型号"
+                    android:id="@+id/et_ec_model"
+                    style="@style/et_style" />
+                <TextView
+                    android:text=">"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left"
+                    android:text="工作时长" />
+                <EditText
+                    android:hint="请输入工作时长"
+                    android:id="@+id/et_work_time"
+                    style="@style/et_style" />
+                <View
+                    style="@style/v_view_1"/>
+                <TextView
+                    style="@style/tv_style_left"
+                    android:text="/小时" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="电     话" />
+                <EditText
+                    android:hint="请输入联系电话"
+                    android:id="@+id/et_phone"
+                    style="@style/et_style" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="联 系 人" />
+                <EditText
+                    android:hint="请输入联系人姓名"
+                    android:id="@+id/et_name"
+                    style="@style/et_style" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout
+                android:id="@+id/ly_production_time"
+                style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="出厂日期" />
+                <TextView
+                    android:hint="请选择出厂日期"
+                    android:id="@+id/et_production_time"
+                    style="@style/tv_style_right" />
+                <TextView
+                    android:text=">"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="地         址" />
+                <TextView
+                    android:id="@+id/et_daaress"
+                    style="@style/et_style" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/address"/>
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_height="wrap_content"
+                android:text="机械简介"
+                android:textStyle="bold"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_18" />
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/rect_radio_6_g"
+                android:layout_height="146dp">
+                <EditText
+                    android:id="@+id/et_input"
+                    android:textColorHint="@color/color_999"
+                    android:textColor="@color/color_222"
+                    android:paddingLeft="@dimen/dp_17"
+                    android:paddingTop="@dimen/dp_17"
+                    android:gravity="start"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0/200"
+                    android:textColor="@color/color_999"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="13dp"
+                    android:textSize="11sp"
+                    android:layout_gravity="end|bottom"/>
+
+            </FrameLayout>
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+
+                    style="@style/tv_style_left"
+                    android:layout_width="wrap_content"
+                    android:text="添加图片、视频" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_666"
+                    android:textSize="11sp"
+                    android:text="（前方左右45角度照片两张+后方一张，至少一张照片)"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/dp_17"
+                android:id="@+id/ry_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_marginTop="@dimen/dp_45"
+                android:layout_width="match_parent"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:background="@drawable/submit_bg"
+                android:text="提交"
+                android:textColor="@color/color_222"
+                android:layout_height="56dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

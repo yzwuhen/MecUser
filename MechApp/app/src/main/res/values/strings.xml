@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">MechanicalApp</string>
+    
+    
+    <string name="tab_main">首页</string>
+    <string name="tab_store">商城</string>
+    <string name="tab_release">发布</string>
+    <string name="tab_msg">消息</string>
+    <string name="tab_mine">我的</string>
+
+
+    <string name="hot_apparatus">热门器械</string>
+    
+    <string name="search_mec_tv1">汽车租赁</string>
+    <string name="search_mec_tv2">器械交易</string>
+    <string name="search_mec_tv3">配件租赁</string>
+    <string name="search_mec_tv4">招聘求职</string>
+    <string name="search_mec_tv5">维修厂</string>
+</resources>

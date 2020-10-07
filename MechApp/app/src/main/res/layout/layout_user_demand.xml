@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        style="@style/h_view_10"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:gravity="center"
+            android:id="@+id/tv_lease"
+            android:text="最新出租"
+            android:textSize="@dimen/sp_18"
+            android:textColor="#222222"
+            android:textStyle="bold"
+            android:drawableBottom="@drawable/tv_under_ine"
+            />
+
+        <TextView
+            android:layout_marginLeft="41dp"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:id="@+id/tv_rent"
+            android:gravity="center"
+            android:text="最新求租"
+            android:textSize="15sp"
+            android:textColor="#B5B5B5"
+            />
+
+        <TextView
+            android:id="@+id/tv_demand_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:drawablePadding="8dp"
+            android:drawableRight="@mipmap/more"
+            android:textSize="15sp"
+            android:textColor="#B5B5B5"
+            android:text="更多"/>
+
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_demand"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

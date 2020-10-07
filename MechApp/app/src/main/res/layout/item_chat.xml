@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:paddingRight="@dimen/dp_17"
+    android:paddingLeft="@dimen/dp_17"
+    android:paddingTop="@dimen/dp_17"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/iv_user_pic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_40"
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+        android:id="@+id/tv_user_nick"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:textSize="15sp"
+        android:textColor="@color/color_222"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_user_pic"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:text="用户名"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_40"
+        android:textSize="14sp"
+        android:textColor="#9a9a9a"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:text="上午8：00"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_msg"
+        android:layout_width="wrap_content"
+        android:maxWidth="258dp"
+        android:layout_height="@dimen/dp_40"
+        app:layout_constraintStart_toStartOf="@+id/tv_user_nick"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_nick"
+        android:textSize="15sp"
+        android:textColor="#9a9a9a"
+        android:maxLines="1"
+        android:text="这海鲜很鲜美，很棒很棒，我下次再来..."
+        android:gravity="center_vertical"/>
+
+
+    <TextView
+        android:id="@+id/tv_msg_num"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="99"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="12sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="@dimen/dp_17"
+        android:background="@drawable/circle_red"/>
+
+    <View
+       style="@style/h_view_1"
+        android:layout_marginTop="@dimen/dp_17"
+        app:layout_constraintTop_toBottomOf="@+id/tv_msg"
+        app:layout_constraintStart_toStartOf="@+id/iv_user_pic"
+       />
+</androidx.constraintlayout.widget.ConstraintLayout>

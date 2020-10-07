@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFB412</color>
+    <color name="colorPrimaryDark">#FFB412</color>
+    <color name="colorAccent">#FFB412</color>
+    <color name="white">#fff</color>
+
+    <color name="color_ffb923">#FFB923</color>
+
+    <color name="line_color">#F6F7FB</color>
+    <color name="carview_color">#FAFAFA</color>
+    <color name="main_tab_unselect_color">#B7B8B8</color>
+    <color name="main_tab_select_color">#222222</color>
+    <color name="color_333">#333</color>
+    <color name="color_222">#222222</color>
+    <color name="color_999">#999999</color>
+    <color name="color_666">#666666</color>
+    <color name="color_b5b">#B5B5B5</color>
+</resources>

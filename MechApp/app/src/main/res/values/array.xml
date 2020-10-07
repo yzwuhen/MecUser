@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="menu_text">
+        <item>机械租赁</item>
+        <item>配件租赁</item>
+        <item>机械交易</item>
+        <item>维修保养</item>
+        <item>求职招聘</item>
+        <item>云盒</item>
+    </array>
+
+</resources>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ly_check"
+        android:layout_width="35dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/dp_17"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="@dimen/dp_18"
+            android:layout_height="@dimen/dp_18"
+            android:src="@drawable/circle_check_s" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_goods_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toEndOf="@+id/ly_check"
+        app:layout_constraintTop_toTopOf="@+id/ly_check" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="回转支承旋转轴承大型吊车挖掘机专用配件支持大小型吊车挖掘机使用"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintTop_toTopOf="@+id/iv_goods_pic"
+        app:layout_constraintStart_toEndOf="@+id/iv_goods_pic" />
+    <TextView
+        android:id="@+id/tv_attr"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_14"
+        android:layout_marginTop="@dimen/dp_14"
+        android:drawablePadding="@dimen/dp_10"
+        android:textSize="@dimen/sp_14"
+        android:textColor="@color/color_666"
+        android:paddingRight="@dimen/dp_10"
+        android:drawableRight="@mipmap/sel_tip_n"
+        android:text="蓝色，均码"
+        android:background="@drawable/rect_radio_6_g"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_marginTop="@dimen/dp_5"
+        app:layout_constraintTop_toBottomOf="@+id/iv_goods_pic"
+        app:layout_constraintStart_toStartOf="@id/tv_title"
+        android:text="￥999"
+        android:textColor="@color/color_222"
+        android:textSize="17sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    
+    <LinearLayout
+        android:id="@+id/ly_control"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_goods_pic"
+        android:background="@drawable/rect_radio_6_fff_cacaca"
+        android:layout_width="100dp"
+        android:layout_height="28dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ly_reduce"
+            android:layout_width="28dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/goods_reduce"/>
+        </LinearLayout>
+        <View
+          style="@style/v_view_1"/>
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:text="1"
+            android:textColor="@color/color_222"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+        <View
+            style="@style/v_view_1"/>
+        <LinearLayout
+            android:id="@+id/ly_add"
+            android:layout_width="28dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/goods_add"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/ly_control"
+        android:layout_marginTop="@dimen/dp_17"
+        style="@style/h_view_1"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

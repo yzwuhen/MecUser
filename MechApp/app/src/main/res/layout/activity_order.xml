@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_search_et" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            android:id="@+id/tv_repair"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="维修订单" />
+
+        <TextView
+            android:id="@+id/tv_engineer"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="工程师" />
+
+
+    </LinearLayout>
+    <com.example.mechanicalapp.ui.view.CusViewPage
+        android:id="@+id/cus_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

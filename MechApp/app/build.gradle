@@ -15,16 +15,48 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-  
-    buildTypes {
+    signingConfigs {
+        debug {
+            // No debug config
+            storeFile file("/mec.jks")
+            storePassword "123456"
+            keyAlias "mec"
+            keyPassword "123456"
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            storeFile file("/mec.jks")
+            storePassword "123456"
+            keyAlias "mec"
+            keyPassword "123456"
         }
     }
+    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//        }
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            shrinkResources false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+
+        }
+    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility 1.8
+        sourceCompatibility "1.8"
     }
 }
 
@@ -46,4 +78,5 @@ dependencies {
     implementation 'com.youth.banner:banner:2.1.0'
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.9'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

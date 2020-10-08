@@ -1,17 +1,12 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.GoodsListAdapter
-import com.example.mechanicalapp.ui.adapter.JobWantAdapter
-import com.example.mechanicalapp.ui.adapter.RecruitAdapter
-import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.activity_search_result.*

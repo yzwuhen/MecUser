@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dp_10"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_text_left1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="机械维修"
+            android:textColor="@color/color_9a"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_text_right1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableRight="@mipmap/tip_down"
+            android:drawablePadding="@dimen/dp_10"
+            android:gravity="right"
+            android:text="￥2000"
+            android:textColor="@color/color_9a"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <View style="@style/h_view_1" />
+
+    <LinearLayout
+        android:id="@+id/ly_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_put_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_10"
+            android:text="提交时间：2020-6-1"
+            android:textColor="@color/color_9a"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_remarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:text="备注：发动机常见故障及维修建议 发动机常见故障及维修建议完 全暖机后发动机转速提高时,发动机机油报警 面对这种情况,我们一 般"
+            android:textColor="@color/color_9a"
+            android:textSize="@dimen/sp_16" />
+    </LinearLayout>
+</LinearLayout>

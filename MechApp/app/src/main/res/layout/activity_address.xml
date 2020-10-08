@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_45"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收货人："
+                android:textColor="@color/color_222"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_user_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入您的名字"
+                android:paddingLeft="@dimen/dp_10"
+                android:textColor="@color/color_222"
+                android:textColorHint="@color/color_9a"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View style="@style/h_view_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机号码："
+                android:textColor="@color/color_222"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_user_phone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入您的手机号码"
+                android:paddingLeft="@dimen/dp_10"
+                android:textColor="@color/color_222"
+                android:textColorHint="@color/color_9a"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View style="@style/h_view_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收货地区："
+                android:textColor="@color/color_222"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_take_goods_address"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请选择您的收货地址"
+                android:paddingLeft="@dimen/dp_10"
+                android:textColor="@color/color_222"
+                android:textColorHint="@color/color_9a"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View style="@style/h_view_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="详细地址："
+                android:textColor="@color/color_222"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/et_address_details"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请填写详细地址，如街道、楼牌号等"
+                android:paddingLeft="@dimen/dp_10"
+                android:textColor="@color/color_222"
+                android:textColorHint="@color/color_9a"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <View style="@style/h_view_1" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginLeft="@dimen/dp_17"
+            android:layout_marginRight="@dimen/dp_17"
+            android:drawableRight="@mipmap/switch_s"
+            android:gravity="center_vertical"
+            android:text="设为默认"
+            android:textColor="@color/color_222"
+            android:textSize="@dimen/sp_16" />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_btn"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/rect_radio_6_y"
+        android:gravity="center"
+        android:text="确认"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_16" />
+
+</FrameLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            android:id="@+id/tv_order1"
+            style="@style/tv_style_22_b5_no_under"
+            android:gravity="center"
+            android:text="全部" />
+
+        <TextView
+            android:id="@+id/tv_order2"
+            style="@style/tv_style_22_b5_no_under"
+            android:gravity="center"
+            android:text="待确认" />
+
+        <TextView
+            android:id="@+id/tv_order3"
+            style="@style/tv_style_22_b5_no_under"
+            android:gravity="center"
+            android:text="待上门" />
+
+        <TextView
+            android:id="@+id/tv_order4"
+            style="@style/tv_style_22_b5_no_under"
+            android:gravity="center"
+            android:text="进行中" />
+
+        <TextView
+            android:id="@+id/tv_order5"
+            style="@style/tv_style_22_b5_no_under"
+            android:gravity="center"
+            android:text="待付款" />
+
+        <TextView
+            android:id="@+id/tv_order6"
+            style="@style/tv_style_22_b5_no_under"
+            android:gravity="center"
+            android:text="已完成" />
+
+
+    </LinearLayout>
+
+    <com.example.mechanicalapp.ui.view.CusViewPage
+        android:id="@+id/cus_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

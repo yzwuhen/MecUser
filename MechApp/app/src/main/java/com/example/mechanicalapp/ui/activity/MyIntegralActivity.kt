@@ -37,7 +37,8 @@ class MyIntegralActivity : BaseActivity<NetData>(), View.OnClickListener {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.iv_back -> finish()
-            R.id.ly_integral->jumpActivity(null,IntegralInfoActivity::class.java)
+            R.id.ly_integral -> jumpActivity(null, IntegralInfoActivity::class.java)
+            R.id.ly_integral_rule -> jumpActivity(null, IntegralRuleActivity::class.java)
         }
     }
 }

@@ -11,7 +11,6 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.fragment.home.HomeFragment
 import com.example.mechanicalapp.ui.fragment.mine.MineFragment
 import com.example.mechanicalapp.ui.fragment.msg.MsgFragment
-import com.example.mechanicalapp.ui.fragment.release.ReleaseFragment
 import com.example.mechanicalapp.ui.fragment.store.StoreFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +21,6 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
 
      private var mHomeFragment:Fragment?=null
      private var mStoreFragment:Fragment?=null
-    // private var mReleaseFragment:Fragment?=null
      private var mMsgFragment:Fragment?=null
      private var mMineFragment:Fragment?=null
 

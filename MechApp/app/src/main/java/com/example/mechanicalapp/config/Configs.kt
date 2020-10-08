@@ -1,7 +1,8 @@
 package com.example.mechanicalapp.config
 
 object Configs {
-    const val HISTORY_TYPE :String ="history_type"  //0 是器械类 1 是招聘 2 是搜索
+    //tye== 0 出租出售 1 招牌  2 求职 3 商品（配件） 4 配件求租 5 配件出租   6是搜索我的设备 7是搜索维修订单
+    const val HISTORY_TYPE :String ="history_type"  //0 是器械类 1 是招聘 2 是搜索  3是配件
     const val SEARCH_TYPE :String="type"
     const val SEARCH_RESULT_TYPE :String="search_result_type"
 

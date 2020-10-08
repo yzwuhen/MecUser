@@ -62,7 +62,21 @@
         <activity android:name=".ui.activity.CompanyCertifyActivity"/>
         <activity android:name=".ui.activity.MyIntegralActivity"/>
         <activity android:name=".ui.activity.IntegralInfoActivity"/>
+        <activity android:name=".ui.activity.IntegralRuleActivity"/>
         <activity android:name=".ui.activity.SketchActivity"/>
+        <activity android:name=".ui.activity.MyCollectActivity"/>
+        <activity android:name=".ui.activity.MyMecListActivity"/>
+        <activity android:name=".ui.activity.MyMecDetailsActivity"/>
+        <activity android:name=".ui.activity.SearchMecResult"/>
+        <activity android:name=".ui.activity.AddMecActivity"/>
+        <activity android:name=".ui.activity.OrderCenterActivity"/>
+        <activity android:name=".ui.activity.OrderDetailsActivity"/>
+        <activity android:name=".ui.activity.VideoListActivity"/>
+        <activity android:name=".ui.activity.EvaluateActivity"/>
+        <activity android:name=".ui.activity.DetailedListActivity"/>
+        <activity android:name=".ui.activity.MyAddressActivity"/>
+        <activity android:name=".ui.activity.AddressActivity"/>
+
     </application>
 
 </manifest>

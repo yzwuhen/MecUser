@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_screen"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45">
+        <TextView
+            android:layout_marginLeft="@dimen/dp_63"
+            android:id="@+id/tv_screen_left"
+            android:text="出租"
+            android:background="@drawable/tc_screen_bg"
+            android:gravity="center"
+            style="@style/tv_screen_style"/>
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_screen_right"
+            android:layout_marginRight="@dimen/dp_63"
+            android:text="求租"
+            android:background="@drawable/tc_screen_bg"
+            android:gravity="center"
+            style="@style/tv_screen_style"/>
+
+    </RelativeLayout>
+    <com.example.mechanicalapp.ui.view.CusViewPage
+        android:id="@+id/cus_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

@@ -4,10 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.activity.CompanyCertifyActivity
-import com.example.mechanicalapp.ui.activity.MyIntegralActivity
-import com.example.mechanicalapp.ui.activity.PersonalCertification
-import com.example.mechanicalapp.ui.activity.UserDataActivity
+import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.MineMenuAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
@@ -53,6 +50,8 @@ class MineFragment : BaseFragment<NetData>(),OnItemClickListener ,View.OnClickLi
         when(position){
             0->jumpActivity(null,PersonalCertification::class.java)
             1->jumpActivity(null,CompanyCertifyActivity::class.java)
+            2->jumpActivity(null,MyMecListActivity::class.java)
+           4->jumpActivity(null,OrderCenterActivity::class.java)
         }
     }
 
@@ -61,7 +60,9 @@ class MineFragment : BaseFragment<NetData>(),OnItemClickListener ,View.OnClickLi
         when(view?.id){
 
             R.id.tv_edit->jumpActivity(null,UserDataActivity::class.java)
+            R.id.ly_address->jumpActivity(null,MyAddressActivity::class.java)
             R.id.ly_integral->jumpActivity(null,MyIntegralActivity::class.java)
+            R.id.ly_collected->jumpActivity(null,MyCollectActivity::class.java)
         }
 
     }

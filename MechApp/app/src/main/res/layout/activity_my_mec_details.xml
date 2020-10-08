@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:layout_marginBottom="@dimen/dp_63"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_45">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ly_search"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingRight="@dimen/dp_17">
+
+                <TextView
+                    android:id="@+id/tv_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:background="@drawable/rect_radio_6_g"
+                    android:drawableLeft="@mipmap/ser"
+                    android:drawablePadding="@dimen/dp_17"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dp_17"
+                    android:text="请输入关键字搜索"
+                    android:textColor="@color/color_999"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <com.youth.banner.Banner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingRight="@dimen/dp_17">
+
+                <TextView
+                    android:id="@+id/tv_mec_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="设备详情"
+                    android:textColor="@color/color_222"
+                    android:textSize="@dimen/sp_16" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="设备名称："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mec_name"
+                        android:layout_width="155dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="卡特彼勒推土机"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="工作时长："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_work_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="2000小时"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="机械类型："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mec_tyoe"
+                        android:layout_width="155dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="推土机"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="出厂日期："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_factory_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="2020年1月"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="机械品牌："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mec_brand"
+                        android:layout_width="155dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="卡特彼勒"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="购买时间："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_but_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="2020年1月"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="机械型号："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mec_model"
+                        android:layout_width="155dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="SW131123"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="设备地址："
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mec_address"
+                        android:layout_width="155dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="广州市天河区珠江新城506号"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:text="配件说明"
+                    android:textColor="@color/color_222"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="卡特彼勒D11T推土机主要用来开挖路堑、构筑路堤、回填基坑、铲除障碍、清除积雪、乎整场地等，也可完成短距离松散物料"
+                    android:textColor="@color/color_222"
+                    android:textSize="16sp" />
+
+                <View
+                    style="@style/h_view_1"
+                    android:layout_marginTop="@dimen/dp_20" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="编辑"
+                        android:textColor="@color/color_666"
+                        android:textSize="@dimen/sp_16" />
+
+                    <TextView
+                        android:id="@+id/tv_del"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="删除"
+                        android:textColor="@color/color_666"
+                        android:textSize="@dimen/sp_16" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17">
+
+        <TextView
+            android:id="@+id/tv_lease"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_45"
+            android:layout_weight="1"
+            android:background="@drawable/rect_radio_6_y"
+            android:gravity="center"
+            android:text="一键出租"
+            android:textColor="@color/color_222"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_sell"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_45"
+            android:layout_marginLeft="9dp"
+            android:layout_weight="1"
+            android:background="@drawable/rect_radio_6_y"
+            android:gravity="center"
+            android:text="一键出售"
+            android:textColor="@color/color_222"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_repair"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_45"
+            android:layout_marginLeft="9dp"
+            android:layout_weight="1"
+            android:background="@drawable/rect_radio_6_y"
+            android:gravity="center"
+            android:text="一键报修"
+            android:textColor="@color/color_222"
+            android:textSize="15sp" />
+    </LinearLayout>
+</FrameLayout>

@@ -65,7 +65,11 @@ class HistorySearchActivity :BaseActivity<NetData>(),TagFlowLayout.OnTagClickLis
         bundle.putInt(Configs.SEARCH_RESULT_TYPE,type)
         if (type ==3){
             jumpActivity(bundle,SearchGoodsResult::class.java)
-        }else{
+        }
+        else if (type == 6) {
+            jumpActivity(bundle,SearchMecResult::class.java)
+        }
+        else{
             jumpActivity(bundle,SearchResultActivity::class.java)
         }
 

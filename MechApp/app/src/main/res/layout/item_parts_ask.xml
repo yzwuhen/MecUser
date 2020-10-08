@@ -7,6 +7,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
+    <LinearLayout
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/dp_17"
+        android:id="@+id/ly_check"
+        android:layout_width="35dp"
+        android:layout_height="112dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/circle_check_s" />
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/iv_pic"
         android:layout_width="112dp"
@@ -14,7 +31,7 @@
         android:layout_marginTop="@dimen/dp_17"
         android:layout_marginBottom="@dimen/dp_10"
         android:scaleType="center"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ly_check"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />

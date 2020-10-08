@@ -6,15 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
+import kotlinx.android.synthetic.main.item_user_demand.view.*
 
 class MecFactoryAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
+    private var isShow:Boolean=false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MecFactoryVh(View.inflate(parent.context, R.layout.item_mec_factory,null),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (isShow){
+            holder.itemView.ly_check.visibility =View.VISIBLE
+        }else{
+            holder.itemView.ly_check.visibility =View.GONE
+        }
     }
 
     override fun getItemCount(): Int {
@@ -22,6 +28,10 @@ class MecFactoryAdapter (var mContext: Context, var mList:MutableList<String>, v
         return mList.size
     }
 
+    fun showCheck(showCheck: Boolean) {
+        isShow = showCheck
+
+    }
     class MecFactoryVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })

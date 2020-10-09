@@ -167,5 +167,22 @@
         <item name="android:textColor">@color/color_222</item>
         <item name="android:textSize">@dimen/sp_16</item>
     </style>
+    <style name="tv_setting_style_left">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/color_222</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
 
+    <style name="tv_setting_style_right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/color_999</item>
+        <item name="android:textColorHint">#cacaca</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@null</item>
+    </style>
 </resources>

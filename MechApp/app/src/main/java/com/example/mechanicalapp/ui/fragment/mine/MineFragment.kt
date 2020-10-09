@@ -52,6 +52,7 @@ class MineFragment : BaseFragment<NetData>(),OnItemClickListener ,View.OnClickLi
             1->jumpActivity(null,CompanyCertifyActivity::class.java)
             2->jumpActivity(null,MyMecListActivity::class.java)
            4->jumpActivity(null,OrderCenterActivity::class.java)
+            7->jumpActivity(null,SettingActivity::class.java)
         }
     }
 
@@ -63,6 +64,7 @@ class MineFragment : BaseFragment<NetData>(),OnItemClickListener ,View.OnClickLi
             R.id.ly_address->jumpActivity(null,MyAddressActivity::class.java)
             R.id.ly_integral->jumpActivity(null,MyIntegralActivity::class.java)
             R.id.ly_collected->jumpActivity(null,MyCollectActivity::class.java)
+            R.id.ly_release->jumpActivity(null,MyReleaseActivity::class.java)
         }
 
     }

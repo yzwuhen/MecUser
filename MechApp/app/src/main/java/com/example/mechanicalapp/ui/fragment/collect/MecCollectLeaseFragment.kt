@@ -60,7 +60,6 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
     }
 
     override fun hiedLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun getLayoutId(): Int {
@@ -68,7 +67,6 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
     }
 
     override fun showData(t: NetData?) {
-        TODO("Not yet implemented")
     }
 
     override fun onItemClick(view: View, position: Int) {

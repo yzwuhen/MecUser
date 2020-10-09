@@ -8,6 +8,7 @@
     android:layout_height="wrap_content">
 
 
+
     <ImageView
         android:id="@+id/iv_pic"
         android:layout_width="112dp"
@@ -17,7 +18,7 @@
         android:scaleType="center"
         app:layout_constraintStart_toEndOf="@+id/ly_check"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/ly_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
@@ -112,46 +113,10 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_pic"
         app:layout_constraintEnd_toEndOf="parent"
         />
-    <LinearLayout
-        android:id="@+id/ly_bottom"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:gravity="right|center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <TextView
-            android:id="@+id/tv_del"
-            android:layout_width="100dp"
-            android:layout_height="34dp"
-            android:layout_marginRight="@dimen/dp_12"
-            android:background="@drawable/rect_white_9a9a9a"
-            android:gravity="center"
-            android:text="删除"
-            android:textColor="@color/color_222"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_refresh"
-            android:layout_width="100dp"
-            android:layout_height="34dp"
-            android:layout_marginRight="@dimen/dp_12"
-            android:background="@drawable/rect_white_9a9a9a"
-            android:gravity="center"
-            android:text="刷新"
-            android:textColor="@color/color_222"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_down"
-            android:layout_width="100dp"
-            android:layout_height="34dp"
-            android:background="@drawable/rect_white_9a9a9a"
-            android:gravity="center"
-            android:text="下架"
-            android:textColor="@color/color_222"
-            android:textSize="16sp" />
-
-    </LinearLayout>
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

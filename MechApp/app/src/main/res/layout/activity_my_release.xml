@@ -39,11 +39,6 @@
             android:gravity="center"
             android:text="@string/search_mec_tv4" />
 
-        <TextView
-            android:id="@+id/tv_repair"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="@string/search_mec_tv5" />
     </LinearLayout>
     <com.example.mechanicalapp.ui.view.CusViewPage
         android:id="@+id/cus_page"

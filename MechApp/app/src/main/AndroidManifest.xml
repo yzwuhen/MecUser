@@ -76,6 +76,11 @@
         <activity android:name=".ui.activity.DetailedListActivity"/>
         <activity android:name=".ui.activity.MyAddressActivity"/>
         <activity android:name=".ui.activity.AddressActivity"/>
+        <activity android:name=".ui.activity.MyReleaseActivity"/>
+        <activity android:name=".ui.activity.AboutUsActivity"/>
+        <activity android:name=".ui.activity.PrivacyActivity"/>
+        <activity android:name=".ui.activity.AgreementActivity"/>
+        <activity android:name=".ui.activity.SettingActivity"/>
 
     </application>
 

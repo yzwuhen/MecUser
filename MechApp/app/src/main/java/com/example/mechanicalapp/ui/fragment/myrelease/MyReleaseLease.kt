@@ -1,4 +1,4 @@
-package com.example.mechanicalapp.ui.fragment.collect
+package com.example.mechanicalapp.ui.fragment.myrelease
 
 import android.view.View
 import android.widget.TextView
@@ -9,14 +9,14 @@ import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 
-class CollectSecondHandFragment : BaseFragment<NetData>(), View.OnClickListener {
+class MyReleaseLease () : BaseFragment<NetData>(), View.OnClickListener {
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(MecCollectLeaseFragment(2))
-        mFragmentList?.add(MecCollectAskRent(2))
+        mFragmentList?.add(ReleaseLeaseFragment())
+        mFragmentList?.add(MyReleaseAsk())
     }
 
     override fun showLoading() {
@@ -33,12 +33,8 @@ class CollectSecondHandFragment : BaseFragment<NetData>(), View.OnClickListener 
 
     override fun initView() {
         super.initView()
-
-        tv_screen_left.text ="出售"
-        tv_screen_right.text ="求购"
         mTextViewList.add(tv_screen_left)
         mTextViewList.add(tv_screen_right)
-
         mTabPageAdapter = FragmentListPageAdapter(childFragmentManager,mFragmentList!!)
 
         cus_page.adapter = mTabPageAdapter
@@ -46,6 +42,7 @@ class CollectSecondHandFragment : BaseFragment<NetData>(), View.OnClickListener 
 
         tv_screen_left.setOnClickListener(this)
         tv_screen_right.setOnClickListener(this)
+
         tv_screen_left.performClick()
     }
 
@@ -59,6 +56,7 @@ class CollectSecondHandFragment : BaseFragment<NetData>(), View.OnClickListener 
         }
 
     }
+
 
     private fun showView(index: Int) {
         cus_page.currentItem = index

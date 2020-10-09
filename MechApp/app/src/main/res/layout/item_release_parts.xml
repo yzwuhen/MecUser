@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <ImageView
         android:id="@+id/iv_pic"
         android:layout_width="112dp"
@@ -82,13 +81,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_address_data"
         />
 
-    <ImageView
-        android:id="@+id/iv_phone"
-        app:layout_constraintEnd_toEndOf="@id/tv_distance"
-        app:layout_constraintTop_toTopOf="@+id/iv_qy"
-        android:layout_width="@dimen/dp_15"
-        android:layout_height="@dimen/dp_15"
-        android:src="@mipmap/phone_icon"/>
 
 
     <TextView
@@ -112,6 +104,8 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_pic"
         app:layout_constraintEnd_toEndOf="parent"
         />
+
+
     <LinearLayout
         android:id="@+id/ly_bottom"
         android:layout_width="match_parent"

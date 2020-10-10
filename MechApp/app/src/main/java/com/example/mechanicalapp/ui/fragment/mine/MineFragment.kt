@@ -10,9 +10,9 @@ import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.fragment_mine.*
 
-class MineFragment : BaseFragment<NetData>(),OnItemClickListener ,View.OnClickListener{
+class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener {
 
-    private var mineMenuAdapter:MineMenuAdapter?=null
+    private var mineMenuAdapter: MineMenuAdapter? = null
 
     override fun showLoading() {
 
@@ -31,8 +31,8 @@ class MineFragment : BaseFragment<NetData>(),OnItemClickListener ,View.OnClickLi
     override fun initView() {
         super.initView()
 
-        mineMenuAdapter = MineMenuAdapter(mContext,this)
-        recycle_list.layoutManager = GridLayoutManager(mContext,4)
+        mineMenuAdapter = MineMenuAdapter(mContext, this)
+        recycle_list.layoutManager = GridLayoutManager(mContext, 4)
         recycle_list.adapter = mineMenuAdapter
 
         tv_edit.setOnClickListener(this)
@@ -47,24 +47,26 @@ class MineFragment : BaseFragment<NetData>(),OnItemClickListener ,View.OnClickLi
 
     override fun onItemClick(view: View, position: Int) {
 
-        when(position){
-            0->jumpActivity(null,PersonalCertification::class.java)
-            1->jumpActivity(null,CompanyCertifyActivity::class.java)
-            2->jumpActivity(null,MyMecListActivity::class.java)
-           4->jumpActivity(null,OrderCenterActivity::class.java)
-            7->jumpActivity(null,SettingActivity::class.java)
+        when (position) {
+            0 -> jumpActivity(null, PersonalCertification::class.java)
+            1 -> jumpActivity(null, CompanyCertifyActivity::class.java)
+            2 -> jumpActivity(null, MyMecListActivity::class.java)
+            3 -> jumpActivity(null, MyLookActivity::class.java)
+            4 -> jumpActivity(null, OrderCenterActivity::class.java)
+            6 -> jumpActivity(null, FactoryApplyActivity::class.java)
+            7 -> jumpActivity(null, SettingActivity::class.java)
         }
     }
 
     override fun onClick(view: View?) {
 
-        when(view?.id){
+        when (view?.id) {
 
-            R.id.tv_edit->jumpActivity(null,UserDataActivity::class.java)
-            R.id.ly_address->jumpActivity(null,MyAddressActivity::class.java)
-            R.id.ly_integral->jumpActivity(null,MyIntegralActivity::class.java)
-            R.id.ly_collected->jumpActivity(null,MyCollectActivity::class.java)
-            R.id.ly_release->jumpActivity(null,MyReleaseActivity::class.java)
+            R.id.tv_edit -> jumpActivity(null, UserDataActivity::class.java)
+            R.id.ly_address -> jumpActivity(null, MyAddressActivity::class.java)
+            R.id.ly_integral -> jumpActivity(null, MyIntegralActivity::class.java)
+            R.id.ly_collected -> jumpActivity(null, MyCollectActivity::class.java)
+            R.id.ly_release -> jumpActivity(null, MyReleaseActivity::class.java)
         }
 
     }

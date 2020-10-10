@@ -12,6 +12,8 @@ object Configs {
     const val EC_BRAND_RESULT_CODE:Int =2;//机械品牌选择后返回得result_code
     const val EC_MODEL_RESULT_CODE:Int =3;//机械型号选择后返回得result_code
     const val FACTORY_RESULT_CODE:Int =4;//维修厂选择后返回得result_code
+    const val PARTS_RESULT_CODE:Int =5;//配件类型选择后返回得result_code
+
     const val EC_RESULT_Extra:String ="ec_type";//机械类型选择后返回得result_code
 //    const val EC_BRAND_RESULT_Extra:String ="ec_brand";//机械品牌选择后返回得result_code
 //    const val EC_MODEL_RESULT_Extra:String ="ec_model";//机械型号选择后返回得result_code

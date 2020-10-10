@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/dp_17">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="入驻详情"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_18" />
+
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="公司名称" />
+
+                <EditText
+                    android:id="@+id/et_company_name"
+                    style="@style/et_style"
+                    android:hint="请输入公司名称" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="姓        名" />
+
+                <EditText
+                    android:id="@+id/et_user_name"
+                    style="@style/et_style"
+                    android:hint="请输入姓名" />
+            </LinearLayout>
+
+
+            <View style="@style/h_view_1" />
+
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="联系电话" />
+
+                <EditText
+                    android:id="@+id/et_contacts_phone"
+                    style="@style/et_style"
+                    android:hint="请输入联系电话" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+
+            <LinearLayout style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="公司地址" />
+
+                <TextView
+                    android:id="@+id/et_company_address"
+                    style="@style/et_style"
+                    android:hint="请输入公司地址" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/address" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+
+            <LinearLayout
+                android:id="@+id/ly_mec_type"
+                style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:layout_width="wrap_content"
+                    android:text="维修机械类型" />
+
+                <TextView
+                    android:id="@+id/tv_mec_type"
+                    style="@style/et_style"
+                    android:hint="请选择维修的机械类型"
+                    android:paddingLeft="@dimen/dp_8" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/right_tip" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+
+            <LinearLayout
+                android:id="@+id/ly_parts_type"
+                style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:layout_width="wrap_content"
+                    android:text="维修配件类型" />
+
+                <TextView
+                    android:id="@+id/tv_parts_type"
+                    style="@style/et_style"
+                    android:hint="请选择维修的配件类型" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/right_tip" />
+            </LinearLayout>
+
+            <View style="@style/h_view_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="维修厂简介"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold" />
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="146dp"
+                android:background="@drawable/rect_radio_6_g">
+
+                <EditText
+                    android:id="@+id/et_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="start"
+                    android:paddingLeft="@dimen/dp_17"
+                    android:paddingTop="@dimen/dp_17"
+                    android:textColor="@color/color_222"
+                    android:textColorHint="@color/color_999" />
+
+                <TextView
+                    android:id="@+id/tv_tip_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="0/200"
+                    android:textColor="@color/color_999"
+                    android:textSize="11sp" />
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/iv_license_pic"
+                android:layout_width="179dp"
+                android:layout_height="215dp"
+                android:layout_marginTop="@dimen/dp_35"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/add_pic_n" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="营业执照副本"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_16" />
+
+            <ImageView
+                android:id="@+id/iv_factory_pic"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:layout_marginTop="@dimen/dp_35"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/add_pic_n" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="维修厂照片"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_16" />
+
+
+
+            <TextView
+                android:id="@+id/tv_submit"
+                android:layout_marginTop="@dimen/dp_45"
+                android:layout_width="match_parent"
+                android:textSize="17sp"
+                android:gravity="center"
+                android:background="@drawable/submit_bg"
+                android:text="提交"
+                android:textColor="@color/color_222"
+                android:layout_height="56dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

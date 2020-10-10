@@ -81,6 +81,10 @@
         <activity android:name=".ui.activity.PrivacyActivity"/>
         <activity android:name=".ui.activity.AgreementActivity"/>
         <activity android:name=".ui.activity.SettingActivity"/>
+        <activity android:name=".ui.activity.FactoryApplyActivity"/>
+        <activity android:name=".ui.activity.MoreSelPartsType"/>
+        <activity android:name=".ui.activity.MoreSelectMecType"/>
+        <activity android:name=".ui.activity.MyLookActivity"/>
 
     </application>
 

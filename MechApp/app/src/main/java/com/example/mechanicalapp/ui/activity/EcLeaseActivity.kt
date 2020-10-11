@@ -58,6 +58,7 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
         ly_ec_type.setOnClickListener(this)
         ly_ec_brand.setOnClickListener(this)
         ly_ec_model.setOnClickListener(this)
+        ly_address.setOnClickListener(this)
 
         mStringList?.add("元/月")
         mStringList?.add("元/台班")
@@ -101,6 +102,8 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
                 Configs.EC_MODEL_RESULT_CODE,
                 EcModel::class.java
             )
+            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
+
         }
     }
 
@@ -138,12 +141,15 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
 
-        showResult(requestCode, data?.getStringExtra(Configs.EC_RESULT_Extra))
+        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
         super.onActivityResult(requestCode, resultCode, data)
 
     }
 
     private fun showResult(requestCode: Int, extra: String?) {
+        if (extra.isNullOrEmpty()){
+            return
+        }
         when (requestCode) {
             Configs.EC_TYPE_RESULT_CODE -> et_ec_type.text = extra
             Configs.EC_BRAND_RESULT_CODE -> et_ec_brand.text = extra

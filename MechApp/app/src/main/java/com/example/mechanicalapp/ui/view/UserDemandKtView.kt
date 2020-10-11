@@ -11,6 +11,8 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.activity.AskDetailsActivity
+import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import kotlinx.android.synthetic.main.layout_user_demand.view.*
@@ -95,7 +97,26 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
         mContext.startActivity(intent)
     }
 
+    private fun jumDetails() {
+        val intent = Intent()
+//        val bundle = Bundle()
+//        bundle.putInt(Configs.MORE_VIEW_TYPE,type)
+        if (type==0){
+            intent.setClass(mContext, LeaseDetailsActivity::class.java)
+        }
+        else{
+            intent.setClass(mContext, AskDetailsActivity::class.java)
+        }
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+//        if (bundle != null) {
+//            intent.putExtras(bundle)
+//        }
+        mContext.startActivity(intent)
+    }
+
+
     override fun onItemClick(view: View, position: Int) {
 
+        jumDetails()
     }
 }

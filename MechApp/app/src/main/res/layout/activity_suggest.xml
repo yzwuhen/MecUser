@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_45"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_17">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="28dp"
+            android:gravity="center_vertical"
+            android:text="反馈内容："
+            android:textColor="@color/color_222"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="234dp"
+            android:background="@drawable/rect_radio_6_g">
+
+            <EditText
+                android:id="@+id/et_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="start"
+                android:hint="请输入反馈内容"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_17"
+                android:textColor="@color/color_222"
+                android:textColorHint="@color/color_999" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginRight="13dp"
+                android:layout_marginBottom="13dp"
+                android:text="0/1000"
+                android:textColor="@color/color_999"
+                android:textSize="11sp" />
+
+        </FrameLayout>
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center_vertical"
+            android:text="添加图片证据（最多3张，最少上传1张)"
+            android:textColor="@color/color_222"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ry_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:textSize="17sp"
+        android:layout_margin="@dimen/dp_17"
+        android:gravity="center"
+        android:background="@drawable/rect_radio_6_y"
+        android:text="提交"
+        android:textColor="@color/color_222"
+        android:layout_height="56dp"/>
+</FrameLayout>

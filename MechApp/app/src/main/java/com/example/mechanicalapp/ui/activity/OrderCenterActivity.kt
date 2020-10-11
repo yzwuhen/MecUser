@@ -9,12 +9,14 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.fragment.EngineerFragment
 import com.example.mechanicalapp.ui.fragment.OrderFragment
 import kotlinx.android.synthetic.main.activity_order.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
 class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener{
 
+    private var type:Int=0
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
     private var mTabPageAdapter: FragmentListPageAdapter?=null
     private var mTextViewList:MutableList<TextView>  =ArrayList<TextView>()
@@ -32,7 +34,7 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener{
         iv_back.setOnClickListener(this)
 
         mFragmentList?.add(OrderFragment())
-        mFragmentList?.add(OrderFragment())
+        mFragmentList?.add(EngineerFragment())
 
         mTabPageAdapter = FragmentListPageAdapter(supportFragmentManager, mFragmentList!!)
         cus_page.adapter=mTabPageAdapter
@@ -55,12 +57,18 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener{
     private fun jump() {
 
         var bundle = Bundle()
-        bundle.putInt(Configs.HISTORY_TYPE,7)
+        if (type==0){
+            bundle.putInt(Configs.HISTORY_TYPE,7)
+        }else{
+            bundle.putInt(Configs.HISTORY_TYPE,8)
+        }
+
         jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 
     private fun showView(index: Int) {
 
+        type= index;
         cus_page.currentItem=index
         for (i in mTextViewList.indices){
             if (index ==i){

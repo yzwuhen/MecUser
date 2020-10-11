@@ -176,7 +176,9 @@
 
 
             <View style="@style/h_view_1" />
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_address"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left1"

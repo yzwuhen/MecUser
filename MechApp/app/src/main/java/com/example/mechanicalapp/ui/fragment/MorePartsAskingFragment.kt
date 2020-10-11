@@ -16,6 +16,7 @@ import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
+import kotlinx.android.synthetic.main.inculde_search_title.*
 
 /**
  * 求组 配件
@@ -103,10 +104,16 @@ class MorePartsAskingFragment  : BaseFragment<NetData>(), OnItemClickListener, V
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        Log.e("sssssssssss", "sssssssssss=============$requestCode")
-        if (Configs.EC_TYPE_RESULT_CODE == resultCode) {
-            tv_ec_type.text = data?.getStringExtra(Configs.EC_RESULT_Extra)
-        }
+        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun showResult(requestCode: Int, extra: String?) {
+        if (extra.isNullOrEmpty()) {
+            return
+        }
+        when (requestCode) {
+            Configs.EC_TYPE_RESULT_CODE -> tv_ec_type.text = extra
+        }
     }
 }

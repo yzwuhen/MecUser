@@ -95,7 +95,7 @@ class MaintenanceActivity : BaseActivity<NetData>(),View.OnClickListener ,PopUti
 
             var intent  = Intent()
             var bundle = Bundle()
-            bundle.putString(Configs.EC_RESULT_Extra,"广州市莹宝维修中心")
+            bundle.putString(Configs.SCREEN_RESULT_Extra,"广州市莹宝维修中心")
             intent.putExtras(bundle)
             setResult(Configs.EC_MODEL_RESULT_CODE,intent)
             finish()

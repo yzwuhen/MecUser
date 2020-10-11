@@ -56,6 +56,7 @@ class EcSellActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClic
         tv_way.setOnClickListener(this)
         ly_production_time.setOnClickListener(this)
         ly_pay_way.setOnClickListener(this)
+        ly_address.setOnClickListener(this)
         mStringList?.add("元/月")
         mStringList?.add("元/台班")
         mStringList?.add("元/小时")
@@ -89,6 +90,7 @@ class EcSellActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClic
             R.id.tv_way->showInput()
             R.id.ly_production_time ->showTime()
             R.id.ly_pay_way->showPayWay()
+            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
         }
     }
 

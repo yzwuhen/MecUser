@@ -14,7 +14,6 @@ class VideoListAdapter (var mContext: Context, var mList:MutableList<String>, va
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-       // return VideoListVh(View.inflate(parent.context, R.layout.item_video_list,null),mOnItemClickListener)
         return VideoListVh(LayoutInflater.from(mContext).inflate(R.layout.item_video_list,parent,false),mOnItemClickListener)
     }
 

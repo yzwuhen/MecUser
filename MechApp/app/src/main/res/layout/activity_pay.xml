@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_title" />
+
+
+        <LinearLayout
+            android:id="@+id/ly_tip"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_17">
+
+            <TextView
+                android:id="@+id/tv_tip_info1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单号：2456567685u7y667456"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/tv_tip_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:text="订单金额：￥5000"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_16" />
+        </LinearLayout>
+
+        <View style="@style/h_view_6" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_17"
+            android:text="支付方式"
+            android:textColor="@color/color_222"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/dp_17"
+        android:background="@drawable/rect_radio_6_y"
+        android:gravity="center"
+        android:text="支付"
+        android:textColor="@color/color_222"
+        android:textSize="17sp" />
+</FrameLayout>

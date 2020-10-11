@@ -112,8 +112,7 @@ class PartsOrderDetails : BaseActivity<NetData>(), View.OnClickListener {
     }
 
     private fun goPay() {
-
-
+        jumpActivity(null,PayActivity::class.java)
     }
 
     private fun cancelOrder() {

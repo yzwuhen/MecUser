@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="127dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ly_wx"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/share_wx"
+                android:drawablePadding="@dimen/dp_10"
+                android:text="微信好友"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_13" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_qq"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/share_qq"
+                android:drawablePadding="@dimen/dp_10"
+                android:text="QQ好友"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_13" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_sina"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/share_sina"
+                android:drawablePadding="@dimen/dp_10"
+                android:text="新浪微博"
+                android:textColor="@color/color_222"
+                android:textSize="@dimen/sp_13" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View style="@style/h_view_1" />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/color_666"
+        android:textSize="17sp" />
+
+</LinearLayout>

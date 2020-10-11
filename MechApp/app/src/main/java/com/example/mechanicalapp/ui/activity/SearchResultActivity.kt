@@ -23,6 +23,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
     private var mPartsAdapter :PartsAdapter?=null
     private var mMorePartsAskAdapter :MorePartsAskAdapter?=null
     private var mOrderAdapter:OrderAdapter?=null
+    private var mEngineerAdapter:SearchResultEngineer?=null
     var mList: MutableList<String> = ArrayList<String>()
 
     private var type:Int =0;
@@ -68,7 +69,10 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
             mOrderAdapter = OrderAdapter(this, mList, this)
             recycler_list.adapter = mOrderAdapter
         }
-
+        else if (type ==8){
+            mEngineerAdapter = SearchResultEngineer(this, mList, this)
+            recycler_list.adapter = mOrderAdapter
+        }
 
 
 

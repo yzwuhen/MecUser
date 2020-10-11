@@ -36,6 +36,7 @@ class AskingRentPatsActivity : BaseActivity<NetData>(), OnItemClickListener, Vie
         iv_back.setOnClickListener(this)
         tv_title.text = "配件求租"
         tv_way.setOnClickListener(this)
+        ly_address.setOnClickListener(this)
 
         mStringList?.add("元/月")
         mStringList?.add("元/台班")
@@ -64,6 +65,7 @@ class AskingRentPatsActivity : BaseActivity<NetData>(), OnItemClickListener, Vie
         when (v?.id) {
             R.id.iv_back -> finish()
             R.id.tv_way -> showInput()
+            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
         }
     }
 

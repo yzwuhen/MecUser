@@ -1,11 +1,14 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.CityAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.activity_search_city.*
@@ -18,7 +21,7 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
     private var mCityLinearLayoutManager :LinearLayoutManager ?=null
     private var mLetterLinearLayoutManager :LinearLayoutManager ?=null
 
-    private var mCityList :MutableList<String> ?=null
+    private var mCityList :MutableList<String> =ArrayList<String>()
     private val items = listOf(
         "A",
         "B",
@@ -45,7 +48,6 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
         mLetterLinearLayoutManager = LinearLayoutManager(this)
         mLetterLinearLayoutManager?.orientation = LinearLayoutManager.VERTICAL
 
-        mCityList = ArrayList<String>()
         mCityList?.add("广州")
         mCityList?.add("深圳")
         mCityList?.add("广州")
@@ -82,15 +84,12 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun hiedLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun showData(t: NetData) {
-        TODO("Not yet implemented")
     }
 
 
@@ -105,6 +104,18 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
     }
 
     override fun onItemClick(view: View, position: Int) {
+        when(view?.id){
+            R.id.ly_city_root->callback(mCityList[position])
+        }
+    }
+
+    private fun callback(extra: String) {
+        var intent  = Intent()
+        var bundle = Bundle()
+        bundle.putString(Configs.SCREEN_RESULT_Extra,extra)
+        intent.putExtras(bundle)
+        setResult(Configs.CITY_RESULT_CODE,intent)
+        finish()
 
     }
 }

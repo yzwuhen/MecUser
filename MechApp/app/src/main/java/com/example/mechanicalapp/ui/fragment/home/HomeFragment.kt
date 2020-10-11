@@ -1,21 +1,26 @@
 package com.example.mechanicalapp.ui.fragment.home
 
+import android.content.Intent
 import android.view.View
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.activity.HistorySearchActivity
+import com.example.mechanicalapp.ui.activity.MapActivity
 import com.example.mechanicalapp.ui.activity.ReportActivity
 import com.example.mechanicalapp.ui.activity.SearchCityActivity
-import com.example.mechanicalapp.ui.activity.SearchMecActivity
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.mvp.impl.DemoPresenterImpl
 import com.example.mechanicalapp.ui.view.*
+import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
 import kotlinx.android.synthetic.main.inculde_search_title.*
 
-class HomeFragment : BaseFragment<MutableList<BannerData>>(),View.OnClickListener{
+class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListener {
 
-    private var bannerView : BannerView ?=null
-    private var itemMenu : ItemMenu ?=null
+    private var bannerView: BannerView? = null
+    private var itemMenu: ItemMenu? = null
 
     override fun showLoading() {
 
@@ -35,7 +40,7 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(),View.OnClickListene
         nest_scroll
 
         bannerView = BannerView(mContext)
-        itemMenu =ItemMenu(mContext)
+        itemMenu = ItemMenu(mContext)
 
         mPresenter = DemoPresenterImpl(this)
 
@@ -48,21 +53,52 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(),View.OnClickListene
 
         tv_address.setOnClickListener(this)
         tv_search.setOnClickListener(this)
-
+        tv_map.setOnClickListener(this)
         mPresenter.request()
     }
 
     override fun onClick(view: View?) {
 
-       if (view?.id ==R.id.tv_address){
-           jumpActivity(null,SearchCityActivity::class.java)
-       }
-        else if (view?.id ==R.id.tv_search){
-            jumpActivity(null,ReportActivity::class.java)
+        when (view?.id) {
+            R.id.tv_address -> jumCity()
+            R.id.tv_search -> jumpActivity(null, HistorySearchActivity::class.java)
+            R.id.tv_map -> jumMap()
         }
+
+
+    }
+
+    private fun jumCity() {
+        jumpActivityForReSult(
+            Configs.CITY_RESULT_CODE,
+            SearchCityActivity::class.java
+        )
+    }
+
+    private fun jumMap() {
+        jumpActivity(null, MapActivity::class.java)
     }
 
     override fun showData(listt: MutableList<BannerData>) {
         bannerView?.setData(listt)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
+        if (Configs.CITY_RESULT_CODE == resultCode) {
+            showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun showResult(requestCode: Int, extra: String?) {
+        if (extra.isNullOrEmpty()) {
+            return
+        }
+        when (requestCode) {
+            Configs.CITY_RESULT_CODE -> tv_address.text = extra
+        }
     }
 }

@@ -70,12 +70,15 @@ class CreateRepairActivity :BaseActivity<NetData>(),View.OnClickListener,OnItemC
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
 
-        showResult(requestCode, data?.getStringExtra(Configs.EC_RESULT_Extra))
+        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
         super.onActivityResult(requestCode, resultCode, data)
 
     }
 
     private fun showResult(requestCode: Int, extra: String?) {
+        if (extra.isNullOrEmpty()){
+            return
+        }
         when (requestCode) {
             Configs.EC_TYPE_RESULT_CODE -> et_ec_type.text = extra
             Configs.EC_BRAND_RESULT_CODE -> et_ec_brand.text = extra

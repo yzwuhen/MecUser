@@ -88,7 +88,7 @@ class EcType:BaseActivity<NetData>(), OnItemClickListener {
     private fun callback(callbackkStr: String) {
         var intent  =Intent()
         var bundle =Bundle()
-        bundle.putString(Configs.EC_RESULT_Extra,callbackkStr)
+        bundle.putString(Configs.SCREEN_RESULT_Extra,callbackkStr)
         intent.putExtras(bundle)
         setResult(Configs.EC_TYPE_RESULT_CODE,intent)
         finish()

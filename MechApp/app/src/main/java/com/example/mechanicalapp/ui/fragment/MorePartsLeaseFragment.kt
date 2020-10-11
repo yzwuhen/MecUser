@@ -101,7 +101,7 @@ class MorePartsLeaseFragment : BaseFragment<NetData>(), OnItemClickListener, Vie
 
         Log.e("sssssssssss","sssssssssss=============$requestCode")
         if (Configs.EC_TYPE_RESULT_CODE==resultCode){
-            tv_ec_type.text =data?.getStringExtra(Configs.EC_RESULT_Extra)
+            tv_ec_type.text =data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
         }
         super.onActivityResult(requestCode, resultCode, data)
     }

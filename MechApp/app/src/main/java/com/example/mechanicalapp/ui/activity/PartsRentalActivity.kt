@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.location.Address
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -47,6 +48,7 @@ class PartsRentalActivity : BaseActivity<NetData>(), OnItemClickListener, View.O
         iv_back.setOnClickListener(this)
         tv_title.text ="配件出租"
         tv_no_element.setOnClickListener(this)
+        ly_address.setOnClickListener(this)
         mStringList?.add("元/月")
         mStringList?.add("元/台班")
         mStringList?.add("元/小时")
@@ -75,6 +77,7 @@ class PartsRentalActivity : BaseActivity<NetData>(), OnItemClickListener, View.O
         when(v?.id){
             R.id.iv_back->finish()
             R.id.tv_no_element->showInput()
+            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
         }
     }
 

@@ -46,6 +46,7 @@ class RecruitActivity : BaseActivity<NetData>(),  View.OnClickListener,OnItemCli
         ly_work_type.setOnClickListener(this)
         ly_work_experience.setOnClickListener(this)
         ly_salary.setOnClickListener(this)
+        ly_address.setOnClickListener(this)
 
         mYears?.add("一年以上")
         mYears?.add("两年以上")
@@ -79,6 +80,7 @@ class RecruitActivity : BaseActivity<NetData>(),  View.OnClickListener,OnItemCli
             R.id.ly_work_type->jumpActivity(null,WorkType::class.java)
             R.id.ly_work_experience->showExperience()
             R.id.ly_salary->showSalary()
+            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
         }
     }
 

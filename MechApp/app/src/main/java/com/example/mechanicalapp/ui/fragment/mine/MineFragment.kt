@@ -56,6 +56,7 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
             5 -> jumpActivity(null, PartsOrderActivity::class.java)
             6 -> jumpActivity(null, FactoryApplyActivity::class.java)
             7 -> jumpActivity(null, SettingActivity::class.java)
+            9 -> jumpActivity(null, SuggestActivity::class.java)
         }
     }
 

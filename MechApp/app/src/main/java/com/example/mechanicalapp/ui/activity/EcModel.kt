@@ -66,7 +66,7 @@ class EcModel :BaseActivity<NetData>(), OnItemClickListener {
 
         var intent  = Intent()
         var bundle = Bundle()
-        bundle.putString(Configs.EC_RESULT_Extra,extra)
+        bundle.putString(Configs.SCREEN_RESULT_Extra,extra)
         intent.putExtras(bundle)
         setResult(Configs.EC_MODEL_RESULT_CODE,intent)
         finish()

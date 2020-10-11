@@ -55,9 +55,8 @@ class TwoWayProgressBar(
         bgPaint?.strokeCap = Paint.Cap.ROUND
         textPaint?.color = textColor
         textPaint?.strokeWidth = 10f
-        textPaint?.textSize = 50f
+        textPaint?.textSize = 30f
         fontMetics = textPaint?.fontMetrics
-
         bitMapleft = BitmapFactory.decodeResource(resources, R.mipmap.progress_icon, null);
 //        bitMapRight=BitmapFactory.decodeResource(resources, R.mipmap.progress_icon, null);
     }

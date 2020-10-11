@@ -4,6 +4,7 @@ import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import kotlinx.android.synthetic.main.activity_ec_buy.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class EcBuyActivity : BaseActivity<NetData>(),  View.OnClickListener{
@@ -22,6 +23,7 @@ class EcBuyActivity : BaseActivity<NetData>(),  View.OnClickListener{
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
+        ly_address.setOnClickListener(this)
         tv_title.text = "机械求购"
 
 
@@ -42,6 +44,7 @@ class EcBuyActivity : BaseActivity<NetData>(),  View.OnClickListener{
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_back -> finish()
+            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
         }
     }
 

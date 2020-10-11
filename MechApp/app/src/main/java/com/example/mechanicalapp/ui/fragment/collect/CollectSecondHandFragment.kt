@@ -33,6 +33,9 @@ class CollectSecondHandFragment : BaseFragment<NetData>(), View.OnClickListener 
 
     override fun initView() {
         super.initView()
+
+        tv_screen_left.text ="出售"
+        tv_screen_right.text ="求购"
         mTextViewList.add(tv_screen_left)
         mTextViewList.add(tv_screen_right)
 

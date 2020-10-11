@@ -53,7 +53,6 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
 
      private fun selectText(index: Int) {
          for ((i,e) in mTextViews?.withIndex()!!) {
-             println("下标=$index----元素=$e")
 
              mTextViews[i].isSelected =i == index
 //             if (i == index) {
@@ -180,8 +179,8 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
       * 隐藏一个Fragment
       */
      private fun hideFragment(transaction:FragmentTransaction, fragment:Fragment ) {
-         if (fragment != null && fragment.isAdded()) {
-             transaction.hide(fragment);
+         if (fragment != null && fragment.isAdded) {
+             transaction.hide(fragment)
          }
      }
 

@@ -10,7 +10,6 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.ui.fragment.collect.*
-import kotlinx.android.synthetic.main.activity_more_data.cus_page
 import kotlinx.android.synthetic.main.activity_my_collected.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 import org.greenrobot.eventbus.EventBus
@@ -38,10 +37,9 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
     override fun initView() {
         super.initView()
         tv_title.text ="我的收藏"
+        iv_right.visibility =View.GONE
         tv_right.visibility = View.VISIBLE
-        iv_right.visibility = View.GONE
         tv_right.text ="编辑"
-
 
         mTextViewList.add(tv_mec_rent)
         mTextViewList.add(tv_apparatus)

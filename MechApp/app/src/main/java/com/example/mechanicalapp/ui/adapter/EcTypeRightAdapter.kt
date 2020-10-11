@@ -1,8 +1,10 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
@@ -12,7 +14,7 @@ class EcTypeRightAdapter (var mContext: Context, var mList:MutableList<String>, 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return EcTypeRightVh(View.inflate(parent.context, R.layout.item_ec_type_right,null),mOnItemClickListener)
+        return EcTypeRightVh(LayoutInflater.from(mContext).inflate(R.layout.item_ec_type_right,parent,false),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

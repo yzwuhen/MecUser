@@ -6,8 +6,6 @@
     android:paddingRight="@dimen/dp_17"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-
     <LinearLayout
         android:visibility="gone"
         android:layout_marginTop="@dimen/dp_17"
@@ -24,6 +22,7 @@
             android:src="@drawable/circle_check_s" />
     </LinearLayout>
 
+
     <ImageView
         android:id="@+id/iv_pic"
         android:layout_width="112dp"
@@ -33,7 +32,7 @@
         android:scaleType="center"
         app:layout_constraintStart_toEndOf="@+id/ly_check"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ly_bottom"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
@@ -128,10 +127,11 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_pic"
         app:layout_constraintEnd_toEndOf="parent"
         />
+
     <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EEEEEE"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/iv_pic"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_15"
+        style="@style/h_view_1"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:backgroundTint="@color/white">
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/item_tv_date"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_17"
+        android:text="2020-05-05"
+        android:textColor="@color/color_9a"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_marginTop="@dimen/dp_17"
+        android:id="@+id/iv_rent_user"
+        android:layout_width="@dimen/dp_45"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_date" />
+
+    <TextView
+        android:id="@+id/tv_rent_user_nick"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="广东房东"
+        android:textColor="#222222"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_rent_sr"
+        app:layout_constraintStart_toEndOf="@+id/iv_rent_user"
+        app:layout_constraintTop_toTopOf="@+id/iv_rent_user"
+
+        />
+
+    <ImageView
+        android:id="@+id/iv_rent_sr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_17"
+        android:src="@mipmap/sr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_rent_user" />
+
+    <TextView
+        android:id="@+id/tv_rent_address_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="广东深圳 | 租用时间：1小时"
+        android:textColor="#666666"
+        android:textSize="13sp"
+        app:layout_constraintStart_toEndOf="@+id/iv_rent_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rent_user_nick" />
+
+    <TextView
+        android:id="@+id/tv_rent_price"
+        android:layout_width="39dp"
+        android:layout_height="22dp"
+        android:layout_marginRight="@dimen/dp_17"
+        android:background="@drawable/label_bg"
+        android:gravity="center"
+        android:text="面议"
+        android:textColor="#FE9418"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_rent_address_data" />
+
+    <TextView
+        android:id="@+id/tv_rent_equipment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="WD-180机锁杆旋挖钻机"
+        android:textColor="#5C5C5C"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/tv_rent_address_data"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rent_address_data" />
+
+    <TextView
+        android:id="@+id/tv_rent_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:drawableLeft="@mipmap/jl"
+        android:drawablePadding="5dp"
+        android:text="距离205km"
+        android:textColor="#3A7EFF"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_rent_equipment"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rent_equipment" />
+
+
+    <TextView
+        android:id="@+id/tv_rent_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_17"
+        android:text="刚刚"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_rent_distance" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="6dp"
+        android:layout_marginTop="10dp"
+        android:background="#EEEEEE"
+        app:layout_constraintEnd_toEndOf="@+id/iv_rent_sr"
+        app:layout_constraintStart_toStartOf="@+id/iv_pic"
+        app:layout_constraintTop_toBottomOf="@+id/tv_rent_distance" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,7 +62,6 @@ class CollectAskRent : BaseFragment<NetData>() , OnItemClickListener {
 
 
     override fun hiedLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun getLayoutId(): Int {
@@ -70,7 +69,6 @@ class CollectAskRent : BaseFragment<NetData>() , OnItemClickListener {
     }
 
     override fun showData(t: NetData?) {
-        TODO("Not yet implemented")
     }
 
     override fun onItemClick(view: View, position: Int) {

@@ -171,7 +171,7 @@
 
                 <TextView
                     style="@style/tv_style_left1"
-                    android:text="地         址" />
+                    android:text="地        址" />
                 <TextView
                     android:id="@+id/et_daaress"
                     style="@style/et_style" />

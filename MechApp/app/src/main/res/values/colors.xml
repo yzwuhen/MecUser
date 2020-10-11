@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFB412</color>
-    <color name="colorPrimaryDark">#FFB412</color>
-    <color name="colorAccent">#FFB412</color>
+    <color name="colorPrimary">#FFB923</color>
+    <color name="colorPrimaryDark">#FFB923</color>
+    <color name="colorAccent">#FFB923</color>
     <color name="white">#fff</color>
 
     <color name="color_ffb923">#FFB923</color>
@@ -17,4 +17,5 @@
     <color name="color_666">#666666</color>
     <color name="color_b5b">#B5B5B5</color>
     <color name="color_9a">#9a9a9a</color>
+    <color name="item_tv_date">#eee</color>
 </resources>

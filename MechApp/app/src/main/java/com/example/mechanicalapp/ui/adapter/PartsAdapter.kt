@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,7 @@ class PartsAdapter (var mContext: Context, var mList:MutableList<String>, var mO
 
     private var isShow:Boolean=false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PartsVh(View.inflate(parent.context, R.layout.item_parts,null),mOnItemClickListener)
+        return PartsVh(LayoutInflater.from(mContext).inflate(R.layout.item_parts,parent,false),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

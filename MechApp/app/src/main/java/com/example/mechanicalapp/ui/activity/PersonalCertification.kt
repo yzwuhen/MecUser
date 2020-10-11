@@ -1,13 +1,9 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
@@ -23,14 +19,8 @@ import kotlinx.android.synthetic.main.layout_title.*
 
 class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
 
-    private val REQUEST_EXTERNAL_STORAGE = 1
-    private val PERMISSIONS_STORAGE = arrayOf(
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.CAMER"
-    )
-    private var mButtDialog: BottomSheetDialog?=null
 
+    private var mButtDialog: BottomSheetDialog?=null
     private var mDialogView:View ?= null
     private var mDialogTv1: TextView?= null
     private var mDialogTv2: TextView?= null
@@ -81,6 +71,11 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
         verifyStoragePermissions(this)
     }
 
+    override fun hasPermissions() {
+        super.hasPermissions()
+        takePicture()
+    }
+
     private fun showDialogType(type:Int){
         if (mButtDialog ==null){
             mButtDialog = BottomSheetDialog(this)
@@ -113,29 +108,7 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
             }
         }
     }
-    private fun verifyStoragePermissions(activity: Activity?) {
-        try {
-            //检测是否有写的权限
-            val permission = ActivityCompat.checkSelfPermission(
-                activity!!,
-                "android.permission.WRITE_EXTERNAL_STORAGE"
-            )
-            Log.v("sssss", "ssssssssssdsdsd ${permission != PackageManager.PERMISSION_GRANTED}")
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-                // 没有写的权限，去申请写的权限，会弹出对话框
-                Log.v("sssss", "ssssssssssdsdsd===========")
-                ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-                )
-            }else{
-                takePicture()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+
     private fun takePicture() {
         PictureSelector.create(this)
             .openGallery(PictureMimeType.ofAll())

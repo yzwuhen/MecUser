@@ -115,7 +115,7 @@ class CompanyCertifyActivity:BaseActivity<NetData>(),View.OnClickListener {
         }
     }
 
-    private fun verifyStoragePermissions(activity: Activity?) {
+    override fun verifyStoragePermissions(activity: Activity?) {
         try {
             //检测是否有写的权限
             val permission = ActivityCompat.checkSelfPermission(

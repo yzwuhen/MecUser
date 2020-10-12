@@ -18,52 +18,34 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.youth.banner.Banner
-                android:id="@+id/banner"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-               />
-            
+
             <LinearLayout
-                android:id="@+id/ly_lease_user_info"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:paddingLeft="@dimen/dp_17"
-                android:gravity="center_vertical"
-                android:layout_height="@dimen/dp_45">
-
-                <ImageView
-                    android:id="@+id/iv_lease_user_pic"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:src="@mipmap/user_default"/>
-                <TextView
-                    android:id="@+id/tv_lease_user_nick"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:text="昵称：谭老板"
-                    android:textColor="@color/color_666"
-                    android:textSize="@dimen/sp_16" />
-
-                <ImageView
-                    android:id="@+id/tv_lease_user_sr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:src="@mipmap/sr" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_details_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:paddingLeft="@dimen/dp_17"
-                android:text="卡特彼勒D11T推土机 出租"
-                android:textColor="@color/color_222"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold" />
+                android:layout_marginTop="@dimen/dp_20"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_details_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/dp_17"
+                    android:text="招聘挖掘机驾驶员卡特彼勒D11T推土机 出租"
+                    android:textColor="@color/color_222"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15K/月"
+                    android:textColor="#FC3D38"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,24 +64,28 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_experience"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_35"
+                    android:drawableLeft="@mipmap/details_experience_icon"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:text="5年以上经验"
+                    android:textColor="@color/color_666"
+                    android:textSize="12sp" />
+
+                <TextView
                     android:id="@+id/tv_browse_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_35"
+                    android:drawableLeft="@mipmap/details_time_icon"
+                    android:drawablePadding="@dimen/dp_10"
                     android:text="前天21：10"
                     android:textColor="@color/color_666"
                     android:textSize="12sp" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_17"
-                android:layout_marginTop="@dimen/dp_20"
-                android:text="￥2W/月"
-                android:textColor="#FC3D38"
-                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/tv_address"
@@ -128,13 +114,12 @@
                 android:paddingRight="@dimen/dp_17">
 
                 <TextView
-                    android:id="@+id/tv_mec_details"
+                    android:id="@+id/tv_parts_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="设备详情"
+                    android:text="招聘详情"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -144,18 +129,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械类型："
+                        android:text="工      种："
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tv_mec_type"
+                        android:id="@+id/tv_worker_type"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="推土机"
+                        android:text="挖掘机驾驶员"
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
@@ -163,59 +148,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械品牌:："
+                        android:text="人      数:："
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tv_mec_brand"
+                        android:id="@+id/tv_recruit_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="卡特彼勒"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="出厂日期："
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_factory_time"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="2020年4月"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械型号:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_mec_model"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="卡特彼勒D11T"
+                        android:text="1人"
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
                 </LinearLayout>
@@ -229,18 +171,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="工作时长："
+                        android:text="工作经验："
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tv_work_time"
+                        android:id="@+id/tv_details_experience"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="1200/小时"
+                        android:text="5年以上"
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
@@ -248,26 +190,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="计费模式:"
+                        android:text="工作薪酬"
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tv_cost_way"
+                        android:id="@+id/tv_pay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="可面议"
+                        android:text="15k/月"
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
                 </LinearLayout>
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_30"
-                    android:text="机械简介"
+                    android:text="岗位要求"
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -364,6 +305,7 @@
             android:text="收藏"
             android:textColor="@color/color_222"
             android:textSize="@dimen/sp_13" />
+
         <LinearLayout
             android:id="@+id/ly_chat"
             android:layout_width="0dp"
@@ -384,6 +326,7 @@
                 android:textColor="@color/color_222"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ly_call"
             android:layout_width="0dp"

@@ -12,10 +12,10 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.activity_ask_details.*
+import kotlinx.android.synthetic.main.activity_job_want_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils.onViewListener {
+class JobWantDetails: BaseActivity<NetData>(), View.OnClickListener, PopUtils.onViewListener {
     private var mShareDialog: BottomSheetDialog?=null
     private var mShareView: View?=null
 
@@ -32,28 +32,23 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
 
     private var intentType:Int?=0
     override fun getLayoutId(): Int {
-        return R.layout.activity_ask_details
+        return R.layout.activity_job_want_details
     }
 
     override fun initView() {
         super.initView()
 
         iv_right.setImageResource(R.mipmap.title_share)
-        tv_title.text="求租详情"
+        tv_title.text="求职详情"
         iv_left.setOnClickListener(this)
         iv_right.setOnClickListener(this)
         tv_report.setOnClickListener(this)
         tv_collected.setOnClickListener(this)
         ly_chat.setOnClickListener(this)
         ly_call.setOnClickListener(this)
-        tv_address.setOnClickListener(this)
         ly_user_info.setOnClickListener(this)
 
-        intentType = intent.getIntExtra(Configs.MEC_ASK_DETAILS_TYPE,0)
-        if (intentType==1){
-            tv_mec_details.text ="求购描述"
-            tv_title.text="求购详情"
-        }
+
     }
 
     override fun initPresenter() {
@@ -83,18 +78,6 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
             R.id.tv_pop_cancel-> PopUtils.dismissPop(this)
             R.id.ly_user_info->jumHomePage()
         }
-    }
-
-    private fun jumHomePage() {
-        var bundle =Bundle()
-        if (intentType==0){
-            bundle.putInt(Configs.USER_HOME_PAGE,1)
-        }else{
-            bundle.putInt(Configs.USER_HOME_PAGE,0)
-        }
-        bundle.putInt(Configs.USER_HOME_PAGE,1)
-        jumpActivity(bundle,UserHomePage::class.java)
-
     }
 
     private fun showPhone() {
@@ -142,5 +125,14 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
 
         popCancel?.setOnClickListener(this)
         popSure?.setOnClickListener(this)
+    }
+
+    private fun jumHomePage() {
+        var bundle = Bundle()
+            bundle.putInt(Configs.USER_HOME_PAGE,2)
+            bundle.putInt(Configs.USER_HOME_PAGE_Index,1)
+
+        jumpActivity(bundle,UserHomePage::class.java)
+
     }
 }

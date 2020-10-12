@@ -9,6 +9,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcModel
+import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
 import com.example.mechanicalapp.ui.adapter.PartsAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
@@ -100,6 +101,7 @@ class MorePartsAskingFragment  : BaseFragment<NetData>(), OnItemClickListener, V
     }
 
     override fun onItemClick(view: View, position: Int) {
+        jumpActivity(null,PartsAskDetailsActivity::class.java)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

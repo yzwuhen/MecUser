@@ -99,18 +99,20 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
 
     private fun jumDetails() {
         val intent = Intent()
-//        val bundle = Bundle()
-//        bundle.putInt(Configs.MORE_VIEW_TYPE,type)
+        val bundle = Bundle()
+
         if (type==0){
+            bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE,0)
             intent.setClass(mContext, LeaseDetailsActivity::class.java)
         }
         else{
+            bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE,0)
             intent.setClass(mContext, AskDetailsActivity::class.java)
         }
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-//        if (bundle != null) {
-//            intent.putExtras(bundle)
-//        }
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
         mContext.startActivity(intent)
     }
 

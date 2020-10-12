@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.RecruitDetailsActivity
 import com.example.mechanicalapp.ui.activity.WorkType
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseFragment
@@ -93,5 +94,6 @@ class RecruitFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListene
     }
 
     override fun onItemClick(view: View, position: Int) {
+        jumpActivity(null,RecruitDetailsActivity::class.java)
     }
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_comment1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="全部（2）"
+            android:textColor="@color/color_222"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/tv_comment2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="好评（0）"
+            android:textColor="@color/color_222"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/tv_comment3"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="中评（0）"
+            android:textColor="@color/color_222"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/tv_comment4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="差评（0）"
+            android:textColor="@color/color_222"
+            android:textSize="@dimen/sp_16" />
+
+    </LinearLayout>
+
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/spring_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.liaoinstan.springview.widget.SpringView>
+
+
+</LinearLayout>

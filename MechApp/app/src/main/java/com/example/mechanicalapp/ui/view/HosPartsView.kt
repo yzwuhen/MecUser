@@ -10,8 +10,10 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.activity.MorePartsActivity
+import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.HotPartsAdapter
 import kotlinx.android.synthetic.main.layout_hot_parts.view.*
 
@@ -38,8 +40,14 @@ class HosPartsView(var mContext: Context) : LinearLayout(mContext) , OnItemClick
 
 
     override fun onItemClick(view: View, position: Int) {
+        jumAct1()
     }
-
+    private fun jumAct1() {
+        val intent = Intent()
+        intent.setClass(mContext, GoodsDetailsActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        mContext.startActivity(intent)
+    }
     private fun jumAct() {
         val intent = Intent()
         intent.setClass(mContext, MorePartsActivity::class.java)

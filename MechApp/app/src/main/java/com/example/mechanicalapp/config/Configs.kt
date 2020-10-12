@@ -5,6 +5,11 @@ object Configs {
     const val HISTORY_TYPE :String ="history_type"  //0 是器械类 1 是招聘 2 是搜索  3是配件
     const val SEARCH_TYPE :String="type"
     const val SEARCH_RESULT_TYPE :String="search_result_type"
+    const val MEC_Lease_DETAILS_TYPE :String="mec_lease_details_type"// 0是出租 1 是出售
+    const val MEC_ASK_DETAILS_TYPE :String="mec_ask_details_type"// 0是求租 1 是求购
+
+    const val USER_HOME_PAGE :String="user_home_page"// 0是出售求购  1是出租求组  2求职招聘 3 配件出租求组
+    const val USER_HOME_PAGE_Index :String="user_home_page_index"// 0是左  1 是右
 
     const val MORE_VIEW_TYPE :String="more_view_type"
 

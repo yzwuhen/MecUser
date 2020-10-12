@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.activity.AskDetailsActivity
+import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
@@ -94,9 +96,27 @@ class BossDemandView (var mContext: Context) : LinearLayout(mContext), OnItemCli
         }
         mContext.startActivity(intent)
     }
+    private fun jumDetails() {
+        val intent = Intent()
+        val bundle = Bundle()
+        bundle.putInt(Configs.MORE_VIEW_TYPE,type)
 
+        if (type==0){
+            bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE,1)
+            intent.setClass(mContext, LeaseDetailsActivity::class.java)
+        }
+        else{
+            bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE,1)
+            intent.setClass(mContext, AskDetailsActivity::class.java)
+        }
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        mContext.startActivity(intent)
+    }
     override fun onItemClick(view: View, position: Int) {
-
+        jumDetails()
     }
 
 

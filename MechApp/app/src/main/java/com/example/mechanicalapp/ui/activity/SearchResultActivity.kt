@@ -16,12 +16,13 @@ import kotlinx.android.synthetic.main.layout_search_et.*
 
 class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
-    //tye== 0 出租出售 1 招牌  2 求职 3 商品（配件） 4 配件求租 5 配件出租  6是我的设备
+    //tye== 0 出租出售 1 招聘  2 求职 3 商品（配件） 4 配件求租 5 配件出租  6是我的设备
     private var mAdapter :UserDemandAdapter ?=null
     private var mRecruitAdapter : RecruitAdapter?=null
     private var mJobWantAdapter : JobWantAdapter?=null
     private var mPartsAdapter :PartsAdapter?=null
     private var mMorePartsAskAdapter :MorePartsAskAdapter?=null
+
     private var mOrderAdapter:OrderAdapter?=null
     private var mEngineerAdapter:SearchResultEngineer?=null
     var mList: MutableList<String> = ArrayList<String>()

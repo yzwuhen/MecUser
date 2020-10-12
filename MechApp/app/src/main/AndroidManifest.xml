@@ -116,6 +116,15 @@
         <activity android:name=".ui.activity.AddressSelActivity"/>
         <activity android:name=".ui.activity.LeaseDetailsActivity"/>
         <activity android:name=".ui.activity.AskDetailsActivity"/>
+        <activity android:name=".ui.activity.PartsLeaseDetailsActivity"/>
+        <activity android:name=".ui.activity.PartsAskDetailsActivity"/>
+        <activity android:name=".ui.activity.RecruitDetailsActivity"/>
+        <activity android:name=".ui.activity.JobWantDetails"/>
+        <activity android:name=".ui.activity.GoodsDetailsActivity"/>
+        <activity android:name=".ui.activity.CommentListActivity"/>
+        <activity android:name=".ui.activity.SureOrderActivity"/>
+        <activity android:name=".ui.activity.FreightRuleActivity"/>
+        <activity android:name=".ui.activity.UserHomePage"/>
 
         <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
         </meta-data>

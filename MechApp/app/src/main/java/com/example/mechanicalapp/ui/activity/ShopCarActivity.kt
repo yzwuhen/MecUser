@@ -42,6 +42,8 @@ class ShopCarActivity: BaseActivity<NetData>() ,View.OnClickListener,OnItemClick
         tv_title.text = "购物车（0）"
 
 
+        tv_settlement.setOnClickListener(this)
+
         mList.add("所有类型")
         mList.add("挖掘机")
         mList.add("推土机")
@@ -82,6 +84,7 @@ class ShopCarActivity: BaseActivity<NetData>() ,View.OnClickListener,OnItemClick
 
         when(view?.id){
             R.id.iv_back->finish()
+            R.id.tv_settlement->jumpActivity(null,SureOrderActivity::class.java)
         }
 
 

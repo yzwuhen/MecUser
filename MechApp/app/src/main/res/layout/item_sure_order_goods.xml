@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="@dimen/dp_17">
+
+    <ImageView
+        android:id="@+id/iv_goods_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_goods_state"
+        android:layout_width="100dp"
+        android:layout_height="22dp"
+        android:background="@color/color_222_70"
+        android:gravity="center"
+        android:text="商品已下架"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_goods_pic"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_17"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="回转支承旋转轴承大型吊车挖掘机专用配件支持大小型吊车挖掘机使用"
+        android:textColor="@color/color_222"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_goods_pic"
+        app:layout_constraintTop_toTopOf="@+id/iv_goods_pic" />
+
+    <TextView
+        android:id="@+id/tv_attr"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="@drawable/rect_radio_6_g"
+        android:drawableRight="@mipmap/sel_tip_n"
+        android:drawablePadding="@dimen/dp_10"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_14"
+        android:paddingRight="@dimen/dp_10"
+        android:text="蓝色，均码"
+        android:textColor="@color/color_666"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintStart_toStartOf="@+id/tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥999"
+        android:textColor="@color/color_222"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_goods_pic"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="x1"
+        android:textColor="@color/color_222"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_attr" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

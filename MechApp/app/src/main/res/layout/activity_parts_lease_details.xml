@@ -22,11 +22,10 @@
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-               />
-            
+                />
+
             <LinearLayout
                 android:id="@+id/ly_lease_user_info"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:paddingLeft="@dimen/dp_17"
                 android:gravity="center_vertical"
@@ -97,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_17"
                 android:layout_marginTop="@dimen/dp_20"
-                android:text="￥2W/月"
+                android:text="一口价￥2W/月"
                 android:textColor="#FC3D38"
                 android:textSize="22sp" />
 
@@ -128,10 +127,10 @@
                 android:paddingRight="@dimen/dp_17">
 
                 <TextView
-                    android:id="@+id/tv_mec_details"
+                    android:id="@+id/tv_parts_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="设备详情"
+                    android:text="配件详情"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
 
@@ -144,7 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械类型："
+                        android:text="适用机型："
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
@@ -159,22 +158,7 @@
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械品牌:："
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/tv_mec_brand"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="卡特彼勒"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
                 </LinearLayout>
 
 
@@ -187,37 +171,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="出厂日期："
+                        android:text="配件品牌："
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/tv_factory_time"
+                        android:id="@+id/tv_parts_brand"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="2020年4月"
+                        android:text="山河"
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械型号:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_mec_model"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="卡特彼勒D11T"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -229,37 +197,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="工作时长："
+                        android:text="配件型号："
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
-
                     <TextView
-                        android:id="@+id/tv_work_time"
+                        android:id="@+id/tv_parts_type"
                         android:layout_width="140dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="1200/小时"
+                        android:text="山河"
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="计费模式:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tv_cost_way"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="可面议"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
                 </LinearLayout>
 
 
@@ -267,7 +218,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_30"
-                    android:text="机械简介"
+                    android:text="配件说明"
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_17"
+        android:text="承保公司"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_18" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:text="这海鲜很鲜美，很棒很棒，我下次再来购买的，配送也很快 速，配送人员也很有亲和力~这海鲜很鲜美，很棒很棒，我下 次再来购买的，配"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_17"
+        android:text="投保须知"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_18" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:text="这海鲜很鲜美，很棒很棒，我下次再来购买的，配送也很快 速，配送人员也很有亲和力~这海鲜很鲜美，很棒很棒，我下 次再来购买的，配"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_17"
+        android:text="重要告知"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_18" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:text="这海鲜很鲜美，很棒很棒，我下次再来购买的，配送也很快 速，配送人员也很有亲和力~这海鲜很鲜美，很棒很棒，我下 次再来购买的，配"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_16" />
+
+</LinearLayout>

@@ -15,22 +15,22 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.youth.banner.indicator.CircleIndicator
-import kotlinx.android.synthetic.main.activity_lease_details.*
+import kotlinx.android.synthetic.main.activity_parts_lease_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onViewListener {
+class PartsLeaseDetailsActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.onViewListener {
     private var mShareDialog: BottomSheetDialog?=null
-    private var mShareView:View?=null
+    private var mShareView: View?=null
 
-    private var mLyWx:LinearLayout?=null
-    private var mLyQq:LinearLayout?=null
-    private var mLySina:LinearLayout?=null
-    private var mTvCancelShare:TextView?=null
+    private var mLyWx: LinearLayout?=null
+    private var mLyQq: LinearLayout?=null
+    private var mLySina: LinearLayout?=null
+    private var mTvCancelShare: TextView?=null
 
-    private var popTvTitle:TextView?=null
-    private var popTvInfo:TextView?=null
-    private var popCancel:TextView?=null
-    private var popSure:TextView?=null
+    private var popTvTitle: TextView?=null
+    private var popTvInfo: TextView?=null
+    private var popCancel: TextView?=null
+    private var popSure: TextView?=null
     private var mPopwindow: PopupWindow?=null
 
     var mList: MutableList<BannerData>? = ArrayList<BannerData>()
@@ -39,7 +39,7 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
     private var intentType:Int?=0
 
     override fun getLayoutId(): Int {
-        return R.layout.activity_lease_details
+        return R.layout.activity_parts_lease_details
     }
 
     override fun initView() {
@@ -69,8 +69,7 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
         intentType = intent.getIntExtra(Configs.MEC_Lease_DETAILS_TYPE,0)
 
         if (intentType==1){
-            ly_lease_user_info.visibility =View.VISIBLE
-            tv_title.text="出售详情"
+            ly_lease_user_info.visibility = View.VISIBLE
         }
 
     }
@@ -98,19 +97,15 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
             R.id.ly_qq->mShareDialog?.dismiss()
             R.id.ly_sina->mShareDialog?.dismiss()
             R.id.tv_cancel->mShareDialog?.dismiss()
-            R.id.tv_pop_sure->PopUtils.dismissPop(this)
-            R.id.tv_pop_cancel->PopUtils.dismissPop(this)
+            R.id.tv_pop_sure-> PopUtils.dismissPop(this)
+            R.id.tv_pop_cancel-> PopUtils.dismissPop(this)
             R.id.ly_user_info->jumHomePage()
         }
     }
     private fun jumHomePage() {
         var bundle = Bundle()
-        if (intentType==0){
-            bundle.putInt(Configs.USER_HOME_PAGE,1)
-        }else{
-            bundle.putInt(Configs.USER_HOME_PAGE,0)
-        }
-        bundle.putInt(Configs.USER_HOME_PAGE,0)
+        bundle.putInt(Configs.USER_HOME_PAGE,3)
+        bundle.putInt(Configs.USER_HOME_PAGE_Index,0)
         jumpActivity(bundle,UserHomePage::class.java)
 
     }
@@ -119,7 +114,7 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
         if (mPopwindow ==null){
             mPopwindow =  this?.let {
                 PopUtils.init(this,
-                    it,R.layout.pop_center_phone,
+                    it, R.layout.pop_center_phone,
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT,true,this)
             }
@@ -130,22 +125,22 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
 
     private fun showShare() {
 
-            if (mShareDialog ==null){
-                mShareDialog = BottomSheetDialog(this)
-                mShareView = View.inflate(this,R.layout.dialog_share,null)
-                mShareDialog?.setContentView(mShareView!!)
+        if (mShareDialog ==null){
+            mShareDialog = BottomSheetDialog(this)
+            mShareView = View.inflate(this, R.layout.dialog_share,null)
+            mShareDialog?.setContentView(mShareView!!)
 
-                mLyWx = mShareView?.findViewById(R.id.ly_wx)
-                mLyQq = mShareView?.findViewById(R.id.ly_qq)
-                mLySina = mShareView?.findViewById(R.id.ly_sina)
-                mTvCancelShare = mShareView?.findViewById(R.id.tv_cancel)
+            mLyWx = mShareView?.findViewById(R.id.ly_wx)
+            mLyQq = mShareView?.findViewById(R.id.ly_qq)
+            mLySina = mShareView?.findViewById(R.id.ly_sina)
+            mTvCancelShare = mShareView?.findViewById(R.id.tv_cancel)
 
-                mLyWx?.setOnClickListener(this)
-                mLyQq?.setOnClickListener(this)
-                mLySina?.setOnClickListener(this)
-                mTvCancelShare?.setOnClickListener(this)
-            }
-            mShareDialog?.show()
+            mLyWx?.setOnClickListener(this)
+            mLyQq?.setOnClickListener(this)
+            mLySina?.setOnClickListener(this)
+            mTvCancelShare?.setOnClickListener(this)
+        }
+        mShareDialog?.show()
 
     }
 

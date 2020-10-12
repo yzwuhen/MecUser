@@ -110,7 +110,7 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
         }else{
             bundle.putInt(Configs.USER_HOME_PAGE,0)
         }
-        bundle.putInt(Configs.USER_HOME_PAGE,0)
+        bundle.putInt(Configs.USER_HOME_PAGE_Index,0)
         jumpActivity(bundle,UserHomePage::class.java)
 
     }

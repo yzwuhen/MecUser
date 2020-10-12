@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -94,12 +95,13 @@ class UserHomePage : BaseActivity<NetData>(), View.OnClickListener {
 
         when (v?.id) {
             R.id.iv_back -> finish()
-            R.id.tv_screen_left -> showView(0)
-            R.id.tv_screen_right -> showView(1)
+            R.id.ly_screen_left -> showView(0)
+            R.id.ly_screen_right -> showView(1)
         }
     }
 
     private fun showView(index: Int) {
+        Log.e("sssssssssss","sssssssssssssssssssssss===$index");
         cus_page.currentItem = index
         for (i in mTextViewList.indices) {
             if (index == i){

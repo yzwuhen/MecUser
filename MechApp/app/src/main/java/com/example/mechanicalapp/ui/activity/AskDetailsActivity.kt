@@ -92,7 +92,7 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
         }else{
             bundle.putInt(Configs.USER_HOME_PAGE,0)
         }
-        bundle.putInt(Configs.USER_HOME_PAGE,1)
+        bundle.putInt(Configs.USER_HOME_PAGE_Index,1)
         jumpActivity(bundle,UserHomePage::class.java)
 
     }

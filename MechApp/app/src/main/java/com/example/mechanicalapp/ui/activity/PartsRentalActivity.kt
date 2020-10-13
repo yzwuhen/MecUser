@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.location.Address
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.adapter.PopWayAdapter
@@ -48,6 +50,9 @@ class PartsRentalActivity : BaseActivity<NetData>(), OnItemClickListener, View.O
         iv_back.setOnClickListener(this)
         tv_title.text ="配件出租"
         tv_no_element.setOnClickListener(this)
+        ly_ec_type.setOnClickListener(this)
+        ly_ec_brand.setOnClickListener(this)
+        ly_ec_model.setOnClickListener(this)
         ly_address.setOnClickListener(this)
         mStringList?.add("元/月")
         mStringList?.add("元/台班")
@@ -77,6 +82,18 @@ class PartsRentalActivity : BaseActivity<NetData>(), OnItemClickListener, View.O
         when(v?.id){
             R.id.iv_back->finish()
             R.id.tv_no_element->showInput()
+            R.id.ly_ec_type -> jumpActivityForReSult(
+                Configs.EC_TYPE_RESULT_CODE,
+                EcType::class.java
+            )
+            R.id.ly_ec_brand -> jumpActivityForReSult(
+                Configs.EC_BRAND_RESULT_CODE,
+                Brand::class.java
+            )
+            R.id.ly_ec_model -> jumpActivityForReSult(
+                Configs.EC_MODEL_RESULT_CODE,
+                EcModel::class.java
+            )
             R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
         }
     }
@@ -99,5 +116,23 @@ class PartsRentalActivity : BaseActivity<NetData>(), OnItemClickListener, View.O
         popRecy?.layoutManager = LinearLayoutManager(this)
         popRecy?.adapter = mPopWayAdapter
     }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+
+        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
+        super.onActivityResult(requestCode, resultCode, data)
+
+    }
+
+    private fun showResult(requestCode: Int, extra: String?) {
+        if (extra.isNullOrEmpty()){
+            return
+        }
+        when (requestCode) {
+            Configs.EC_TYPE_RESULT_CODE -> et_ec_type.text = extra
+            Configs.EC_BRAND_RESULT_CODE -> et_ec_brand.text = extra
+            Configs.EC_MODEL_RESULT_CODE -> et_ec_model.text = extra
+        }
+
+    }
 }

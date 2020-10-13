@@ -36,15 +36,17 @@
 
             <View style="@style/h_view_1" />
 
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_ec_type"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
                     android:text="适合机型" />
 
-                <EditText
+                <TextView
                     android:hint="请选择适合得机型"
-                    android:id="@+id/et_ec_tye"
+                    android:id="@+id/et_ec_type"
                     style="@style/et_style" />
                 <TextView
                     android:text=">"
@@ -54,12 +56,14 @@
 
 
             <View style="@style/h_view_1" />
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_ec_brand"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
                     android:text="配件品牌" />
-                <EditText
+                <TextView
                     android:hint="请选择配件品牌"
                     android:id="@+id/et_parts_brand"
                     style="@style/et_style" />
@@ -70,12 +74,14 @@
             </LinearLayout>
 
             <View style="@style/h_view_1" />
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_ec_model"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
                     android:text="配件型号" />
-                <EditText
+                <TextView
                     android:hint="请选择配件型号"
                     android:id="@+id/et_parts_model"
                     style="@style/et_style" />

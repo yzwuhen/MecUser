@@ -52,15 +52,17 @@
             </LinearLayout>
             <View style="@style/h_view_1" />
 
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_ec_type"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
                     android:text="机械类型" />
 
-                <EditText
+                <TextView
                     android:hint="请选择机械类型"
-                    android:id="@+id/et_ec_tyoe"
+                    android:id="@+id/et_ec_type"
                     style="@style/et_style" />
                 <TextView
                     android:text=">"
@@ -69,12 +71,14 @@
             </LinearLayout>
 
             <View style="@style/h_view_1" />
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_ec_brand"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
                     android:text="机械品牌" />
-                <EditText
+                <TextView
                     android:hint="请选择机械品牌"
                     android:id="@+id/et_ec_brand"
                     style="@style/et_style" />
@@ -85,12 +89,14 @@
             </LinearLayout>
 
             <View style="@style/h_view_1" />
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_ec_model"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
                     android:text="机械型号" />
-                <EditText
+                <TextView
                     android:hint="请选择机械型号"
                     android:id="@+id/et_ec_model"
                     style="@style/et_style" />

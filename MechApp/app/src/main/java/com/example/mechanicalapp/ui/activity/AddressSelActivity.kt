@@ -3,10 +3,7 @@ package com.example.mechanicalapp.ui.activity
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -98,22 +95,22 @@ class AddressSelActivity:BaseActivity<NetData>() ,GdMapUtils.LocationListener,On
             }
 
         })
-        et_search.addTextChangedListener { object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                Log.e("yz_map","sssssssssssssss=============beforeTextChanged============")
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                Log.e("yz_map","sssssssssssssss==========onTextChanged===============")
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                Log.e("yz_map","sssssssssssssss==============afterTextChanged===========")
-                searchList(code,et_search.text.toString().trim());
-            }
-
-        }}
+//        et_search.addTextChangedListener { object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                Log.e("yz_map","sssssssssssssss=============beforeTextChanged============")
+//
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                Log.e("yz_map","sssssssssssssss==========onTextChanged===============")
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                Log.e("yz_map","sssssssssssssss==============afterTextChanged===========")
+//                searchList(code,et_search.text.toString().trim());
+//            }
+//
+//        }}
 
     }
 

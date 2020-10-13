@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -9,6 +10,7 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PopWayAdapter
 import com.example.mechanicalapp.ui.adapter.YearsAdapter
@@ -53,7 +55,9 @@ class AskingRentActivity : BaseActivity<NetData>(), OnItemClickListener, View.On
         ly_rent_time.setOnClickListener(this)
         ly_production_time.setOnClickListener(this)
         ly_address.setOnClickListener(this)
-
+        ly_ec_type.setOnClickListener(this)
+        ly_ec_brand.setOnClickListener(this)
+        ly_ec_model.setOnClickListener(this)
         mStringList?.add("元/月")
         mStringList?.add("元/台班")
         mStringList?.add("元/小时")
@@ -90,6 +94,18 @@ class AskingRentActivity : BaseActivity<NetData>(), OnItemClickListener, View.On
             R.id.tv_way -> showInput()
             R.id.ly_production_time -> showTime()
             R.id.ly_rent_time->showDialog()
+            R.id.ly_ec_type -> jumpActivityForReSult(
+                Configs.EC_TYPE_RESULT_CODE,
+                EcType::class.java
+            )
+            R.id.ly_ec_brand -> jumpActivityForReSult(
+                Configs.EC_BRAND_RESULT_CODE,
+                Brand::class.java
+            )
+            R.id.ly_ec_model -> jumpActivityForReSult(
+                Configs.EC_MODEL_RESULT_CODE,
+                EcModel::class.java
+            )
             R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
 
         }
@@ -138,5 +154,24 @@ class AskingRentActivity : BaseActivity<NetData>(), OnItemClickListener, View.On
         mRecyDialog?.addItemDecoration(MyDecoration(3))
         mRecyDialog?.adapter =YearsAdapter(this,mYears,this)
         mButtDialog?.show()
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
+        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
+        super.onActivityResult(requestCode, resultCode, data)
+
+    }
+
+    private fun showResult(requestCode: Int, extra: String?) {
+        if (extra.isNullOrEmpty()){
+            return
+        }
+        when (requestCode) {
+            Configs.EC_TYPE_RESULT_CODE -> et_ec_type.text = extra
+            Configs.EC_BRAND_RESULT_CODE -> et_ec_brand.text = extra
+            Configs.EC_MODEL_RESULT_CODE -> et_ec_model.text = extra
+        }
+
     }
 }

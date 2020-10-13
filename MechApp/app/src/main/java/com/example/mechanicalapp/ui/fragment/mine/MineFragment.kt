@@ -40,6 +40,7 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
         ly_collected.setOnClickListener(this)
         ly_address.setOnClickListener(this)
         ly_release.setOnClickListener(this)
+        iv_user_pic.setOnClickListener(this)
     }
 
     override fun showData(t: NetData?) {
@@ -63,7 +64,7 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     override fun onClick(view: View?) {
 
         when (view?.id) {
-
+            R.id.iv_user_pic -> jumpActivity(null, LoginActivity::class.java)
             R.id.tv_edit -> jumpActivity(null, UserDataActivity::class.java)
             R.id.ly_address -> jumpActivity(null, MyAddressActivity::class.java)
             R.id.ly_integral -> jumpActivity(null, MyIntegralActivity::class.java)

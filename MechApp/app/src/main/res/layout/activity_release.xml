@@ -16,15 +16,20 @@
         android:layout_height="wrap_content"/>
 
 
-    <ImageView
+    <TextView
         android:id="@+id/iv_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="75dp"
+        android:gravity="center"
+        android:textSize="@dimen/sp_18"
+        android:textColor="@color/white"
+        android:paddingLeft="@dimen/dp_10"
+        android:text="发布维修"
         app:layout_constraintBottom_toTopOf="@+id/iv_close"
-        android:src="@mipmap/fbwx"/>
+        android:background="@mipmap/fbwx"/>
     <ImageView
         android:id="@+id/iv_close"
         app:layout_constraintBottom_toBottomOf="parent"

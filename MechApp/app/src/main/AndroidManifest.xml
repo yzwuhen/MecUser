@@ -125,6 +125,12 @@
         <activity android:name=".ui.activity.SureOrderActivity"/>
         <activity android:name=".ui.activity.FreightRuleActivity"/>
         <activity android:name=".ui.activity.UserHomePage"/>
+        <activity android:name=".ui.activity.LoginActivity"/>
+        <activity android:name=".ui.activity.LoginCodeActivity"/>
+        <activity android:name=".ui.activity.LoginPwdActivity"/>
+        <activity android:name=".ui.activity.RegisterActivity"/>
+        <activity android:name=".ui.activity.FindPwdActivity"/>
+        <activity android:name=".ui.activity.SettingPwdActivity"/>
 
         <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
         </meta-data>

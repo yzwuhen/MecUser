@@ -49,6 +49,8 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
          ly_release?.setOnClickListener(this)
          ly_mine?.setOnClickListener(this)
          ly_msg?.setOnClickListener(this)
+
+         verifyStoragePermissions(this)
      }
 
      private fun selectText(index: Int) {

@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
-import com.example.mechanicalapp.ui.activity.CloudBoxActivity
-import com.example.mechanicalapp.ui.activity.MoreRecruitActivity
-import com.example.mechanicalapp.ui.activity.SearchMecActivity
+import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.MenuAdapter
 
 class ItemMenu(var mContext: Context) : LinearLayout(mContext) , OnItemClickListener {
@@ -55,11 +53,29 @@ class ItemMenu(var mContext: Context) : LinearLayout(mContext) , OnItemClickList
         mContext.startActivity(intent)
     }
 
+    private fun jumMoreDataAct(type:Int){
+        val intent = Intent()
+        val bundle = Bundle()
+        bundle.putInt(Configs.MORE_VIEW_TYPE,type)
+        intent.setClass(mContext, MoreDataActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        mContext.startActivity(intent)
+    }
+    private fun jumParts(){
+        val intent = Intent()
+        intent.setClass(mContext, MorePartsActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        mContext.startActivity(intent)
+    }
+
     override fun onItemClick(view: View, position: Int) {
         when(position){
-            0->jumAct(0)
-            1->jumAct(2)
-            2->jumAct(1)
+            0->jumMoreDataAct(0)
+            1->jumParts()
+            2->jumMoreDataAct(1)
             3->jumAct(4)
             4->jumAct2()
             5->jumAct1()

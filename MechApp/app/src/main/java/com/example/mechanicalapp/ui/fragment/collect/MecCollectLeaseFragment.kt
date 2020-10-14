@@ -35,7 +35,7 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
 
     override fun initView() {
         super.initView()
-        mAdapter = UserDemandAdapter(mContext, mList, this)
+        mAdapter = UserDemandAdapter(mContext, mList, type,this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 

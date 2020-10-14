@@ -33,7 +33,7 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
         mList.add("1")
         mList.add("1")
 
-        mAdapter = UserDemandAdapter(mContext, mList, this)
+        mAdapter = UserDemandAdapter(mContext, mList, 0,this)
 
         mRentAdapter = UserRentAdapter(mContext,mList,this)
 

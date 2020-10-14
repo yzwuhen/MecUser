@@ -33,7 +33,7 @@ class BossDemandView (var mContext: Context) : LinearLayout(mContext), OnItemCli
         mList.add("1")
         mList.add("1")
 
-        mAdapter = UserDemandAdapter(mContext, mList, this)
+        mAdapter = UserDemandAdapter(mContext, mList, 1,this)
 
         mRentAdapter = UserRentAdapter(mContext,mList,this)
 

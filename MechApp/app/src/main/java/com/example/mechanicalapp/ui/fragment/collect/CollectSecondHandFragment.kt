@@ -15,7 +15,7 @@ class CollectSecondHandFragment : BaseFragment<NetData>(), View.OnClickListener 
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(MecCollectLeaseFragment(2))
+        mFragmentList?.add(MecCollectLeaseFragment(0))
         mFragmentList?.add(MecCollectAskRent(2))
     }
 

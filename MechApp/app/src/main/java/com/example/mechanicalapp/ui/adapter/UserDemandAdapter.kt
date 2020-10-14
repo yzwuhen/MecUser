@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,13 +11,13 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import kotlinx.android.synthetic.main.item_user_demand.view.*
 
-class UserDemandAdapter(var mContext:Context,var mList:MutableList<String>,var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserDemandAdapter(var mContext:Context,var mList:MutableList<String>,var type:Int,var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isShow:Boolean=false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return UserDemandVh(View.inflate(parent.context, R.layout.item_user_demand,null),mOnItemClickListener)
+        return UserDemandVh(LayoutInflater.from(mContext).inflate(R.layout.item_user_demand,parent,false),type,mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -39,9 +40,12 @@ class UserDemandAdapter(var mContext:Context,var mList:MutableList<String>,var m
 
     }
 
-    class UserDemandVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
+    class UserDemandVh(itemView: View, type:Int,mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            if (type==1){
+                itemView.tv_new_pic.visibility =View.GONE
+            }
         }
     }
 }

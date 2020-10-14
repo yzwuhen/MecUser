@@ -99,6 +99,14 @@
             android:layout_marginTop="48dp"
             android:text="请完成验证" />
 
+        <com.example.mechanicalapp.ui.view.SidleView
+            android:id="@+id/sidle_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="54dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="54dp" />
+
 
     </LinearLayout>
 

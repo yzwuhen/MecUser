@@ -28,10 +28,10 @@ class OrderAdapter(
         if (position == 1) {
             holder.itemView.tv_order_state.text = "待上门"
             holder.itemView.tv_order_num.text = "订单号：123456789774"
-        } else if (position == 1) {
+        } else if (position == 2) {
             holder.itemView.tv_order_state.text = "进行中"
             holder.itemView.tv_order_num.text = "订单号：123456789774"
-        } else if (position == 1) {
+        } else if (position == 3) {
             holder.itemView.tv_order_state.text = "待付款"
             holder.itemView.tv_order_num.text = ""
         }

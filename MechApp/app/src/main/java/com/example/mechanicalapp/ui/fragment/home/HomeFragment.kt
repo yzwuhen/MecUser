@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment.home
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
@@ -61,11 +62,17 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
 
         when (view?.id) {
             R.id.tv_address -> jumCity()
-            R.id.tv_search -> jumpActivity(null, HistorySearchActivity::class.java)
+            R.id.tv_search -> jumpSearch()
             R.id.tv_map -> jumMap()
         }
 
 
+    }
+    private fun jumpSearch() {
+
+        var bundle = Bundle()
+        bundle.putInt(Configs.HISTORY_TYPE,9)
+        jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 
     private fun jumCity() {

@@ -1,13 +1,10 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ktapp.views.MyDecoration
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
@@ -37,7 +34,6 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
         type = intent.getIntExtra(Configs.SEARCH_RESULT_TYPE,0)
 
-        Log.v("sssss","sssssssssss=====$type")
         mList.add("1")
         mList.add("1")
         mList.add("1")
@@ -45,7 +41,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
         recycler_list.layoutManager = LinearLayoutManager(this)
 
         if (type ==0){
-            mAdapter = UserDemandAdapter(this, mList, this)
+            mAdapter = UserDemandAdapter(this, mList, 1,this)
             recycler_list.adapter = mAdapter
         }
         else if (type ==1){

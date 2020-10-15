@@ -1,17 +1,16 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.pm.PackageManager
 import android.telephony.TelephonyManager
 import android.view.View
+import androidx.core.app.ActivityCompat
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import kotlinx.android.synthetic.main.activity_login_code.*
 import kotlinx.android.synthetic.main.activity_login_third.*
-import kotlinx.android.synthetic.main.activity_login_third.tv_agreement
-import kotlinx.android.synthetic.main.activity_login_third.tv_check
-import kotlinx.android.synthetic.main.activity_login_third.tv_login
-import kotlinx.android.synthetic.main.activity_login_third.tv_privacy
 import kotlinx.android.synthetic.main.layout_title.*
 import java.lang.Exception
 
@@ -25,6 +24,7 @@ class LoginActivity : BaseActivity<NetData>(), View.OnClickListener {
 
     }
 
+    @SuppressLint("HardwareIds")
     override fun initView() {
         super.initView()
         tv_title.text = "登录"
@@ -40,6 +40,26 @@ class LoginActivity : BaseActivity<NetData>(), View.OnClickListener {
         telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
 
         try {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_SMS
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_PHONE_NUMBERS
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_PHONE_STATE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
             tv_phone.text = "本机号码${telephonyManager?.line1Number}"
         } catch (e: Exception) {
 

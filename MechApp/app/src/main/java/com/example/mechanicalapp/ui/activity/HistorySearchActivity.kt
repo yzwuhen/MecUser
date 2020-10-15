@@ -14,15 +14,16 @@ import com.example.mechanicalapp.ui.widget.TagFlowLayout
 import kotlinx.android.synthetic.main.activity_history_search.*
 
 
-class HistorySearchActivity :BaseActivity<NetData>(),TagFlowLayout.OnTagClickListener ,View.OnClickListener {
+class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickListener,
+    View.OnClickListener {
 
-    private var mHisToryFl:TagFlowLayout ?=null
-    private var tvDeleteHistory:TextView ?=null
+    private var mHisToryFl: TagFlowLayout? = null
+    private var tvDeleteHistory: TextView? = null
     private var mHistoryAdapter: HistoryAdapter? = null
 
-    private var mHistoryList :MutableList<String> = ArrayList<String>()
+    private var mHistoryList: MutableList<String> = ArrayList<String>()
 
-    private var type :Int =0
+    private var type: Int = 0
 
     override fun getLayoutId(): Int {
 
@@ -41,7 +42,7 @@ class HistorySearchActivity :BaseActivity<NetData>(),TagFlowLayout.OnTagClickLis
         mHistoryList.add("1")
         mHistoryList.add("1")
 
-        type = intent.getIntExtra(Configs.HISTORY_TYPE,0)
+        type = intent.getIntExtra(Configs.HISTORY_TYPE, 0)
 
         showHisFl()
     }
@@ -61,16 +62,17 @@ class HistorySearchActivity :BaseActivity<NetData>(),TagFlowLayout.OnTagClickLis
     override fun onTagClick(view: View?, position: Int, parent: FlowLayout?): Boolean {
 
 
-        var bundle :Bundle = Bundle()
-        bundle.putInt(Configs.SEARCH_RESULT_TYPE,type)
-        if (type ==3){
-            jumpActivity(bundle,SearchGoodsResult::class.java)
-        }
-        else if (type == 6) {
-            jumpActivity(bundle,SearchMecResult::class.java)
-        }
-        else{
-            jumpActivity(bundle,SearchResultActivity::class.java)
+        var bundle: Bundle = Bundle()
+        bundle.putInt(Configs.SEARCH_RESULT_TYPE, type)
+        if (type == 3) {
+            jumpActivity(bundle, SearchGoodsResult::class.java)
+        } else if (type == 6) {
+            jumpActivity(bundle, SearchMecResult::class.java)
+        } else if (type == 9) {
+            bundle.putInt(Configs.SEARCH_TYPE,0)
+            jumpActivity(bundle, SearchMecActivity::class.java)
+        } else {
+            jumpActivity(bundle, SearchResultActivity::class.java)
         }
 
 //        if (type==0){

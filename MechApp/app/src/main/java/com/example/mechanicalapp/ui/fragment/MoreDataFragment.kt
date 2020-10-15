@@ -60,7 +60,7 @@ class MoreDataFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListen
     override fun initView() {
         super.initView()
 
-        mAdapter = UserDemandAdapter(mContext, mList, this)
+        mAdapter = UserDemandAdapter(mContext, mList, type,this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
         tv_screen1.text ="2$type"

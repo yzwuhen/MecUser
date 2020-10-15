@@ -37,6 +37,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
+        android:id="@+id/tv_new_pic"
         android:layout_width="@dimen/dp_63"
         android:layout_height="27dp"
         android:layout_marginTop="13dp"

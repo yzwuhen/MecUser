@@ -27,10 +27,6 @@ class MoreDataActivity: BaseActivity<NetData>() ,View.OnClickListener{
         return  R.layout.activity_more_data
     }
 
-    init {
-        mFragmentList?.add(MoreDataFragment(1))
-        mFragmentList?.add(MoreRecruitFragment(2))
-    }
 
 
     override fun initView() {
@@ -45,6 +41,10 @@ class MoreDataActivity: BaseActivity<NetData>() ,View.OnClickListener{
             tv_screen_left.text ="出售"
             tv_screen_right.text ="求购"
         }
+
+
+        mFragmentList?.add(MoreDataFragment(type))
+        mFragmentList?.add(MoreRecruitFragment(2))
 
 
         mTabPageAdapter = FragmentListPageAdapter(this.supportFragmentManager, mFragmentList!!)

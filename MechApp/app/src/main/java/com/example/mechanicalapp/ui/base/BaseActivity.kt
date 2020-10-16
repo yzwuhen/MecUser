@@ -81,10 +81,8 @@ abstract  class BaseActivity<T> : AppCompatActivity() ,BaseView<T>{
                 activity!!,
                 "android.permission.WRITE_EXTERNAL_STORAGE"
             )
-            Log.v("sssss", "ssssssssssdsdsd ${permission != PackageManager.PERMISSION_GRANTED}")
             if (permission != PackageManager.PERMISSION_GRANTED) {
                 // 没有写的权限，去申请写的权限，会弹出对话框
-                Log.v("sssss", "ssssssssssdsdsd===========")
                 ActivityCompat.requestPermissions(
                     activity,
                     PERMISSIONS_STORAGE,

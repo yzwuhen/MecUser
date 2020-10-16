@@ -2,26 +2,26 @@ package com.example.mechanicalapp.ui.fragment.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.util.Log
 import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.HistorySearchActivity
 import com.example.mechanicalapp.ui.activity.MapActivity
-import com.example.mechanicalapp.ui.activity.ReportActivity
 import com.example.mechanicalapp.ui.activity.SearchCityActivity
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.mvp.impl.DemoPresenterImpl
 import com.example.mechanicalapp.ui.view.*
-import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
 import kotlinx.android.synthetic.main.inculde_search_title.*
 
 class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListener {
 
     private var bannerView: BannerView? = null
     private var itemMenu: ItemMenu? = null
+    private var requestLocalCode = 888
 
     override fun showLoading() {
 
@@ -83,7 +83,12 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
     }
 
     private fun jumMap() {
-        jumpActivity(null, MapActivity::class.java)
+        if (isLocationEnabled(mContext)){
+            jumpActivity(null, MapActivity::class.java)
+        }else{
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(intent)
+        }
     }
 
     override fun showData(listt: MutableList<BannerData>) {
@@ -91,7 +96,6 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
 
         if (Configs.CITY_RESULT_CODE == resultCode) {
             showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))

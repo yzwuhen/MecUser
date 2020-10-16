@@ -35,13 +35,13 @@
             android:id="@+id/iv_phone"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:src="@mipmap/phone_icon"/>
+            android:src="@mipmap/black_phone"/>
     </LinearLayout>
 
     <com.youth.banner.Banner
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="210dp"
         android:layout_gravity="center" />
 
     <FrameLayout

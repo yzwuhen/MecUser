@@ -33,7 +33,7 @@ class EcTypeLeftAdapter (var mContext: Context, var mList:MutableList<String>, v
 
     class EcTypeLeftVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.tv_type,adapterPosition) })
         }
     }
 }

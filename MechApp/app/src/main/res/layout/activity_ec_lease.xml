@@ -29,7 +29,8 @@
                 <TextView
                     style="@style/tv_style_left1"
                     android:text="机械名称" />
-                <EditText android:id="@+id/et_ec_name" android:hint="请输入机械名称" style="@style/et_style" />
+                <EditText android:id="@+id/et_ec_name"
+                    android:hint="请输入机械名称" style="@style/et_style" />
             </LinearLayout>
 
             <View style="@style/h_view_1" />

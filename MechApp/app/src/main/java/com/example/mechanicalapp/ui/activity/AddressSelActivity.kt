@@ -2,10 +2,10 @@ package com.example.mechanicalapp.ui.activity
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amap.api.location.AMapLocation
 import com.amap.api.maps.AMap
@@ -28,58 +28,45 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.utils.GdMapUtils
 import kotlinx.android.synthetic.main.activity_address_sel.*
 
-class AddressSelActivity:BaseActivity<NetData>() ,GdMapUtils.LocationListener,OnItemClickListener{
-    private var aMap: AMap? = null
-    private var mLocationAddressAdapter: LocationAddressAdapter?=null
-    private var mList:MutableList<PoiItem> =ArrayList<PoiItem>()
+
+class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
+    OnItemClickListener, TextWatcher {
+
+    var aMap: AMap? = null
+
+    private var mLocationAddressAdapter: LocationAddressAdapter? = null
+    private var mList: MutableList<PoiItem> = ArrayList<PoiItem>()
     private var poiQuery: PoiSearch.Query? = null
-    private var marker : Marker?=null
-    private lateinit var code:String
+    private var marker: Marker? = null
+    private  var mCityCode: String="020"
+
     override fun getLayoutId(): Int {
         return R.layout.activity_address_sel
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        map?.onCreate(savedInstanceState)
     }
 
     override fun initView() {
         super.initView()
 
-        if (aMap==null){
-            aMap =map.map
+        if (aMap == null) {
+            aMap = map.map
         }
-
         GdMapUtils.location(this)
 
         mLocationAddressAdapter = LocationAddressAdapter(mList, this)
         recycler_list.layoutManager = LinearLayoutManager(this)
-        recycler_list.adapter =mLocationAddressAdapter
-
-
+        recycler_list.adapter = mLocationAddressAdapter
         initListener()
     }
 
-    override fun initPresenter() {
-    }
-
-    override fun showLoading() {
-    }
-
-    override fun hiedLoading() {
-    }
-
-    override fun showData(t: NetData) {
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        map?.onCreate(savedInstanceState)
-    }
-
     private fun initListener() {
-
         //地图移动的时候 监听
         aMap?.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
             override fun onCameraChange(cameraPosition: CameraPosition?) {
-
-
                 if (cameraPosition != null) {
                     latSearchList(cameraPosition.target.latitude, cameraPosition.target.longitude)
                 };
@@ -95,23 +82,7 @@ class AddressSelActivity:BaseActivity<NetData>() ,GdMapUtils.LocationListener,On
             }
 
         })
-//        et_search.addTextChangedListener { object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                Log.e("yz_map","sssssssssssssss=============beforeTextChanged============")
-//
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                Log.e("yz_map","sssssssssssssss==========onTextChanged===============")
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                Log.e("yz_map","sssssssssssssss==============afterTextChanged===========")
-//                searchList(code,et_search.text.toString().trim());
-//            }
-//
-//        }}
-
+        et_search.addTextChangedListener(this)
     }
 
     private fun latSearchList(latitude: Double, longitude: Double) {
@@ -149,13 +120,13 @@ class AddressSelActivity:BaseActivity<NetData>() ,GdMapUtils.LocationListener,On
             mLocationAddressAdapter?.notifyDataSetChanged()
         }
         poiQuery = PoiSearch.Query(road, "", cityCode)
-        poiQuery?.pageSize=15
-        poiQuery?.pageNum=0
+        poiQuery?.pageSize = 15
+        poiQuery?.pageNum = 0
         val poiSearch = PoiSearch(this, poiQuery)
         poiSearch.setOnPoiSearchListener(object : PoiSearch.OnPoiSearchListener {
             override fun onPoiSearched(result: PoiResult?, rCode: Int) {
                 if (rCode === 1000) {
-                    if (result?.query!= null) { // 搜索poi的结果
+                    if (result?.query != null) { // 搜索poi的结果
                         if (result.query == poiQuery) { // 是否是同一条
                             //     poiResult = result;
                             // 取得搜索到的poiitems有多少页
@@ -181,10 +152,7 @@ class AddressSelActivity:BaseActivity<NetData>() ,GdMapUtils.LocationListener,On
         })
         poiSearch.searchPOIAsyn()
     }
-    private fun moveMap(latitude: Double, longitude: Double){
-        aMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), 14f))
-        addMark(latitude, longitude)
-    }
+
     private fun addMark(latitude: Double, longitude: Double) {
         if (marker == null) {
             marker = aMap!!.addMarker(
@@ -199,9 +167,49 @@ class AddressSelActivity:BaseActivity<NetData>() ,GdMapUtils.LocationListener,On
                     .draggable(true)
             )
         } else {
-            marker?.position= LatLng(latitude, longitude)
+            marker?.position = LatLng(latitude, longitude)
         }
     }
+
+    override fun initPresenter() {
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hiedLoading() {
+    }
+
+    override fun showData(t: NetData) {
+    }
+
+    private fun moveMap(latitude: Double, longitude: Double) {
+
+        aMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(latitude, longitude), 14f))
+        addMark(latitude, longitude)
+    }
+
+    override fun locationSuccess(mapLocation: AMapLocation) {
+        mCityCode =mapLocation.cityCode
+        moveMap(mapLocation.latitude, mapLocation.longitude)
+    }
+
+    override fun locationErr() {
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        searchList(mCityCode,et_search?.text.toString().trim());
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
@@ -226,16 +234,4 @@ class AddressSelActivity:BaseActivity<NetData>() ,GdMapUtils.LocationListener,On
         map?.onSaveInstanceState(outState)
     }
 
-    override fun locationSuccess(mapLocation: AMapLocation) {
-        moveMap(mapLocation.latitude, mapLocation.longitude)
-        code =mapLocation.cityCode
-    }
-
-    override fun locationErr() {
-    }
-
-    override fun onItemClick(view: View, position: Int) {
-
-
-    }
 }

@@ -78,6 +78,7 @@ class GoodsListActivity:BaseActivity<NetData>(),OnItemClickListener ,View.OnClic
 
     override fun onItemClick(view: View, position: Int) {
 
+        jumpActivity(null,GoodsDetailsActivity::class.java)
 
     }
     private fun showInput() {
@@ -94,7 +95,7 @@ class GoodsListActivity:BaseActivity<NetData>(),OnItemClickListener ,View.OnClic
 
     override fun onClick(view: View?) {
         when(view?.id){
-            R.id.ly_search ->jumAct()
+         //  R.id.ly_search ->jumAct()
             R.id.ly_price->selectText(0);
             R.id.ly_sales->selectText(1);
             R.id.ly_sort->selectText(2);

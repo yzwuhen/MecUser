@@ -93,7 +93,7 @@
             android:textSize="17sp"
             android:gravity="center"
             android:background="@drawable/rect_radio_6_y"
-            android:text="提交发布"
+            android:text="确定"
             android:textColor="@color/color_222"
             android:layout_height="56dp"/>
 

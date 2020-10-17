@@ -1,9 +1,12 @@
 package com.example.mechanicalapp.ui.fragment.look
 
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.LookLeaseAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
@@ -47,7 +50,8 @@ class LookLease(var type: Int) : BaseFragment<NetData>(), OnItemClickListener {
     }
 
     override fun onItemClick(view: View, position: Int) {
-
-
+        val bundle = Bundle()
+        bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, type)
+        jumpActivity(bundle, LeaseDetailsActivity::class.java)
     }
 }

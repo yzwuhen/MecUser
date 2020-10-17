@@ -16,7 +16,7 @@ class LookSecondHand  : BaseFragment<NetData>(), View.OnClickListener {
 
     init {
         mFragmentList?.add(LookLease(1))
-        mFragmentList?.add(LookAsk(2))
+        mFragmentList?.add(LookAsk(1))
     }
 
     override fun showLoading() {

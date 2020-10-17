@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
+import com.example.mechanicalapp.ui.activity.RecruitDetailsActivity
 import com.example.mechanicalapp.ui.adapter.RecruitAdapter
 import com.example.mechanicalapp.ui.adapter.ReleaseRecruitAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
@@ -79,7 +81,12 @@ class ReleaseRecruit : BaseFragment<NetData>() , OnItemClickListener, PopUtils.o
 
 
     override fun onItemClick(view: View, position: Int) {
-        showPop()
+        when(view?.id){
+            R.id.item_root->{
+                jumpActivity(null, RecruitDetailsActivity::class.java)
+            }
+            R.id.tv_del-> showPop()
+        }
     }
 
     override fun getView(view: View?) {

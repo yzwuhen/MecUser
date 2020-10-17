@@ -1,9 +1,12 @@
 package com.example.mechanicalapp.ui.fragment.look
 
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.LookAskAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
@@ -46,7 +49,8 @@ class LookAsk(var type:Int): BaseFragment<NetData>() , OnItemClickListener {
     }
 
     override fun onItemClick(view: View, position: Int) {
-
-
+        val bundle = Bundle()
+        bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE, type)
+        jumpActivity(bundle, AskDetailsActivity::class.java)
     }
 }

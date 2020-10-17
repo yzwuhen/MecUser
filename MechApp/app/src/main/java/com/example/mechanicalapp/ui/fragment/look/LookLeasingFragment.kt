@@ -15,8 +15,8 @@ class LookLeasingFragment : BaseFragment<NetData>(), View.OnClickListener {
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(LookLease(1))
-        mFragmentList?.add(LookAsk(2))
+        mFragmentList?.add(LookLease(0))
+        mFragmentList?.add(LookAsk(0))
     }
 
     override fun showLoading() {

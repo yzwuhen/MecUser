@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import kotlinx.android.synthetic.main.item_user_demand.view.*
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.*
 
 class ReleaseGoodsAskAdapter (
     var mContext: Context,
@@ -45,6 +45,9 @@ class ReleaseGoodsAskAdapter (
                     adapterPosition
                 )
             })
+            itemView.tv_del.setOnClickListener(View.OnClickListener {  mOnItemClickListener.onItemClick(itemView.tv_del,adapterPosition) })
+            itemView.tv_refresh.setOnClickListener(View.OnClickListener {  mOnItemClickListener.onItemClick(itemView.tv_refresh,adapterPosition) })
+            itemView.tv_down.setOnClickListener(View.OnClickListener {  mOnItemClickListener.onItemClick(itemView.tv_down,adapterPosition) })
         }
     }
 }

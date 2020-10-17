@@ -15,8 +15,8 @@ class MyReleaseLease () : BaseFragment<NetData>(), View.OnClickListener {
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(ReleaseLeaseFragment())
-        mFragmentList?.add(MyReleaseAsk())
+        mFragmentList?.add(ReleaseLeaseFragment(0))
+        mFragmentList?.add(MyReleaseAsk(0))
     }
 
     override fun showLoading() {

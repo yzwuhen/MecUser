@@ -1,12 +1,15 @@
 package com.example.mechanicalapp.ui.fragment.myrelease
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.ReleaseLeaseAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
@@ -15,7 +18,7 @@ import kotlinx.android.synthetic.main.item_parts_ask.*
 import kotlinx.android.synthetic.main.layout_spring_list.*
 
 
-class ReleaseLeaseFragment  : BaseFragment<NetData>(), OnItemClickListener,PopUtils.onViewListener,View.OnClickListener {
+class ReleaseLeaseFragment(var type:Int)   : BaseFragment<NetData>(), OnItemClickListener,PopUtils.onViewListener,View.OnClickListener {
 
 
     private var mAdapter: ReleaseLeaseAdapter? = null
@@ -79,7 +82,15 @@ class ReleaseLeaseFragment  : BaseFragment<NetData>(), OnItemClickListener,PopUt
     }
 
     override fun onItemClick(view: View, position: Int) {
-        showPop()
+        when(view?.id){
+            R.id.item_root->{
+                val bundle = Bundle()
+                bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, type)
+                jumpActivity(bundle, LeaseDetailsActivity::class.java)
+            }
+            R.id.tv_del-> showPop()
+        }
+
     }
 
     override fun getView(view: View?) {

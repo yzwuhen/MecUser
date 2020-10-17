@@ -4,9 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import android.widget.TextView
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.utils.GlideEngine
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
@@ -14,7 +17,6 @@ import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_person_certify.*
-import kotlinx.android.synthetic.main.activity_user_data.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
@@ -25,6 +27,8 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
     private var mDialogTv1: TextView?= null
     private var mDialogTv2: TextView?= null
     private var mDialogTv3: TextView?= null
+
+    private var type:Int =0
 
     override fun getLayoutId(): Int {
 
@@ -76,7 +80,8 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
         takePicture()
     }
 
-    private fun showDialogType(type:Int){
+    private fun showDialogType(i:Int){
+        type =i
         if (mButtDialog ==null){
             mButtDialog = BottomSheetDialog(this)
             mDialogView = View.inflate(this,R.layout.dialog_user_data_buttom,null)
@@ -96,26 +101,21 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode === -1 && android.R.attr.data != null) {
-            when (requestCode) {
-                PictureConfig.CHOOSE_REQUEST -> {
-                    val selectList = PictureSelector.obtainMultipleResult(data)
-                    iv_user_pic.setImageURI(Uri.parse(selectList[0].compressPath))
-                }
-            }
-        }
-    }
 
     private fun takePicture() {
+        mButtDialog?.dismiss()
         PictureSelector.create(this)
             .openGallery(PictureMimeType.ofAll())
-//            .loadImageEngine(GlideEngine.createGlideEngine())
+            .imageEngine(GlideEngine.createGlideEngine())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
+                    if (type==0){
+                        ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_positive_pic,result[0]?.path,R.mipmap.user_default)
+                    }else{
+                        ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_side_pic,result[0]?.path,R.mipmap.user_default)
+                    }
+
                 }
                 override fun onCancel() {
                     // 取消

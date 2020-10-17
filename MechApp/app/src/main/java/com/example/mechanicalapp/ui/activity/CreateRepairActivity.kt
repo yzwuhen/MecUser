@@ -64,6 +64,7 @@ class CreateRepairActivity :BaseActivity<NetData>(),View.OnClickListener,OnItemC
                 Configs.FACTORY_RESULT_CODE,
                 MaintenanceActivity::class.java
             )
+            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
 //            R.id.ly_right->
         }
     }

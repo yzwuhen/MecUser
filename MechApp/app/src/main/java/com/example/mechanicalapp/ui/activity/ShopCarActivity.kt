@@ -95,6 +95,7 @@ class ShopCarActivity: BaseActivity<NetData>() ,View.OnClickListener,OnItemClick
 
         when(view?.id){
             R.id.tv_attr->showAttrSel()
+            R.id.item_root->jumpActivity(null, GoodsDetailsActivity::class.java)
         }
     }
 

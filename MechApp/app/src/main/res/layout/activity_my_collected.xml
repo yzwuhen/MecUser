@@ -4,51 +4,65 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <include layout="@layout/layout_title" />-->
-    <include layout="@layout/layout_left_right_title"/>
+    <!--    <include layout="@layout/layout_title" />-->
+    <include layout="@layout/layout_left_right_title" />
 
-    <LinearLayout
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="@dimen/dp_17"
-        android:paddingRight="@dimen/dp_17">
+        android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/tv_mec_rent"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="机械租赁" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_50"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17">
 
-        <TextView
-            android:id="@+id/tv_apparatus"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="二手设备" />
+            <TextView
+                android:id="@+id/tv_mec_rent"
+                style="@style/tv_collected"
+                android:gravity="center"
+                android:text="机械租赁" />
 
-        <TextView
-            android:id="@+id/tv_parts"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="@string/search_mec_tv3" />
+            <TextView
+                android:id="@+id/tv_apparatus"
+                style="@style/tv_collected"
+                android:gravity="center"
+                android:text="二手设备" />
 
-        <TextView
-            android:id="@+id/tv_recruit"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="@string/search_mec_tv4" />
+            <TextView
+                android:id="@+id/tv_parts"
+                style="@style/tv_collected"
+                android:gravity="center"
+                android:text="@string/search_mec_tv3" />
 
-        <TextView
-            android:id="@+id/tv_repair"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="@string/search_mec_tv5" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_recruit"
+                style="@style/tv_collected"
+                android:gravity="center"
+                android:text="@string/search_mec_tv4" />
+
+            <TextView
+                android:id="@+id/tv_repair"
+                style="@style/tv_collected"
+                android:gravity="center"
+                android:text="@string/search_mec_tv5" />
+
+            <TextView
+                android:id="@+id/tv_goods"
+                style="@style/tv_collected"
+                android:gravity="center"
+                android:text="@string/search_mec_tv6" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <com.example.mechanicalapp.ui.view.CusViewPage
         android:id="@+id/cus_page"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

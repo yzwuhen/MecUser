@@ -17,7 +17,7 @@ class ShopCarAdapter (var mContext: Context, var mList:MutableList<String>, var 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 //        holder.itemView.tv_text = mList[position]
-        holder.itemView.tv_attr.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(holder.itemView.tv_attr,position) })
+      //  holder.itemView.tv_attr.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(holder.itemView.tv_attr,position) })
     }
 
     override fun getItemCount(): Int {
@@ -28,7 +28,8 @@ class ShopCarAdapter (var mContext: Context, var mList:MutableList<String>, var 
     class ShopCarVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
 
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.item_root,adapterPosition) })
+            itemView.tv_attr.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.tv_attr,adapterPosition) })
 //            itemView.setOnLongClickListener(View.OnLongClickListener {  })
         }
     }

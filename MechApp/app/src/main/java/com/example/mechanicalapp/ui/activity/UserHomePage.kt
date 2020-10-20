@@ -54,7 +54,7 @@ class UserHomePage : BaseActivity<NetData>(), View.OnClickListener {
             tv_screen_left.text = "招聘"
             tv_screen_right.text = "求职"
         } else if (type == 3) {
-            mFragmentList?.add(CollectGoodsLease())
+            mFragmentList?.add(CollectPartsLease())
             mFragmentList?.add(CollectAskRent())
             tv_screen_left.text = "出租"
             tv_screen_right.text = "求租"

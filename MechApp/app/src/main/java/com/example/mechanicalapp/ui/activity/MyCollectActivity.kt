@@ -30,9 +30,10 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
     init {
         mFragmentList?.add(MecCollectLeasingFragment(1))
         mFragmentList?.add(CollectSecondHandFragment())
-        mFragmentList?.add(CollectGoodsFragment())
+        mFragmentList?.add(CollectPartsFragment())
         mFragmentList?.add(CollectRecruitFragment())
         mFragmentList?.add(CollectFactoryFragment())
+        mFragmentList?.add(CollectGoodsFragment())
     }
     override fun initView() {
         super.initView()
@@ -46,7 +47,7 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
         mTextViewList.add(tv_parts)
         mTextViewList.add(tv_recruit)
         mTextViewList.add(tv_repair)
-
+        mTextViewList.add(tv_goods)
         mTabPageAdapter = FragmentListPageAdapter(this.supportFragmentManager, mFragmentList!!)
         cus_page.adapter=mTabPageAdapter
 
@@ -55,6 +56,7 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
         tv_parts.setOnClickListener(this)
         tv_recruit.setOnClickListener(this)
         tv_repair.setOnClickListener(this)
+        tv_goods.setOnClickListener(this)
         tv_right.setOnClickListener(this)
         iv_left.setOnClickListener(this)
 
@@ -82,6 +84,7 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
             R.id.tv_parts->showView(2)
             R.id.tv_recruit->showView(3)
             R.id.tv_repair->showView(4)
+            R.id.tv_goods->showView(5)
         }
 
     }

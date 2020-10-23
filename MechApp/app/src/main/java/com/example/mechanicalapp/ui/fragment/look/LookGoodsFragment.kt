@@ -4,18 +4,16 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
-import com.example.mechanicalapp.ui.adapter.LookPartsAskAdapter
-import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
+import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
+import com.example.mechanicalapp.ui.adapter.LookGoodsAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.layout_spring_list.*
 
+class LookGoodsFragment : BaseFragment<NetData>() , OnItemClickListener {
 
-class LookPartsAsk  : BaseFragment<NetData>() , OnItemClickListener {
 
-
-    private var mAdapter: LookPartsAskAdapter? = null
+    private var mAdapter: LookGoodsAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
     override fun showLoading() {
 
@@ -27,18 +25,15 @@ class LookPartsAsk  : BaseFragment<NetData>() , OnItemClickListener {
         mList.add("1")
         mList.add("1")
 
-
     }
 
     override fun initView() {
         super.initView()
-        mAdapter = LookPartsAskAdapter(mContext, mList, this)
+
+        mAdapter = LookGoodsAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter =mAdapter
-
-
     }
-
 
 
     override fun hiedLoading() {
@@ -53,6 +48,6 @@ class LookPartsAsk  : BaseFragment<NetData>() , OnItemClickListener {
 
     override fun onItemClick(view: View, position: Int) {
 
-        jumpActivity(null, PartsAskDetailsActivity::class.java)
+        jumpActivity(null, GoodsDetailsActivity::class.java)
     }
 }

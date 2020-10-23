@@ -1,26 +1,61 @@
 package com.example.mechanicalapp.ui.fragment.collect
 
 import android.view.View
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
+import com.example.mechanicalapp.ui.adapter.CollectGoodsAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
-import kotlinx.android.synthetic.main.fragment_mec_leasing.*
+import com.example.mechanicalapp.ui.data.java.EventFresh
+import kotlinx.android.synthetic.main.layout_spring_list.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
-class CollectGoodsFragment  : BaseFragment<NetData>(), View.OnClickListener {
-    private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
-    private var mTabPageAdapter: FragmentListPageAdapter? = null
-    private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
+class CollectGoodsFragment : BaseFragment<NetData>(),OnItemClickListener {
+    private var mAdapter: CollectGoodsAdapter? = null
+    var mList: MutableList<String> = ArrayList<String>()
 
     init {
-        mFragmentList?.add(CollectGoodsLease())
-        mFragmentList?.add(CollectAskRent())
+        mList.add("1")
+        mList.add("1")
+        mList.add("1")
+        mList.add("1")
+        mList.add("1")
+        mList.add("1")
+        EventBus.getDefault().register(this)
+
     }
 
-    override fun showLoading() {
+    override fun initView() {
+        super.initView()
+        mAdapter = CollectGoodsAdapter(mContext, mList, this)
+        recycler_list.layoutManager = LinearLayoutManager(mContext)
+        recycler_list.adapter =mAdapter
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun onFresh(msg: EventFresh) {
+
+        mAdapter?.showCheck(msg.isShowCheck)
+        mAdapter?.notifyDataSetChanged()
+
+        if (msg.isShowCheck) {
+            fl_bottom.visibility = View.VISIBLE
+        } else {
+            fl_bottom.visibility = View.GONE
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    override fun showLoading() {
 
     }
 
@@ -28,40 +63,15 @@ class CollectGoodsFragment  : BaseFragment<NetData>(), View.OnClickListener {
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_mec_leasing
-    }
-
-    override fun initView() {
-        super.initView()
-        mTextViewList.add(tv_screen_left)
-        mTextViewList.add(tv_screen_right)
-
-        mTabPageAdapter = FragmentListPageAdapter(childFragmentManager,mFragmentList!!)
-
-        cus_page.adapter = mTabPageAdapter
-
-
-        tv_screen_left.setOnClickListener(this)
-        tv_screen_right.setOnClickListener(this)
-        tv_screen_left.performClick()
+        return R.layout.layout_spring_list
     }
 
     override fun showData(t: NetData?) {
     }
 
-    override fun onClick(p0: View?) {
-        when (p0?.id) {
-            R.id.tv_screen_left -> showView(0)
-            R.id.tv_screen_right -> showView(1)
-        }
+    override fun onItemClick(view: View, position: Int) {
 
-    }
-
-    private fun showView(index: Int) {
-        cus_page.currentItem = index
-        for (i in mTextViewList.indices) {
-            mTextViewList[i]?.isSelected = index == i
-        }
+        jumpActivity(null,GoodsDetailsActivity::class.java)
 
     }
 }

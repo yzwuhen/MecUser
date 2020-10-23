@@ -25,8 +25,8 @@ class LocationAddressAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         holder.itemView.tv_address.text =
-            "${items[position].provinceName}${items[position].cityName} ${items[position].adName}${items[position].businessArea}${items[position].title}"
-       // holder.itemView.tv_address_road.text =items[position].typeDes
+            "${items[position].provinceName}${items[position].cityName} ${items[position].adName}"
+        holder.itemView.tv_address_road.text = items[position].title
 //            holder.itemView.setOnClickListener(View.OnClickListener {
 //                onItemclickListener?.onItemClick(position)
 //            })

@@ -106,6 +106,7 @@ class MoreDataActivity: BaseActivity<NetData>() ,View.OnClickListener{
             R.id.tv_screen_right->showView(1)
             R.id.iv_back ->finish()
             R.id.tv_search-> jumpActivity(null,HistorySearchActivity::class.java)
+            R.id.tv_map->jumpActivity(null,MapActivity::class.java)
 
         }
     }

@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.JobWantDetails
+import com.example.mechanicalapp.ui.activity.RecruitDetailsActivity
 import com.example.mechanicalapp.ui.adapter.ReleaseJobWantAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
@@ -81,7 +83,13 @@ class ReleaseJobWant  : BaseFragment<NetData>() , OnItemClickListener ,PopUtils.
     }
 
     override fun onItemClick(view: View, position: Int) {
-        showPop()
+
+        when(view?.id){
+            R.id.item_root->{
+                jumpActivity(null, JobWantDetails::class.java)
+            }
+            R.id.tv_del-> showPop()
+        }
     }
 
     override fun getView(view: View?) {

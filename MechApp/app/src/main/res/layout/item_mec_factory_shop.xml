@@ -39,6 +39,7 @@
             android:id="@+id/iv_item_pic"
             android:layout_width="77dp"
             android:layout_height="77dp"
+            android:src="@drawable/ic_launcher"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/dp_20"
             app:layout_constraintStart_toEndOf="@id/ly_check"/>

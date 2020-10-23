@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
 import com.example.mechanicalapp.ui.adapter.LookPartsLeaseAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
@@ -48,6 +49,6 @@ class LookPartsLease: BaseFragment<NetData>() , OnItemClickListener {
 
     override fun onItemClick(view: View, position: Int) {
 
-
+        jumpActivity(null, GoodsDetailsActivity::class.java)
     }
 }

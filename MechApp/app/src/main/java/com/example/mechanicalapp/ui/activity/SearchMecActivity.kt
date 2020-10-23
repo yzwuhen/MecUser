@@ -204,6 +204,8 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
                 jumpActivity(null, GoodsDetailsActivity::class.java)
             } else if (mType == 3) {
                 jumpActivity(null, RecruitDetailsActivity::class.java)
+            }else{
+                jumpActivity(null,CreateRepairActivity::class.java)
             }
         } else {
             if (mType == 0 || mType == 1) {
@@ -213,6 +215,8 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
                 jumpActivity(null, PartsAskDetailsActivity::class.java)
             } else if (mType == 3) {
                 jumpActivity(null, JobWantDetails::class.java)
+            }else{
+                jumpActivity(null,CreateRepairActivity::class.java)
             }
         }
     }

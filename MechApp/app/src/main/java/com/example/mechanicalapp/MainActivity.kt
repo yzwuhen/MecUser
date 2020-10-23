@@ -55,13 +55,7 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
 
      private fun selectText(index: Int) {
          for ((i,e) in mTextViews?.withIndex()!!) {
-
              mTextViews[i].isSelected =i == index
-//             if (i == index) {
-//                 mTextViews?.get(i)?.setSelected(true);
-//             } else {
-//                 mTextViews?.get(i)?.setSelected(false);
-//             }
          }
      }
 
@@ -102,24 +96,7 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
     }
 
     private fun clickTabRelease() {
-
         jumpActivity(null,ReleaseActivity::class.java)
-
-//        var transaction: FragmentTransaction? = mManager?.beginTransaction()
-//
-//        if (mReleaseFragment == null) {
-//            mReleaseFragment = ReleaseFragment();
-//            transaction?.add(R.id.main_frame, mReleaseFragment as Fragment);
-//        } else {
-//            if (transaction != null) {
-//                showFragment(transaction, mReleaseFragment as Fragment)
-//            };
-//        }
-//        if (transaction != null) {
-//            hideFragment(transaction, mStoreFragment, mHomeFragment, mMsgFragment, mMineFragment)
-//        };
-//        transaction?.commitAllowingStateLoss();
-
     }
 
     private fun clickTabMsg() {
@@ -223,15 +200,12 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun hiedLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun showData(t: NetData) {
-        TODO("Not yet implemented")
     }
 
 }

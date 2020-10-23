@@ -29,6 +29,8 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
         mList.add("1")
         mList.add("1")
         mList.add("1")
+        mList.add("1")
+        mList.add("1")
         EventBus.getDefault().register(this)
 
     }

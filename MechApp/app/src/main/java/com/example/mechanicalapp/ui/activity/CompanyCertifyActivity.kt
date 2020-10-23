@@ -1,34 +1,24 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.utils.GlideEngine
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
-import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
-import kotlinx.android.synthetic.main.activity_person_certify.*
-import kotlinx.android.synthetic.main.activity_user_data.*
+import kotlinx.android.synthetic.main.activity_company_certify.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class CompanyCertifyActivity:BaseActivity<NetData>(),View.OnClickListener {
 
-    private val REQUEST_EXTERNAL_STORAGE = 1
-    private val PERMISSIONS_STORAGE = arrayOf(
-        "android.permission.READ_EXTERNAL_STORAGE",
-        "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.CAMER"
-    )
+
     private var mButtDialog: BottomSheetDialog? = null
 
     private var mDialogView: View? = null
@@ -36,6 +26,7 @@ class CompanyCertifyActivity:BaseActivity<NetData>(),View.OnClickListener {
     private var mDialogTv2: TextView? = null
     private var mDialogTv3: TextView? = null
 
+    private var picType:Int=0
     override fun getLayoutId(): Int {
 
         return R.layout.activity_company_certify
@@ -50,6 +41,7 @@ class CompanyCertifyActivity:BaseActivity<NetData>(),View.OnClickListener {
         tv_sketch.setOnClickListener(this)
         iv_positive_pic.setOnClickListener(this)
         iv_side_pic.setOnClickListener(this)
+        iv_company_pic.setOnClickListener(this)
     }
 
     override fun initPresenter() {
@@ -82,7 +74,13 @@ class CompanyCertifyActivity:BaseActivity<NetData>(),View.OnClickListener {
         verifyStoragePermissions(this)
     }
 
+    override fun hasPermissions() {
+        super.hasPermissions()
+        takePicture()
+    }
+
     private fun showDialogType(type: Int) {
+        picType =type
         if (mButtDialog == null) {
             mButtDialog = BottomSheetDialog(this)
             mDialogView = View.inflate(this, R.layout.dialog_user_data_buttom, null)
@@ -102,50 +100,24 @@ class CompanyCertifyActivity:BaseActivity<NetData>(),View.OnClickListener {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode === -1 && android.R.attr.data != null) {
-            when (requestCode) {
-                PictureConfig.CHOOSE_REQUEST -> {
-                    val selectList = PictureSelector.obtainMultipleResult(data)
-                    iv_user_pic.setImageURI(Uri.parse(selectList[0].compressPath))
-                }
-            }
-        }
-    }
-
-    override fun verifyStoragePermissions(activity: Activity?) {
-        try {
-            //检测是否有写的权限
-            val permission = ActivityCompat.checkSelfPermission(
-                activity!!,
-                "android.permission.WRITE_EXTERNAL_STORAGE"
-            )
-            Log.v("sssss", "ssssssssssdsdsd ${permission != PackageManager.PERMISSION_GRANTED}")
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-                // 没有写的权限，去申请写的权限，会弹出对话框
-                Log.v("sssss", "ssssssssssdsdsd===========")
-                ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-                )
-            } else {
-                takePicture()
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
 
     private fun takePicture() {
+        mButtDialog?.dismiss()
         PictureSelector.create(this)
             .openGallery(PictureMimeType.ofAll())
-//            .loadImageEngine(GlideEngine.createGlideEngine())
+           .imageEngine(GlideEngine.createGlideEngine())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
+                    if (picType==0){
+                        ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_positive_pic,result[0]?.path,R.mipmap.user_default)
+                    }else if (picType==1){
+                        ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_side_pic,result[0]?.path,R.mipmap.user_default)
+                    }else{
+                        ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_company_pic,result[0]?.path,R.mipmap.user_default)
+                    }
+
                 }
 
                 override fun onCancel() {

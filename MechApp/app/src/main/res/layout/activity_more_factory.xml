@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bg_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include layout="@layout/layout_more_data_title" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ly_ec_type"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_ec_type"
+                android:text="机械类型"
+                android:textSize="@dimen/sp_16"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/sel_tip"
+                android:textColor="@color/color_222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_parts_type"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_parts_type"
+                android:text="配件类型"
+                android:textSize="@dimen/sp_16"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/sel_tip"
+                android:textColor="@color/color_222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_sort"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_sort"
+                android:text="智能排序"
+                android:textSize="@dimen/sp_16"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/sel_tip"
+                android:textColor="@color/color_222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/spring_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.liaoinstan.springview.widget.SpringView>
+</LinearLayout>

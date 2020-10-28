@@ -3,77 +3,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     android:orientation="vertical">
 
     <include layout="@layout/layout_more_data_title" />
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/spring_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--第一部分：伸缩工具栏-->
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#fff"
-            app:elevation="0dp">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--第一部分：伸缩工具栏-->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title=""
-                app:titleEnabled="false">
+                android:background="@color/bg_color"
+                app:elevation="0dp">
 
-                <com.youth.banner.Banner
-                    android:id="@+id/banner"
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
-                    android:layout_height="185dp"
-                    android:layout_margin="@dimen/dp_17"
-                    app:layout_collapseMode="parallax"
-                    app:layout_collapseParallaxMultiplier="0.7" />
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:title=""
+                    app:titleEnabled="false">
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+                    <com.youth.banner.Banner
+                        android:id="@+id/banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="185dp"
+                        android:layout_margin="@dimen/dp_17"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.7" />
 
-        </com.google.android.material.appbar.AppBarLayout>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <!--第二部分：主要内容-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            </com.google.android.material.appbar.AppBarLayout>
 
-            <RelativeLayout
-                android:id="@+id/rl_screen"
+            <!--第二部分：主要内容-->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_45"
-                android:background="@color/white"
-                android:gravity="center_vertical">
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dp_17"
 
-                <TextView
-                    android:id="@+id/tv_screen_left"
-                    style="@style/tv_screen_style"
-                    android:layout_marginLeft="@dimen/dp_63"
-                    android:drawableBottom="@drawable/tv_under_ine"
-                    android:gravity="center"
-                    android:text="出租" />
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                <TextView
-                    android:id="@+id/tv_screen_right"
-                    style="@style/tv_screen_style"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_63"
-                    android:drawableBottom="@drawable/tv_under_ine"
-                    android:gravity="center"
-                    android:text="求租" />
+                <RelativeLayout
+                    android:id="@+id/rl_screen"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@drawable/rect_radio_6_white"
+                    android:gravity="center_vertical">
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tv_screen_left"
+                        style="@style/tv_screen_style"
+                        android:layout_marginLeft="@dimen/dp_63"
+                        android:drawableBottom="@drawable/tv_under_line"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="出租" />
 
-            <com.example.mechanicalapp.ui.view.CusViewPage
-                android:id="@+id/cus_page"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    <TextView
+                        android:id="@+id/tv_screen_right"
+                        style="@style/tv_screen_style"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp_63"
+                        android:drawableBottom="@drawable/tv_under_line"
+                        android:drawablePadding="@dimen/dp_10"
+                        android:gravity="center"
+                        android:text="求租" />
+
+                </RelativeLayout>
+
+                <com.example.mechanicalapp.ui.view.CusViewPage
+                    android:id="@+id/cus_page"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

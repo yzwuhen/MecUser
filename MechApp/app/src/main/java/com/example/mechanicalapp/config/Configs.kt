@@ -2,7 +2,7 @@ package com.example.mechanicalapp.config
 
 object Configs {
     //tye== 0 出租出售 1 招牌  2 求职 3 商品（配件） 4 配件求租 5 配件出租   6是搜索我的设备 7是搜索维修订单 8是工程师
-    //9 是home 搜索 热门搜索跳转到多配件页
+    //9 是home 搜索 热门搜索跳转到多配件页  10跳转到维修厂
     const val HISTORY_TYPE :String ="history_type"
     const val SEARCH_TYPE :String="type"
     const val SEARCH_RESULT_TYPE :String="search_result_type"

@@ -71,15 +71,11 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
         } else if (type == 9) {
             bundle.putInt(Configs.SEARCH_TYPE,0)
             jumpActivity(bundle, SearchMecActivity::class.java)
-        } else {
+        }
+        else {
             jumpActivity(bundle, SearchResultActivity::class.java)
         }
 
-//        if (type==0){
-//            jumpActivity(null,SearchResultActivity::class.java)
-//        }else if (type ==1){
-//            jumpActivity(null,SearchResultActivity::class.java)
-//        }
 
         return false
     }
@@ -89,14 +85,11 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun hiedLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun showData(t: NetData) {
-        TODO("Not yet implemented")
     }
 }

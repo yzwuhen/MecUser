@@ -52,6 +52,14 @@ class ItemMenu(var mContext: Context) : LinearLayout(mContext) , OnItemClickList
         }
         mContext.startActivity(intent)
     }
+    private fun jumAct3() {
+        val intent = Intent()
+        intent.setClass(mContext, MoreFactoryActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+
+        mContext.startActivity(intent)
+    }
+
 
     private fun jumMoreDataAct(type:Int){
         val intent = Intent()
@@ -76,7 +84,7 @@ class ItemMenu(var mContext: Context) : LinearLayout(mContext) , OnItemClickList
             0->jumMoreDataAct(0)
             1->jumParts()
             2->jumMoreDataAct(1)
-            3->jumAct(4)
+            3->jumAct3()
             4->jumAct2()
             5->jumAct1()
         }

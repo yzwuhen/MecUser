@@ -10,7 +10,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
-import com.example.mechanicalapp.ui.adapter.PartsAdapter
+import com.example.mechanicalapp.ui.adapter.MorePartsAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
 
 class MorePartsLeaseFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener {
-    var mAdapter: PartsAdapter? = null
+    var mAdapter: MorePartsAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
 
     var popRecy : RecyclerView?=null
@@ -40,7 +40,7 @@ class MorePartsLeaseFragment : BaseFragment<NetData>(), OnItemClickListener, Vie
     override fun initView() {
         super.initView()
 
-        mAdapter = PartsAdapter(mContext, mList, this)
+        mAdapter = MorePartsAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 
@@ -101,7 +101,6 @@ class MorePartsLeaseFragment : BaseFragment<NetData>(), OnItemClickListener, Vie
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        Log.e("sssssssssss","sssssssssss=============$requestCode")
         if (Configs.EC_TYPE_RESULT_CODE==resultCode){
             tv_ec_type.text =data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
         }

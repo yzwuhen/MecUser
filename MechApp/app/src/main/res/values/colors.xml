@@ -22,4 +22,6 @@
     <color name="color_222_70">#B3222222</color>
     <color name="color_blue">#3D7DFC</color>
     <color name="color_ccc">#ccc</color>
+
+    <color name="bg_color">#F6F7FB</color>
 </resources>

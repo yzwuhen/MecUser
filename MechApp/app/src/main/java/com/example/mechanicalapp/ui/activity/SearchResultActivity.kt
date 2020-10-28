@@ -8,6 +8,8 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_search_result.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
@@ -18,10 +20,12 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
     private var mRecruitAdapter : RecruitAdapter?=null
     private var mJobWantAdapter : JobWantAdapter?=null
     private var mPartsAdapter :PartsAdapter?=null
-    private var mMorePartsAskAdapter :MorePartsAskAdapter?=null
+    private var mPartsAskAdapter :PartsAskAdapter?=null
 
     private var mOrderAdapter:OrderAdapter?=null
     private var mEngineerAdapter:SearchResultEngineer?=null
+
+    private var mMoreFactoryActivity:SearchResultFactoryAdapter?=null
     var mList: MutableList<String> = ArrayList<String>()
 
     private var type:Int =0;
@@ -58,8 +62,8 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
         }
 
         else if (type ==4){
-            mMorePartsAskAdapter = MorePartsAskAdapter(this, mList, this)
-            recycler_list.adapter = mMorePartsAskAdapter
+            mPartsAskAdapter = PartsAskAdapter(this, mList, this)
+            recycler_list.adapter = mPartsAskAdapter
         }
 
         else if (type ==7){
@@ -68,13 +72,37 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
         }
         else if (type ==8){
             mEngineerAdapter = SearchResultEngineer(this, mList, this)
-            recycler_list.adapter = mOrderAdapter
+            recycler_list.adapter = mEngineerAdapter
+        }
+
+        else if (type ==10){
+            mMoreFactoryActivity = SearchResultFactoryAdapter(this, mList, this)
+            recycler_list.adapter = mMoreFactoryActivity
         }
 
 
-
         iv_back.setOnClickListener(View.OnClickListener { finish() })
+
+        spring_list.setType(SpringView.Type.FOLLOW)
+        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(this))
+
+        spring_list.setListener(object : SpringView.OnFreshListener {
+            override fun onRefresh() {
+                spring_list.setEnable(false)
+                //  initData()
+                closeRefreshView()
+            }
+
+            override fun onLoadmore() {}
+        })
+
     }
+
+    fun closeRefreshView() {
+        spring_list.setEnable(true)
+        spring_list.onFinishFreshAndLoad()
+    }
+
 
     override fun initPresenter() {
 

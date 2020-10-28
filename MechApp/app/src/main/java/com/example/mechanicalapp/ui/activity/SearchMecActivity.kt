@@ -21,7 +21,7 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     private var mAdapter: UserDemandAdapter? = null
     private var mBossAdapter: UserDemandAdapter? = null
     var mPartsAdapter: PartsAdapter? = null//配件出租
-    var mPartsAskAdapter: MorePartsAskAdapter? = null//配件求租
+    var mPartsAskAdapter: PartsAskAdapter? = null//配件求租
     private var mRentAdapter: UserRentAdapter? = null//机械求租 求购
     private var mRecruitAdapter: RecruitAdapter? = null//招聘
     private var mJobWantAdapter: JobWantAdapter? = null//求职
@@ -50,7 +50,7 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
         mBossAdapter = UserDemandAdapter(this, mList, 1, this)
 
         mPartsAdapter = PartsAdapter(this, mList, this)
-        mPartsAskAdapter = MorePartsAskAdapter(this, mList, this)
+        mPartsAskAdapter = PartsAskAdapter(this, mList, this)
 
         mRentAdapter = UserRentAdapter(this, mList, this)
 

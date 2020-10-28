@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:gravity="center_vertical"
+        android:textColor="@color/color_222"
         android:paddingLeft="@dimen/dp_17"
         android:text="智能排序"/>
     <View

@@ -3,7 +3,6 @@ package com.example.mechanicalapp.ui.fragment.home
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
@@ -14,6 +13,9 @@ import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.mvp.impl.DemoPresenterImpl
 import com.example.mechanicalapp.ui.view.*
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.liaoinstan.springview.widget.SpringView
+import com.liaoinstan.springview.widget.SpringView.OnFreshListener
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.inculde_search_title.*
 
@@ -56,8 +58,25 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
         tv_search.setOnClickListener(this)
         tv_map.setOnClickListener(this)
         mPresenter.request()
-    }
+        spring_list.setType(SpringView.Type.FOLLOW)
+        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(context))
 
+
+        spring_list.setListener(object : OnFreshListener {
+            override fun onRefresh() {
+                spring_list.setEnable(false)
+              //  initData()
+                closeRefreshView()
+            }
+
+            override fun onLoadmore() {}
+        })
+
+    }
+    fun closeRefreshView() {
+        spring_list.setEnable(true)
+        spring_list.onFinishFreshAndLoad()
+    }
     override fun onClick(view: View?) {
 
         when (view?.id) {

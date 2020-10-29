@@ -16,7 +16,7 @@
             android:text="出租"
             android:background="@drawable/tc_screen_bg"
             android:gravity="center"
-            style="@style/tv_screen_style"/>
+            style="@style/tv_collect_style"/>
 
         <TextView
             android:layout_alignParentRight="true"
@@ -25,7 +25,7 @@
             android:text="求租"
             android:background="@drawable/tc_screen_bg"
             android:gravity="center"
-            style="@style/tv_screen_style"/>
+            style="@style/tv_collect_style"/>
 
     </RelativeLayout>
     <com.example.mechanicalapp.ui.view.CusViewPage

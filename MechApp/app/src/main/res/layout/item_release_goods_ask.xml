@@ -5,6 +5,8 @@
     android:paddingLeft="@dimen/dp_17"
     android:paddingRight="@dimen/dp_17"
     android:id="@+id/item_root"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/dp_5"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

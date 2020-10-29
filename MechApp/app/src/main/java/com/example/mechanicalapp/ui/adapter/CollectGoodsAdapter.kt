@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ class CollectGoodsAdapter  (var mContext: Context, var mList:MutableList<String>
     private var isShow:Boolean=false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CollectGoodsVh(View.inflate(parent.context, R.layout.item_collect_goods,null),mOnItemClickListener)
+        return CollectGoodsVh(  LayoutInflater.from(mContext).inflate(R.layout.item_collect_goods, parent, false),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

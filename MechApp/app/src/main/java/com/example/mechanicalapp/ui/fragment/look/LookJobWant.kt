@@ -5,10 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.JobWantDetails
-import com.example.mechanicalapp.ui.adapter.JobWantAdapter
 import com.example.mechanicalapp.ui.adapter.LookJobWantAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
 
 class LookJobWant  : BaseFragment<NetData>() , OnItemClickListener {
@@ -39,7 +40,26 @@ class LookJobWant  : BaseFragment<NetData>() , OnItemClickListener {
         recycler_list.adapter = mAdapter
 
 
+        spring_list.setType(SpringView.Type.FOLLOW)
+        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
+
+        spring_list.setListener(object : SpringView.OnFreshListener {
+            override fun onRefresh() {
+                spring_list.setEnable(false)
+                //  initData()
+                closeRefreshView()
+            }
+
+            override fun onLoadmore() {}
+        })
+
     }
+
+    fun closeRefreshView() {
+        spring_list.setEnable(true)
+        spring_list.onFinishFreshAndLoad()
+    }
+
 
 
 

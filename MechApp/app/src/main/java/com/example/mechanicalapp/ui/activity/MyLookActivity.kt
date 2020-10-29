@@ -3,17 +3,21 @@ package com.example.mechanicalapp.ui.activity
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.fragment.look.*
+import com.google.android.material.appbar.AppBarLayout
+import kotlinx.android.synthetic.main.activity_more_data.*
 
 import kotlinx.android.synthetic.main.activity_my_collected.*
+import kotlinx.android.synthetic.main.activity_my_collected.cus_page
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 
-class MyLookActivity : BaseActivity<NetData>(), View.OnClickListener {
+class MyLookActivity : BaseActivity<NetData>(), View.OnClickListener ,ViewPager.OnPageChangeListener{
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
     private var mTabPageAdapter: FragmentListPageAdapter?=null
@@ -57,6 +61,10 @@ class MyLookActivity : BaseActivity<NetData>(), View.OnClickListener {
         iv_left.setOnClickListener(this)
 
         tv_mec_rent.performClick()
+
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
+
     }
 
     override fun initPresenter() {
@@ -88,14 +96,22 @@ class MyLookActivity : BaseActivity<NetData>(), View.OnClickListener {
 
         cus_page.currentItem=index
         for (i in mTextViewList.indices){
-            if (index ==i){
-                mTextViewList[index]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0, R.drawable.tv_under_ine)
-            }else{
-                mTextViewList[i]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            }
+            mTextViewList[i]?.isSelected = index ==i
         }
+
 
     }
 
+    override fun onPageScrollStateChanged(state: Int) {
+
+
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        showView(position)
+    }
 
 }

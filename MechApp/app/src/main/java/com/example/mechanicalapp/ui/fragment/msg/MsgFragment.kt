@@ -1,28 +1,24 @@
 package com.example.mechanicalapp.ui.fragment.msg
 
 import android.graphics.Color
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.activity.BlackListActivity
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.fragment.ChatEnFragment
 import com.example.mechanicalapp.ui.fragment.ChatMsgFragment
 import com.example.mechanicalapp.ui.fragment.ChatSysFragment
 import com.example.mechanicalapp.ui.view.PopUtils
-import kotlinx.android.synthetic.main.activity_ec_sell.*
-import kotlinx.android.synthetic.main.activity_more_data.*
-import kotlinx.android.synthetic.main.activity_more_data.cus_page
 import kotlinx.android.synthetic.main.fragment_msg.*
 
-class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewListener{
+class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewListener, ViewPager.OnPageChangeListener{
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
     private var mTabPageAdapter: FragmentListPageAdapter?=null
@@ -56,6 +52,9 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
         iv_left.setOnClickListener(this)
 
         ly_chat_msg.performClick()
+
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
     }
 
     override fun showLoading() {
@@ -109,27 +108,37 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
         tv_sys_msg.isSelected = position==2
 
         if (position ==0){
-            tv_chat_msg?.setTextColor(Color.parseColor("#222222"))
-            tv_eng_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-            tv_sys_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
-            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+
+            tv_chat_msg.isSelected =true
+            tv_eng_msg.isSelected =false
+            tv_sys_msg.isSelected =false
+//            tv_chat_msg?.setTextColor(Color.parseColor("#222222"))
+//            tv_eng_msg?.setTextColor(Color.parseColor("#9a9a9a"))
+//            tv_sys_msg?.setTextColor(Color.parseColor("#9a9a9a"))
+//            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
+//            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+//            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
 
         }else if (position ==1){
-            tv_eng_msg?.setTextColor(Color.parseColor("#222222"))
-            tv_chat_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-            tv_sys_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
-            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+//            tv_eng_msg?.setTextColor(Color.parseColor("#222222"))
+//            tv_chat_msg?.setTextColor(Color.parseColor("#9a9a9a"))
+//            tv_sys_msg?.setTextColor(Color.parseColor("#9a9a9a"))
+//            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+//            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
+//            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+            tv_chat_msg.isSelected =false
+            tv_eng_msg.isSelected =true
+            tv_sys_msg.isSelected =false
         }else{
-            tv_sys_msg?.setTextColor(Color.parseColor("#222222"))
-            tv_eng_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-            tv_chat_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
+//            tv_sys_msg?.setTextColor(Color.parseColor("#222222"))
+//            tv_eng_msg?.setTextColor(Color.parseColor("#9a9a9a"))
+//            tv_chat_msg?.setTextColor(Color.parseColor("#9a9a9a"))
+//            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+//            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+//            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
+            tv_chat_msg.isSelected =false
+            tv_eng_msg.isSelected =false
+            tv_sys_msg.isSelected =true
         }
     }
 
@@ -138,6 +147,18 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
 
         tvPopTip = view?.findViewById(R.id.tv_pop_tip)
         tvPopCancle = view?.findViewById(R.id.tv_pop_cancel)
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+
+    }
+
+    override fun onPageSelected(position: Int) {
+        showPage(position)
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
     }
 
 }

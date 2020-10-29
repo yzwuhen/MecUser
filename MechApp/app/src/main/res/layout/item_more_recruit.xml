@@ -1,40 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/item_root"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:paddingTop="@dimen/dp_15"
     android:layout_marginBottom="@dimen/dp_5"
-    android:background="@color/white"
-    android:paddingTop="@dimen/dp_17">
-
+    android:background="@drawable/rect_radio_6_white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tv_recruit_title"
         android:layout_width="0dp"
+        android:layout_marginLeft="@dimen/dp_10"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_17"
-        android:ellipsize="end"
-        android:maxLines="1"
         android:text="招聘挖掘机驾驶员"
         android:textColor="@color/color_222"
         android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_label"
+        android:maxLines="1"
+        android:ellipsize="end"
+        />
     <TextView
         android:id="@+id/tv_label"
         android:layout_width="39dp"
         android:layout_height="22dp"
-        android:layout_marginRight="@dimen/dp_17"
-        android:background="@drawable/label_bg"
         android:gravity="center"
+        android:layout_marginRight="@dimen/dp_17"
         android:text="面议"
         android:textColor="#FE9418"
         android:textSize="12sp"
+        android:background="@drawable/label_bg"
+        app:layout_constraintTop_toTopOf="@+id/tv_recruit_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_recruit_title" />
+        />
 
     <TextView
         android:id="@+id/tv_recruit_address"
@@ -43,29 +45,31 @@
         android:background="@drawable/rect_radio_2_g"
         android:gravity="center"
         android:text="广西"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recruit_title"
         app:layout_constraintStart_toStartOf="@+id/tv_recruit_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recruit_title" />
+        />
 
 
     <TextView
         android:id="@+id/tv_recruit_exp"
         style="@style/recuit_tv_label_style"
-        android:layout_marginLeft="@dimen/dp_5"
         android:background="@drawable/rect_radio_2_g"
         android:gravity="center"
         android:text="1-3年经验"
+        android:layout_marginLeft="@dimen/dp_5"
         app:layout_constraintStart_toEndOf="@+id/tv_recruit_address"
-        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address" />
-
+        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address"
+        />
     <TextView
         android:id="@+id/tv_recruit_num"
         style="@style/recuit_tv_label_style"
-        android:layout_marginLeft="@dimen/dp_5"
         android:background="@drawable/rect_radio_2_g"
+        android:layout_marginLeft="@dimen/dp_5"
         android:gravity="center"
         android:text="5人"
         app:layout_constraintStart_toEndOf="@+id/tv_recruit_exp"
-        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address" />
+        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address"
+        />
 
     <TextView
         android:id="@+id/tv_recruit_method"
@@ -75,7 +79,8 @@
         android:gravity="center"
         android:text="月结"
         app:layout_constraintStart_toEndOf="@+id/tv_recruit_num"
-        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address" />
+        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address"
+        />
 
 
     <TextView
@@ -84,11 +89,12 @@
         android:layout_height="wrap_content"
         android:drawableLeft="@mipmap/jl"
         android:drawablePadding="3dp"
-        android:text="距离205km"
         android:textColor="#3A7EFF"
         android:textSize="13sp"
+        android:text="距离205km"
         app:layout_constraintEnd_toEndOf="@id/tv_label"
-        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address" />
+        app:layout_constraintTop_toTopOf="@+id/tv_recruit_address"
+        />
 
     <ImageView
         android:id="@+id/iv_recruit_pic"
@@ -97,84 +103,45 @@
         android:layout_marginTop="@dimen/dp_10"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toStartOf="@id/tv_recruit_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recruit_address" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tv_recruit_address"
+        />
     <TextView
         android:id="@+id/tv_recruit_user"
+        app:layout_constraintTop_toTopOf="@+id/iv_recruit_pic"
+        app:layout_constraintStart_toEndOf="@id/iv_recruit_pic"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginLeft="@dimen/dp_20"
         android:gravity="center"
-        android:text="李先生。招聘者"
-        android:textColor="@color/color_666"
         android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/iv_recruit_pic"
-        app:layout_constraintTop_toTopOf="@+id/iv_recruit_pic" />
+        android:textColor="@color/color_666"
+        android:text="李先生。招聘者"/>
 
     <ImageView
         android:layout_width="20dp"
         android:layout_height="13dp"
-        android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginTop="14dp"
-        android:src="@mipmap/sr"
+        android:layout_marginLeft="@dimen/dp_8"
+        app:layout_constraintTop_toTopOf="@+id/iv_recruit_pic"
         app:layout_constraintStart_toEndOf="@+id/tv_recruit_user"
-        app:layout_constraintTop_toTopOf="@+id/iv_recruit_pic" />
+        android:src="@mipmap/sr"/>
 
     <TextView
         android:id="@+id/tv_recruit_time"
+        app:layout_constraintTop_toTopOf="@+id/iv_recruit_pic"
+        app:layout_constraintEnd_toEndOf="@+id/tv_label"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginLeft="@dimen/dp_20"
         android:gravity="center"
-        android:text="刚刚"
-        android:textColor="@color/color_666"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_label"
-        app:layout_constraintTop_toTopOf="@+id/iv_recruit_pic" />
-
-
-    <LinearLayout
-        android:id="@+id/ly_bottom"
+        android:textColor="@color/color_666"
+        android:text="刚刚"/>
+    <View
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:gravity="right|center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recruit_time">
-
-        <TextView
-            android:id="@+id/tv_del"
-            android:layout_width="100dp"
-            android:layout_height="34dp"
-            android:layout_marginRight="@dimen/dp_12"
-            android:background="@drawable/rect_white_9a9a9a"
-            android:gravity="center"
-            android:text="删除"
-            android:textColor="@color/color_222"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_refresh"
-            android:layout_width="100dp"
-            android:layout_height="34dp"
-            android:layout_marginRight="@dimen/dp_12"
-            android:background="@drawable/rect_white_9a9a9a"
-            android:gravity="center"
-            android:text="刷新"
-            android:textColor="@color/color_222"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_down"
-            android:layout_width="100dp"
-            android:layout_height="34dp"
-            android:background="@drawable/rect_white_9a9a9a"
-            android:gravity="center"
-            android:text="下架"
-            android:textColor="@color/color_222"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/dp_15"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recruit_time"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

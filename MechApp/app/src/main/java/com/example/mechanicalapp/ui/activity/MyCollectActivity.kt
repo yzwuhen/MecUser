@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_my_collected.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 import org.greenrobot.eventbus.EventBus
 
-class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
+class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
     private var mTabPageAdapter: FragmentListPageAdapter?=null
@@ -61,6 +62,10 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
         iv_left.setOnClickListener(this)
 
         tv_mec_rent.performClick()
+
+        cus_page.setTouchEvent(true)
+        cus_page.offscreenPageLimit=6
+        cus_page.addOnPageChangeListener(this)
     }
 
     override fun initPresenter() {
@@ -94,11 +99,7 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
         position = index
         cus_page.currentItem=index
         for (i in mTextViewList.indices){
-            if (index ==i){
-                mTextViewList[index]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
-            }else{
-                mTextViewList[i]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            }
+            mTextViewList[i]?.isSelected = index ==i
         }
 
     }
@@ -116,5 +117,14 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener {
 
         Log.v("sssssss","ssssssssssssssss$mEventFresh.isShowCheck")
         EventBus.getDefault().post(mEventFresh)
+    }
+    override fun onPageScrollStateChanged(state: Int) {
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        showView(position)
     }
 }

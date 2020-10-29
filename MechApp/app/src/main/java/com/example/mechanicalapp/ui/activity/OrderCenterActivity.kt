@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
@@ -14,7 +15,7 @@ import com.example.mechanicalapp.ui.fragment.OrderFragment
 import kotlinx.android.synthetic.main.activity_order.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
-class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener{
+class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPager.OnPageChangeListener{
 
     private var type:Int=0
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
@@ -43,6 +44,9 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener{
         tv_repair.setOnClickListener(this)
         tv_engineer.setOnClickListener(this)
         tv_repair.performClick()
+
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
     }
     override fun onClick(p0: View?) {
         when(p0?.id){
@@ -71,11 +75,7 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener{
         type= index;
         cus_page.currentItem=index
         for (i in mTextViewList.indices){
-            if (index ==i){
-                mTextViewList[index]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
-            }else{
-                mTextViewList[i]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            }
+            mTextViewList[i]?.isSelected = index ==i
         }
 
     }
@@ -90,4 +90,15 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener{
 
     override fun showData(t: NetData) {
     }
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        showView(position)
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+
+    }
+
 }

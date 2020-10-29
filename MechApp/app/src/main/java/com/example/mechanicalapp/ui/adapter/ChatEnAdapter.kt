@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ class ChatEnAdapter  (var mContext: Context, var mList:MutableList<String>, var 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return ChatEnVh(View.inflate(parent.context, R.layout.item_chat_en,null))
+        return ChatEnVh(LayoutInflater.from(mContext).inflate(R.layout.item_chat_en,parent,false))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

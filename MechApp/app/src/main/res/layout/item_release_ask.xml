@@ -7,6 +7,7 @@
     android:id="@+id/item_root"
     android:paddingRight="@dimen/dp_17"
     android:background="@color/white"
+    android:layout_marginBottom="@dimen/dp_5"
     android:paddingTop="@dimen/dp_17"
     android:layout_height="wrap_content">
 

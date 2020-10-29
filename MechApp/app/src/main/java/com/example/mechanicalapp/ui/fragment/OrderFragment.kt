@@ -3,14 +3,14 @@ package com.example.mechanicalapp.ui.fragment
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
-import kotlinx.android.synthetic.main.fragment_mec_leasing.cus_page
 import kotlinx.android.synthetic.main.fragment_order.*
 
-class OrderFragment:BaseFragment<NetData>(),View.OnClickListener {
+class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPageChangeListener {
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
@@ -58,6 +58,9 @@ class OrderFragment:BaseFragment<NetData>(),View.OnClickListener {
 
 
         tv_order1.performClick()
+        cus_page.offscreenPageLimit =6
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
     }
     override fun onClick(p0: View?) {
         when (p0?.id) {
@@ -76,6 +79,16 @@ class OrderFragment:BaseFragment<NetData>(),View.OnClickListener {
         for (i in mTextViewList.indices) {
             mTextViewList[i]?.isSelected = index == i
         }
+
+    }
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        showView(position)
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
 
     }
 }

@@ -23,7 +23,6 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
 
     private var bannerView: BannerView? = null
     private var itemMenu: ItemMenu? = null
-    private var requestLocalCode = 888
 
     override fun showLoading() {
 

@@ -3,13 +3,16 @@ package com.example.mechanicalapp.ui.fragment.myrelease
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import kotlinx.android.synthetic.main.activity_my_release.*
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
+import kotlinx.android.synthetic.main.fragment_mec_leasing.cus_page
 
-class MyReleaseSecondFragment : BaseFragment<NetData>(), View.OnClickListener {
+class MyReleaseSecondFragment : BaseFragment<NetData>(), View.OnClickListener ,ViewPager.OnPageChangeListener{
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
@@ -45,6 +48,9 @@ class MyReleaseSecondFragment : BaseFragment<NetData>(), View.OnClickListener {
         tv_screen_right.setOnClickListener(this)
 
         tv_screen_left.performClick()
+
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
     }
 
     override fun showData(t: NetData?) {
@@ -65,5 +71,15 @@ class MyReleaseSecondFragment : BaseFragment<NetData>(), View.OnClickListener {
             mTextViewList[i]?.isSelected = index == i
         }
 
+    }
+    override fun onPageScrollStateChanged(state: Int) {
+
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        showView(position)
     }
 }

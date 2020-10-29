@@ -8,14 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 
-class ChatSysAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-
+class MoreJobWantAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        return ChatVh(
-            LayoutInflater.from(mContext).inflate(R.layout.item_chat_sys, parent, false),mOnItemClickListener
-        )
+        return MoreJobWantVh(LayoutInflater.from(mContext).inflate(R.layout.item_more_job_want,parent,false),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -23,10 +19,13 @@ class ChatSysAdapter (var mContext: Context, var mList:MutableList<String>, var 
     }
 
     override fun getItemCount(): Int {
+
         return mList.size
     }
 
-    class ChatVh(itemView: View, mOnItemClickListener: OnItemClickListener): RecyclerView.ViewHolder(itemView){
+
+
+    class MoreJobWantVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
         }

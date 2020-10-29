@@ -17,25 +17,25 @@
 
         <TextView
             android:id="@+id/tv_mec_rent"
-            style="@style/tv_style_22_b5"
+            style="@style/tv_collected"
             android:gravity="center"
             android:text="机械租赁" />
 
         <TextView
             android:id="@+id/tv_apparatus"
-            style="@style/tv_style_22_b5"
+            style="@style/tv_collected"
             android:gravity="center"
             android:text="二手设备" />
 
         <TextView
             android:id="@+id/tv_parts"
-            style="@style/tv_style_22_b5"
+            style="@style/tv_collected"
             android:gravity="center"
             android:text="@string/search_mec_tv3" />
 
         <TextView
             android:id="@+id/tv_recruit"
-            style="@style/tv_style_22_b5"
+            style="@style/tv_collected"
             android:gravity="center"
             android:text="@string/search_mec_tv4" />
 

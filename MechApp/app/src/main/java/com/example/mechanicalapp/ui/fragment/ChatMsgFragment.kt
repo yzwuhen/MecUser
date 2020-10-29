@@ -10,8 +10,11 @@ import com.example.mechanicalapp.ui.adapter.ChatAdapter
 import com.example.mechanicalapp.ui.adapter.DialogListAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_msg_list.*
+
 
 class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClick {
 
@@ -52,7 +55,27 @@ class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClic
         recycle_list.layoutManager = LinearLayoutManager(mContext)
         mChatAdapter = ChatAdapter(mContext, mList, this,this)
         recycle_list.adapter = mChatAdapter
+
+        spring_list.setType(SpringView.Type.FOLLOW)
+        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
+
+        spring_list.setListener(object : SpringView.OnFreshListener {
+            override fun onRefresh() {
+                spring_list.setEnable(false)
+                //  initData()
+                closeRefreshView()
+            }
+
+            override fun onLoadmore() {}
+        })
+
     }
+
+    fun closeRefreshView() {
+        spring_list.setEnable(true)
+        spring_list.onFinishFreshAndLoad()
+    }
+
 
     override fun onItemClick(view: View, position: Int) {
 

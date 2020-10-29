@@ -8,6 +8,8 @@ import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.java.EventFresh
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -31,6 +33,8 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
         mList.add("1")
         mList.add("1")
         mList.add("1")
+        mList.add("1")
+        mList.add("1")
         EventBus.getDefault().register(this)
 
     }
@@ -41,7 +45,27 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 
+        spring_list.setType(SpringView.Type.FOLLOW)
+        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
+
+        spring_list.setListener(object : SpringView.OnFreshListener {
+            override fun onRefresh() {
+                spring_list.setEnable(false)
+                //  initData()
+                closeRefreshView()
+            }
+
+            override fun onLoadmore() {}
+        })
+
     }
+
+    fun closeRefreshView() {
+        spring_list.setEnable(true)
+        spring_list.onFinishFreshAndLoad()
+    }
+
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public fun onFresh(msg: EventFresh) {

@@ -17,10 +17,10 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     //tye== 0 出租出售 1 招聘  2 求职 3 商品（配件） 4 配件求租 5 配件出租  6是我的设备
     private var mAdapter :UserDemandAdapter ?=null
-    private var mRecruitAdapter : RecruitAdapter?=null
-    private var mJobWantAdapter : JobWantAdapter?=null
-    private var mPartsAdapter :PartsAdapter?=null
-    private var mPartsAskAdapter :PartsAskAdapter?=null
+    private var mRecruitAdapter : MoreRecruitAdapter?=null
+    private var mJobWantAdapter : MoreJobWantAdapter?=null
+    private var mPartsAdapter :MorePartsAdapter?=null
+    private var mPartsAskAdapter :MorePartsAskAdapter?=null
 
     private var mOrderAdapter:OrderAdapter?=null
     private var mEngineerAdapter:SearchResultEngineer?=null
@@ -49,20 +49,20 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
             recycler_list.adapter = mAdapter
         }
         else if (type ==1){
-            mRecruitAdapter = RecruitAdapter(this, mList, this)
+            mRecruitAdapter = MoreRecruitAdapter(this, mList, this)
             recycler_list.adapter = mRecruitAdapter
         }
         else if (type ==2){
-            mJobWantAdapter = JobWantAdapter(this, mList, this)
+            mJobWantAdapter = MoreJobWantAdapter(this, mList, this)
             recycler_list.adapter = mJobWantAdapter
         }
         else if (type ==5){
-            mPartsAdapter = PartsAdapter(this, mList, this)
+            mPartsAdapter = MorePartsAdapter(this, mList, this)
             recycler_list.adapter = mPartsAdapter
         }
 
         else if (type ==4){
-            mPartsAskAdapter = PartsAskAdapter(this, mList, this)
+            mPartsAskAdapter = MorePartsAskAdapter(this, mList, this)
             recycler_list.adapter = mPartsAskAdapter
         }
 

@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.activity
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
@@ -11,10 +12,16 @@ import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseGoodsFragment
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseLease
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseRecruitFragment
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseSecondFragment
+import kotlinx.android.synthetic.main.activity_my_collected.*
 import kotlinx.android.synthetic.main.activity_my_release.*
+import kotlinx.android.synthetic.main.activity_my_release.cus_page
+import kotlinx.android.synthetic.main.activity_my_release.tv_apparatus
+import kotlinx.android.synthetic.main.activity_my_release.tv_mec_rent
+import kotlinx.android.synthetic.main.activity_my_release.tv_parts
+import kotlinx.android.synthetic.main.activity_my_release.tv_recruit
 import kotlinx.android.synthetic.main.layout_title.*
 
-class MyReleaseActivity:BaseActivity<NetData>(), View.OnClickListener {
+class MyReleaseActivity:BaseActivity<NetData>(), View.OnClickListener,ViewPager.OnPageChangeListener {
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
     private var mTabPageAdapter: FragmentListPageAdapter?=null
@@ -53,6 +60,9 @@ class MyReleaseActivity:BaseActivity<NetData>(), View.OnClickListener {
         tv_recruit.setOnClickListener(this)
 
         tv_mec_rent.performClick()
+
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
     }
 
     override fun initPresenter() {
@@ -83,13 +93,20 @@ class MyReleaseActivity:BaseActivity<NetData>(), View.OnClickListener {
         position = index
         cus_page.currentItem=index
         for (i in mTextViewList.indices){
-            if (index ==i){
-                mTextViewList[index]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0, R.drawable.tv_under_ine)
-            }else{
-                mTextViewList[i]?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-            }
+            mTextViewList[i]?.isSelected = index ==i
         }
 
+    }
+    override fun onPageScrollStateChanged(state: Int) {
+
+
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        showView(position)
     }
 
 }

@@ -41,17 +41,7 @@ class ItemMenu(var mContext: Context) : LinearLayout(mContext) , OnItemClickList
         mContext.startActivity(intent)
 
     }
-    private fun jumAct(type: Int) {
-        val intent = Intent()
-        val bundle = Bundle()
-        bundle.putInt(Configs.SEARCH_TYPE,type)
-        intent.setClass(mContext, SearchMecActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-        if (bundle != null) {
-            intent.putExtras(bundle)
-        }
-        mContext.startActivity(intent)
-    }
+
     private fun jumAct3() {
         val intent = Intent()
         intent.setClass(mContext, MoreFactoryActivity::class.java)

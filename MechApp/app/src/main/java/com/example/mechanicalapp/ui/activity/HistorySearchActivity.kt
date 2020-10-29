@@ -70,7 +70,7 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
             jumpActivity(bundle, SearchMecResult::class.java)
         } else if (type == 9) {
             bundle.putInt(Configs.SEARCH_TYPE,0)
-            jumpActivity(bundle, SearchMecActivity::class.java)
+            jumpActivity(bundle, SearchAllActivity::class.java)
         }
         else {
             jumpActivity(bundle, SearchResultActivity::class.java)

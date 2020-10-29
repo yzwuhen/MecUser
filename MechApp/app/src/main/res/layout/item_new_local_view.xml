@@ -23,7 +23,7 @@
             android:layout_marginTop="15dp"
             android:layout_width="90dp"
             android:layout_height="37dp"
-            android:background="@drawable/rect_radio_7"
+            android:background="@drawable/rect_6_fff_e8"
             android:gravity="center"
             android:drawablePadding="4dp"
             android:textColor="#222222"

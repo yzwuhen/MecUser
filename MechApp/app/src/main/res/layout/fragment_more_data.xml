@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/bg_color"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,36 +10,60 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:gravity="center_vertical"
-        android:background="@color/white"
         android:paddingLeft="@dimen/dp_17"
         android:paddingRight="@dimen/dp_17"
         android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ly_screen1"
+           style="@style/more_ly_menu_style">
+            <TextView
+                android:id="@+id/tv_screen1"
+                style="@style/tv_right_down_style"
+                android:gravity="center"
+                android:text="机型" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_screen1"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="机型" />
-        <TextView
-            android:id="@+id/tv_screen2"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="品牌" />
-        <TextView
-            android:id="@+id/tv_screen3"
-            android:gravity="center"
-            style="@style/tv_style_22_b5"
-            android:text="型号" />
-        <TextView
-            android:id="@+id/tv_screen4"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="排序" />
-        <TextView
-            android:id="@+id/tv_screen5"
-            style="@style/tv_style_22_b5"
-            android:gravity="center"
-            android:text="筛选" />
+
+        <LinearLayout
+            android:id="@+id/ly_screen2"
+            style="@style/more_ly_menu_style">
+            <TextView
+                android:id="@+id/tv_screen2"
+                style="@style/tv_right_down_style"
+                android:gravity="center"
+                android:text="品牌" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_screen3"
+            style="@style/more_ly_menu_style">
+            <TextView
+                android:id="@+id/tv_screen3"
+                style="@style/tv_right_down_style"
+                android:gravity="center"
+                android:text="型号" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_screen4"
+            style="@style/more_ly_menu_style">
+            <TextView
+                android:id="@+id/tv_screen4"
+                style="@style/tv_right_down_style"
+                android:gravity="center"
+                android:text="排序" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_screen5"
+            style="@style/more_ly_menu_style">
+            <TextView
+                android:id="@+id/tv_screen5"
+                style="@style/tv_right_down_style"
+                android:gravity="center"
+                android:text="筛选" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <com.liaoinstan.springview.widget.SpringView

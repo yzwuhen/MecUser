@@ -8,15 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.MecFactoryShopAdapter
+import com.example.mechanicalapp.ui.adapter.MecFactoryAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.view.PopUtils
-import kotlinx.android.synthetic.main.activity_maintenance.*
-import kotlinx.android.synthetic.main.layout_title.*
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.liaoinstan.springview.widget.SpringView
+import kotlinx.android.synthetic.main.activity_more_factory.*
+import kotlinx.android.synthetic.main.layout_more_data_title.*
 
-class MaintenanceActivity : BaseActivity<NetData>(),View.OnClickListener ,PopUtils.onViewListener,OnItemClickListener{
+class MoreFactoryActivity : BaseActivity<NetData>() ,View.OnClickListener ,PopUtils.onViewListener,
+    OnItemClickListener {
 
     var popRecy : RecyclerView?=null
     private var mScreenAdapter : ScreenAdapter?=null
@@ -24,30 +27,29 @@ class MaintenanceActivity : BaseActivity<NetData>(),View.OnClickListener ,PopUti
     private var mStringList :MutableList<String> = ArrayList<String>()
 
 
-    private var mMecFactoryShopAdapter : MecFactoryShopAdapter?=null
+    private var mMecFactoryShopAdapter : MecFactoryAdapter?=null
     var mList: MutableList<String> = ArrayList<String>()
 
     override fun getLayoutId(): Int {
 
-        return R.layout.activity_maintenance
+        return R.layout.activity_more_factory
     }
 
     override fun initView() {
         super.initView()
 
-        tv_title.text ="维修厂"
-
         iv_back.setOnClickListener(this)
+        tv_search.setOnClickListener(this)
+        tv_map.setOnClickListener(this)
+
         ly_ec_type.setOnClickListener(this)
         ly_parts_type.setOnClickListener(this)
         ly_sort.setOnClickListener(this)
-        tv_submit.setOnClickListener(this)
 
 
         mStringList?.add("智能排序")
+        mStringList?.add("距离由近到远")
         mStringList?.add("最新上架")
-        mStringList?.add("最新上架")
-        mStringList?.add("工作时长最短")
 
 
 
@@ -55,11 +57,32 @@ class MaintenanceActivity : BaseActivity<NetData>(),View.OnClickListener ,PopUti
         mList.add("1")
         mList.add("1")
         mList.add("1")
-        mMecFactoryShopAdapter = MecFactoryShopAdapter(this,mList,this)
+        mMecFactoryShopAdapter = MecFactoryAdapter(this,mList,this)
 
-        recycle_list.layoutManager =LinearLayoutManager(this)
+        recycle_list.layoutManager = LinearLayoutManager(this)
         recycle_list.adapter = mMecFactoryShopAdapter
+
+        spring_list.setType(SpringView.Type.FOLLOW)
+        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(this))
+
+        spring_list.setListener(object : SpringView.OnFreshListener {
+            override fun onRefresh() {
+                spring_list.setEnable(false)
+                //  initData()
+                closeRefreshView()
+            }
+
+            override fun onLoadmore() {}
+        })
+
     }
+
+    fun closeRefreshView() {
+        spring_list.setEnable(true)
+        spring_list.onFinishFreshAndLoad()
+    }
+
+
 
     override fun initPresenter() {
     }
@@ -74,29 +97,25 @@ class MaintenanceActivity : BaseActivity<NetData>(),View.OnClickListener ,PopUti
     }
 
     override fun onClick(view: View?) {
-      when(view?.id){
-          R.id.iv_back->finish()
-          R.id.ly_ec_type ->jumpActivityForReSult(
-              Configs.EC_TYPE_RESULT_CODE,
-              EcType::class.java
-          )
-          R.id.ly_parts_type ->jumpActivityForReSult(
-              Configs.EC_TYPE_RESULT_CODE,
-              EcType::class.java
-          )
-          R.id.ly_sort ->showPop()
-          R.id.tv_submit->toResult()
-      }
+        when(view?.id){
+            R.id.iv_back->finish()
+            R.id.ly_ec_type ->jumpActivityForReSult(
+                Configs.EC_TYPE_RESULT_CODE,
+                EcType::class.java
+            )
+            R.id.ly_parts_type ->jumpActivityForReSult(
+                Configs.EC_TYPE_RESULT_CODE,
+                EcType::class.java
+            )
+            R.id.ly_sort ->showPop()
+            R.id.tv_search ->jumAct()
+            R.id.tv_map->jumpActivity(null,MapActivity::class.java)
+        }
     }
-
-    private fun toResult() {
-
-            var intent  = Intent()
-            var bundle = Bundle()
-            bundle.putString(Configs.SCREEN_RESULT_Extra,"广州市莹宝维修中心")
-            intent.putExtras(bundle)
-            setResult(Configs.EC_MODEL_RESULT_CODE,intent)
-            finish()
+    private fun jumAct(){
+        var bundle :Bundle = Bundle()
+        bundle.putInt(Configs.HISTORY_TYPE,10)
+        jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 
     private fun showPop() {

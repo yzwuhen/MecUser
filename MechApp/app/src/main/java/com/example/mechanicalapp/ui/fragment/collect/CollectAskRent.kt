@@ -4,8 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
-import com.example.mechanicalapp.ui.adapter.PartsAdapter
+import com.example.mechanicalapp.ui.adapter.PartsAskAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.java.EventFresh
@@ -17,7 +16,7 @@ import org.greenrobot.eventbus.ThreadMode
 class CollectAskRent : BaseFragment<NetData>() , OnItemClickListener {
 
 
-    private var mAdapter: MorePartsAskAdapter? = null
+    private var mAdapter: PartsAskAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
     override fun showLoading() {
 
@@ -35,7 +34,7 @@ class CollectAskRent : BaseFragment<NetData>() , OnItemClickListener {
 
     override fun initView() {
         super.initView()
-        mAdapter = MorePartsAskAdapter(mContext, mList, this)
+        mAdapter = PartsAskAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter =mAdapter
 

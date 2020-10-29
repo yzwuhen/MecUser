@@ -99,8 +99,8 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
             popSure?.text = "确定"
         } else {
             popInfo?.text = "退出登录？"
-            popCancel?.text = "不加密"
-            popSure?.text = "加密"
+            popCancel?.text = "取消"
+            popSure?.text = "确定"
         }
 
         this?.let { PopUtils.showPopupWindow(ly_login_out, it) }

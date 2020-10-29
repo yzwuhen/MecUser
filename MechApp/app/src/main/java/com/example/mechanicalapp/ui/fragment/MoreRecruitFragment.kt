@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.Brand
 import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.EcType
+import com.example.mechanicalapp.ui.adapter.MoreUserRentAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_more_data.*
 
 class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,ProgressListener {
-    var mAdapter: UserRentAdapter? = null
+    var mAdapter: MoreUserRentAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
 
     var popRecy : RecyclerView?=null
@@ -56,10 +57,9 @@ class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickLi
     override fun initView() {
         super.initView()
 
-        mAdapter = UserRentAdapter(mContext, mList, this)
+        mAdapter = MoreUserRentAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
-        tv_screen1.text ="2$type"
 
 
 
@@ -69,11 +69,11 @@ class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickLi
         mStringList?.add("工作时长最短")
 
 
-        tv_screen1.setOnClickListener(this)
-        tv_screen2.setOnClickListener(this)
-        tv_screen3.setOnClickListener(this)
-        tv_screen4.setOnClickListener(this)
-        tv_screen5.setOnClickListener(this)
+        ly_screen1.setOnClickListener(this)
+        ly_screen2.setOnClickListener(this)
+        ly_screen3.setOnClickListener(this)
+        ly_screen4.setOnClickListener(this)
+        ly_screen5.setOnClickListener(this)
     }
 
     override fun showLoading() {
@@ -100,11 +100,11 @@ class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickLi
 
     override fun onClick(p0: View?) {
         when(p0?.id){
-            R.id.tv_screen1 ->jumpActivity(null, EcModel::class.java)
-            R.id.tv_screen2->jumpActivity(null, Brand::class.java)
-            R.id.tv_screen3->jumpActivity(null, EcType::class.java)
-            R.id.tv_screen4->showInput()
-            R.id.tv_screen5->showDialogType()
+            R.id.ly_screen1 ->jumpActivity(null, EcModel::class.java)
+            R.id.ly_screen2->jumpActivity(null, Brand::class.java)
+            R.id.ly_screen3->jumpActivity(null, EcType::class.java)
+            R.id.ly_screen4->showInput()
+            R.id.ly_screen5->showDialogType()
             R.id.tv_sure->mButtDialog?.dismiss()
             R.id.tv_reset->mButtDialog?.dismiss()
         }

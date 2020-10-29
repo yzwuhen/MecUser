@@ -1,7 +1,6 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -11,13 +10,12 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
-import com.example.mechanicalapp.ui.adapter.PartsAdapter
+import com.example.mechanicalapp.ui.adapter.PartsAskAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
-import kotlinx.android.synthetic.main.inculde_search_title.*
 
 /**
  * 求组 配件

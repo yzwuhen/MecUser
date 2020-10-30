@@ -9,9 +9,12 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.HistorySearchActivity
 import com.example.mechanicalapp.ui.activity.MapActivity
 import com.example.mechanicalapp.ui.activity.SearchCityActivity
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.BannerData
+import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.DemoPresenterImpl
+import com.example.mechanicalapp.ui.mvp.v.HomeBaseView
 import com.example.mechanicalapp.ui.view.*
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -19,19 +22,11 @@ import com.liaoinstan.springview.widget.SpringView.OnFreshListener
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.inculde_search_title.*
 
-class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListener {
+class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetData> {
 
     private var bannerView: BannerView? = null
     private var itemMenu: ItemMenu? = null
-
-    override fun showLoading() {
-
-    }
-
-    override fun hiedLoading() {
-
-    }
-
+    private var listbanner:MutableList<BannerData> ?=ArrayList()
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
@@ -71,6 +66,15 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
             override fun onLoadmore() {}
         })
 
+
+        var  bannerData = BannerData()
+        bannerData.img_path =
+            "https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723"
+
+        listbanner?.add(bannerData)
+        listbanner?.add(bannerData)
+        bannerView?.setData(listbanner)
+
     }
     fun closeRefreshView() {
         spring_list.setEnable(true)
@@ -109,9 +113,9 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
         }
     }
 
-    override fun showData(listt: MutableList<BannerData>) {
-        bannerView?.setData(listt)
-    }
+//    override fun showData(listt: MutableList<BannerData>) {
+//        bannerView?.setData(listt)
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
@@ -129,5 +133,15 @@ class HomeFragment : BaseFragment<MutableList<BannerData>>(), View.OnClickListen
         when (requestCode) {
             Configs.CITY_RESULT_CODE -> tv_address.text = extra
         }
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun hiedLoading() {
+    }
+
+    override fun showData(t: NetData) {
     }
 }

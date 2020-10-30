@@ -132,6 +132,7 @@
         <activity android:name=".ui.activity.FindPwdActivity"/>
         <activity android:name=".ui.activity.SettingPwdActivity"/>
         <activity android:name=".ui.activity.MoreFactoryActivity"/>
+        <activity android:name=".ui.activity.SearchAllActivity"/>
 
         <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
         </meta-data>

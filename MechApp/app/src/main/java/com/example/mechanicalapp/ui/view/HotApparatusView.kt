@@ -1,15 +1,11 @@
 package com.example.mechanicalapp.ui.view
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
+
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.config.Configs
-import com.example.mechanicalapp.ui.activity.SearchCityActivity
-import com.example.mechanicalapp.ui.activity.SearchMecActivity
 import kotlinx.android.synthetic.main.layout_hot_apparatus.view.*
 
 class HotApparatusView(var mContext :Context) :FrameLayout(mContext),View.OnClickListener {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_search_et" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_mec_rent"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv1" />
+        <TextView
+            android:id="@+id/tv_apparatus"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv2" />
+        <TextView
+            android:id="@+id/tv_parts"
+            android:gravity="center"
+            style="@style/tv_style_22_b5"
+            android:text="@string/search_mec_tv3" />
+        <TextView
+            android:id="@+id/tv_recruit"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv4" />
+        <TextView
+            android:id="@+id/tv_repair"
+            style="@style/tv_style_22_b5"
+            android:gravity="center"
+            android:text="@string/search_mec_tv5" />
+    </LinearLayout>
+
+    <com.example.mechanicalapp.ui.view.CusViewPage
+        android:id="@+id/cus_page"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

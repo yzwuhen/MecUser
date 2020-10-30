@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="true" android:drawable="@drawable/tv_h_50_s"/>
+    <item android:state_selected="false" android:drawable="@drawable/tv_h_50_n"/>
 
-
-<!--    <corners android:radius="5dp"/>-->
-    <solid android:color="#FFB924"/>
-    <size android:height="50dp" android:width="5dp"/>
-</shape>
+</selector>

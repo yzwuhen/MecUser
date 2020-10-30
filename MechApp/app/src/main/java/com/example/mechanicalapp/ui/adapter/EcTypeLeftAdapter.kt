@@ -17,12 +17,7 @@ class EcTypeLeftAdapter (var mContext: Context, var mList:MutableList<String>, v
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_type.text = mList[position]
-        holder.itemView.tv_type.isSelected = position==2
-        if (position ==2){
-            holder.itemView.tv_type.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tv_h_50,0,0,0)
-        }else{
-            holder.itemView.tv_type.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-        }
+        holder.itemView.tv_type.isSelected = position ==2
 
     }
 

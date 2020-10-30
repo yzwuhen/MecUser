@@ -12,7 +12,7 @@
         android:textSize="15sp"
         android:gravity="center"
         android:text="机型"
-        android:textColor="@color/color_222"
+        android:textColor="@drawable/msg_tv_color"
         android:drawableLeft="@drawable/tv_h_50"/>
 
 </LinearLayout>

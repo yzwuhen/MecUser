@@ -12,7 +12,7 @@ import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.activity_brand.*
-import kotlinx.android.synthetic.main.layout_search_title.*
+import kotlinx.android.synthetic.main.layout_title.*
 
 class Brand : BaseActivity<NetData>() , OnItemClickListener, View.OnClickListener {
 
@@ -79,6 +79,7 @@ class Brand : BaseActivity<NetData>() , OnItemClickListener, View.OnClickListene
         ry_brand_letter.adapter = mLetterAdapter
 
         iv_back.setOnClickListener(this)
+        tv_unlimited.setOnClickListener(this)
     }
 
     override fun initPresenter() {
@@ -95,10 +96,13 @@ class Brand : BaseActivity<NetData>() , OnItemClickListener, View.OnClickListene
 
 
     override fun onClick(view: View?) {
-        if (view?.id == R.id.iv_back) {
-            finish()
+//        if (view?.id == R.id.iv_back) {
+//            finish()
+//        }
+        when(view?.id){
+            R.id.iv_back->finish()
+            R.id.tv_unlimited->callback("不限")
         }
-
     }
 
     override fun onItemClick(view: View, position: Int) {

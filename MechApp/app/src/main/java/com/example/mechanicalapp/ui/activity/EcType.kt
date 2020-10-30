@@ -13,9 +13,9 @@ import com.example.mechanicalapp.ui.adapter.EcTypeRightAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.activity_ec_type.*
-import kotlinx.android.synthetic.main.item_ec_type_right.*
+import kotlinx.android.synthetic.main.layout_title.*
 
-class EcType:BaseActivity<NetData>(), OnItemClickListener {
+class EcType:BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListener{
 
 
     private var mLeftAdapter: EcTypeLeftAdapter? = null
@@ -62,6 +62,11 @@ class EcType:BaseActivity<NetData>(), OnItemClickListener {
         recycler_list_right.adapter = mRightAdapter
 
 
+        tv_title.text="机械类型"
+
+        tv_unlimited.setOnClickListener(this)
+        iv_back.setOnClickListener(this)
+
     }
 
     override fun initPresenter() {
@@ -92,5 +97,13 @@ class EcType:BaseActivity<NetData>(), OnItemClickListener {
         intent.putExtras(bundle)
         setResult(Configs.EC_TYPE_RESULT_CODE,intent)
         finish()
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.iv_back->finish()
+            R.id.tv_unlimited->callback("不限")
+        }
+
     }
 }

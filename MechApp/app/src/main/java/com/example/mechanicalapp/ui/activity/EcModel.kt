@@ -12,8 +12,9 @@ import com.example.mechanicalapp.ui.adapter.EcModelAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.activity_ec_model.*
+import kotlinx.android.synthetic.main.layout_title.*
 
-class EcModel :BaseActivity<NetData>(), OnItemClickListener {
+class EcModel :BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListener{
 
 
     private var mAdapter:EcModelAdapter ?=null
@@ -44,6 +45,11 @@ class EcModel :BaseActivity<NetData>(), OnItemClickListener {
         recycler_list.layoutManager = GridLayoutManager(this,3)
         recycler_list.addItemDecoration(MyDecoration(2))
         recycler_list.adapter = mAdapter
+
+        tv_title.text="型号"
+
+        tv_unlimited.setOnClickListener(this)
+        iv_back.setOnClickListener(this)
     }
 
     override fun initPresenter() {
@@ -70,5 +76,13 @@ class EcModel :BaseActivity<NetData>(), OnItemClickListener {
         intent.putExtras(bundle)
         setResult(Configs.EC_MODEL_RESULT_CODE,intent)
         finish()
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.iv_back->finish()
+            R.id.tv_unlimited->callback("不限")
+        }
+
     }
 }

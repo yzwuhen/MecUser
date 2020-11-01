@@ -8,6 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.MyDataCleanManager
 import com.luck.picture.lib.tools.ToastUtils
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
@@ -22,7 +23,7 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
     private var mPopwindow: PopupWindow? = null
-
+    private var dataSize: String? = null
 
     override fun getLayoutId(): Int {
 
@@ -46,6 +47,13 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
         ly_login_out.setOnClickListener(this)
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
+
+        try {
+            dataSize = MyDataCleanManager.getTotalCacheSize(applicationContext)
+            tv_cache.text=dataSize
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun initPresenter() {
@@ -133,8 +141,8 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
 
     private fun clearAppCache() {
 
-        ToastUtils.s(this,"清除完成")
-        tv_cache.text="0M"
+        MyDataCleanManager.clearAllCache(this)
+        tv_cache.text="0B"
     }
 
     private fun voice() {

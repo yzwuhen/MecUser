@@ -4,8 +4,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.ProgressListener
 import com.example.mechanicalapp.ui.activity.Brand
 import com.example.mechanicalapp.ui.activity.EcModel
@@ -13,19 +13,22 @@ import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.MoreUserDemanAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
-import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecLeaseListView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
 
-class MoreDataFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListener,View.OnClickListener,
-    PopUtils.onViewListener,ProgressListener {
+class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,View.OnClickListener,
+    PopUtils.onViewListener,ProgressListener ,MecLeaseListView<NetData>{
     var mAdapter: MoreUserDemanAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<MecSellData> = ArrayList<MecSellData>()
 
     var popRecy :RecyclerView?=null
     private var mScreenAdapter :ScreenAdapter ?=null
@@ -45,17 +48,6 @@ class MoreDataFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListen
     private var list2:MutableList<String> =ArrayList<String>()
     private var list3:MutableList<String> =ArrayList<String>()
 
-
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-    }
 
     override fun initView() {
         super.initView()
@@ -77,6 +69,9 @@ class MoreDataFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListen
         ly_screen3.setOnClickListener(this)
         ly_screen4.setOnClickListener(this)
         ly_screen5.setOnClickListener(this)
+
+        mPresenter =MecLeaseListPresenter(mContext,this)
+        (mPresenter as MecLeaseListPresenter).getLeaseList(1)
     }
 
     override fun showLoading() {
@@ -185,5 +180,18 @@ class MoreDataFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListen
     override fun progress(leftPos: Double, rightPos: Double) {
 
 
+    }
+
+    override fun refreshUI(list: List<MecSellData>) {
+
+        mList.clear()
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadMore(list: List<MecSellData>) {
+    }
+
+    override fun err() {
     }
 }

@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_user_demand.view.*
 
-class UserDemandAdapter(var mContext:Context, var mList:MutableList<MecLeaseData>, var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserDemandAdapter(var mContext:Context, var mList:MutableList<MecSellData>, var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isShow:Boolean=false
 
@@ -30,7 +30,7 @@ class UserDemandAdapter(var mContext:Context, var mList:MutableList<MecLeaseData
         }
         ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
 
-        holder.itemView.tv_title.text =mList[position].tititle
+        holder.itemView.tv_title.text =mList[position].title
 
         holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].facDate}"
 

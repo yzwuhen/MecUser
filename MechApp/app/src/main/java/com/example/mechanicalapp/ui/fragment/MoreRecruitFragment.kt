@@ -13,16 +13,20 @@ import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.adapter.MoreUserRentAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecLeaseListView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
-class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener,ProgressListener {
+class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+    PopUtils.onViewListener,ProgressListener ,MecLeaseListView<NetData>{
     var mAdapter: MoreUserRentAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
 
@@ -43,6 +47,7 @@ class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickLi
     private var list1:MutableList<String> =ArrayList<String>()
     private var list2:MutableList<String> =ArrayList<String>()
     private var list3:MutableList<String> =ArrayList<String>()
+
     init {
         mList.add("1")
         mList.add("1")
@@ -74,6 +79,9 @@ class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickLi
         ly_screen3.setOnClickListener(this)
         ly_screen4.setOnClickListener(this)
         ly_screen5.setOnClickListener(this)
+
+        mPresenter = MecLeaseListPresenter(mContext,this)
+        (mPresenter as MecLeaseListPresenter).getLeaseList(2)
     }
 
     override fun showLoading() {
@@ -181,6 +189,18 @@ class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickLi
 
     override fun progress(leftPos: Double, rightPos: Double) {
 
+    }
 
+    override fun refreshUI(list: List<MecSellData>) {
+
+//        mList.clear()
+//        mList.addAll(list)
+//        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadMore(list: List<MecSellData>) {
+    }
+
+    override fun err() {
     }
 }

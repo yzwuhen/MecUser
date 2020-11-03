@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.MecSellData
+import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_more_user_demand.view.*
 
-class MoreUserDemanAdapter (var mContext: Context, var mList:MutableList<String>, var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+class MoreUserDemanAdapter (var mContext: Context, var mList:MutableList<MecSellData>, var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isShow:Boolean=false
 
@@ -20,9 +23,36 @@ class MoreUserDemanAdapter (var mContext: Context, var mList:MutableList<String>
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
 
+        holder.itemView.tv_title.text =mList[position].title
 
-        Glide.with(mContext).load("https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723").into(  holder.itemView.iv_pic);
+        holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].facDate}"
+
+        holder.itemView.tv_distance.text="距离：${mList[position].gpsLon}"
+
+        if (mList[position].isNew == "1"){
+            holder.itemView.tv_label.visibility=View.VISIBLE
+        }else{
+            holder.itemView.tv_label.visibility=View.GONE
+        }
+
+        if (mList[position].isPerson == "1"){
+            holder.itemView.iv_sr.visibility=View.VISIBLE
+        }else{
+            holder.itemView.iv_sr.visibility=View.GONE
+        }
+
+        if (mList[position].isEnterprise == "1"){
+            holder.itemView.iv_qy.visibility=View.VISIBLE
+        }else{
+            holder.itemView.iv_qy.visibility=View.GONE
+        }
+        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}"
+
+        holder.itemView.tv_rent.text="￥${mList[position].price}/月"
+
+        holder.itemView.tv_time.text= DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
     }
 
     override fun getItemCount(): Int {
@@ -30,10 +60,7 @@ class MoreUserDemanAdapter (var mContext: Context, var mList:MutableList<String>
         return mList.size
     }
 
-    fun showCheck(showCheck: Boolean) {
-        isShow = showCheck
 
-    }
 
     class MoreUserDemanVh(itemView: View, type:Int, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {

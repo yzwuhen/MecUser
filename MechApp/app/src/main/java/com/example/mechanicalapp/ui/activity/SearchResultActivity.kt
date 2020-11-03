@@ -7,7 +7,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
-import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
@@ -29,7 +29,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     private var mMoreFactoryActivity:SearchResultFactoryAdapter?=null
     var mList: MutableList<String> = ArrayList<String>()
-    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
+    var mLeaseList: MutableList<MecSellData> = ArrayList<MecSellData>()
     private var type:Int =0;
     override fun getLayoutId(): Int {
         return R.layout.activity_search_result

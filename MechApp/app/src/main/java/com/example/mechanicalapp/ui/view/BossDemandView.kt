@@ -15,8 +15,8 @@ import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
-import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.MecRentData
+import com.example.mechanicalapp.ui.data.MecSellData
 import kotlinx.android.synthetic.main.layout_boss_denmand.view.*
 
 class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener,
@@ -25,7 +25,7 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
     private var mAdapter: UserDemandAdapter? = null
     private var mRentAdapter: UserRentAdapter? = null
     var mList: MutableList<MecRentData> = ArrayList<MecRentData>()
-    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
+    var mLeaseList: MutableList<MecSellData> = ArrayList<MecSellData>()
     var type: Int = 0
 
     init {
@@ -120,7 +120,7 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
         jumDetails()
     }
 
-    fun setSell(list: List<MecLeaseData>) {
+    fun setSell(list: List<MecSellData>) {
         mLeaseList.clear()
         mLeaseList.addAll(list)
         mAdapter?.notifyDataSetChanged()

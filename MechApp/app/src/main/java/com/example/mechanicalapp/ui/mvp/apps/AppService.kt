@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.apps
 
+import com.example.mechanicalapp.ui.data.HomeData
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.LoginCode
@@ -19,5 +20,5 @@ interface AppService {
     fun loginCode(@Body requestBody: LoginCode):Observable<LoginCodeBean>
 
     @GET("/jeecg-boot/app/userIndex")
-    fun getHomeData():Observable<NetData>
+    fun getHomeData():Observable<HomeData>
 }

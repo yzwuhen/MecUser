@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.data.PartsData
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_hot_parts.view.*
 
-class HotPartsAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HotPartsAdapter (var mContext: Context, var mList:MutableList<PartsData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -17,7 +19,13 @@ class HotPartsAdapter (var mContext: Context, var mList:MutableList<String>, var
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Glide.with(mContext).load("https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600756241&t=763e1ae48758aa906e25d3f41d9ada93").into(  holder.itemView.iv_goods_pic);
+
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_goods_pic,mList[position].img.split(",")[0],R.mipmap.ic_launcher)
+        holder.itemView.tv_goods_title.text = mList[position].title
+        holder.itemView.tv_goods_price.text ="￥${mList[position].price}"
+        holder.itemView.tv_pay_num.text="${mList[position].scale}人付款"
+
+
     }
 
     override fun getItemCount(): Int {

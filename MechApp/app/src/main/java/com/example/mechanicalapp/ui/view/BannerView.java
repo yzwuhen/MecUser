@@ -63,7 +63,6 @@ public class BannerView extends LinearLayout implements View.OnClickListener {
         Log.d("ssss","ssss===="+banner.size());
         mList.clear();
         mList.addAll(banner);
-
         mBanner.setAdapter(new ImageAdapter(mList))
                 .setIndicator(new CircleIndicator(mContext));
 

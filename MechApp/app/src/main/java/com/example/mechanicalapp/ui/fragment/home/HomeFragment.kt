@@ -11,8 +11,7 @@ import com.example.mechanicalapp.ui.activity.MapActivity
 import com.example.mechanicalapp.ui.activity.SearchCityActivity
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.BannerData
-import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.DemoPresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.HomeBaseView
 import com.example.mechanicalapp.ui.view.*
@@ -26,7 +25,12 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
 
     private var bannerView: BannerView? = null
     private var itemMenu: ItemMenu? = null
-    private var listbanner:MutableList<BannerData> ?=ArrayList()
+
+    private var mHotApparatusView: HotApparatusView? = null
+    private var mUserDemandKtView: UserDemandKtView? = null
+    private var mBossDemandView: BossDemandView? = null
+    private var mHosPartsView: HosPartsView? = null
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
@@ -39,46 +43,43 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         bannerView = BannerView(mContext)
         itemMenu = ItemMenu(mContext)
 
+        mHotApparatusView = HotApparatusView(mContext)
+        mUserDemandKtView = UserDemandKtView(mContext)
+
+        mBossDemandView = BossDemandView(mContext)
+        mHosPartsView = HosPartsView(mContext)
+
         mPresenter = DemoPresenterImpl(this)
 
         ly_root.addView(bannerView)
         ly_root.addView(itemMenu)
-        ly_root.addView(HotApparatusView(mContext))
-        ly_root.addView(UserDemandKtView(mContext))
-        ly_root.addView(BossDemandView(mContext))
-        ly_root.addView(HosPartsView(mContext))
+        ly_root.addView(mHotApparatusView)
+        ly_root.addView(mUserDemandKtView)
+        ly_root.addView(mBossDemandView)
+        ly_root.addView(mHosPartsView)
 
         tv_address.setOnClickListener(this)
         tv_search.setOnClickListener(this)
         tv_map.setOnClickListener(this)
         mPresenter.request()
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(context))
-
+        spring_list.type=SpringView.Type.FOLLOW
+        spring_list.header=RefreshHeaderUtils.getHeaderView(mContext)
 
         spring_list.setListener(object : OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
-              //  initData()
-                closeRefreshView()
-            }
 
+            //    closeRefreshView()
+                if (mPresenter!=null){
+                    spring_list.isEnable=false
+                    mPresenter.request()
+                }
+            }
             override fun onLoadmore() {}
         })
-
-
-        var  bannerData = BannerData()
-        bannerData.img_path =
-            "https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723"
-
-        listbanner?.add(bannerData)
-        listbanner?.add(bannerData)
-        bannerView?.setData(listbanner)
-
     }
     fun closeRefreshView() {
-        spring_list.setEnable(true)
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
     override fun onClick(view: View?) {
 
@@ -113,9 +114,6 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         }
     }
 
-//    override fun showData(listt: MutableList<BannerData>) {
-//        bannerView?.setData(listt)
-//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
@@ -140,8 +138,42 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
     }
 
     override fun hiedLoading() {
+        closeRefreshView()
     }
 
     override fun showData(t: NetData) {
+    }
+
+    override fun showAd(adList: List<BannerData>) {
+        bannerView?.setData(adList)
+    }
+
+    override fun showHotMec(hotMec: List<HotMechineCate>) {
+        mHotApparatusView?.setData(hotMec)
+    }
+
+    override fun showParts(mecProds: List<PartsData>) {
+        mHosPartsView?.setData(mecProds)
+    }
+
+    override fun showLease(list: List<MecLeaseData>) {
+        mUserDemandKtView?.setLease(list)
+    }
+
+    override fun showUserRent(list: List<MecRentData>) {
+        mUserDemandKtView?.setRent(list)
+    }
+
+    override fun showBossSell(list: List<MecLeaseData>) {
+        mBossDemandView?.setSell(list)
+    }
+
+    override fun showBossBuy(list: List<MecRentData>) {
+        mBossDemandView?.setBuy(list)
+    }
+
+    override fun err() {
+
+
     }
 }

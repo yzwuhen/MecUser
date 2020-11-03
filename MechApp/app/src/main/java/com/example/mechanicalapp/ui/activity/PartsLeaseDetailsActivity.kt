@@ -57,7 +57,7 @@ class PartsLeaseDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
         ly_user_info.setOnClickListener(this)
 
         val bannerData = BannerData()
-        bannerData.img_path =
+        bannerData.img =
             "https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723"
 
         mList?.add(bannerData)

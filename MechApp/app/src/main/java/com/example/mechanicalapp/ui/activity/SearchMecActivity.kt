@@ -9,6 +9,8 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.ui.data.MecRentData
 import com.example.mechanicalapp.ui.data.NetData
 import kotlinx.android.synthetic.main.layout_more_data_title.*
 import kotlinx.android.synthetic.main.layout_search_result.*
@@ -28,7 +30,8 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     private var mMecFactoryAdapter: MecFactoryAdapter? = null//维修厂
 
     var mList: MutableList<String> = ArrayList<String>()
-
+    var mRentList: MutableList<MecRentData> = ArrayList<MecRentData>()
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     private val leftOfString: Array<String> = arrayOf("出租", "出售", "出租", "招聘")
     private val rigthOfString: Array<String> = arrayOf("求租", "求购", "求租", "求职")
 
@@ -46,13 +49,13 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
         mList.add("1")
         mList.add("1")
 
-        mAdapter = UserDemandAdapter(this, mList, 0, this)
-        mBossAdapter = UserDemandAdapter(this, mList, 1, this)
+        mAdapter = UserDemandAdapter(this, mLeaseList, 0, this)
+        mBossAdapter = UserDemandAdapter(this, mLeaseList, 1, this)
 
         mPartsAdapter = PartsAdapter(this, mList, this)
         mPartsAskAdapter = PartsAskAdapter(this, mList, this)
 
-        mRentAdapter = UserRentAdapter(this, mList, this)
+        mRentAdapter = UserRentAdapter(this, mRentList, this)
 
         mRecruitAdapter = RecruitAdapter(this, mList, this)
 

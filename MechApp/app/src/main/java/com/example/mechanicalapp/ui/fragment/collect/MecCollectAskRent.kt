@@ -6,6 +6,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.data.MecRentData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
@@ -19,16 +20,13 @@ class MecCollectAskRent (var type:Int):BaseFragment<NetData>() , OnItemClickList
 
 
     private var mAdapter: UserRentAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mRentList: MutableList<MecRentData> = ArrayList<MecRentData>()
     override fun showLoading() {
 
 
     }
     init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+
         EventBus.getDefault().register(this)
 
     }
@@ -36,7 +34,7 @@ class MecCollectAskRent (var type:Int):BaseFragment<NetData>() , OnItemClickList
     override fun initView() {
         super.initView()
 
-        mAdapter = UserRentAdapter(mContext, mList, this)
+        mAdapter = UserRentAdapter(mContext, mRentList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter =mAdapter
         spring_list.setType(SpringView.Type.FOLLOW)

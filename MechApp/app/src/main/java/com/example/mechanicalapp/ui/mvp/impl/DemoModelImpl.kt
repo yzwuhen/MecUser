@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 
 import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
+import com.example.mechanicalapp.ui.data.HomeData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
@@ -23,13 +24,13 @@ class DemoModelImpl: BaseModel {
 
 
 
-    fun getHomeData(mISubscriberListener:ISubscriberListener<NetData>) {
+    fun getHomeData(mISubscriberListener:ISubscriberListener<HomeData>) {
 
         Log.e("sssss============","sssssssss==============getHomeData")
         appsService?.getHomeData()
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(mISubscriberListener))
+            )?.subscribe(NetSubscribe<HomeData>(mISubscriberListener))
 
 
     }

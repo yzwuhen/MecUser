@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.adapter;
 
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -43,8 +42,8 @@ public class ImageAdapter extends BannerAdapter<BannerData, ImageAdapter.BannerV
 //                .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
 //                .into(holder.imageView);
         BannerViewHolder bannerViewHolder = holder;
-        Log.v("sssss","sssssssssss======$"+data.getImg_path());
-        Glide.with(App.getInstance().getApplicationContext()).load(data.getImg_path()).into(bannerViewHolder.imageView);
+//        Log.v("sssss","sssssssssss======$"+data.getImg());
+        Glide.with(App.getInstance().getApplicationContext()).load(data.getImg()).into(bannerViewHolder.imageView);
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {

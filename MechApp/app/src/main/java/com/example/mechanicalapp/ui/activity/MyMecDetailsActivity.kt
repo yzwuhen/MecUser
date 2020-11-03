@@ -33,7 +33,7 @@ class MyMecDetailsActivity:BaseActivity<NetData>(),View.OnClickListener ,PopUtil
         tv_title.text = "设备详情"
         var bannerData: BannerData
         bannerData = BannerData()
-        bannerData.img_path ="https://t9.baidu.com/it/u=2268908537,2815455140&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1601476836&t=43717528e86dbef35c5a6e035d0e8c55"
+        bannerData.img ="https://t9.baidu.com/it/u=2268908537,2815455140&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1601476836&t=43717528e86dbef35c5a6e035d0e8c55"
 
         mList?.add(bannerData)
         mList?.add(bannerData)

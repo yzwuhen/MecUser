@@ -6,6 +6,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
@@ -21,6 +22,7 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
 
     private var mAdapter: UserDemandAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     override fun showLoading() {
 
 
@@ -41,7 +43,7 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
 
     override fun initView() {
         super.initView()
-        mAdapter = UserDemandAdapter(mContext, mList, type,this)
+        mAdapter = UserDemandAdapter(mContext, mLeaseList, type,this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 

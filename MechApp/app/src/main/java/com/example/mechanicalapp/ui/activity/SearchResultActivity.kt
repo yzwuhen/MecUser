@@ -7,6 +7,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -27,7 +28,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     private var mMoreFactoryActivity:SearchResultFactoryAdapter?=null
     var mList: MutableList<String> = ArrayList<String>()
-
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     private var type:Int =0;
     override fun getLayoutId(): Int {
         return R.layout.activity_search_result
@@ -45,7 +46,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
         recycler_list.layoutManager = LinearLayoutManager(this)
 
         if (type ==0){
-            mAdapter = UserDemandAdapter(this, mList, 1,this)
+            mAdapter = UserDemandAdapter(this, mLeaseList, 1,this)
             recycler_list.adapter = mAdapter
         }
         else if (type ==1){

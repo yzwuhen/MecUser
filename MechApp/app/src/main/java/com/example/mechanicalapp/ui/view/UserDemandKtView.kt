@@ -15,27 +15,26 @@ import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
+import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.ui.data.MecRentData
 import kotlinx.android.synthetic.main.layout_user_demand.view.*
 
 class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener,View.OnClickListener {
 
     var mAdapter: UserDemandAdapter? = null
     var mRentAdapter :UserRentAdapter ?=null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
+    var mRentList: MutableList<MecRentData> = ArrayList<MecRentData>()
     var type:Int = 0
     init {
         orientation = VERTICAL;
         val view = inflate(mContext, R.layout.layout_user_demand, null)
         addView(view)
 
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
 
-        mAdapter = UserDemandAdapter(mContext, mList, 0,this)
+        mAdapter = UserDemandAdapter(mContext, mLeaseList, 0,this)
 
-        mRentAdapter = UserRentAdapter(mContext,mList,this)
+        mRentAdapter = UserRentAdapter(mContext,mRentList,this)
 
         recycler_demand.layoutManager = LinearLayoutManager(mContext)
         recycler_demand.adapter = mAdapter
@@ -120,5 +119,20 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
     override fun onItemClick(view: View, position: Int) {
 
         jumDetails()
+    }
+
+    //出
+    fun setLease(list: List<MecLeaseData>) {
+        mLeaseList.clear()
+        mLeaseList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    //求
+    fun setRent(list: List<MecRentData>) {
+        mLeaseList.clear()
+        mRentList.addAll(list)
+        mRentAdapter?.notifyDataSetChanged()
+
     }
 }

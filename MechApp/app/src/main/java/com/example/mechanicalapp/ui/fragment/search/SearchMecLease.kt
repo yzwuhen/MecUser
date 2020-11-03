@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
@@ -18,7 +19,7 @@ class SearchMecLease(var type:Int):BaseCusFragment() ,OnItemClickListener{
 
     var mList: MutableList<String> = ArrayList<String>()
     private var mAdapter: UserDemandAdapter? = null
-
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     override fun getLayoutId(): Int {
        return R.layout.fragment_search_all_result
     }
@@ -30,7 +31,7 @@ class SearchMecLease(var type:Int):BaseCusFragment() ,OnItemClickListener{
         mList.add("1")
         mList.add("1")
 
-        mAdapter = UserDemandAdapter(mContext, mList, type, this)
+        mAdapter = UserDemandAdapter(mContext, mLeaseList, type, this)
 
         recycle_list.layoutManager = LinearLayoutManager(mContext)
         recycle_list.adapter = mAdapter

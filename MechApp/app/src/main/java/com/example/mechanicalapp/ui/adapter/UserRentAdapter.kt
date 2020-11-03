@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
-import kotlinx.android.synthetic.main.item_user_demand.view.*
+import com.example.mechanicalapp.ui.data.MecRentData
+import kotlinx.android.synthetic.main.item_user_rent.view.*
 
-class UserRentAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class UserRentAdapter (var mContext: Context, var mList:MutableList<MecRentData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isShow:Boolean=false
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -16,12 +17,19 @@ class UserRentAdapter (var mContext: Context, var mList:MutableList<String>, var
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         if (isShow){
             holder.itemView.ly_check.visibility =View.VISIBLE
         }else{
             holder.itemView.ly_check.visibility =View.GONE
         }
+
+        holder.itemView.tv_rent_user_nick.text =mList[position].createBy
+
+        holder.itemView.tv_rent_address_data.text="${mList[position].city} | 租用时间：${mList[position].tenancy} "
+
+
+
+
     }
 
     override fun getItemCount(): Int {

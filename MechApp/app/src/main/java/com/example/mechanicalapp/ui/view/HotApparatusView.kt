@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.data.HotMechineCate
 import kotlinx.android.synthetic.main.layout_hot_apparatus.view.*
 
 class HotApparatusView(var mContext :Context) :FrameLayout(mContext),View.OnClickListener {
@@ -47,5 +48,10 @@ class HotApparatusView(var mContext :Context) :FrameLayout(mContext),View.OnClic
 //            intent.putExtras(bundle)
 //        }
 //        mContext.startActivity(intent)
+    }
+
+    fun setData(hotMec: List<HotMechineCate>) {
+
+
     }
 }

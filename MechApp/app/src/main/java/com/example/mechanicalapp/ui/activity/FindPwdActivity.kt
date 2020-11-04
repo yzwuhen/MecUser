@@ -4,6 +4,7 @@ import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.SidleView
 import kotlinx.android.synthetic.main.activity_find_pwd.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -19,7 +20,7 @@ class FindPwdActivity:BaseActivity<NetData>(),View.OnClickListener ,SidleView.Si
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun getLayoutId(): Int {

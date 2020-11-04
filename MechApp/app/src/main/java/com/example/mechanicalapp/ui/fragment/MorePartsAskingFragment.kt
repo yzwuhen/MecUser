@@ -10,10 +10,10 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
-import com.example.mechanicalapp.ui.adapter.PartsAskAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
 
@@ -70,7 +70,7 @@ class MorePartsAskingFragment  : BaseFragment<NetData>(), OnItemClickListener, V
         return R.layout.fragment_more_parts_lease
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
 

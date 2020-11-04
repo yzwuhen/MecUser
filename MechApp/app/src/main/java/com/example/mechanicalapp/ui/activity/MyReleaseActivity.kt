@@ -8,12 +8,11 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseGoodsFragment
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseLease
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseRecruitFragment
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseSecondFragment
-import kotlinx.android.synthetic.main.activity_my_collected.*
-import kotlinx.android.synthetic.main.activity_my_release.*
 import kotlinx.android.synthetic.main.activity_my_release.cus_page
 import kotlinx.android.synthetic.main.activity_my_release.tv_apparatus
 import kotlinx.android.synthetic.main.activity_my_release.tv_mec_rent
@@ -74,7 +73,7 @@ class MyReleaseActivity:BaseActivity<NetData>(), View.OnClickListener,ViewPager.
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(p0: View?) {

@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.mvp.apps
 import com.example.mechanicalapp.ui.data.HomeData
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreBean
 import com.example.mechanicalapp.ui.data.request.LoginCode
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -21,4 +22,9 @@ interface AppService {
 
     @GET("/jeecg-boot/app/userIndex")
     fun getHomeData():Observable<HomeData>
+
+
+
+    @GET("/jeecg-boot/shop/mecProductCategory/AllList")
+    fun getStoreData():Observable<StoreBean>
 }

@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_my_mec_details.*
@@ -59,7 +60,7 @@ class MyMecDetailsActivity:BaseActivity<NetData>(),View.OnClickListener ,PopUtil
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

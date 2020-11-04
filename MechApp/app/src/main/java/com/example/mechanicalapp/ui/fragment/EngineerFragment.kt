@@ -8,6 +8,7 @@ import com.example.mechanicalapp.ui.adapter.EngineerAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.fragment_engineer.*
 
 class EngineerFragment :BaseFragment<NetData>(),OnItemClickListener{
@@ -74,7 +75,7 @@ class EngineerFragment :BaseFragment<NetData>(),OnItemClickListener{
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun getLayoutId(): Int {

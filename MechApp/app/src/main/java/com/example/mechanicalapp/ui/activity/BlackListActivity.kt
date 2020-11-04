@@ -5,12 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.BlackListAdapter
-import com.example.mechanicalapp.ui.adapter.CityAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_search_city.*
-import kotlinx.android.synthetic.main.layout_search_title.*
 import kotlinx.android.synthetic.main.layout_search_title.iv_back
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -92,7 +91,7 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
         TODO("Not yet implemented")
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
         TODO("Not yet implemented")
     }
 

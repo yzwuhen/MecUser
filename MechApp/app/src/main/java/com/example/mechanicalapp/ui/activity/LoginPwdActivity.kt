@@ -4,6 +4,8 @@ import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
+
 import kotlinx.android.synthetic.main.activity_login_pwd.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -28,6 +30,9 @@ class LoginPwdActivity : BaseActivity<NetData>(), View.OnClickListener {
         tv_code_login.setOnClickListener(this)
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
+
+        et_phone.setText("13886943851")
+        et_pwd.setText("123456")
     }
 
     override fun initPresenter() {
@@ -39,7 +44,7 @@ class LoginPwdActivity : BaseActivity<NetData>(), View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

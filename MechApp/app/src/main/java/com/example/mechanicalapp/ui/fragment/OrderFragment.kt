@@ -8,6 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.fragment_order.*
 
 class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPageChangeListener {
@@ -25,7 +26,7 @@ class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPag
         return R.layout.fragment_order
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun initView() {

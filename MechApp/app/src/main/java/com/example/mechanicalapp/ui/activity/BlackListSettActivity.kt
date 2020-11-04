@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.activity
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 
 class BlackListSettActivity:BaseActivity<NetData>() {
     override fun getLayoutId(): Int {
@@ -20,6 +21,6 @@ class BlackListSettActivity:BaseActivity<NetData>() {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 }

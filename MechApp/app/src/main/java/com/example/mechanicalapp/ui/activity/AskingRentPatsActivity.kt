@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PopWayAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.activity_ask_rent_parts.*
 
@@ -60,7 +61,7 @@ class AskingRentPatsActivity : BaseActivity<NetData>(), OnItemClickListener, Vie
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onItemClick(view: View, position: Int) {

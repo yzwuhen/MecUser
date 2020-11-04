@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.data;
 
-public class NetData {
+import java.io.Serializable;
+
+public class NetData implements Serializable {
     private int code;
     private String message;
 
@@ -19,4 +21,6 @@ public class NetData {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
 }

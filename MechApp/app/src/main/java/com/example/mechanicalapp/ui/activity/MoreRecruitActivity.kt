@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.RecruitFragment
 import com.example.mechanicalapp.ui.fragment.RentFragment
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
@@ -104,7 +105,7 @@ class MoreRecruitActivity : BaseActivity<NetData>(), View.OnClickListener,
 
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
 
     }
 

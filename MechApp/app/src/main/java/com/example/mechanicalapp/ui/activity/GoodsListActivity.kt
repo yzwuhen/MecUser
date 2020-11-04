@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.adapter.GoodsListAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.activity_goods_list.*
 import kotlinx.android.synthetic.main.layout_search_et.*
@@ -73,7 +74,7 @@ class GoodsListActivity:BaseActivity<NetData>(),OnItemClickListener ,View.OnClic
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onItemClick(view: View, position: Int) {

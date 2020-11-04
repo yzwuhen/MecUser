@@ -1,7 +1,6 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +13,7 @@ import com.example.mechanicalapp.ui.adapter.MorePartsAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
 
@@ -66,7 +66,7 @@ class MorePartsLeaseFragment : BaseFragment<NetData>(), OnItemClickListener, Vie
         return R.layout.fragment_more_parts_lease
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
 

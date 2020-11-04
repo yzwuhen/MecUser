@@ -8,7 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
-import kotlinx.android.synthetic.main.activity_my_release.*
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 import kotlinx.android.synthetic.main.fragment_mec_leasing.cus_page
 
@@ -51,7 +51,7 @@ class MyReleaseLease () : BaseFragment<NetData>(), View.OnClickListener ,ViewPag
         cus_page.addOnPageChangeListener(this)
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(p0: View?) {

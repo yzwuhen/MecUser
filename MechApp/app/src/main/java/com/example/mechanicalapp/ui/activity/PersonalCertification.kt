@@ -1,18 +1,16 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.content.Intent
-import android.net.Uri
 import android.view.View
 import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.GlideEngine
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
-import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
@@ -55,7 +53,7 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(view: View?) {

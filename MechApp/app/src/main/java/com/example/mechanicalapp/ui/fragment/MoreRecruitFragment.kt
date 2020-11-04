@@ -13,9 +13,9 @@ import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.adapter.MoreUserRentAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
-import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -87,7 +87,7 @@ class MoreRecruitFragment (var type:Int): BaseFragment<NetData>(), OnItemClickLi
         return R.layout.fragment_more_data
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
 

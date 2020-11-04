@@ -10,9 +10,9 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.AttrAdapter
 import com.example.mechanicalapp.ui.adapter.ShopCarAdapter
-import com.example.mechanicalapp.ui.adapter.YearsAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_shop_car.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -77,7 +77,7 @@ class ShopCarActivity: BaseActivity<NetData>() ,View.OnClickListener,OnItemClick
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(view: View?) {

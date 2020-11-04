@@ -1,7 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
-import android.location.Address
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -14,6 +13,7 @@ import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.adapter.PopWayAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.activity_parts_rental.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -72,7 +72,7 @@ class PartsRentalActivity : BaseActivity<NetData>(), OnItemClickListener, View.O
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onItemClick(view: View, position: Int) {

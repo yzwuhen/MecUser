@@ -14,19 +14,23 @@ import com.example.mechanicalapp.ui.activity.ShopCarActivity
 import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.EcTypeRightAdapter
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
-import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.BannerData
-import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.StorePresenterImpl
+import com.example.mechanicalapp.ui.mvp.v.StoreView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_store.*
 
 
-class StoreFragment : BaseFragment<NetData>(), OnItemClickListener, PopUtils.onViewListener,
-    View.OnClickListener {
+class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewListener,
+    View.OnClickListener,StoreView<StoreLeftBean> {
     private var mLeftAdapter: EcTypeLeftAdapter? = null
     private var mRightAdapter: EcTypeRightAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
+    var mLeftList: MutableList<StoreLeftBean> = ArrayList<StoreLeftBean>()
+
     private var mBannerList: MutableList<BannerData>? = ArrayList<BannerData>()
 
 
@@ -35,6 +39,7 @@ class StoreFragment : BaseFragment<NetData>(), OnItemClickListener, PopUtils.onV
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
     private var mPopwindow: PopupWindow? = null
+
 
     override fun getLayoutId(): Int {
 
@@ -63,27 +68,21 @@ class StoreFragment : BaseFragment<NetData>(), OnItemClickListener, PopUtils.onV
         recycler_list_right.adapter = mRightAdapter
 
 
-        var bannerData = BannerData()
-        bannerData.img =
-            "https://t9.baidu.com/it/u=2268908537,2815455140&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1601476836&t=43717528e86dbef35c5a6e035d0e8c55"
-
-        mBannerList?.add(bannerData)
-        mBannerList?.add(bannerData)
+//        var bannerData = BannerData()
+//        bannerData.img =
+//            "https://t9.baidu.com/it/u=2268908537,2815455140&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1601476836&t=43717528e86dbef35c5a6e035d0e8c55"
+//
+//        mBannerList?.add(bannerData)
+//        mBannerList?.add(bannerData)
 
         banner.adapter = ImageAdapter(mBannerList)
         banner.indicator = CircleIndicator(mContext)
 
         fl_shop_car.setOnClickListener(this)
         iv_phone.setOnClickListener(this)
-    }
 
-    override fun showLoading() {
-    }
-
-    override fun hiedLoading() {
-    }
-
-    override fun showData(t: NetData) {
+        mPresenter = StorePresenterImpl(mContext,this)
+        mPresenter?.request()
     }
 
     override fun onItemClick(view: View, position: Int) {
@@ -134,5 +133,29 @@ class StoreFragment : BaseFragment<NetData>(), OnItemClickListener, PopUtils.onV
             R.id.tv_pop_sure -> activity?.let { PopUtils.dismissPop(it) }
             R.id.tv_pop_cancel -> activity?.let { PopUtils.dismissPop(it) }
         }
+    }
+
+    override fun err() {
+
+
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hiedLoading() {
+    }
+
+    override fun showData(list: MutableList<StoreLeftBean>) {
+        mLeftList.clear()
+        mLeftList.addAll(list)
+    //    mLeftAdapter?.notifyDataSetChanged()
+    }
+
+    override fun showAd(adList: List<BannerData>) {
+
+        mBannerList?.clear()
+        mBannerList?.addAll(adList)
+        banner.adapter?.notifyDataSetChanged()
     }
 }

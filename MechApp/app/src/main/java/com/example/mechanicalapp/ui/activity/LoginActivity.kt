@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_login_third.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.lang.Exception
@@ -76,7 +77,7 @@ class LoginActivity : BaseActivity<NetData>(), View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

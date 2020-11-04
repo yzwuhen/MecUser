@@ -1,19 +1,17 @@
 package com.example.mechanicalapp.ui.fragment.myrelease
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
-import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.ReleasePartsAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -72,7 +70,7 @@ class ReleaseGoodsLease : BaseFragment<NetData>() , OnItemClickListener,PopUtils
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
     private fun showPop() {
 

@@ -130,7 +130,7 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
 
     //求
     fun setRent(list: List<MecRentData>) {
-        mLeaseList.clear()
+        mRentList.clear()
         mRentList.addAll(list)
         mRentAdapter?.notifyDataSetChanged()
 

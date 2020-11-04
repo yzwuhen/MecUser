@@ -11,6 +11,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_search_city.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 
@@ -89,7 +90,7 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
 

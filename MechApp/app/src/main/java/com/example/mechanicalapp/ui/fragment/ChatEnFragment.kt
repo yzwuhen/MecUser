@@ -7,6 +7,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.ChatEnAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_msg_list.*
@@ -23,7 +24,7 @@ class ChatEnFragment : BaseFragment<NetData>(), OnItemClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun getLayoutId(): Int {

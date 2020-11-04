@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.adapter.ChatAdapter
 import com.example.mechanicalapp.ui.adapter.DialogListAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
@@ -33,7 +34,7 @@ class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClic
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun getLayoutId(): Int {

@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_search_result.*
@@ -117,7 +118,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
 
     }
 

@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.adapter.TravelAdapter
 import com.example.mechanicalapp.ui.adapter.WorkTimeAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_details_list.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -70,7 +71,7 @@ class DetailedListActivity:BaseActivity<NetData>() ,View.OnClickListener,OnItemC
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

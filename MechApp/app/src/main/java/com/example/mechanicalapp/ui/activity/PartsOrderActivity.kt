@@ -8,6 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.PartsOrderFragment
 import kotlinx.android.synthetic.main.activity_parts_order.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -65,7 +66,7 @@ class PartsOrderActivity:BaseActivity<NetData>(),View.OnClickListener ,ViewPager
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(p0: View?) {

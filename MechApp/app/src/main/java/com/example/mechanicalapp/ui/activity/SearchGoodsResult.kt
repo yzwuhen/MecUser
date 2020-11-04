@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.GoodsListAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_search_result.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
@@ -53,7 +54,7 @@ class SearchGoodsResult : BaseActivity<NetData>(), OnItemClickListener {
 
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
 
     }
 

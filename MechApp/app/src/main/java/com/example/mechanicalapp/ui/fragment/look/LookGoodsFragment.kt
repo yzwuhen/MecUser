@@ -8,6 +8,7 @@ import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
 import com.example.mechanicalapp.ui.adapter.LookGoodsAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
@@ -65,7 +66,7 @@ class LookGoodsFragment : BaseFragment<NetData>() , OnItemClickListener {
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onItemClick(view: View, position: Int) {

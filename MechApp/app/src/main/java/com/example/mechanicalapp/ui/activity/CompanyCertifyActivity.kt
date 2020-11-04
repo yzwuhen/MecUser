@@ -6,6 +6,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.GlideEngine
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -53,7 +54,7 @@ class CompanyCertifyActivity:BaseActivity<NetData>(),View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(view: View?) {

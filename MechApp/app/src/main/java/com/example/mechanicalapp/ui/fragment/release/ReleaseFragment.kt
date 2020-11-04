@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.fragment.release
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 
 class ReleaseFragment : BaseFragment<NetData>() {
     override fun getLayoutId(): Int {
@@ -22,7 +23,7 @@ class ReleaseFragment : BaseFragment<NetData>() {
         TODO("Not yet implemented")
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
         TODO("Not yet implemented")
     }
 }

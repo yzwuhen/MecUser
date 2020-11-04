@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.MoreDataFragment
 import com.example.mechanicalapp.ui.fragment.MoreRecruitFragment
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
@@ -111,7 +112,7 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
 
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
 
     }
 

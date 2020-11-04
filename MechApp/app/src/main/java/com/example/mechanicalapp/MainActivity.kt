@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.mechanicalapp.ui.activity.ReleaseActivity
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.home.HomeFragment
 import com.example.mechanicalapp.ui.fragment.mine.MineFragment
 import com.example.mechanicalapp.ui.fragment.msg.MsgFragment
@@ -205,7 +206,7 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
 }

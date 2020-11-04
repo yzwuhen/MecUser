@@ -8,6 +8,7 @@ import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.MineMenuAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener {
@@ -43,7 +44,7 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
         iv_user_pic.setOnClickListener(this)
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onItemClick(view: View, position: Int) {

@@ -8,6 +8,7 @@ import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.MecRentData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -82,7 +83,7 @@ class MecCollectAskRent (var type:Int):BaseFragment<NetData>() , OnItemClickList
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
         TODO("Not yet implemented")
     }
 

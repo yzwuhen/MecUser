@@ -10,6 +10,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.EngineerFragment
 import com.example.mechanicalapp.ui.fragment.OrderFragment
 import kotlinx.android.synthetic.main.activity_order.*
@@ -88,7 +89,7 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
     }

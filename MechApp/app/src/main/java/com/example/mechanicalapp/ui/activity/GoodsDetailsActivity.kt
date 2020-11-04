@@ -15,11 +15,11 @@ import com.example.mechanicalapp.ui.adapter.SpecAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_goods_details.*
 import kotlinx.android.synthetic.main.activity_goods_details.banner
-import kotlinx.android.synthetic.main.activity_more_data.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 class GoodsDetailsActivity:BaseActivity<NetData>(),View.OnClickListener ,OnItmeClickTyleListener{
@@ -104,7 +104,7 @@ class GoodsDetailsActivity:BaseActivity<NetData>(),View.OnClickListener ,OnItmeC
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

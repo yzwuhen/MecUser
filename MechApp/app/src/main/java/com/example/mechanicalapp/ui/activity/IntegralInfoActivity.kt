@@ -7,6 +7,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.IntegralAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_integral_info.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -50,7 +51,7 @@ class IntegralInfoActivity : BaseActivity<NetData>() ,View.OnClickListener,OnIte
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(p0: View?) {

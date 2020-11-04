@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.BrandAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_brand.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -91,7 +92,7 @@ class Brand : BaseActivity<NetData>() , OnItemClickListener, View.OnClickListene
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
 

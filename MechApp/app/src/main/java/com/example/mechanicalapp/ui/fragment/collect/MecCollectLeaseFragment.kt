@@ -8,6 +8,7 @@ import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -94,7 +95,7 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onItemClick(view: View, position: Int) {

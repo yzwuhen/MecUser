@@ -7,11 +7,10 @@ import android.widget.TextView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.MyDataCleanManager
-import com.luck.picture.lib.tools.ToastUtils
 import kotlinx.android.synthetic.main.activity_setting.*
-import kotlinx.android.synthetic.main.layout_left_right_title.*
 import kotlinx.android.synthetic.main.layout_title.*
 import kotlinx.android.synthetic.main.layout_title.rl_title
 import kotlinx.android.synthetic.main.layout_title.tv_title
@@ -65,7 +64,7 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

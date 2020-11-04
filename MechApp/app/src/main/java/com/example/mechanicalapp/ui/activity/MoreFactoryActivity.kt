@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.MecFactoryAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -93,7 +93,7 @@ class MoreFactoryActivity : BaseActivity<NetData>() ,View.OnClickListener ,PopUt
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(view: View?) {

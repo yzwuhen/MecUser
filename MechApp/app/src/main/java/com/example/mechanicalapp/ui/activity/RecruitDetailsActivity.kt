@@ -8,9 +8,9 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
-import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_recruit_details.*
@@ -64,7 +64,7 @@ class RecruitDetailsActivity  : BaseActivity<NetData>(), View.OnClickListener, P
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

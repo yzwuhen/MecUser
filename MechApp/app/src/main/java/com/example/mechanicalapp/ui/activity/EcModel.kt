@@ -11,6 +11,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.EcModelAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_ec_model.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -61,7 +62,7 @@ class EcModel :BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListene
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
 

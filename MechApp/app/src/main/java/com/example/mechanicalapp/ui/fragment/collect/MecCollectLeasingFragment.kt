@@ -8,6 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 
 /**
@@ -54,7 +55,7 @@ class MecCollectLeasingFragment(var type:Int) : BaseFragment<NetData>(), View.On
         cus_page.addOnPageChangeListener(this)
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(p0: View?) {

@@ -13,6 +13,7 @@ import com.example.mechanicalapp.ui.activity.PartsOrderDetails
 import com.example.mechanicalapp.ui.adapter.PartsOrderAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -88,7 +89,7 @@ class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickL
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
 
     }
 

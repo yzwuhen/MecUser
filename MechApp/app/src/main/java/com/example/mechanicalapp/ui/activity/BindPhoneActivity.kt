@@ -5,6 +5,7 @@ import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_bind_phone.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -39,7 +40,7 @@ class BindPhoneActivity : BaseActivity<NetData>(), View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

@@ -7,11 +7,10 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.activity_factory_apply.*
 import kotlinx.android.synthetic.main.activity_factory_apply.tv_submit
-import kotlinx.android.synthetic.main.item_job_want.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class FactoryApplyActivity:BaseActivity<NetData>(),View.OnClickListener {
@@ -51,7 +50,7 @@ class FactoryApplyActivity:BaseActivity<NetData>(),View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

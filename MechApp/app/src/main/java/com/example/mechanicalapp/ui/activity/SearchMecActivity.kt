@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.MecRentData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.layout_more_data_title.*
 import kotlinx.android.synthetic.main.layout_search_result.*
 
@@ -102,7 +103,7 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(view: View?) {

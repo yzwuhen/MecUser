@@ -8,9 +8,8 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.look.*
-import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.activity_more_data.*
 
 import kotlinx.android.synthetic.main.activity_my_collected.*
 import kotlinx.android.synthetic.main.activity_my_collected.cus_page
@@ -76,7 +75,7 @@ class MyLookActivity : BaseActivity<NetData>(), View.OnClickListener ,ViewPager.
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(p0: View?) {

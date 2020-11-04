@@ -25,6 +25,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.LocationAddressAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.GdMapUtils
 import kotlinx.android.synthetic.main.activity_address_sel.*
 
@@ -180,7 +181,7 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     private fun moveMap(latitude: Double, longitude: Double) {

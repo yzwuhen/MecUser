@@ -1,7 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.mechanicalapp.R
@@ -9,6 +8,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.HistoryAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.widget.FlowLayout
 import com.example.mechanicalapp.ui.widget.TagFlowLayout
 import kotlinx.android.synthetic.main.activity_history_search.*
@@ -90,6 +90,6 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 }

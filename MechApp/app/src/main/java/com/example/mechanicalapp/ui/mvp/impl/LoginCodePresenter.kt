@@ -1,4 +1,4 @@
-package com.example.mechanicalapp.ui.mvp.p
+package com.example.mechanicalapp.ui.mvp.impl
 
 import android.content.Context
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
@@ -8,12 +8,14 @@ import com.example.mechanicalapp.ui.data.request.LoginCode
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
+import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class LoginCodePresenter(private var mContext: Context, private var baseView: LoginCodeView<NetData>) : BasePresenter  {
+class LoginCodePresenter(private var mContext: Context, private var baseView: LoginCodeView<NetData>) :
+    BasePresenter {
 
     private var appsApi: AppsApi? = null
     private var appsService: AppService? = null

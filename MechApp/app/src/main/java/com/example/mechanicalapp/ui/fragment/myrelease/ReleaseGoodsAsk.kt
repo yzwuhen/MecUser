@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.ReleaseGoodsAskAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -70,7 +71,7 @@ class ReleaseGoodsAsk : BaseFragment<NetData>() , OnItemClickListener, PopUtils.
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
 
     }
     private fun showPop() {

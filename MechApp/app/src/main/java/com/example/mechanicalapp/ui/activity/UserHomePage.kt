@@ -9,6 +9,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.collect.*
 import kotlinx.android.synthetic.main.activity_user_home_page.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -88,7 +89,7 @@ class UserHomePage : BaseActivity<NetData>(), View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(v: View?) {

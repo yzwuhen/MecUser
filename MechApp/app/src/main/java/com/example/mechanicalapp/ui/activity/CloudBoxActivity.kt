@@ -4,6 +4,7 @@ import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.layout_search_title.*
 
 class CloudBoxActivity :BaseActivity<NetData>() {
@@ -26,6 +27,6 @@ class CloudBoxActivity :BaseActivity<NetData>() {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 }

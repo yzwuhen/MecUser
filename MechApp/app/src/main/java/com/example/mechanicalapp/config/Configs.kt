@@ -26,6 +26,6 @@ object Configs {
 
     const val BASE_URL:String="http://206e5202m7.imwork.net"
 
-    const val TOKEN:String="token"
+  //  const val TOKEN:String="token"
 
 }

@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.location.Address
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.MyAddressAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.activity_my_address.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -60,7 +60,7 @@ class MyAddressActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClick
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onItemClick(view: View, position: Int) {

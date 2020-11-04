@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.adapter.MecFactoryShopAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.activity_maintenance.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -70,7 +71,7 @@ class MaintenanceActivity : BaseActivity<NetData>(),View.OnClickListener ,PopUti
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(view: View?) {

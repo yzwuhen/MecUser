@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.fragment.msg
 
-import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
@@ -12,6 +11,7 @@ import com.example.mechanicalapp.ui.activity.BlackListActivity
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.ChatEnFragment
 import com.example.mechanicalapp.ui.fragment.ChatMsgFragment
 import com.example.mechanicalapp.ui.fragment.ChatSysFragment
@@ -63,7 +63,7 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
     override fun hiedLoading() {
     }
 
-    override fun showData(t: NetData?) {
+    override fun showData(t: MutableList<StoreLeftBean>) {
     }
 
     override fun onClick(view: View?) {

@@ -29,6 +29,15 @@ public class StoreLeftBean implements Serializable {
     private String name;
     private String icon;
     private List<StoreChildBean> children;
+    private boolean isSelect;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getId() {
         return id;

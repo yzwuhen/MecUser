@@ -11,11 +11,10 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.GoodsListActivity
 import com.example.mechanicalapp.ui.activity.ShopCarActivity
-import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
-import com.example.mechanicalapp.ui.adapter.EcTypeRightAdapter
-import com.example.mechanicalapp.ui.adapter.ImageAdapter
+import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.BannerData
+import com.example.mechanicalapp.ui.data.StoreChildBean
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.StorePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.StoreView
@@ -26,11 +25,10 @@ import kotlinx.android.synthetic.main.fragment_store.*
 
 class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewListener,
     View.OnClickListener,StoreView<StoreLeftBean> {
-    private var mLeftAdapter: EcTypeLeftAdapter? = null
-    private var mRightAdapter: EcTypeRightAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
-    var mLeftList: MutableList<StoreLeftBean> = ArrayList<StoreLeftBean>()
-
+    private var mLeftAdapter: StoreLeftAdapter? = null
+    private var mRightAdapter: StoreRightAdapter? = null
+    private var mLeftList: MutableList<StoreLeftBean> = ArrayList<StoreLeftBean>()
+    var mRightList: MutableList<StoreChildBean> = ArrayList<StoreChildBean>()
     private var mBannerList: MutableList<BannerData>? = ArrayList<BannerData>()
 
 
@@ -41,6 +39,9 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
     private var mPopwindow: PopupWindow? = null
 
 
+    private var selectIndex:Int =0;
+
+
     override fun getLayoutId(): Int {
 
         return R.layout.fragment_store
@@ -48,32 +49,15 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
 
     override fun initView() {
         super.initView()
-        mList.add("不限")
-        mList.add("挖掘机")
-        mList.add("推土机")
-        mList.add("旋挖机")
-        mList.add("汽车吊")
-        mList.add("泵车")
-        mList.add("装载机")
 
-
-        mLeftAdapter = EcTypeLeftAdapter(mContext, mList, this)
+        mLeftAdapter = StoreLeftAdapter(mContext, mLeftList, this)
         recycler_list_left.layoutManager = LinearLayoutManager(mContext)
         recycler_list_left.adapter = mLeftAdapter
 
-
-        mRightAdapter = EcTypeRightAdapter(mContext, mList, this)
+        mRightAdapter = StoreRightAdapter(mContext, mRightList, this)
         recycler_list_right.layoutManager = GridLayoutManager(mContext, 2)
         recycler_list_right.addItemDecoration(MyDecoration(2))
         recycler_list_right.adapter = mRightAdapter
-
-
-//        var bannerData = BannerData()
-//        bannerData.img =
-//            "https://t9.baidu.com/it/u=2268908537,2815455140&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1601476836&t=43717528e86dbef35c5a6e035d0e8c55"
-//
-//        mBannerList?.add(bannerData)
-//        mBannerList?.add(bannerData)
 
         banner.adapter = ImageAdapter(mBannerList)
         banner.indicator = CircleIndicator(mContext)
@@ -91,7 +75,23 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
         when (view?.id) {
             R.id.ly_type -> jumpActivity(null, GoodsListActivity::class.java)
 
+            R.id.tv_type->switchData(position)
         }
+    }
+
+    private fun switchData(position: Int) {
+        if (selectIndex!=position){
+            mLeftList[selectIndex].isSelect =false
+            mLeftAdapter?.notifyItemChanged(selectIndex)
+            mLeftList[position].isSelect =true
+            mLeftAdapter?.notifyItemChanged(position)
+            mRightList.clear()
+            mRightList.addAll(mLeftList[position].children)
+            mRightAdapter?.notifyDataSetChanged()
+            selectIndex =position;
+        }
+
+
     }
 
     private fun showPhone() {
@@ -149,7 +149,13 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
     override fun showData(list: MutableList<StoreLeftBean>) {
         mLeftList.clear()
         mLeftList.addAll(list)
-    //    mLeftAdapter?.notifyDataSetChanged()
+        if (mLeftList.size>0){
+            mLeftList[0].isSelect =true
+            mRightList.clear()
+            mRightList.addAll(mLeftList[0].children)
+        }
+        mLeftAdapter?.notifyDataSetChanged()
+        mRightAdapter?.notifyDataSetChanged()
     }
 
     override fun showAd(adList: List<BannerData>) {

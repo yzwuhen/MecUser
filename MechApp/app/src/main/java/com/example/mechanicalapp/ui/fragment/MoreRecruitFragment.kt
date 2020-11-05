@@ -18,6 +18,7 @@ import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.BuyPresenter
 import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseListView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -80,8 +81,8 @@ class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener
         ly_screen4.setOnClickListener(this)
         ly_screen5.setOnClickListener(this)
 
-        mPresenter = MecLeaseListPresenter(mContext,this)
-        (mPresenter as MecLeaseListPresenter).getLeaseList(2)
+        mPresenter = BuyPresenter(mContext,this)
+        (mPresenter as BuyPresenter).getWantBuyList(2)
     }
 
     override fun showLoading() {

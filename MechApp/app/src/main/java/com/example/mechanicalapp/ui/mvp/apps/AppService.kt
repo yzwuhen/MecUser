@@ -32,11 +32,22 @@ interface AppService {
 
     /**
      * 租赁机械表-分页列表查询
-     * 出售求购
+     * 出租求组
      */
     @GET("/jeecg-boot/market/mecMarketMechanics/list")
     fun getMecList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
                       @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
+    ):Observable<MoreLeaseData>
+
+
+    /**
+     * 租赁配件-分页列表查询
+     * 出租 求租
+     * bussiessType 1出租2求租
+     */
+    @GET("/jeecg-boot/market/mecMarketParts/list")
+    fun getPartsList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
+                   @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
     ):Observable<MoreLeaseData>
 
 

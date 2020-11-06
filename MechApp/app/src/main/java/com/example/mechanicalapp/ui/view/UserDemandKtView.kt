@@ -16,14 +16,14 @@ import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.data.MecRentData
-import com.example.mechanicalapp.ui.data.MecSellData
+import com.example.mechanicalapp.ui.data.MecData
 import kotlinx.android.synthetic.main.layout_user_demand.view.*
 
 class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener,View.OnClickListener {
 
     var mAdapter: UserDemandAdapter? = null
     var mRentAdapter :UserRentAdapter ?=null
-    var mLeaseList: MutableList<MecSellData> = ArrayList<MecSellData>()
+    var mLeaseList: MutableList<MecData> = ArrayList<MecData>()
     var mRentList: MutableList<MecRentData> = ArrayList<MecRentData>()
     var type:Int = 0
     init {
@@ -122,7 +122,7 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
     }
 
     //出
-    fun setLease(list: List<MecSellData>) {
+    fun setLease(list: List<MecData>) {
         mLeaseList.clear()
         mLeaseList.addAll(list)
         mAdapter?.notifyDataSetChanged()

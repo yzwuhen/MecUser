@@ -27,7 +27,6 @@
     <TextView
         android:id="@+id/tv_new_pic"
         android:layout_width="@dimen/dp_63"
-        android:visibility="gone"
         android:layout_height="27dp"
         android:layout_marginTop="13dp"
         android:background="@mipmap/xsj"
@@ -110,23 +109,14 @@
         app:layout_constraintStart_toEndOf="@id/iv_sr"
         app:layout_constraintTop_toBottomOf="@id/tv_address_data" />
 
-    <TextView
-        android:id="@+id/tv_work_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="工作时长：2小时"
-        android:textColor="#666666"
-        android:textSize="13sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_distance" />
+
 
 
     <TextView
         android:id="@+id/tv_rent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="￥1000/月"
+        android:text="￥1000万"
         android:textColor="#FC3D38"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@id/iv_pic"

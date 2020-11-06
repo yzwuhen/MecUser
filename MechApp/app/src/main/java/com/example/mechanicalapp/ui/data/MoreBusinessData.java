@@ -2,7 +2,7 @@ package com.example.mechanicalapp.ui.data;
 
 import java.util.List;
 
-public class MoreLeaseData extends NetData {
+public class MoreBusinessData extends NetData {
 
 
     /**
@@ -37,7 +37,7 @@ public class MoreLeaseData extends NetData {
         private Boolean hitCount;
         private Boolean searchCount;
         private Integer pages;
-        private List<MecLeaseData> records;
+        private List<MecData> records;
 
         public Integer getTotal() {
             return total;
@@ -67,8 +67,9 @@ public class MoreLeaseData extends NetData {
             return pages;
         }
 
-        public List<MecLeaseData> getRecords() {
+        public List<MecData> getRecords() {
             return records;
         }
     }
 }
+

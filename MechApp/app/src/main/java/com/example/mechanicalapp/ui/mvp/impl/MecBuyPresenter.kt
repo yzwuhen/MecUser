@@ -3,20 +3,19 @@ package com.example.mechanicalapp.ui.mvp.impl
 import android.content.Context
 import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.data.MoreLeaseData
+import com.example.mechanicalapp.ui.data.MoreBusinessData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
-import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 
-class BuyPresenter(
+class MecBuyPresenter(
     private var mContext: Context,
-    private var baseView: MecLeaseView<NetData>
+    private var baseView: MecBusinessView<NetData>
 ) :
     BasePresenter {
 
 
-    private var baseModel: MecLeaseModelImp? = null
+    private var baseModel: MecBuyModelImpl? = null
     private var page: Int = 0
     private var pageSize: Int = 30
     private var brandId: String? = null
@@ -24,32 +23,31 @@ class BuyPresenter(
     private var modelId: String? = null
 
     init {
-        baseModel = MecLeaseModelImp()
+        baseModel = MecBuyModelImpl()
     }
 
     override fun request() {
 
     }
 
-    fun getWantBuyList(type:Int) {
+    //type 1 是出售 2 是求购
+    fun getBuyList(type:Int) {
 
-        baseModel?.getLeaseList(type,
+        baseModel?.getMecBuyList(type,
             page,
             pageSize,
             brandId,
             cateId,
             modelId,
-            object : ISubscriberListener<MoreLeaseData> {
-                override fun onNext(t: MoreLeaseData?) {
+            object : ISubscriberListener<MoreBusinessData> {
+                override fun onNext(t: MoreBusinessData?) {
                     if (t?.code == 200 && t?.result != null) {
                         t?.result?.records?.let { baseView?.refreshUI(it) }
                         baseView?.hiedLoading()
                     } else {
                         baseView?.err()
                     }
-
                 }
-
                 override fun onError(e: Throwable?) {
                     baseView?.err()
                     Log.e("sssss============", "sssssssss==============onError$e")

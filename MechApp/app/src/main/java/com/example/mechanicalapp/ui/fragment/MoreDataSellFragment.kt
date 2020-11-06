@@ -11,40 +11,37 @@ import com.example.mechanicalapp.ui.activity.Brand
 import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
-import com.example.mechanicalapp.ui.adapter.MoreUserDemanAdapter
+import com.example.mechanicalapp.ui.adapter.MoreSellAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecData
-import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
+import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
-import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
+class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+    PopUtils.onViewListener, ProgressListener, MecBusinessView<NetData> {
+    var mAdapter: MoreSellAdapter? = null
+    var mList: MutableList<MecData> = ArrayList<MecData>()
 
-class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,View.OnClickListener,
-    PopUtils.onViewListener,ProgressListener , MecLeaseView<NetData> {
-    var mAdapter: MoreUserDemanAdapter? = null
-    var mList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
-
-    var popRecy :RecyclerView?=null
-    private var mScreenAdapter :ScreenAdapter ?=null
+    var popRecy : RecyclerView?=null
+    private var mScreenAdapter : ScreenAdapter?=null
 
     private var mStringList :MutableList<String> = ArrayList<String>()
 
     private var mButtDialog: BottomSheetDialog?=null
-    private var mDialogView:View?=null
+    private var mDialogView: View?=null
 
-    private var mDialogTvRest:TextView?=null
-    private var mDialogTvSure:TextView?=null
-    private var mProgress1:TwoWayProgressBar?=null
-    private var mProgress2:TwoWayProgressBar?=null
-    private var mProgress3:TwoWayProgressBar?=null
+    private var mDialogTvRest: TextView?=null
+    private var mDialogTvSure: TextView?=null
+    private var mProgress1: TwoWayProgressBar?=null
+    private var mProgress2: TwoWayProgressBar?=null
+    private var mProgress3: TwoWayProgressBar?=null
 
     private var list1:MutableList<String> =ArrayList<String>()
     private var list2:MutableList<String> =ArrayList<String>()
@@ -54,7 +51,7 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
     override fun initView() {
         super.initView()
 
-        mAdapter = MoreUserDemanAdapter(mContext, mList, type,this)
+        mAdapter = MoreSellAdapter(mContext, mList,this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 
@@ -72,8 +69,8 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
         ly_screen4.setOnClickListener(this)
         ly_screen5.setOnClickListener(this)
 
-        mPresenter =MecLeaseListPresenter(mContext,this)
-        (mPresenter as MecLeaseListPresenter).getLeaseList(1)
+        mPresenter = MecBuyPresenter(mContext,this)
+        (mPresenter as MecBuyPresenter).getBuyList(1)
     }
 
     override fun showLoading() {
@@ -93,7 +90,7 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
     private fun showDialogType(){
         if (mButtDialog ==null){
             mButtDialog = BottomSheetDialog(mContext)
-            mDialogView = View.inflate(mContext,R.layout.dialog_screen,null)
+            mDialogView = View.inflate(mContext, R.layout.dialog_screen,null)
             mButtDialog?.setContentView(mDialogView!!)
 
             mDialogTvRest = mDialogView?.findViewById(R.id.tv_reset)
@@ -158,10 +155,10 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
 
     override fun onClick(p0: View?) {
         when(p0?.id){
-            R.id.ly_screen1 ->jumpActivity(null,EcModel::class.java)
-            R.id.ly_screen2->jumpActivity(null,Brand::class.java)
-            R.id.ly_screen3->jumpActivity(null,EcType::class.java)
-                R.id.ly_screen4->showInput()
+            R.id.ly_screen1 ->jumpActivity(null, EcModel::class.java)
+            R.id.ly_screen2->jumpActivity(null, Brand::class.java)
+            R.id.ly_screen3->jumpActivity(null, EcType::class.java)
+            R.id.ly_screen4->showInput()
             R.id.ly_screen5->showDialogType()
             R.id.tv_sure->mButtDialog?.dismiss()
             R.id.tv_reset->mButtDialog?.dismiss()
@@ -176,7 +173,7 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
     }
 
     override fun onItemClick(view: View, position: Int) {
-        jumpActivity(null,LeaseDetailsActivity::class.java)
+        jumpActivity(null, LeaseDetailsActivity::class.java)
     }
 
     override fun progress(leftPos: Double, rightPos: Double) {
@@ -184,14 +181,14 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
 
     }
 
-    override fun refreshUI(list: List<MecLeaseData>) {
+    override fun refreshUI(list: List<MecData>) {
 
         mList.clear()
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun loadMore(list: List<MecLeaseData>) {
+    override fun loadMore(list: List<MecData>) {
     }
 
     override fun err() {

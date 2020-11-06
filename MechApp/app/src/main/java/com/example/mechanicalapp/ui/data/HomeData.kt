@@ -8,9 +8,9 @@ class HomeData : NetData() {
         val hotMechineCateList: List<HotMechineCate>,
         val mecProds: List<PartsData>,
         val newMecMarketMechanicsIn: List<MecRentData>,
-        val newMecMarketMechanicsOut: List<MecSellData>,
+        val newMecMarketMechanicsOut: List<MecData>,
         val newMecMarketOldMechanicsIn: List<MecRentData>,
-        val newMecMarketOldMechanicsOut: List<MecSellData>
+        val newMecMarketOldMechanicsOut: List<MecData>
     )
 
 }

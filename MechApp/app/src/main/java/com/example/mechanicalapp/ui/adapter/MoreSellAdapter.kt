@@ -8,22 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecData
-import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
-import kotlinx.android.synthetic.main.item_more_user_demand.view.*
+import kotlinx.android.synthetic.main.item_more_sell.view.*
 
+class MoreSellAdapter  (var mContext: Context, var mList:MutableList<MecData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-class MoreUserDemanAdapter (var mContext: Context, var mList:MutableList<MecLeaseData>, var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    private var isShow:Boolean=false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return MoreUserDemanVh(LayoutInflater.from(mContext).inflate(R.layout.item_more_user_demand,parent,false),type,mOnItemClickListener)
+        return MoreSellVh(LayoutInflater.from(mContext).inflate(R.layout.item_more_sell,parent,false),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,mList[position].pic, R.mipmap.ic_launcher)
 
         holder.itemView.tv_title.text =mList[position].tittle
 
@@ -32,25 +31,24 @@ class MoreUserDemanAdapter (var mContext: Context, var mList:MutableList<MecLeas
         holder.itemView.tv_distance.text="距离：${mList[position].gpsLon}"
 
         if (mList[position].isNew == "1"){
-            holder.itemView.tv_label.visibility=View.VISIBLE
+            holder.itemView.tv_label.visibility= View.VISIBLE
         }else{
-            holder.itemView.tv_label.visibility=View.GONE
+            holder.itemView.tv_label.visibility= View.GONE
         }
 
         if (mList[position].isPerson == "1"){
-            holder.itemView.iv_sr.visibility=View.VISIBLE
+            holder.itemView.iv_sr.visibility= View.VISIBLE
         }else{
-            holder.itemView.iv_sr.visibility=View.GONE
+            holder.itemView.iv_sr.visibility= View.GONE
         }
 
         if (mList[position].isEnterprise == "1"){
-            holder.itemView.iv_qy.visibility=View.VISIBLE
+            holder.itemView.iv_qy.visibility= View.VISIBLE
         }else{
-            holder.itemView.iv_qy.visibility=View.GONE
+            holder.itemView.iv_qy.visibility= View.GONE
         }
-        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}"
 
-        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
+        holder.itemView.tv_rent.text="￥${mList[position].price}"
 
         holder.itemView.tv_time.text= DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
     }
@@ -62,7 +60,7 @@ class MoreUserDemanAdapter (var mContext: Context, var mList:MutableList<MecLeas
 
 
 
-    class MoreUserDemanVh(itemView: View, type:Int, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
+    class MoreSellVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
 

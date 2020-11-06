@@ -11,8 +11,10 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.fragment.MoreBuyFragment
+import com.example.mechanicalapp.ui.fragment.MoreDataSellFragment
 import com.example.mechanicalapp.ui.fragment.MoreDataFragment
-import com.example.mechanicalapp.ui.fragment.MoreRecruitFragment
+import com.example.mechanicalapp.ui.fragment.MoreRentFragment
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.appbar.AppBarLayout
 import com.liaoinstan.springview.widget.SpringView
@@ -42,14 +44,18 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
         if (type == 0) {
             tv_screen_left.text = "出租"
             tv_screen_right.text = "求租"
+            mFragmentList?.add(MoreDataFragment(type))
+            mFragmentList?.add(MoreRentFragment(2))
         } else {
             tv_screen_left.text = "出售"
             tv_screen_right.text = "求购"
+            mFragmentList?.add(MoreDataSellFragment())
+            mFragmentList?.add(MoreBuyFragment())
         }
 
 
-        mFragmentList?.add(MoreDataFragment(type))
-        mFragmentList?.add(MoreRecruitFragment(2))
+
+
 
 
         mTabPageAdapter = FragmentListPageAdapter(this.supportFragmentManager, mFragmentList!!)
@@ -80,12 +86,12 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
 
         app_bar.addOnOffsetChangedListener(this)
 
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(this))
+        spring_list.type=SpringView.Type.FOLLOW
+        spring_list.header=RefreshHeaderUtils.getHeaderView(this)
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
+                spring_list.isEnable=false
                 //  initData()
                 closeRefreshView()
             }
@@ -96,7 +102,7 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
+        spring_list.isEnable=true
         spring_list.onFinishFreshAndLoad()
     }
 

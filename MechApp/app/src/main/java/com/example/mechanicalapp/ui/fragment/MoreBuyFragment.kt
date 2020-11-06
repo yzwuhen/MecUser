@@ -11,25 +11,23 @@ import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.Brand
 import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.EcType
-import com.example.mechanicalapp.ui.adapter.MoreUserRentAdapter
+import com.example.mechanicalapp.ui.adapter.MoreBuyAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.MecSellData
+import com.example.mechanicalapp.ui.data.MecData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.mvp.impl.BuyPresenter
-import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
-import com.example.mechanicalapp.ui.mvp.v.MecLeaseListView
+import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
-class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener,ProgressListener ,MecLeaseListView<NetData>{
-    var mAdapter: MoreUserRentAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+    PopUtils.onViewListener, ProgressListener, MecBusinessView<NetData> {
+    var mAdapter: MoreBuyAdapter? = null
+    var mList: MutableList<MecData> = ArrayList<MecData>()
 
     var popRecy : RecyclerView?=null
     var mScreenAdapter : ScreenAdapter?=null
@@ -37,7 +35,7 @@ class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener
     private var mStringList :MutableList<String> = ArrayList<String>()
 
     private var mButtDialog: BottomSheetDialog?=null
-    private var mDialogView:View?=null
+    private var mDialogView: View?=null
 
     private var mDialogTvRest: TextView?=null
     private var mDialogTvSure: TextView?=null
@@ -49,21 +47,11 @@ class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener
     private var list2:MutableList<String> =ArrayList<String>()
     private var list3:MutableList<String> =ArrayList<String>()
 
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-    }
 
     override fun initView() {
         super.initView()
 
-        mAdapter = MoreUserRentAdapter(mContext, mList, this)
+        mAdapter = MoreBuyAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 
@@ -81,8 +69,8 @@ class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener
         ly_screen4.setOnClickListener(this)
         ly_screen5.setOnClickListener(this)
 
-        mPresenter = BuyPresenter(mContext,this)
-        (mPresenter as BuyPresenter).getWantBuyList(2)
+        mPresenter = MecBuyPresenter(mContext,this)
+        (mPresenter as MecBuyPresenter).getBuyList(2)
     }
 
     override fun showLoading() {
@@ -121,7 +109,7 @@ class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener
     private fun showDialogType(){
         if (mButtDialog ==null){
             mButtDialog = BottomSheetDialog(mContext)
-            mDialogView = View.inflate(mContext,R.layout.dialog_screen,null)
+            mDialogView = View.inflate(mContext, R.layout.dialog_screen,null)
             mButtDialog?.setContentView(mDialogView!!)
 
             mDialogTvRest = mDialogView?.findViewById(R.id.tv_reset)
@@ -185,21 +173,20 @@ class MoreRecruitFragment (var type:Int): BaseCusFragment(), OnItemClickListener
     }
 
     override fun onItemClick(view: View, position: Int) {
-        jumpActivity(null,AskDetailsActivity::class.java)
+        jumpActivity(null, AskDetailsActivity::class.java)
     }
 
     override fun progress(leftPos: Double, rightPos: Double) {
 
     }
 
-    override fun refreshUI(list: List<MecSellData>) {
-
-//        mList.clear()
-//        mList.addAll(list)
-//        mAdapter?.notifyDataSetChanged()
+    override fun refreshUI(list: List<MecData>) {
+        mList.clear()
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
     }
 
-    override fun loadMore(list: List<MecSellData>) {
+    override fun loadMore(list: List<MecData>) {
     }
 
     override fun err() {

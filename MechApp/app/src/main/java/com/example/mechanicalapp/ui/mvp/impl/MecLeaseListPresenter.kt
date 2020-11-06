@@ -6,11 +6,12 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
-import com.example.mechanicalapp.ui.mvp.v.MecLeaseListView
+import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
+import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 
 class MecLeaseListPresenter(
     private var mContext: Context,
-    private var baseView: MecLeaseListView<NetData>
+    private var baseView: MecLeaseView<NetData>
 ) :
     BasePresenter {
 
@@ -41,7 +42,7 @@ class MecLeaseListPresenter(
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
                     if (t?.code == 200 && t?.result != null) {
-                        t?.result?.records?.let { baseView?.refreshUI(it) }
+                       t?.result?.records?.let { baseView?.refreshUI(it) }
                         baseView?.hiedLoading()
                     } else {
                         baseView?.err()

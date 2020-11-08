@@ -8,12 +8,13 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.BannerData
-import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.RecruitFragment
 import com.example.mechanicalapp.ui.fragment.RentFragment
+import com.example.mechanicalapp.ui.mvp.impl.RecruitPresenter
+import com.example.mechanicalapp.ui.mvp.v.WorkAboutView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.appbar.AppBarLayout
 import com.liaoinstan.springview.widget.SpringView
@@ -21,13 +22,17 @@ import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_more_data.*
 import kotlinx.android.synthetic.main.layout_more_data_title.*
 
-class MoreRecruitActivity : BaseActivity<NetData>(), View.OnClickListener,
-    ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener {
+/**
+ * 招聘
+ */
+class MoreRecruitActivity :BaseCusActivity(), View.OnClickListener,
+    ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener ,WorkAboutView{
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     var mList: MutableList<BannerData>? = ArrayList<BannerData>()
     var type: Int = 1
+    //private var presenter: RecruitPresenter?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_more_data
@@ -84,6 +89,8 @@ class MoreRecruitActivity : BaseActivity<NetData>(), View.OnClickListener,
 
             override fun onLoadmore() {}
         })
+
+
 
     }
 

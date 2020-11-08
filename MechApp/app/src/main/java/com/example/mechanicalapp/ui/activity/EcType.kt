@@ -11,12 +11,15 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.EcTypeRightAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecAtrrsView
 import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class EcType:BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListener{
+class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAtrrsView<NetData>{
 
 
     private var mLeftAdapter: EcTypeLeftAdapter? = null
@@ -24,7 +27,7 @@ class EcType:BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListener{
     var mList: MutableList<String> = ArrayList<String>()
 
     private var mRightList: MutableList<String> = ArrayList<String>()
-
+    private var mPresenter: MecModelPresenter?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
     }
@@ -67,7 +70,8 @@ class EcType:BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListener{
 
         tv_unlimited.setOnClickListener(this)
         iv_back.setOnClickListener(this)
-
+        mPresenter = MecModelPresenter(this,this)
+        mPresenter?.getMecModelList()
     }
 
     override fun initPresenter() {

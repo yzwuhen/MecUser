@@ -10,16 +10,21 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.EcModelAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecAtrrsView
 import kotlinx.android.synthetic.main.activity_ec_model.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class EcModel :BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListener{
+class EcModel :BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAtrrsView<NetData>{
 
 
     private var mAdapter:EcModelAdapter ?=null
     var mList: MutableList<String> = ArrayList<String>()
+
+    private var mPresenter: MecModelPresenter?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_ec_model
@@ -51,6 +56,9 @@ class EcModel :BaseActivity<NetData>(), OnItemClickListener ,View.OnClickListene
 
         tv_unlimited.setOnClickListener(this)
         iv_back.setOnClickListener(this)
+
+        mPresenter = MecModelPresenter(this,this)
+        mPresenter?.getMecModelList()
     }
 
     override fun initPresenter() {

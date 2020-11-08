@@ -11,17 +11,20 @@ import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
+import com.example.mechanicalapp.ui.mvp.v.MorePartsLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
 
 /**
  * 求组 配件
  */
-class MorePartsAskingFragment  : BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener {
+class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+    PopUtils.onViewListener , MorePartsLeaseView<NetData> {
     var mAdapter: MorePartsAskAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
 
@@ -56,7 +59,8 @@ class MorePartsAskingFragment  : BaseFragment<NetData>(), OnItemClickListener, V
 
         ly_sort.setOnClickListener(this)
         ly_ec_type.setOnClickListener(this)
-
+        mPresenter = MorePartsPresenter(mContext,this)
+        (mPresenter as MorePartsPresenter).getPartsLeaseList(2)
     }
 
     override fun showLoading() {

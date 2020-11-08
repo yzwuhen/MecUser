@@ -10,18 +10,21 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.BrandAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecAtrrsView
 import kotlinx.android.synthetic.main.activity_brand.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class Brand : BaseActivity<NetData>() , OnItemClickListener, View.OnClickListener {
+class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecAtrrsView<NetData> {
 
     private var mBrandAdapter: BrandAdapter? = null
     private var mLetterAdapter: LetterAdapter? = null
     private var mCityLinearLayoutManager: LinearLayoutManager? = null
     private var mLetterLinearLayoutManager: LinearLayoutManager? = null
-
+    private var mPresenter: MecModelPresenter?=null
     private var mCityList: MutableList<String> = ArrayList<String>()
     private val items = listOf(
         "A",
@@ -81,6 +84,9 @@ class Brand : BaseActivity<NetData>() , OnItemClickListener, View.OnClickListene
 
         iv_back.setOnClickListener(this)
         tv_unlimited.setOnClickListener(this)
+
+        mPresenter = MecModelPresenter(this,this)
+        mPresenter?.getMecBrandList()
     }
 
     override fun initPresenter() {

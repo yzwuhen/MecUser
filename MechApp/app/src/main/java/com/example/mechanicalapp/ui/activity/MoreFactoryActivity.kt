@@ -10,16 +10,19 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.MecFactoryAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.FactoryPresenter
+import com.example.mechanicalapp.ui.mvp.v.FactoryView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_more_factory.*
 import kotlinx.android.synthetic.main.layout_more_data_title.*
 
-class MoreFactoryActivity : BaseActivity<NetData>() ,View.OnClickListener ,PopUtils.onViewListener,
-    OnItemClickListener {
+class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.onViewListener,
+    OnItemClickListener,FactoryView {
 
     var popRecy : RecyclerView?=null
     private var mScreenAdapter : ScreenAdapter?=null
@@ -29,6 +32,8 @@ class MoreFactoryActivity : BaseActivity<NetData>() ,View.OnClickListener ,PopUt
 
     private var mMecFactoryShopAdapter : MecFactoryAdapter?=null
     var mList: MutableList<String> = ArrayList<String>()
+
+    private var mPresenter:FactoryPresenter?=null
 
     override fun getLayoutId(): Int {
 
@@ -75,6 +80,8 @@ class MoreFactoryActivity : BaseActivity<NetData>() ,View.OnClickListener ,PopUt
             override fun onLoadmore() {}
         })
 
+        mPresenter = FactoryPresenter(this,this)
+        mPresenter?.getFactoryList()
     }
 
     fun closeRefreshView() {

@@ -9,17 +9,20 @@ import com.example.mechanicalapp.ui.activity.JobWantDetails
 import com.example.mechanicalapp.ui.activity.WorkType
 import com.example.mechanicalapp.ui.adapter.MoreJobWantAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.RecruitPresenter
+import com.example.mechanicalapp.ui.mvp.v.WorkAboutView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
 
-class RentFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener {
+class RentFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+    PopUtils.onViewListener,WorkAboutView {
     var mAdapter: MoreJobWantAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
 
@@ -59,24 +62,25 @@ class RentFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListener, 
         ly_screen2.setOnClickListener(this)
         ly_screen3.setOnClickListener(this)
 
-        spring_list.setType(SpringView.Type.FOLLOW)
+        spring_list.type=SpringView.Type.FOLLOW
         spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
+                spring_list.isEnable=false
                 //  initData()
                 closeRefreshView()
             }
 
             override fun onLoadmore() {}
         })
-
+        mPresenter = RecruitPresenter(mContext,this)
+        (mPresenter as RecruitPresenter)?.getWantWorkList()
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     override fun showLoading() {

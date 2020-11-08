@@ -8,16 +8,19 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.RecruitDetailsActivity
 import com.example.mechanicalapp.ui.activity.WorkType
 import com.example.mechanicalapp.ui.adapter.*
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.RecruitPresenter
+import com.example.mechanicalapp.ui.mvp.v.WorkAboutView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
-class RecruitFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener {
+class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+    PopUtils.onViewListener,WorkAboutView {
     var mAdapter: MoreRecruitAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
 
@@ -69,6 +72,8 @@ class RecruitFragment(var type:Int): BaseFragment<NetData>(), OnItemClickListene
             override fun onLoadmore() {}
         })
 
+        mPresenter = RecruitPresenter(mContext,this)
+        (mPresenter as RecruitPresenter)?.getRecruitList()
     }
 
     fun closeRefreshView() {

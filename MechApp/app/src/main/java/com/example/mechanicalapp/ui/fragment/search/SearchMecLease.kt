@@ -9,7 +9,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecData
+import com.example.mechanicalapp.ui.data.MecRentOutData
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
@@ -19,7 +19,7 @@ class SearchMecLease(var type:Int):BaseCusFragment() ,OnItemClickListener{
 
     var mList: MutableList<String> = ArrayList<String>()
     private var mAdapter: UserDemandAdapter? = null
-    var mLeaseList: MutableList<MecData> = ArrayList<MecData>()
+    var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
     override fun getLayoutId(): Int {
        return R.layout.fragment_search_all_result
     }

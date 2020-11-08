@@ -2,10 +2,7 @@ package com.example.mechanicalapp.ui.data;
 
 import java.util.List;
 
-/**
- * 出租
- */
-public class MoreLeaseData extends NetData {
+public class MoreSellBean extends NetData {
 
 
     /**
@@ -40,7 +37,7 @@ public class MoreLeaseData extends NetData {
         private Boolean hitCount;
         private Boolean searchCount;
         private Integer pages;
-        private List<MecLeaseData> records;
+        private List<MecSellData> records;
 
         public Integer getTotal() {
             return total;
@@ -70,8 +67,10 @@ public class MoreLeaseData extends NetData {
             return pages;
         }
 
-        public List<MecLeaseData> getRecords() {
+        public List<MecSellData> getRecords() {
             return records;
         }
     }
 }
+
+

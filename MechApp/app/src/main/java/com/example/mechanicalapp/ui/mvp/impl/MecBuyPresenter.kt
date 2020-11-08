@@ -6,11 +6,11 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreBusinessData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
-import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
+import com.example.mechanicalapp.ui.mvp.v.MecBuyView
 
 class MecBuyPresenter(
     private var mContext: Context,
-    private var baseView: MecBusinessView<NetData>
+    private var baseView: MecBuyView<NetData>
 ) :
     BasePresenter {
 

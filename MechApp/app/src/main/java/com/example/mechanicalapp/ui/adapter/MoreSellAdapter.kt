@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.data.MecData
+import com.example.mechanicalapp.ui.data.MecRentOutData
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_more_sell.view.*
 
-class MoreSellAdapter  (var mContext: Context, var mList:MutableList<MecData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MoreSellAdapter  (var mContext: Context, var mList:MutableList<MecSellData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isShow:Boolean=false
 

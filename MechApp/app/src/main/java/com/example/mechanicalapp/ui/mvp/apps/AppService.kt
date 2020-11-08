@@ -53,12 +53,24 @@ interface AppService {
 
     /**
      * 交易机械表-分页列表查询
-     * 出售求购
+     * 求购
      */
     @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
     fun getMecBuyList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
                    @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
     ):Observable<MoreBusinessData>
+
+
+    /**
+     * 交易机械表-分页列表查询
+     * 出售
+     */
+    @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
+    fun getSellList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
+                      @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
+    ):Observable<MoreSellBean>
+
+
 
 
     /**

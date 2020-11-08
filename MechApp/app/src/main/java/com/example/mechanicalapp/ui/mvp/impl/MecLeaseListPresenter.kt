@@ -6,7 +6,6 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
-import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 
 class MecLeaseListPresenter(
@@ -49,7 +48,6 @@ class MecLeaseListPresenter(
                     }
 
                 }
-
                 override fun onError(e: Throwable?) {
                     baseView?.err()
                     Log.e("sssss============", "sssssssss==============onError$e")
@@ -59,6 +57,36 @@ class MecLeaseListPresenter(
                 }
             })
     }
+
+    //求租
+    fun getRentList(type:Int) {
+
+        baseModel?.getLeaseList(type,
+            page,
+            pageSize,
+            brandId,
+            cateId,
+            modelId,
+            object : ISubscriberListener<MoreLeaseData> {
+                override fun onNext(t: MoreLeaseData?) {
+                    if (t?.code == 200 && t?.result != null) {
+                        t?.result?.records?.let { baseView?.refreshUI(it) }
+                        baseView?.hiedLoading()
+                    } else {
+                        baseView?.err()
+                    }
+
+                }
+                override fun onError(e: Throwable?) {
+                    baseView?.err()
+                    Log.e("sssss============", "sssssssss==============onError$e")
+                }
+
+                override fun onCompleted() {
+                }
+            })
+    }
+
 
     override fun onDestroy() {
     }

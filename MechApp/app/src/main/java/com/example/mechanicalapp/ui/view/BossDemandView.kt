@@ -13,19 +13,21 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
-import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
-import com.example.mechanicalapp.ui.adapter.UserRentAdapter
-import com.example.mechanicalapp.ui.data.MecRentData
-import com.example.mechanicalapp.ui.data.MecData
+import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
+import com.example.mechanicalapp.ui.adapter.BossSellAdapter
+import com.example.mechanicalapp.ui.data.MecBuyData
+import com.example.mechanicalapp.ui.data.MecRentInData
+import com.example.mechanicalapp.ui.data.MecRentOutData
+import com.example.mechanicalapp.ui.data.MecSellData
 import kotlinx.android.synthetic.main.layout_boss_denmand.view.*
 
 class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener,
     View.OnClickListener {
 
-    private var mAdapter: UserDemandAdapter? = null
-    private var mRentAdapter: UserRentAdapter? = null
-    var mList: MutableList<MecRentData> = ArrayList<MecRentData>()
-    var mLeaseList: MutableList<MecData> = ArrayList<MecData>()
+    private var mAdapter: BossSellAdapter? = null
+    private var mBuyAdapter: BossBuyAdapter? = null
+    var mList: MutableList<MecBuyData> = ArrayList<MecBuyData>()
+    var mSellList: MutableList<MecSellData> = ArrayList<MecSellData>()
     var type: Int = 0
 
     init {
@@ -34,9 +36,9 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
         addView(view)
 
 
-        mAdapter = UserDemandAdapter(mContext, mLeaseList, 1, this)
+        mAdapter = BossSellAdapter(mContext, mSellList, 1, this)
 
-        mRentAdapter = UserRentAdapter(mContext, mList, this)
+        mBuyAdapter = BossBuyAdapter(mContext, mList, this)
 
         recycler_demand.layoutManager = LinearLayoutManager(mContext)
         recycler_demand.adapter = mAdapter
@@ -67,7 +69,7 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
         } else if (v?.id == R.id.tv_rent) {
             if (type != 1) {
                 type = 1
-                recycler_demand.adapter = mRentAdapter
+                recycler_demand.adapter = mBuyAdapter
                 tv_rent.paint.isFakeBoldText = true
                 tv_lease.paint.isFakeBoldText = false
                 tv_rent.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, R.drawable.tv_under_ine)
@@ -120,17 +122,17 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
         jumDetails()
     }
 
-    fun setSell(list: List<MecData>) {
-        mLeaseList.clear()
-        mLeaseList.addAll(list)
+    fun setSell(list: List<MecSellData>) {
+        mSellList.clear()
+        mSellList.addAll(list)
         mAdapter?.notifyDataSetChanged()
 
     }
 
-    fun setBuy(list: List<MecRentData>) {
+    fun setBuy(list: List<MecBuyData>) {
         mList.clear()
         mList.addAll(list)
-        mRentAdapter?.notifyDataSetChanged()
+        mBuyAdapter?.notifyDataSetChanged()
 
     }
 

@@ -14,20 +14,22 @@ import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.adapter.MoreBuyAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecData
+import com.example.mechanicalapp.ui.data.MecBuyData
+import com.example.mechanicalapp.ui.data.MecRentOutData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
-import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
+import com.example.mechanicalapp.ui.mvp.v.MecBuyView
+import com.example.mechanicalapp.ui.mvp.v.MecSellView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
 class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener, ProgressListener, MecBusinessView<NetData> {
+    PopUtils.onViewListener, ProgressListener, MecBuyView<NetData> {
     var mAdapter: MoreBuyAdapter? = null
-    var mList: MutableList<MecData> = ArrayList<MecData>()
+    var mList: MutableList<MecBuyData> = ArrayList<MecBuyData>()
 
     var popRecy : RecyclerView?=null
     var mScreenAdapter : ScreenAdapter?=null
@@ -180,13 +182,13 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
 
     }
 
-    override fun refreshUI(list: List<MecData>) {
+    override fun refreshUI(list: List<MecBuyData>) {
         mList.clear()
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun loadMore(list: List<MecData>) {
+    override fun loadMore(list: List<MecBuyData>) {
     }
 
     override fun err() {

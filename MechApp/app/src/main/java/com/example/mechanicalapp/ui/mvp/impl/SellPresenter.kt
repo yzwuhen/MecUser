@@ -4,19 +4,19 @@ import android.content.Context
 import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreLeaseData
+import com.example.mechanicalapp.ui.data.MoreSellBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
-import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
-import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
+import com.example.mechanicalapp.ui.mvp.v.MecSellView
 
-class BuyPresenter(
+class SellPresenter (
     private var mContext: Context,
-    private var baseView: MecLeaseView<NetData>
+    private var baseView: MecSellView<NetData>
 ) :
     BasePresenter {
 
 
-    private var baseModel: MecLeaseModelImp? = null
+    private var baseModel: MecBuyModelImpl? = null
     private var page: Int = 0
     private var pageSize: Int = 30
     private var brandId: String? = null
@@ -24,23 +24,23 @@ class BuyPresenter(
     private var modelId: String? = null
 
     init {
-        baseModel = MecLeaseModelImp()
+        baseModel = MecBuyModelImpl()
     }
 
     override fun request() {
 
     }
 
-    fun getWantBuyList(type:Int) {
+    fun getSellList(type:Int) {
 
-        baseModel?.getLeaseList(type,
+        baseModel?.getSellList(type,
             page,
             pageSize,
             brandId,
             cateId,
             modelId,
-            object : ISubscriberListener<MoreLeaseData> {
-                override fun onNext(t: MoreLeaseData?) {
+            object : ISubscriberListener<MoreSellBean> {
+                override fun onNext(t: MoreSellBean?) {
                     if (t?.code == 200 && t?.result != null) {
                         t?.result?.records?.let { baseView?.refreshUI(it) }
                         baseView?.hiedLoading()

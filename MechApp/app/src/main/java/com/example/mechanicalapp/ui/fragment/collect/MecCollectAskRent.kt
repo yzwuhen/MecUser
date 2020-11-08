@@ -6,7 +6,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.MecRentData
+import com.example.mechanicalapp.ui.data.MecRentInData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.java.EventFresh
@@ -21,7 +21,7 @@ class MecCollectAskRent (var type:Int):BaseFragment<NetData>() , OnItemClickList
 
 
     private var mAdapter: UserRentAdapter? = null
-    var mRentList: MutableList<MecRentData> = ArrayList<MecRentData>()
+    var mRentList: MutableList<MecRentInData> = ArrayList<MecRentInData>()
     override fun showLoading() {
 
 

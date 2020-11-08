@@ -9,8 +9,8 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
-import com.example.mechanicalapp.ui.data.MecRentData
-import com.example.mechanicalapp.ui.data.MecData
+import com.example.mechanicalapp.ui.data.MecRentInData
+import com.example.mechanicalapp.ui.data.MecRentOutData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.layout_more_data_title.*
@@ -31,8 +31,8 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     private var mMecFactoryAdapter: MecFactoryAdapter? = null//维修厂
 
     var mList: MutableList<String> = ArrayList<String>()
-    var mRentList: MutableList<MecRentData> = ArrayList<MecRentData>()
-    var mLeaseList: MutableList<MecData> = ArrayList<MecData>()
+    var mRentList: MutableList<MecRentInData> = ArrayList<MecRentInData>()
+    var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
     private val leftOfString: Array<String> = arrayOf("出租", "出售", "出租", "招聘")
     private val rigthOfString: Array<String> = arrayOf("求租", "求购", "求租", "求职")
 

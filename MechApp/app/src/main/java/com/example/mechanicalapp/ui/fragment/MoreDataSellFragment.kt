@@ -14,20 +14,22 @@ import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.MoreSellAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecData
+import com.example.mechanicalapp.ui.data.MecRentOutData
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
-import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
+import com.example.mechanicalapp.ui.mvp.impl.SellPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecSellView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
 class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener, ProgressListener, MecBusinessView<NetData> {
+    PopUtils.onViewListener, ProgressListener, MecSellView<NetData> {
     var mAdapter: MoreSellAdapter? = null
-    var mList: MutableList<MecData> = ArrayList<MecData>()
+    var mList: MutableList<MecSellData> = ArrayList<MecSellData>()
 
     var popRecy : RecyclerView?=null
     private var mScreenAdapter : ScreenAdapter?=null
@@ -69,8 +71,8 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
         ly_screen4.setOnClickListener(this)
         ly_screen5.setOnClickListener(this)
 
-        mPresenter = MecBuyPresenter(mContext,this)
-        (mPresenter as MecBuyPresenter).getBuyList(1)
+        mPresenter = SellPresenter(mContext,this)
+        (mPresenter as SellPresenter).getSellList(1)
     }
 
     override fun showLoading() {
@@ -181,14 +183,14 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
 
     }
 
-    override fun refreshUI(list: List<MecData>) {
+    override fun refreshUI(list: List<MecSellData>) {
 
         mList.clear()
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun loadMore(list: List<MecData>) {
+    override fun loadMore(list: List<MecSellData>) {
     }
 
     override fun err() {

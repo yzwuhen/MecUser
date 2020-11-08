@@ -7,10 +7,9 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.AskDetailsActivity
-import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecRentData
+import com.example.mechanicalapp.ui.data.MecRentInData
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_search_all_result.*
 class SearchMecAsk : BaseCusFragment() , OnItemClickListener {
 
 
-    var mList: MutableList<MecRentData> = ArrayList<MecRentData>()
+    var mList: MutableList<MecRentInData> = ArrayList<MecRentInData>()
     private var mAdapter: UserRentAdapter? = null
 
     override fun getLayoutId(): Int {

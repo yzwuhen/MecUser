@@ -159,22 +159,22 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         mHosPartsView?.setData(mecProds)
     }
 
-    override fun showLease(list: List<MecData>) {
+    override fun showLease(list: List<MecRentOutData>) {
         Log.e("sssss============", "sssssssss==============showLease===${list.size}")
         mUserDemandKtView?.setLease(list)
     }
 
-    override fun showUserRent(list: List<MecRentData>) {
+    override fun showUserRent(list: List<MecRentInData>) {
         Log.e("sssss============", "sssssssss==============showUserRent===${list.size}")
         mUserDemandKtView?.setRent(list)
     }
 
-    override fun showBossSell(list: List<MecData>) {
+    override fun showBossSell(list: List<MecSellData>) {
         Log.e("sssss============", "sssssssss==============showBossSell===${list.size}")
         mBossDemandView?.setSell(list)
     }
 
-    override fun showBossBuy(list: List<MecRentData>) {
+    override fun showBossBuy(list: List<MecBuyData>) {
         Log.e("sssss============", "sssssssss==============showBossBuy===${list.size}")
         mBossDemandView?.setBuy(list)
     }

@@ -14,13 +14,10 @@ import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.adapter.MoreUserRentAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecData
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.mvp.impl.BuyPresenter
 import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
-import com.example.mechanicalapp.ui.mvp.v.MecBusinessView
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
@@ -72,7 +69,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
         ly_screen5.setOnClickListener(this)
 
         mPresenter = MecLeaseListPresenter(mContext,this)
-        (mPresenter as MecLeaseListPresenter).getLeaseList(2)
+        (mPresenter as MecLeaseListPresenter).getRentList(2)
     }
 
     override fun showLoading() {

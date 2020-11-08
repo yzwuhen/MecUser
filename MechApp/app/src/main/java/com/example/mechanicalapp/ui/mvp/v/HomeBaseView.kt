@@ -9,8 +9,8 @@ interface HomeBaseView<NetData> : BaseView<NetData> {
     fun showHotMec(hotMec: List<HotMechineCate>)//热门器械
     fun showParts(mecProds: List<PartsData>)//热门配件
 
-    fun showLease(list: List<MecData>)//出租
-    fun showUserRent(list: List<MecRentData>)//求租
-    fun showBossSell(list: List<MecData>)//出售
-    fun showBossBuy(list: List<MecRentData>)//求购
+    fun showLease(list: List<MecRentOutData>)//出租
+    fun showUserRent(list: List<MecRentInData>)//求租
+    fun showBossSell(list: List<MecSellData>)//出售
+    fun showBossBuy(list: List<MecBuyData>)//求购
 }

@@ -1,73 +1,67 @@
 package com.example.mechanicalapp.ui.data;
-
-import java.io.Serializable;
-
-public class MecLeaseData implements Serializable {
+/**
+ * 出租
+ */
+public class MecRentOutData {
 
     /**
-     * priceUnit_dictText : 元/台班
-     * facDate : 2020-10-18
+     * facDate : 2020-10-21
      * modelId : 1321491075206004738
-     * city : null
-     * pic : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/1603903127813_1603903252472.jpg
-     * cateName : 挖掘机子类
+     * city :
+     * pic : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/1603903127813_1603904624932.jpg
+     * cateName :
+     * paymentType : 0
      * isPerson : 1
-     * mecUnit : 2
-     * orderTime : 2020-10-19
+     * orderTime : 2020-10-28
      * updateBy : admin
-     * briefDesc : 点点滴滴才休息
-     * price : 100
+     * briefDesc : 123123
+     * price : 10000
      * isOn : 1
-     * contactPone : 15013096883
      * isNew_dictText : 是
-     * id : 1318136162723864517
+     * id : 1
      * isTop_dictText : null
-     * tittle : 大臂机械20
-     * priceUnit : 1
+     * tittle : 推土机SD13型号
      * brandName : 八达重工
      * gpsLon : 1.22333
      * bussiessType : 2
-     * contactName : 老铁
-     * tenancy : 1
+     * contactName : 老陈
      * updateTime : 2020-11-05 20:16:35
      * isNew : 1
      * workTime : 2年
      * modelName : 机械机型1
      * createBy : admin
-     * createTime : 2020-10-20 08:50:55
-     * cateId : 1323668504007696385
+     * createTime : 2020-10-29 01:04:04
+     * cateId : 1321476604976406530
      * isTop : null
      * brandId : 1321490471452721153
      * gpsLat : 3.122
-     * sysOrgCode : string
+     * sysOrgCode : A01A03
      * isEnterprise : null
-     * bussiessType_dictText : 求租
+     * paymentType_dictText : 全款
+     * bussiessType_dictText : 求购
+     * contactPhone : 15013098003
      */
 
-    private String priceUnit_dictText;
     private String facDate;
     private String modelId;
-    private Object city;
+    private String city;
     private String pic;
     private String cateName;
+    private String paymentType;
     private String isPerson;
-    private String mecUnit;
     private String orderTime;
     private String updateBy;
     private String briefDesc;
-    private Double price;
+    private String price;
     private String isOn;
-    private String contactPone;
     private String isNew_dictText;
     private String id;
     private Object isTop_dictText;
     private String tittle;
-    private String priceUnit;
     private String brandName;
     private String gpsLon;
     private String bussiessType;
     private String contactName;
-    private String tenancy;
     private String updateTime;
     private String isNew;
     private String workTime;
@@ -80,15 +74,9 @@ public class MecLeaseData implements Serializable {
     private String gpsLat;
     private String sysOrgCode;
     private Object isEnterprise;
+    private String paymentType_dictText;
     private String bussiessType_dictText;
-
-    public String getPriceUnit_dictText() {
-        return priceUnit_dictText;
-    }
-
-    public void setPriceUnit_dictText(String priceUnit_dictText) {
-        this.priceUnit_dictText = priceUnit_dictText;
-    }
+    private String contactPhone;
 
     public String getFacDate() {
         return facDate;
@@ -106,11 +94,11 @@ public class MecLeaseData implements Serializable {
         this.modelId = modelId;
     }
 
-    public Object getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(Object city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -130,20 +118,20 @@ public class MecLeaseData implements Serializable {
         this.cateName = cateName;
     }
 
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
     public String getIsPerson() {
         return isPerson;
     }
 
     public void setIsPerson(String isPerson) {
         this.isPerson = isPerson;
-    }
-
-    public String getMecUnit() {
-        return mecUnit;
-    }
-
-    public void setMecUnit(String mecUnit) {
-        this.mecUnit = mecUnit;
     }
 
     public String getOrderTime() {
@@ -170,11 +158,11 @@ public class MecLeaseData implements Serializable {
         this.briefDesc = briefDesc;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -184,14 +172,6 @@ public class MecLeaseData implements Serializable {
 
     public void setIsOn(String isOn) {
         this.isOn = isOn;
-    }
-
-    public String getContactPone() {
-        return contactPone;
-    }
-
-    public void setContactPone(String contactPone) {
-        this.contactPone = contactPone;
     }
 
     public String getIsNew_dictText() {
@@ -226,14 +206,6 @@ public class MecLeaseData implements Serializable {
         this.tittle = tittle;
     }
 
-    public String getPriceUnit() {
-        return priceUnit;
-    }
-
-    public void setPriceUnit(String priceUnit) {
-        this.priceUnit = priceUnit;
-    }
-
     public String getBrandName() {
         return brandName;
     }
@@ -264,14 +236,6 @@ public class MecLeaseData implements Serializable {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
-    }
-
-    public String getTenancy() {
-        return tenancy;
-    }
-
-    public void setTenancy(String tenancy) {
-        this.tenancy = tenancy;
     }
 
     public String getUpdateTime() {
@@ -370,11 +334,27 @@ public class MecLeaseData implements Serializable {
         this.isEnterprise = isEnterprise;
     }
 
+    public String getPaymentType_dictText() {
+        return paymentType_dictText;
+    }
+
+    public void setPaymentType_dictText(String paymentType_dictText) {
+        this.paymentType_dictText = paymentType_dictText;
+    }
+
     public String getBussiessType_dictText() {
         return bussiessType_dictText;
     }
 
     public void setBussiessType_dictText(String bussiessType_dictText) {
         this.bussiessType_dictText = bussiessType_dictText;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
+    }
+
+    public void setContactPhone(String contactPhone) {
+        this.contactPhone = contactPhone;
     }
 }

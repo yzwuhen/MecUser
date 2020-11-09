@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.RecruitPresenter
 import com.example.mechanicalapp.ui.mvp.v.WorkAboutView
@@ -22,23 +23,12 @@ import kotlinx.android.synthetic.main.fragment_more_data.*
 class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,WorkAboutView {
     var mAdapter: MoreRecruitAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
 
     var popRecy: RecyclerView? = null
     var mScreenAdapter: ScreenAdapter? = null
 
     private var mStringList: MutableList<String> = ArrayList<String>()
-
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-    }
 
     override fun initView() {
         super.initView()
@@ -73,12 +63,26 @@ class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View
         })
 
         mPresenter = RecruitPresenter(mContext,this)
-        (mPresenter as RecruitPresenter)?.getRecruitList()
+        (mPresenter as RecruitPresenter)?.getRecruitList(1)
     }
 
     fun closeRefreshView() {
         spring_list.setEnable(true)
         spring_list.onFinishFreshAndLoad()
+    }
+
+    override fun refreshRecruitUI(list: List<RecruitData>) {
+        mList.clear()
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadRecruitMore(list: List<RecruitData>) {
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun err() {
     }
 
     override fun showLoading() {

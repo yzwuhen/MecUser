@@ -3,8 +3,12 @@ package com.example.mechanicalapp.ui.data;
 import java.io.Serializable;
 
 public class PartsData implements Serializable {
+
+
     /**
+     * priceUnit_dictText : 元/小时
      * city : null
+     * pic : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/1603903127813_1603903252472.jpg
      * partsType : modlecode3
      * content : 2
      * isPerson : 1
@@ -13,27 +17,29 @@ public class PartsData implements Serializable {
      * updateBy : admin
      * price : 22
      * isOn : 1
-     * id : 1
+     * id : 2
      * isTop_dictText : null
      * brand : null
      * isTalk : 1
      * priceUnit : 2
      * address : 2
      * gpsLon : null
-     * bussiessType : 1
+     * bussiessType : 2
      * contactName : 2
      * updateTime : 2020-11-05 20:16:35
      * createBy : admin
      * createTime : 2020-10-31 19:23:04
      * isTop : null
      * gpsLat : null
-     * name : 挖掘机反光镜
+     * name : 挖掘机链条
      * sysOrgCode : A01A03
      * isEnterprise : null
      * contactPhone : 12333233333
      */
 
+    private String priceUnit_dictText;
     private String city;
+    private String pic;
     private String partsType;
     private String content;
     private String isPerson;
@@ -49,7 +55,7 @@ public class PartsData implements Serializable {
     private String priceUnit;
     private String address;
     private Object gpsLon;
-    private int bussiessType;
+    private Integer bussiessType;
     private String contactName;
     private String updateTime;
     private String createBy;
@@ -61,12 +67,28 @@ public class PartsData implements Serializable {
     private Object isEnterprise;
     private String contactPhone;
 
+    public String getPriceUnit_dictText() {
+        return priceUnit_dictText;
+    }
+
+    public void setPriceUnit_dictText(String priceUnit_dictText) {
+        this.priceUnit_dictText = priceUnit_dictText;
+    }
+
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
     public String getPartsType() {
@@ -189,11 +211,11 @@ public class PartsData implements Serializable {
         this.gpsLon = gpsLon;
     }
 
-    public int getBussiessType() {
+    public Integer getBussiessType() {
         return bussiessType;
     }
 
-    public void setBussiessType(int bussiessType) {
+    public void setBussiessType(Integer bussiessType) {
         this.bussiessType = bussiessType;
     }
 

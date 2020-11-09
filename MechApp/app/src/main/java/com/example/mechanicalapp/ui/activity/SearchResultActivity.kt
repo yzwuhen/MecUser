@@ -7,9 +7,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
-import com.example.mechanicalapp.ui.data.MecRentOutData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_search_result.*
@@ -29,6 +27,9 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     private var mMoreFactoryActivity:SearchResultFactoryAdapter?=null
     var mList: MutableList<String> = ArrayList<String>()
+
+    var mPartsList: MutableList<PartsData> = ArrayList<PartsData>()
+    var mRecruitList: MutableList<RecruitData> = ArrayList<RecruitData>()
     var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
     private var type:Int =0;
     override fun getLayoutId(): Int {
@@ -51,20 +52,20 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
             recycler_list.adapter = mAdapter
         }
         else if (type ==1){
-            mRecruitAdapter = MoreRecruitAdapter(this, mList, this)
+            mRecruitAdapter = MoreRecruitAdapter(this, mRecruitList, this)
             recycler_list.adapter = mRecruitAdapter
         }
         else if (type ==2){
-            mJobWantAdapter = MoreJobWantAdapter(this, mList, this)
+            mJobWantAdapter = MoreJobWantAdapter(this, mRecruitList, this)
             recycler_list.adapter = mJobWantAdapter
         }
         else if (type ==5){
-            mPartsAdapter = MorePartsAdapter(this, mList, this)
+            mPartsAdapter = MorePartsAdapter(this, mPartsList, this)
             recycler_list.adapter = mPartsAdapter
         }
 
         else if (type ==4){
-            mPartsAskAdapter = MorePartsAskAdapter(this, mList, this)
+            mPartsAskAdapter = MorePartsAskAdapter(this, mPartsList, this)
             recycler_list.adapter = mPartsAskAdapter
         }
 

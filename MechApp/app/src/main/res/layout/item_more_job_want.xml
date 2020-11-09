@@ -60,6 +60,22 @@
         app:layout_constraintTop_toTopOf="@+id/iv_job_pic" />
 
     <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_label"
+        android:layout_width="39dp"
+        android:layout_height="22dp"
+        android:gravity="center"
+        android:layout_marginRight="@dimen/dp_17"
+        android:text="面议"
+        android:textColor="#FE9418"
+        android:textSize="12sp"
+        android:background="@drawable/label_bg"
+        app:layout_constraintTop_toTopOf="@+id/iv_job_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <TextView
         android:id="@+id/tv_job_seekers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.RecruitPresenter
 import com.example.mechanicalapp.ui.mvp.v.WorkAboutView
@@ -24,23 +25,12 @@ import kotlinx.android.synthetic.main.fragment_more_data.*
 class RentFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,WorkAboutView {
     var mAdapter: MoreJobWantAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
 
     private var popRecy: RecyclerView? = null
     private var mScreenAdapter: ScreenAdapter? = null
 
     private var mStringList: MutableList<String> = ArrayList<String>()
-
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-    }
 
     override fun initView() {
         super.initView()
@@ -75,12 +65,26 @@ class RentFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.On
             override fun onLoadmore() {}
         })
         mPresenter = RecruitPresenter(mContext,this)
-        (mPresenter as RecruitPresenter)?.getWantWorkList()
+        (mPresenter as RecruitPresenter)?.getRecruitList(2)
     }
 
     fun closeRefreshView() {
         spring_list?.isEnable=true
         spring_list?.onFinishFreshAndLoad()
+    }
+
+    override fun refreshRecruitUI(list: List<RecruitData>) {
+        mList.clear()
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadRecruitMore(list: List<RecruitData>) {
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun err() {
     }
 
     override fun showLoading() {

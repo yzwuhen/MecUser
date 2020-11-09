@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.PartsData
+import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_more_parts_ask.view.*
+
 
 class MorePartsAskAdapter (
     var mContext: Context,
-    var mList: MutableList<String>,
+    var mList: MutableList<PartsData>,
     var mOnItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -24,9 +27,14 @@ class MorePartsAskAdapter (
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Glide.with(mContext)
-            .load("https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723")
-            .into(holder.itemView.iv_pic);
+
+        ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
+
+        holder.itemView.tv_title.text =mList[position].name
+        holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].partsType}"
+        // holder.itemView.tv_distance.text ="距离${mList[position].}"
+        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
+        holder.itemView.tv_time.text = DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
 
     }
 
@@ -44,6 +52,7 @@ class MorePartsAskAdapter (
                     adapterPosition
                 )
             })
+            itemView.iv_phone.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.iv_phone,adapterPosition) })
         }
     }
 }

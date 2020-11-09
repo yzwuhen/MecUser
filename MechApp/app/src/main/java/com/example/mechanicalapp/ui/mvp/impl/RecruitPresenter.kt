@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.RecruitBean
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.WorkAboutView
 
@@ -12,7 +13,6 @@ class RecruitPresenter (
     private var baseView: WorkAboutView
 ) :
     BasePresenter {
-
 
     private var baseModel: RecruitModelImpl? = null
     private var page: Int = 0
@@ -29,27 +29,27 @@ class RecruitPresenter (
 
     }
 
-    fun getRecruitList() {
+    fun getRecruitList(type:Int) {
 
-        baseModel?.getRecruitList(
+        baseModel?.getRecruitList(type,
             page,
             pageSize,
             region,
             typeWork,
             sort,
-            object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
-//                  /  if (t?.code == 200 && t?.result != null) {
-//                    //    t?.result?.records?.let { baseView?.refreshUI(it) }
-//                    //    baseView?.hiedLoading()
-//                    } else {
-//                //        baseView?.err()
-//                    }
+            object : ISubscriberListener<RecruitBean> {
+                override fun onNext(t: RecruitBean?) {
+                   if (t?.code == 200 && t?.result != null) {
+                        t?.result?.records?.let { baseView?.refreshRecruitUI(it) }
+                        baseView?.hiedLoading()
+                    } else {
+                        baseView?.err()
+                    }
 
                 }
 
                 override fun onError(e: Throwable?) {
-               //     baseView?.err()
+                    baseView?.err()
                     Log.e("sssss============", "sssssssss==============onError$e")
                 }
 
@@ -58,34 +58,7 @@ class RecruitPresenter (
             })
     }
 
-    fun getWantWorkList() {
 
-        baseModel?.getWantWorkList(
-            page,
-            pageSize,
-            region,
-            typeWork,
-            sort,
-            object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
-//                  /  if (t?.code == 200 && t?.result != null) {
-//                    //    t?.result?.records?.let { baseView?.refreshUI(it) }
-//                    //    baseView?.hiedLoading()
-//                    } else {
-//                //        baseView?.err()
-//                    }
-
-                }
-
-                override fun onError(e: Throwable?) {
-                    //     baseView?.err()
-                    Log.e("sssss============", "sssssssss==============onError$e")
-                }
-
-                override fun onCompleted() {
-                }
-            })
-    }
 
     override fun onDestroy() {
     }

@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.layout_more_data_title.*
  * 招聘
  */
 class MoreRecruitActivity :BaseCusActivity(), View.OnClickListener,
-    ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener ,WorkAboutView{
+    ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener{
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
@@ -104,17 +104,6 @@ class MoreRecruitActivity :BaseCusActivity(), View.OnClickListener,
 
     }
 
-    override fun showLoading() {
-
-    }
-
-    override fun hiedLoading() {
-
-    }
-
-    override fun showData(t: MutableList<StoreLeftBean>) {
-
-    }
 
     private fun showView(index: Int) {
         cus_page.currentItem = index

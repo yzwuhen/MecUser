@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.RecruitBean
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
@@ -22,28 +23,28 @@ class RecruitModelImpl  : BaseModel {
     }
 
 
-    fun getRecruitList(pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,mISubscriberListener: ISubscriberListener<NetData>) {
+    fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
 
         Log.e("sssss============","sssssssss==============getMecBuyList")
-        appsService?.getRecruitList(pageIndex,pageSize,"1",region,typeWork,sort)
+        appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,sort)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(mISubscriberListener))
+            )?.subscribe(NetSubscribe<RecruitBean>(mISubscriberListener))
 
 
     }
 
 
-    fun getWantWorkList(pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,mISubscriberListener: ISubscriberListener<NetData>) {
-
-        Log.e("sssss============","sssssssss==============getMecBuyList")
-        appsService?.getWantWorkList(pageIndex,pageSize,"2",region,typeWork,sort)
-            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-                AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(mISubscriberListener))
-
-
-    }
+//    fun getWantWorkList(pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,mISubscriberListener: ISubscriberListener<NetData>) {
+//
+//        Log.e("sssss============","sssssssss==============getMecBuyList")
+//        appsService?.getWantWorkList(pageIndex,pageSize,"2",region,typeWork,sort)
+//            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+//                AndroidSchedulers.mainThread()
+//            )?.subscribe(NetSubscribe<NetData>(mISubscriberListener))
+//
+//
+//    }
 
     override fun initRequest() {
 

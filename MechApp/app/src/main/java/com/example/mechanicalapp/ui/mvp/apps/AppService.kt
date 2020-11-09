@@ -80,7 +80,7 @@ interface AppService {
     @GET("/jeecg-boot/market/mecMarketRecruit/list")
     fun getRecruitList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("recruitType")recruitType:String,
                       @Query(" region") region:String?, @Query("typeWork")typeWork:String?, @Query("sort")sort:String?
-    ):Observable<NetData>
+    ):Observable<RecruitBean>
 
 
     /**
@@ -96,7 +96,7 @@ interface AppService {
 
 
     /**
-     * 求职列表
+     * 工厂列表
      * region：地区
      */
     @GET("/jeecg-boot/repair/mecRepaireFactory/list")

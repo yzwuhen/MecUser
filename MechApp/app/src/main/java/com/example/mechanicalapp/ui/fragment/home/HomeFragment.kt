@@ -154,7 +154,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         mHotApparatusView?.setData(hotMec)
     }
 
-    override fun showParts(mecProds: List<PartsData>) {
+    override fun showParts(mecProds: List<HomePartsData>) {
         Log.e("sssss============", "sssssssss==============showParts===${mecProds.size}")
         mHosPartsView?.setData(mecProds)
     }

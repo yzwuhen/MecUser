@@ -4,14 +4,13 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.data.PartsData
+import com.example.mechanicalapp.ui.data.HomePartsData
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_hot_parts.view.*
 
-class HotPartsAdapter (var mContext: Context, var mList:MutableList<PartsData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HotPartsAdapter (var mContext: Context, var mList:MutableList<HomePartsData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

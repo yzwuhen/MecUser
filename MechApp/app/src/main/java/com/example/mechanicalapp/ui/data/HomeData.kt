@@ -6,7 +6,7 @@ class HomeData : NetData() {
     data class Result(
         val adList: List<BannerData>,
         val hotMechineCateList: List<HotMechineCate>,
-        val mecProds: List<PartsData>,
+        val mecProds: List<HomePartsData>,
         val newMecMarketMechanicsIn: List<MecRentInData>,//求租
         val newMecMarketMechanicsOut: List<MecRentOutData>,//出租
         val newMecMarketOldMechanicsIn: List<MecBuyData>,//求购列表

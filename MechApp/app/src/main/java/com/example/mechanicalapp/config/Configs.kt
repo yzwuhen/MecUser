@@ -24,8 +24,8 @@ object Configs {
 //    const val EC_BRAND_RESULT_Extra:String ="ec_brand";//机械品牌选择后返回得result_code
 //    const val EC_MODEL_RESULT_Extra:String ="ec_model";//机械型号选择后返回得result_code
 
-    const val BASE_URL:String="http://206e5202m7.imwork.net"
-
+    //const val BASE_URL:String="http://206e5202m7.imwork.net"
+    const val BASE_URL:String="http://285151h37s.qicp.vip/"
   //  const val TOKEN:String="token"
 
 }

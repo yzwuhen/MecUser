@@ -2,25 +2,20 @@ package com.example.mechanicalapp.ui.view
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
-import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.activity.MorePartsActivity
-import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.HotPartsAdapter
-import com.example.mechanicalapp.ui.data.MecProd
-import com.example.mechanicalapp.ui.data.PartsData
+import com.example.mechanicalapp.ui.data.HomePartsData
 import kotlinx.android.synthetic.main.layout_hot_parts.view.*
 
 class HosPartsView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener {
-    private var mList: MutableList<PartsData> = ArrayList<PartsData>()
+    private var mList: MutableList<HomePartsData> = ArrayList<HomePartsData>()
     var mAdapter: HotPartsAdapter? = null
 
     init {
@@ -55,7 +50,7 @@ class HosPartsView(var mContext: Context) : LinearLayout(mContext), OnItemClickL
         mContext.startActivity(intent)
     }
 
-    fun setData(mecProds: List<PartsData>) {
+    fun setData(mecProds: List<HomePartsData>) {
 
         if (mecProds == null) {
             return

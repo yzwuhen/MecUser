@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreLeaseData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.PartsBean
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
@@ -45,12 +46,12 @@ class MecLeaseModelImp: BaseModel {
     }
 
 
-    fun getPartsLeaseList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,mISubscriberListener: ISubscriberListener<NetData>) {
+    fun getPartsLeaseList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,mISubscriberListener: ISubscriberListener<PartsBean>) {
         Log.e("sssss============","sssssssss==============getLeaseList")
         appsService?.getPartsList(type,pageIndex,pageSize,brandId,cateId,modelId)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(mISubscriberListener))
+            )?.subscribe(NetSubscribe<PartsBean>(mISubscriberListener))
 
 
     }

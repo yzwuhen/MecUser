@@ -2,7 +2,7 @@ package com.example.mechanicalapp.ui.data
 
 import java.io.Serializable
 
-class PartsData : Serializable {
+class HomePartsData : Serializable {
     var createBy: String = ""
     var createTime: String = ""
     var freightRules: String = ""

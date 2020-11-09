@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.PartsData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MorePartsLeaseView
@@ -23,22 +24,13 @@ import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
 class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,MorePartsLeaseView<NetData> {
     var mAdapter: MorePartsAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<PartsData> = ArrayList<PartsData>()
 
     var popRecy : RecyclerView?=null
     private var mScreenAdapter : ScreenAdapter?=null
 
     private var mStringList :MutableList<String> = ArrayList<String>()
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-    }
+
 
     override fun initView() {
         super.initView()
@@ -111,5 +103,19 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
             tv_ec_type.text =data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun refreshUI(list: List<PartsData>) {
+        mList.clear()
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadMore(list: List<PartsData>) {
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun err() {
     }
 }

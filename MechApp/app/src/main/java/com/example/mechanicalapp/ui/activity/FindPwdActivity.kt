@@ -20,7 +20,7 @@ class FindPwdActivity:BaseActivity<NetData>(),View.OnClickListener ,SidleView.Si
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun getLayoutId(): Int {

@@ -86,11 +86,6 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
         return R.layout.fragment_more_data
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
-
-
-
     private fun showInput() {
 
         activity?.let { PopUtils.init(mContext, it,this) }

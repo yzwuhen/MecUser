@@ -75,14 +75,17 @@ class EngineerFragment :BaseFragment<NetData>(),OnItemClickListener{
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_engineer
     }
 
     override fun onItemClick(view: View, position: Int) {
+
+
+    }
+
+    override fun err() {
 
 
     }

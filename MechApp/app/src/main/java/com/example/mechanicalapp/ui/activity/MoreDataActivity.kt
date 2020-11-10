@@ -118,7 +118,7 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
 
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
 
     }
 

@@ -101,4 +101,6 @@ public abstract class BaseFragment<T> extends Fragment implements BaseView<T> {
     }
 
     protected abstract int getLayoutId();
+
+
 }

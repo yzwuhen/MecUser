@@ -91,7 +91,7 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
         TODO("Not yet implemented")
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
         TODO("Not yet implemented")
     }
 

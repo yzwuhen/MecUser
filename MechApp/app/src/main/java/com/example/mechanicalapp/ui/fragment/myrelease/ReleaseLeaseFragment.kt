@@ -97,7 +97,7 @@ class ReleaseLeaseFragment(var type:Int)   : BaseFragment<NetData>(), OnItemClic
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {

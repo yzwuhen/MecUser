@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.HomeData
+import com.example.mechanicalapp.ui.data.MoreFactoryBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
@@ -33,12 +34,12 @@ class ModelImpl : BaseModel {
         mecType: String?,
         partType: String?,
         sort: String?,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<MoreFactoryBean>
     ) {
         appsService?.getFactoryList(page,pageSize,mecType,partType,sort)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<MoreFactoryBean>(iSubscriberListener))
 
     }
 }

@@ -83,9 +83,6 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
         return R.layout.fragment_more_data
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
-
 
 
     private fun showInput() {

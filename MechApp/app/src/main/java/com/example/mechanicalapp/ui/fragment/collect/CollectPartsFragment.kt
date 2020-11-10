@@ -50,7 +50,7 @@ class CollectPartsFragment  : BaseFragment<NetData>(), View.OnClickListener, Vie
         cus_page.addOnPageChangeListener(this)
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(p0: View?) {

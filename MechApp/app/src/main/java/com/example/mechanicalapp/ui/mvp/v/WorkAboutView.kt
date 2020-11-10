@@ -9,6 +9,4 @@ import com.example.mechanicalapp.ui.data.RecruitData
 interface WorkAboutView:BaseView<NetData> {
     fun refreshRecruitUI(list: List<RecruitData>)
     fun loadRecruitMore(list: List<RecruitData>)
-
-    fun err()
 }

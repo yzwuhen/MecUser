@@ -51,7 +51,7 @@ class LookLeasingFragment : BaseFragment<NetData>(), View.OnClickListener, ViewP
         cus_page.addOnPageChangeListener(this)
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(p0: View?) {

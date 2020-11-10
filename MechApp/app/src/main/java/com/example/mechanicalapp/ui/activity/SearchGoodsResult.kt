@@ -54,7 +54,7 @@ class SearchGoodsResult : BaseActivity<NetData>(), OnItemClickListener {
 
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
 
     }
 

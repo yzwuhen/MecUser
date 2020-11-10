@@ -71,7 +71,7 @@ class MaintenanceActivity : BaseActivity<NetData>(),View.OnClickListener ,PopUti
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(view: View?) {

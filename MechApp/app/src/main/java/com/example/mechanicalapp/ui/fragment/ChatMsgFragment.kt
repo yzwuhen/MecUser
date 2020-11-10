@@ -34,8 +34,7 @@ class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClic
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
+
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_msg_list
@@ -107,6 +106,10 @@ class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClic
 
         }
         mTipDialog?.show()
+
+    }
+
+    override fun err() {
 
     }
 }

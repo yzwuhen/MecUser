@@ -85,8 +85,6 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
         return R.layout.fragment_more_data
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
 
     private fun showDialogType(){
         if (mButtDialog ==null){

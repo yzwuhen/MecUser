@@ -86,9 +86,6 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
         return R.layout.fragment_more_data
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
-
     private fun showDialogType(){
         if (mButtDialog ==null){
             mButtDialog = BottomSheetDialog(mContext)

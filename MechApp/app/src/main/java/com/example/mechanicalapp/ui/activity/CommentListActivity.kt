@@ -53,7 +53,7 @@ class CommentListActivity : BaseActivity<NetData>() ,View.OnClickListener,OnItem
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(v: View?) {

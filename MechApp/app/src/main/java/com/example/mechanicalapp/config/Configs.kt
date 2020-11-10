@@ -20,6 +20,7 @@ object Configs {
     const val FACTORY_RESULT_CODE:Int =4;//维修厂选择后返回得result_code
     const val PARTS_RESULT_CODE:Int =5;//配件类型选择后返回得result_code
     const val CITY_RESULT_CODE:Int =6;//城市选择后返回得result_code
+    const val PARTS_TYPE_RESULT_CODE:Int =7;//配件类型选择后返回得result_code
     const val SCREEN_RESULT_Extra:String ="screen_type";//选择后返回得result_code
 //    const val EC_BRAND_RESULT_Extra:String ="ec_brand";//机械品牌选择后返回得result_code
 //    const val EC_MODEL_RESULT_Extra:String ="ec_model";//机械型号选择后返回得result_code

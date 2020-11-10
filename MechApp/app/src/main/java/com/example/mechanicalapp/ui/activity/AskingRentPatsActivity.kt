@@ -61,7 +61,7 @@ class AskingRentPatsActivity : BaseActivity<NetData>(), OnItemClickListener, Vie
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {

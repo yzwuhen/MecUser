@@ -181,7 +181,7 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     private fun moveMap(latitude: Double, longitude: Double) {

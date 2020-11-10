@@ -9,10 +9,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseActivity
-import com.example.mechanicalapp.ui.data.MecRentInData
-import com.example.mechanicalapp.ui.data.MecRentOutData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.*
 import kotlinx.android.synthetic.main.layout_more_data_title.*
 import kotlinx.android.synthetic.main.layout_search_result.*
 
@@ -33,6 +30,8 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     var mList: MutableList<String> = ArrayList<String>()
     var mRentList: MutableList<MecRentInData> = ArrayList<MecRentInData>()
     var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
+    var mFactoryList: MutableList<FactoryData> = ArrayList<FactoryData>()
+
     private val leftOfString: Array<String> = arrayOf("出租", "出售", "出租", "招聘")
     private val rigthOfString: Array<String> = arrayOf("求租", "求购", "求租", "求职")
 
@@ -62,7 +61,7 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
 
         mJobWantAdapter = JobWantAdapter(this, mList, this)
 
-        mMecFactoryAdapter = MecFactoryAdapter(this, mList, this)
+        mMecFactoryAdapter = MecFactoryAdapter(this, mFactoryList, this)
     }
 
     override fun initView() {
@@ -103,7 +102,7 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(view: View?) {

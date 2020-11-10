@@ -75,15 +75,17 @@ class OrderListFragment(var type: Int) : BaseFragment<NetData>(), OnItemClickLis
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-
-    }
 
     override fun onItemClick(view: View, position: Int) {
 
         var bundle =Bundle()
         bundle.putInt("order_type",position)
         jumpActivity(bundle,OrderDetailsActivity::class.java)
+
+    }
+
+    override fun err() {
+
 
     }
 }

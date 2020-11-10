@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.WorkTypeAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.MecTypeParentData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_ec_type.*
@@ -19,7 +20,7 @@ class WorkType : BaseActivity<NetData>(), OnItemClickListener {
     private var mLeftAdapter: EcTypeLeftAdapter? = null
     private var mRightAdapter: WorkTypeAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
-
+    var mLeftList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
     }
@@ -37,7 +38,7 @@ class WorkType : BaseActivity<NetData>(), OnItemClickListener {
         mList.add("管理工种")
 
 
-        mLeftAdapter = EcTypeLeftAdapter(this, mList, this)
+        mLeftAdapter = EcTypeLeftAdapter(this, mLeftList, this)
         recycler_list_left.layoutManager = LinearLayoutManager(this)
         recycler_list_left.adapter = mLeftAdapter
 
@@ -58,7 +59,7 @@ class WorkType : BaseActivity<NetData>(), OnItemClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
 

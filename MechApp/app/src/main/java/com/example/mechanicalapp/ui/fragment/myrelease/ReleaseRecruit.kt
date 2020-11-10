@@ -94,7 +94,7 @@ class ReleaseRecruit : BaseFragment<NetData>() , OnItemClickListener, PopUtils.o
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
 

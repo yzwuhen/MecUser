@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.MecFactoryAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.FactoryPresenter
@@ -31,7 +32,7 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
 
 
     private var mMecFactoryShopAdapter : MecFactoryAdapter?=null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<FactoryData> = ArrayList<FactoryData>()
 
     private var mPresenter:FactoryPresenter?=null
 
@@ -57,11 +58,6 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
         mStringList?.add("最新上架")
 
 
-
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
         mMecFactoryShopAdapter = MecFactoryAdapter(this,mList,this)
 
         recycle_list.layoutManager = LinearLayoutManager(this)
@@ -94,13 +90,24 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
     override fun initPresenter() {
     }
 
+    override fun refreshUI(list: List<FactoryData>) {
+        mList.clear()
+        mList.addAll(list)
+        mMecFactoryShopAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadMore(list: List<FactoryData>) {
+        mList.addAll(list)
+        mMecFactoryShopAdapter?.notifyDataSetChanged()
+    }
+
     override fun showLoading() {
     }
 
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(view: View?) {
@@ -111,8 +118,8 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
                 EcType::class.java
             )
             R.id.ly_parts_type ->jumpActivityForReSult(
-                Configs.EC_TYPE_RESULT_CODE,
-                EcType::class.java
+                Configs.PARTS_TYPE_RESULT_CODE,
+                PartsTypeActivity::class.java
             )
             R.id.ly_sort ->showPop()
             R.id.tv_search ->jumAct()

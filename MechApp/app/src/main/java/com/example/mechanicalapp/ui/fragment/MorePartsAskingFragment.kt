@@ -65,8 +65,6 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
         return R.layout.fragment_more_parts_lease
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
 
 
     private fun showInput() {

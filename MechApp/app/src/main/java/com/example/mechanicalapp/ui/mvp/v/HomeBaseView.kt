@@ -4,7 +4,6 @@ import com.example.mechanicalapp.ui.data.*
 
 interface HomeBaseView<NetData> : BaseView<NetData> {
 
-    fun err()
     fun showAd(adList: List<BannerData>)
     fun showHotMec(hotMec: List<HotMechineCate>)//热门器械
     fun showParts(mecProds: List<HomePartsData>)//热门配件

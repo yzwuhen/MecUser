@@ -2,6 +2,8 @@ package com.example.mechanicalapp.ui.mvp.impl
 
 import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
+import com.example.mechanicalapp.ui.data.MecTypeChildBean
+import com.example.mechanicalapp.ui.data.MecTypeParentBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
@@ -32,16 +34,24 @@ class MecAttrsModelImpl : BaseModel {
 
 
     }
-    fun getMecTypeList(pageIndex:Int,pageSize:Int,mISubscriberListener: ISubscriberListener<NetData>) {
+    fun getMecTypeList(pageIndex:Int,pageSize:Int,mISubscriberListener: ISubscriberListener<MecTypeParentBean>) {
 
         Log.e("sssss============","sssssssss==============getMecModelList")
-        appsService?.getMecType(pageIndex,pageSize)
+        appsService?.getMecParentType(pageIndex,pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(mISubscriberListener))
-
-
+            )?.subscribe(NetSubscribe<MecTypeParentBean>(mISubscriberListener))
     }
+
+    fun getMecTypeChildList(pageIndex:Int,pageSize:Int,pid:String,mISubscriberListener: ISubscriberListener<MecTypeChildBean>) {
+
+        Log.e("sssss============","sssssssss==============getMecModelList")
+        appsService?.getMecChildType(pageIndex,pageSize,pid)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MecTypeChildBean>(mISubscriberListener))
+    }
+
 
     fun getMecBrandList(pageIndex:Int,pageSize:Int,mISubscriberListener: ISubscriberListener<NetData>) {
 

@@ -11,6 +11,8 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.MoreSelMecTypeAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.MecTypeChildData
+import com.example.mechanicalapp.ui.data.MecTypeParentData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_ec_type.*
@@ -21,10 +23,10 @@ class MoreSelectMecType : BaseActivity<NetData>(), OnItemClickListener ,View.OnC
 
     private var mLeftAdapter: EcTypeLeftAdapter? = null
     private var mRightAdapter: MoreSelMecTypeAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
     private var callbackkStr:String=""
 
-    private var mRightList: MutableList<String> = ArrayList<String>()
+    private var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
@@ -33,26 +35,26 @@ class MoreSelectMecType : BaseActivity<NetData>(), OnItemClickListener ,View.OnC
 
     override fun initView() {
         super.initView()
-
-        mList.add("所有类型")
-        mList.add("挖掘机")
-        mList.add("推土机")
-        mList.add("旋挖机")
-        mList.add("汽车吊")
-        mList.add("泵车")
-        mList.add("装载机")
-
-
-        mRightList.add("履带式挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("履带式挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
+//
+//        mList.add("所有类型")
+//        mList.add("挖掘机")
+//        mList.add("推土机")
+//        mList.add("旋挖机")
+//        mList.add("汽车吊")
+//        mList.add("泵车")
+//        mList.add("装载机")
+//
+//
+//        mRightList.add("履带式挖掘机")
+//        mRightList.add("轮式挖掘机")
+//        mRightList.add("水陆挖掘机")
+//        mRightList.add("履带式挖掘机")
+//        mRightList.add("轮式挖掘机")
+//        mRightList.add("水陆挖掘机")
+//        mRightList.add("轮式挖掘机")
+//        mRightList.add("水陆挖掘机")
+//        mRightList.add("轮式挖掘机")
+//        mRightList.add("水陆挖掘机")
 
         tv_title.text="机械类型"
         tv_right.text="完成"
@@ -83,7 +85,7 @@ class MoreSelectMecType : BaseActivity<NetData>(), OnItemClickListener ,View.OnC
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
 
@@ -91,7 +93,7 @@ class MoreSelectMecType : BaseActivity<NetData>(), OnItemClickListener ,View.OnC
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.ly_type->sel(mRightList[position])
+            R.id.ly_type->sel(mRightList[position].cateName)
         }
     }
 

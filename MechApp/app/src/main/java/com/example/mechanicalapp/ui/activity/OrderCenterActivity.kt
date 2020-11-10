@@ -89,7 +89,7 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
     }

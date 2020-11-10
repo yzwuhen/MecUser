@@ -90,7 +90,7 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
 

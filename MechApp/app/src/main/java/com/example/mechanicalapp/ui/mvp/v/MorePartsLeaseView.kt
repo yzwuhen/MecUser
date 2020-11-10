@@ -7,5 +7,4 @@ import com.example.mechanicalapp.ui.data.PartsData
 interface MorePartsLeaseView <NetData> :BaseView<NetData> {
     fun refreshUI(list: List<PartsData>)
     fun loadMore(list: List<PartsData>)
-    fun err()
 }

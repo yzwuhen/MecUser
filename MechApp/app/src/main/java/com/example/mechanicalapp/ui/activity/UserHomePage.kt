@@ -89,7 +89,7 @@ class UserHomePage : BaseActivity<NetData>(), View.OnClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(v: View?) {

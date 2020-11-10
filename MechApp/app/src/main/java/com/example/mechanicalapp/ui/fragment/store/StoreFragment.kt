@@ -146,7 +146,15 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
     override fun hiedLoading() {
     }
 
-    override fun showData(list: MutableList<StoreLeftBean>) {
+    override fun showAd(adList: List<BannerData>) {
+
+        mBannerList?.clear()
+        mBannerList?.addAll(adList)
+        banner.adapter?.notifyDataSetChanged()
+    }
+
+    override fun showData(list: List<StoreLeftBean>) {
+
         mLeftList.clear()
         mLeftList.addAll(list)
         if (mLeftList.size>0){
@@ -156,12 +164,5 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
         }
         mLeftAdapter?.notifyDataSetChanged()
         mRightAdapter?.notifyDataSetChanged()
-    }
-
-    override fun showAd(adList: List<BannerData>) {
-
-        mBannerList?.clear()
-        mBannerList?.addAll(adList)
-        banner.adapter?.notifyDataSetChanged()
     }
 }

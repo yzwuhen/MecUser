@@ -119,7 +119,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
 
     }
 

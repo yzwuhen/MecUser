@@ -9,16 +9,15 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.BrandAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
-import com.example.mechanicalapp.ui.mvp.v.MecAtrrsView
+import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import kotlinx.android.synthetic.main.activity_brand.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecAtrrsView<NetData> {
+class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecAttrsView<NetData> {
 
     private var mBrandAdapter: BrandAdapter? = null
     private var mLetterAdapter: LetterAdapter? = null
@@ -98,7 +97,7 @@ class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecA
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
 

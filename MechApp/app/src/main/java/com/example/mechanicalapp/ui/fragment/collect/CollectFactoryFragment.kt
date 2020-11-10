@@ -6,6 +6,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.MecFactoryAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.java.EventFresh
@@ -20,16 +21,12 @@ class CollectFactoryFragment : BaseFragment<NetData>() , OnItemClickListener {
 
 
     private var mAdapter: MecFactoryAdapter? = null
-    private var mList: MutableList<String> = ArrayList<String>()
+    private var mList: MutableList<FactoryData> = ArrayList<FactoryData>()
     override fun showLoading() {
 
 
     }
     init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
 
         EventBus.getDefault().register(this)
 
@@ -89,7 +86,7 @@ class CollectFactoryFragment : BaseFragment<NetData>() , OnItemClickListener {
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
         TODO("Not yet implemented")
     }
 

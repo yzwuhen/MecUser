@@ -4,9 +4,8 @@ import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 
 
-interface StoreView <StoreLeftBean> :BaseView<StoreLeftBean> {
+interface StoreView <T> :BaseView<T> {
 
     fun showAd(adList: List<BannerData>)
-//    fun showData(hotMec: List<StoreLeftBean>)
-    fun err()
+    fun showData(hotMec: List<T>)
 }

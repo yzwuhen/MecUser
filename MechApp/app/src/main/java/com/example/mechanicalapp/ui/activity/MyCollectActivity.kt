@@ -78,7 +78,7 @@ class MyCollectActivity:BaseActivity<NetData>(),View.OnClickListener, ViewPager.
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(p0: View?) {

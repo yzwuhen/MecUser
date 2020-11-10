@@ -112,7 +112,7 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
 
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
 
     }
 

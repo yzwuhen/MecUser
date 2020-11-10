@@ -52,7 +52,7 @@ class LookRecruitFragment : BaseFragment<NetData>(), View.OnClickListener,ViewPa
         cus_page.addOnPageChangeListener(this)
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onClick(p0: View?) {

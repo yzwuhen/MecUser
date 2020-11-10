@@ -26,8 +26,6 @@ class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPag
         return R.layout.fragment_order
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
 
     override fun initView() {
         super.initView()
@@ -90,6 +88,11 @@ class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPag
     }
 
     override fun onPageScrollStateChanged(state: Int) {
+
+    }
+
+    override fun err() {
+
 
     }
 }

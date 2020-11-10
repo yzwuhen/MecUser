@@ -27,6 +27,6 @@ class CloudBoxActivity :BaseActivity<NetData>() {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 }

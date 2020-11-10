@@ -96,8 +96,6 @@ class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View
         return R.layout.fragment_recruit
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
 
 
     private fun showInput() {

@@ -102,7 +102,7 @@ interface AppService {
     @GET("/jeecg-boot/repair/mecRepaireFactory/list")
     fun getFactoryList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("mecType")mecType:String?,
                         @Query(" partsType") partsType:String? ,@Query("sort")sort:String?
-    ):Observable<NetData>
+    ):Observable<MoreFactoryBean>
 
 
 
@@ -114,11 +114,18 @@ interface AppService {
     @GET("/jeecg-boot/machine/mecMachineModel/list")
     fun getMecModelList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<NetData>
     /**
-     * 机械类型
+     * 机械父级类型
      *
      */
     @GET("/jeecg-boot/machine/mecMachineCate/rootList")
-    fun getMecType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<NetData>
+    fun getMecParentType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecTypeParentBean>
+
+    /**
+     * 机械子级类型
+     *
+     */
+    @GET("/jeecg-boot/machine/mecMachineCate/childList")
+    fun getMecChildType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("pid")pid:String):Observable<MecTypeChildBean>
     /**
      * 机械品牌
      *

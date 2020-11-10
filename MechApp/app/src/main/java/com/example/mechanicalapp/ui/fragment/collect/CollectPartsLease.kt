@@ -85,7 +85,7 @@ class CollectPartsLease : BaseFragment<NetData>() , OnItemClickListener {
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
         TODO("Not yet implemented")
     }
 

@@ -71,7 +71,7 @@ class ReleaseGoodsAsk : BaseFragment<NetData>() , OnItemClickListener, PopUtils.
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
 
     }
     private fun showPop() {

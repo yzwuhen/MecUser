@@ -89,9 +89,6 @@ class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickL
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-
-    }
 
     override fun onItemClick(view: View, position: Int) {
 
@@ -201,5 +198,10 @@ class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickL
             R.id.tv_dialog_item3->mButtDialog?.dismiss()
             R.id.tv_dialog_item4->mButtDialog?.dismiss()
         }
+    }
+
+    override fun err() {
+
+
     }
 }

@@ -24,9 +24,6 @@ class ChatSysFragment : BaseFragment<NetData>(), OnItemClickListener {
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
-
     override fun getLayoutId(): Int {
         return R.layout.fragment_msg_list
     }
@@ -70,6 +67,9 @@ class ChatSysFragment : BaseFragment<NetData>(), OnItemClickListener {
     override fun onItemClick(view: View, position: Int) {
 
         jumpActivity(null,SysMsgActivity::class.java)
+
+    }
+    override fun err() {
 
     }
 }

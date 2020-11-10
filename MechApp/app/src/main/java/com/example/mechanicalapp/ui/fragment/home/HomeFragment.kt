@@ -141,7 +141,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         closeRefreshView()
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun showAd(adList: List<BannerData>) {
@@ -179,8 +179,4 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         mBossDemandView?.setBuy(list)
     }
 
-    override fun err() {
-
-
-    }
 }

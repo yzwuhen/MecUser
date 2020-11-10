@@ -10,51 +10,28 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.EcTypeRightAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
-import com.example.mechanicalapp.ui.mvp.v.MecAtrrsView
+import com.example.mechanicalapp.ui.mvp.v.MecTypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAtrrsView<NetData>{
+class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener, MecTypeView<BaseData> {
 
 
     private var mLeftAdapter: EcTypeLeftAdapter? = null
     private var mRightAdapter: EcTypeRightAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
 
-    private var mRightList: MutableList<String> = ArrayList<String>()
+    private var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
     private var mPresenter: MecModelPresenter?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
     }
 
-
     override fun initView() {
         super.initView()
-
-        mList.add("所有类型")
-        mList.add("挖掘机")
-        mList.add("推土机")
-        mList.add("旋挖机")
-        mList.add("汽车吊")
-        mList.add("泵车")
-        mList.add("装载机")
-
-
-        mRightList.add("履带式挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("履带式挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
 
         mLeftAdapter = EcTypeLeftAdapter(this, mList, this)
         recycler_list_left.layoutManager = LinearLayoutManager(this)
@@ -71,7 +48,7 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAtr
         tv_unlimited.setOnClickListener(this)
         iv_back.setOnClickListener(this)
         mPresenter = MecModelPresenter(this,this)
-        mPresenter?.getMecModelList()
+        mPresenter?.getMecTypeList()
     }
 
     override fun initPresenter() {
@@ -83,7 +60,7 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAtr
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
 
@@ -91,7 +68,8 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAtr
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.ly_type->callback(mRightList[position])
+            R.id.tv_type->{mPresenter?.getMecTypeChildList(mList[position].pid)}
+            R.id.ly_type->callback(mRightList[position].cateName)
         }
     }
 
@@ -111,4 +89,29 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAtr
         }
 
     }
+
+    override fun refreshLeftUI(list: List<MecTypeParentData>) {
+        mList.clear()
+        mList.addAll(list)
+        mList[0].isSelect =true
+        mLeftAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadLeftMore(list: List<MecTypeParentData>) {
+        mList.addAll(list)
+        mLeftAdapter?.notifyDataSetChanged()
+    }
+
+    override fun refreshRightUI(list: MutableList<MecTypeChildData>) {
+        mRightList.clear()
+        mRightList.addAll(list)
+        mRightAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadRightMore(list: List<MecTypeChildData>) {
+        mRightList.addAll(list)
+        mRightAdapter?.notifyDataSetChanged()
+    }
+
+
 }

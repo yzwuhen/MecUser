@@ -11,6 +11,8 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.MoreSelMecTypeAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.MecTypeChildData
+import com.example.mechanicalapp.ui.data.MecTypeParentData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_ec_type.*
@@ -21,10 +23,10 @@ class MoreSelPartsType : BaseActivity<NetData>(), OnItemClickListener, View.OnCl
 
     private var mLeftAdapter: EcTypeLeftAdapter? = null
     private var mRightAdapter: MoreSelMecTypeAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mLeftList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
+    var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
     private var callbackkStr:String=""
 
-    private var mRightList: MutableList<String> = ArrayList<String>()
 
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
@@ -34,31 +36,31 @@ class MoreSelPartsType : BaseActivity<NetData>(), OnItemClickListener, View.OnCl
     override fun initView() {
         super.initView()
 
-        mList.add("所有类型")
-        mList.add("履带")
-        mList.add("液压杆")
-        mList.add("控制器")
-        mList.add("液压杆")
-        mList.add("液压杆")
-        mList.add("控制器")
-
-
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
-        mRightList.add("轮轴")
+//        mList.add("所有类型")
+//        mList.add("履带")
+//        mList.add("液压杆")
+//        mList.add("控制器")
+//        mList.add("液压杆")
+//        mList.add("液压杆")
+//        mList.add("控制器")
+//
+//
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
+//        mRightList.add("轮轴")
 
         tv_title.text="配件类型"
         tv_right.text="完成"
         tv_right.visibility = View.VISIBLE
 
-        mLeftAdapter = EcTypeLeftAdapter(this, mList, this)
+        mLeftAdapter = EcTypeLeftAdapter(this, mLeftList, this)
         recycler_list_left.layoutManager = LinearLayoutManager(this)
         recycler_list_left.adapter = mLeftAdapter
 
@@ -83,7 +85,7 @@ class MoreSelPartsType : BaseActivity<NetData>(), OnItemClickListener, View.OnCl
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
 
@@ -91,7 +93,7 @@ class MoreSelPartsType : BaseActivity<NetData>(), OnItemClickListener, View.OnCl
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.ly_type->sel(mRightList[position])
+            R.id.ly_type->sel(mRightList[position].cateName)
         }
     }
 

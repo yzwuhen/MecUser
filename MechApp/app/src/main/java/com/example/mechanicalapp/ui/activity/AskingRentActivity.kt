@@ -83,7 +83,7 @@ class AskingRentActivity : BaseActivity<NetData>(), OnItemClickListener, View.On
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {

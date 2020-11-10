@@ -87,11 +87,12 @@ class CollectAskRent : BaseFragment<NetData>() , OnItemClickListener {
         return R.layout.layout_spring_list
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
 
     override fun onItemClick(view: View, position: Int) {
 
 
+    }
+
+    override fun err() {
     }
 }

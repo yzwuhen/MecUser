@@ -58,7 +58,7 @@ class MyMecListActivity : BaseActivity<NetData>(),OnItemClickListener ,View.OnCl
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {

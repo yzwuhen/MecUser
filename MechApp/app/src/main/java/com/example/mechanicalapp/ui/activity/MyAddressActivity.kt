@@ -60,7 +60,7 @@ class MyAddressActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClick
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {

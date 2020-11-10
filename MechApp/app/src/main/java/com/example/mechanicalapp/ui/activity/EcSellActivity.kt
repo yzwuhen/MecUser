@@ -84,7 +84,7 @@ class EcSellActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClic
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {

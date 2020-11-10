@@ -90,6 +90,6 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
     override fun hiedLoading() {
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 }

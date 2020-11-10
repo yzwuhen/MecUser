@@ -98,8 +98,6 @@ class RentFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.On
         return R.layout.fragment_recruit
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
-    }
 
 
     private fun showInput() {

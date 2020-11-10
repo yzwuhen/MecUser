@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.data.FactoryData
+import com.example.mechanicalapp.utils.ImageLoadUtils
+import kotlinx.android.synthetic.main.item_mec_factory.view.*
 import kotlinx.android.synthetic.main.item_user_demand.view.*
+import kotlinx.android.synthetic.main.item_user_demand.view.ly_check
 
 class MecFactoryAdapter(
     var mContext: Context,
-    var mList: MutableList<String>,
+    var mList: MutableList<FactoryData>,
     var mOnItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -30,6 +34,12 @@ class MecFactoryAdapter(
         } else {
             holder.itemView.ly_check.visibility = View.GONE
         }
+        holder.itemView.tv_item_title.text =mList[position].name
+        holder.itemView.tv_address.text ="${mList[position].address}  |"
+        holder.itemView.tv_introduce.text ="简介：${mList[position].introduction}"
+
+        ImageLoadUtils.loadImage(mContext,holder.itemView.iv_item_pic,mList[position].factoryPicture,R.mipmap.ic_launcher)
+
     }
 
     override fun getItemCount(): Int {

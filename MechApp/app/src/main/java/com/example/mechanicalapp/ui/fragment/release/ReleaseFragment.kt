@@ -23,7 +23,7 @@ class ReleaseFragment : BaseFragment<NetData>() {
         TODO("Not yet implemented")
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
         TODO("Not yet implemented")
     }
 }

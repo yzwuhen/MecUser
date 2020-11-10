@@ -44,7 +44,7 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
         iv_user_pic.setOnClickListener(this)
     }
 
-    override fun showData(t: MutableList<StoreLeftBean>) {
+    override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {

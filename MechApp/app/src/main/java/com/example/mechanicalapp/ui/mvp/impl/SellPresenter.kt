@@ -22,6 +22,7 @@ class SellPresenter (
     private var brandId: String? = null
     private var cateId: String? = null
     private var modelId: String? = null
+    private var title:String?=null
 
     init {
         baseModel = MecBuyModelImpl()
@@ -39,6 +40,7 @@ class SellPresenter (
             brandId,
             cateId,
             modelId,
+            title,
             object : ISubscriberListener<MoreSellBean> {
                 override fun onNext(t: MoreSellBean?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -59,7 +61,18 @@ class SellPresenter (
                 }
             })
     }
-
+    fun setTitle(s: String) {
+        this.title =s
+    }
+    fun setBrandId(id:String){
+        this.brandId =id
+    }
+    fun setCateId(id:String){
+        this.cateId =id
+    }
+    fun setModelId(id:String){
+        this.modelId =id
+    }
     override fun onDestroy() {
     }
 }

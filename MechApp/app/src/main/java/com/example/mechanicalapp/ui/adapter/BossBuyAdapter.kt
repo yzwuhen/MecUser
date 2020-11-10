@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecBuyData
-import com.example.mechanicalapp.ui.data.MecRentInData
 import kotlinx.android.synthetic.main.item_user_rent.view.*
 
 class BossBuyAdapter (var mContext: Context, var mList:MutableList<MecBuyData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {

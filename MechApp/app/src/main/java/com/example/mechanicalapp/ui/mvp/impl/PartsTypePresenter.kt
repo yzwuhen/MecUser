@@ -9,7 +9,7 @@ import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import com.example.mechanicalapp.ui.mvp.v.MecTypeView
 
-class MecModelPresenter(
+class PartsTypePresenter(
     private var mContext: Context,
     private var baseView: BaseView<NetData>
 ) :
@@ -28,24 +28,25 @@ class MecModelPresenter(
 
     }
 
-    fun getMecModelList() {
 
-        baseModel?.getMecModelList(
+    fun getPartsModelList() {
+
+        baseModel?.getPartsModelList(
             page,
             pageSize,
             object : ISubscriberListener<MecModelBean> {
                 override fun onNext(t: MecModelBean?) {
-                        if (t?.code == 200 && t?.result != null) {
-                            t?.result?.records?.let { (baseView as MecAttrsView<MecModelData>)?.refreshUI(it) }
-                            baseView?.hiedLoading()
-                        } else {
-                            baseView?.err()
-                        }
+                    if (t?.code == 200 && t?.result != null) {
+                        t?.result?.records?.let { (baseView as MecAttrsView<MecModelData>)?.refreshUI(it) }
+                        baseView?.hiedLoading()
+                    } else {
+                        baseView?.err()
+                    }
 
                 }
 
                 override fun onError(e: Throwable?) {
-                         baseView?.err()
+                    baseView?.err()
                     Log.e("sssss============", "sssssssss==============onError$e")
                 }
 
@@ -54,8 +55,9 @@ class MecModelPresenter(
             })
     }
 
-    fun getMecTypeList() {
-        baseModel?.getMecTypeList(
+
+    fun getPartsTypeList() {
+        baseModel?.getPartsTypeList(
             page,
             pageSize,
             object : ISubscriberListener<MecTypeParentBean> {
@@ -67,7 +69,7 @@ class MecModelPresenter(
                             )
                         }
                         if (t?.result?.records?.size!! > 0) {
-                            t?.result?.records?.get(0)?.id?.let { getMecTypeChildList(it) }
+                            t?.result?.records?.get(0)?.id?.let { getPartsTypeChildList(it) }
                         }
 
                         baseView?.hiedLoading()
@@ -88,9 +90,9 @@ class MecModelPresenter(
     }
 
 
-    fun getMecTypeChildList(pid: String) {
+    fun getPartsTypeChildList(pid: String) {
 
-        baseModel?.getMecTypeChildList(
+        baseModel?.getPartsTypeChildList(
             page,
             pageSize,
             pid,
@@ -119,32 +121,6 @@ class MecModelPresenter(
                 }
             })
     }
-
-
-    fun getMecBrandList() {
-        baseModel?.getMecBrandList(
-            page,
-            pageSize,
-            object : ISubscriberListener<BrandBean> {
-                override fun onNext(t: BrandBean?) {
-                    if (t?.code == 200 && t?.result != null) {
-                        t?.result?.records?.let { (baseView as MecAttrsView<BrandData>)?.refreshUI(it) }
-                        baseView?.hiedLoading()
-                    } else {
-                        baseView?.err()
-                    }
-
-                }
-                override fun onError(e: Throwable?) {
-                    baseView?.err()
-                    Log.e("sssss============", "sssssssss==============onError$e")
-                }
-
-                override fun onCompleted() {
-                }
-            })
-    }
-
 
     override fun onDestroy() {
     }

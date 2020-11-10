@@ -15,8 +15,8 @@ class SearchMecDealFragment : BaseCusFragment() , View.OnClickListener, ViewPage
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(SearchMecLease(1))
-        mFragmentList?.add(SearchMecAsk())
+        mFragmentList?.add(SearchMecSell(1))
+        mFragmentList?.add(SearchBuy())
     }
 
 

@@ -4,27 +4,27 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EcModelAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.MecModelData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
+import com.example.mechanicalapp.ui.mvp.impl.PartsTypePresenter
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import kotlinx.android.synthetic.main.activity_ec_model.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class EcModel :BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecAttrsView<MecModelData>{
+class PartsModel : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
+    MecAttrsView<MecModelData> {
 
 
-    private var mAdapter:EcModelAdapter ?=null
+    private var mAdapter: EcModelAdapter?=null
     var mList: MutableList<MecModelData> = ArrayList<MecModelData>()
 
-    private var mPresenter: MecModelPresenter?=null
+    private var mPresenter: PartsTypePresenter?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_ec_model
@@ -46,8 +46,8 @@ class EcModel :BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecA
         tv_unlimited.setOnClickListener(this)
         iv_back.setOnClickListener(this)
 
-        mPresenter = MecModelPresenter(this,this)
-        mPresenter?.getMecModelList()
+        mPresenter = PartsTypePresenter(this,this)
+        mPresenter?.getPartsModelList()
     }
 
     override fun initPresenter() {

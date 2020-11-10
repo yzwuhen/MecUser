@@ -15,12 +15,9 @@ import com.example.mechanicalapp.ui.adapter.MoreBuyAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecBuyData
-import com.example.mechanicalapp.ui.data.MecRentOutData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecBuyView
-import com.example.mechanicalapp.ui.mvp.v.MecSellView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog

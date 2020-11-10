@@ -23,28 +23,16 @@ class RecruitModelImpl  : BaseModel {
     }
 
 
-    fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
+    fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,jobTitle:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
 
         Log.e("sssss============","sssssssss==============getMecBuyList")
-        appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,sort)
+        appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,sort,jobTitle)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<RecruitBean>(mISubscriberListener))
 
 
     }
-
-
-//    fun getWantWorkList(pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,mISubscriberListener: ISubscriberListener<NetData>) {
-//
-//        Log.e("sssss============","sssssssss==============getMecBuyList")
-//        appsService?.getWantWorkList(pageIndex,pageSize,"2",region,typeWork,sort)
-//            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-//                AndroidSchedulers.mainThread()
-//            )?.subscribe(NetSubscribe<NetData>(mISubscriberListener))
-//
-//
-//    }
 
     override fun initRequest() {
 

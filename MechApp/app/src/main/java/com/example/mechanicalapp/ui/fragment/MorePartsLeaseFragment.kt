@@ -9,6 +9,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
+import com.example.mechanicalapp.ui.activity.PartsModel
 import com.example.mechanicalapp.ui.adapter.MorePartsAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
@@ -76,7 +77,7 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
 
             R.id.ly_ec_type->jumpActivityForReSult(
                 Configs.EC_TYPE_RESULT_CODE,
-                EcModel::class.java
+                PartsModel::class.java
             )
             R.id.ly_sort->showInput()
         }

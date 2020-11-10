@@ -11,15 +11,19 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PartsTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.PartsTypeRightAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.MecTypeChildData
+import com.example.mechanicalapp.ui.data.MecTypeParentData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
+import com.example.mechanicalapp.ui.mvp.impl.PartsTypePresenter
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
+import com.example.mechanicalapp.ui.mvp.v.MecTypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
-    MecAttrsView<NetData> {
+    MecTypeView<NetData> {
 
 
     private var mLeftAdapter: PartsTypeLeftAdapter? = null
@@ -27,7 +31,7 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     var mList: MutableList<String> = ArrayList<String>()
 
     private var mRightList: MutableList<String> = ArrayList<String>()
-    private var mPresenter: MecModelPresenter?=null
+    private var mPresenter: PartsTypePresenter?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
     }
@@ -70,8 +74,8 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
 
         tv_unlimited.setOnClickListener(this)
         iv_back.setOnClickListener(this)
-        mPresenter = MecModelPresenter(this,this)
-        mPresenter?.getMecModelList()
+        mPresenter = PartsTypePresenter(this,this)
+        mPresenter?.getPartsTypeList()
     }
 
     override fun initPresenter() {
@@ -110,5 +114,19 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
             R.id.tv_unlimited->callback("不限")
         }
 
+    }
+
+
+    override fun refreshLeftUI(list: List<MecTypeParentData>) {
+
+    }
+
+    override fun loadLeftMore(list: List<MecTypeParentData>) {
+    }
+
+    override fun refreshRightUI(list: MutableList<MecTypeChildData>) {
+    }
+
+    override fun loadRightMore(list: List<MecTypeChildData>) {
     }
 }

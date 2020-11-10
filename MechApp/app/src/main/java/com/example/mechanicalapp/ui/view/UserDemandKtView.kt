@@ -15,16 +15,15 @@ import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
-import com.example.mechanicalapp.ui.data.MecRentInData
-import com.example.mechanicalapp.ui.data.MecRentOutData
+import com.example.mechanicalapp.ui.data.MecLeaseData
 import kotlinx.android.synthetic.main.layout_user_demand.view.*
 
 class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener,View.OnClickListener {
 
     var mAdapter: UserDemandAdapter? = null
-    var mRentAdapter :UserRentAdapter ?=null
-    var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
-    var mRentList: MutableList<MecRentInData> = ArrayList<MecRentInData>()
+    private var mRentAdapter :UserRentAdapter ?=null
+    private var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
+    private var mRentList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     var type:Int = 0
     init {
         orientation = VERTICAL;
@@ -122,14 +121,14 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
     }
 
     //出
-    fun setLease(list: List<MecRentOutData>) {
+    fun setLease(list: List<MecLeaseData>) {
         mLeaseList.clear()
         mLeaseList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }
 
     //求
-    fun setRent(list: List<MecRentInData>) {
+    fun setRent(list: List<MecLeaseData>) {
         mRentList.clear()
         mRentList.addAll(list)
         mRentAdapter?.notifyDataSetChanged()

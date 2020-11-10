@@ -6,9 +6,8 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.MecRentOutData
+import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -23,7 +22,7 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
 
     private var mAdapter: UserDemandAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
-    var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     override fun showLoading() {
 
 

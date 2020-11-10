@@ -80,12 +80,12 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
         cus_page.addOnPageChangeListener(this)
         app_bar.addOnOffsetChangedListener(this)
 
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(this))
+        spring_list.type=SpringView.Type.FOLLOW
+        spring_list.header=RefreshHeaderUtils.getHeaderView(this)
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
+                spring_list.isEnable=false
                 //  initData()
                 closeRefreshView()
             }
@@ -96,7 +96,7 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
+        spring_list.isEnable=true
         spring_list.onFinishFreshAndLoad()
     }
 

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecBuyData
-import com.example.mechanicalapp.ui.data.MecRentOutData
 import com.example.mechanicalapp.utils.DateUtils
 import kotlinx.android.synthetic.main.item_more_user_rent.view.*
 

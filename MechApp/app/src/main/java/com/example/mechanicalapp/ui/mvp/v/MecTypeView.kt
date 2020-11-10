@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.mvp.v
 
-import com.example.mechanicalapp.ui.data.MecTypeChildBean
 import com.example.mechanicalapp.ui.data.MecTypeChildData
 import com.example.mechanicalapp.ui.data.MecTypeParentData
 import com.example.mechanicalapp.ui.data.NetData

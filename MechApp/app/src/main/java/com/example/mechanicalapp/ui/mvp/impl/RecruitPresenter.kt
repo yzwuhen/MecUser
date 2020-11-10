@@ -20,6 +20,7 @@ class RecruitPresenter (
     private var region: String? = null
     private var typeWork: String? = null
     private var sort: String? = null
+    private var jobTitle:String?=null
 
     init {
         baseModel = RecruitModelImpl()
@@ -37,6 +38,7 @@ class RecruitPresenter (
             region,
             typeWork,
             sort,
+            jobTitle,
             object : ISubscriberListener<RecruitBean> {
                 override fun onNext(t: RecruitBean?) {
                    if (t?.code == 200 && t?.result != null) {
@@ -58,7 +60,9 @@ class RecruitPresenter (
             })
     }
 
-
+    fun setTitle(s:String){
+        this.jobTitle = s
+    }
 
     override fun onDestroy() {
     }

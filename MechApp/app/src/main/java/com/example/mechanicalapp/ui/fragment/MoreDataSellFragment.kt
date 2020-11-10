@@ -14,11 +14,8 @@ import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.MoreSellAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecRentOutData
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
 import com.example.mechanicalapp.ui.mvp.impl.SellPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecSellView
 import com.example.mechanicalapp.ui.view.PopUtils

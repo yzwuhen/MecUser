@@ -28,8 +28,8 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     private var mMecFactoryAdapter: MecFactoryAdapter? = null//维修厂
 
     var mList: MutableList<String> = ArrayList<String>()
-    var mRentList: MutableList<MecRentInData> = ArrayList<MecRentInData>()
-    var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
+    var mRentList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     var mFactoryList: MutableList<FactoryData> = ArrayList<FactoryData>()
 
     private val leftOfString: Array<String> = arrayOf("出租", "出售", "出租", "招聘")

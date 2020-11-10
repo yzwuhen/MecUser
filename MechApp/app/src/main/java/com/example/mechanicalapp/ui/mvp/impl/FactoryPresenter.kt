@@ -21,7 +21,7 @@ class FactoryPresenter(
     private var mecType: String? = null
     private var partsType: String? = null
     private var sort: String? = null
-
+    private var name: String? = null
     init {
         baseModel = ModelImpl()
     }
@@ -38,6 +38,7 @@ class FactoryPresenter(
             mecType,
             partsType,
             sort,
+            name,
             object : ISubscriberListener<MoreFactoryBean> {
                 override fun onNext(t: MoreFactoryBean?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -57,6 +58,9 @@ class FactoryPresenter(
                 override fun onCompleted() {
                 }
             })
+    }
+    fun setName(v:String){
+        this.name =v
     }
 
     override fun onDestroy() {

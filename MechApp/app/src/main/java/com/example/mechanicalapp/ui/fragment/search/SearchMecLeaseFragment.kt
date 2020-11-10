@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 
 class SearchMecLeaseFragment : BaseCusFragment() , View.OnClickListener, ViewPager.OnPageChangeListener  {

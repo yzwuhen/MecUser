@@ -10,21 +10,20 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.BrandAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.BrandData
 import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import kotlinx.android.synthetic.main.activity_brand.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecAttrsView<NetData> {
+class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecAttrsView<BrandData> {
 
     private var mBrandAdapter: BrandAdapter? = null
     private var mLetterAdapter: LetterAdapter? = null
     private var mCityLinearLayoutManager: LinearLayoutManager? = null
     private var mLetterLinearLayoutManager: LinearLayoutManager? = null
     private var mPresenter: MecModelPresenter?=null
-    private var mCityList: MutableList<String> = ArrayList<String>()
+    private var mBrandList: MutableList<BrandData> = ArrayList<BrandData>()
     private val items = listOf(
         "A",
         "B",
@@ -51,29 +50,9 @@ class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecA
         mLetterLinearLayoutManager = LinearLayoutManager(this)
         mLetterLinearLayoutManager?.orientation = LinearLayoutManager.VERTICAL
 
-//        mCityList = ArrayList<String>()
-
-        mCityList?.add("八达重工1")
-        mCityList?.add("八达重工2")
-        mCityList?.add("八达重工3")
-        mCityList?.add("八达重工4")
-        mCityList?.add("八达重工5")
-        mCityList?.add("八达重工6")
-        mCityList?.add("八达重工7")
-        mCityList?.add("八达重工8")
-        mCityList?.add("八达重工9")
-        mCityList?.add("八达重工0")
-        mCityList?.add("八达重工11")
-        mCityList?.add("八达重工12")
-        mCityList?.add("八达重工13")
-        mCityList?.add("八达重工14")
-        mCityList?.add("八达重工")
-
-
-
         mLetterAdapter = LetterAdapter(this, items, this)
 
-        mBrandAdapter = BrandAdapter(this, mCityList as MutableList<String>, this)
+        mBrandAdapter = BrandAdapter(this, mBrandList, this)
 
         ry_brand.layoutManager = mCityLinearLayoutManager
         ry_brand_letter.layoutManager = mLetterLinearLayoutManager
@@ -107,24 +86,37 @@ class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecA
 //        }
         when(view?.id){
             R.id.iv_back->finish()
-            R.id.tv_unlimited->callback("不限")
+            R.id.tv_unlimited->callback("不限","0")
         }
     }
 
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.ly_city_root->callback(mCityList[position])
+            R.id.ly_city_root->callback(mBrandList[position].brandName,mBrandList[position].id)
         }
     }
 
-    private fun callback(extra: String) {
+    private fun callback(extra: String,id:String) {
 
         var intent  = Intent()
         var bundle = Bundle()
         bundle.putString(Configs.SCREEN_RESULT_Extra,extra)
+        bundle.putString(Configs.SCREEN_RESULT_ID,id)
         intent.putExtras(bundle)
         setResult(Configs.EC_BRAND_RESULT_CODE,intent)
         finish()
+    }
+
+    override fun refreshUI(list: List<BrandData>) {
+        mBrandList.clear()
+        mBrandList.addAll(list)
+        mBrandAdapter?.notifyDataSetChanged()
+
+    }
+
+    override fun loadMore(list: List<BrandData>) {
+        mBrandList.addAll(list)
+        mBrandAdapter?.notifyDataSetChanged()
     }
 }

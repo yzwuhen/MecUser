@@ -16,8 +16,6 @@ import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
 import com.example.mechanicalapp.ui.adapter.BossSellAdapter
 import com.example.mechanicalapp.ui.data.MecBuyData
-import com.example.mechanicalapp.ui.data.MecRentInData
-import com.example.mechanicalapp.ui.data.MecRentOutData
 import com.example.mechanicalapp.ui.data.MecSellData
 import kotlinx.android.synthetic.main.layout_boss_denmand.view.*
 

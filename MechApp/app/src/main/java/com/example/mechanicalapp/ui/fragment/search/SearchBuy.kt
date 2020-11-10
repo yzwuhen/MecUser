@@ -7,21 +7,22 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.AskDetailsActivity
-import com.example.mechanicalapp.ui.adapter.UserRentAdapter
+import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.ui.data.MecBuyData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
 import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
-import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
+import com.example.mechanicalapp.ui.mvp.v.MecBuyView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
 
-class SearchMecAsk : BaseCusFragment() , OnItemClickListener, MecLeaseView<NetData> {
+class SearchBuy : BaseCusFragment(), OnItemClickListener, MecBuyView<NetData> {
 
 
-    var mList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
-    private var mAdapter: UserRentAdapter? = null
+    var mList: MutableList<MecBuyData> = ArrayList<MecBuyData>()
+    private var mAdapter: BossBuyAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_search_all_result
@@ -30,7 +31,7 @@ class SearchMecAsk : BaseCusFragment() , OnItemClickListener, MecLeaseView<NetDa
     override fun initView() {
         super.initView()
 
-        mAdapter = UserRentAdapter(mContext, mList,  this)
+        mAdapter = BossBuyAdapter(mContext, mList, this)
 
         recycle_list.layoutManager = LinearLayoutManager(mContext)
         recycle_list.adapter = mAdapter
@@ -49,9 +50,8 @@ class SearchMecAsk : BaseCusFragment() , OnItemClickListener, MecLeaseView<NetDa
                 //     closeRefreshView()
             }
         })
-        mPresenter = MecLeaseListPresenter(mContext,this)
-        (mPresenter as MecLeaseListPresenter).setTitle("机械")
-        (mPresenter as MecLeaseListPresenter).getLeaseList(2)
+        mPresenter = MecBuyPresenter(mContext, this)
+        (mPresenter as MecBuyPresenter).getBuyList(2)
     }
 
     fun closeRefreshView() {
@@ -65,14 +65,14 @@ class SearchMecAsk : BaseCusFragment() , OnItemClickListener, MecLeaseView<NetDa
         jumpActivity(bundle, AskDetailsActivity::class.java)
     }
 
-    override fun refreshUI(list: List<MecLeaseData>) {
+    override fun refreshUI(list: List<MecBuyData>) {
         mList.clear()
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
 
     }
 
-    override fun loadMore(list: List<MecLeaseData>) {
+    override fun loadMore(list: List<MecBuyData>) {
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }

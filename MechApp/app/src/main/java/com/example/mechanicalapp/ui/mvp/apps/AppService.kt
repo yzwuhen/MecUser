@@ -36,7 +36,8 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketMechanics/list")
     fun getMecList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
-                      @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
+                      @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?,
+                   @Query("tittle")title:String?
     ):Observable<MoreLeaseData>
 
 
@@ -67,7 +68,8 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
     fun getSellList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
-                      @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
+                      @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?,
+                    @Query("title")title:String?
     ):Observable<MoreSellBean>
 
 
@@ -79,7 +81,8 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketRecruit/list")
     fun getRecruitList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("recruitType")recruitType:String,
-                      @Query(" region") region:String?, @Query("typeWork")typeWork:String?, @Query("sort")sort:String?
+                      @Query(" region") region:String?, @Query("typeWork")typeWork:String?, @Query("sort")sort:String?,
+                       @Query("jobTittle")jobTittle:String?
     ):Observable<RecruitBean>
 
 
@@ -89,7 +92,8 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketRecruit/list")
     fun getWantWorkList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("recruitType")recruitType:String,
-                       @Query(" region") region:String?, @Query("typeWork")typeWork:String?, @Query("sort")sort:String?
+                       @Query(" region") region:String?, @Query("typeWork")typeWork:String?, @Query("sort")sort:String?,
+                        @Query("jobTittle")jobTittle:String?
     ):Observable<NetData>
 
 
@@ -101,7 +105,8 @@ interface AppService {
      */
     @GET("/jeecg-boot/repair/mecRepaireFactory/list")
     fun getFactoryList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("mecType")mecType:String?,
-                        @Query(" partsType") partsType:String? ,@Query("sort")sort:String?
+                        @Query(" partsType") partsType:String? ,@Query("sort")sort:String?,
+                       @Query("name")name:String?
     ):Observable<MoreFactoryBean>
 
 
@@ -112,7 +117,7 @@ interface AppService {
      *
      */
     @GET("/jeecg-boot/machine/mecMachineModel/list")
-    fun getMecModelList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<NetData>
+    fun getMecModelList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecModelBean>
     /**
      * 机械父级类型
      *
@@ -125,11 +130,37 @@ interface AppService {
      *
      */
     @GET("/jeecg-boot/machine/mecMachineCate/childList")
-    fun getMecChildType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("pid")pid:String):Observable<MecTypeChildBean>
+    fun getMecChildType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("id")pid:String):Observable<MecTypeChildBean>
+
+
+
+    /**
+     * 配件-机型
+     *
+     */
+    @GET("/jeecg-boot//parts/mecPartsModel/list")
+    fun getPartsModelList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecModelBean>
+
+
+    /**
+     * 配件父级类型
+     *
+     */
+    @GET("/jeecg-boot/parts/mecPartsCate/rootList")
+    fun getPartsParentType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecTypeParentBean>
+
+    /**
+     * 配件子级类型
+     *
+     */
+    @GET("/jeecg-boot/parts/mecPartsCate/childList")
+    fun getPartsChildType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("id")pid:String):Observable<MecTypeChildBean>
+
+
     /**
      * 机械品牌
      *
      */
     @GET("/jeecg-boot/machine/mecMachineBrand/list")
-    fun getMecBrandList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<NetData>
+    fun getMecBrandList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<BrandBean>
 }

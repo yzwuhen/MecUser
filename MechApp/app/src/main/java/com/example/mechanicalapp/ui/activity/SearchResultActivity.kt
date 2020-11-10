@@ -30,7 +30,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     var mPartsList: MutableList<PartsData> = ArrayList<PartsData>()
     var mRecruitList: MutableList<RecruitData> = ArrayList<RecruitData>()
-    var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
+    var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     private var type:Int =0;
     override fun getLayoutId(): Int {
         return R.layout.activity_search_result

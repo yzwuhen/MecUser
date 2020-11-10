@@ -9,27 +9,26 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.MecRentOutData
+import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
 
-class SearchMecLease(var type:Int):BaseCusFragment() ,OnItemClickListener{
+class SearchMecLease(var type:Int):BaseCusFragment() ,OnItemClickListener, MecLeaseView<NetData>{
 
 
-    var mList: MutableList<String> = ArrayList<String>()
     private var mAdapter: UserDemandAdapter? = null
-    var mLeaseList: MutableList<MecRentOutData> = ArrayList<MecRentOutData>()
+    private var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     override fun getLayoutId(): Int {
        return R.layout.fragment_search_all_result
     }
 
     override fun initView() {
         super.initView()
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+
 
         mAdapter = UserDemandAdapter(mContext, mLeaseList, type, this)
 
@@ -52,6 +51,9 @@ class SearchMecLease(var type:Int):BaseCusFragment() ,OnItemClickListener{
             }
         })
 
+        mPresenter = MecLeaseListPresenter(mContext,this)
+        (mPresenter as MecLeaseListPresenter).setTitle("机械")
+        (mPresenter as MecLeaseListPresenter).getLeaseList(1)
     }
 
     fun closeRefreshView() {
@@ -63,5 +65,26 @@ class SearchMecLease(var type:Int):BaseCusFragment() ,OnItemClickListener{
         var bundle = Bundle()
         bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 0)
         jumpActivity(bundle, LeaseDetailsActivity::class.java)
+    }
+
+    override fun refreshUI(list: List<MecLeaseData>) {
+        mLeaseList.clear()
+        mLeaseList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+
+    }
+
+    override fun loadMore(list: List<MecLeaseData>) {
+        mLeaseList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hiedLoading() {
+    }
+
+    override fun err() {
     }
 }

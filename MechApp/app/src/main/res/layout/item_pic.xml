@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
-    <FrameLayout
-        android:layout_width="125dp"
-        android:layout_height="125dp">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_width="120dp"
+    android:background="@color/color_blue"
+    android:layout_height="120dp">
 
         <ImageView
             android:id="@+id/iv_pic"
-            android:layout_width="118dp"
-            android:layout_height="118dp"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
             android:layout_gravity="center"
             android:src="@mipmap/add_pic_n" />
 
@@ -23,7 +18,5 @@
             android:layout_height="21dp"
             android:layout_gravity="right"
             android:src="@mipmap/del" />
-    </FrameLayout>
 
-
-</LinearLayout>
+</FrameLayout>

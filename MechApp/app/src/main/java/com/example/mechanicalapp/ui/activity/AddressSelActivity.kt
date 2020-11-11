@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
@@ -21,6 +22,7 @@ import com.amap.api.services.geocoder.RegeocodeResult
 import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.LocationAddressAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
@@ -39,7 +41,7 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     private var mList: MutableList<PoiItem> = ArrayList<PoiItem>()
     private var poiQuery: PoiSearch.Query? = null
     private var marker: Marker? = null
-    private  var mCityCode: String="020"
+    private var mCityCode: String = "020"
 
     override fun getLayoutId(): Int {
         return R.layout.activity_address_sel
@@ -181,7 +183,7 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     override fun hiedLoading() {
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     private fun moveMap(latitude: Double, longitude: Double) {
@@ -191,7 +193,7 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     }
 
     override fun locationSuccess(mapLocation: AMapLocation) {
-        mCityCode =mapLocation.cityCode
+        mCityCode = mapLocation.cityCode
         moveMap(mapLocation.latitude, mapLocation.longitude)
     }
 
@@ -199,6 +201,7 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     }
 
     override fun onItemClick(view: View, position: Int) {
+        callback( "${mList[position].provinceName}${mList[position].cityName} ${mList[position].adName}",mList[position].cityCode)
     }
 
     override fun afterTextChanged(s: Editable?) {
@@ -208,8 +211,19 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        searchList(mCityCode,et_search?.text.toString().trim());
+        searchList(mCityCode, et_search?.text.toString().trim());
     }
+
+    private fun callback(callbackStr: String, id: String) {
+        var intent = Intent()
+        var bundle = Bundle()
+        bundle.putString(Configs.SCREEN_RESULT_Extra, callbackStr)
+        bundle.putString(Configs.SCREEN_RESULT_ID, id)
+        intent.putExtras(bundle)
+        setResult(Configs.EC_TYPE_RESULT_CODE, intent)
+        finish()
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

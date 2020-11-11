@@ -65,6 +65,11 @@ class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecA
 
         mPresenter = MecModelPresenter(this,this)
         mPresenter?.getMecBrandList()
+
+        var type = intent.getIntExtra("type",0)
+        if (type==1){
+            tv_unlimited.visibility =View.GONE
+        }
     }
 
     override fun initPresenter() {

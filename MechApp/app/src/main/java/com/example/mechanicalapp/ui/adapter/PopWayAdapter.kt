@@ -36,7 +36,7 @@ class PopWayAdapter(
         init {
             itemView.setOnClickListener(View.OnClickListener {
                 mOnItemClickListener.onItemClick(
-                    itemView,
+                    itemView.tv_screen,
                     adapterPosition
                 )
             })

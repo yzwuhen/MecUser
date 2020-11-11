@@ -4,15 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EcModelAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.MecModelData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import kotlinx.android.synthetic.main.activity_ec_model.*
@@ -45,6 +43,12 @@ class EcModel :BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecA
 
         tv_unlimited.setOnClickListener(this)
         iv_back.setOnClickListener(this)
+
+        var type = intent.getIntExtra("type",0)
+        if (type==1){
+            tv_unlimited.visibility =View.GONE
+        }
+
 
         mPresenter = MecModelPresenter(this,this)
         mPresenter?.getMecModelList()

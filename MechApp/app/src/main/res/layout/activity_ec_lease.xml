@@ -48,6 +48,7 @@
                 <TextView
                     android:id="@+id/tv_way"
                     style="@style/tv_style_left"
+                    android:paddingLeft="@dimen/dp_20"
                     android:layout_gravity="center"
                     android:text="元/月" />
 

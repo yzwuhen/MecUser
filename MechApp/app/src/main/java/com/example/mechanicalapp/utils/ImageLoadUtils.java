@@ -59,8 +59,11 @@ public class ImageLoadUtils {
             return;
         }
 
+//        Glide.with(mContext).load(url).into(weakReference.get());
+
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(norImage).error(norImage).diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
         Glide.with(mContext).load(url).apply(requestOptions).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

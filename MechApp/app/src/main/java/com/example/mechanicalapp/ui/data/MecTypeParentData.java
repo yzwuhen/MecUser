@@ -19,7 +19,6 @@ public class MecTypeParentData extends BaseData {
      * id : 1321476604976406530
      * isHot : 1
      */
-
     private String isHot_dictText;
     private String orderNum;
     private String hasChild_dictText;

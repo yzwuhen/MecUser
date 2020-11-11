@@ -26,7 +26,8 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener, MecTy
 
     private var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
     private var mPresenter: MecModelPresenter?=null
-    private var index:Int =0;
+    private var index:Int =0
+
 
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
@@ -51,6 +52,12 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener, MecTy
         iv_back.setOnClickListener(this)
         mPresenter = MecModelPresenter(this,this)
         mPresenter?.getMecTypeList()
+
+
+       var type = intent.getIntExtra("type",0)
+        if (type==1){
+            tv_unlimited.visibility =View.GONE
+        }
     }
 
     override fun initPresenter() {

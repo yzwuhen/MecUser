@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amap.api.services.core.PoiItem
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import kotlinx.android.synthetic.main.item_ec_type_left.view.*
 import kotlinx.android.synthetic.main.item_map_address.view.*
 
 class LocationAddressAdapter(
-    var items: List<PoiItem>,
+    var mList: List<PoiItem>,
     var onItemclickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -18,6 +19,7 @@ class LocationAddressAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return LocationAddressVh(
+            onItemclickListener,
             LayoutInflater.from(parent.context).inflate(R.layout.item_map_address, parent, false)
         )
     }
@@ -25,16 +27,18 @@ class LocationAddressAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         holder.itemView.tv_address.text =
-            "${items[position].provinceName}${items[position].cityName} ${items[position].adName}"
-        holder.itemView.tv_address_road.text = items[position].title
-//            holder.itemView.setOnClickListener(View.OnClickListener {
-//                onItemclickListener?.onItemClick(position)
-//            })
+            "${mList[position].provinceName}${mList[position].cityName} ${mList[position].adName}"
+        holder.itemView.tv_address_road.text = mList[position].title
+
     }
 
     override fun getItemCount(): Int {
-        return items.size;
+        return mList.size;
     }
 
-    class LocationAddressVh(var itemViews: View) : RecyclerView.ViewHolder(itemViews)
+    class LocationAddressVh(onItemClickListener: OnItemClickListener, itemView: View) : RecyclerView.ViewHolder(itemView){
+        init {
+            itemView.setOnClickListener(View.OnClickListener { onItemClickListener.onItemClick(itemView.tv_type,adapterPosition) })
+        }
+    }
 }

@@ -4,6 +4,7 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.HomeData
 import com.example.mechanicalapp.ui.data.MoreFactoryBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReMecLease
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
@@ -42,5 +43,12 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreFactoryBean>(iSubscriberListener))
 
+    }
+
+    fun addMecLease(mReMecLease: ReMecLease,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.addMecLease(mReMecLease)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 }

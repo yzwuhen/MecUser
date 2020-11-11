@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.MecTypeParentData
 import kotlinx.android.synthetic.main.item_ec_type_left.view.*
 
-class PartsTypeLeftAdapter  (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PartsTypeLeftAdapter  (var mContext: Context, var mList:MutableList<MecTypeParentData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -16,8 +17,8 @@ class PartsTypeLeftAdapter  (var mContext: Context, var mList:MutableList<String
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_type.text = mList[position]
-        holder.itemView.tv_type.isSelected = position ==2
+        holder.itemView.tv_type.text = mList[position].cateName
+        holder.itemView.tv_type.isSelected = mList[position].isSelect
 
     }
 

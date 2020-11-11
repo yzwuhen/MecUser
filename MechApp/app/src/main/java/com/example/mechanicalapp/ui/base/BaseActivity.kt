@@ -70,9 +70,29 @@ abstract  class BaseActivity<T> : AppCompatActivity() ,BaseView<T>{
     ) {
         val intent = Intent()
         intent.setClass(this, targetActivity!!)
+
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         startActivityForResult(intent, result)
     }
+
+    /**
+     * 跳转到其他界面返回===> 携带参数过去 上面涉及太多 新添加一个
+     * 主要是跳转是否需要显示不限 ，不考虑其它情况先了
+     */
+    open fun jumpActivityForResult(
+        result: Int,
+        type:Int,
+        targetActivity: Class<*>?
+    ) {
+        val intent = Intent()
+        intent.setClass(this, targetActivity!!)
+
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        intent.putExtra("type",type)
+        startActivityForResult(intent, result)
+    }
+
+
 
     open fun verifyStoragePermissions(activity: Activity?) {
         try {

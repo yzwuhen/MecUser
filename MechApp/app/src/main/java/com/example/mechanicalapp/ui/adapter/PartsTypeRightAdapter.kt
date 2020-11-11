@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.MecTypeChildData
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_ec_type_right.view.*
 
-class PartsTypeRightAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PartsTypeRightAdapter (var mContext: Context, var mList:MutableList<MecTypeChildData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -17,7 +19,8 @@ class PartsTypeRightAdapter (var mContext: Context, var mList:MutableList<String
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_type_name.text = mList[position]
+        holder.itemView.tv_type_name.text = mList[position].cateName
+        ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].cateLogo,R.mipmap.ic_launcher)
     }
 
     override fun getItemCount(): Int {

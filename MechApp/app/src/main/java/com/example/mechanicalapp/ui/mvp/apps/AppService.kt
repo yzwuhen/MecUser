@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.mvp.apps
 
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.LoginCode
+import com.example.mechanicalapp.ui.data.request.ReMecLease
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -163,4 +164,12 @@ interface AppService {
      */
     @GET("/jeecg-boot/machine/mecMachineBrand/list")
     fun getMecBrandList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<BrandBean>
+
+
+    /**
+     * 添加租赁机械
+     *
+     */
+    @POST("/market/mecMarketMechanics/add")
+    fun addMecLease(@Body mReMecLease: ReMecLease) :Observable<NetData>
 }

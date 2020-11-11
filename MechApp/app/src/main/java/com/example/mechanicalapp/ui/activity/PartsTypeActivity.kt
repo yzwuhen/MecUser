@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,9 +29,9 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
 
     private var mLeftAdapter: PartsTypeLeftAdapter? = null
     private var mRightAdapter: PartsTypeRightAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
 
-    private var mRightList: MutableList<String> = ArrayList<String>()
+    private var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
     private var mPresenter: PartsTypePresenter?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
@@ -39,26 +40,6 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
 
     override fun initView() {
         super.initView()
-
-        mList.add("所有类型")
-        mList.add("挖掘机")
-        mList.add("推土机")
-        mList.add("旋挖机")
-        mList.add("汽车吊")
-        mList.add("泵车")
-        mList.add("装载机")
-
-
-        mRightList.add("履带式挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("履带式挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
-        mRightList.add("轮式挖掘机")
-        mRightList.add("水陆挖掘机")
 
         mLeftAdapter = PartsTypeLeftAdapter(this, mList, this)
         recycler_list_left.layoutManager = LinearLayoutManager(this)
@@ -95,14 +76,17 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.ly_type->callback(mRightList[position])
+            R.id.ly_type->callback(mRightList[position].cateName,mRightList[position].id)
         }
     }
 
-    private fun callback(callbackkStr: String) {
+    private fun callback(callbackStr: String,id:String?) {
         var intent  = Intent()
         var bundle = Bundle()
-        bundle.putString(Configs.SCREEN_RESULT_Extra,callbackkStr)
+        bundle.putString(Configs.SCREEN_RESULT_Extra,callbackStr)
+        if (!TextUtils.isEmpty(id)){
+            bundle.putString(Configs.SCREEN_RESULT_ID,id)
+        }
         intent.putExtras(bundle)
         setResult(Configs.EC_TYPE_RESULT_CODE,intent)
         finish()
@@ -111,22 +95,33 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.iv_back->finish()
-            R.id.tv_unlimited->callback("不限")
+            R.id.tv_unlimited->callback("不限",null)
         }
 
     }
 
 
     override fun refreshLeftUI(list: List<MecTypeParentData>) {
-
+        mList.clear()
+        mList.addAll(list)
+        mList[0].isSelect =true
+        mLeftAdapter?.notifyDataSetChanged()
     }
 
     override fun loadLeftMore(list: List<MecTypeParentData>) {
+        mList.addAll(list)
+        mLeftAdapter?.notifyDataSetChanged()
     }
 
     override fun refreshRightUI(list: MutableList<MecTypeChildData>) {
+        mRightList.clear()
+        mRightList.addAll(list)
+        mRightAdapter?.notifyDataSetChanged()
     }
 
     override fun loadRightMore(list: List<MecTypeChildData>) {
+        mRightList.addAll(list)
+        mRightAdapter?.notifyDataSetChanged()
     }
+
 }

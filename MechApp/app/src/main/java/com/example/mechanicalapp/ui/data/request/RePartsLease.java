@@ -1,124 +1,87 @@
 package com.example.mechanicalapp.ui.data.request;
 
-public class ReMecLease {
-
+public class RePartsLease {
 
     /**
-     * brandId : string
-     * brandName : string
-     * briefDesc : string
-     * bussiessType : string
-     * cateId : string
-     * cateName : string
+     * address : string
+     * brand : string
+     * bussiessType : 0
      * city : string
      * contactName : string
      * contactPhone : string
+     * content : string
      * createBy : string
-     * createTime : 2020-11-11T06:33:19.374Z
-     * facDate : 2020-11-11T06:33:19.374Z
+     * createTime : 2020-11-12T07:51:48.350Z
+     * fitMachineType : string
      * gpsLat : string
      * gpsLon : string
      * id : string
      * isEnterprise : string
-     * isNew : string
      * isOn : string
      * isPerson : string
+     * isTalk : string
      * isTop : string
-     * mecUnit : string
-     * modelId : string
-     * modelName : string
-     * orderTime : 2020-11-11T06:33:19.374Z
+     * orderTime : 2020-11-12T07:51:48.350Z
+     * partsType : string
      * pic : string
-     * price : 0
+     * price : string
      * priceUnit : string
      * sysOrgCode : string
-     * tenancy : string
-     * tittle : string
+     * title : string
      * updateBy : string
-     * updateTime : 2020-11-11T06:33:19.374Z
-     * workTime : string
+     * updateTime : 2020-11-12T07:51:48.350Z
      */
 
-    private String brandId;
-    private String brandName;
-    private String briefDesc;
-    private String bussiessType;//1 是出租 2 是求组
-    private String cateId;
-    private String cateName;
+    private String address;
+    private String brand;
+    private int bussiessType;
     private String city;
     private String contactName;
     private String contactPhone;
+    private String content;
     private String createBy;
     private String createTime;
-    private String facDate;
+    private String fitMachineType;
     private String gpsLat;
     private String gpsLon;
     private String id;
     private String isEnterprise;
-    private String isNew;
     private String isOn;
     private String isPerson;
+    private String isTalk;
     private String isTop;
-    private String mecUnit;
-    private String modelId;
-    private String modelName;
     private String orderTime;
+    private String partsType;
     private String pic;
-    private int price;
+    private String price;
     private String priceUnit;
     private String sysOrgCode;
-    private String tenancy;
-    private String tittle;
+    private String title;
     private String updateBy;
     private String updateTime;
-    private String workTime;
 
-    public String getBrandId() {
-        return brandId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setBrandId(String brandId) {
-        this.brandId = brandId;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 
-    public String getBriefDesc() {
-        return briefDesc;
-    }
-
-    public void setBriefDesc(String briefDesc) {
-        this.briefDesc = briefDesc;
-    }
-
-    public String getBussiessType() {
+    public int getBussiessType() {
         return bussiessType;
     }
 
-    public void setBussiessType(String bussiessType) {
+    public void setBussiessType(int bussiessType) {
         this.bussiessType = bussiessType;
-    }
-
-    public String getCateId() {
-        return cateId;
-    }
-
-    public void setCateId(String cateId) {
-        this.cateId = cateId;
-    }
-
-    public String getCateName() {
-        return cateName;
-    }
-
-    public void setCateName(String cateName) {
-        this.cateName = cateName;
     }
 
     public String getCity() {
@@ -145,6 +108,14 @@ public class ReMecLease {
         this.contactPhone = contactPhone;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public String getCreateBy() {
         return createBy;
     }
@@ -161,12 +132,12 @@ public class ReMecLease {
         this.createTime = createTime;
     }
 
-    public String getFacDate() {
-        return facDate;
+    public String getFitMachineType() {
+        return fitMachineType;
     }
 
-    public void setFacDate(String facDate) {
-        this.facDate = facDate;
+    public void setFitMachineType(String fitMachineType) {
+        this.fitMachineType = fitMachineType;
     }
 
     public String getGpsLat() {
@@ -201,14 +172,6 @@ public class ReMecLease {
         this.isEnterprise = isEnterprise;
     }
 
-    public String getIsNew() {
-        return isNew;
-    }
-
-    public void setIsNew(String isNew) {
-        this.isNew = isNew;
-    }
-
     public String getIsOn() {
         return isOn;
     }
@@ -225,36 +188,20 @@ public class ReMecLease {
         this.isPerson = isPerson;
     }
 
+    public String getIsTalk() {
+        return isTalk;
+    }
+
+    public void setIsTalk(String isTalk) {
+        this.isTalk = isTalk;
+    }
+
     public String getIsTop() {
         return isTop;
     }
 
     public void setIsTop(String isTop) {
         this.isTop = isTop;
-    }
-
-    public String getMecUnit() {
-        return mecUnit;
-    }
-
-    public void setMecUnit(String mecUnit) {
-        this.mecUnit = mecUnit;
-    }
-
-    public String getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(String modelId) {
-        this.modelId = modelId;
-    }
-
-    public String getModelName() {
-        return modelName;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
     }
 
     public String getOrderTime() {
@@ -265,6 +212,14 @@ public class ReMecLease {
         this.orderTime = orderTime;
     }
 
+    public String getPartsType() {
+        return partsType;
+    }
+
+    public void setPartsType(String partsType) {
+        this.partsType = partsType;
+    }
+
     public String getPic() {
         return pic;
     }
@@ -273,11 +228,11 @@ public class ReMecLease {
         this.pic = pic;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -297,20 +252,12 @@ public class ReMecLease {
         this.sysOrgCode = sysOrgCode;
     }
 
-    public String getTenancy() {
-        return tenancy;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTenancy(String tenancy) {
-        this.tenancy = tenancy;
-    }
-
-    public String getTittle() {
-        return tittle;
-    }
-
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUpdateBy() {
@@ -327,13 +274,5 @@ public class ReMecLease {
 
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public String getWorkTime() {
-        return workTime;
-    }
-
-    public void setWorkTime(String workTime) {
-        this.workTime = workTime;
     }
 }

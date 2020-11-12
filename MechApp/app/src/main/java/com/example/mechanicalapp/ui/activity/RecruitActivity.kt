@@ -10,25 +10,29 @@ import com.example.mechanicalapp.ui.adapter.YearsAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.request.ReWorkAbout
+import com.example.mechanicalapp.ui.mvp.impl.AddMecManagePresenterImpl
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_recruit.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class RecruitActivity : BaseActivity<NetData>(),  View.OnClickListener,OnItemClickListener{
+class RecruitActivity : BaseActivity<NetData>(), View.OnClickListener, OnItemClickListener {
 
-    private var mButtDialog: BottomSheetDialog?=null
-    private var mDialogView:View ?= null
-    private var mRecyDialog: RecyclerView?=null
-    private var mYearsAdapter: YearsAdapter?=null
+    private var mButtDialog: BottomSheetDialog? = null
+    private var mDialogView: View? = null
+    private var mRecyDialog: RecyclerView? = null
+    private var mYearsAdapter: YearsAdapter? = null
     private var mYears: MutableList<String> = ArrayList<String>()
 
 
-
-    private var mSalaryDialog: BottomSheetDialog?=null
-    private var mSalaryDialogView:View ?= null
-    private var mRecySalaryDialog: RecyclerView?=null
-    private var mSalary: YearsAdapter?=null
+    private var mSalaryDialog: BottomSheetDialog? = null
+    private var mSalaryDialogView: View? = null
+    private var mRecySalaryDialog: RecyclerView? = null
+    private var mSalary: YearsAdapter? = null
     private var mSalaryList: MutableList<String> = ArrayList<String>()
+
+    private var mReBean = ReWorkAbout()
+    private var mPresenter: AddMecManagePresenterImpl? = null
 
     override fun getLayoutId(): Int {
 
@@ -72,29 +76,29 @@ class RecruitActivity : BaseActivity<NetData>(),  View.OnClickListener,OnItemCli
     override fun hiedLoading() {
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_back -> finish()
-            R.id.ly_work_type->jumpActivity(null,WorkType::class.java)
-            R.id.ly_work_experience->showExperience()
-            R.id.ly_salary->showSalary()
-            R.id.ly_address->jumpActivity(null,AddressSelActivity::class.java)
+            R.id.ly_work_type -> jumpActivity(null, WorkType::class.java)
+            R.id.ly_work_experience -> showExperience()
+            R.id.ly_salary -> showSalary()
+            R.id.ly_address -> jumpActivity(null, AddressSelActivity::class.java)
         }
     }
 
     private fun showExperience() {
         mButtDialog = BottomSheetDialog(this)
 
-        mDialogView = View.inflate(this,R.layout.dialog_selsec_years,null)
+        mDialogView = View.inflate(this, R.layout.dialog_selsec_years, null)
         mButtDialog?.setContentView(mDialogView!!)
         mRecyDialog = mDialogView?.findViewById(R.id.recycler_years)
 
-        mRecyDialog?.layoutManager = GridLayoutManager(this,3)
+        mRecyDialog?.layoutManager = GridLayoutManager(this, 3)
         mRecyDialog?.addItemDecoration(MyDecoration(3))
-        mRecyDialog?.adapter =YearsAdapter(this,mYears,this)
+        mRecyDialog?.adapter = YearsAdapter(this, mYears, this)
         mButtDialog?.show()
 
 
@@ -103,13 +107,13 @@ class RecruitActivity : BaseActivity<NetData>(),  View.OnClickListener,OnItemCli
     private fun showSalary() {
         mSalaryDialog = BottomSheetDialog(this)
 
-        mSalaryDialogView = View.inflate(this,R.layout.dialog_selsec_years,null)
+        mSalaryDialogView = View.inflate(this, R.layout.dialog_selsec_years, null)
         mSalaryDialog?.setContentView(mSalaryDialogView!!)
         mRecySalaryDialog = mSalaryDialogView?.findViewById(R.id.recycler_years)
 
-        mRecySalaryDialog?.layoutManager = GridLayoutManager(this,3)
+        mRecySalaryDialog?.layoutManager = GridLayoutManager(this, 3)
         mRecySalaryDialog?.addItemDecoration(MyDecoration(3))
-        mRecySalaryDialog?.adapter =YearsAdapter(this,mSalaryList,object :OnItemClickListener{
+        mRecySalaryDialog?.adapter = YearsAdapter(this, mSalaryList, object : OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
 
             }

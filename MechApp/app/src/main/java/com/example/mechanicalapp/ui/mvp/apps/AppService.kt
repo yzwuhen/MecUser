@@ -1,8 +1,7 @@
 package com.example.mechanicalapp.ui.mvp.apps
 
 import com.example.mechanicalapp.ui.data.*
-import com.example.mechanicalapp.ui.data.request.LoginCode
-import com.example.mechanicalapp.ui.data.request.ReMecLease
+import com.example.mechanicalapp.ui.data.request.*
 import io.reactivex.Observable
 import retrofit2.http.*
 
@@ -172,4 +171,23 @@ interface AppService {
      */
     @POST("/market/mecMarketMechanics/add")
     fun addMecLease(@Body mReMecLease: ReMecLease) :Observable<NetData>
+
+    /**
+     * 添加交易机械--出售 求购
+     */
+    @POST("/market/mecMarketOldMechanics/add")
+    fun addMecBusiness(@Body mReMecSell: ReMecBusiness) :Observable<NetData>
+
+
+    /**
+     * 添加配件--出售 求购
+     */
+    @POST("/market/mecMarketParts/add")
+    fun addPartsLease(@Body mRePartsLease: RePartsLease) :Observable<NetData>
+
+    /**
+     * 招聘需求--招聘、 求职
+     */
+    @POST("/market/mecMarketRecruit/add")
+    fun addWorkAbout(@Body mReWorkAbout: ReWorkAbout) :Observable<NetData>
 }

@@ -4,7 +4,10 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.HomeData
 import com.example.mechanicalapp.ui.data.MoreFactoryBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReMecBusiness
 import com.example.mechanicalapp.ui.data.request.ReMecLease
+import com.example.mechanicalapp.ui.data.request.RePartsLease
+import com.example.mechanicalapp.ui.data.request.ReWorkAbout
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
@@ -47,6 +50,27 @@ class ModelImpl : BaseModel {
 
     fun addMecLease(mReMecLease: ReMecLease,iSubscriberListener: ISubscriberListener<NetData>){
         appsService?.addMecLease(mReMecLease)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+    fun addMecBusiness(mReMecBusiness: ReMecBusiness,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.addMecBusiness(mReMecBusiness)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+    fun addPartsLease(mRePartsLease: RePartsLease,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.addPartsLease(mRePartsLease)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun addWorkAbout(mReWorkAbout: ReWorkAbout, iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.addWorkAbout(mReWorkAbout)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))

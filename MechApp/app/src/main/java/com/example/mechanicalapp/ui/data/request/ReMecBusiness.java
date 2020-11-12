@@ -1,7 +1,9 @@
 package com.example.mechanicalapp.ui.data.request;
 
-public class ReMecLease {
-
+/**
+ * 出售求购 request
+ */
+public class ReMecBusiness {
 
     /**
      * brandId : string
@@ -14,8 +16,8 @@ public class ReMecLease {
      * contactName : string
      * contactPhone : string
      * createBy : string
-     * createTime : 2020-11-11T06:33:19.374Z
-     * facDate : 2020-11-11T06:33:19.374Z
+     * createTime : 2020-11-12T02:50:39.913Z
+     * facDate : 2020-11-12T02:50:39.913Z
      * gpsLat : string
      * gpsLon : string
      * id : string
@@ -24,25 +26,23 @@ public class ReMecLease {
      * isOn : string
      * isPerson : string
      * isTop : string
-     * mecUnit : string
      * modelId : string
      * modelName : string
-     * orderTime : 2020-11-11T06:33:19.374Z
+     * orderTime : 2020-11-12T02:50:39.913Z
+     * paymentType : string
      * pic : string
-     * price : 0
-     * priceUnit : string
+     * price : string
      * sysOrgCode : string
-     * tenancy : string
      * tittle : string
      * updateBy : string
-     * updateTime : 2020-11-11T06:33:19.374Z
+     * updateTime : 2020-11-12T02:50:39.913Z
      * workTime : string
      */
 
     private String brandId;
     private String brandName;
     private String briefDesc;
-    private String bussiessType;//1 是出租 2 是求组
+    private String bussiessType;
     private String cateId;
     private String cateName;
     private String city;
@@ -59,15 +59,13 @@ public class ReMecLease {
     private String isOn;
     private String isPerson;
     private String isTop;
-    private String mecUnit;
     private String modelId;
     private String modelName;
     private String orderTime;
+    private String paymentType;
     private String pic;
-    private int price;
-    private String priceUnit;
+    private String price;
     private String sysOrgCode;
-    private String tenancy;
     private String tittle;
     private String updateBy;
     private String updateTime;
@@ -233,14 +231,6 @@ public class ReMecLease {
         this.isTop = isTop;
     }
 
-    public String getMecUnit() {
-        return mecUnit;
-    }
-
-    public void setMecUnit(String mecUnit) {
-        this.mecUnit = mecUnit;
-    }
-
     public String getModelId() {
         return modelId;
     }
@@ -265,6 +255,14 @@ public class ReMecLease {
         this.orderTime = orderTime;
     }
 
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
     public String getPic() {
         return pic;
     }
@@ -273,20 +271,12 @@ public class ReMecLease {
         this.pic = pic;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
-    }
-
-    public String getPriceUnit() {
-        return priceUnit;
-    }
-
-    public void setPriceUnit(String priceUnit) {
-        this.priceUnit = priceUnit;
     }
 
     public String getSysOrgCode() {
@@ -295,14 +285,6 @@ public class ReMecLease {
 
     public void setSysOrgCode(String sysOrgCode) {
         this.sysOrgCode = sysOrgCode;
-    }
-
-    public String getTenancy() {
-        return tenancy;
-    }
-
-    public void setTenancy(String tenancy) {
-        this.tenancy = tenancy;
     }
 
     public String getTittle() {

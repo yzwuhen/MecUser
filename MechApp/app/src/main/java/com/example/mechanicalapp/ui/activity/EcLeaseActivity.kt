@@ -5,35 +5,28 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
-import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.adapter.PopWayAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
-import com.example.mechanicalapp.ui.data.MoreLeaseData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.request.ReMecLease
+import com.example.mechanicalapp.ui.mvp.impl.AddMecManagePresenterImpl
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GlideEngine
-import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_ec_lease.*
-import kotlinx.android.synthetic.main.activity_user_data.*
-import kotlinx.android.synthetic.main.item_job_want.*
-import kotlinx.android.synthetic.main.item_screen.view.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -52,16 +45,18 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
     private var popRecy: RecyclerView? = null
     private var mPopWayAdapter: PopWayAdapter? = null
 
-    private var strPic: String = ""
+
     private var mReMecLease = ReMecLease()
 
-
+    private var strPic: String = ""
     private var mButtDialog: BottomSheetDialog? = null
 
     private var mDialogView: View? = null
     private var mDialogTv1: TextView? = null
     private var mDialogTv2: TextView? = null
     private var mDialogTv3: TextView? = null
+
+    private var mPresenter: AddMecManagePresenterImpl?=null
 
     override fun getLayoutId(): Int {
 
@@ -93,6 +88,10 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
         mStringList?.add("元/台班")
         mStringList?.add("元/小时")
         mStringList?.add("面议")
+
+        mReMecLease.bussiessType ="1"
+
+        mPresenter = AddMecManagePresenterImpl(this,this)
 
     }
 
@@ -233,6 +232,10 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
                 et_ec_model.text = extra
                 mReMecLease.modelName = extra
                 mReMecLease.modelId = extraId
+            }
+            Configs.ADDRESS_RESULT_CODE->{
+                et_address.text =extra
+                mReMecLease.city = extra
             }
         }
 

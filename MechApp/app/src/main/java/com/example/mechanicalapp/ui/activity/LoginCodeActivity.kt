@@ -36,7 +36,7 @@ class LoginCodeActivity : BaseActivity<NetData>(), View.OnClickListener ,LoginCo
         tv_pwd_login.setOnClickListener(this)
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
-        et_phone.setText("13886943851")
+        et_phone.setText("13751773402")
         et_code.setText("123456")
 
 

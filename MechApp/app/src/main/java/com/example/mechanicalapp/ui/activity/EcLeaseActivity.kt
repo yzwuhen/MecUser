@@ -1,6 +1,9 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +21,7 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReMecLease
 import com.example.mechanicalapp.ui.mvp.impl.AddMecManagePresenterImpl
+import com.example.mechanicalapp.ui.mvp.impl.UpdateFilePresenterImpl
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GlideEngine
@@ -35,7 +39,7 @@ import kotlin.collections.ArrayList
  * 机械出租
  */
 class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener, OnTimeSelectListener {
+    PopUtils.onViewListener, OnTimeSelectListener,TextWatcher {
 
     private var mPicAdapter: PicAdapter? = null
 
@@ -57,6 +61,7 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
     private var mDialogTv3: TextView? = null
 
     private var mPresenter: AddMecManagePresenterImpl?=null
+    private var mUpLoadFilePresenter :UpdateFilePresenterImpl?=null
 
     override fun getLayoutId(): Int {
 
@@ -65,9 +70,6 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
 
     override fun initView() {
         super.initView()
-
-//        mPicList?.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600716333897&di=963fb5b0077fce243ce0cbf1d70b44cf&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290")
-//        mPicList?.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600716333897&di=963fb5b0077fce243ce0cbf1d70b44cf&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290")
         mPicAdapter = PicAdapter(this, mPicList, this)
         var mLinearLayoutManager =LinearLayoutManager(this)
         mLinearLayoutManager.orientation =LinearLayoutManager.HORIZONTAL
@@ -92,6 +94,17 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
         mReMecLease.bussiessType ="1"
 
         mPresenter = AddMecManagePresenterImpl(this,this)
+        mUpLoadFilePresenter = UpdateFilePresenterImpl(this,this)
+
+
+        et_ec_name.addTextChangedListener(this)
+        et_way.addTextChangedListener(this)
+        et_work_time.addTextChangedListener(this)
+        et_phone.addTextChangedListener(this)
+        et_name.addTextChangedListener(this)
+        et_production_time.addTextChangedListener(this)
+        et_address.addTextChangedListener(this)
+        et_input.addTextChangedListener(this)
 
     }
 
@@ -165,7 +178,8 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
 
     private fun setItem() {
         mButtDialog?.dismiss()
-        verifyStoragePermissions(this)
+       // verifyStoragePermissions(this)
+        takePoto()
     }
 
     private fun showTime() {
@@ -199,7 +213,7 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
 
         mReMecLease.facDate=DateUtils.dateToStr(date)
         et_production_time.text =DateUtils.dateToStr(date)
-        Log.e("yz_mec", "======${DateUtils.dateToStr(date)}")
+      //  Log.e("yz_mec", "======${DateUtils.dateToStr(date)}")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -241,6 +255,21 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
 
     }
 
+    private fun takePoto(){
+        PictureSelector.create(this)
+            .openCamera(PictureMimeType.ofImage())
+            .forResult(object :OnResultCallbackListener<LocalMedia?>{
+                override fun onResult(result: MutableList<LocalMedia?>) {
+                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    mPicList?.add(result[0]?.realPath.toString())
+                    mPicAdapter?.notifyDataSetChanged()
+                }
+
+                override fun onCancel() {
+                }
+            });
+    }
+
     private fun takePicture() {
         mButtDialog?.dismiss()
         PictureSelector.create(this)
@@ -250,14 +279,10 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
                   //  imgUrl = result[0]?.path.toString()
-                    mPicList?.add(result[0]?.path.toString())
+                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    mPicList?.add(result[0]?.realPath.toString())
                     mPicAdapter?.notifyDataSetChanged()
-//                    ImageLoadUtils.loadImage(
-//                        App.getInstance().applicationContext,
-//                        iv_user_pic,
-//                        result[0]?.path,
-//                        R.mipmap.user_default
-//                    )
+
                 }
 
                 override fun onCancel() {
@@ -286,4 +311,64 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
 
         mButtDialog?.show()
     }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        Log.e("yz_mec","================="+et_ec_name.text.toString())
+        checkInfo()
+    }
+
+    private fun checkInfo() {
+        if (!TextUtils.isEmpty(et_ec_name.text.toString().trim())){
+            mReMecLease.tittle =et_ec_name.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_way.text.toString().trim())){
+            mReMecLease.price =et_way.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_ec_type.text.toString().trim())){
+            mReMecLease.cateName =et_ec_type.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_ec_brand.text.toString().trim())){
+            mReMecLease.brandName =et_ec_brand.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_ec_model.text.toString().trim())){
+            mReMecLease.modelName =et_ec_model.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_work_time.text.toString().trim())){
+            mReMecLease.workTime =et_work_time.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_phone.text.toString().trim())){
+            mReMecLease.contactPhone =et_phone.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_name.text.toString().trim())){
+            mReMecLease.contactName =et_name.text.toString().trim()
+        }
+
+        if (!TextUtils.isEmpty(et_production_time.text.toString().trim())){
+            mReMecLease.facDate =et_production_time.text.toString().trim()
+        }
+        if (!TextUtils.isEmpty(et_address.text.toString().trim())){
+            mReMecLease.city =et_address.text.toString().trim()
+        }
+
+//        if (!TextUtils.isEmpty(et_input.text.toString().trim())){
+//            mReMecLease.tenancy =et_input.text.toString().trim()
+//        }
+
+
+    }
+
 }

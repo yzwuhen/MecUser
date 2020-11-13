@@ -1,7 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.data.HomeData
 import com.example.mechanicalapp.ui.data.MoreFactoryBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReMecBusiness
@@ -14,6 +13,7 @@ import com.example.mechanicalapp.ui.mvp.apps.AppService
 import com.example.mechanicalapp.ui.mvp.m.BaseModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
 
 class ModelImpl : BaseModel {
 
@@ -38,24 +38,27 @@ class ModelImpl : BaseModel {
         mecType: String?,
         partType: String?,
         sort: String?,
-        name:String?,
+        name: String?,
         iSubscriberListener: ISubscriberListener<MoreFactoryBean>
     ) {
-        appsService?.getFactoryList(page,pageSize,mecType,partType,sort,name)
+        appsService?.getFactoryList(page, pageSize, mecType, partType, sort, name)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreFactoryBean>(iSubscriberListener))
 
     }
 
-    fun addMecLease(mReMecLease: ReMecLease,iSubscriberListener: ISubscriberListener<NetData>){
+    fun addMecLease(mReMecLease: ReMecLease, iSubscriberListener: ISubscriberListener<NetData>) {
         appsService?.addMecLease(mReMecLease)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
-    fun addMecBusiness(mReMecBusiness: ReMecBusiness,iSubscriberListener: ISubscriberListener<NetData>){
+    fun addMecBusiness(
+        mReMecBusiness: ReMecBusiness,
+        iSubscriberListener: ISubscriberListener<NetData>
+    ) {
         appsService?.addMecBusiness(mReMecBusiness)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
@@ -63,14 +66,25 @@ class ModelImpl : BaseModel {
     }
 
 
-    fun addPartsLease(mRePartsLease: RePartsLease,iSubscriberListener: ISubscriberListener<NetData>){
+    fun addPartsLease(
+        mRePartsLease: RePartsLease,
+        iSubscriberListener: ISubscriberListener<NetData>
+    ) {
         appsService?.addPartsLease(mRePartsLease)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
-    fun addWorkAbout(mReWorkAbout: ReWorkAbout, iSubscriberListener: ISubscriberListener<NetData>){
+
+    fun addWorkAbout(mReWorkAbout: ReWorkAbout, iSubscriberListener: ISubscriberListener<NetData>) {
         appsService?.addWorkAbout(mReWorkAbout)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+    fun upLoadFile(body: MultipartBody.Part, iSubscriberListener: ISubscriberListener<NetData>) {
+        appsService?.uploadFile(body)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))

@@ -64,7 +64,7 @@ public class ReMecLease {
     private String modelName;
     private String orderTime;
     private String pic;
-    private int price;
+    private String price;
     private String priceUnit;
     private String sysOrgCode;
     private String tenancy;
@@ -273,11 +273,11 @@ public class ReMecLease {
         this.pic = pic;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

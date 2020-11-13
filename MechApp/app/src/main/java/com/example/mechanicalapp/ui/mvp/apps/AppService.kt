@@ -3,7 +3,9 @@ package com.example.mechanicalapp.ui.mvp.apps
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.*
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import retrofit2.http.*
+
 
 interface AppService {
     @GET("/app/getAppList")
@@ -35,9 +37,14 @@ interface AppService {
      * 出租求组
      */
     @GET("/jeecg-boot/market/mecMarketMechanics/list")
-    fun getMecList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
-                      @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?,
-                   @Query("tittle")title:String?
+    fun getMecList(
+        @Query("bussiessType") bussiessType: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query(" brandId") brandId: String?,
+        @Query("cateId") cateId: String?,
+        @Query("modelId") modelId: String?,
+        @Query("tittle") title: String?
     ):Observable<MoreLeaseData>
 
 
@@ -47,8 +54,13 @@ interface AppService {
      * bussiessType 1出租2求租
      */
     @GET("/jeecg-boot/market/mecMarketParts/list")
-    fun getPartsList(@Query("bussiessType")bussiessType:Int, @Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
-                     @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
+    fun getPartsList(
+        @Query("bussiessType") bussiessType: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query(" brandId") brandId: String?,
+        @Query("cateId") cateId: String?,
+        @Query("modelId") modelId: String?
     ):Observable<PartsBean>
 
 
@@ -57,8 +69,13 @@ interface AppService {
      * 求购
      */
     @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
-    fun getMecBuyList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
-                   @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?
+    fun getMecBuyList(
+        @Query("bussiessType") bussiessType: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query(" brandId") brandId: String?,
+        @Query("cateId") cateId: String?,
+        @Query("modelId") modelId: String?
     ):Observable<MoreBusinessData>
 
 
@@ -67,9 +84,14 @@ interface AppService {
      * 出售
      */
     @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
-    fun getSellList(@Query("bussiessType")bussiessType:Int,@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,
-                      @Query(" brandId") brandId:String?, @Query("cateId")cateId:String?, @Query("modelId")modelId:String?,
-                    @Query("title")title:String?
+    fun getSellList(
+        @Query("bussiessType") bussiessType: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query(" brandId") brandId: String?,
+        @Query("cateId") cateId: String?,
+        @Query("modelId") modelId: String?,
+        @Query("title") title: String?
     ):Observable<MoreSellBean>
 
 
@@ -80,9 +102,14 @@ interface AppService {
      * region：地区
      */
     @GET("/jeecg-boot/market/mecMarketRecruit/list")
-    fun getRecruitList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("recruitType")recruitType:String,
-                      @Query(" region") region:String?, @Query("typeWork")typeWork:String?, @Query("sort")sort:String?,
-                       @Query("jobTittle")jobTittle:String?
+    fun getRecruitList(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("recruitType") recruitType: String,
+        @Query(" region") region: String?,
+        @Query("typeWork") typeWork: String?,
+        @Query("sort") sort: String?,
+        @Query("jobTittle") jobTittle: String?
     ):Observable<RecruitBean>
 
 
@@ -91,9 +118,16 @@ interface AppService {
      * region：地区
      */
     @GET("/jeecg-boot/market/mecMarketRecruit/list")
-    fun getWantWorkList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("recruitType")recruitType:String,
-                       @Query(" region") region:String?, @Query("typeWork")typeWork:String?, @Query("sort")sort:String?,
-                        @Query("jobTittle")jobTittle:String?
+    fun getWantWorkList(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("recruitType") recruitType: String,
+        @Query(" region") region: String?,
+        @Query("typeWork") typeWork: String?,
+        @Query(
+            "sort"
+        ) sort: String?,
+        @Query("jobTittle") jobTittle: String?
     ):Observable<NetData>
 
 
@@ -104,9 +138,13 @@ interface AppService {
      * region：地区
      */
     @GET("/jeecg-boot/repair/mecRepaireFactory/list")
-    fun getFactoryList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("mecType")mecType:String?,
-                        @Query(" partsType") partsType:String? ,@Query("sort")sort:String?,
-                       @Query("name")name:String?
+    fun getFactoryList(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("mecType") mecType: String?,
+        @Query(" partsType") partsType: String?,
+        @Query("sort") sort: String?,
+        @Query("name") name: String?
     ):Observable<MoreFactoryBean>
 
 
@@ -117,20 +155,24 @@ interface AppService {
      *
      */
     @GET("/jeecg-boot/machine/mecMachineModel/list")
-    fun getMecModelList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecModelBean>
+    fun getMecModelList(@Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int):Observable<MecModelBean>
     /**
      * 机械父级类型
      *
      */
     @GET("/jeecg-boot/machine/mecMachineCate/rootList")
-    fun getMecParentType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecTypeParentBean>
+    fun getMecParentType(@Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int):Observable<MecTypeParentBean>
 
     /**
      * 机械子级类型
      *
      */
     @GET("/jeecg-boot/machine/mecMachineCate/childList")
-    fun getMecChildType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("id")pid:String):Observable<MecTypeChildBean>
+    fun getMecChildType(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("id") pid: String
+    ):Observable<MecTypeChildBean>
 
 
 
@@ -139,7 +181,7 @@ interface AppService {
      *
      */
     @GET("/jeecg-boot//parts/mecPartsModel/list")
-    fun getPartsModelList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecModelBean>
+    fun getPartsModelList(@Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int):Observable<MecModelBean>
 
 
     /**
@@ -147,14 +189,18 @@ interface AppService {
      *
      */
     @GET("/jeecg-boot/parts/mecPartsCate/rootList")
-    fun getPartsParentType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<MecTypeParentBean>
+    fun getPartsParentType(@Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int):Observable<MecTypeParentBean>
 
     /**
      * 配件子级类型
      *
      */
     @GET("/jeecg-boot/parts/mecPartsCate/childList")
-    fun getPartsChildType(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int,@Query("id")pid:String):Observable<MecTypeChildBean>
+    fun getPartsChildType(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("id") pid: String
+    ):Observable<MecTypeChildBean>
 
 
     /**
@@ -162,7 +208,7 @@ interface AppService {
      *
      */
     @GET("/jeecg-boot/machine/mecMachineBrand/list")
-    fun getMecBrandList(@Query("pageNo")pageNo:Int, @Query("pageSize")pageSize:Int):Observable<BrandBean>
+    fun getMecBrandList(@Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int):Observable<BrandBean>
 
 
     /**
@@ -190,4 +236,14 @@ interface AppService {
      */
     @POST("/market/mecMarketRecruit/add")
     fun addWorkAbout(@Body mReWorkAbout: ReWorkAbout) :Observable<NetData>
+
+
+    /**
+     * 上传文件
+     */
+    @Multipart
+    @POST("/jeecg-boot/sys/common/upload")
+    fun uploadFile(
+        @Part file: MultipartBody.Part?
+    ): Observable<NetData>
 }

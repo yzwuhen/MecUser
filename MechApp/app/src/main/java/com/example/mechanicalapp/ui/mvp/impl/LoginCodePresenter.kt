@@ -58,5 +58,6 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
     }
 
     override fun onDestroy() {
+
     }
 }

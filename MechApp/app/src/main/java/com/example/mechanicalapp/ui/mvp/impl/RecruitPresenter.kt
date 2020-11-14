@@ -52,7 +52,6 @@ class RecruitPresenter (
 
                 override fun onError(e: Throwable?) {
                     baseView?.err()
-                    Log.e("sssss============", "sssssssss==============onError$e")
                 }
 
                 override fun onCompleted() {

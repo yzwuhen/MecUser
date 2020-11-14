@@ -25,7 +25,6 @@ class MecBuyModelImpl : BaseModel {
 
     fun getSellList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,mISubscriberListener: ISubscriberListener<MoreSellBean>) {
 
-        Log.e("sssss============","sssssssss==============getMecBuyList")
         appsService?.getSellList(type,pageIndex,pageSize,brandId,cateId,modelId,title)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
@@ -36,7 +35,6 @@ class MecBuyModelImpl : BaseModel {
 
     fun getMecBuyList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,mISubscriberListener: ISubscriberListener<MoreBusinessData>) {
 
-        Log.e("sssss============","sssssssss==============getMecBuyList")
         appsService?.getMecBuyList(type,pageIndex,pageSize,brandId,cateId,modelId)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()

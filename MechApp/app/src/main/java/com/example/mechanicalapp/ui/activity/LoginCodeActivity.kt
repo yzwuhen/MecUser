@@ -137,7 +137,6 @@ class LoginCodeActivity : BaseActivity<NetData>(), View.OnClickListener ,LoginCo
     }
 
     override fun LoginErr() {
-        TODO("Not yet implemented")
     }
 
 }

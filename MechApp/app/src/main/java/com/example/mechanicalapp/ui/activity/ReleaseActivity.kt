@@ -10,9 +10,7 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_release.*
 
-class ReleaseActivity :BaseActivity<NetData>() ,View.OnClickListener,OnItemClickListener{
-
-
+class ReleaseActivity : BaseActivity<NetData>(), View.OnClickListener, OnItemClickListener {
 
 
     override fun getLayoutId(): Int {
@@ -27,8 +25,8 @@ class ReleaseActivity :BaseActivity<NetData>() ,View.OnClickListener,OnItemClick
 
 
 
-        recycle_list.layoutManager= GridLayoutManager(this, 4)
-        recycle_list.adapter= ReleaseAdapter(this!!, this)
+        recycle_list.layoutManager = GridLayoutManager(this, 4)
+        recycle_list.adapter = ReleaseAdapter(this!!, this)
 
         iv_close.setOnClickListener(this)
         iv_release.setOnClickListener(this)
@@ -43,28 +41,28 @@ class ReleaseActivity :BaseActivity<NetData>() ,View.OnClickListener,OnItemClick
     override fun hiedLoading() {
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     override fun onClick(v: View?) {
 
-        when(v?.id){
-            R.id.iv_close->finish()
-            R.id.iv_release->jumpActivity(null,CreateRepairActivity::class.java)
+        when (v?.id) {
+            R.id.iv_close -> finish()
+            R.id.iv_release -> jumpActivity(null, CreateRepairActivity::class.java)
         }
     }
 
     override fun onItemClick(view: View, position: Int) {
 
-        when(position){
-            0->jumpActivity(null,EcLeaseActivity::class.java)
-            1->jumpActivity(null,EcSellActivity::class.java)
-            2->jumpActivity(null,PartsRentalActivity::class.java)
-            3->jumpActivity(null,RecruitActivity::class.java)
-            4->jumpActivity(null,AskingRentActivity::class.java)
-            5->jumpActivity(null,EcBuyActivity::class.java)
-            6->jumpActivity(null,AskingRentPatsActivity::class.java)
-            7->jumpActivity(null,JobWantActivity::class.java)
+        when (position) {
+            0 -> jumpActivity(null, EcLeaseActivity::class.java)
+            1 -> jumpActivity(null, EcSellActivity::class.java)
+            2 -> jumpActivity(null, PartsRentalActivity::class.java)
+            3 -> jumpActivity(null, RecruitActivity::class.java)
+            4 -> jumpActivity(null, AskingRentActivity::class.java)
+            5 -> jumpActivity(null, EcBuyActivity::class.java)
+            6 -> jumpActivity(null, AskingRentPatsActivity::class.java)
+            7 -> jumpActivity(null, JobWantActivity::class.java)
         }
     }
 }

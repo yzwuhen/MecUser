@@ -148,6 +148,20 @@ interface AppService {
     ):Observable<MoreFactoryBean>
 
 
+    /**
+     * 获取工种
+     * region：地区
+     */
+    @GET("/jeecg-boot/repair/mecRepaireFactory/list")
+    fun getWorkTypeList(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("mecType") mecType: String?,
+        @Query(" partsType") partsType: String?,
+        @Query("sort") sort: String?,
+        @Query("name") name: String?
+    ):Observable<MoreFactoryBean>
+
 
 
     /**
@@ -215,27 +229,27 @@ interface AppService {
      * 添加租赁机械
      *
      */
-    @POST("/market/mecMarketMechanics/add")
-    fun addMecLease(@Body mReMecLease: ReMecLease) :Observable<NetData>
+    @POST("/jeecg-boot/market/mecMarketMechanics/add")
+    fun addMecLease(@Body mReMecLease: ReMecLease,@Header("X-Access-Token")token: String?) :Observable<NetData>
 
     /**
      * 添加交易机械--出售 求购
      */
-    @POST("/market/mecMarketOldMechanics/add")
-    fun addMecBusiness(@Body mReMecSell: ReMecBusiness) :Observable<NetData>
+    @POST("/jeecg-boot/market/mecMarketOldMechanics/add")
+    fun addMecBusiness(@Body mReMecSell: ReMecBusiness,@Header("X-Access-Token")token: String?) :Observable<NetData>
 
 
     /**
      * 添加配件--出售 求购
      */
-    @POST("/market/mecMarketParts/add")
-    fun addPartsLease(@Body mRePartsLease: RePartsLease) :Observable<NetData>
+    @POST("/jeecg-boot/market/mecMarketParts/add")
+    fun addPartsLease(@Body mRePartsLease: RePartsLease,@Header("X-Access-Token")token: String?) :Observable<NetData>
 
     /**
      * 招聘需求--招聘、 求职
      */
-    @POST("/market/mecMarketRecruit/add")
-    fun addWorkAbout(@Body mReWorkAbout: ReWorkAbout) :Observable<NetData>
+    @POST("/jeecg-boot/market/mecMarketRecruit/add")
+    fun addWorkAbout(@Body mReWorkAbout: ReWorkAbout,@Header("X-Access-Token")token: String?) :Observable<NetData>
 
 
     /**
@@ -246,4 +260,52 @@ interface AppService {
     fun uploadFile(
         @Part file: MultipartBody.Part?
     ): Observable<NetData>
+
+
+    /**
+     * 收藏的 机械租赁
+     */
+    @GET("/jeecg-boot/my/mecMyStore/appQueryPageList_Machine")
+    fun getCollectList(@Header("X-Access-Token")token:String,@Query("type")type:Int, @Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int): Observable<NetData>
+
+
+    /**
+     * 收藏的 二手机械租赁
+     */
+    @GET("/jeecg-boot/my/mecMyStore/appQueryPageList_oldMachine")
+    fun getCollectSecondHandList(@Header("X-Access-Token")token:String,@Query("type")type:Int, @Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int): Observable<NetData>
+
+    /**
+     * 收藏的 配件租赁
+     */
+    @GET("/jeecg-boot/my/mecMyStore/appQueryPageList_parts")
+    fun getCollectPartsList(@Header("X-Access-Token")token:String,@Query("type")type:Int, @Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int): Observable<NetData>
+
+    /**
+     * 收藏的 招聘 求职
+     */
+    @GET("/jeecg-boot/my/mecMyStore/appQueryPageList_Recruit")
+    fun getCollectRecruitList(@Header("X-Access-Token")token:String,@Query("type")type:Int, @Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int): Observable<NetData>
+
+
+    /**
+     * 收藏的 工厂租赁
+     */
+    @GET("/jeecg-boot/my/mecMyStore/appQueryPageList_repairFactory")
+    fun getCollectFactoryList(@Header("X-Access-Token")token:String,@Query("type")type:Int, @Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int): Observable<NetData>
+
+    /**
+     * 收藏的 商品租赁
+     */
+    @GET("/jeecg-boot/my/mecMyStore/appQueryPageList")
+    fun getCollectGoodsyList(@Header("X-Access-Token")token:String,@Query("type")type:Int, @Query("pageNo") pageNo: Int, @Query("pageSize") pageSize: Int): Observable<NetData>
+
+    /**
+     * 收藏的 商品租赁
+     */
+    @GET("/jeecg-boot/sys/dictItem/listByDictCode")
+    fun getCode(@Query("dictCode")dictCode:String): Observable<CodeBean>
+
+
+
 }

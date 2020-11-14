@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amap.api.services.core.PoiItem
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import kotlinx.android.synthetic.main.item_ec_type_left.view.*
 import kotlinx.android.synthetic.main.item_map_address.view.*
 
 class LocationAddressAdapter(
@@ -38,7 +37,7 @@ class LocationAddressAdapter(
 
     class LocationAddressVh(onItemClickListener: OnItemClickListener, itemView: View) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { onItemClickListener.onItemClick(itemView.tv_type,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { onItemClickListener.onItemClick(itemView.tv_address,adapterPosition) })
         }
     }
 }

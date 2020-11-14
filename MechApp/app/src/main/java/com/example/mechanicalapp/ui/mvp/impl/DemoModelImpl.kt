@@ -26,7 +26,6 @@ class DemoModelImpl: BaseModel {
 
     fun getHomeData(mISubscriberListener:ISubscriberListener<HomeData>) {
 
-        Log.e("sssss============","sssssssss==============getHomeData")
         appsService?.getHomeData()
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()

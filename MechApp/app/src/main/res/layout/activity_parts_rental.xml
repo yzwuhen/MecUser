@@ -45,14 +45,11 @@
                     style="@style/tv_style_left"
                     android:text="适合机型" />
 
-                <TextView
-                    android:hint="请选择适合得机型"
+                <EditText
+                    android:hint="请填写适合得机型"
                     android:id="@+id/et_ec_type"
                     style="@style/et_style" />
-                <TextView
-                    android:text=">"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <View style="@style/h_view_1" />
@@ -63,14 +60,11 @@
                 <TextView
                     style="@style/tv_style_left"
                     android:text="配件品牌" />
-                <TextView
-                    android:hint="请选择配件品牌"
+                <EditText
+                    android:hint="请填写配件品牌"
                     android:id="@+id/et_ec_brand"
                     style="@style/et_style" />
-                <TextView
-                    android:text=">"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <View style="@style/h_view_1" />
@@ -81,14 +75,11 @@
                 <TextView
                     style="@style/tv_style_left"
                     android:text="配件型号" />
-                <TextView
-                    android:hint="请选择配件型号"
+                <EditText
+                    android:hint="请填写配件型号"
                     android:id="@+id/et_ec_model"
                     style="@style/et_style" />
-                <TextView
-                    android:text=">"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
 
@@ -120,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_height="50dp"
-                    android:drawableLeft="@drawable/circle_fff_cacaca"
+                    android:drawableLeft="@drawable/check_icon"
                     android:drawablePadding="@dimen/dp_5"
                     android:textSize="16sp"
                     android:textColor="@color/color_222"
@@ -131,6 +122,7 @@
                     app:layout_constraintStart_toEndOf="@+id/tv_yes"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/tv_element"
+                    android:inputType="numberDecimal"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:background="@null"
@@ -156,11 +148,11 @@
                     android:layout_width="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_height="50dp"
-                    android:drawableLeft="@drawable/circle_check_s"
+                    android:drawableLeft="@drawable/check_icon"
                     android:drawablePadding="@dimen/dp_5"
                     android:textSize="16sp"
                     android:textColor="@color/color_222"
-                    android:text="是"/>
+                    android:text="否"/>
 
 
                 <EditText
@@ -171,6 +163,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:background="@null"
+                    android:inputType="numberDecimal"
                     ></EditText>
 
                 <TextView
@@ -221,6 +214,7 @@
                     android:text="电     话" />
                 <EditText
                     android:hint="请输入联系电话"
+                    android:inputType="numberDecimal"
                     android:id="@+id/et_phone"
                     style="@style/et_style" />
             </LinearLayout>
@@ -236,7 +230,7 @@
                     style="@style/tv_style_left1"
                     android:text="地      址" />
                 <TextView
-                    android:id="@+id/et_daaress"
+                    android:id="@+id/et_address"
                     style="@style/et_style" />
 
                 <ImageView

@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.PresenterImpl
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 
 class CollectRecruitFragment : BaseFragment<NetData>(), View.OnClickListener , ViewPager.OnPageChangeListener{
@@ -48,6 +49,7 @@ class CollectRecruitFragment : BaseFragment<NetData>(), View.OnClickListener , V
         tv_screen_left.performClick()
         cus_page.setTouchEvent(true)
         cus_page.addOnPageChangeListener(this)
+
     }
 
     override fun err()  {

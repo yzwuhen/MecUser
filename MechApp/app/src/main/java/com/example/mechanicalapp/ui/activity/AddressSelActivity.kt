@@ -201,7 +201,9 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     }
 
     override fun onItemClick(view: View, position: Int) {
-        callback( "${mList[position].provinceName}${mList[position].cityName} ${mList[position].adName}",mList[position].cityCode)
+        callback( "${mList[position].provinceName}${mList[position].cityName} ${mList[position].adName}",
+            mList[position].cityCode,mList[position].cityName,
+            mList[position].latLonPoint.latitude,mList[position].latLonPoint.longitude)
     }
 
     override fun afterTextChanged(s: Editable?) {
@@ -214,11 +216,14 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
         searchList(mCityCode, et_search?.text.toString().trim());
     }
 
-    private fun callback(callbackStr: String, id: String) {
+    private fun callback(address: String, cityId: String,city:String,lat:Double,lot:Double) {
         var intent = Intent()
         var bundle = Bundle()
-        bundle.putString(Configs.SCREEN_RESULT_Extra, callbackStr)
-        bundle.putString(Configs.SCREEN_RESULT_ID, id)
+        bundle.putString(Configs.SCREEN_RESULT_Extra, address)
+        bundle.putString(Configs.SCREEN_RESULT_ID, cityId)
+        bundle.putString(Configs.CITY_NAME, city)
+        bundle.putDouble(Configs.CITY_LAT, lat)
+        bundle.putDouble(Configs.CITY_LOT, lot)
         intent.putExtras(bundle)
         setResult(Configs.EC_TYPE_RESULT_CODE, intent)
         finish()

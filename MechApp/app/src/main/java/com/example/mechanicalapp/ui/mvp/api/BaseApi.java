@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.mvp.api;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.mechanicalapp.App;

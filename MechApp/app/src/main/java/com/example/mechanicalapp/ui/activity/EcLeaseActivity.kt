@@ -4,7 +4,6 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -17,14 +16,17 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.adapter.PopWayAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.CodeData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReMecLease
-import com.example.mechanicalapp.ui.mvp.impl.AddMecManagePresenterImpl
+import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import com.example.mechanicalapp.ui.mvp.impl.UpdateFilePresenterImpl
+import com.example.mechanicalapp.ui.mvp.v.ReleaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GlideEngine
+import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
@@ -38,21 +40,20 @@ import kotlin.collections.ArrayList
 /**
  * 机械出租
  */
-class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener, OnTimeSelectListener,TextWatcher {
+class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
+    PopUtils.onViewListener, OnTimeSelectListener, TextWatcher, ReleaseView<List<CodeData>> {
 
     private var mPicAdapter: PicAdapter? = null
 
-    private var mPicList: MutableList<String> =ArrayList<String>()
+    private var mPicList: MutableList<String> = ArrayList<String>()
 
-    private var mStringList: MutableList<String> = ArrayList<String>()
+    private var mStringList: MutableList<CodeData> = ArrayList<CodeData>()
     private var popRecy: RecyclerView? = null
     private var mPopWayAdapter: PopWayAdapter? = null
 
 
     private var mReMecLease = ReMecLease()
 
-    private var strPic: String = ""
     private var mButtDialog: BottomSheetDialog? = null
 
     private var mDialogView: View? = null
@@ -60,8 +61,8 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
     private var mDialogTv2: TextView? = null
     private var mDialogTv3: TextView? = null
 
-    private var mPresenter: AddMecManagePresenterImpl?=null
-    private var mUpLoadFilePresenter :UpdateFilePresenterImpl?=null
+    private var mPresenter: AddManagePresenterImpl? = null
+    private var mUpLoadFilePresenter: UpdateFilePresenterImpl? = null
 
     override fun getLayoutId(): Int {
 
@@ -71,8 +72,8 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
     override fun initView() {
         super.initView()
         mPicAdapter = PicAdapter(this, mPicList, this)
-        var mLinearLayoutManager =LinearLayoutManager(this)
-        mLinearLayoutManager.orientation =LinearLayoutManager.HORIZONTAL
+        var mLinearLayoutManager = LinearLayoutManager(this)
+        mLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         ry_pic.layoutManager = mLinearLayoutManager
         ry_pic.adapter = mPicAdapter
 
@@ -85,17 +86,19 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
         ly_ec_brand.setOnClickListener(this)
         ly_ec_model.setOnClickListener(this)
         ly_address.setOnClickListener(this)
+        tv_submit.setOnClickListener(this)
 
-        mStringList?.add("元/月")
-        mStringList?.add("元/台班")
-        mStringList?.add("元/小时")
-        mStringList?.add("面议")
+//        mStringList?.add("元/月")
+//        mStringList?.add("元/台班")
+//        mStringList?.add("元/小时")
+//        mStringList?.add("面议")
 
-        mReMecLease.bussiessType ="1"
+        mReMecLease.bussiessType = "1"
 
-        mPresenter = AddMecManagePresenterImpl(this,this)
-        mUpLoadFilePresenter = UpdateFilePresenterImpl(this,this)
+        mPresenter = AddManagePresenterImpl(this, this)
+        mUpLoadFilePresenter = UpdateFilePresenterImpl(this, this)
 
+        (mPresenter as AddManagePresenterImpl).getBillMethod()
 
         et_ec_name.addTextChangedListener(this)
         et_way.addTextChangedListener(this)
@@ -112,26 +115,30 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err() {
+        ToastUtils.showText("请求失败")
     }
 
     override fun onItemClick(view: View, position: Int) {
-        when(view?.id){
-            R.id.tv_screen->{
-                tv_way?.text = mStringList[position]
+        when (view?.id) {
+            R.id.tv_screen -> {
+                tv_way?.text = mStringList[position].itemText
+                mReMecLease.priceUnit = mStringList[position].itemValue
                 PopUtils.dismissPop()
             }
-            R.id.iv_del->{
+            R.id.iv_del -> {
                 mPicList?.removeAt(position)
                 mPicAdapter?.notifyDataSetChanged()
             }
-            R.id.iv_pic->{
-                if (position==mPicList?.size){
+            R.id.iv_pic -> {
+                if (position == mPicList?.size) {
                     showDialogType()
                 }
             }
@@ -167,7 +174,17 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
             R.id.tv_dialog_item1 -> setItem()
             R.id.tv_dialog_item2 -> setItem1()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
+            R.id.tv_submit->submit()
 
+        }
+    }
+
+    private fun submit() {
+        if (checkInfo()){
+            for (str in mPicList){
+               mReMecLease.pic ="$str,"
+            }
+            (mPresenter as AddManagePresenterImpl).addMecLease(mReMecLease)
         }
     }
 
@@ -178,7 +195,6 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
 
     private fun setItem() {
         mButtDialog?.dismiss()
-       // verifyStoragePermissions(this)
         takePoto()
     }
 
@@ -211,20 +227,46 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
 
     override fun onTimeSelect(date: Date?, v: View?) {
 
-        mReMecLease.facDate=DateUtils.dateToStr(date)
-        et_production_time.text =DateUtils.dateToStr(date)
-      //  Log.e("yz_mec", "======${DateUtils.dateToStr(date)}")
+        mReMecLease.facDate = DateUtils.dateToStr(date)
+        et_production_time.text = DateUtils.dateToStr(date)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        showResult(
-            requestCode,
-            data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
-            data?.getStringExtra(Configs.SCREEN_RESULT_ID)
-        )
+        if (requestCode == Configs.ADDRESS_RESULT_CODE) {
+            data?.getStringExtra(Configs.SCREEN_RESULT_Extra)?.let {
+                showAddress(
+                    it,
+                    data?.getStringExtra(Configs.SCREEN_RESULT_ID),
+                    data?.getStringExtra(Configs.CITY_NAME),
+                    data?.getDoubleExtra(Configs.CITY_LAT, 0.0),
+                    data?.getDoubleExtra(Configs.CITY_LOT, 0.0)
+                )
+            }
+        } else {
+            showResult(
+                requestCode,
+                data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+                data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+            )
+        }
+
         super.onActivityResult(requestCode, resultCode, data)
 
+    }
+
+    private fun showAddress(
+        address: String,
+        cityId: String?,
+        city: String?,
+        lat: Double,
+        lot: Double
+    ) {
+        et_address.text = address
+        mReMecLease.city = city
+        mReMecLease.address = address
+        mReMecLease.gpsLat = lat
+        mReMecLease.gpsLon = lot
     }
 
     private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
@@ -247,22 +289,18 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
                 mReMecLease.modelName = extra
                 mReMecLease.modelId = extraId
             }
-            Configs.ADDRESS_RESULT_CODE->{
-                et_address.text =extra
-                mReMecLease.city = extra
-            }
+
         }
 
     }
 
-    private fun takePoto(){
+    private fun takePoto() {
+        mButtDialog?.dismiss()
         PictureSelector.create(this)
             .openCamera(PictureMimeType.ofImage())
-            .forResult(object :OnResultCallbackListener<LocalMedia?>{
+            .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
                     mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
-                    mPicList?.add(result[0]?.realPath.toString())
-                    mPicAdapter?.notifyDataSetChanged()
                 }
 
                 override fun onCancel() {
@@ -278,10 +316,9 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                  //  imgUrl = result[0]?.path.toString()
                     mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
-                    mPicList?.add(result[0]?.realPath.toString())
-                    mPicAdapter?.notifyDataSetChanged()
+//                    mPicList?.add(result[0]?.realPath.toString())
+//                    mPicAdapter?.notifyDataSetChanged()
 
                 }
 
@@ -320,55 +357,87 @@ class EcLeaseActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnCli
     }
 
     override fun afterTextChanged(p0: Editable?) {
-        Log.e("yz_mec","================="+et_ec_name.text.toString())
-        checkInfo()
+
+        changeBtn()
     }
 
-    private fun checkInfo() {
-        if (!TextUtils.isEmpty(et_ec_name.text.toString().trim())){
-            mReMecLease.tittle =et_ec_name.text.toString().trim()
+    private fun changeBtn() {
+        tv_submit.isSelected =checkInfo()
+    }
+
+    private fun checkInfo(): Boolean {
+
+        if (TextUtils.isEmpty(et_ec_name.text.toString().trim())) {
+            return false
+        }
+        mReMecLease.tittle = et_ec_name.text.toString().trim()
+
+        if (TextUtils.isEmpty(et_way.text.toString().trim())) {
+            return false
+        }
+        mReMecLease.price = et_way.text.toString().trim()
+
+        if (TextUtils.isEmpty(mReMecLease.cateName)) {
+            return false
+        }
+        if (TextUtils.isEmpty(mReMecLease.brandName)) {
+            return false
+        }
+        if (TextUtils.isEmpty(mReMecLease.modelName)) {
+            return false
         }
 
-        if (!TextUtils.isEmpty(et_way.text.toString().trim())){
-            mReMecLease.price =et_way.text.toString().trim()
+        if (TextUtils.isEmpty(et_work_time.text.toString().trim())) {
+            return false
+        }
+        mReMecLease.workTime = et_work_time.text.toString().trim()
+
+        if (TextUtils.isEmpty(et_phone.text.toString().trim())) {
+            return false
+        }
+        mReMecLease.contactPhone = et_phone.text.toString().trim()
+
+        if (TextUtils.isEmpty(et_name.text.toString().trim())) {
+            return false
+        }
+        mReMecLease.contactName = et_name.text.toString().trim()
+
+        if (TextUtils.isEmpty(et_production_time.text.toString().trim())) {
+            return false
+        }
+        mReMecLease.facDate = et_production_time.text.toString().trim()
+
+        if (TextUtils.isEmpty(et_address.text.toString().trim())) {
+            return false
+        }
+        mReMecLease.address = et_address.text.toString().trim()
+        mReMecLease.briefDesc = et_input.text.toString().trim()
+        if (mPicList.size==0) {
+            return false
         }
 
-        if (!TextUtils.isEmpty(et_ec_type.text.toString().trim())){
-            mReMecLease.cateName =et_ec_type.text.toString().trim()
+        return true
+    }
+
+    override fun showImg(netData: NetData?) {
+        if (netData != null && netData.code == 200) {
+            mPicList?.add(netData.message)
+            mPicAdapter?.notifyDataSetChanged()
+            changeBtn()
         }
+    }
 
-        if (!TextUtils.isEmpty(et_ec_brand.text.toString().trim())){
-            mReMecLease.brandName =et_ec_brand.text.toString().trim()
+    override fun showSuccess(netData: NetData?) {
+
+        ToastUtils.showText(netData?.message)
+        if (netData?.code==200){
+            finish()
         }
+    }
 
-        if (!TextUtils.isEmpty(et_ec_model.text.toString().trim())){
-            mReMecLease.modelName =et_ec_model.text.toString().trim()
-        }
-
-        if (!TextUtils.isEmpty(et_work_time.text.toString().trim())){
-            mReMecLease.workTime =et_work_time.text.toString().trim()
-        }
-
-        if (!TextUtils.isEmpty(et_phone.text.toString().trim())){
-            mReMecLease.contactPhone =et_phone.text.toString().trim()
-        }
-
-        if (!TextUtils.isEmpty(et_name.text.toString().trim())){
-            mReMecLease.contactName =et_name.text.toString().trim()
-        }
-
-        if (!TextUtils.isEmpty(et_production_time.text.toString().trim())){
-            mReMecLease.facDate =et_production_time.text.toString().trim()
-        }
-        if (!TextUtils.isEmpty(et_address.text.toString().trim())){
-            mReMecLease.city =et_address.text.toString().trim()
-        }
-
-//        if (!TextUtils.isEmpty(et_input.text.toString().trim())){
-//            mReMecLease.tenancy =et_input.text.toString().trim()
-//        }
-
-
+    override fun showData(t: List<CodeData>) {
+        mStringList.clear()
+        mStringList.addAll(t)
     }
 
 }

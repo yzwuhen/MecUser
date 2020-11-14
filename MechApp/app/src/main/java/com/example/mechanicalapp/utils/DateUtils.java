@@ -774,7 +774,6 @@ public class DateUtils {
      * @return
      */
     public static String dateDiffs(String start, long end) {
-        Log.e("ssss","sssss=========="+start);
         if (TextUtils.isEmpty(start)){
             return "刚刚";
         }

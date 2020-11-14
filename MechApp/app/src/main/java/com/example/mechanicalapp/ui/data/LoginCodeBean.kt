@@ -19,7 +19,7 @@ class LoginCodeBean : NetData() {
          * token : eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ2MDcyODMsInVzZXJuYW1lIjoiMTY2MjAxNjQwNTEifQ.9hwW0_bUktFcR3xGpFtXV3zjynh53stGEbOtEHLrMOg
          */
         var multi_depart = 0
-        var userInfo: UserInfoBean? = null
+        var userInfo: UserInfo? = null
         var sysAllDictItems: Any? = null
         var token: String? = null
         var departs: List<*>? = null

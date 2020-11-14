@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+
+        <TextView
+            android:id="@+id/tv_salary_cancel"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/color_333"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tv_salary_finish"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:text="完成"
+            android:textColor="@color/color_333"
+            android:textSize="17sp" />
+    </FrameLayout>
+
+    <View style="@style/h_view_1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_salary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="257dp"
+        android:padding="@dimen/dp_10" />
+
+</LinearLayout>

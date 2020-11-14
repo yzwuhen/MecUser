@@ -5,40 +5,43 @@ package com.example.mechanicalapp.ui.data.request;
  */
 public class ReMecBusiness {
 
+
     /**
-     * brandId : string
-     * brandName : string
-     * briefDesc : string
-     * bussiessType : string
-     * cateId : string
-     * cateName : string
-     * city : string
-     * contactName : string
-     * contactPhone : string
-     * createBy : string
-     * createTime : 2020-11-12T02:50:39.913Z
-     * facDate : 2020-11-12T02:50:39.913Z
-     * gpsLat : string
-     * gpsLon : string
-     * id : string
-     * isEnterprise : string
-     * isNew : string
-     * isOn : string
-     * isPerson : string
-     * isTop : string
-     * modelId : string
-     * modelName : string
-     * orderTime : 2020-11-12T02:50:39.913Z
-     * paymentType : string
-     * pic : string
-     * price : string
-     * sysOrgCode : string
-     * tittle : string
-     * updateBy : string
-     * updateTime : 2020-11-12T02:50:39.913Z
-     * workTime : string
+     * address :
+     * brandId :
+     * brandName :
+     * briefDesc :
+     * bussiessType :
+     * cateId :
+     * cateName :
+     * city :
+     * contactName :
+     * contactPhone :
+     * createBy :
+     * createTime :
+     * facDate :
+     * gpsLat :
+     * gpsLon :
+     * id :
+     * isEnterprise :
+     * isNew :
+     * isOn :
+     * isPerson :
+     * isTop :
+     * modelId :
+     * modelName :
+     * orderTime :
+     * paymentType :
+     * pic :
+     * price :
+     * sysOrgCode :
+     * tittle :
+     * updateBy :
+     * updateTime :
+     * workTime :
      */
 
+    private String address;
     private String brandId;
     private String brandName;
     private String briefDesc;
@@ -70,6 +73,14 @@ public class ReMecBusiness {
     private String updateBy;
     private String updateTime;
     private String workTime;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getBrandId() {
         return brandId;

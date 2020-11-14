@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.MecTypeParentData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import kotlinx.android.synthetic.main.activity_ec_type.*
 
 class WorkType : BaseActivity<NetData>(), OnItemClickListener {
@@ -21,6 +22,9 @@ class WorkType : BaseActivity<NetData>(), OnItemClickListener {
     private var mRightAdapter: WorkTypeAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
     var mLeftList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
+
+    private var mPresenter: AddManagePresenterImpl ?=null
+
     override fun getLayoutId(): Int {
         return R.layout.activity_ec_type
     }
@@ -47,6 +51,8 @@ class WorkType : BaseActivity<NetData>(), OnItemClickListener {
         recycler_list_right.layoutManager = GridLayoutManager(this,2)
         recycler_list_right.addItemDecoration(MyDecoration(2))
         recycler_list_right.adapter = mRightAdapter
+
+        mPresenter = AddManagePresenterImpl(this,this)
 
     }
 

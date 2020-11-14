@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +25,6 @@ class PicAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         if (mList.isEmpty()) {
             holder.itemView.iv_del.visibility = View.GONE
             holder.itemView.iv_pic.setImageResource(R.mipmap.add_pic_n)

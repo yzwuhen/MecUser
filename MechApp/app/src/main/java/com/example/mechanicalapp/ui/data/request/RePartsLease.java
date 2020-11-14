@@ -2,39 +2,40 @@ package com.example.mechanicalapp.ui.data.request;
 
 public class RePartsLease {
 
+
     /**
-     * address : string
-     * brand : string
+     * address :
+     * brand :
      * bussiessType : 0
-     * city : string
-     * contactName : string
-     * contactPhone : string
-     * content : string
-     * createBy : string
-     * createTime : 2020-11-12T07:51:48.350Z
-     * fitMachineType : string
-     * gpsLat : string
-     * gpsLon : string
-     * id : string
-     * isEnterprise : string
-     * isOn : string
-     * isPerson : string
-     * isTalk : string
-     * isTop : string
-     * orderTime : 2020-11-12T07:51:48.350Z
-     * partsType : string
-     * pic : string
-     * price : string
-     * priceUnit : string
-     * sysOrgCode : string
-     * title : string
-     * updateBy : string
-     * updateTime : 2020-11-12T07:51:48.350Z
+     * city :
+     * contactName :
+     * contactPhone :
+     * content :
+     * createBy :
+     * createTime :
+     * fitMachineType :
+     * gpsLat :
+     * gpsLon :
+     * id :
+     * isEnterprise :
+     * isOn :
+     * isPerson :
+     * isTalk :
+     * isTop :
+     * orderTime :
+     * partsType :
+     * pic :
+     * price :
+     * priceUnit :
+     * sysOrgCode :
+     * title :
+     * updateBy :
+     * updateTime :
      */
 
     private String address;
     private String brand;
-    private int bussiessType;
+    private Integer bussiessType;
     private String city;
     private String contactName;
     private String contactPhone;
@@ -76,11 +77,11 @@ public class RePartsLease {
         this.brand = brand;
     }
 
-    public int getBussiessType() {
+    public Integer getBussiessType() {
         return bussiessType;
     }
 
-    public void setBussiessType(int bussiessType) {
+    public void setBussiessType(Integer bussiessType) {
         this.bussiessType = bussiessType;
     }
 

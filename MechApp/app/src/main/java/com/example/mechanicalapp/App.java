@@ -2,12 +2,12 @@ package com.example.mechanicalapp;
 
 import android.app.Application;
 
-import com.example.mechanicalapp.ui.data.UserInfoBean;
+import com.example.mechanicalapp.ui.data.UserInfo;
 import com.orhanobut.hawk.Hawk;
 
 public class App extends Application {
     private static App instance;
-    private UserInfoBean userInfoBean;
+    private UserInfo userInfoBean;
     private String mToken;
     @Override
     public void onCreate() {
@@ -18,11 +18,14 @@ public class App extends Application {
     public static App getInstance() {
         return instance;
     }
-    public void setUser(UserInfoBean user){
+    public void setUser(UserInfo user){
         this.userInfoBean =user;
     }
 
-    public UserInfoBean getUserInfo(){
+    public UserInfo getUserInfo(){
+        if (userInfoBean ==null){
+            userInfoBean =new  UserInfo();
+        }
         return userInfoBean;
     }
 

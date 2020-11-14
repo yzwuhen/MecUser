@@ -51,7 +51,6 @@ class MecLeaseListPresenter(
                 }
                 override fun onError(e: Throwable?) {
                     baseView?.err()
-                    Log.e("sssss============", "sssssssss==============onError$e")
                 }
 
                 override fun onCompleted() {
@@ -81,7 +80,6 @@ class MecLeaseListPresenter(
                 }
                 override fun onError(e: Throwable?) {
                     baseView?.err()
-                    Log.e("sssss============", "sssssssss==============onError$e")
                 }
 
                 override fun onCompleted() {

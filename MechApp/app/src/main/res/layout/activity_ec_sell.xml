@@ -48,7 +48,7 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/circle_fff_cacaca"
+                    android:drawableLeft="@drawable/check_icon"
                     android:drawablePadding="@dimen/dp_5"
                     android:textSize="16sp"
                     android:textColor="@color/color_222"
@@ -59,7 +59,7 @@
                     android:layout_marginLeft="@dimen/dp_20"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/circle_check_s"
+                    android:drawableLeft="@drawable/check_icon"
                     android:drawablePadding="@dimen/dp_5"
                     android:textSize="16sp"
                     android:textColor="@color/color_222"
@@ -131,6 +131,7 @@
                     style="@style/tv_style_left1"
                     android:text="机械价格" />
                 <EditText android:id="@+id/et_way"
+                    android:inputType="numberDecimal"
                     android:hint="请输入机械价格" style="@style/et_style" />
 
                 <View
@@ -138,6 +139,7 @@
                 <TextView
                     android:id="@+id/tv_way"
                     style="@style/tv_style_left"
+                    android:paddingLeft="@dimen/dp_10"
                     android:layout_gravity="center|right"
                     android:text="/元" />
 
@@ -152,12 +154,14 @@
                     android:text="工作时长" />
                 <EditText
                     android:hint="请输入工作时长"
+                    android:inputType="numberDecimal"
                     android:id="@+id/et_work_time"
                     style="@style/et_style" />
                 <View
                     style="@style/v_view_1"/>
                 <TextView
                     style="@style/tv_style_left"
+                    android:paddingLeft="@dimen/dp_10"
                     android:text="/小时" />
             </LinearLayout>
 
@@ -173,6 +177,7 @@
                     android:text="出厂日期" />
                 <TextView
                     android:hint="请选择出厂日期"
+                    android:paddingLeft="@dimen/dp_8"
                     android:id="@+id/et_production_time"
                     style="@style/tv_style_right" />
                 <TextView
@@ -220,6 +225,7 @@
                 <EditText
                     android:hint="请输入联系电话"
                     android:id="@+id/et_phone"
+                    android:inputType="numberDecimal"
                     style="@style/et_style" />
             </LinearLayout>
 

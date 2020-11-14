@@ -4,48 +4,51 @@ public class ReWorkAbout {
 
     /**
      * age : 0
-     * birthday : string
-     * city : string
-     * compamyAddress : string
-     * company : string
-     * contactName : string
-     * contactPhone : string
-     * content : string
-     * createBy : string
-     * createTime : 2020-11-12T07:55:31.097Z
+     * birthday :
+     * cateId :
+     * cateName :
+     * city :
+     * company :
+     * companyAddress :
+     * contactName :
+     * contactPhone :
+     * content :
+     * createBy :
+     * createTime :
      * gpsId : 0
-     * gpsLat : string
-     * gpsLon : string
-     * id : string
-     * isEnterprise : string
-     * isOn : string
-     * isPerson : string
-     * isTop : string
-     * jobAddress : string
+     * gpsLat :
+     * gpsLon :
+     * id :
+     * isEnterprise :
+     * isOn :
+     * isPerson :
+     * isTop :
+     * jobAddress :
      * jobEx : 0
-     * jobTittle : string
-     * jobType : string
+     * jobTittle :
      * needNumber : 0
-     * orderTime : 2020-11-12T07:55:31.097Z
+     * orderTime :
      * price : 0
-     * recruitType : string
-     * sex : string
-     * sysOrgCode : string
-     * updateBy : string
-     * updateTime : 2020-11-12T07:55:31.097Z
+     * recruitType :
+     * sex :
+     * sysOrgCode :
+     * updateBy :
+     * updateTime :
      */
 
-    private int age;
+    private Integer age;
     private String birthday;
+    private String cateId;
+    private String cateName;
     private String city;
-    private String compamyAddress;
     private String company;
+    private String companyAddress;
     private String contactName;
     private String contactPhone;
     private String content;
     private String createBy;
     private String createTime;
-    private int gpsId;
+    private String gpsId;
     private String gpsLat;
     private String gpsLon;
     private String id;
@@ -54,23 +57,19 @@ public class ReWorkAbout {
     private String isPerson;
     private String isTop;
     private String jobAddress;
-    private int jobEx;
+    private String jobEx;
     private String jobTittle;
-    private String jobType;
-    private int needNumber;
+    private String needNumber;
     private String orderTime;
-    private int price;
+    private String price;
     private String recruitType;
     private String sex;
-    private String sysOrgCode;
-    private String updateBy;
-    private String updateTime;
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -82,6 +81,22 @@ public class ReWorkAbout {
         this.birthday = birthday;
     }
 
+    public String getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(String cateId) {
+        this.cateId = cateId;
+    }
+
+    public String getCateName() {
+        return cateName;
+    }
+
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
+    }
+
     public String getCity() {
         return city;
     }
@@ -90,20 +105,20 @@ public class ReWorkAbout {
         this.city = city;
     }
 
-    public String getCompamyAddress() {
-        return compamyAddress;
-    }
-
-    public void setCompamyAddress(String compamyAddress) {
-        this.compamyAddress = compamyAddress;
-    }
-
     public String getCompany() {
         return company;
     }
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public String getCompanyAddress() {
+        return companyAddress;
+    }
+
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
     }
 
     public String getContactName() {
@@ -146,11 +161,11 @@ public class ReWorkAbout {
         this.createTime = createTime;
     }
 
-    public int getGpsId() {
+    public String getGpsId() {
         return gpsId;
     }
 
-    public void setGpsId(int gpsId) {
+    public void setGpsId(String gpsId) {
         this.gpsId = gpsId;
     }
 
@@ -218,11 +233,11 @@ public class ReWorkAbout {
         this.jobAddress = jobAddress;
     }
 
-    public int getJobEx() {
+    public String getJobEx() {
         return jobEx;
     }
 
-    public void setJobEx(int jobEx) {
+    public void setJobEx(String jobEx) {
         this.jobEx = jobEx;
     }
 
@@ -234,19 +249,11 @@ public class ReWorkAbout {
         this.jobTittle = jobTittle;
     }
 
-    public String getJobType() {
-        return jobType;
-    }
-
-    public void setJobType(String jobType) {
-        this.jobType = jobType;
-    }
-
-    public int getNeedNumber() {
+    public String getNeedNumber() {
         return needNumber;
     }
 
-    public void setNeedNumber(int needNumber) {
+    public void setNeedNumber(String needNumber) {
         this.needNumber = needNumber;
     }
 
@@ -258,11 +265,11 @@ public class ReWorkAbout {
         this.orderTime = orderTime;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -280,29 +287,5 @@ public class ReWorkAbout {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getSysOrgCode() {
-        return sysOrgCode;
-    }
-
-    public void setSysOrgCode(String sysOrgCode) {
-        this.sysOrgCode = sysOrgCode;
-    }
-
-    public String getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(String updateBy) {
-        this.updateBy = updateBy;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
     }
 }

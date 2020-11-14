@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.java.EventFresh
+import com.example.mechanicalapp.ui.mvp.impl.PresenterImpl
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
@@ -52,6 +53,8 @@ class CollectFactoryFragment : BaseFragment<NetData>() , OnItemClickListener {
             override fun onLoadmore() {}
         })
 
+        mPresenter = PresenterImpl(mContext,this)
+        (mPresenter as PresenterImpl).getFactoryCollect(1)
     }
 
     fun closeRefreshView() {

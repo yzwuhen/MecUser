@@ -40,7 +40,6 @@ class DemoPresenterImpl(private var baseView: HomeBaseView<NetData>?) : BasePres
 
             override fun onError(e: Throwable?) {
                 baseView?.err()
-                Log.e("sssss============", "sssssssss==============onError$e")
             }
 
             override fun onCompleted() {

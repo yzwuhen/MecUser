@@ -4,45 +4,48 @@ public class ReMecLease {
 
 
     /**
-     * brandId : string
-     * brandName : string
-     * briefDesc : string
-     * bussiessType : string
-     * cateId : string
-     * cateName : string
-     * city : string
-     * contactName : string
-     * contactPhone : string
-     * createBy : string
-     * createTime : 2020-11-11T06:33:19.374Z
-     * facDate : 2020-11-11T06:33:19.374Z
-     * gpsLat : string
-     * gpsLon : string
-     * id : string
-     * isEnterprise : string
-     * isNew : string
-     * isOn : string
-     * isPerson : string
-     * isTop : string
-     * mecUnit : string
-     * modelId : string
-     * modelName : string
-     * orderTime : 2020-11-11T06:33:19.374Z
-     * pic : string
+     * address :
+     * brandId :
+     * brandName :
+     * briefDesc :
+     * bussiessType :
+     * cateId :
+     * cateName :
+     * city :
+     * contactName :
+     * contactPhone :
+     * createBy :
+     * createTime :
+     * facDate :
+     * facTime : 0
+     * gpsLat :
+     * gpsLon :
+     * id :
+     * isEnterprise :
+     * isNew :
+     * isOn :
+     * isPerson :
+     * isTop :
+     * mecUnit :
+     * modelId :
+     * modelName :
+     * orderTime :
+     * pic :
      * price : 0
-     * priceUnit : string
-     * sysOrgCode : string
-     * tenancy : string
-     * tittle : string
-     * updateBy : string
-     * updateTime : 2020-11-11T06:33:19.374Z
-     * workTime : string
+     * priceUnit :
+     * sysOrgCode :
+     * tenancy :
+     * tittle :
+     * updateBy :
+     * updateTime :
+     * workTime :
      */
 
+    private String address;
     private String brandId;
     private String brandName;
     private String briefDesc;
-    private String bussiessType;//1 是出租 2 是求组
+    private String bussiessType;
     private String cateId;
     private String cateName;
     private String city;
@@ -51,8 +54,9 @@ public class ReMecLease {
     private String createBy;
     private String createTime;
     private String facDate;
-    private String gpsLat;
-    private String gpsLon;
+    private Integer facTime;
+    private Double gpsLat;
+    private Double gpsLon;
     private String id;
     private String isEnterprise;
     private String isNew;
@@ -72,6 +76,14 @@ public class ReMecLease {
     private String updateBy;
     private String updateTime;
     private String workTime;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getBrandId() {
         return brandId;
@@ -169,19 +181,27 @@ public class ReMecLease {
         this.facDate = facDate;
     }
 
-    public String getGpsLat() {
+    public Integer getFacTime() {
+        return facTime;
+    }
+
+    public void setFacTime(Integer facTime) {
+        this.facTime = facTime;
+    }
+
+    public Double getGpsLat() {
         return gpsLat;
     }
 
-    public void setGpsLat(String gpsLat) {
+    public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
     }
 
-    public String getGpsLon() {
+    public Double getGpsLon() {
         return gpsLon;
     }
 
-    public void setGpsLon(String gpsLon) {
+    public void setGpsLon(Double gpsLon) {
         this.gpsLon = gpsLon;
     }
 

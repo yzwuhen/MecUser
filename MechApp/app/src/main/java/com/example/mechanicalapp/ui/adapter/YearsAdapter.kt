@@ -13,11 +13,11 @@ class YearsAdapter  (var mContext: Context, var mList:MutableList<String>, var m
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return YearsVh(View.inflate(parent.context, R.layout.item_dialog_years,null))
+        return YearsVh(View.inflate(parent.context, R.layout.item_dialog_years,null),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_years.text =mList[position]
+        holder.itemView.tv_text.text =mList[position]
 
     }
 
@@ -25,5 +25,12 @@ class YearsAdapter  (var mContext: Context, var mList:MutableList<String>, var m
         return mList.size
     }
 
-    class YearsVh (itemView: View): RecyclerView.ViewHolder(itemView)
+    class YearsVh(
+        itemView: View,
+        mOnItemClickListener: OnItemClickListener
+    ): RecyclerView.ViewHolder(itemView){
+        init {
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.tv_text,adapterPosition) })
+        }
+    }
 }

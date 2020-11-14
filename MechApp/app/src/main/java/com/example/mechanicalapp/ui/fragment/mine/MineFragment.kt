@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.fragment.mine
 
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.*
@@ -28,6 +29,17 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
         return R.layout.fragment_mine
     }
 
+    override fun onResume() {
+        super.onResume()
+        showInfo()
+    }
+
+    private fun showInfo() {
+
+
+        tv_user_nick.text =App.getInstance().userInfo.username
+        tv_phone.text =App.getInstance().userInfo.phone
+    }
 
     override fun initView() {
         super.initView()

@@ -25,7 +25,6 @@ class RecruitModelImpl  : BaseModel {
 
     fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,jobTitle:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
 
-        Log.e("sssss============","sssssssss==============getMecBuyList")
         appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,sort,jobTitle)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()

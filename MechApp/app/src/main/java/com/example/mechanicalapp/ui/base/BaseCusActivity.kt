@@ -13,14 +13,17 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.utils.Density
 import kotlinx.android.synthetic.main.act_base.*
 
-abstract class BaseCusActivity : AppCompatActivity(){
+abstract class BaseCusActivity : AppCompatActivity() {
     private val REQUEST_EXTERNAL_STORAGE = 1
     private val PERMISSIONS_STORAGE = arrayOf(
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.CAMERA","android.permission.ACCESS_COARSE_LOCATION","android.permission.ACCESS_FINE_LOCATION"
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
     )
 
+    private var mLoadingView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_base)
@@ -38,6 +41,8 @@ abstract class BaseCusActivity : AppCompatActivity(){
 
         fl_root?.addView(View.inflate(this, getLayoutId(), null))
     }
+
+
     protected open fun <T : View?> getViewTo(viewId: Int): T {
         return findViewById<View>(viewId) as T
     }
@@ -85,13 +90,31 @@ abstract class BaseCusActivity : AppCompatActivity(){
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
                 )
-            }else{
+            } else {
                 hasPermissions()
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
+
+    /**
+     * 跳转到其他界面返回===> 携带参数过去 上面涉及太多 新添加一个
+     * 主要是跳转是否需要显示不限 ，不考虑其它情况先了
+     */
+    open fun jumpActivityForResult(
+        result: Int,
+        type: Int,
+        targetActivity: Class<*>?
+    ) {
+        val intent = Intent()
+        intent.setClass(this, targetActivity!!)
+
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        intent.putExtra("type", type)
+        startActivityForResult(intent, result)
+    }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -112,7 +135,23 @@ abstract class BaseCusActivity : AppCompatActivity(){
 
     open fun hasPermissions() {
 
+    }
 
+    open fun showLoadView() {
+        if (mLoadingView == null) {
+            mLoadingView = View.inflate(this, R.layout.loading_view, null)
+        }
+        if (mLoadingView?.parent == null) {
+            fl_root.addView(mLoadingView)
+        }
+    }
+
+    open fun hideLoadingView() {
+        if (mLoadingView != null) {
+            if (mLoadingView?.parent != null) {
+                fl_root.removeView(mLoadingView)
+            }
+        }
     }
 
 

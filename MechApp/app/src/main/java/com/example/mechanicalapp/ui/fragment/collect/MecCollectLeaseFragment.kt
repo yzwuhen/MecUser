@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.java.EventFresh
+import com.example.mechanicalapp.ui.mvp.impl.PresenterImpl
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
@@ -24,7 +25,6 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
     var mList: MutableList<String> = ArrayList<String>()
     var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     override fun showLoading() {
-
 
     }
 
@@ -60,6 +60,9 @@ class MecCollectLeaseFragment(var type: Int) : BaseFragment<NetData>(), OnItemCl
             override fun onLoadmore() {}
         })
 
+
+        mPresenter = PresenterImpl(mContext,this)
+        (mPresenter as PresenterImpl).getCollectList(1)
     }
 
     fun closeRefreshView() {

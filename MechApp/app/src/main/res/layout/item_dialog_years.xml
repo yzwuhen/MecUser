@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    
-    xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <TextView
-        android:id="@+id/tv_years"
-        android:layout_width="120dp"
+
+        android:id="@+id/tv_text"
+        android:layout_width="match_parent"
         android:layout_height="37dp"
+        android:background="@drawable/dialog_work_time_tv"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_5"
+        android:paddingRight="@dimen/dp_5"
         android:text="一年以内"
         android:textColor="@color/color_222"
-        android:textSize="@dimen/sp_16"
-        android:gravity="center"
-        android:background="@drawable/rect_radio_6_fff_cacaca"/>
+        android:textSize="@dimen/sp_14" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

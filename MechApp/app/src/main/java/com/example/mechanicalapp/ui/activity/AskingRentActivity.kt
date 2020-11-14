@@ -15,6 +15,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PopWayAdapter
 import com.example.mechanicalapp.ui.adapter.YearsAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.CodeData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -28,7 +29,7 @@ class AskingRentActivity : BaseActivity<NetData>(), OnItemClickListener, View.On
     PopUtils.onViewListener, OnTimeSelectListener {
 
 
-    private var mStringList: MutableList<String> = ArrayList<String>()
+    private var mStringList: MutableList<CodeData> = ArrayList<CodeData>()
     private var popRecy: RecyclerView? = null
     private var mPopWayAdapter: PopWayAdapter? = null
 
@@ -59,10 +60,10 @@ class AskingRentActivity : BaseActivity<NetData>(), OnItemClickListener, View.On
         ly_ec_type.setOnClickListener(this)
         ly_ec_brand.setOnClickListener(this)
         ly_ec_model.setOnClickListener(this)
-        mStringList?.add("元/月")
-        mStringList?.add("元/台班")
-        mStringList?.add("元/小时")
-        mStringList?.add("面议")
+//        mStringList?.add("元/月")
+//        mStringList?.add("元/台班")
+//        mStringList?.add("元/小时")
+//        mStringList?.add("面议")
 
 
         mYears?.add("一年以内")

@@ -40,6 +40,7 @@
                     style="@style/tv_style_left"
                     android:text="计费方式" />
                 <EditText android:id="@+id/et_way"
+                    android:inputType="numberDecimal"
                     android:hint="请输入计费方式"
                     style="@style/et_style" />
 
@@ -118,6 +119,7 @@
                 <EditText
                     android:hint="请输入工作时长"
                     android:id="@+id/et_work_time"
+                    android:inputType="numberDecimal"
                     style="@style/et_style" />
                 <View
                     style="@style/v_view_1"/>
@@ -135,6 +137,7 @@
                 <EditText
                     android:hint="请输入联系电话"
                     android:id="@+id/et_phone"
+                    android:inputType="numberDecimal"
                     style="@style/et_style" />
             </LinearLayout>
 
@@ -159,6 +162,7 @@
                     style="@style/tv_style_left1"
                     android:text="出厂日期" />
                 <TextView
+                    android:paddingLeft="@dimen/dp_10"
                     android:hint="请选择出厂日期"
                     android:id="@+id/et_production_time"
                     style="@style/tv_style_right" />

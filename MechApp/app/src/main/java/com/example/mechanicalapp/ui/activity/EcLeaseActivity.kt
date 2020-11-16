@@ -415,7 +415,6 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
         if (mPicList.size==0) {
             return false
         }
-
         return true
     }
 

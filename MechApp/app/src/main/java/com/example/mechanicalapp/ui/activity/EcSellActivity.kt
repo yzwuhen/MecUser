@@ -19,6 +19,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PayWayAdapter
 import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.CodeBean
 import com.example.mechanicalapp.ui.data.CodeData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReMecBusiness
@@ -46,7 +47,7 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
     private var mPicList: MutableList<String> = ArrayList<String>()
 
 
-    private var mPayWayList: MutableList<String> = ArrayList<String>()
+    private var mPayWayList: MutableList<CodeData> = ArrayList<CodeData>()
     private var mPopPayWay: RecyclerView? = null
     private var mPayWayAdapter: PayWayAdapter? = null
 
@@ -93,12 +94,12 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         tv_no.setOnClickListener(this)
 
 
-        mPayWayList?.add("全款")
-        mPayWayList?.add("协议付款")
-        mPayWayList?.add("分期付款")
+//        mPayWayList?.add("全款")
+//        mPayWayList?.add("协议付款")
+//        mPayWayList?.add("分期付款")
 
         mReMecBusiness.bussiessType = "1"//出售
-        mReMecBusiness.isNew = "1"
+        mReMecBusiness.isNew = "0"
         tv_yes.isSelected = true
 
         mPresenter = AddManagePresenterImpl(this, this)
@@ -113,6 +114,8 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         et_production_time.addTextChangedListener(this)
         et_address.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
+
+        (mPresenter as AddManagePresenterImpl).getPayWay()
     }
 
     override fun initPresenter() {
@@ -133,8 +136,8 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
     override fun onItemClick(view: View, position: Int) {
         when (view?.id) {
             R.id.tv_pay_way -> {
-                pay_way?.text = mPayWayList[position]
-                mReMecBusiness.paymentType = mPayWayList[position]
+                pay_way?.text = mPayWayList[position].itemText
+                mReMecBusiness.paymentType = mPayWayList[position].itemValue
                 PopUtils.dismissPop()
             }
             R.id.iv_del -> {
@@ -174,7 +177,6 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
                 1,
                 AddressSelActivity::class.java
             )
-            R.id.ly_address -> jumpActivity(null, AddressSelActivity::class.java)
             R.id.tv_dialog_item1 -> setItem()
             R.id.tv_dialog_item2 -> setItem1()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
@@ -182,12 +184,12 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
             R.id.tv_yes -> {
                 tv_yes.isSelected = true
                 tv_no.isSelected = false
-                mReMecBusiness.isNew = "1"
+                mReMecBusiness.isNew = "0"
             }
             R.id.tv_no -> {
                 tv_yes.isSelected = false
                 tv_no.isSelected = true
-                mReMecBusiness.isNew = "2"
+                mReMecBusiness.isNew = "1"
             }
         }
     }
@@ -365,7 +367,6 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
     private fun checkInfo(): Boolean {
 
         if (TextUtils.isEmpty(et_ec_name.text.toString().trim())) {
-            Log.e("yz_mec", "=================  et_ec_name===")
             return false
         }
         mReMecBusiness.tittle = et_ec_name.text.toString().trim()
@@ -450,7 +451,9 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
 
     //支付方式
     override fun showData(t: List<CodeData>) {
-
+        mPayWayList.clear()
+        mPayWayList.addAll(t)
+    //    mPayWayAdapter?.notifyDataSetChanged()
     }
 
 }

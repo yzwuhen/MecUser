@@ -1,7 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
 import android.content.Context
-import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
@@ -10,12 +9,12 @@ import com.example.mechanicalapp.ui.data.request.ReMecLease
 import com.example.mechanicalapp.ui.data.request.RePartsLease
 import com.example.mechanicalapp.ui.data.request.ReWorkAbout
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
-import com.example.mechanicalapp.ui.mvp.v.*
+import com.example.mechanicalapp.ui.mvp.v.BaseView
+import com.example.mechanicalapp.ui.mvp.v.MecTypeView
+import com.example.mechanicalapp.ui.mvp.v.RecruitView
+import com.example.mechanicalapp.ui.mvp.v.ReleaseView
 
-/**
- * 器械 配件 工厂 添加管理
- */
-class AddManagePresenterImpl(
+class AskingRentPresenterImpl(
     private var mContext: Context,
     private var baseView: BaseView<NetData>
 ) :
@@ -189,7 +188,7 @@ class AddManagePresenterImpl(
             object : ISubscriberListener<CodeBean> {
                 override fun onNext(t: CodeBean?) {
                     if (t?.code == 200) {
-                        (baseView as AskRentView).showYears(t.result)
+                        (baseView as RecruitView).showWages(t.result)
                     }
                 }
 
@@ -234,7 +233,7 @@ class AddManagePresenterImpl(
             })
     }
 
-     fun getWorkTypeChildList(pid: String) {
+    fun getWorkTypeChildList(pid: String) {
         baseModel?.getWorkTypeChildList(
             1,
             30,

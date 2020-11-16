@@ -54,7 +54,7 @@ public class ReMecLease {
     private String createBy;
     private String createTime;
     private String facDate;
-    private Integer facTime;
+    private String facTime;
     private Double gpsLat;
     private Double gpsLon;
     private String id;
@@ -181,11 +181,11 @@ public class ReMecLease {
         this.facDate = facDate;
     }
 
-    public Integer getFacTime() {
+    public String getFacTime() {
         return facTime;
     }
 
-    public void setFacTime(Integer facTime) {
+    public void setFacTime(String facTime) {
         this.facTime = facTime;
     }
 

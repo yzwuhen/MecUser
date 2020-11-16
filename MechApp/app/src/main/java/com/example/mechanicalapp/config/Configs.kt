@@ -22,6 +22,9 @@ object Configs {
     const val CITY_RESULT_CODE:Int =6;//城市选择后返回得result_code
     const val PARTS_TYPE_RESULT_CODE:Int =7;//配件类型选择后返回得result_code
     const val ADDRESS_RESULT_CODE:Int =8;//选择地址后返回的result_code
+    const val WORK_TYPE_RESULT_CODE:Int =9;//选择公众后后返回的result_code
+
+
 
     const val SCREEN_RESULT_Extra:String ="screen_type";//选择后返回得result_string
     const val SCREEN_RESULT_ID:String ="screen_id";//选择后返回得result_code

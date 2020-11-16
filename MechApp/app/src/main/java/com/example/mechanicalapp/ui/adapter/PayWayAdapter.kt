@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.CodeData
 import kotlinx.android.synthetic.main.item_pop_pay_way.view.*
 
 class PayWayAdapter (
     var mContext: Context,
-    var mList: MutableList<String>,
+    var mList: MutableList<CodeData>,
     var mOnItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -23,7 +24,7 @@ class PayWayAdapter (
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_pay_way.text = mList[position]
+        holder.itemView.tv_pay_way.text = mList[position].itemText
     }
 
     override fun getItemCount(): Int {

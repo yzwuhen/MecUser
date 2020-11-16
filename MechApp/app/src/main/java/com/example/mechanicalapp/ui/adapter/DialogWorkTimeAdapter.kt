@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,13 +15,14 @@ class DialogWorkTimeAdapter  (var mContext: Context, var mList:MutableList<CodeD
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return DialogWorkTimeVh(View.inflate(parent.context, R.layout.item_dialog_years,null),mOnItemClickListener)
+        return DialogWorkTimeVh(
+            //    View.inflate(parent.context, R.layout.item_dialog_years,null),mOnItemClickListener)
+          LayoutInflater.from(mContext).inflate(R.layout.item_dialog_years,parent,false),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_text.text =mList[position].itemText
         holder.itemView.tv_text.isSelected =mList[position].isSelect
-
     }
 
     override fun getItemCount(): Int {

@@ -119,7 +119,10 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_back -> finish()
-            R.id.ly_work_type -> jumpActivity(null, WorkType::class.java)
+            R.id.ly_work_type -> jumpActivityForReSult(
+                Configs.WORK_TYPE_RESULT_CODE,
+                WorkType::class.java
+            )
             R.id.ly_work_experience -> showExperience()
             R.id.ly_salary -> showSalary()
             R.id.ly_address -> jumpActivityForResult(
@@ -147,8 +150,10 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
 
     private fun selectSalary() {
         mSalaryDialog?.dismiss()
-        et_salary.text =mSalaryLists[mSalaryIndex].itemText
-        mReBean.price =mSalaryLists[mSalaryIndex].itemValue
+        if (mSalaryIndex>0){
+            et_salary.text =mSalaryLists[mSalaryIndex].itemText
+            mReBean.price =mSalaryLists[mSalaryIndex].itemValue
+        }
     }
 
     private fun cancleWork() {
@@ -157,8 +162,10 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
 
     private fun selectWork() {
         mButtDialog?.dismiss()
-        et_work_experience.text =mExpList[mWorkIndex].itemText
-        mReBean.jobEx =mExpList[mSalaryIndex].itemValue
+        if (mWorkIndex>0){
+            et_work_experience.text =mExpList[mWorkIndex].itemText
+            mReBean.jobEx =mExpList[mWorkIndex].itemValue
+        }
     }
 
     private fun showExperience() {
@@ -169,7 +176,7 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
             mButtDialog?.setContentView(mDialogView!!)
             mRecyDialog = mDialogView?.findViewById(R.id.recycler_years)
             mRecyDialog?.layoutManager = GridLayoutManager(this, 3)
-            mRecyDialog?.addItemDecoration(MyDecoration(3))
+
 
             mWorkTimeAdapter = DialogWorkTimeAdapter(this, mExpList, this)
             mRecyDialog?.adapter = mWorkTimeAdapter
@@ -192,12 +199,12 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
             mSalaryDialog?.setContentView(mSalaryDialogView!!)
             mRecySalaryDialog = mSalaryDialogView?.findViewById(R.id.recycler_salary)
             mRecySalaryDialog?.layoutManager = GridLayoutManager(this, 3)
-            mRecySalaryDialog?.addItemDecoration(MyDecoration(3))
+
             mSalaryAdapter = DialogWorkTimeAdapter(this, mSalaryLists, this)
             mRecySalaryDialog?.adapter = mSalaryAdapter
 
-            mSalarySure = mDialogView?.findViewById(R.id.tv_salary_finish)
-            mSalaryCancle = mDialogView?.findViewById(R.id.tv_salary_cancel)
+            mSalarySure = mSalaryDialogView?.findViewById(R.id.tv_salary_finish)
+            mSalaryCancle = mSalaryDialogView?.findViewById(R.id.tv_salary_cancel)
             mSalarySure?.setOnClickListener(this)
             mSalaryCancle?.setOnClickListener(this)
         }
@@ -237,10 +244,23 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
                     data?.getDoubleExtra(Configs.CITY_LOT, 0.0)
                 )
             }
+        }else if (requestCode ==Configs.WORK_TYPE_RESULT_CODE){
+            data?.getStringExtra(Configs.SCREEN_RESULT_Extra)?.let {
+                showResult(
+                    it,
+                    data?.getStringExtra(Configs.SCREEN_RESULT_ID)!!
+                )
+            }
         }
 
         super.onActivityResult(requestCode, resultCode, data)
 
+    }
+
+    private fun showResult(it: String, stringExtra: String){
+        et_work_type.text =it
+        mReBean.cateName =it
+        mReBean.cateId =stringExtra
     }
 
     private fun showAddress(
@@ -304,6 +324,9 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
             return false
         }
 
+//        if (TextUtils.isEmpty(mReBean.cateName)) {
+//            return false
+//        }
 
 
 

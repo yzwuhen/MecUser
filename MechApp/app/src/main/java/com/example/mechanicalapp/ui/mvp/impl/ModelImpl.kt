@@ -1,9 +1,7 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.data.CodeBean
-import com.example.mechanicalapp.ui.data.MoreFactoryBean
-import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReMecBusiness
 import com.example.mechanicalapp.ui.data.request.ReMecLease
 import com.example.mechanicalapp.ui.data.request.RePartsLease
@@ -44,19 +42,28 @@ class ModelImpl : BaseModel {
     fun getWorkTypeList(
         page: Int,
         pageSize: Int,
-        mecType: String?,
-        partType: String?,
-        sort: String?,
-        name: String?,
-        iSubscriberListener: ISubscriberListener<MoreFactoryBean>
+        iSubscriberListener: ISubscriberListener<MecTypeParentBean>
     ) {
-        appsService?.getWorkTypeList(page, pageSize, mecType, partType, sort, name)
+        appsService?.getWorkTypeList(page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MoreFactoryBean>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<MecTypeParentBean>(iSubscriberListener))
 
     }
 
+    //获取工种子级
+    fun getWorkTypeChildList(
+        page: Int,
+        pageSize: Int,
+        pid:String,
+        iSubscriberListener: ISubscriberListener<MecTypeChildBean>
+    ) {
+        appsService?.getWorkTypeChildList(page, pageSize,pid)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MecTypeChildBean>(iSubscriberListener))
+
+    }
 
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="false" android:drawable="@drawable/rect_radio_6_fff_cacaca"/>
-        <item android:state_selected="true" android:drawable="@drawable/rect_redio_6_fff_y"/>
+    <item android:drawable="@drawable/rect_radio_6_fff_cacaca" android:state_selected="false" />
+    <item android:drawable="@drawable/rect_redio_6_fff_y" android:state_selected="true" />
 
 </selector>

@@ -30,7 +30,18 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
+import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.activity_parts_rental.*
+import kotlinx.android.synthetic.main.activity_parts_rental.et_address
+import kotlinx.android.synthetic.main.activity_parts_rental.et_ec_brand
+import kotlinx.android.synthetic.main.activity_parts_rental.et_ec_model
+import kotlinx.android.synthetic.main.activity_parts_rental.et_ec_type
+import kotlinx.android.synthetic.main.activity_parts_rental.et_input
+import kotlinx.android.synthetic.main.activity_parts_rental.et_name
+import kotlinx.android.synthetic.main.activity_parts_rental.et_phone
+import kotlinx.android.synthetic.main.activity_parts_rental.ly_address
+import kotlinx.android.synthetic.main.activity_parts_rental.ry_pic
+import kotlinx.android.synthetic.main.activity_parts_rental.tv_submit
 import kotlinx.android.synthetic.main.layout_title.*
 
 class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
@@ -377,6 +388,10 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
     override fun showData(t: List<CodeData>) {
         mStringList.clear()
         mStringList.addAll(t)
+        if (mStringList.size>0){
+            tv_no_element?.text = mStringList[0].itemText
+            mRePartsLease.priceUnit = mStringList[0].itemValue
+        }
 
     }
 }

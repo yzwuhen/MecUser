@@ -435,8 +435,13 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
     }
 
     override fun showData(t: List<CodeData>) {
+
         mStringList.clear()
         mStringList.addAll(t)
+        if (mStringList.size>0){
+            tv_way?.text = mStringList[0].itemText
+            mReMecLease.priceUnit = mStringList[0].itemValue
+        }
     }
 
 }

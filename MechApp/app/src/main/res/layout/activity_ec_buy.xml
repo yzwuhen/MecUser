@@ -40,8 +40,8 @@
                 <TextView
                     style="@style/tv_style_left1"
                     android:text="所  在  地" />
-                <EditText
-                    android:id="@+id/et_daaress"
+                <TextView
+                    android:id="@+id/et_address"
                     android:hint="请输入准确地址"
                     style="@style/et_style" />
 
@@ -115,13 +115,15 @@
                 <TextView
                     style="@style/tv_style_left"
                     android:text="工作时长" />
-                <TextView
+                <EditText
                     android:hint="请输入工作时长"
+                    android:inputType="numberDecimal"
                     android:id="@+id/et_work_time"
                     style="@style/et_style" />
                 <View
                     style="@style/v_view_1"/>
                 <TextView
+                    android:paddingLeft="@dimen/dp_10"
                     style="@style/tv_style_left"
                     android:text="/小时" />
             </LinearLayout>
@@ -146,6 +148,7 @@
                     android:text="电     话" />
                 <EditText
                     android:hint="请输入联系电话"
+                    android:inputType="numberDecimal"
                     android:id="@+id/et_phone"
                     style="@style/et_style" />
             </LinearLayout>
@@ -159,6 +162,7 @@
                     style="@style/tv_style_left"
                     android:text="预算价格" />
                 <EditText android:id="@+id/et_price"
+                    android:inputType="numberDecimal"
                     android:hint="请输入预算价格"
                     style="@style/et_style" />
             </LinearLayout>

@@ -29,7 +29,10 @@
                 <TextView
                     style="@style/tv_style_left1"
                     android:text="配件名称" />
-                <EditText android:id="@+id/et_parts_name" android:hint="请输入配件名称" style="@style/et_style" />
+                <EditText
+                    android:id="@+id/et_parts_name"
+                    android:hint="请输入配件名称"
+                    style="@style/et_style" />
             </LinearLayout>
 
 
@@ -44,14 +47,14 @@
                     style="@style/tv_style_left"
                     android:text="适合机型" />
 
-                <TextView
-                    android:hint="请选择适合得机型"
+                <EditText
+                    android:hint="请输入适合得机型"
                     android:id="@+id/et_ec_type"
                     style="@style/et_style" />
-                <TextView
-                    android:text=">"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+<!--                <TextView-->
+<!--                    android:text=">"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
             </LinearLayout>
 
 
@@ -63,14 +66,14 @@
                 <TextView
                     style="@style/tv_style_left"
                     android:text="配件品牌" />
-                <TextView
-                    android:hint="请选择配件品牌"
+                <EditText
+                    android:hint="请输入配件品牌"
                     android:id="@+id/et_parts_brand"
                     style="@style/et_style" />
-                <TextView
-                    android:text=">"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+<!--                <TextView-->
+<!--                    android:text=">"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
             </LinearLayout>
 
             <View style="@style/h_view_1" />
@@ -81,14 +84,14 @@
                 <TextView
                     style="@style/tv_style_left"
                     android:text="配件型号" />
-                <TextView
-                    android:hint="请选择配件型号"
+                <EditText
+                    android:hint="请输入配件型号"
                     android:id="@+id/et_parts_model"
                     style="@style/et_style" />
-                <TextView
-                    android:text=">"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+<!--                <TextView-->
+<!--                    android:text=">"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"/>-->
             </LinearLayout>
 
             <View style="@style/h_view_1" />
@@ -97,12 +100,16 @@
                 <TextView
                     style="@style/tv_style_left"
                     android:text="租凭价格" />
-                <EditText android:id="@+id/et_way"  android:hint="请输入租赁价格" style="@style/et_style" />
+                <EditText android:id="@+id/et_way"
+                    android:inputType="numberDecimal"
+                    android:hint="请输入租赁价格"
+                    style="@style/et_style" />
 
                 <View
                     style="@style/v_view_1"/>
                 <TextView
                     android:id="@+id/tv_way"
+                    android:paddingLeft="@dimen/dp_10"
                     style="@style/tv_style_left"
                     android:layout_gravity="center"
                     android:text="元/月" />
@@ -146,7 +153,7 @@
                     style="@style/tv_style_left1"
                     android:text="地      址" />
                 <TextView
-                    android:id="@+id/et_daaress"
+                    android:id="@+id/et_address"
                     style="@style/et_style" />
 
                 <ImageView

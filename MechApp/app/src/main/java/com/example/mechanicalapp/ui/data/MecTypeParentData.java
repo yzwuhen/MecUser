@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.data;
 
-import java.io.Serializable;
 
 public class MecTypeParentData extends BaseData {
     /**

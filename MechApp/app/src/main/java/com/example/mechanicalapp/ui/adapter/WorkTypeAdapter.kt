@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.MecTypeChildData
+import kotlinx.android.synthetic.main.item_work_type.view.*
 
-class WorkTypeAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WorkTypeAdapter (var mContext: Context, var mList:MutableList<MecTypeChildData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -15,7 +17,7 @@ class WorkTypeAdapter (var mContext: Context, var mList:MutableList<String>, var
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        holder.itemView.tv_text = mList[position]
+        holder.itemView.tv_text.text = mList[position].cateName
     }
 
     override fun getItemCount(): Int {
@@ -25,7 +27,7 @@ class WorkTypeAdapter (var mContext: Context, var mList:MutableList<String>, var
 
     class WorkTypeVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.tv_text,adapterPosition) })
         }
     }
 }

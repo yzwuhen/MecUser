@@ -151,17 +151,25 @@ interface AppService {
     /**
      * 获取工种
      * region：地区
+     * 返回格式与机械类型差不多 就直接用了
      */
-    @GET("/jeecg-boot/repair/mecRepaireFactory/list")
+    @GET("/jeecg-boot/market/mecMarketRecruitCate/rootList")
     fun getWorkTypeList(
         @Query("pageNo") pageNo: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("mecType") mecType: String?,
-        @Query(" partsType") partsType: String?,
-        @Query("sort") sort: String?,
-        @Query("name") name: String?
-    ):Observable<MoreFactoryBean>
+        @Query("pageSize") pageSize: Int
+    ):Observable<MecTypeParentBean>
 
+    /**
+     * 获取工种 子级
+     * region：地区
+     * 返回格式与机械类型差不多 就直接用了
+     */
+    @GET("/jeecg-boot/market/mecMarketRecruitCate/rootList")
+    fun getWorkTypeChildList(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("id") id:String
+    ):Observable<MecTypeChildBean>
 
 
     /**

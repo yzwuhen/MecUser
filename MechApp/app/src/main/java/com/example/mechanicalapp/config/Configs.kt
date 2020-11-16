@@ -29,7 +29,7 @@ object Configs {
     const val SCREEN_RESULT_Extra:String ="screen_type";//选择后返回得result_string
     const val SCREEN_RESULT_ID:String ="screen_id";//选择后返回得result_code
 
-
+    const val FACTORY_ADDRESS:String ="factory_address";//维修厂地址
     const val CITY_NAME:String ="city_name";//选择后返回得result_code
     const val CITY_LAT:String ="city_lat";//选择后返回得result_code
     const val CITY_LOT:String ="city_lot";//选择后返回得result_code

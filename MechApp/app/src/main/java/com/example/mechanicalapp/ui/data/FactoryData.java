@@ -46,6 +46,25 @@ public class FactoryData implements Serializable {
     private String id;
     private Object lat;
     private String introduction;
+    private String companyId;
+
+    private boolean isSelect;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public Object getBusinessLicense() {
         return businessLicense;

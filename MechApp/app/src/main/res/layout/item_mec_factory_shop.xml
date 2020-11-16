@@ -2,14 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:paddingLeft="12dp"
-    android:paddingTop="6dp"
+    android:paddingTop="3dp"
     android:paddingRight="12dp"
-    android:paddingBottom="6dp"
+    android:paddingBottom="3dp"
     android:orientation="vertical"
     android:id="@+id/ly_item_mec_factory"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/rect_radio_6_white"
@@ -31,7 +31,7 @@
                 android:id="@+id/iv_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/circle_check_s"/>
+                android:src="@drawable/check_icon"/>
 
         </LinearLayout>
 

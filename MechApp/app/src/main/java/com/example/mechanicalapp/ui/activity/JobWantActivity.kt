@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bigkoo.pickerview.builder.TimePickerBuilder
@@ -35,6 +36,8 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
     private var mRecyDialog: RecyclerView? = null
     private var mWorkTimeAdapter: YearsAdapter? = null
     private var mExpList: MutableList<CodeData> = ArrayList<CodeData>()
+    private var mWorkSure: TextView? = null
+    private var mWorkCancle: TextView? = null
 
 
     private var mSalaryDialog: BottomSheetDialog? = null
@@ -42,7 +45,8 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
     private var mRecySalaryDialog: RecyclerView? = null
     private var mSalaryAdapter: YearsAdapter? = null
     private var mSalaryLists: MutableList<CodeData> = ArrayList<CodeData>()
-
+    private var mSalarySure: TextView? = null
+    private var mSalaryCancle: TextView? = null
 
     private var mReBean = ReWorkAbout()
     private var mPresenter: AddManagePresenterImpl? = null
@@ -77,7 +81,8 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
         et_input.addTextChangedListener(this)
 
         mReBean.recruitType = "2"
-        //  mReBean.
+         mReBean.isReady ="1"
+        tv_yes.isSelected =true
 
         mPresenter = AddManagePresenterImpl(this, this)
         (mPresenter as AddManagePresenterImpl).getWorkExp()
@@ -184,6 +189,13 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
 
             mWorkTimeAdapter = YearsAdapter(this, mExpList, this)
             mRecyDialog?.adapter = mWorkTimeAdapter
+
+            mWorkSure = mDialogView?.findViewById(R.id.tv_finish)
+            mWorkCancle = mDialogView?.findViewById(R.id.tv_cancel)
+            mWorkSure?.setOnClickListener(this)
+            mWorkCancle?.setOnClickListener(this)
+
+
         }
         mButtDialog?.show()
 
@@ -195,14 +207,19 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
         if (mSalaryDialog == null) {
             mSalaryDialog = BottomSheetDialog(this)
 
-            mSalaryDialogView = View.inflate(this, R.layout.dialog_selsec_years, null)
+            mSalaryDialogView = View.inflate(this, R.layout.dialog_select_salary, null)
             mSalaryDialog?.setContentView(mSalaryDialogView!!)
-            mRecySalaryDialog = mSalaryDialogView?.findViewById(R.id.recycler_years)
+            mRecySalaryDialog = mSalaryDialogView?.findViewById(R.id.recycler_salary)
 
             mRecySalaryDialog?.layoutManager = GridLayoutManager(this, 3)
             mSalaryAdapter = YearsAdapter(this, mSalaryLists, this)
 
             mRecySalaryDialog?.adapter = mSalaryAdapter
+
+            mSalarySure = mSalaryDialogView?.findViewById(R.id.tv_salary_finish)
+            mSalaryCancle = mSalaryDialogView?.findViewById(R.id.tv_salary_cancel)
+            mSalarySure?.setOnClickListener(this)
+            mSalaryCancle?.setOnClickListener(this)
         }
         mSalaryDialog?.show()
 

@@ -5,10 +5,7 @@ import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
-import com.example.mechanicalapp.ui.data.request.ReMecBusiness
-import com.example.mechanicalapp.ui.data.request.ReMecLease
-import com.example.mechanicalapp.ui.data.request.RePartsLease
-import com.example.mechanicalapp.ui.data.request.ReWorkAbout
+import com.example.mechanicalapp.ui.data.request.*
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.*
 
@@ -107,6 +104,30 @@ class AddManagePresenterImpl(
             })
     }
 
+
+    fun addFactoryOrder(mReFactoryOrder: ReFactoryOrder) {
+        baseView?.showLoading()
+        baseModel.addFactory(
+            mReFactoryOrder,
+            App.getInstance().token,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    if (t != null) {
+                        (baseView as FactoryOrderView<NetData>)?.showData(t)
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView?.err()
+                }
+
+                override fun onCompleted() {
+                    baseView?.hiedLoading()
+                }
+            })
+    }
+
+
     //工作经验
     fun getWorkExp() {
         baseModel.getCode("mec_market_recruit_age",
@@ -181,8 +202,6 @@ class AddManagePresenterImpl(
     }
 
 
-
-
     // 获取年份
     fun getYearsTime() {
         baseModel.getCode("mec_market_delivery_type",
@@ -234,7 +253,7 @@ class AddManagePresenterImpl(
             })
     }
 
-     fun getWorkTypeChildList(pid: String) {
+    fun getWorkTypeChildList(pid: String) {
         baseModel?.getWorkTypeChildList(
             1,
             30,
@@ -264,6 +283,7 @@ class AddManagePresenterImpl(
             })
 
     }
+
 
     override fun onDestroy() {
     }

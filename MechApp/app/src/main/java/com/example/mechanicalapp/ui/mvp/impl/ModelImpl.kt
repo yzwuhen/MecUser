@@ -2,10 +2,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
-import com.example.mechanicalapp.ui.data.request.ReMecBusiness
-import com.example.mechanicalapp.ui.data.request.ReMecLease
-import com.example.mechanicalapp.ui.data.request.RePartsLease
-import com.example.mechanicalapp.ui.data.request.ReWorkAbout
+import com.example.mechanicalapp.ui.data.request.*
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
@@ -99,6 +96,17 @@ class ModelImpl : BaseModel {
         iSubscriberListener: ISubscriberListener<NetData>
     ) {
         appsService?.addMecBusiness(mReMecBusiness, token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+    fun addFactory(
+        mReFactoryOrder: ReFactoryOrder, token: String?,
+        iSubscriberListener: ISubscriberListener<NetData>
+    ) {
+        appsService?.addFactoryOrder(mReFactoryOrder, token)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))

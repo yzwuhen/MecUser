@@ -103,7 +103,7 @@
                     style="@style/tv_style_left1"
                     android:text="所在地点" />
                 <TextView
-                    android:id="@+id/et_daaress"
+                    android:id="@+id/et_address"
                     android:hint="请输入准确地址"
                     style="@style/et_style" />
 
@@ -134,6 +134,7 @@
                     android:text="电     话" />
                 <EditText
                     android:hint="请输入联系电话"
+                    android:inputType="numberDecimal"
                     android:id="@+id/et_phone"
                     style="@style/et_style" />
             </LinearLayout>

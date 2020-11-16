@@ -135,8 +135,8 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
                             // 取得搜索到的poiitems有多少页
                             val poiItems: List<PoiItem> =
                                 result.pois// 取得第一页的poiitem数据，页数从数字0开始
-                            val suggestionCities: List<SuggestionCity> = result
-                                .searchSuggestionCitys// 当搜索不到poiitem数据时，会返回含有搜索关键字的城市信息
+//                            val suggestionCities: List<SuggestionCity> = result
+//                                .searchSuggestionCitys// 当搜索不到poiitem数据时，会返回含有搜索关键字的城市信息
                             mList.clear()
                             if (poiItems.isNotEmpty()) {
                                 mList.addAll(poiItems)

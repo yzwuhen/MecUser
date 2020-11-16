@@ -248,6 +248,14 @@ interface AppService {
 
 
     /**
+     * 添加维修单
+     */
+    @POST("/jeecg-boot/repair/mecRepairOrder/add")
+    fun addFactoryOrder(@Body mReFactoryOrder: ReFactoryOrder,@Header("X-Access-Token")token: String?) :Observable<NetData>
+
+
+
+    /**
      * 添加配件--出售 求购
      */
     @POST("/jeecg-boot/market/mecMarketParts/add")

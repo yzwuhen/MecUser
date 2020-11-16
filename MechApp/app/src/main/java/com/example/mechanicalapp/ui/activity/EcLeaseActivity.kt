@@ -88,10 +88,6 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
         ly_address.setOnClickListener(this)
         tv_submit.setOnClickListener(this)
 
-//        mStringList?.add("元/月")
-//        mStringList?.add("元/台班")
-//        mStringList?.add("元/小时")
-//        mStringList?.add("面议")
 
         mReMecLease.bussiessType = "1"
 

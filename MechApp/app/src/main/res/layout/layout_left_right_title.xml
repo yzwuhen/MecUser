@@ -38,7 +38,7 @@
             android:id="@+id/iv_right"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@mipmap/phone_icon"
+            android:src="@mipmap/black_phone"
              />
 
         <TextView

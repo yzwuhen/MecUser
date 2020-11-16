@@ -64,6 +64,15 @@ public class ReWorkAbout {
     private String price;
     private String recruitType;
     private String sex;
+    private String isReady;
+
+    public String getIsReady() {
+        return isReady;
+    }
+
+    public void setIsReady(String isReady) {
+        this.isReady = isReady;
+    }
 
     public Integer getAge() {
         return age;

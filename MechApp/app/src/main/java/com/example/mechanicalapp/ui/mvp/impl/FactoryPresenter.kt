@@ -32,6 +32,7 @@ class FactoryPresenter(
 
     fun getFactoryList() {
 
+        baseView.showLoading()
         baseModel?.getFactoryList(
             page,
             pageSize,
@@ -55,6 +56,7 @@ class FactoryPresenter(
                 }
 
                 override fun onCompleted() {
+                    baseView.hiedLoading()
                 }
             })
     }

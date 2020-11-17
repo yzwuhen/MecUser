@@ -6,6 +6,7 @@
     android:layout_marginBottom="@dimen/dp_5"
     android:layout_marginLeft="@dimen/dp_10"
     android:layout_marginRight="@dimen/dp_10"
+    android:id="@+id/root_view"
     android:background="@drawable/rect_radio_6_white">
 
     <LinearLayout
@@ -20,9 +21,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/iv_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/circle_check_s" />
+            android:src="@drawable/check_icon" />
     </LinearLayout>
 
     <ImageView

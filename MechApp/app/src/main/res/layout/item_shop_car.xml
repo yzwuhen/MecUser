@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="@dimen/dp_18"
             android:layout_height="@dimen/dp_18"
-            android:src="@drawable/circle_check_s" />
+            android:src="@drawable/check_icon" />
     </LinearLayout>
 
     <ImageView

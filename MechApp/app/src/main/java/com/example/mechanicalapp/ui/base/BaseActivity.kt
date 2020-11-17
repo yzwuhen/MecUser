@@ -55,6 +55,7 @@ abstract  class BaseActivity<T> : AppCompatActivity() ,BaseView<T>{
         val intent = Intent()
         intent.setClass(this, targetActivity!!)
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        // intent.flags =Intent.FLAG_ACTIVITY_NEW_TASK
         if (bundle != null) {
             intent.putExtras(bundle)
         }

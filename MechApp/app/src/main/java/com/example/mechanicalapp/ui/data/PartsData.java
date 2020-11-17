@@ -66,7 +66,15 @@ public class PartsData implements Serializable {
     private String sysOrgCode;
     private Object isEnterprise;
     private String contactPhone;
+    private boolean isSelect;
 
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
     public String getPriceUnit_dictText() {
         return priceUnit_dictText;
     }

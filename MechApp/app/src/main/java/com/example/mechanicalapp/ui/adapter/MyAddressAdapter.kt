@@ -19,9 +19,9 @@ class MyAddressAdapter (var mContext: Context, var mList:MutableList<String>, va
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (position==0){
-            holder.itemView.tv_check.setCompoundDrawablesWithIntrinsicBounds(R.drawable.circle_check_s,0,0,0)
+            holder.itemView.tv_check.setCompoundDrawablesWithIntrinsicBounds(R.drawable.check_icon,0,0,0)
         }else{
-            holder.itemView.tv_check.setCompoundDrawablesWithIntrinsicBounds(R.drawable.circle_fff_cacaca,0,0,0)
+            holder.itemView.tv_check.setCompoundDrawablesWithIntrinsicBounds(R.drawable.check_icon,0,0,0)
         }
 
     }

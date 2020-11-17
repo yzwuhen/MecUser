@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingLeft="@dimen/dp_17"
     android:paddingRight="@dimen/dp_17"
+    android:id="@+id/root_view"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -18,9 +19,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
+            android:id="@+id/iv_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/circle_check_s" />
+            android:src="@drawable/check_icon" />
     </LinearLayout>
 
 

@@ -24,6 +24,9 @@ public abstract class BaseCusFragment extends Fragment {
     protected FrameLayout mContanier;
     protected Context mContext;
     public BasePresenter mPresenter;
+
+    protected View mLoadingView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public abstract class BaseCusFragment extends Fragment {
     protected void initView() {
 
     }
+
     /**
      * 跳转到其他界面
      */
@@ -62,13 +66,13 @@ public abstract class BaseCusFragment extends Fragment {
      */
 
     public void jumpActivityForReSult(Integer result,
-                                      @SuppressWarnings("rawtypes") Class targetActivity){
+                                      @SuppressWarnings("rawtypes") Class targetActivity) {
 
         Intent intent = new Intent();
         intent.setClass(mContext, targetActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        startActivityForResult(intent,result);
+        startActivityForResult(intent, result);
     }
 
 
@@ -88,6 +92,23 @@ public abstract class BaseCusFragment extends Fragment {
             return !TextUtils.isEmpty(locationProviders);
         }
     }
+
+    public void showLoadView() {
+        if (mLoadingView == null) {
+            mLoadingView = View.inflate(mContext, R.layout.loading_view, null);
+        }
+        if (mLoadingView != null && mLoadingView.getParent() == null) {
+            mContanier.addView(mLoadingView);
+        }
+    }
+
+    public void hideLoadingView() {
+
+        if (mLoadingView != null && mLoadingView.getParent() != null) {
+            mContanier.removeView(mLoadingView);
+        }
+    }
+
 
 
     /**

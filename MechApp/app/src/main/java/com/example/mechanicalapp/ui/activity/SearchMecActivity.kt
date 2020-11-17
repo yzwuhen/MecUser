@@ -27,11 +27,11 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     private var mJobWantAdapter: JobWantAdapter? = null//求职
     private var mMecFactoryAdapter: MecFactoryAdapter? = null//维修厂
 
-    var mList: MutableList<String> = ArrayList<String>()
     var mRentList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     var mFactoryList: MutableList<FactoryData> = ArrayList<FactoryData>()
-
+    var mPartsList: MutableList<PartsData> = ArrayList<PartsData>()
+    var mRecruitList: MutableList<RecruitData> = ArrayList<RecruitData>()
     private val leftOfString: Array<String> = arrayOf("出租", "出售", "出租", "招聘")
     private val rigthOfString: Array<String> = arrayOf("求租", "求购", "求租", "求职")
 
@@ -44,22 +44,18 @@ class SearchMecActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     }
 
     init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
 
         mAdapter = UserDemandAdapter(this, mLeaseList, 0, this)
         mBossAdapter = UserDemandAdapter(this, mLeaseList, 1, this)
 
-        mPartsAdapter = PartsAdapter(this, mList, this)
-        mPartsAskAdapter = PartsAskAdapter(this, mList, this)
+        mPartsAdapter = PartsAdapter(this, mPartsList, this)
+        mPartsAskAdapter = PartsAskAdapter(this, mPartsList, this)
 
         mRentAdapter = UserRentAdapter(this, mRentList, this)
 
-        mRecruitAdapter = RecruitAdapter(this, mList, this)
+        mRecruitAdapter = RecruitAdapter(this, mRecruitList, this)
 
-        mJobWantAdapter = JobWantAdapter(this, mList, this)
+        mJobWantAdapter = JobWantAdapter(this, mRecruitList, this)
 
         mMecFactoryAdapter = MecFactoryAdapter(this, mFactoryList, this)
     }

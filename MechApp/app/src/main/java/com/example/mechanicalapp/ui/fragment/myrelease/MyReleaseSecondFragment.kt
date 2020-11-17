@@ -18,8 +18,8 @@ class MyReleaseSecondFragment : BaseFragment<NetData>(), View.OnClickListener ,V
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(ReleaseLeaseFragment(1))
-        mFragmentList?.add(MyReleaseAsk(1))
+        mFragmentList?.add(ReleaseSellFragment())
+        mFragmentList?.add(ReleaseBuyFragment())
     }
 
     override fun showLoading() {

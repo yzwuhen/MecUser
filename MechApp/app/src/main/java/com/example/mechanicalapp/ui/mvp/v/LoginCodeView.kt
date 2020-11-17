@@ -5,5 +5,5 @@ import com.example.mechanicalapp.ui.data.LoginCodeBean
 
 interface LoginCodeView<NetData> :BaseView<NetData> {
     fun loginSuccess(mLoginCodeBean: LoginCodeBean)
-    fun LoginErr()
+    fun loginErr(exception: String?)
 }

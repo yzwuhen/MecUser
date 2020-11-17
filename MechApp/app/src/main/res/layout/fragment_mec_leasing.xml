@@ -28,6 +28,8 @@
             style="@style/tv_collect_style"/>
 
     </RelativeLayout>
+    <View
+       style="@style/h_view_1"/>
     <com.example.mechanicalapp.ui.view.CusViewPage
         android:id="@+id/cus_page"
         android:layout_width="match_parent"

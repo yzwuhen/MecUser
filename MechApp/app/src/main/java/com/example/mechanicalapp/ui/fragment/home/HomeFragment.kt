@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import com.amap.api.location.AMapLocation
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.HistorySearchActivity
@@ -15,13 +16,14 @@ import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.DemoPresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.HomeBaseView
 import com.example.mechanicalapp.ui.view.*
+import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import com.liaoinstan.springview.widget.SpringView.OnFreshListener
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.inculde_search_title.*
 
-class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetData> {
+class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetData>,GdMapUtils.LocationListener {
 
     private var bannerView: BannerView? = null
     private var itemMenu: ItemMenu? = null
@@ -76,6 +78,8 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
             }
             override fun onLoadmore() {}
         })
+
+        GdMapUtils.location(this)
     }
     fun closeRefreshView() {
         spring_list?.isEnable=true
@@ -170,6 +174,13 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
 
     override fun showBossBuy(list: List<MecBuyData>) {
         mBossDemandView?.setBuy(list)
+    }
+
+    override fun locationSuccess(mapLocation: AMapLocation) {
+        tv_address.text =mapLocation.city
+    }
+
+    override fun locationErr() {
     }
 
 }

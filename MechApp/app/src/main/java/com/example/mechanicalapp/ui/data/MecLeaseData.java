@@ -1,5 +1,7 @@
 package com.example.mechanicalapp.ui.data;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 public class MecLeaseData implements Serializable {
@@ -47,7 +49,7 @@ public class MecLeaseData implements Serializable {
     private String priceUnit_dictText;
     private String facDate;
     private String modelId;
-    private Object city;
+    private String city;
     private String pic;
     private String cateName;
     private String isPerson;
@@ -64,7 +66,7 @@ public class MecLeaseData implements Serializable {
     private String tittle;
     private String priceUnit;
     private String brandName;
-    private String gpsLon;
+    private Double gpsLon;
     private String bussiessType;
     private String contactName;
     private String tenancy;
@@ -77,10 +79,20 @@ public class MecLeaseData implements Serializable {
     private String cateId;
     private Object isTop;
     private String brandId;
-    private String gpsLat;
+    private Double gpsLat;
     private String sysOrgCode;
     private Object isEnterprise;
     private String bussiessType_dictText;
+
+    private boolean isSelect;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getPriceUnit_dictText() {
         return priceUnit_dictText;
@@ -106,11 +118,11 @@ public class MecLeaseData implements Serializable {
         this.modelId = modelId;
     }
 
-    public Object getCity() {
-        return city;
+    public String getCity() {
+        return TextUtils.isEmpty(city)?"":city;
     }
 
-    public void setCity(Object city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
@@ -242,11 +254,11 @@ public class MecLeaseData implements Serializable {
         this.brandName = brandName;
     }
 
-    public String getGpsLon() {
+    public Double getGpsLon() {
         return gpsLon;
     }
 
-    public void setGpsLon(String gpsLon) {
+    public void setGpsLon(Double gpsLon) {
         this.gpsLon = gpsLon;
     }
 
@@ -346,11 +358,11 @@ public class MecLeaseData implements Serializable {
         this.brandId = brandId;
     }
 
-    public String getGpsLat() {
+    public Double getGpsLat() {
         return gpsLat;
     }
 
-    public void setGpsLat(String gpsLat) {
+    public void setGpsLat(Double gpsLat) {
         this.gpsLat = gpsLat;
     }
 

@@ -1,27 +1,24 @@
 package com.example.mechanicalapp.utils
 
 import android.util.Log
-import com.amap.api.location.AMapLocation
-import com.amap.api.location.AMapLocationClient
-import com.amap.api.location.AMapLocationClientOption
+import com.amap.api.location.*
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode
-import com.amap.api.location.AMapLocationListener
 import com.amap.api.maps.model.MyLocationStyle
 import com.example.mechanicalapp.App
 
 
 object GdMapUtils {
     private var myLocationStyle: MyLocationStyle? = null
-    private var mlocationClient:AMapLocationClient?=null
-    private var mLocationOption:AMapLocationClientOption?=null
-    private var mLocationListener:LocationListener?=null
-    public fun location(locationListener:LocationListener) {
+    private var mlocationClient: AMapLocationClient? = null
+    private var mLocationOption: AMapLocationClientOption? = null
+    private var mLocationListener: LocationListener? = null
+    public fun location(locationListener: LocationListener) {
 //        myLocationStyle =
 //            MyLocationStyle() //初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
 //        myLocationStyle!!.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW)
 //        myLocationStyle?.interval(20000) //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
 
-        mLocationListener =locationListener
+        mLocationListener = locationListener
         mlocationClient = AMapLocationClient(App.getInstance().applicationContext)
         //初始化定位参数
         //初始化定位参数
@@ -31,8 +28,8 @@ object GdMapUtils {
         mlocationClient?.setLocationListener(mAMapLocationListener)
         //设置为高精度定位模式
         //设置为高精度定位模式
-        mLocationOption?.locationMode=AMapLocationMode.Hight_Accuracy
-        mLocationOption?.interval =60000
+        mLocationOption?.locationMode = AMapLocationMode.Hight_Accuracy
+        mLocationOption?.interval = 60000
         //只定位一次
         mLocationOption?.isOnceLocation = true
         //设置定位参数
@@ -50,15 +47,17 @@ object GdMapUtils {
 
     }
 
-    object mAMapLocationListener: AMapLocationListener{
+    object mAMapLocationListener : AMapLocationListener {
         override fun onLocationChanged(amapLocation: AMapLocation?) {
 
             Log.e("yz_map", "sss=====$amapLocation")
-            if (mLocationListener!=null){
+            if (mLocationListener != null) {
                 if (amapLocation != null
                     && amapLocation.errorCode === 0
                 ) {
                     Log.e("yz_map", "成功了 可以回调了")
+
+                    App.getInstance().thisPoint = getPoint(amapLocation.latitude,amapLocation.longitude)
                     mLocationListener?.locationSuccess(amapLocation)
                 } else {
                     val errText = "定位失败," + amapLocation?.errorCode
@@ -72,10 +71,17 @@ object GdMapUtils {
 
     }
 
+     fun getPoint(latitude: Double, longitude: Double): DPoint? {
+        var dPoint =DPoint()
+         dPoint.latitude =latitude
+         dPoint.longitude =longitude
+        return dPoint
+    }
+
     /**
      * 停止定位
      */
-    public fun deactivate(){
+    public fun deactivate() {
         mLocationListener = null;
         if (mlocationClient != null) {
             mlocationClient?.stopLocation();
@@ -84,7 +90,8 @@ object GdMapUtils {
         mlocationClient = null;
     }
 
-    interface LocationListener{
+
+    interface LocationListener {
         fun locationSuccess(mapLocation: AMapLocation)
         fun locationErr()
     }

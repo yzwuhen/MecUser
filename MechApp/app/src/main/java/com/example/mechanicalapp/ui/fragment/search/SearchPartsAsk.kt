@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.PartsAdapter
 import com.example.mechanicalapp.ui.adapter.PartsAskAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.PartsData
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_search_all_result.*
 class SearchPartsAsk  : BaseCusFragment() , OnItemClickListener {
 
 
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<PartsData> = ArrayList<PartsData>()
     private var mAdapter: PartsAskAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -27,10 +28,6 @@ class SearchPartsAsk  : BaseCusFragment() , OnItemClickListener {
 
     override fun initView() {
         super.initView()
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
 
         mAdapter = PartsAskAdapter(mContext, mList, this)
 

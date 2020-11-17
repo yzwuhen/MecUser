@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.adapter.MineMenuAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener {
@@ -39,6 +40,7 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
 
         tv_user_nick.text =App.getInstance().userInfo.username
         tv_phone.text =App.getInstance().userInfo.phone
+        ImageLoadUtils.loadImageCenterCrop(mContext,iv_user_pic,App.getInstance().userInfo.avatar,R.mipmap.ic_launcher)
     }
 
     override fun initView() {

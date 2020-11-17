@@ -6,6 +6,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
@@ -15,7 +16,7 @@ import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_login_code.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class LoginCodeActivity : BaseActivity<NetData>(), View.OnClickListener ,LoginCodeView<NetData> {
+class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView<NetData> {
     private var isCheck:Boolean=false
     private var mPresenter:LoginCodePresenter?=null
     private var phone:String?=null
@@ -47,9 +48,13 @@ class LoginCodeActivity : BaseActivity<NetData>(), View.OnClickListener ,LoginCo
     }
 
     override fun showLoading() {
+        tv_login.isEnabled =false
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        tv_login.isEnabled =true
+        hideLoadingView()
     }
 
     override fun err()  {
@@ -136,7 +141,10 @@ class LoginCodeActivity : BaseActivity<NetData>(), View.OnClickListener ,LoginCo
 
     }
 
-    override fun LoginErr() {
+    override fun loginErr(exception: String?) {
+
+        ToastUtils.showText(exception)
     }
+
 
 }

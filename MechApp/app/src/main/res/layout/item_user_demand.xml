@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/root_view"
     android:background="@color/white"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/dp_17"
@@ -19,9 +20,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/circle_check_s" />
+            android:id="@+id/iv_check"
+            android:layout_width="@dimen/dp_17"
+            android:layout_height="@dimen/dp_17"
+            android:src="@drawable/check_icon" />
     </LinearLayout>
 
 

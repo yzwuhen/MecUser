@@ -70,7 +70,15 @@ public class RecruitData  implements Serializable {
     private Object isEnterprise;
     private String jobTittle;
     private String contactPhone;
+    private boolean isSelect;
 
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
     public String getGpsId() {
         return gpsId;
     }

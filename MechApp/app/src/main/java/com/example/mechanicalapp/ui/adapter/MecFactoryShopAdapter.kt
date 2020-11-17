@@ -9,14 +9,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.utils.ImageLoadUtils
-import kotlinx.android.synthetic.main.item_mec_factory.view.*
 import kotlinx.android.synthetic.main.item_mec_factory_shop.view.*
-import kotlinx.android.synthetic.main.item_mec_factory_shop.view.iv_item_pic
-import kotlinx.android.synthetic.main.item_mec_factory_shop.view.ly_check
-import kotlinx.android.synthetic.main.item_mec_factory_shop.view.tv_address
-import kotlinx.android.synthetic.main.item_mec_factory_shop.view.tv_introduce
-import kotlinx.android.synthetic.main.item_mec_factory_shop.view.tv_item_title
-import kotlinx.android.synthetic.main.item_user_demand.view.*
 
 class MecFactoryShopAdapter (var mContext: Context, var mList:MutableList<FactoryData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

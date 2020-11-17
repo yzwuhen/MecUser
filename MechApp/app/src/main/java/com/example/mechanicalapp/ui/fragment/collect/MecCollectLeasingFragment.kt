@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 
 /**
  * type 类型 新的和二手的一样的
+ *
  */
 class MecCollectLeasingFragment(var type:Int) : BaseFragment<NetData>(), View.OnClickListener, ViewPager.OnPageChangeListener  {
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()

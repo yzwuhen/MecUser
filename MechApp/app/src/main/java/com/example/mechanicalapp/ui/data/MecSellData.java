@@ -1,5 +1,7 @@
 package com.example.mechanicalapp.ui.data;
 
+import android.text.TextUtils;
+
 public class MecSellData {
     /**
      * facDate : 2020-11-10
@@ -56,7 +58,7 @@ public class MecSellData {
     private Object isTop_dictText;
     private String tittle;
     private String brandName;
-    private String gpsLon;
+    private Double gpsLon;
     private String bussiessType;
     private String contactName;
     private String updateTime;
@@ -68,15 +70,33 @@ public class MecSellData {
     private String cateId;
     private Object isTop;
     private String brandId;
-    private String gpsLat;
+    private Double gpsLat;
     private String sysOrgCode;
     private Object isEnterprise;
     private String paymentType_dictText;
     private String bussiessType_dictText;
     private String contactPhone;
+    private String priceUnit;
+    private String priceUnit_dictText;
+    private boolean isSelect;
 
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
     public String getFacDate() {
         return facDate;
+    }
+
+    public String getPriceUnit() {
+        return priceUnit;
+    }
+
+    public String getPriceUnit_dictText() {
+        return priceUnit_dictText;
     }
 
     public String getModelId() {
@@ -143,7 +163,7 @@ public class MecSellData {
         return brandName;
     }
 
-    public String getGpsLon() {
+    public Double getGpsLon() {
         return gpsLon;
     }
 
@@ -152,7 +172,7 @@ public class MecSellData {
     }
 
     public String getContactName() {
-        return contactName;
+        return TextUtils.isEmpty(contactName)?"":contactName;
     }
 
     public String getUpdateTime() {
@@ -191,7 +211,7 @@ public class MecSellData {
         return brandId;
     }
 
-    public String getGpsLat() {
+    public Double getGpsLat() {
         return gpsLat;
     }
 

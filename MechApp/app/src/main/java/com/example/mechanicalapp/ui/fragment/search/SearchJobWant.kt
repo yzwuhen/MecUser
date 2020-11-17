@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.JobWantDetails
 import com.example.mechanicalapp.ui.adapter.JobWantAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_search_all_result.*
 class SearchJobWant : BaseCusFragment() , OnItemClickListener {
 
 
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
     private var mAdapter: JobWantAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -26,10 +27,7 @@ class SearchJobWant : BaseCusFragment() , OnItemClickListener {
 
     override fun initView() {
         super.initView()
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+
 
         mAdapter = JobWantAdapter(mContext, mList,  this)
 

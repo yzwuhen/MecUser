@@ -30,7 +30,7 @@
             android:id="@+id/iv_check"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/circle_check"/>
+            android:src="@drawable/check_icon"/>
 
     </LinearLayout>
 

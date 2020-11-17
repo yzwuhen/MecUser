@@ -27,7 +27,6 @@ class MyReleaseActivity:BaseActivity<NetData>(), View.OnClickListener,ViewPager.
     private var mTextViewList:MutableList<TextView>  =ArrayList<TextView>()
 
     private var position:Int=0
-
     override fun getLayoutId(): Int {
 
         return R.layout.activity_my_release

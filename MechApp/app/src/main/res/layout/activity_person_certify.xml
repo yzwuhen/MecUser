@@ -84,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:drawablePadding="@dimen/dp_17"
-            android:drawableRight="@drawable/circle_check_s"
+            android:drawableRight="@drawable/check_icon"
             android:textColor="@color/color_222"
             android:textSize="16sp"
             android:text="男"/>
@@ -95,7 +95,7 @@
             android:layout_marginLeft="80dp"
             android:textColor="@color/color_222"
             android:drawablePadding="@dimen/dp_17"
-            android:drawableRight="@drawable/circle_check_s"
+            android:drawableRight="@drawable/check_icon"
             android:textSize="16sp"
             android:text="性别"/>
 

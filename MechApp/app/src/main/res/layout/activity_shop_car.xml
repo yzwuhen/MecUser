@@ -35,7 +35,7 @@
             android:id="@+id/tv_check_all"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:drawableLeft="@drawable/circle_check_s"
+            android:drawableLeft="@drawable/check_icon"
             android:drawablePadding="@dimen/dp_10"
             android:gravity="center"
             android:text="全选"

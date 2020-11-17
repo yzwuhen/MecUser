@@ -10,6 +10,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ly_check"
         android:layout_width="35dp"
         android:layout_height="100dp"
@@ -19,9 +20,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/iv_check"
             android:layout_width="@dimen/dp_18"
             android:layout_height="@dimen/dp_18"
-            android:src="@drawable/circle_check_s" />
+            android:src="@drawable/check_icon" />
     </LinearLayout>
 
     <ImageView
@@ -51,6 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
+        android:visibility="gone"
         android:gravity="center"
         android:paddingLeft="@dimen/dp_14"
         android:layout_marginTop="@dimen/dp_14"

@@ -25,6 +25,8 @@ class UserDemandAdapter(var mContext:Context, var mList:MutableList<MecLeaseData
 
         if (isShow){
             holder.itemView.ly_check.visibility =View.VISIBLE
+
+            holder.itemView.iv_check.isSelected =mList[position].isSelect
         }else{
             holder.itemView.ly_check.visibility =View.GONE
         }
@@ -78,7 +80,8 @@ class UserDemandAdapter(var mContext:Context, var mList:MutableList<MecLeaseData
 
     class UserDemandVh(itemView: View, type:Int,mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.root_view,adapterPosition) })
+            itemView.ly_check.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.ly_check,adapterPosition) })
             if (type==1){
                 itemView.tv_new_pic.visibility =View.GONE
             }

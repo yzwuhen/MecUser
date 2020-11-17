@@ -5,33 +5,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.JobWantAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.ui.mvp.impl.PresenterImpl
+import com.example.mechanicalapp.ui.mvp.v.CollectView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class CollectJobWant  : BaseFragment<NetData>() , OnItemClickListener {
+class CollectJobWant  : BaseCusFragment() , OnItemClickListener ,CollectView<RecruitData>,View.OnClickListener{
 
 
     private var mAdapter: JobWantAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
-    override fun showLoading() {
-
-
-    }
-
+    var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
+    private var isCheckAll:Boolean=false
+    private var ids:String=""
     init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+
         EventBus.getDefault().register(this)
 
     }
@@ -43,21 +41,24 @@ class CollectJobWant  : BaseFragment<NetData>() , OnItemClickListener {
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
+        spring_list.type=SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(mContext)
+        spring_list.footer = RefreshHeaderUtils.getFooterView(mContext)
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
-                //  initData()
-                closeRefreshView()
+                spring_list.isEnable = false
+                (mPresenter as PresenterImpl).getRecruitCollect(2)
             }
 
-            override fun onLoadmore() {}
+            override fun onLoadmore() {
+                (mPresenter as PresenterImpl).getRecruitCollectMore(2)
+            }
         })
-
-        mPresenter = PresenterImpl(mContext,this)
+        mPresenter = PresenterImpl(mContext, this)
         (mPresenter as PresenterImpl).getRecruitCollect(2)
+        tv_check_all.setOnClickListener(this)
+        tv_del.setOnClickListener(this)
     }
 
     fun closeRefreshView() {
@@ -84,20 +85,93 @@ class CollectJobWant  : BaseFragment<NetData>() , OnItemClickListener {
     }
 
 
+    override fun showLoading() {
+        showLoadView()
+    }
+
+
     override fun hiedLoading() {
-        TODO("Not yet implemented")
+        hideLoadingView()
+        closeRefreshView()
     }
 
     override fun getLayoutId(): Int {
         return R.layout.layout_spring_list
     }
 
-    override fun err()  {
-        TODO("Not yet implemented")
+    override fun err() {
     }
 
     override fun onItemClick(view: View, position: Int) {
+        when(view?.id){
+            R.id.ly_check->selectPosition(position)
+            R.id.root_view->clickPosition(position)
+        }
+
+    }
+
+    private fun clickPosition(position: Int) {
 
 
+    }
+
+    private fun selectPosition(position: Int) {
+        isCheckAll =false
+        mList[position].isSelect = !mList[position].isSelect
+        mAdapter?.notifyItemChanged(position)
+        tv_check_all.isSelected =isCheckAll
+
+    }
+
+
+    override fun refreshUI(list: List<RecruitData>?) {
+        mList.clear()
+        if (list != null) {
+            mList.addAll(list)
+        }
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadMore(list: List<RecruitData>?) {
+        if (list != null) {
+            mList.addAll(list)
+            mAdapter?.notifyDataSetChanged()
+        }
+    }
+
+    override fun onClick(view: View?) {
+
+        when(view?.id){
+            R.id.tv_check_all->checkAll()
+            R.id.tv_del->delSelect()
+        }
+
+    }
+
+    private fun delSelect() {
+        for (index in mList.indices){
+            if (mList[index].isSelect){
+                ids ="$ids,${mList[index].id}"
+            }
+        }
+
+        (mPresenter as PresenterImpl).del(ids)
+
+    }
+
+    private fun checkAll() {
+        isCheckAll =!isCheckAll
+        for (index in mList.indices){
+            mList[index].isSelect=isCheckAll
+        }
+        tv_check_all.isSelected =isCheckAll
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun success(netData: NetData) {
+        if (netData.code==200){
+            (mPresenter as PresenterImpl).getRecruitCollect(2)
+        }
+        ToastUtils.showText(netData.message)
     }
 }

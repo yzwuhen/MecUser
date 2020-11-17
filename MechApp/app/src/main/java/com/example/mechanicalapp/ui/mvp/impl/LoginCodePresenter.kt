@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
 import android.content.Context
+import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
@@ -32,6 +33,7 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
 
     fun loginCode(phone: String?, code: String?) {
 
+        baseView.showLoading()
         var mLoginCode = LoginCode()
         mLoginCode.captcha=code
         mLoginCode.mobile =phone
@@ -43,15 +45,17 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
                     if (t != null) {
                         baseView.loginSuccess(t)
                     }else{
-                       baseView.LoginErr()
+                       baseView.loginErr("数据是空")
                     }
                 }
 
                 override fun onError(e: Throwable?) {
-                    baseView.LoginErr()
+                    baseView.hiedLoading()
+                    baseView.loginErr(e?.message)
                 }
 
                 override fun onCompleted() {
+                    baseView.hiedLoading()
                 }
             }))
 

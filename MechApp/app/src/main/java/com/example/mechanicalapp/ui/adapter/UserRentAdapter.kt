@@ -9,6 +9,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import kotlinx.android.synthetic.main.item_user_rent.view.*
 
+
 class UserRentAdapter (var mContext: Context, var mList:MutableList<MecLeaseData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isShow:Boolean=false
@@ -19,6 +20,7 @@ class UserRentAdapter (var mContext: Context, var mList:MutableList<MecLeaseData
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (isShow){
             holder.itemView.ly_check.visibility =View.VISIBLE
+            holder.itemView.iv_check.isSelected =mList[position].isSelect
         }else{
             holder.itemView.ly_check.visibility =View.GONE
         }
@@ -43,7 +45,8 @@ class UserRentAdapter (var mContext: Context, var mList:MutableList<MecLeaseData
 
     class UserRentVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.root_view,adapterPosition) })
+            itemView.ly_check.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.ly_check,adapterPosition) })
         }
     }
 }

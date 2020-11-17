@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingTop="@dimen/dp_17"
     android:background="@color/white"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -18,9 +19,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
+            android:id="@+id/iv_check"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/circle_check_s" />
+            android:src="@drawable/check_icon" />
     </LinearLayout>
     <TextView
         android:id="@+id/tv_recruit_title"
@@ -46,6 +48,19 @@
         android:textColor="#FE9418"
         android:textSize="12sp"
         android:background="@drawable/label_bg"
+        app:layout_constraintTop_toTopOf="@+id/tv_recruit_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <TextView
+        android:id="@+id/tv_label1"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:gravity="center"
+        android:layout_marginRight="@dimen/dp_17"
+        android:text="15K/月"
+        android:textColor="@color/color_red"
+        android:textSize="17sp"
         app:layout_constraintTop_toTopOf="@+id/tv_recruit_title"
         app:layout_constraintEnd_toEndOf="parent"
         />

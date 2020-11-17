@@ -26,7 +26,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/circle_check_s" />
+            android:src="@drawable/check_icon" />
     </LinearLayout>
 
 
@@ -43,6 +43,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
+        android:id="@+id/tv_new_up"
         android:layout_width="@dimen/dp_63"
         android:layout_height="27dp"
         android:layout_marginTop="13dp"

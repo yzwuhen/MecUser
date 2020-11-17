@@ -35,6 +35,7 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<CodeBean>(iSubscriberListener))
     }
+
     //获取工种
     fun getWorkTypeList(
         page: Int,
@@ -52,16 +53,15 @@ class ModelImpl : BaseModel {
     fun getWorkTypeChildList(
         page: Int,
         pageSize: Int,
-        pid:String,
+        pid: String,
         iSubscriberListener: ISubscriberListener<MecTypeChildBean>
     ) {
-        appsService?.getWorkTypeChildList(page, pageSize,pid)
+        appsService?.getWorkTypeChildList(page, pageSize, pid)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MecTypeChildBean>(iSubscriberListener))
 
     }
-
 
 
     fun getFactoryList(
@@ -143,78 +143,133 @@ class ModelImpl : BaseModel {
     }
 
     fun getCollect(
-        token: String,
+        token: String?,
         type: Int,
         page: Int,
         pageSize: Int,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<CollectLeaseBean>
     ) {
         appsService?.getCollectList(token, type, page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<CollectLeaseBean>(iSubscriberListener))
     }
 
     fun getSecondCollect(
-        token: String,
+        token: String?,
         type: Int,
         page: Int,
         pageSize: Int,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<CollectBusinessBean>
     ) {
         appsService?.getCollectSecondHandList(token, type, page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<CollectBusinessBean>(iSubscriberListener))
     }
 
     fun getPartsCollect(
-        token: String,
+        token: String?,
         type: Int,
         page: Int,
         pageSize: Int,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<CollectPartsBean>
     ) {
         appsService?.getCollectPartsList(token, type, page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<CollectPartsBean>(iSubscriberListener))
     }
 
     fun getRecruitCollect(
-        token: String,
+        token: String?,
         type: Int,
         page: Int,
         pageSize: Int,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<CollectRecruitBean>
     ) {
         appsService?.getCollectRecruitList(token, type, page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<CollectRecruitBean>(iSubscriberListener))
     }
 
     fun getFactoryCollect(
-        token: String,
+        token: String?,
         type: Int,
         page: Int,
         pageSize: Int,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<CollectFactoryBean>
     ) {
         appsService?.getCollectFactoryList(token, type, page, pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<CollectFactoryBean>(iSubscriberListener))
+    }
+
+    fun getGoodsCollect(
+        token: String?,
+        type: Int,
+        page: Int,
+        pageSize: Int,
+        iSubscriberListener: ISubscriberListener<CollectGoodsBean>
+    ) {
+        appsService?.getCollectGoodsList(token, type, page, pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<CollectGoodsBean>(iSubscriberListener))
+    }
+
+    fun delCollect(
+        token: String?,
+        ids: String?,
+        iSubscriberListener: ISubscriberListener<NetData>
+    ) {
+
+        appsService?.delCollect(token, ids)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
-    fun getGoodsCollect(
-        token: String,
-        type: Int,
-        page: Int,
-        pageSize: Int,
-        iSubscriberListener: ISubscriberListener<NetData>
-    ) {
-        appsService?.getCollectGoodsyList(token, type, page, pageSize)
+    fun getLeaseList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MoreLeaseData>){
+        appsService?.getMyLeaseList(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
+    }
+
+    fun getBusinessList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MoreLeaseData>){
+        appsService?.getMyLeaseList(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
+    }
+
+
+    fun refreshLease(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.getRefreshLeaseList(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun editLease(token: String?,id: String,isOn:String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        body.isOn =isOn
+        appsService?.editLease(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+    fun delLease(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.delLease(token,body)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))

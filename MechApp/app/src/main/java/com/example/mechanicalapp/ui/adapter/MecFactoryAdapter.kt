@@ -10,8 +10,6 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_mec_factory.view.*
-import kotlinx.android.synthetic.main.item_user_demand.view.*
-import kotlinx.android.synthetic.main.item_user_demand.view.ly_check
 
 class MecFactoryAdapter(
     var mContext: Context,
@@ -31,6 +29,7 @@ class MecFactoryAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (isShow) {
             holder.itemView.ly_check.visibility = View.VISIBLE
+            holder.itemView.iv_check.isSelected = mList[position].isSelect
         } else {
             holder.itemView.ly_check.visibility = View.GONE
         }
@@ -57,7 +56,14 @@ class MecFactoryAdapter(
         init {
             itemView.setOnClickListener(View.OnClickListener {
                 mOnItemClickListener.onItemClick(
-                    itemView,
+                    itemView.root_view,
+                    adapterPosition
+                )
+            })
+
+            itemView.ly_check.setOnClickListener(View.OnClickListener {
+                mOnItemClickListener.onItemClick(
+                    itemView.ly_check,
                     adapterPosition
                 )
             })

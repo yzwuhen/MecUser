@@ -69,7 +69,7 @@ interface AppService {
         @Query("bussiessType") bussiessType: Int,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
-    ):Observable<MoreLeaseData>
+    ):Observable<MoreSellBean>
 
 
     /**

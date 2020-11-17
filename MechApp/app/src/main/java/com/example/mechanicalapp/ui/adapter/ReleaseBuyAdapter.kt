@@ -29,7 +29,8 @@ class ReleaseBuyAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_rent_user_nick.text = mList[position].contactName
+
+       // holder.itemView.tv_rent_user_nick.text = mList[position].contactName
 
         holder.itemView.tv_rent_address_data.text =
             "${mList[position].city} | ${mList[position].facDate}"

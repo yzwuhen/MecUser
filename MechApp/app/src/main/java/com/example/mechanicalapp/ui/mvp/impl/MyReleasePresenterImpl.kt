@@ -3,9 +3,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 import android.content.Context
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.data.MecLeaseData
-import com.example.mechanicalapp.ui.data.MoreLeaseData
-import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.MyReleaseView
@@ -33,7 +31,6 @@ class MyReleasePresenterImpl(
             pageSize,
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
-                    page++
                     if (t?.code == 200 && t?.result != null) {
                         if (page == 0) {
                             t?.result?.records?.let {
@@ -52,6 +49,7 @@ class MyReleasePresenterImpl(
                     } else {
                         (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(null)
                     }
+                    page++
                 }
 
                 override fun onError(e: Throwable?) {
@@ -131,26 +129,25 @@ class MyReleasePresenterImpl(
 
 
     //出售 求购
-    fun getBusinessList(type: Int) {
+    fun getBusinessSellList(type: Int) {
         baseView.showLoading()
-        baseModel.getLeaseList(
+        baseModel.getBusinessList(
             App.getInstance().token,
             type,
             page,
             pageSize,
-            object : ISubscriberListener<MoreLeaseData> {
-                override fun onNext(t: MoreLeaseData?) {
-                    page++
+            object : ISubscriberListener<MoreSellBean> {
+                override fun onNext(t: MoreSellBean?) {
                     if (t?.code == 200 && t?.result != null) {
                         if (page == 0) {
                             t?.result?.records?.let {
-                                (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(
+                                (baseView as MyReleaseView<MecSellData>)?.refreshUI(
                                     it
                                 )
                             }
                         } else {
                             t?.result?.records?.let {
-                                (baseView as MyReleaseView<MecLeaseData>)?.loadMore(
+                                (baseView as MyReleaseView<MecSellData>)?.loadMore(
                                     it
                                 )
                             }
@@ -159,6 +156,7 @@ class MyReleasePresenterImpl(
                     } else {
                         (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(null)
                     }
+                    page++
                 }
 
                 override fun onError(e: Throwable?) {

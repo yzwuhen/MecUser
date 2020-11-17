@@ -30,7 +30,7 @@ class ReleaseLeaseAdapter (var mContext: Context, var mList:MutableList<MecLease
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,StringUtils.getImgStr(mList[position].pic),R.mipmap.ic_launcher)
 
         holder.itemView.tv_title.text =mList[position].tittle
 

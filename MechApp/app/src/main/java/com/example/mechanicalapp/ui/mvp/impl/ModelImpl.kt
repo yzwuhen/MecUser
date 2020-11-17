@@ -239,11 +239,11 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
     }
 
-    fun getBusinessList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MoreLeaseData>){
-        appsService?.getMyLeaseList(token,type,page,pageSize)
+    fun getBusinessList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MoreSellBean>){
+        appsService?.getMyBusinessList(token,type,page,pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<MoreSellBean>(iSubscriberListener))
     }
 
 

@@ -1,70 +1,76 @@
 package com.example.mechanicalapp.ui.data;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 public class PartsData implements Serializable {
 
 
     /**
-     * priceUnit_dictText : 元/小时
-     * city : null
-     * pic : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/1603903127813_1603903252472.jpg
-     * partsType : modlecode3
-     * content : 2
-     * isPerson : 1
-     * orderTime : 2020-10-31
-     * fitMachineType : 1
-     * updateBy : admin
-     * price : 22
+     * priceUnit_dictText : null
+     * city : 深圳市
+     * pic : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/timg-1_1605684491284.bin,
+     * title : 全球气温
+     * partsType : 挖掘机
+     * cateName : 挖掘机
+     * content : 1是法国
+     * isPerson : null
+     * orderTime : 2020-11-18
+     * updateBy : null
+     * price : 123123
      * isOn : 1
-     * id : 2
+     * id : 1328963220114886657
      * isTop_dictText : null
-     * brand : null
+     * brand : 去微软
      * isTalk : 1
-     * priceUnit : 2
-     * address : 2
-     * gpsLon : null
-     * bussiessType : 2
-     * contactName : 2
-     * updateTime : 2020-11-05 20:16:35
-     * createBy : admin
-     * createTime : 2020-10-31 19:23:04
+     * priceUnit : null
+     * address : 广东省深圳市 宝安区
+     * gpsLon : 113.841901
+     * bussiessType : 1
+     * contactName : 微软
+     * updateTime : null
+     * createBy : 13751773402
+     * createTime : 2020-11-18 15:28:17
+     * cateId : 1321476604976406530
      * isTop : null
-     * gpsLat : null
-     * name : 挖掘机链条
-     * sysOrgCode : A01A03
+     * isOn_dictText : 是
+     * gpsLat : 22.628645
+     * sysOrgCode : A02
      * isEnterprise : null
-     * contactPhone : 12333233333
+     * contactPhone : 1333333333
      */
 
     private String priceUnit_dictText;
     private String city;
     private String pic;
+    private String title;
     private String partsType;
+    private String cateName;
     private String content;
-    private String isPerson;
+    private int isPerson;
     private String orderTime;
-    private String fitMachineType;
     private String updateBy;
     private String price;
-    private String isOn;
+    private int isOn;
     private String id;
     private String isTop_dictText;
     private String brand;
     private String isTalk;
     private String priceUnit;
     private String address;
-    private Object gpsLon;
-    private Integer bussiessType;
+    private String gpsLon;
+    private int bussiessType;
     private String contactName;
     private String updateTime;
     private String createBy;
     private String createTime;
-    private Object isTop;
-    private Object gpsLat;
-    private String name;
+    private String cateId;
+    private String isTop;
+    private String isOn_dictText;
+    private String gpsLat;
     private String sysOrgCode;
-    private Object isEnterprise;
+    private String isEnterprise;
     private String contactPhone;
     private boolean isSelect;
 
@@ -75,8 +81,9 @@ public class PartsData implements Serializable {
     public void setSelect(boolean select) {
         isSelect = select;
     }
+
     public String getPriceUnit_dictText() {
-        return priceUnit_dictText;
+        return TextUtils.isEmpty(priceUnit_dictText)?"元":priceUnit_dictText;
     }
 
     public void setPriceUnit_dictText(String priceUnit_dictText) {
@@ -99,12 +106,28 @@ public class PartsData implements Serializable {
         this.pic = pic;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getPartsType() {
         return partsType;
     }
 
     public void setPartsType(String partsType) {
         this.partsType = partsType;
+    }
+
+    public String getCateName() {
+        return cateName;
+    }
+
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
     }
 
     public String getContent() {
@@ -115,11 +138,11 @@ public class PartsData implements Serializable {
         this.content = content;
     }
 
-    public String getIsPerson() {
+    public int getIsPerson() {
         return isPerson;
     }
 
-    public void setIsPerson(String isPerson) {
+    public void setIsPerson(int isPerson) {
         this.isPerson = isPerson;
     }
 
@@ -129,14 +152,6 @@ public class PartsData implements Serializable {
 
     public void setOrderTime(String orderTime) {
         this.orderTime = orderTime;
-    }
-
-    public String getFitMachineType() {
-        return fitMachineType;
-    }
-
-    public void setFitMachineType(String fitMachineType) {
-        this.fitMachineType = fitMachineType;
     }
 
     public String getUpdateBy() {
@@ -155,11 +170,11 @@ public class PartsData implements Serializable {
         this.price = price;
     }
 
-    public String getIsOn() {
+    public int getIsOn() {
         return isOn;
     }
 
-    public void setIsOn(String isOn) {
+    public void setIsOn(int isOn) {
         this.isOn = isOn;
     }
 
@@ -211,19 +226,19 @@ public class PartsData implements Serializable {
         this.address = address;
     }
 
-    public Object getGpsLon() {
-        return gpsLon;
+    public double getGpsLon() {
+        return TextUtils.isEmpty(gpsLon)?0.0d:Double.valueOf(gpsLon);
     }
 
-    public void setGpsLon(Object gpsLon) {
+    public void setGpsLon(String gpsLon) {
         this.gpsLon = gpsLon;
     }
 
-    public Integer getBussiessType() {
+    public int getBussiessType() {
         return bussiessType;
     }
 
-    public void setBussiessType(Integer bussiessType) {
+    public void setBussiessType(int bussiessType) {
         this.bussiessType = bussiessType;
     }
 
@@ -259,28 +274,36 @@ public class PartsData implements Serializable {
         this.createTime = createTime;
     }
 
-    public Object getIsTop() {
+    public String getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(String cateId) {
+        this.cateId = cateId;
+    }
+
+    public String getIsTop() {
         return isTop;
     }
 
-    public void setIsTop(Object isTop) {
+    public void setIsTop(String isTop) {
         this.isTop = isTop;
     }
 
-    public Object getGpsLat() {
-        return gpsLat;
+    public String getIsOn_dictText() {
+        return isOn_dictText;
     }
 
-    public void setGpsLat(Object gpsLat) {
+    public void setIsOn_dictText(String isOn_dictText) {
+        this.isOn_dictText = isOn_dictText;
+    }
+
+    public double getGpsLat() {
+        return TextUtils.isEmpty(gpsLat)?0.0d:Double.valueOf(gpsLat);
+    }
+
+    public void setGpsLat(String gpsLat) {
         this.gpsLat = gpsLat;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSysOrgCode() {
@@ -291,11 +314,11 @@ public class PartsData implements Serializable {
         this.sysOrgCode = sysOrgCode;
     }
 
-    public Object getIsEnterprise() {
+    public String getIsEnterprise() {
         return isEnterprise;
     }
 
-    public void setIsEnterprise(Object isEnterprise) {
+    public void setIsEnterprise(String isEnterprise) {
         this.isEnterprise = isEnterprise;
     }
 

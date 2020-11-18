@@ -41,7 +41,7 @@ class PartsAskAdapter(
 
         ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
 
-        holder.itemView.tv_title.text =mList[position].name
+        holder.itemView.tv_title.text =mList[position].title
         holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].partsType}"
         // holder.itemView.tv_distance.text ="距离${mList[position].}"
         holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"

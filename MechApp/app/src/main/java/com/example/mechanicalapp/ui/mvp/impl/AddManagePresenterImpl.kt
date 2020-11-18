@@ -35,6 +35,7 @@ class AddManagePresenterImpl(
                 }
 
                 override fun onError(e: Throwable?) {
+                    baseView?.hiedLoading()
                     baseView?.err()
                 }
 
@@ -55,6 +56,7 @@ class AddManagePresenterImpl(
                 }
 
                 override fun onError(e: Throwable?) {
+                    baseView?.hiedLoading()
                     baseView?.err()
                 }
 
@@ -75,6 +77,7 @@ class AddManagePresenterImpl(
                 }
 
                 override fun onError(e: Throwable?) {
+                    baseView?.hiedLoading()
                     baseView?.err()
                 }
 
@@ -95,6 +98,7 @@ class AddManagePresenterImpl(
                 }
 
                 override fun onError(e: Throwable?) {
+                    baseView?.hiedLoading()
                     baseView?.err()
                 }
 
@@ -118,6 +122,7 @@ class AddManagePresenterImpl(
                 }
 
                 override fun onError(e: Throwable?) {
+                    baseView?.hiedLoading()
                     baseView?.err()
                 }
 
@@ -245,6 +250,7 @@ class AddManagePresenterImpl(
                 }
 
                 override fun onError(e: Throwable?) {
+                    baseView?.hiedLoading()
                 }
 
                 override fun onCompleted() {
@@ -261,7 +267,6 @@ class AddManagePresenterImpl(
             object : ISubscriberListener<MecTypeChildBean> {
                 override fun onNext(t: MecTypeChildBean?) {
                     if (t?.code == 200 && t?.result != null) {
-
                         t?.result?.records?.let {
                             (baseView as MecTypeView<BaseData>)?.refreshRightUI(
                                 it

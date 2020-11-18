@@ -10,13 +10,16 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.MyAddressAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.AddressPresenterImpl
+import com.example.mechanicalapp.ui.mvp.v.AddressView
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.activity_my_address.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class MyAddressActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClickListener ,PopUtils.onViewListener{
+class MyAddressActivity:BaseCusActivity(),OnItemClickListener,View.OnClickListener ,PopUtils.onViewListener,AddressView<NetData>{
 
     private var mMyAddressAdapter: MyAddressAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
@@ -25,6 +28,8 @@ class MyAddressActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClick
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
     private var mPopWindow: PopupWindow? = null
+
+    private var mPresenter: AddressPresenterImpl?=null
 
     override fun getLayoutId(): Int {
 
@@ -49,6 +54,10 @@ class MyAddressActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClick
         recycler_list.adapter = mMyAddressAdapter
 
         tv_btn.setOnClickListener(this)
+
+
+        mPresenter = AddressPresenterImpl(this)
+        mPresenter?.getAddressList()
     }
 
     override fun initPresenter() {

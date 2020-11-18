@@ -37,6 +37,20 @@
         app:layout_constraintTop_toTopOf="@+id/tv_recruit_title" />
 
     <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_salary"
+        android:text="15K以上"
+        android:textColor="#FC3D38"
+        android:textSize="17sp"
+        android:layout_marginRight="@dimen/dp_17"
+        app:layout_constraintTop_toTopOf="@+id/iv_job_pic"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        />
+
+    <TextView
         android:id="@+id/tv_recruit_address"
         style="@style/recuit_tv_label_style"
         android:layout_marginTop="@dimen/dp_8"
@@ -112,6 +126,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_recruit_pic" />
 
     <ImageView
+        android:id="@+id/iv_ser"
         android:layout_width="20dp"
         android:layout_height="13dp"
         android:layout_marginLeft="@dimen/dp_8"
@@ -137,6 +152,7 @@
         android:id="@+id/ly_bottom"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:paddingRight="@dimen/dp_17"
         android:gravity="right|center_vertical"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

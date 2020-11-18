@@ -15,6 +15,7 @@ import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_release_ask.view.*
 
+
 class MyReleaseAskAdapter (var mContext: Context, var mList:MutableList<MecLeaseData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -44,7 +45,12 @@ class MyReleaseAskAdapter (var mContext: Context, var mList:MutableList<MecLease
         }else{
             holder.itemView.iv_rent_sr.visibility =View.GONE
         }
-
+        //是否上架
+        if (mList[position].isOn == "1"){
+            holder.itemView.tv_down.text="下架"
+        }else{
+            holder.itemView.tv_down.text="重新上架"
+        }
         if (mList[position].priceUnit=="3"){
             holder.itemView.tv_rent_price.visibility =View.VISIBLE
             holder.itemView.tv_rent.visibility =View.GONE

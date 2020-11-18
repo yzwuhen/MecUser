@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.LookLeaseAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MyLookPresenter
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
@@ -39,24 +40,30 @@ class LookLease(var type: Int) : BaseFragment<NetData>(), OnItemClickListener {
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
-
+        spring_list.type = SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(mContext)
+        spring_list.footer = RefreshHeaderUtils.getFooterView(mContext)
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
-                //  initData()
-                closeRefreshView()
+                spring_list.isEnable = false
+                (mPresenter as MyLookPresenter).resetPage()
+                (mPresenter as MyLookPresenter).getLookLeaseList(1)
             }
 
-            override fun onLoadmore() {}
+            override fun onLoadmore() {
+                (mPresenter as MyLookPresenter).getLookLeaseList(1)
+            }
         })
+
+
+        mPresenter = MyLookPresenter( this)
+        (mPresenter as MyLookPresenter).getLookLeaseList(1)
 
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
 
 

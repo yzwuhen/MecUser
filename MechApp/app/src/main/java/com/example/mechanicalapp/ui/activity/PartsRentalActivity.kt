@@ -30,18 +30,7 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
-import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.activity_parts_rental.*
-import kotlinx.android.synthetic.main.activity_parts_rental.et_address
-import kotlinx.android.synthetic.main.activity_parts_rental.et_ec_brand
-import kotlinx.android.synthetic.main.activity_parts_rental.et_ec_model
-import kotlinx.android.synthetic.main.activity_parts_rental.et_ec_type
-import kotlinx.android.synthetic.main.activity_parts_rental.et_input
-import kotlinx.android.synthetic.main.activity_parts_rental.et_name
-import kotlinx.android.synthetic.main.activity_parts_rental.et_phone
-import kotlinx.android.synthetic.main.activity_parts_rental.ly_address
-import kotlinx.android.synthetic.main.activity_parts_rental.ry_pic
-import kotlinx.android.synthetic.main.activity_parts_rental.tv_submit
 import kotlinx.android.synthetic.main.layout_title.*
 
 class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
@@ -87,7 +76,7 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
         tv_yes.setOnClickListener(this)
         tv_no.setOnClickListener(this)
         tv_submit.setOnClickListener(this)
-
+        ly_ec_type.setOnClickListener(this)
 
 
         mRePartsLease.bussiessType = 1
@@ -96,9 +85,11 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
         mPresenter = AddManagePresenterImpl(this, this)
         mUpLoadFilePresenter = UpdateFilePresenterImpl(this, this)
 
+        (mPresenter as AddManagePresenterImpl).getBillMethod()
+
 
         et_parts_name.addTextChangedListener(this)
-        et_ec_type.addTextChangedListener(this)
+//        et_ec_type.addTextChangedListener(this)
         et_ec_brand.addTextChangedListener(this)
         et_ec_model.addTextChangedListener(this)
         et_one_price.addTextChangedListener(this)
@@ -119,6 +110,7 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
                 mRePartsLease.priceUnit = mStringList[position].itemValue
                 PopUtils.dismissPop()
             }
+
             R.id.iv_del -> {
                 mPicList?.removeAt(position)
                 mPicAdapter?.notifyDataSetChanged()
@@ -135,12 +127,18 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
         when (v?.id) {
             R.id.iv_back -> finish()
             R.id.tv_no_element -> showInput()
+            R.id.ly_ec_type->{
+                jumpActivityForResult(
+                    Configs.EC_TYPE_RESULT_CODE,
+                    1,
+                    EcType::class.java
+                )
+            }
             R.id.ly_address -> jumpActivityForResult(
                 Configs.ADDRESS_RESULT_CODE,
                 1,
                 AddressSelActivity::class.java
             )
-            R.id.ly_address -> jumpActivity(null, AddressSelActivity::class.java)
             R.id.tv_dialog_item1 -> setItem()
             R.id.tv_dialog_item2 -> setItem1()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
@@ -201,6 +199,10 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
                     data?.getDoubleExtra(Configs.CITY_LOT, 0.0)
                 )
             }
+        }else if (requestCode ==Configs.EC_TYPE_RESULT_CODE ){
+            et_ec_type.text = data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
+            mRePartsLease.cateName = data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
+            mRePartsLease.cateId = data?.getStringExtra(Configs.SCREEN_RESULT_ID)
         }
         super.onActivityResult(requestCode, resultCode, data)
 

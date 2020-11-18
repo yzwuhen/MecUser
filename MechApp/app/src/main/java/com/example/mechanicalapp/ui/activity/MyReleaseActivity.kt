@@ -8,8 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseGoodsFragment
+import com.example.mechanicalapp.ui.fragment.myrelease.MyReleasePartsFragment
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseLease
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseRecruitFragment
 import com.example.mechanicalapp.ui.fragment.myrelease.MyReleaseSecondFragment
@@ -34,7 +33,7 @@ class MyReleaseActivity:BaseActivity<NetData>(), View.OnClickListener,ViewPager.
     init {
         mFragmentList?.add(MyReleaseLease())
         mFragmentList?.add(MyReleaseSecondFragment())
-        mFragmentList?.add(MyReleaseGoodsFragment())
+        mFragmentList?.add(MyReleasePartsFragment())
         mFragmentList?.add(MyReleaseRecruitFragment())
     }
     override fun initView() {

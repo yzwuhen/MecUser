@@ -66,8 +66,8 @@ class ReleaseSellFragment  : BaseCusFragment(), OnItemClickListener, PopUtils.on
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     private fun showPop(position: Int) {
@@ -126,7 +126,10 @@ class ReleaseSellFragment  : BaseCusFragment(), OnItemClickListener, PopUtils.on
 
         when (v?.id) {
 
-            R.id.tv_pop_sure -> activity?.let { PopUtils.dismissPop(it) }
+            R.id.tv_pop_sure -> activity?.let {
+                PopUtils.dismissPop(it)
+                (mPresenter as MyReleasePresenterImpl).delBusiness(mList[mPosition].id)
+            }
             R.id.tv_pop_cancel -> activity?.let { PopUtils.dismissPop(it) }
 
         }
@@ -134,15 +137,15 @@ class ReleaseSellFragment  : BaseCusFragment(), OnItemClickListener, PopUtils.on
 
     private fun offDown(position: Int) {
         if (mList[position].isOn=="1"){
-            (mPresenter as MyReleasePresenterImpl).editLease(mList[position].id,"2")
+            (mPresenter as MyReleasePresenterImpl).editBusiness(mList[position].id,"2")
         }else{
             //重新上架
-            (mPresenter as MyReleasePresenterImpl).editLease(mList[position].id,"1")
+            (mPresenter as MyReleasePresenterImpl).editBusiness(mList[position].id,"1")
         }
     }
 
     private fun refreshItem(position: Int) {
-        (mPresenter as MyReleasePresenterImpl).refreshLease(mList[position].id)
+        (mPresenter as MyReleasePresenterImpl).refreshBusiness(mList[position].id)
     }
 
     override fun showLoading() {

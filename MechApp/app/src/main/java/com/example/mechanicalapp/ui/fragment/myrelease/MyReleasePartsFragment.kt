@@ -8,17 +8,16 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 
-class MyReleaseGoodsFragment  : BaseFragment<NetData>(), View.OnClickListener,ViewPager.OnPageChangeListener {
+class MyReleasePartsFragment  : BaseFragment<NetData>(), View.OnClickListener,ViewPager.OnPageChangeListener {
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(ReleaseGoodsLease())
-        mFragmentList?.add(ReleaseGoodsAsk())
+        mFragmentList?.add(ReleasePartsLease())
+        mFragmentList?.add(ReleasePartsAsk())
     }
 
     override fun showLoading() {

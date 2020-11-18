@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.IntegralData
 import kotlinx.android.synthetic.main.item_integral.view.*
 
-class IntegralAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class IntegralAdapter (var mContext: Context, var mList:MutableList<IntegralData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -17,7 +18,7 @@ class IntegralAdapter (var mContext: Context, var mList:MutableList<String>, var
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_integral_info.text =mList[position]
+        holder.itemView.tv_integral_info.text =mList[position].updateAction
 
     }
 

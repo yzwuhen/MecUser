@@ -64,8 +64,8 @@ class ReleaseLeaseFragment(var type: Int) : BaseCusFragment(), OnItemClickListen
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable = true
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     private fun showPop(position: Int) {

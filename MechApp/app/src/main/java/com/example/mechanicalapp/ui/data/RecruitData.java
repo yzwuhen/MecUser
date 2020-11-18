@@ -5,69 +5,84 @@ import android.text.TextUtils;
 import java.io.Serializable;
 
 public class RecruitData  implements Serializable {
+
+
     /**
+     * birthday : null
+     * sex_dictText : null
      * gpsId : null
      * city : null
+     * isReady : null
      * recruitType_dictText : 招聘
-     * compamyAddress : null
-     * content : null
+     * cateName : 旋挖机驾驶员
+     * content : 招聘地铁司机
      * isPerson : null
-     * price_dictText :
-     * orderTime : null
+     * price_dictText : 面议
+     * orderTime : 2020-11-18
      * updateBy : null
-     * price : 5000
+     * price : 5
      * isOn : 1
-     * jobEx : 1.0
-     * company : null
-     * id : 1
-     * jobType_dictText : 挖掘机工程师
+     * jobEx : 5
+     * company : 广州地铁
+     * id : 1328887284547833857
      * isTop_dictText : null
-     * jobType : 1
      * gpsLon : null
-     * contactName : 尼才
+     * contactName : 哈哈
      * recruitType : 1
-     * updateTime : 2020-10-31 20:24:31
-     * needNumber : 100
-     * jobAddress : null
-     * createBy : null
-     * createTime : 2020-10-31 20:24:29
+     * sex : null
+     * jobEx_dictText :
+     * isReady_dictText : null
+     * updateTime : null
+     * needNumber : 5
+     * jobAddress : 广州市
+     * createBy : 13886943851
+     * createTime : 2020-11-18 10:26:33
+     * cateId : 1327630527800279042
      * isTop : null
+     * companyAddress : 广州市
      * gpsLat : null
      * sysOrgCode : null
      * isEnterprise : null
-     * jobTittle : 高级维修工程师招聘
-     * contactPhone : 1355555555
+     * jobTittle : 司机
+     * contactPhone : 13886943851
+     * age : null
      */
 
+    private String birthday;
+    private String sex_dictText;
     private String gpsId;
     private String city;
+    private String isReady;
     private String recruitType_dictText;
-    private String compamyAddress;
+    private String cateName;
     private String content;
     private String isPerson;
     private String price_dictText;
     private String orderTime;
     private String updateBy;
-    private Double price;
+    private int price;
     private String isOn;
-    private Double jobEx;
+    private int jobEx;
     private String company;
     private String id;
-    private String jobType_dictText;
     private String isTop_dictText;
-    private String jobType;
-    private Object gpsLon;
+    private String gpsLon;
     private String contactName;
     private String recruitType;
+    private String sex;
+    private String jobEx_dictText;
+    private String isReady_dictText;
     private String updateTime;
-    private Integer needNumber;
+    private int needNumber;
     private String jobAddress;
     private String createBy;
     private String createTime;
+    private String cateId;
     private String isTop;
-    private Object gpsLat;
-    private Object sysOrgCode;
-    private Object isEnterprise;
+    private String companyAddress;
+    private String gpsLat;
+    private String sysOrgCode;
+    private String isEnterprise;
     private String jobTittle;
     private String contactPhone;
     private boolean isSelect;
@@ -79,6 +94,15 @@ public class RecruitData  implements Serializable {
     public void setSelect(boolean select) {
         isSelect = select;
     }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public String getSex_dictText() {
+        return TextUtils.isEmpty(sex_dictText)?"男":sex_dictText;
+    }
+
     public String getGpsId() {
         return gpsId;
     }
@@ -87,12 +111,16 @@ public class RecruitData  implements Serializable {
         return TextUtils.isEmpty(city)?"广州":city;
     }
 
+    public String getIsReady() {
+        return isReady;
+    }
+
     public String getRecruitType_dictText() {
         return recruitType_dictText;
     }
 
-    public String getCompamyAddress() {
-        return compamyAddress;
+    public String getCateName() {
+        return cateName;
     }
 
     public String getContent() {
@@ -115,7 +143,7 @@ public class RecruitData  implements Serializable {
         return updateBy;
     }
 
-    public Double getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -123,7 +151,7 @@ public class RecruitData  implements Serializable {
         return isOn;
     }
 
-    public Double getJobEx() {
+    public int getJobEx() {
         return jobEx;
     }
 
@@ -135,20 +163,12 @@ public class RecruitData  implements Serializable {
         return id;
     }
 
-    public String getJobType_dictText() {
-        return jobType_dictText;
-    }
-
     public String getIsTop_dictText() {
         return isTop_dictText;
     }
 
-    public String getJobType() {
-        return jobType;
-    }
-
-    public Object getGpsLon() {
-        return gpsLon;
+    public Double getGpsLon() {
+        return TextUtils.isEmpty(gpsLon)?0.0d:Double.valueOf(gpsLon);
     }
 
     public String getContactName() {
@@ -159,11 +179,23 @@ public class RecruitData  implements Serializable {
         return recruitType;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public String getJobEx_dictText() {
+        return jobEx_dictText;
+    }
+
+    public String getIsReady_dictText() {
+        return isReady_dictText;
+    }
+
     public String getUpdateTime() {
         return updateTime;
     }
 
-    public Integer getNeedNumber() {
+    public int getNeedNumber() {
         return needNumber;
     }
 
@@ -179,19 +211,27 @@ public class RecruitData  implements Serializable {
         return createTime;
     }
 
+    public String getCateId() {
+        return cateId;
+    }
+
     public String getIsTop() {
         return isTop;
     }
 
-    public Object getGpsLat() {
-        return gpsLat;
+    public String getCompanyAddress() {
+        return companyAddress;
     }
 
-    public Object getSysOrgCode() {
+    public Double getGpsLat() {
+        return TextUtils.isEmpty(gpsLat)?0.0d:Double.valueOf(gpsLat);
+    }
+
+    public String getSysOrgCode() {
         return sysOrgCode;
     }
 
-    public Object getIsEnterprise() {
+    public String getIsEnterprise() {
         return isEnterprise;
     }
 

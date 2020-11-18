@@ -61,9 +61,9 @@ interface AppService {
 
     /**
      * 租赁机械表-分页列表查询
-     * 出售求购
+     * 出售 求购
      */
-    @GET("/jeecg-boot/market/mecMarketMechanics/list")
+    @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
     fun getMyBusinessList(
         @Header("X-Access-Token")token:String?,
         @Query("bussiessType") bussiessType: Int,
@@ -102,6 +102,128 @@ interface AppService {
     ):Observable<NetData>
 
 
+
+    /**
+     * 买卖机械表-分页列表查询
+     * 刷新
+     */
+    @POST("/jeecg-boot/market/mecMarketOldMechanics/refresh")
+    fun getRefreshBusiness(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+    /**
+     * 买卖机械表-分页列表查询
+     * 下架\ 上架
+     */
+    @POST("/jeecg-boot/market/mecMarketOldMechanics/edit")
+    fun editBusiness(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+
+    /**
+     * 买卖机械表-分页列表查询
+     * 删除
+     */
+    @POST("/jeecg-boot/market/mecMarketOldMechanics/delete")
+    fun delBusiness(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+
+
+    /**
+     * 租赁配件-分页列表查询
+     * 出租 求租
+     * bussiessType 1出租2求租
+     */
+    @GET("/jeecg-boot/market/mecMarketParts/list")
+    fun getReleasePartsList(
+        @Header("X-Access-Token")token:String?,
+        @Query("bussiessType") bussiessType: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<PartsBean>
+
+
+    /**
+     * 配件机械表-分页列表查询
+     * 刷新
+     */
+    @POST("/jeecg-boot/market/mecMarketParts/refresh")
+    fun refreshParts(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+    /**
+     * 配件机械表-分页列表查询
+     * 下架\ 上架
+     */
+    @POST("/jeecg-boot/market/mecMarketParts/edit")
+    fun editParts(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+
+    /**
+     * 配件机械表-分页列表查询
+     * 删除
+     */
+    @POST("/jeecg-boot/market/mecMarketParts/delete")
+    fun delParts(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+
+
+
+    /**
+     * 求职招聘-分页列表查询
+     * 求职招聘
+     * bussiessType 1出租2求租
+     */
+    @GET("/jeecg-boot/market/mecMarketRecruit/list")
+    fun getReleaseWorkList(
+        @Header("X-Access-Token")token:String?,
+        @Query("bussiessType") bussiessType: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<RecruitBean>
+
+
+    /**
+     * 求职招聘-分页列表查询
+     * 刷新
+     */
+    @POST("/jeecg-boot/market/mecMarketRecruit/refresh")
+    fun refreshWork(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+    /**
+     * 求职招聘-分页列表查询
+     * 下架\ 上架
+     */
+    @POST("/jeecg-boot/market/mecMarketRecruit/edit")
+    fun editWork(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+
+    /**
+     * 求职招聘-分页列表查询
+     * 删除
+     */
+    @POST("/jeecg-boot/market/mecMarketRecruit/delete")
+    fun delWork(
+        @Header("X-Access-Token")token:String?,
+        @Body body: ReMyRelease
+    ):Observable<NetData>
+
+
+
+
     /**
      * 租赁配件-分页列表查询
      * 出租 求租
@@ -131,6 +253,7 @@ interface AppService {
         @Query("cateId") cateId: String?,
         @Query("modelId") modelId: String?
     ):Observable<MoreBusinessData>
+
 
 
     /**
@@ -385,4 +508,65 @@ interface AppService {
 
 
 
+    /**
+     * 租赁机械表-分页列表查询
+     * 我的查看
+     */
+    @GET("/jeecg-boot/my/mecMyViewed/appQueryPageList_Machine")
+    fun getLookLeaseList(
+        @Header("X-Access-Token")token:String?,
+        @Query("type") type: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<MoreLeaseData>
+
+
+    /**
+     * 租赁机械表-分页列表查询
+     * wo de 地址
+     */
+    @GET("/jeecg-boot/my/mecMyViewed/appQueryPageList_Machine")
+    fun getAddressList(
+        @Header("X-Access-Token")token:String?,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<NetData>
+
+    /**
+     * 租赁机械表-分页列表查询
+     * 获取我的积分
+     */
+    @GET("/jeecg-boot/market/mecMarketPoints/getAuthPoints")
+    fun getIntegral(
+        @Header("X-Access-Token")token:String?
+    ):Observable<IntegralBean>
+
+    /**
+     * 租赁机械表-分页列表查询
+     * 获取我的积分列表
+     */
+    @GET("/jeecg-boot/market/mecMarketPointsLog/list")
+    fun getIntegralList(
+        @Header("X-Access-Token")token:String?,
+    @Query("pageNo") pageNo: Int,
+    @Query("pageSize") pageSize: Int
+    ):Observable<IntegralListBean>
+
+    /**
+     * 签到
+     */
+    @GET("/jeecg-boot/market/mecMarketPoints/signInMarketAuthPoints")
+    fun signIntegral(
+        @Header("X-Access-Token")token:String?
+    ):Observable<NetData>
+
+
+    /**
+     * 提交个人认证
+     */
+    @POST("/jeecg-boot/market/mecUserApprove/add")
+    fun submitPerson(
+        @Header("X-Access-Token")token:String?,
+        @Body rePersonCer: RePersonCer
+    ):Observable<NetData>
 }

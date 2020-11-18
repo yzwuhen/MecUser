@@ -6,26 +6,40 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.amap.api.location.CoordinateConverter
+import com.bumptech.glide.Glide
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.GoodsData
 import com.example.mechanicalapp.ui.data.PartsData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.*
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.iv_pic
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.iv_qy
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.iv_sr
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_address_data
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_del
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_distance
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_down
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_refresh
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_rent
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_time
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.tv_title
 import kotlinx.android.synthetic.main.item_release_parts.view.*
 
-
-class ReleasePartsAdapter(
+class ReleasePartsAskAdapter (
     var mContext: Context,
     var mList: MutableList<PartsData>,
     var mOnItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ReleasePartsVh(
-            LayoutInflater.from(mContext).inflate(R.layout.item_release_parts, parent, false),
+
+        return ReleaseGoodsAskVh(
+            LayoutInflater.from(mContext).inflate(R.layout.item_release_goods_ask, parent, false),
             mOnItemClickListener
         )
     }
@@ -52,7 +66,7 @@ class ReleasePartsAdapter(
 
 
 
-        if (mList[position].isPerson == 1) {
+        if (mList[position].isPerson ==1) {
             holder.itemView.iv_sr.visibility = View.VISIBLE
         } else {
             holder.itemView.iv_sr.visibility = View.GONE
@@ -83,35 +97,20 @@ class ReleasePartsAdapter(
         return mList.size
     }
 
-
-    class ReleasePartsVh(itemView: View, mOnItemClickListener: OnItemClickListener) :
+    class ReleaseGoodsAskVh(itemView: View, mOnItemClickListener: OnItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener(View.OnClickListener {
                 mOnItemClickListener.onItemClick(
-                    itemView.item_root,
+                    itemView,
                     adapterPosition
                 )
             })
-            itemView.tv_del.setOnClickListener(View.OnClickListener {
-                mOnItemClickListener.onItemClick(
-                    itemView.tv_del,
-                    adapterPosition
-                )
-            })
-            itemView.tv_refresh.setOnClickListener(View.OnClickListener {
-                mOnItemClickListener.onItemClick(
-                    itemView.tv_refresh,
-                    adapterPosition
-                )
-            })
-            itemView.tv_down.setOnClickListener(View.OnClickListener {
-                mOnItemClickListener.onItemClick(
-                    itemView.tv_down,
-                    adapterPosition
-                )
-            })
+            itemView.tv_del.setOnClickListener(View.OnClickListener {  mOnItemClickListener.onItemClick(itemView.tv_del,adapterPosition) })
+            itemView.tv_refresh.setOnClickListener(View.OnClickListener {  mOnItemClickListener.onItemClick(itemView.tv_refresh,adapterPosition) })
+            itemView.tv_down.setOnClickListener(View.OnClickListener {  mOnItemClickListener.onItemClick(itemView.tv_down,adapterPosition) })
 
+            itemView.iv_phone.setOnClickListener(View.OnClickListener {  mOnItemClickListener.onItemClick(itemView.iv_phone,adapterPosition) })
         }
     }
 }

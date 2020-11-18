@@ -60,8 +60,8 @@ class MyReleaseAsk(var type: Int) : BaseCusFragment(), OnItemClickListener, PopU
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable = true
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     private fun showPop(position: Int) {

@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
 import android.content.Context
+import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
@@ -84,7 +85,7 @@ class MyReleasePresenterImpl(
     }
 
     //编辑 下架重新上架
-    fun editLease(id: String,isOn:String) {
+    fun editLease(id: String, isOn: String) {
         baseView.showLoading()
         baseModel.editLease(
             App.getInstance().token,
@@ -124,8 +125,6 @@ class MyReleasePresenterImpl(
                 }
             })
     }
-
-
 
 
     //出售 求购
@@ -168,6 +167,279 @@ class MyReleasePresenterImpl(
                 }
             })
 
+    }
+
+
+    fun refreshBusiness(id: String) {
+        baseView.showLoading()
+        baseModel.refreshBusiness(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    //编辑 下架重新上架
+    fun editBusiness(id: String, isOn: String) {
+        baseView.showLoading()
+        baseModel.editBusiness(
+            App.getInstance().token,
+            id,
+            isOn,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    fun delBusiness(id: String) {
+        baseView.showLoading()
+        baseModel.delBusiness(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+
+    fun getPartsList(type: Int) {
+        baseView.showLoading()
+        baseModel.getPartsList(
+            App.getInstance().token,
+            type,
+            page,
+            pageSize,
+            object : ISubscriberListener<PartsBean> {
+                override fun onNext(t: PartsBean?) {
+                    if (t?.code == 200 && t?.result != null) {
+                        if (page == 0) {
+                            t?.result?.records?.let {
+                                (baseView as MyReleaseView<PartsData>)?.refreshUI(
+                                    it
+                                )
+                            }
+                        } else {
+                            t?.result?.records?.let {
+                                (baseView as MyReleaseView<PartsData>)?.loadMore(
+                                    it
+                                )
+                            }
+                        }
+
+                    } else {
+                        (baseView as MyReleaseView<PartsData>)?.refreshUI(null)
+                    }
+                    page++
+                }
+
+                override fun onError(e: Throwable?) {
+                    Log.e(":sssss","ssssssssss$e")
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
+    }
+
+
+    fun refreshParts(id: String) {
+        baseView.showLoading()
+        baseModel.refreshParts(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    //编辑 下架重新上架
+    fun editParts(id: String, isOn: String) {
+        baseView.showLoading()
+        baseModel.editParts(
+            App.getInstance().token,
+            id,
+            isOn,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    fun delParts(id: String) {
+        baseView.showLoading()
+        baseModel.delParts(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    fun getWorkList(type: Int) {
+        baseView.showLoading()
+        baseModel.getWorkList(
+            App.getInstance().token,
+            type,
+            page,
+            pageSize,
+            object : ISubscriberListener<RecruitBean> {
+                override fun onNext(t: RecruitBean?) {
+                    if (t?.code == 200 && t?.result != null) {
+                        if (page == 0) {
+                            t?.result?.records?.let {
+                                (baseView as MyReleaseView<RecruitData>)?.refreshUI(
+                                    it
+                                )
+                            }
+                        } else {
+                            t?.result?.records?.let {
+                                (baseView as MyReleaseView<RecruitData>)?.loadMore(
+                                    it
+                                )
+                            }
+                        }
+
+                    } else {
+                        (baseView as MyReleaseView<RecruitData>)?.refreshUI(null)
+                    }
+                    page++
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
+    }
+
+
+    fun refreshWork(id: String) {
+        baseView.showLoading()
+        baseModel.refreshWork(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    //编辑 下架重新上架
+    fun editWork(id: String, isOn: String) {
+        baseView.showLoading()
+        baseModel.editWork(
+            App.getInstance().token,
+            id,
+            isOn,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    fun delWork(id: String) {
+        baseView.showLoading()
+        baseModel.delWork(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MyReleaseView<NetData>)?.showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
     }
 
 

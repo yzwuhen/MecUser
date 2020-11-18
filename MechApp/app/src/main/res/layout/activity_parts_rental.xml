@@ -45,7 +45,7 @@
                     style="@style/tv_style_left"
                     android:text="适合机型" />
 
-                <EditText
+                <TextView
                     android:hint="请填写适合得机型"
                     android:id="@+id/et_ec_type"
                     style="@style/et_style" />

@@ -7,13 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.activity.JobWantDetails
-import com.example.mechanicalapp.ui.adapter.ReleaseJobWantAdapter
+import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
+import com.example.mechanicalapp.ui.adapter.ReleasePartsAskAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.data.GoodsData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.RecruitData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.PartsData
 import com.example.mechanicalapp.ui.mvp.impl.MyReleasePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.MyReleaseView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -23,26 +22,24 @@ import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
 
 
-class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewListener,
-    View.OnClickListener, MyReleaseView<RecruitData> {
+class ReleasePartsAsk : BaseCusFragment(), OnItemClickListener, PopUtils.onViewListener,
+    View.OnClickListener, MyReleaseView<PartsData> {
+
     private var popInfo: TextView? = null
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
     private var mPopwindow: PopupWindow? = null
-
-    private var mAdapter: ReleaseJobWantAdapter? = null
-    var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
+    private var mAdapter: ReleasePartsAskAdapter? = null
+    var mList: MutableList<PartsData> = ArrayList<PartsData>()
 
     private var mPosition: Int = 0
 
+
     override fun initView() {
         super.initView()
-
-        mAdapter = ReleaseJobWantAdapter(mContext, mList, this)
+        mAdapter = ReleasePartsAskAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
-
-
         spring_list.type = SpringView.Type.FOLLOW
         spring_list.header = RefreshHeaderUtils.getHeaderView(mContext)
         spring_list.footer = RefreshHeaderUtils.getFooterView(mContext)
@@ -50,22 +47,21 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as MyReleasePresenterImpl).resetPage()
-                (mPresenter as MyReleasePresenterImpl).getWorkList(1)
+                (mPresenter as MyReleasePresenterImpl).getPartsList(1)
             }
 
             override fun onLoadmore() {
-                (mPresenter as MyReleasePresenterImpl).getWorkList(1)
+                (mPresenter as MyReleasePresenterImpl).getPartsList(1)
             }
         })
 
 
         mPresenter = MyReleasePresenterImpl(mContext, this)
-        (mPresenter as MyReleasePresenterImpl).getWorkList(1)
-
+        (mPresenter as MyReleasePresenterImpl).getPartsList(1)
     }
 
     fun closeRefreshView() {
-        spring_list?.isEnable = true
+        spring_list?.isEnable=true
         spring_list?.onFinishFreshAndLoad()
     }
 
@@ -97,15 +93,16 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
     }
 
     override fun onItemClick(view: View, position: Int) {
-
         when (view?.id) {
             R.id.item_root -> {
-                jumpActivity(null, JobWantDetails::class.java)
+
+                jumpActivity(null, PartsAskDetailsActivity::class.java)
             }
             R.id.tv_del -> showPop(position)
             R.id.tv_refresh -> refreshItem(position)
             R.id.tv_down -> offDown(position)
         }
+
     }
 
     override fun getView(view: View?) {
@@ -124,7 +121,7 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
 
             R.id.tv_pop_sure -> activity?.let {
                 PopUtils.dismissPop(it)
-                (mPresenter as MyReleasePresenterImpl).delWork(mList[mPosition].id)
+                (mPresenter as MyReleasePresenterImpl).delParts(mList[mPosition].id)
             }
             R.id.tv_pop_cancel -> activity?.let { PopUtils.dismissPop(it) }
 
@@ -132,16 +129,16 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
     }
 
     private fun offDown(position: Int) {
-        if (mList[position].isOn == "1") {
-            (mPresenter as MyReleasePresenterImpl).editWork(mList[position].id, "2")
+        if (mList[position].isOn == 1) {
+            (mPresenter as MyReleasePresenterImpl).editParts(mList[position].id, "2")
         } else {
             //重新上架
-            (mPresenter as MyReleasePresenterImpl).editWork(mList[position].id, "1")
+            (mPresenter as MyReleasePresenterImpl).editParts(mList[position].id, "1")
         }
     }
 
     private fun refreshItem(position: Int) {
-        (mPresenter as MyReleasePresenterImpl).refreshWork(mList[position].id)
+        (mPresenter as MyReleasePresenterImpl).refreshParts(mList[position].id)
     }
 
     override fun showLoading() {
@@ -156,7 +153,7 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
     override fun err() {
     }
 
-    override fun refreshUI(list: List<RecruitData>?) {
+    override fun refreshUI(list: List<PartsData>?) {
         mList.clear()
         if (list != null) {
             mList.addAll(list)
@@ -164,7 +161,7 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun loadMore(list: List<RecruitData>?) {
+    override fun loadMore(list: List<PartsData>?) {
         if (list != null) {
             mList.addAll(list)
             mAdapter?.notifyDataSetChanged()

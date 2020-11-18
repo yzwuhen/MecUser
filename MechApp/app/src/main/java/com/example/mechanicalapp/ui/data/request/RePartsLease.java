@@ -60,6 +60,24 @@ public class RePartsLease {
     private String title;
     private String updateBy;
     private String updateTime;
+    private String cateName;
+    private String cateId;
+
+    public String getCateName() {
+        return cateName;
+    }
+
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
+    }
+
+    public String getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(String cateId) {
+        this.cateId = cateId;
+    }
 
     public String getAddress() {
         return address;

@@ -14,6 +14,11 @@ import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_release_ask.view.*
+import kotlinx.android.synthetic.main.item_release_ask.view.item_root
+import kotlinx.android.synthetic.main.item_release_ask.view.tv_del
+import kotlinx.android.synthetic.main.item_release_ask.view.tv_down
+import kotlinx.android.synthetic.main.item_release_ask.view.tv_rent
+import kotlinx.android.synthetic.main.item_release_goods_ask.view.*
 
 class ReleaseBuyAdapter(
     var mContext: Context,
@@ -53,7 +58,12 @@ class ReleaseBuyAdapter(
         } else {
             holder.itemView.iv_rent_sr.visibility = View.GONE
         }
-
+        //是否上架
+        if (mList[position].isOn == "1"){
+            holder.itemView.tv_down.text="下架"
+        }else{
+            holder.itemView.tv_down.text="重新上架"
+        }
         if (mList[position].priceUnit == "3") {
             holder.itemView.tv_rent_price.visibility = View.VISIBLE
             holder.itemView.tv_rent.visibility = View.GONE

@@ -1,32 +1,47 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.request.RePersonCer
+import com.example.mechanicalapp.ui.mvp.impl.PersonCerPresenter
+import com.example.mechanicalapp.ui.mvp.impl.UpdateFilePresenterImpl
+import com.example.mechanicalapp.ui.mvp.v.PersonCerView
 import com.example.mechanicalapp.utils.GlideEngine
 import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.StringUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
+import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.activity_person_certify.*
+import kotlinx.android.synthetic.main.activity_person_certify.tv_submit
 import kotlinx.android.synthetic.main.layout_title.*
 
-class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
+class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCerView, TextWatcher {
 
 
-    private var mButtDialog: BottomSheetDialog?=null
-    private var mDialogView:View ?= null
-    private var mDialogTv1: TextView?= null
-    private var mDialogTv2: TextView?= null
-    private var mDialogTv3: TextView?= null
+    private var mButtDialog: BottomSheetDialog? = null
+    private var mDialogView: View? = null
+    private var mDialogTv1: TextView? = null
+    private var mDialogTv2: TextView? = null
+    private var mDialogTv3: TextView? = null
 
-    private var type:Int =0
+    private var type: Int = 0
+    private var mRePersonCer = RePersonCer()
+
+    private var mUpFilePresenter: PersonCerPresenter? = null
 
     override fun getLayoutId(): Int {
 
@@ -42,30 +57,49 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
         tv_sketch.setOnClickListener(this)
         iv_positive_pic.setOnClickListener(this)
         iv_side_pic.setOnClickListener(this)
+        tv_man.setOnClickListener(this)
+        tv_woman.setOnClickListener(this)
+        tv_submit.setOnClickListener(this)
+
+        tv_man.isSelected = true
+        mRePersonCer.sex = "男"
+        et_user_name.addTextChangedListener(this)
+        et_user_code.addTextChangedListener(this)
     }
 
     override fun initPresenter() {
+        mUpFilePresenter = PersonCerPresenter(this, this)
     }
 
-    override fun showLoading() {
-    }
-
-    override fun hiedLoading() {
-    }
-
-    override fun err()  {
-    }
 
     override fun onClick(view: View?) {
 
-        when(view?.id){
-            R.id.iv_back->finish()
-            R.id.tv_sketch->jumpActivity(null,SketchActivity::class.java)
-            R.id.iv_positive_pic->showDialogType(0)
-            R.id.iv_side_pic->showDialogType(1)
-            R.id.tv_dialog_item1->setItem()
-            R.id.tv_dialog_item2->setItem()
-            R.id.tv_dialog_item3->mButtDialog?.dismiss()
+        when (view?.id) {
+            R.id.iv_back -> finish()
+            R.id.tv_sketch -> jumpActivity(null, SketchActivity::class.java)
+            R.id.iv_positive_pic -> showDialogType(0)
+            R.id.iv_side_pic -> showDialogType(1)
+            R.id.tv_man -> {
+                tv_man.isSelected = true
+                tv_woman.isSelected = false
+                mRePersonCer.sex = "男"
+            }
+            R.id.tv_woman -> {
+                tv_man.isSelected = false
+                tv_woman.isSelected = true
+                mRePersonCer.sex = "女"
+            }
+            R.id.tv_dialog_item1 -> setItem()
+            R.id.tv_dialog_item2 -> setItem()
+            R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
+            R.id.tv_submit->submit()
+        }
+    }
+
+    private fun submit() {
+
+        if (checkInfo()){
+            mUpFilePresenter?.submitPersonCer(mRePersonCer)
         }
     }
 
@@ -78,18 +112,18 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
         takePicture()
     }
 
-    private fun showDialogType(i:Int){
-        type =i
-        if (mButtDialog ==null){
+    private fun showDialogType(i: Int) {
+        type = i
+        if (mButtDialog == null) {
             mButtDialog = BottomSheetDialog(this)
-            mDialogView = View.inflate(this,R.layout.dialog_user_data_buttom,null)
+            mDialogView = View.inflate(this, R.layout.dialog_user_data_buttom, null)
             mButtDialog?.setContentView(mDialogView!!)
             mDialogTv1 = mDialogView?.findViewById(R.id.tv_dialog_item1)
             mDialogTv2 = mDialogView?.findViewById(R.id.tv_dialog_item2)
             mDialogTv3 = mDialogView?.findViewById(R.id.tv_dialog_item3)
         }
-            mDialogTv1?.text ="拍照"
-            mDialogTv2?.text ="从相册选择"
+        mDialogTv1?.text = "拍照"
+        mDialogTv2?.text = "从相册选择"
 
         mDialogTv1?.setOnClickListener(this)
         mDialogTv2?.setOnClickListener(this)
@@ -99,7 +133,6 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
     }
 
 
-
     private fun takePicture() {
         mButtDialog?.dismiss()
         PictureSelector.create(this)
@@ -107,17 +140,92 @@ class PersonalCertification:BaseActivity<NetData>(),View.OnClickListener {
             .imageEngine(GlideEngine.createGlideEngine())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
-                    // 结果回调
-                    if (type==0){
-                        ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_positive_pic,result[0]?.path,R.mipmap.user_default)
-                    }else{
-                        ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_side_pic,result[0]?.path,R.mipmap.user_default)
-                    }
-
+                    (mUpFilePresenter as PersonCerPresenter).upLoadFile(result[0]?.realPath.toString())
                 }
                 override fun onCancel() {
                     // 取消
                 }
             })
     }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        changeBtn()
+    }
+
+    private fun changeBtn() {
+        tv_submit.isSelected = checkInfo()
+    }
+
+
+    private fun checkInfo(): Boolean {
+
+        if (TextUtils.isEmpty(et_user_name.text.toString().trim())) {
+            return false
+        }
+        mRePersonCer.name = et_user_name.text.toString().trim()
+
+        if (TextUtils.isEmpty(et_user_code.text.toString().trim())) {
+            return false
+        }
+        mRePersonCer.idCard = et_user_code.text.toString().trim()
+
+        if (TextUtils.isEmpty(mRePersonCer.idCardBackPic)) {
+            return false
+        }
+
+        if (TextUtils.isEmpty(mRePersonCer.idCardFrontPi)) {
+            return false
+        }
+        return true
+    }
+
+    override fun success(netData: NetData?) {
+        ToastUtils.showText(netData?.message)
+        if (netData?.code==200){
+            finish()
+        }
+    }
+
+    override fun showImg(netData: NetData?) {
+        if (netData != null && netData.code == 200) {
+            changeBtn()
+            if (type == 0) {
+                ImageLoadUtils.loadImage(
+                    App.getInstance().applicationContext,
+                    iv_positive_pic,
+                    netData.message,
+                    R.mipmap.user_default
+                )
+                mRePersonCer.idCardFrontPi = netData.message
+            } else {
+                ImageLoadUtils.loadImage(
+                    App.getInstance().applicationContext,
+                    iv_side_pic,
+                    netData.message,
+                    R.mipmap.user_default
+                )
+                mRePersonCer.idCardBackPic = netData.message
+            }
+        }
+    }
+
+    override fun showLoading() {
+        showLoadView()
+    }
+
+    override fun hiedLoading() {
+        hideLoadingView()
+    }
+
+    override fun err() {
+    }
+
+
 }

@@ -22,12 +22,9 @@ class ModelImpl : BaseModel {
         appsService = appsApi?.service
     }
 
-
     override fun initRequest() {
 
-
     }
-
 
     fun getCode(code: String, iSubscriberListener: ISubscriberListener<CodeBean>) {
         appsService?.getCode(code)
@@ -273,5 +270,161 @@ class ModelImpl : BaseModel {
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+
+
+    fun refreshBusiness(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.getRefreshBusiness(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun editBusiness(token: String?,id: String,isOn:String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        body.isOn =isOn
+        appsService?.editBusiness(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+    fun delBusiness(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.delBusiness(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+    fun getPartsList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<PartsBean>){
+        appsService?.getReleasePartsList(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<PartsBean>(iSubscriberListener))
+    }
+
+    fun refreshParts(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.refreshParts(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun editParts(token: String?,id: String,isOn:String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        body.isOn =isOn
+        appsService?.editParts(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+    fun delParts(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.delParts(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+
+    fun getWorkList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<RecruitBean>){
+        appsService?.getReleaseWorkList(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<RecruitBean>(iSubscriberListener))
+    }
+
+    fun refreshWork(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.refreshWork(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun editWork(token: String?,id: String,isOn:String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        body.isOn =isOn
+        appsService?.editWork(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+    fun delWork(token: String?,id: String,iSubscriberListener: ISubscriberListener<NetData>){
+        var body=ReMyRelease()
+        body.id =id
+        appsService?.delWork(token,body)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
+
+    fun getLookLeaseList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MoreLeaseData>){
+        appsService?.getLookLeaseList(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
+    }
+    fun getAddressList(token: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.getAddressList(token,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+    fun getIntegral(token: String?, iSubscriberListener: ISubscriberListener<IntegralBean>) {
+
+        appsService?.getIntegral(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<IntegralBean>(iSubscriberListener))
+    }
+
+    fun getIntegralList(
+        token: String?,
+        page: Int,
+        pageSize: Int,
+        iSubscriberListener: ISubscriberListener<IntegralListBean>
+    ) {
+
+        appsService?.getIntegralList(token,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<IntegralListBean>(iSubscriberListener))
+    }
+
+    fun signIntegral(token: String?, iSubscriberListener: ISubscriberListener<NetData>) {
+
+        appsService?.signIntegral(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+    fun submitPerson(token: String?,mRePersonCer: RePersonCer, iSubscriberListener: ISubscriberListener<NetData>) {
+        appsService?.submitPerson(token,mRePersonCer)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+
     }
 }

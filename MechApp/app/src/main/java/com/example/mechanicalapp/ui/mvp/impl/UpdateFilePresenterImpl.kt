@@ -7,20 +7,20 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.ReleaseView
+import com.example.mechanicalapp.ui.mvp.v.UpLoadFileView
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
 
-class UpdateFilePresenterImpl(
+open class UpdateFilePresenterImpl(
     private var mContext: Context,
     private var baseView: BaseView<NetData>
 ) :
     BasePresenter {
 
-    private var baseModel = ModelImpl()
-
+    var baseModel = ModelImpl()
 
     override fun request() {
     }
@@ -28,25 +28,21 @@ class UpdateFilePresenterImpl(
     fun upLoadFile(fileUrl: String){
 
         val file: File = File(fileUrl)
-        Log.e("yz_mec", "$fileUrl======File---===========$file")
-        Log.e("yz_mec", "======File---===========${file.exists()}")
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
         baseView.showLoading()
         baseModel.upLoadFile(body, object : ISubscriberListener<NetData> {
             override fun onNext(t: NetData?) {
-                (baseView as ReleaseView<NetData>).showImg(t)
+                (baseView as UpLoadFileView).showImg(t)
             }
 
             override fun onError(e: Throwable?) {
-                Log.e("yz_mec", "=================$e")
-                (baseView as ReleaseView<NetData>).err()
+                (baseView as UpLoadFileView).err()
             }
 
             override fun onCompleted() {
                 baseView.hiedLoading()
-                Log.v("yz_mec","===================onCompleted========")
             }
         })
     }

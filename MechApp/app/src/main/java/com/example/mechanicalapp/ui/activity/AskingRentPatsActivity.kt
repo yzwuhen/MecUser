@@ -51,15 +51,15 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
         tv_way.setOnClickListener(this)
         ly_address.setOnClickListener(this)
         tv_submit.setOnClickListener(this)
-
+        ly_ec_type.setOnClickListener(this)
 
 
         mReBean.bussiessType = 2
         mPresenter = AddManagePresenterImpl(this, this)
-
+        (mPresenter as AddManagePresenterImpl).getBillMethod()
         et_parts_name.addTextChangedListener(this)
-        et_ec_type.addTextChangedListener(this)
-        et_ec_type.addTextChangedListener(this)
+//        et_ec_type.addTextChangedListener(this)
+//        et_ec_type.addTextChangedListener(this)
         et_parts_brand.addTextChangedListener(this)
         et_parts_model.addTextChangedListener(this)
         et_way.addTextChangedListener(this)
@@ -97,6 +97,13 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
         when (v?.id) {
             R.id.iv_back -> finish()
             R.id.tv_way -> showInput()
+            R.id.ly_ec_type->{
+                jumpActivityForResult(
+                    Configs.EC_TYPE_RESULT_CODE,
+                    1,
+                    EcType::class.java
+                )
+            }
             R.id.ly_address -> jumpActivityForResult(
                 Configs.ADDRESS_RESULT_CODE,
                 1,
@@ -148,6 +155,10 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
                     data?.getDoubleExtra(Configs.CITY_LOT, 0.0)
                 )
             }
+        }else if (requestCode ==Configs.EC_TYPE_RESULT_CODE ){
+            et_ec_type.text = data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
+            mReBean.cateName = data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
+            mReBean.cateId = data?.getStringExtra(Configs.SCREEN_RESULT_ID)
         }
         super.onActivityResult(requestCode, resultCode, data)
 

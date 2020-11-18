@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecBuyData
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
 import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_search_all_result.*
 class SearchBuy : BaseCusFragment(), OnItemClickListener, MecBuyView<NetData> {
 
 
-    var mList: MutableList<MecBuyData> = ArrayList<MecBuyData>()
+    var mList: MutableList<MecSellData> = ArrayList<MecSellData>()
     private var mAdapter: BossBuyAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -65,14 +66,14 @@ class SearchBuy : BaseCusFragment(), OnItemClickListener, MecBuyView<NetData> {
         jumpActivity(bundle, AskDetailsActivity::class.java)
     }
 
-    override fun refreshUI(list: List<MecBuyData>) {
+    override fun refreshUI(list: List<MecSellData>) {
         mList.clear()
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
 
     }
 
-    override fun loadMore(list: List<MecBuyData>) {
+    override fun loadMore(list: List<MecSellData>) {
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }

@@ -4,20 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
+    android:paddingTop="@dimen/dp_17"
     android:backgroundTint="@color/white">
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@color/item_tv_date"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_17"
-        android:text="2020-05-05"
-        android:textColor="@color/color_9a"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:layout_marginTop="@dimen/dp_17"
@@ -81,6 +70,16 @@
         app:layout_constraintTop_toTopOf="@+id/tv_rent_address_data" />
 
     <TextView
+        android:id="@+id/tv_rent"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥1000/月"
+        android:textColor="#FC3D38"
+        android:textSize="13sp"
+        app:layout_constraintTop_toTopOf="@+id/tv_rent_address_data"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
         android:id="@+id/tv_rent_equipment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +119,7 @@
         android:layout_width="0dp"
         android:layout_height="6dp"
         android:layout_marginTop="10dp"
-        android:background="#EEEEEE"
+        android:background="@color/bg_color"
         app:layout_constraintEnd_toEndOf="@+id/iv_rent_sr"
         app:layout_constraintStart_toStartOf="@+id/iv_pic"
         app:layout_constraintTop_toBottomOf="@+id/tv_rent_distance" />

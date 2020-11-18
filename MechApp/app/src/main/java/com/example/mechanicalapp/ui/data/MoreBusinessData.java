@@ -37,7 +37,7 @@ public class MoreBusinessData extends NetData {
         private Boolean hitCount;
         private Boolean searchCount;
         private Integer pages;
-        private List<MecBuyData> records;
+        private List<MecSellData> records;
 
         public Integer getTotal() {
             return total;
@@ -67,7 +67,7 @@ public class MoreBusinessData extends NetData {
             return pages;
         }
 
-        public List<MecBuyData> getRecords() {
+        public List<MecSellData> getRecords() {
             return records;
         }
     }

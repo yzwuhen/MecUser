@@ -441,6 +441,10 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         }
     }
 
+    override fun uploadFail(str: String) {
+        ToastUtils.showText(str)
+    }
+
     override fun showSuccess(netData: NetData?) {
 
         ToastUtils.showText(netData?.message)

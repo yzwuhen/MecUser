@@ -11,5 +11,5 @@ interface HomeBaseView<NetData> : BaseView<NetData> {
     fun showLease(list: List<MecLeaseData>)//出租
     fun showUserRent(list: List<MecLeaseData>)//求租
     fun showBossSell(list: List<MecSellData>)//出售
-    fun showBossBuy(list: List<MecBuyData>)//求购
+    fun showBossBuy(list: List<MecSellData>)//求购
 }

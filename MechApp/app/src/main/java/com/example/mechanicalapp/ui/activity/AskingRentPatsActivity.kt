@@ -183,6 +183,10 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
 
     }
 
+    override fun uploadFail(str: String) {
+        ToastUtils.showText(str)
+    }
+
     override fun showSuccess(netData: NetData?) {
         ToastUtils.showText(netData?.message)
         if (netData?.code == 200) {

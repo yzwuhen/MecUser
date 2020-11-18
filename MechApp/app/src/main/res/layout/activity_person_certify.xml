@@ -28,6 +28,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="请输入真实姓名"
+            android:paddingLeft="@dimen/dp_10"
             android:textColor="@color/color_222"
             android:textColorHint="#cacaca"
             android:textSize="16sp"
@@ -56,6 +57,7 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:hint="请输入身份证号码"
+            android:paddingLeft="@dimen/dp_10"
             android:textColor="@color/color_222"
             android:textColorHint="#cacaca"
             android:textSize="16sp"
@@ -140,7 +142,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_certify"
             android:layout_width="179dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/take_picture_add"/>
+            android:src="@mipmap/cer_pic_add"/>
 
         <ImageView
             android:id="@+id/iv_side_pic"
@@ -149,7 +151,7 @@
             android:layout_marginRight="@dimen/dp_17"
             android:layout_width="179dp"
             android:layout_height="wrap_content"
-            android:src="@mipmap/take_picture_add"/>
+            android:src="@mipmap/cer_pic_add"/>
 
         <TextView
             android:layout_width="179dp"

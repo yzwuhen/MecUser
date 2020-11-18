@@ -5,12 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.amap.api.location.CoordinateConverter.calculateLineDistance
 import com.bumptech.glide.Glide
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_look_lease.view.*
 
-class LookLeaseAdapter (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LookLeaseAdapter (var mContext: Context, var mList:MutableList<MecLeaseData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -19,12 +26,41 @@ class LookLeaseAdapter (var mContext: Context, var mList:MutableList<String>, va
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (position%3==0){
-            holder.itemView.tv_date.visibility =View.VISIBLE
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,
+            StringUtils.getImgStr(mList[position].pic),R.mipmap.ic_launcher)
+
+        holder.itemView.tv_title.text =mList[position].tittle
+
+        holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].facDate}"
+
+        holder.itemView.tv_distance.text="距离：${StringUtils.getDistance(calculateLineDistance(
+            App.getInstance().thisPoint ,
+            GdMapUtils.getPoint(mList[position].gpsLat,mList[position].gpsLon)))}km"
+
+        if (mList[position].isNew == "1"){
+            holder.itemView.tv_label.visibility=View.VISIBLE
         }else{
-            holder.itemView.tv_date.visibility =View.GONE
+            holder.itemView.tv_label.visibility=View.GONE
         }
-        Glide.with(mContext).load("https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723").into(  holder.itemView.iv_pic);
+
+        if (mList[position].isPerson == "1"){
+            holder.itemView.iv_sr.visibility=View.VISIBLE
+        }else{
+            holder.itemView.iv_sr.visibility=View.GONE
+        }
+
+
+        if (mList[position].isEnterprise == "1"){
+            holder.itemView.iv_qy.visibility=View.VISIBLE
+        }else{
+            holder.itemView.iv_qy.visibility=View.GONE
+        }
+        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}"
+
+        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
+
+        holder.itemView.tv_time.text= DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
+
     }
 
     override fun getItemCount(): Int {

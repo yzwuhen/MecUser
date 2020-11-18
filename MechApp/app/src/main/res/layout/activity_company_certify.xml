@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="请输入公司名称"
+                android:paddingLeft="@dimen/dp_10"
                 android:textColor="@color/color_222"
                 android:textColorHint="#cacaca"
                 android:textSize="16sp" />
@@ -61,6 +62,7 @@
                 android:background="@null"
                 android:hint="请输入真实姓名"
                 android:textColor="@color/color_222"
+                android:paddingLeft="@dimen/dp_10"
                 android:textColorHint="#cacaca"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -86,9 +88,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="请输入身份证号码"
+                android:hint="请输入社会信用代码"
                 android:textColor="@color/color_222"
                 android:textColorHint="#cacaca"
+                android:paddingLeft="@dimen/dp_10"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -116,6 +119,7 @@
                 android:background="@null"
                 android:hint="请输入公司地址"
                 android:textColor="@color/color_222"
+                android:paddingLeft="@dimen/dp_10"
                 android:textColorHint="#cacaca"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -156,7 +160,7 @@
                 android:id="@+id/iv_positive_pic"
                 android:layout_width="179dp"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/take_picture_add"
+                android:src="@mipmap/cer_pic_add"
                 app:layout_constraintStart_toStartOf="@+id/tv_certify"
                 app:layout_constraintTop_toBottomOf="@+id/tv_certify" />
 
@@ -165,7 +169,7 @@
                 android:layout_width="179dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/dp_17"
-                android:src="@mipmap/take_picture_add"
+                android:src="@mipmap/cer_pic_add"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_certify" />
 
@@ -198,7 +202,7 @@
                 android:layout_height="216dp"
                 android:layout_marginTop="60dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/take_picture_add"
+                android:src="@mipmap/add_pic_n"
                 app:layout_constraintStart_toStartOf="@+id/iv_positive_pic"
                 app:layout_constraintTop_toBottomOf="@+id/iv_positive_pic" />
 

@@ -7,20 +7,23 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.UserDemandAdapter
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
+import com.example.mechanicalapp.ui.adapter.HomeDemandAdapter
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import kotlinx.android.synthetic.main.layout_user_demand.view.*
 
+/**
+ * 首页 间距比较小的
+ */
 class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener,View.OnClickListener {
 
-    var mAdapter: UserDemandAdapter? = null
+    var mAdapter: HomeDemandAdapter? = null
     private var mRentAdapter :UserRentAdapter ?=null
     private var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
     private var mRentList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
@@ -31,7 +34,7 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
         addView(view)
 
 
-        mAdapter = UserDemandAdapter(mContext, mLeaseList, 0,this)
+        mAdapter = HomeDemandAdapter(mContext, mLeaseList, 0,this)
 
         mRentAdapter = UserRentAdapter(mContext,mRentList,this)
 

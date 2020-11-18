@@ -378,11 +378,11 @@ class ModelImpl : BaseModel {
 
 
 
-    fun getLookLeaseList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MoreLeaseData>){
+    fun getLookLeaseList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MyLookLeaseBean>){
         appsService?.getLookLeaseList(token,type,page,pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<MyLookLeaseBean>(iSubscriberListener))
     }
     fun getAddressList(token: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<NetData>){
         appsService?.getAddressList(token,page,pageSize)
@@ -420,8 +420,8 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
-    fun submitPerson(token: String?,mRePersonCer: RePersonCer, iSubscriberListener: ISubscriberListener<NetData>) {
-        appsService?.submitPerson(token,mRePersonCer)
+    fun submitCer(token: String?, mRePersonCer: ReCer, iSubscriberListener: ISubscriberListener<NetData>) {
+        appsService?.submitCer(token,mRePersonCer)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))

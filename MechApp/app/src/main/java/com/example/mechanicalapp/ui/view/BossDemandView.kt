@@ -24,7 +24,7 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
 
     private var mAdapter: BossSellAdapter? = null
     private var mBuyAdapter: BossBuyAdapter? = null
-    var mList: MutableList<MecBuyData> = ArrayList<MecBuyData>()
+    var mList: MutableList<MecSellData> = ArrayList<MecSellData>()
     var mSellList: MutableList<MecSellData> = ArrayList<MecSellData>()
     var type: Int = 0
 
@@ -127,7 +127,7 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
 
     }
 
-    fun setBuy(list: List<MecBuyData>) {
+    fun setBuy(list: List<MecSellData>) {
         mList.clear()
         mList.addAll(list)
         mBuyAdapter?.notifyDataSetChanged()

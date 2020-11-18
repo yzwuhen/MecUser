@@ -37,7 +37,7 @@ class MyLookActivity : BaseActivity<NetData>(), View.OnClickListener ,ViewPager.
     }
     override fun initView() {
         super.initView()
-        tv_title.text ="我最近查看过得"
+        tv_title.text ="我最近查看过的"
         iv_right.visibility =View.GONE
 
 

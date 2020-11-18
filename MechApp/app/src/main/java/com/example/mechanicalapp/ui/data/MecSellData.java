@@ -51,7 +51,7 @@ public class MecSellData {
     private Object orderTime;
     private String updateBy;
     private String briefDesc;
-    private Object price;
+    private String price;
     private String isOn;
     private String isNew_dictText;
     private String id;
@@ -96,7 +96,7 @@ public class MecSellData {
     }
 
     public String getPriceUnit_dictText() {
-        return priceUnit_dictText;
+        return TextUtils.isEmpty(priceUnit_dictText)?"元":priceUnit_dictText;
     }
 
     public String getModelId() {
@@ -104,7 +104,7 @@ public class MecSellData {
     }
 
     public String getCity() {
-        return city;
+        return TextUtils.isEmpty(city)?"广州":city;
     }
 
     public String getPic() {
@@ -135,8 +135,8 @@ public class MecSellData {
         return briefDesc;
     }
 
-    public Object getPrice() {
-        return price;
+    public String getPrice() {
+        return TextUtils.isEmpty(price)?"0":price;
     }
 
     public String getIsOn() {

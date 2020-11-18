@@ -95,7 +95,7 @@ public class MecLeaseData implements Serializable {
     }
 
     public String getPriceUnit_dictText() {
-        return priceUnit_dictText;
+        return TextUtils.isEmpty(priceUnit_dictText)?"元":priceUnit_dictText;
     }
 
     public void setPriceUnit_dictText(String priceUnit_dictText) {
@@ -119,7 +119,7 @@ public class MecLeaseData implements Serializable {
     }
 
     public String getCity() {
-        return TextUtils.isEmpty(city)?"":city;
+        return TextUtils.isEmpty(city)?"广州":city;
     }
 
     public void setCity(String city) {

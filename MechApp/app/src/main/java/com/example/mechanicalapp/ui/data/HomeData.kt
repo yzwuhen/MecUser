@@ -9,7 +9,7 @@ class HomeData : NetData() {
         val mecProds: List<HomePartsData>,
         val newMecMarketMechanicsIn: List<MecLeaseData>,//求租
         val newMecMarketMechanicsOut: List<MecLeaseData>,//出租
-        val newMecMarketOldMechanicsIn: List<MecBuyData>,//求购列表
+        val newMecMarketOldMechanicsIn: List<MecSellData>,//求购列表
         val newMecMarketOldMechanicsOut: List<MecSellData>//出售列表
     )
 

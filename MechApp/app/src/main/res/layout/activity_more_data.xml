@@ -67,7 +67,7 @@
                         style="@style/tv_screen_style"
                         android:layout_marginLeft="@dimen/dp_63"
                         android:drawableBottom="@drawable/tv_under_line"
-                        android:drawablePadding="@dimen/dp_10"
+                        android:drawablePadding="@dimen/dp_5"
                         android:gravity="center"
                         android:text="出租" />
 
@@ -77,7 +77,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp_63"
                         android:drawableBottom="@drawable/tv_under_line"
-                        android:drawablePadding="@dimen/dp_10"
+                        android:drawablePadding="@dimen/dp_5"
                         android:gravity="center"
                         android:text="求租" />
 

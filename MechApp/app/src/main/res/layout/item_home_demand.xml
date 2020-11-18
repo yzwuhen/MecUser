@@ -7,7 +7,6 @@
     android:background="@color/white"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/dp_17"
-    android:layout_marginBottom="@dimen/dp_5"
     android:paddingRight="@dimen/dp_17">
 
     <LinearLayout
@@ -157,5 +156,10 @@
         app:layout_constraintBottom_toBottomOf="@id/iv_pic"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

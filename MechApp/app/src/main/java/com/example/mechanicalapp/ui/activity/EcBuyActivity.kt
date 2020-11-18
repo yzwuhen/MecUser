@@ -234,6 +234,11 @@ class EcBuyActivity : BaseCusActivity(), View.OnClickListener,TextWatcher,
     override fun showImg(netData: NetData?) {
     }
 
+    override fun uploadFail(str: String) {
+
+        ToastUtils.showText(str)
+    }
+
     override fun showSuccess(netData: NetData?) {
         ToastUtils.showText(netData?.message)
         if (netData?.code==200){

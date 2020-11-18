@@ -172,7 +172,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         mBossDemandView?.setSell(list)
     }
 
-    override fun showBossBuy(list: List<MecBuyData>) {
+    override fun showBossBuy(list: List<MecSellData>) {
         mBossDemandView?.setBuy(list)
     }
 

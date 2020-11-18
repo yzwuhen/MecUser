@@ -9,28 +9,30 @@ import com.amap.api.location.CoordinateConverter
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.data.MecSellData
+import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
-import kotlinx.android.synthetic.main.item_boss_sell.view.*
+import kotlinx.android.synthetic.main.item_home_demand.view.*
 
-class BossSellAdapter (var mContext:Context, var mList:MutableList<MecSellData>, var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeDemandAdapter(var mContext: Context, var mList:MutableList<MecLeaseData>, var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var isShow:Boolean=false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return UserDemandVh(LayoutInflater.from(mContext).inflate(R.layout.item_boss_sell,parent,false),type,mOnItemClickListener)
+        return UserDemandVh(LayoutInflater.from(mContext).inflate(R.layout.item_home_demand,parent,false),type,mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         if (isShow){
-            holder.itemView.ly_check.visibility =View.VISIBLE
+            holder.itemView.ly_check.visibility = View.VISIBLE
+
+            holder.itemView.iv_check.isSelected =mList[position].isSelect
         }else{
-            holder.itemView.ly_check.visibility =View.GONE
+            holder.itemView.ly_check.visibility = View.GONE
         }
         ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,
             StringUtils.getImgStr(mList[position].pic), R.mipmap.ic_launcher)
@@ -39,8 +41,7 @@ class BossSellAdapter (var mContext:Context, var mList:MutableList<MecSellData>,
 
         holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].facDate}"
 
-        holder.itemView.tv_distance.text="距离：${
-        StringUtils.getDistance(
+        holder.itemView.tv_distance.text="距离：${StringUtils.getDistance(
             CoordinateConverter.calculateLineDistance(
                 App.getInstance().thisPoint,
                 GdMapUtils.getPoint(mList[position].gpsLat, mList[position].gpsLon)
@@ -65,10 +66,17 @@ class BossSellAdapter (var mContext:Context, var mList:MutableList<MecSellData>,
         }else{
             holder.itemView.iv_qy.visibility= View.GONE
         }
-        holder.itemView.tv_rent.text="￥${mList[position].price}/元"
+        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}"
+
+        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
 
         holder.itemView.tv_time.text= DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
 
+        if (DateUtils.getUserDate("yyyy-mm-dd")==mList[position].createTime){
+            holder.itemView.tv_new_pic.visibility = View.VISIBLE
+        }else{
+            holder.itemView.tv_new_pic.visibility = View.INVISIBLE
+        }
     }
 
     override fun getItemCount(): Int {
@@ -81,10 +89,13 @@ class BossSellAdapter (var mContext:Context, var mList:MutableList<MecSellData>,
 
     }
 
-    class UserDemandVh(itemView: View, type:Int,mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
+    class UserDemandVh(itemView: View, type:Int, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
-
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.root_view,adapterPosition) })
+            itemView.ly_check.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.ly_check,adapterPosition) })
+            if (type==1){
+                itemView.tv_new_pic.visibility = View.GONE
+            }
         }
     }
 }

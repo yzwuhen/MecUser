@@ -99,6 +99,11 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
 
     }
 
+    override fun uploadFail(str: String) {
+
+        ToastUtils.showText(str)
+    }
+
     override fun showSuccess(netData: NetData?) {
         ToastUtils.showText(netData?.message)
         if (netData?.code==200){

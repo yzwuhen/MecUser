@@ -7,24 +7,19 @@ import android.view.View
 import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.data.request.RePersonCer
+import com.example.mechanicalapp.ui.data.request.ReCer
 import com.example.mechanicalapp.ui.mvp.impl.PersonCerPresenter
-import com.example.mechanicalapp.ui.mvp.impl.UpdateFilePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.PersonCerView
 import com.example.mechanicalapp.utils.GlideEngine
 import com.example.mechanicalapp.utils.ImageLoadUtils
-import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
-import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.activity_person_certify.*
 import kotlinx.android.synthetic.main.activity_person_certify.tv_submit
 import kotlinx.android.synthetic.main.layout_title.*
@@ -39,7 +34,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
     private var mDialogTv3: TextView? = null
 
     private var type: Int = 0
-    private var mRePersonCer = RePersonCer()
+    private var mRePersonCer = ReCer()
 
     private var mUpFilePresenter: PersonCerPresenter? = null
 
@@ -62,6 +57,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
         tv_submit.setOnClickListener(this)
 
         tv_man.isSelected = true
+        mRePersonCer.apporveType=2
         mRePersonCer.sex = "男"
         et_user_name.addTextChangedListener(this)
         et_user_code.addTextChangedListener(this)
@@ -99,7 +95,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
     private fun submit() {
 
         if (checkInfo()){
-            mUpFilePresenter?.submitPersonCer(mRePersonCer)
+            mUpFilePresenter?.submitCer(mRePersonCer)
         }
     }
 
@@ -180,7 +176,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
             return false
         }
 
-        if (TextUtils.isEmpty(mRePersonCer.idCardFrontPi)) {
+        if (TextUtils.isEmpty(mRePersonCer.idCardFrontPic)) {
             return false
         }
         return true
@@ -203,7 +199,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
                     netData.message,
                     R.mipmap.user_default
                 )
-                mRePersonCer.idCardFrontPi = netData.message
+                mRePersonCer.idCardFrontPic = netData.message
             } else {
                 ImageLoadUtils.loadImage(
                     App.getInstance().applicationContext,
@@ -214,6 +210,11 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
                 mRePersonCer.idCardBackPic = netData.message
             }
         }
+    }
+
+    override fun uploadFail(str: String) {
+
+        ToastUtils.showText(str)
     }
 
     override fun showLoading() {

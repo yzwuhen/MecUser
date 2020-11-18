@@ -15,6 +15,7 @@ import com.example.mechanicalapp.ui.adapter.MoreBuyAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecBuyData
+import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecBuyView
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_more_data.*
 class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener, ProgressListener, MecBuyView<NetData> {
     var mAdapter: MoreBuyAdapter? = null
-    var mList: MutableList<MecBuyData> = ArrayList<MecBuyData>()
+    var mList: MutableList<MecSellData> = ArrayList<MecSellData>()
 
     var popRecy : RecyclerView?=null
     var mScreenAdapter : ScreenAdapter?=null
@@ -174,13 +175,13 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
 
     }
 
-    override fun refreshUI(list: List<MecBuyData>) {
+    override fun refreshUI(list: List<MecSellData>) {
         mList.clear()
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }
 
-    override fun loadMore(list: List<MecBuyData>) {
+    override fun loadMore(list: List<MecSellData>) {
     }
 
     override fun err() {

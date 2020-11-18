@@ -4,4 +4,5 @@ import com.example.mechanicalapp.ui.data.NetData
 
 interface UpLoadFileView :BaseView<NetData> {
     fun showImg(netData: NetData?)
+    fun uploadFail(str:String)
 }

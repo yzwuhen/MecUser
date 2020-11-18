@@ -518,7 +518,7 @@ interface AppService {
         @Query("type") type: Int,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
-    ):Observable<MoreLeaseData>
+    ):Observable<MyLookLeaseBean>
 
 
     /**
@@ -562,11 +562,11 @@ interface AppService {
 
 
     /**
-     * 提交个人认证
+     * 提交个人认证  企业认证 维修厂认证
      */
     @POST("/jeecg-boot/market/mecUserApprove/add")
-    fun submitPerson(
+    fun submitCer(
         @Header("X-Access-Token")token:String?,
-        @Body rePersonCer: RePersonCer
+        @Body rePersonCer: ReCer
     ):Observable<NetData>
 }

@@ -27,7 +27,7 @@ class ReleaseRecruitAdapter  (var mContext: Context, var mList:MutableList<Recru
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_recruit_title.text =mList[position].jobTittle
       holder.itemView.tv_recruit_address.text =mList[position].city
-       // holder.itemView.tv_recruit_exp.text =mList[position].jobEx
+        holder.itemView.tv_recruit_exp.text =mList[position].jobEx_dictText
         holder.itemView.tv_recruit_num.text="${mList[position].needNumber}人"
         holder.itemView.tv_recruit_distance.text ="距离：${
             StringUtils.getDistance(
@@ -37,7 +37,7 @@ class ReleaseRecruitAdapter  (var mContext: Context, var mList:MutableList<Recru
                 )
             )
         }km"
-        holder.itemView.tv_recruit_user.text ="${mList[position].createBy}·招聘"
+        holder.itemView.tv_recruit_user.text ="${mList[position].realname}·招聘"
 
         if (mList[position].isPerson=="1"){
             holder.itemView.iv_ser.visibility =View.VISIBLE

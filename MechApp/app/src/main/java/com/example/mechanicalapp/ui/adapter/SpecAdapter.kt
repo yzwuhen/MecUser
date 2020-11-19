@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.`interface`.OnItmeClickTyleListener
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 
-class SpecAdapter  (var mContext: Context, var mList:MutableList<String>,var type:Int, var mOnItemClickListener: OnItmeClickTyleListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SpecAdapter  (var mContext: Context, var mList:MutableList<String>,var type:Int, var mOnItemClickListener: OnItemClickLevelListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -24,7 +24,7 @@ class SpecAdapter  (var mContext: Context, var mList:MutableList<String>,var typ
         return mList.size
     }
 
-    class SpecVh(itemView: View, mOnItemClickListener: OnItmeClickTyleListener,type:Int) : RecyclerView.ViewHolder(itemView){
+    class SpecVh(itemView: View, mOnItemClickListener: OnItemClickLevelListener, type:Int) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition,type) })
         }

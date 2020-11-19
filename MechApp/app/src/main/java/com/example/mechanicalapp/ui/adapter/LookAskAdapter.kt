@@ -16,7 +16,7 @@ import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_look_rent.view.*
 
 
-class LookAskAdapter  (var mContext: Context, var mList:MutableList<MecLeaseData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LookAskAdapter  (var mContext: Context, var mList:MutableList<MecLeaseData>,var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return LookAskVh(LayoutInflater.from(mContext).inflate(R.layout.item_look_rent,parent,false),mOnItemClickListener)
@@ -25,7 +25,12 @@ class LookAskAdapter  (var mContext: Context, var mList:MutableList<MecLeaseData
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_rent_user_nick.text =mList[position].contactName
 
-        holder.itemView.tv_rent_address_data.text="${mList[position].city} | 租用时间：${mList[position].tenancy}天"
+        if (type==1){
+            holder.itemView.tv_rent_address_data.text="${mList[position].city} | 租用时间：${mList[position].tenancy}天"
+        }else{
+            holder.itemView.tv_rent_address_data.text="${mList[position].city} |${mList[position].facDate}"
+        }
+
 
         holder.itemView.tv_rent_equipment.text =mList[position].brandName
 

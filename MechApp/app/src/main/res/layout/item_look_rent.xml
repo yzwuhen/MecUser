@@ -74,6 +74,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_17"
         android:text="￥1000/月"
         android:textColor="#FC3D38"
         android:textSize="13sp"

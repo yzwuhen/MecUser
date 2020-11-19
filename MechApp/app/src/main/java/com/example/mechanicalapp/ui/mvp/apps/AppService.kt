@@ -521,6 +521,67 @@ interface AppService {
     ):Observable<MyLookLeaseBean>
 
 
+
+    /**
+     * 二手设备买卖-分页列表查询
+     * 我的查看
+     */
+    @GET("/jeecg-boot/my/mecMyViewed/appQueryPageList_oldMachine")
+    fun getLookSecondLeaseList(
+        @Header("X-Access-Token")token:String?,
+        @Query("type") type: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<MyLookLeaseBean>
+
+    /**
+     * 配件表-分页列表查询
+     * 我的查看
+     */
+    @GET("/jeecg-boot/my/mecMyViewed/appQueryPageList_parts")
+    fun getLookParts(
+        @Header("X-Access-Token")token:String?,
+        @Query("type") type: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<LookPartsBean>
+    /**
+     * 求职招聘-分页列表查询
+     * 我的查看
+     */
+    @GET("/jeecg-boot/my/mecMyViewed/appQueryPageList_Recruit")
+    fun getLookRecruitList(
+        @Header("X-Access-Token")token:String?,
+        @Query("type") type: Int,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<LookRecruitBean>
+
+    /**
+     * 维修厂-分页列表查询
+     * 我的查看
+     */
+    @GET("/jeecg-boot/my/mecMyViewed/appQueryPageList_repairFactory")
+    fun getLookFactoryList(
+        @Header("X-Access-Token")token:String?,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<LookFactoryBean>
+
+
+
+    /**
+     * 商品-分页列表查询
+     * 我的查看
+     */
+    @GET("/jeecg-boot/my/mecMyViewed/appQueryPageList")
+    fun getLookGoodsList(
+        @Header("X-Access-Token")token:String?,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<LookGoodsBean>
+
+
     /**
      * 租赁机械表-分页列表查询
      * wo de 地址
@@ -569,4 +630,46 @@ interface AppService {
         @Header("X-Access-Token")token:String?,
         @Body rePersonCer: ReCer
     ):Observable<NetData>
+
+    /**
+     * 获取机械类型树
+     */
+    @GET("/jeecg-boot/machine/mecMachineCate/getTreeList")
+    fun getMecType(
+        @Header("X-Access-Token")token:String?
+    ):Observable<MecTypeBean>
+
+
+    /**
+     * 获取配件类型树
+     */
+    @GET("/jeecg-boot/repair/mecRepairOrderDetail/getPartsList")
+    fun getPartType(
+        @Header("X-Access-Token")token:String?
+    ):Observable<MecTypeBean>
+
+
+
+    /**
+     *
+     * 获取我的设备列表
+     */
+    @GET("/jeecg-boot/machine/mecMachine/list")
+    fun getMyMecList(
+        @Header("X-Access-Token")token:String?,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ):Observable<MyLookLeaseBean>
+
+
+    /**
+     *
+     * 获取机械出租 求租详情
+     */
+    @GET("/jeecg-boot/market/mecMarketMechanics/queryById")
+    fun getLeaseDetails(
+        @Header("X-Access-Token")token:String?,
+        @Query("id") id: String?
+    ):Observable<NetData>
+
 }

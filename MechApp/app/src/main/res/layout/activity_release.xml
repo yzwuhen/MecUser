@@ -29,7 +29,6 @@
         android:background="@mipmap/fbwx"
         android:gravity="center"
         android:paddingLeft="@dimen/dp_10"
-        android:text="发布维修"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_18"
         app:layout_constraintBottom_toTopOf="@+id/iv_close"

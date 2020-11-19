@@ -32,6 +32,15 @@ public class MecTypeChildData extends BaseData {
     private String sysOrgCode;
     private String id;
     private String isHot;
+    private boolean isSelect;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getIsHot_dictText() {
         return isHot_dictText;

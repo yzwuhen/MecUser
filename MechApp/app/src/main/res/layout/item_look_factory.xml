@@ -3,20 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingTop="@dimen/dp_17"
     android:backgroundTint="@color/white">
-
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@color/item_tv_date"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_17"
-        android:text="2020-05-05"
-        android:textColor="@color/color_9a"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView

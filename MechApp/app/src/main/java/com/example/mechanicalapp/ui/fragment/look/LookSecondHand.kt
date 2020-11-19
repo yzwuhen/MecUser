@@ -17,8 +17,8 @@ class LookSecondHand  : BaseFragment<NetData>(), View.OnClickListener ,ViewPager
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(LookLease(1))
-        mFragmentList?.add(LookAsk(1))
+        mFragmentList?.add(LookSecondLease())
+        mFragmentList?.add(LookSecondAsk())
     }
 
     override fun showLoading() {

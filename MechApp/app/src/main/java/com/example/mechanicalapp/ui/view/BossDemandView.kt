@@ -15,7 +15,6 @@ import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
 import com.example.mechanicalapp.ui.adapter.BossSellAdapter
-import com.example.mechanicalapp.ui.data.MecBuyData
 import com.example.mechanicalapp.ui.data.MecSellData
 import kotlinx.android.synthetic.main.layout_boss_denmand.view.*
 
@@ -97,16 +96,18 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
         mContext.startActivity(intent)
     }
 
-    private fun jumDetails() {
+    private fun jumDetails(position: Int) {
         val intent = Intent()
         val bundle = Bundle()
         bundle.putInt(Configs.MORE_VIEW_TYPE, type)
 
         if (type == 0) {
             bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 1)
+            bundle.putString(Configs.MEC_ID, mSellList[position].id)
             intent.setClass(mContext, LeaseDetailsActivity::class.java)
         } else {
             bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE, 1)
+            bundle.putString(Configs.MEC_ID, mList[position].id)
             intent.setClass(mContext, AskDetailsActivity::class.java)
         }
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -117,7 +118,7 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
     }
 
     override fun onItemClick(view: View, position: Int) {
-        jumDetails()
+        jumDetails(position)
     }
 
     fun setSell(list: List<MecSellData>) {

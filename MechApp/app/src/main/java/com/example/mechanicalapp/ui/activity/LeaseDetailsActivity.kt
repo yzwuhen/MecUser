@@ -13,6 +13,7 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.youth.banner.indicator.CircleIndicator
@@ -37,8 +38,9 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
     var mList: MutableList<BannerData>? = ArrayList<BannerData>()
 
 
+    private var mPresenter:DetailsPresenter?=null
     private var intentType:Int?=0
-
+    private var mecId:String?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_lease_details
     }
@@ -68,7 +70,7 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
         banner.indicator = CircleIndicator(this)
 
         intentType = intent.getIntExtra(Configs.MEC_Lease_DETAILS_TYPE,0)
-
+        mecId =intent.getStringExtra(Configs.MEC_ID)
         if (intentType==1){
             ly_lease_user_info.visibility =View.VISIBLE
             tv_title.text="出售详情"
@@ -77,6 +79,8 @@ class LeaseDetailsActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils
     }
 
     override fun initPresenter() {
+        mPresenter = DetailsPresenter(this)
+        mPresenter?.getLeaseDetails(mecId)
     }
 
     override fun showLoading() {

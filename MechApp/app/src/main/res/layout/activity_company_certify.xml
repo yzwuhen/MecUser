@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:scrollbars="none">
 
     <LinearLayout
@@ -202,7 +203,7 @@
                 android:layout_height="216dp"
                 android:layout_marginTop="60dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/add_pic_n"
+                android:src="@mipmap/add_pic_rect"
                 app:layout_constraintStart_toStartOf="@+id/iv_positive_pic"
                 app:layout_constraintTop_toBottomOf="@+id/iv_positive_pic" />
 

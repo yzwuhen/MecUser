@@ -10,23 +10,26 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MyMecPresenter
+import com.example.mechanicalapp.ui.mvp.v.BaseView
 import kotlinx.android.synthetic.main.activity_add_mec.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddMecActivity:BaseActivity<NetData>(),View.OnClickListener,OnItemClickListener,
-    OnTimeSelectListener {
+class AddMecActivity:BaseCusActivity(),View.OnClickListener,OnItemClickListener,
+    OnTimeSelectListener ,BaseView<NetData>{
 
 
     private var mPicAdapter: PicAdapter? = null
+    private var mPicList: MutableList<String> = ArrayList<String>()
 
-    private var mPicList: MutableList<String>? = null
+    private var mPresenter: MyMecPresenter?=null
 
     override fun getLayoutId(): Int {
-
 
         return R.layout.activity_add_mec
 
@@ -35,16 +38,13 @@ class AddMecActivity:BaseActivity<NetData>(),View.OnClickListener,OnItemClickLis
     override fun initView() {
         super.initView()
 
-        mPicList = ArrayList<String>()
-        mPicList?.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600716333897&di=963fb5b0077fce243ce0cbf1d70b44cf&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290")
-        mPicList?.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600716333897&di=963fb5b0077fce243ce0cbf1d70b44cf&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290")
         mPicAdapter = PicAdapter(this, mPicList as ArrayList<String>, this)
         ry_pic.layoutManager = GridLayoutManager(this, 3)
         ry_pic.adapter = mPicAdapter
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
-        tv_title.text = "机械出租"
+        tv_title.text = "添加设备"
         ly_production_time.setOnClickListener(this)
         ly_ec_type.setOnClickListener(this)
         ly_ec_brand.setOnClickListener(this)
@@ -53,6 +53,8 @@ class AddMecActivity:BaseActivity<NetData>(),View.OnClickListener,OnItemClickLis
     }
 
     override fun initPresenter() {
+        mPresenter = MyMecPresenter(this)
+        mPresenter?.getMecList()
     }
 
     override fun showLoading() {

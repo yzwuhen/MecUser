@@ -91,7 +91,7 @@ public class PartsData implements Serializable {
     }
 
     public String getCity() {
-        return city;
+        return TextUtils.isEmpty(city)?"广州":city;
     }
 
     public void setCity(String city) {

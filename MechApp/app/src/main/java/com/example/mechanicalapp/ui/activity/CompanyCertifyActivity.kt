@@ -200,7 +200,7 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
 
     override fun showImg(netData: NetData?) {
         if (netData != null && netData.code == 200) {
-            changeBtn()
+
             if (picType == 0) {
                 ImageLoadUtils.loadImage(
                     App.getInstance().applicationContext,
@@ -228,6 +228,7 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
                 reCompanyCer.socialPic = netData.message
             }
         }
+        changeBtn()
     }
 
     override fun uploadFail(str: String) {

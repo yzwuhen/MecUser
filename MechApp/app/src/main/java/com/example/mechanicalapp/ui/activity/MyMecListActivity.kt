@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.adapter.MyMecAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.MyMecPresenter
 import kotlinx.android.synthetic.main.activity_my_mec.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -20,6 +21,8 @@ class MyMecListActivity : BaseActivity<NetData>(),OnItemClickListener ,View.OnCl
     private var mMyMecAdapter: MyMecAdapter? = null
 
      private var mList: MutableList<String> = ArrayList<String>()
+
+    private var mPresenter: MyMecPresenter?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_my_mec
@@ -50,6 +53,8 @@ class MyMecListActivity : BaseActivity<NetData>(),OnItemClickListener ,View.OnCl
     }
 
     override fun initPresenter() {
+        mPresenter = MyMecPresenter(this)
+        mPresenter?.getMecList()
     }
 
     override fun showLoading() {

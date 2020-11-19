@@ -191,7 +191,6 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
 
     override fun showImg(netData: NetData?) {
         if (netData != null && netData.code == 200) {
-            changeBtn()
             if (type == 0) {
                 ImageLoadUtils.loadImage(
                     App.getInstance().applicationContext,
@@ -210,6 +209,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
                 mRePersonCer.idCardBackPic = netData.message
             }
         }
+        changeBtn()
     }
 
     override fun uploadFail(str: String) {

@@ -98,16 +98,18 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
         mContext.startActivity(intent)
     }
 
-    private fun jumDetails() {
+    private fun jumDetails(position: Int) {
         val intent = Intent()
         val bundle = Bundle()
 
         if (type==0){
             bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE,0)
+            bundle.putString(Configs.MEC_ID, mLeaseList[position].id)
             intent.setClass(mContext, LeaseDetailsActivity::class.java)
         }
         else{
             bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE,0)
+            bundle.putString(Configs.MEC_ID, mRentList[position].id)
             intent.setClass(mContext, AskDetailsActivity::class.java)
         }
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -120,7 +122,7 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
 
     override fun onItemClick(view: View, position: Int) {
 
-        jumDetails()
+        jumDetails(position)
     }
 
     //出

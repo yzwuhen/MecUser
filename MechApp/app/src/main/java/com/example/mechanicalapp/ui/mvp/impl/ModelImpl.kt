@@ -384,6 +384,50 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MyLookLeaseBean>(iSubscriberListener))
     }
+
+    fun getLookSecondLeaseList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MyLookLeaseBean>){
+        appsService?.getLookSecondLeaseList(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MyLookLeaseBean>(iSubscriberListener))
+    }
+
+    fun getLookPartsList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<LookPartsBean>){
+        appsService?.getLookParts(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<LookPartsBean>(iSubscriberListener))
+    }
+
+    fun getLookRecruitList(token: String?,type: Int,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<LookRecruitBean>){
+        appsService?.getLookRecruitList(token,type,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<LookRecruitBean>(iSubscriberListener))
+    }
+    fun getLookFactoryList(token: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<LookFactoryBean>){
+        appsService?.getLookFactoryList(token,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<LookFactoryBean>(iSubscriberListener))
+    }
+    fun getLookGoodsList(token: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<LookGoodsBean>){
+        appsService?.getLookGoodsList(token,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<LookGoodsBean>(iSubscriberListener))
+    }
+
+
+
+    fun getMyMecList(token: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<MyLookLeaseBean>){
+        appsService?.getMyMecList(token,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MyLookLeaseBean>(iSubscriberListener))
+    }
+
+
     fun getAddressList(token: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<NetData>){
         appsService?.getAddressList(token,page,pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
@@ -426,5 +470,28 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
 
+    }
+
+
+    fun getMecType(token: String?, iSubscriberListener: ISubscriberListener<MecTypeBean>) {
+        appsService?.getMecType(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MecTypeBean>(iSubscriberListener))
+
+    }
+    fun getPartType(token: String?, iSubscriberListener: ISubscriberListener<MecTypeBean>) {
+        appsService?.getPartType(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MecTypeBean>(iSubscriberListener))
+
+    }
+
+    fun getLeaseDetails(token: String?,id: String?,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.getLeaseDetails(token,id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 }

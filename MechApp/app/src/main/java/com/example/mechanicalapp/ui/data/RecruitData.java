@@ -86,6 +86,16 @@ public class RecruitData  implements Serializable {
     private String jobTittle;
     private String contactPhone;
     private boolean isSelect;
+    private String realname;
+
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
 
     public boolean isSelect() {
         return isSelect;

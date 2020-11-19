@@ -62,12 +62,15 @@
                 <EditText
                     android:id="@+id/et_contacts_phone"
                     style="@style/et_style"
+                    android:inputType="numberDecimal"
                     android:hint="请输入联系电话" />
             </LinearLayout>
 
             <View style="@style/h_view_1" />
 
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_address"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left1"
@@ -98,6 +101,8 @@
                 <TextView
                     android:id="@+id/tv_mec_type"
                     style="@style/et_style"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:hint="请选择维修的机械类型"
                     android:paddingLeft="@dimen/dp_8" />
 
@@ -121,6 +126,8 @@
                 <TextView
                     android:id="@+id/tv_parts_type"
                     style="@style/et_style"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:hint="请选择维修的配件类型" />
 
                 <ImageView
@@ -176,7 +183,7 @@
                 android:layout_height="215dp"
                 android:layout_marginTop="@dimen/dp_35"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/add_pic_n" />
+                android:src="@mipmap/add_pic_rect" />
 
             <TextView
                 android:layout_width="wrap_content"

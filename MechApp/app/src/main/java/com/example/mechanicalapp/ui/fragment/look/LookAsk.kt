@@ -27,7 +27,7 @@ class LookAsk(var type: Int) : BaseCusFragment(), OnItemClickListener, MyRelease
     override fun initView() {
         super.initView()
 
-        mAdapter = LookAskAdapter(mContext, mList, this)
+        mAdapter = LookAskAdapter(mContext, mList, 1,this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
 
@@ -67,7 +67,7 @@ class LookAsk(var type: Int) : BaseCusFragment(), OnItemClickListener, MyRelease
     }
 
     override fun hiedLoading() {
-        hideLoadingView()
+     //   hideLoadingView()
         closeRefreshView()
     }
 
@@ -75,7 +75,7 @@ class LookAsk(var type: Int) : BaseCusFragment(), OnItemClickListener, MyRelease
     }
 
     override fun showLoading() {
-        showLoadView()
+     //   showLoadView()
     }
 
     override fun refreshUI(list: List<MecLeaseData>?) {

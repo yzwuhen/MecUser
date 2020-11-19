@@ -29,7 +29,7 @@ class SidleView(var mContext: Context, attrs: AttributeSet? = null) : View(
 
     private var rectBitmap: Rect = Rect()
 
-    private var bitMapSize: Int = 100
+    private var bitMapSize: Int = 180
     private var startY: Float = 0f
     private var stopY: Float = 0f
 
@@ -55,7 +55,7 @@ class SidleView(var mContext: Context, attrs: AttributeSet? = null) : View(
         textPaint?.textSize = 40f
         fontMetics = textPaint?.fontMetrics
 
-        bitMapleft = BitmapFactory.decodeResource(resources, R.mipmap.progress_icon, null);
+        bitMapleft = BitmapFactory.decodeResource(resources, R.mipmap.scroll_n, null);
 
         mXfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
     }

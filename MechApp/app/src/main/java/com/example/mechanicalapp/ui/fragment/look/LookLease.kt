@@ -73,14 +73,14 @@ class LookLease(var type: Int) : BaseCusFragment(), OnItemClickListener, MyRelea
         jumpActivity(bundle, LeaseDetailsActivity::class.java)
     }
     override fun hiedLoading() {
-        hideLoadingView()
+      //  hideLoadingView()
         closeRefreshView()
     }
 
     override fun err()  {
     }
     override fun showLoading() {
-        showLoadView()
+      //  showLoadView()
     }
 
     override fun refreshUI(list: List<MecLeaseData>?) {

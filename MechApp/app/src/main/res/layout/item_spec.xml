@@ -8,7 +8,7 @@
         android:id="@+id/tv_specs"
         android:layout_width="90dp"
         android:layout_height="40dp"
-        android:background="@drawable/rect_radio_6_g"
+        android:background="@drawable/attr_bg"
         android:gravity="center"
         android:text="属性"
         android:textColor="@color/color_222"

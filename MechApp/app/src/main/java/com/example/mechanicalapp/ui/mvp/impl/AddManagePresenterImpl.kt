@@ -213,7 +213,7 @@ class AddManagePresenterImpl(
             object : ISubscriberListener<CodeBean> {
                 override fun onNext(t: CodeBean?) {
                     if (t?.code == 200) {
-                        (baseView as AskRentView).showYears(t.result)
+                        (baseView as MecMecAskRentView).showYears(t.result)
                     }
                 }
 

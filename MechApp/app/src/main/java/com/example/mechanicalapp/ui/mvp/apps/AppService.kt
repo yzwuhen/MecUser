@@ -670,6 +670,39 @@ interface AppService {
     fun getLeaseDetails(
         @Header("X-Access-Token")token:String?,
         @Query("id") id: String?
+    ):Observable<MecDetailsBean>
+
+
+    /**
+     *
+     * 获取机械出租出售详情
+     */
+    @GET("/jeecg-boot/market/mecMarketOldMechanics/queryById")
+    fun getBusinessDetails(
+        @Header("X-Access-Token")token:String?,
+        @Query("id") id: String?
+    ):Observable<BusinessDetailsBean>
+
+
+    /**
+     *
+     * 获取商品详情
+     */
+    @GET("/jeecg-boot/shop/mecProd/queryById")
+    fun getGoodsDetail(
+        @Header("X-Access-Token")token:String?,
+        @Query("id") id: String?
+    ):Observable<GoodsDetailsBean>
+
+
+    /**
+     *
+     * 添加收藏
+     */
+    @POST("/jeecg-boot/my/mecMyStore/add")
+    fun addCollect(
+        @Header("X-Access-Token")token:String?,
+        @Body reCollect: ReCollect
     ):Observable<NetData>
 
 }

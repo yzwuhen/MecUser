@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
-import com.example.mechanicalapp.ui.activity.AskDetailsActivity
-import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
-import com.example.mechanicalapp.ui.activity.MoreDataActivity
+import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
 import com.example.mechanicalapp.ui.adapter.BossSellAdapter
 import com.example.mechanicalapp.ui.data.MecSellData
@@ -104,11 +102,11 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
         if (type == 0) {
             bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 1)
             bundle.putString(Configs.MEC_ID, mSellList[position].id)
-            intent.setClass(mContext, LeaseDetailsActivity::class.java)
+            intent.setClass(mContext, MecSellDetails::class.java)
         } else {
             bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE, 1)
             bundle.putString(Configs.MEC_ID, mList[position].id)
-            intent.setClass(mContext, AskDetailsActivity::class.java)
+            intent.setClass(mContext, MecBuyDetails::class.java)
         }
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
         if (bundle != null) {

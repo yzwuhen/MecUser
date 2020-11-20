@@ -1,22 +1,30 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.MecDetailsData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.request.ReCollect
+import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
+import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_ask_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils.onViewListener {
+class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
+    MecDetailsView<MecDetailsData> {
     private var mShareDialog: BottomSheetDialog?=null
     private var mShareView: View?=null
 
@@ -31,7 +39,12 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
     private var popSure: TextView?=null
     private var mPopwindow: PopupWindow?=null
 
-    private var intentType:Int?=0
+
+    private var mPresenter: DetailsPresenter? = null
+    private var intentType: Int? = 0
+    private var mecId: String? = null
+    private var mData:MecDetailsData?=null
+    private var mReCollect = ReCollect()
     override fun getLayoutId(): Int {
         return R.layout.activity_ask_details
     }
@@ -51,22 +64,15 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
         ly_user_info.setOnClickListener(this)
 
         intentType = intent.getIntExtra(Configs.MEC_ASK_DETAILS_TYPE,0)
-        if (intentType==1){
-            tv_mec_details.text ="求购描述"
-            tv_title.text="求购详情"
-        }
+        mecId = intent.getStringExtra(Configs.MEC_ID)
+        mReCollect.type=4
+        mReCollect.storeId =mecId
     }
 
     override fun initPresenter() {
-    }
+        mPresenter = DetailsPresenter(this)
 
-    override fun showLoading() {
-    }
-
-    override fun hiedLoading() {
-    }
-
-    override fun err()  {
+         mPresenter?.getLeaseDetails(mecId)
     }
 
     override fun onClick(v: View?) {
@@ -83,9 +89,17 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
             R.id.tv_pop_sure-> PopUtils.dismissPop(this)
             R.id.tv_pop_cancel-> PopUtils.dismissPop(this)
             R.id.ly_user_info->jumHomePage()
+            R.id.tv_collected->collect()
         }
     }
 
+    private fun collect() {
+        if (TextUtils.isEmpty(App.getInstance().token)){
+            ToastUtils.showText("请先登陆后再操作")
+            return
+        }
+        mPresenter?.addCollect(mReCollect)
+    }
     private fun jumHomePage() {
         var bundle =Bundle()
         if (intentType==0){
@@ -139,9 +153,68 @@ class AskDetailsActivity:BaseActivity<NetData>(), View.OnClickListener, PopUtils
         popSure = view?.findViewById(R.id.tv_pop_sure)
         popTvTitle = view?.findViewById(R.id.tv_pop_title)
         popTvInfo = view?.findViewById(R.id.tv_pop_info)
-
+        popTvTitle?.text=mData?.contactName
+        popTvInfo?.text ="请问是否呼叫 ${mData?.contactPhone}"
 
         popCancel?.setOnClickListener(this)
         popSure?.setOnClickListener(this)
+    }
+    override fun showLoading() {
+        showLoadView()
+    }
+
+    override fun hiedLoading() {
+        hideLoadingView()
+    }
+
+    override fun err() {
+    }
+
+    override fun showData(data: MecDetailsData?) {
+        if (data != null) {
+            mData =data
+            tv_goods_title.text =data.tittle
+
+            if (data.priceUnit=="3"){
+                tv_rent_price.text ="租赁价格：面议"
+                tv_coast_money.text ="面议"
+            }else{
+                tv_rent_price.text ="租赁价格：￥${data.price}/${data.priceUnit_dictText}"
+                tv_coast_money.text ="￥${data.price}/${data.priceUnit_dictText}"
+            }
+
+            tv_browse.text ="浏览量："
+            tv_browse_time.text = DateUtils.dateDiffs(data.createTime,System.currentTimeMillis())
+
+
+
+            tv_address.text="所在地：${data.address}"
+
+            tv_mec_type.text=data.cateName
+            tv_mec_brand.text =data.brandName
+            tv_factory_time.text ="${data.facTime}年"
+            tv_mec_model.text =data.modelName
+            tv_mec_num.text =data.mecUnit
+            tv_ask_time.text=data.workTime
+
+            tv_details.text =data.briefDesc
+
+            tv_user_nick.text ="昵称：${data.contactName}"
+            if (data.isPerson=="1"){
+                iv_ask_user_sr.visibility =View.VISIBLE
+            }else{
+                iv_ask_user_sr.visibility =View.GONE
+            }
+
+        }
+    }
+
+    override fun collectSuccess(netData: NetData?) {
+        if (netData!=null&&netData.code==200){
+            tv_collected.text ="已收藏"
+            tv_collected.isSelected = true
+        }
+        ToastUtils.showText(netData?.message)
+
     }
 }

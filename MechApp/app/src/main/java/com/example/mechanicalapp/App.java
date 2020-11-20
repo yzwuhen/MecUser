@@ -36,7 +36,7 @@ public class App extends Application {
         mToken =token;
     }
     public String getToken(){
-        return mToken;
+        return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQxNTYwMjAsInVzZXJuYW1lIjoiMTM3NTE3NzM0MDIifQ.xdcw7xyur9wTXg4IPUXDZSKQuStnt76Graa5T_DI9N8";
     }
 
     public DPoint getThisPoint() {

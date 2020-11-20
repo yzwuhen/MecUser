@@ -81,7 +81,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -93,7 +92,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_5"
-                                android:text="租赁价格："
+                                android:text="预算价格："
                                 android:textColor="@color/color_999"
                                 android:textSize="@dimen/sp_13" />
                             <TextView
@@ -105,6 +104,7 @@
                                 android:textColor="@color/color_red"
                                 android:textSize="@dimen/sp_16" />
                         </LinearLayout>
+
                         <View
                             android:id="@+id/line1"
                             style="@style/h_view_1"
@@ -123,9 +123,8 @@
 
                             <TextView
                                 android:id="@+id/tv_browse"
-                                android:layout_width="0dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
                                 android:drawableLeft="@mipmap/browse_icon"
                                 android:drawablePadding="@dimen/dp_10"
                                 android:text="浏览量：12940"
@@ -138,6 +137,18 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="@dimen/dp_35"
                                 android:text="前天21：10"
+                                android:textColor="@color/color_666"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tv_user_main"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp_35"
+                                android:drawableRight="@mipmap/details_next_icon"
+                                android:drawablePadding="@dimen/dp_10"
+                                android:gravity="right|center_vertical"
+                                android:text="个人主页"
                                 android:textColor="@color/color_666"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -170,41 +181,55 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="租赁价格:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_coast_money"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="面议"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="预算价格:"
+                            android:textColor="@color/color_666"
+                            android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械类型:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tv_coast_money"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="面议"
+                            android:textColor="@color/color_222"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_mec_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="履带挖掘机"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="机械类型:"
+                            android:textColor="@color/color_666"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_mec_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="履带挖掘机"
+                            android:textColor="@color/color_222"
+                            android:textSize="15sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -213,41 +238,56 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="出厂日期："
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_factory_time"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="一年"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="工作时长："
+                            android:textColor="@color/color_666"
+                            android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械品牌:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tv_work_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="一年"
+                            android:textColor="@color/color_222"
+                            android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/tv_mec_brand"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="______"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="机械品牌:"
+                            android:textColor="@color/color_666"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_mec_brand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="______"
+                            android:textColor="@color/color_222"
+                            android:textSize="15sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -255,66 +295,58 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="数    量:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_mec_num"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="2台"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="数        量:"
+                            android:textColor="@color/color_666"
+                            android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械型号:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tv_mec_num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="2台"
+                            android:textColor="@color/color_222"
+                            android:textSize="15sp" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_mec_model"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="______"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="机械型号:"
+                            android:textColor="@color/color_666"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_mec_model"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:text="______"
+                            android:textColor="@color/color_222"
+                            android:textSize="15sp" />
+                    </LinearLayout>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="租赁工期:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/tv_ask_time"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:text="30天"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-                </LinearLayout>
                 <TextView
                     android:id="@+id/tv_address"
                     android:layout_width="match_parent"

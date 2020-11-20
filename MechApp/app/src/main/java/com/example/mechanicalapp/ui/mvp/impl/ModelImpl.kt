@@ -488,8 +488,30 @@ class ModelImpl : BaseModel {
 
     }
 
-    fun getLeaseDetails(token: String?,id: String?,iSubscriberListener: ISubscriberListener<NetData>){
+    fun getLeaseDetails(token: String?,id: String?,iSubscriberListener: ISubscriberListener<MecDetailsBean>){
         appsService?.getLeaseDetails(token,id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MecDetailsBean>(iSubscriberListener))
+    }
+
+    fun getBusinessDetails(token: String?,id: String?,iSubscriberListener: ISubscriberListener<BusinessDetailsBean>){
+        appsService?.getBusinessDetails(token,id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<BusinessDetailsBean>(iSubscriberListener))
+    }
+
+
+    fun getGoodsDetails(token: String?,id: String?,iSubscriberListener: ISubscriberListener<GoodsDetailsBean>){
+        appsService?.getGoodsDetail(token,id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<GoodsDetailsBean>(iSubscriberListener))
+    }
+
+    fun addCollect(token: String?,recollect: ReCollect,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.addCollect(token,recollect)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))

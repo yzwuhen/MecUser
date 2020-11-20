@@ -2,12 +2,14 @@ package com.example.mechanicalapp.ui.view
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
 import com.example.mechanicalapp.ui.activity.MorePartsActivity
 import com.example.mechanicalapp.ui.adapter.HotPartsAdapter
@@ -33,13 +35,18 @@ class HosPartsView(var mContext: Context) : LinearLayout(mContext), OnItemClickL
 
 
     override fun onItemClick(view: View, position: Int) {
-        jumAct1()
+        jumAct1(position)
     }
 
-    private fun jumAct1() {
+    private fun jumAct1(position: Int) {
         val intent = Intent()
+        val bundle = Bundle()
+        bundle.putString(Configs.MEC_ID, mList[position].id)
         intent.setClass(mContext, GoodsDetailsActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
         mContext.startActivity(intent)
     }
 

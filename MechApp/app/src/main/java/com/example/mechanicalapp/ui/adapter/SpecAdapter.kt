@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
+import com.example.mechanicalapp.ui.data.Spec
+import kotlinx.android.synthetic.main.activity_goods_details.view.*
 
-class SpecAdapter  (var mContext: Context, var mList:MutableList<String>,var type:Int, var mOnItemClickListener: OnItemClickLevelListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SpecAdapter  (var mContext: Context, var mList:MutableList<Spec>,var type:Int, var mOnItemClickListener: OnItemClickLevelListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -17,6 +19,8 @@ class SpecAdapter  (var mContext: Context, var mList:MutableList<String>,var typ
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        holder.itemView.tv_specs.text =mList[position].specName
+        holder.itemView.tv_specs.isSelected =mList[position].isSelect
     }
 
     override fun getItemCount(): Int {

@@ -10,9 +10,8 @@ import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
-import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.BannerData
+import com.example.mechanicalapp.ui.data.BusinessDetails
 import com.example.mechanicalapp.ui.data.MecDetailsData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCollect
@@ -22,12 +21,11 @@ import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.youth.banner.indicator.CircleIndicator
-import kotlinx.android.synthetic.main.activity_lease_details.*
+import kotlinx.android.synthetic.main.activity_mec_buy_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
-    MecDetailsView<MecDetailsData> {
+class MecBuyDetails : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
+    MecDetailsView<BusinessDetails> {
     private var mShareDialog: BottomSheetDialog? = null
     private var mShareView: View? = null
 
@@ -42,25 +40,22 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
     private var popSure: TextView? = null
     private var mPopwindow: PopupWindow? = null
 
-    var mList: MutableList<BannerData>? = ArrayList<BannerData>()
-
 
     private var mPresenter: DetailsPresenter? = null
     private var intentType: Int? = 0
     private var mecId: String? = null
-    private var mData:MecDetailsData?=null
+    private var mData:BusinessDetails?=null
 
-    private var mReCollect =ReCollect()
-
+    private var mReCollect = ReCollect()
     override fun getLayoutId(): Int {
-        return R.layout.activity_lease_details
+        return R.layout.activity_mec_buy_details
     }
 
     override fun initView() {
         super.initView()
 
         iv_right.setImageResource(R.mipmap.title_share)
-        tv_title.text = "出租详情"
+        tv_title.text = "求购详情"
         iv_left.setOnClickListener(this)
         iv_right.setOnClickListener(this)
         tv_report.setOnClickListener(this)
@@ -70,16 +65,16 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         tv_address.setOnClickListener(this)
         ly_user_info.setOnClickListener(this)
 
-        intentType = intent.getIntExtra(Configs.MEC_Lease_DETAILS_TYPE, 0)
+        intentType = intent.getIntExtra(Configs.MEC_ASK_DETAILS_TYPE, 0)
         mecId = intent.getStringExtra(Configs.MEC_ID)
-
-        mReCollect.type=4
+        mReCollect.type=3
         mReCollect.storeId =mecId
     }
 
     override fun initPresenter() {
         mPresenter = DetailsPresenter(this)
-        mPresenter?.getLeaseDetails(mecId)
+        mPresenter?.getBusiness(mecId)
+
     }
 
     override fun onClick(v: View?) {
@@ -115,7 +110,7 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         } else {
             bundle.putInt(Configs.USER_HOME_PAGE, 0)
         }
-        bundle.putInt(Configs.USER_HOME_PAGE_Index, 0)
+        bundle.putInt(Configs.USER_HOME_PAGE_Index, 1)
         jumpActivity(bundle, UserHomePage::class.java)
 
     }
@@ -181,48 +176,40 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
     override fun err() {
     }
 
-    override fun showData(data: MecDetailsData?) {
+    override fun showData(data: BusinessDetails?) {
         if (data != null) {
             mData =data
-            if (!TextUtils.isEmpty(data.pic)) {
-                mList?.clear()
-                for (index in data.pic.split(",")) {
-                    var bannerData = BannerData()
-                    bannerData.img = index
-                    mList?.add(bannerData)
-                }
-                banner.adapter = ImageAdapter(mList)
-                banner.indicator = CircleIndicator(this)
-            }
-            tv_details_title.text = data.tittle
+            tv_goods_title.text = data.tittle
+
+            tv_rent_price.text = "￥${data.price}/元"
+            tv_coast_money.text = "￥${data.price}/元"
+
             tv_browse.text = "浏览量："
             tv_browse_time.text = DateUtils.dateDiffs(data.createTime, System.currentTimeMillis())
 
-            tv_cost.text = "￥${data.price}/${data.priceUnit_dictText}"
+
 
             tv_address.text = "所在地：${data.address}"
 
             tv_mec_type.text = data.cateName
             tv_mec_brand.text = data.brandName
-            tv_factory_time.text = data.facDate
+            tv_work_time.text = "${data.workTime}"
             tv_mec_model.text = data.modelName
-            tv_work_time.text = data.workTime
-            tv_cost_way.text = data.priceUnit_dictText
+            tv_mec_num.text = "1"
 
             tv_details.text = data.briefDesc
 
             tv_user_nick.text = "昵称：${data.contactName}"
             if (data.isPerson == "1") {
-                iv_sr.visibility = View.VISIBLE
+                iv_ask_user_sr.visibility = View.VISIBLE
             } else {
-                iv_sr.visibility = View.GONE
+                iv_ask_user_sr.visibility = View.GONE
             }
 
         }
     }
 
     override fun collectSuccess(netData: NetData?) {
-
         if (netData!=null&&netData.code==200){
             tv_collected.text ="已收藏"
         }

@@ -20,7 +20,7 @@ import com.example.mechanicalapp.ui.data.CodeData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReMecLease
 import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
-import com.example.mechanicalapp.ui.mvp.v.AskRentView
+import com.example.mechanicalapp.ui.mvp.v.MecMecAskRentView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_ask_rent.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
-    PopUtils.onViewListener, AskRentView, TextWatcher {
+    PopUtils.onViewListener, MecMecAskRentView, TextWatcher {
 
 
     private var mStringList: MutableList<CodeData> = ArrayList<CodeData>()

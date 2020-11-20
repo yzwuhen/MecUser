@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
+import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -97,14 +98,6 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         ly_buy.setOnClickListener(this)
         ly_user_info.setOnClickListener(this)
         tv_collected.setOnClickListener(this)
-//        mList.add("红色")
-//        mList.add("黄色")
-//        mList.add("黑色")
-//        mList.add("蓝色")
-//
-//        mList1.add("L")
-//        mList1.add("XL")
-//        mList1.add("XXL")
 
 
         mecId = intent.getStringExtra(Configs.MEC_ID)
@@ -116,6 +109,7 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
     override fun initPresenter() {
         mPresenter = DetailsPresenter(this)
         mPresenter?.getGoodsDetails(mecId)
+        mPresenter?.getCommentList(mecId)
     }
 
     override fun onClick(v: View?) {
@@ -351,6 +345,9 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
 
                 Log.v("ssss","sss======$e")
             }
+
+
+            tv_details.text = Html.fromHtml(data.productDetailInfo)
 
         }
 

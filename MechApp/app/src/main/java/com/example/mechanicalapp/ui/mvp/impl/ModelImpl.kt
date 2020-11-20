@@ -510,6 +510,32 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<GoodsDetailsBean>(iSubscriberListener))
     }
 
+    fun getComment(token: String?,id: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.getComment(token,id,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun getCommentGoods(token: String?,id: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.getCommentGoods(token,id,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun getCommentMiddle(token: String?,id: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.getCommentMiddle(token,id,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun getCommentBad(token: String?,id: String?,page: Int,pageSize: Int,iSubscriberListener: ISubscriberListener<NetData>){
+        appsService?.getCommentBad(token,id,page,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+
     fun addCollect(token: String?,recollect: ReCollect,iSubscriberListener: ISubscriberListener<NetData>){
         appsService?.addCollect(token,recollect)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(

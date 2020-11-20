@@ -80,6 +80,29 @@ class DetailsPresenter(
     }
 
 
+
+    fun getCommentList(id: String?) {
+        baseView.showLoading()
+        baseModel.getComment(
+            App.getInstance().token,
+            id,0,2,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+
+
+
     fun addCollect(recollect: ReCollect){
         baseView.showLoading()
         baseModel.addCollect(

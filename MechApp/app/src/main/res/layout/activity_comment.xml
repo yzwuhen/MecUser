@@ -54,16 +54,13 @@
 
     </LinearLayout>
 
-    <com.liaoinstan.springview.widget.SpringView
-        android:id="@+id/spring_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.liaoinstan.springview.widget.SpringView>
+    <com.example.mechanicalapp.ui.view.CusViewPage
+        android:layout_marginTop="@dimen/dp_5"
+        android:id="@+id/cus_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 
 </LinearLayout>

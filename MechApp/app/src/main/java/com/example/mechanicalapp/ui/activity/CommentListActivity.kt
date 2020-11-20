@@ -1,21 +1,21 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.CommentAdapter
+import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_comment.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class CommentListActivity : BaseActivity<NetData>() ,View.OnClickListener,OnItemClickListener{
+class CommentListActivity : BaseActivity<NetData>() ,View.OnClickListener , ViewPager.OnPageChangeListener{
 
-    private var mAdapter:CommentAdapter?=null
-    private var mList:MutableList<String> =ArrayList<String>()
-
+    private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
+    private var mTabPageAdapter: FragmentListPageAdapter?=null
+    private var mTextViewList:MutableList<TextView>  =ArrayList<TextView>()
     override fun getLayoutId(): Int {
 
         return R.layout.activity_comment
@@ -33,15 +33,17 @@ class CommentListActivity : BaseActivity<NetData>() ,View.OnClickListener,OnItem
         tv_comment3.setOnClickListener(this)
         tv_comment4.setOnClickListener(this)
 
+        mTextViewList.add(tv_comment1)
+        mTextViewList.add(tv_comment2)
+        mTextViewList.add(tv_comment3)
+        mTextViewList.add(tv_comment4)
+        mTabPageAdapter = FragmentListPageAdapter(this.supportFragmentManager, mFragmentList!!)
+        cus_page.adapter=mTabPageAdapter
 
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+        tv_comment1.performClick()
 
-        mAdapter = CommentAdapter(this,mList,this)
-        recycler_list.layoutManager =LinearLayoutManager(this)
-        recycler_list.adapter = mAdapter
-
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
     }
 
     override fun initPresenter() {
@@ -62,9 +64,25 @@ class CommentListActivity : BaseActivity<NetData>() ,View.OnClickListener,OnItem
             R.id.iv_back->finish()
         }
     }
+    private fun showView(index: Int) {
 
-    override fun onItemClick(view: View, position: Int) {
+        cus_page.currentItem=index
+        for (i in mTextViewList.indices){
+            mTextViewList[i]?.isSelected = index ==i
+        }
 
 
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+
+
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        showView(position)
     }
 }

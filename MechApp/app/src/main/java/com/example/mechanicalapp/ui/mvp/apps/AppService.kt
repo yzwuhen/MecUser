@@ -694,6 +694,55 @@ interface AppService {
         @Query("id") id: String?
     ):Observable<GoodsDetailsBean>
 
+    /**
+     *
+     * 获取评论列表
+     */
+    @GET("/jeecg-boot/shop/mecProd/commentListAll")
+    fun getComment(
+        @Header("X-Access-Token")token:String?,
+        @Query("id") id: String?,
+        @Query("pageNo") page: Int,
+        @Query("pageSize") pageSize:Int
+    ):Observable<NetData>
+
+    /**
+     *
+     * 获取好评评论列表
+     */
+    @GET("/jeecg-boot/shop/mecProd/commentListGood")
+    fun getCommentGoods(
+        @Header("X-Access-Token")token:String?,
+        @Query("id") id: String?,
+        @Query("pageNo") page: Int,
+        @Query("pageSize") pageSize:Int
+    ):Observable<NetData>
+
+    /**
+     *
+     * 获取中评评论列表
+     */
+    @GET("/jeecg-boot/shop/mecProd/commentListMiddle")
+    fun getCommentMiddle(
+        @Header("X-Access-Token")token:String?,
+        @Query("id") id: String?,
+        @Query("pageNo") page: Int,
+        @Query("pageSize") pageSize:Int
+    ):Observable<NetData>
+
+    /**
+     *
+     * 获取评论列表
+     */
+    @GET("/jeecg-boot/shop/mecProd/commentListBad")
+    fun getCommentBad(
+        @Header("X-Access-Token")token:String?,
+        @Query("id") id: String?,
+        @Query("pageNo") page: Int,
+        @Query("pageSize") pageSize:Int
+    ):Observable<NetData>
+
+
 
     /**
      *

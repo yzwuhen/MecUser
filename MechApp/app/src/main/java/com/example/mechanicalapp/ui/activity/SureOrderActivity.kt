@@ -6,6 +6,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.SureOrderGoodsAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.GoodsDetails
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.activity_sure_order.*
@@ -14,7 +15,9 @@ import kotlinx.android.synthetic.main.layout_title.*
 class SureOrderActivity:BaseActivity<NetData>(),View.OnClickListener,OnItemClickListener {
 
     private var mAdapter:SureOrderGoodsAdapter?=null
-    private var mList:MutableList<String> =ArrayList<String>()
+    private var mList:MutableList<GoodsDetails.SkuListBean> =ArrayList<GoodsDetails.SkuListBean>()
+
+    private var data:GoodsDetails.SkuListBean?=null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_sure_order
@@ -30,10 +33,13 @@ class SureOrderActivity:BaseActivity<NetData>(),View.OnClickListener,OnItemClick
         tv_settlement.setOnClickListener(this)
         tv_freight_rule.setOnClickListener(this)
 
-        mList.add("红色")
-        mList.add("黄色")
-        mList.add("黑色")
-        mList.add("蓝色")
+//        mList.add("红色")
+//        mList.add("黄色")
+//        mList.add("黑色")
+//        mList.add("蓝色")
+
+        data = intent.getSerializableExtra("data") as GoodsDetails.SkuListBean?
+        data?.let { mList.add(it) }
 
         recycler_list.layoutManager = LinearLayoutManager(this)
         mAdapter = SureOrderGoodsAdapter(this,mList,this)

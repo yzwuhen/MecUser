@@ -1,20 +1,27 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.view.View
-import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
-import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.adapter.OrderTitleAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.CodeBean
+import com.example.mechanicalapp.ui.data.CodeData
+import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
+import com.example.mechanicalapp.ui.mvp.v.OrderView
 import kotlinx.android.synthetic.main.fragment_order.*
 
-class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPageChangeListener {
-    private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
+class OrderFragment : BaseCusFragment(), ViewPager.OnPageChangeListener, OnItemClickListener,
+    OrderView<CodeBean> {
+    private var mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
-    private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
+    private var mList = ArrayList<CodeData>()
+    private var mAdapter: OrderTitleAdapter? = null
+
     override fun showLoading() {
 
     }
@@ -29,57 +36,26 @@ class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPag
 
     override fun initView() {
         super.initView()
+        mAdapter = OrderTitleAdapter(mContext, mList, this)
 
-        mFragmentList?.add(OrderListFragment(0))
-        mFragmentList?.add(OrderListFragment(1))
-        mFragmentList?.add(OrderListFragment(2))
-        mFragmentList?.add(OrderListFragment(3))
-        mFragmentList?.add(OrderListFragment(4))
-        mFragmentList?.add(OrderListFragment(5))
+        var linearLayoutManager = LinearLayoutManager(mContext)
+        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        recycle_list.layoutManager =linearLayoutManager
+        recycle_list.adapter = mAdapter
 
-        mTextViewList.add(tv_order1)
-        mTextViewList.add(tv_order2)
-        mTextViewList.add(tv_order3)
-        mTextViewList.add(tv_order4)
-        mTextViewList.add(tv_order5)
-        mTextViewList.add(tv_order6)
-        mTabPageAdapter = FragmentListPageAdapter(childFragmentManager,mFragmentList!!)
-
-        cus_page.adapter = mTabPageAdapter
-
-
-        tv_order1.setOnClickListener(this)
-        tv_order2.setOnClickListener(this)
-        tv_order3.setOnClickListener(this)
-        tv_order4.setOnClickListener(this)
-        tv_order5.setOnClickListener(this)
-        tv_order6.setOnClickListener(this)
-
-
-        tv_order1.performClick()
-        cus_page.offscreenPageLimit =6
-        cus_page.setTouchEvent(true)
-        cus_page.addOnPageChangeListener(this)
-    }
-    override fun onClick(p0: View?) {
-        when (p0?.id) {
-            R.id.tv_order1 -> showView(0)
-            R.id.tv_order2 -> showView(1)
-            R.id.tv_order3 -> showView(2)
-            R.id.tv_order4 -> showView(3)
-            R.id.tv_order5 -> showView(4)
-            R.id.tv_order6 -> showView(5)
-        }
+        mPresenter = OrderPresenter(this)
+        (mPresenter as OrderPresenter).getOrderTv()
 
     }
 
     private fun showView(index: Int) {
         cus_page.currentItem = index
-        for (i in mTextViewList.indices) {
-            mTextViewList[i]?.isSelected = index == i
+        for (i in mList.indices) {
+            mList[i]?.isSelect = index == i
         }
-
+        mAdapter?.notifyDataSetChanged()
     }
+
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
     }
 
@@ -93,6 +69,35 @@ class OrderFragment:BaseFragment<NetData>(),View.OnClickListener,ViewPager.OnPag
 
     override fun err() {
 
+    }
 
+    override fun showData(data: CodeBean?) {
+        if (data?.code == 200 && data?.result.isNotEmpty()) {
+            mList.clear()
+            mList.addAll(data?.result)
+            mAdapter?.notifyDataSetChanged()
+            addFragmentView()
+        }
+    }
+
+    private fun addFragmentView() {
+        mFragmentList?.clear()
+        for (code in mList.iterator()) {
+            mFragmentList?.add(OrderListFragment(code.itemValue))
+        }
+        mTabPageAdapter = FragmentListPageAdapter(childFragmentManager, mFragmentList!!)
+        cus_page.adapter = mTabPageAdapter
+
+        cus_page.setTouchEvent(true)
+        cus_page.addOnPageChangeListener(this)
+        cus_page.offscreenPageLimit = mList.size
+        showView(0)
+    }
+
+    override fun showDataMore(data: CodeBean?) {
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        showView(position)
     }
 }

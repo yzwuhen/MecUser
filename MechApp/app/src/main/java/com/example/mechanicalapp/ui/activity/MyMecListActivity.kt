@@ -3,24 +3,28 @@ package com.example.mechanicalapp.ui.activity
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.MyMecAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.MecData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MyMecPresenter
+import com.example.mechanicalapp.ui.mvp.v.CollectView
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_my_mec.*
+import kotlinx.android.synthetic.main.activity_my_mec.recycler_list
+import kotlinx.android.synthetic.main.activity_my_mec.spring_list
 import kotlinx.android.synthetic.main.layout_title.*
 
-class MyMecListActivity : BaseActivity<NetData>(),OnItemClickListener ,View.OnClickListener{
+class MyMecListActivity : BaseCusActivity(),OnItemClickListener ,View.OnClickListener, CollectView<MecData> {
 
 
     private var mMyMecAdapter: MyMecAdapter? = null
 
-     private var mList: MutableList<String> = ArrayList<String>()
+     private var mList: MutableList<MecData> = ArrayList<MecData>()
 
     private var mPresenter: MyMecPresenter?=null
     override fun getLayoutId(): Int {
@@ -35,18 +39,26 @@ class MyMecListActivity : BaseActivity<NetData>(),OnItemClickListener ,View.OnCl
         iv_back.setOnClickListener(this)
         tv_title.text = "我的设备列表"
 
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
         recycler_list.layoutManager = GridLayoutManager(this, 3)
         mMyMecAdapter = MyMecAdapter(this, mList, this)
-        recycler_list.addItemDecoration(MyDecoration(3))
+        //recycler_list.addItemDecoration(MyDecoration(3))
         recycler_list.adapter = mMyMecAdapter
+
+        spring_list.type = SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(this)
+     // spring_list.footer = RefreshHeaderUtils.getFooterView(this)
+        spring_list.setListener(object : SpringView.OnFreshListener {
+            override fun onRefresh() {
+                spring_list.isEnable = false
+                mPresenter?.reset()
+                mPresenter?.getMecList()
+            }
+
+            override fun onLoadmore() {
+                mPresenter?.getMecList()
+            }
+        })
+
 
         ly_search.setOnClickListener(this)
         tv_add_mec.setOnClickListener(this)
@@ -57,19 +69,33 @@ class MyMecListActivity : BaseActivity<NetData>(),OnItemClickListener ,View.OnCl
         mPresenter?.getMecList()
     }
 
+    fun closeRefreshView() {
+        spring_list?.isEnable = true
+        spring_list?.onFinishFreshAndLoad()
+    }
+
+    override fun success(netData: NetData) {
+    }
+
+
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
+        closeRefreshView()
     }
+
 
     override fun err()  {
     }
 
     override fun onItemClick(view: View, position: Int) {
 
-
-        jumpActivity(null,MyMecDetailsActivity::class.java)
+        var  bundle =Bundle()
+        bundle.putString("id",mList[position].id)
+        jumpActivity(bundle,MyMecDetailsActivity::class.java)
     }
 
     private fun jump() {
@@ -85,6 +111,21 @@ class MyMecListActivity : BaseActivity<NetData>(),OnItemClickListener ,View.OnCl
             R.id.iv_back->finish()
             R.id.ly_search->jump()
             R.id.tv_add_mec->jumpActivity(null,AddMecActivity::class.java)
+        }
+    }
+
+    override fun refreshUI(list: List<MecData>?) {
+        mList.clear()
+        if (list != null) {
+            mList.addAll(list)
+        }
+        mMyMecAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadMore(list: List<MecData>?) {
+        if (list != null) {
+            mList.addAll(list)
+            mMyMecAdapter?.notifyDataSetChanged()
         }
     }
 }

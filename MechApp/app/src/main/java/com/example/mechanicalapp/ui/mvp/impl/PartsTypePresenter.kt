@@ -17,7 +17,7 @@ class PartsTypePresenter(
 
 
     private var baseModel: MecAttrsModelImpl? = null
-    private var page: Int = 0
+    private var page: Int = 1
     private var pageSize: Int = 30
 
     init {

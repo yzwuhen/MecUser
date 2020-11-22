@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
@@ -14,7 +13,7 @@ import com.example.mechanicalapp.ui.adapter.GoodsListAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.view.MyDecoration
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.activity_goods_list.*
 import kotlinx.android.synthetic.main.layout_search_et.*
@@ -46,7 +45,7 @@ class GoodsListActivity:BaseActivity<NetData>(),OnItemClickListener ,View.OnClic
         mList.add("1")
 
         mAdapter = GoodsListAdapter(this,mList,this)
-        recycle_list.addItemDecoration(MyDecoration(2))
+       recycle_list.addItemDecoration(MyDecoration(2))
         recycle_list.layoutManager = GridLayoutManager(this,2)
         recycle_list.adapter = mAdapter
 

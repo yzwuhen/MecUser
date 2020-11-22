@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="全部（2）"
-            android:textColor="@color/color_222"
+            android:textColor="@drawable/tv_comment_color"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="好评（0）"
-            android:textColor="@color/color_222"
+            android:textColor="@drawable/tv_comment_color"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="中评（0）"
-            android:textColor="@color/color_222"
+            android:textColor="@drawable/tv_comment_color"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="差评（0）"
-            android:textColor="@color/color_222"
+            android:textColor="@drawable/tv_comment_color"
             android:textSize="@dimen/sp_16" />
 
     </LinearLayout>

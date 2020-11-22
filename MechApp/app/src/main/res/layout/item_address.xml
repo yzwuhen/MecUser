@@ -30,11 +30,11 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_parts_money"
+                android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_20"
-                android:text="小计：￥2000"
+                android:text="1333333"
                 android:textColor="@color/color_9a"
                 android:textSize="14sp" />
 

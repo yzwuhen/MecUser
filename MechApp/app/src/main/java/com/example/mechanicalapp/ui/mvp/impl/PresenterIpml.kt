@@ -16,14 +16,14 @@ class PresenterImpl(
     BasePresenter {
 
     private var baseModel = ModelImpl()
-    private var page: Int = 0
+    private var page: Int = 1
     private var pageSize: Int = 30
 
     override fun request() {
     }
 
     fun getCollectList(type: Int) {
-        page = 0
+        page = 1
         baseView.showLoading()
         baseModel.getCollect(
             App.getInstance().token,
@@ -77,7 +77,7 @@ class PresenterImpl(
     }
 
     fun getCollectSecondHandList(type: Int) {
-        page = 0
+        page = 1
         baseView.showLoading()
         baseModel.getSecondCollect(
             App.getInstance().token,
@@ -131,7 +131,7 @@ class PresenterImpl(
     }
 
     fun getCollectPartsList(type: Int) {
-        page = 0
+        page = 1
         baseView.showLoading()
         baseModel.getPartsCollect(
             App.getInstance().token,
@@ -185,7 +185,7 @@ class PresenterImpl(
     }
 
     fun getFactoryCollect(type: Int) {
-        page = 0
+        page = 1
         baseView.showLoading()
         baseModel.getFactoryCollect(
             App.getInstance().token,
@@ -241,7 +241,7 @@ class PresenterImpl(
 
 
     fun getRecruitCollect(type: Int) {
-        page = 0
+        page = 1
         baseView.showLoading()
         baseModel.getRecruitCollect(
             App.getInstance().token,
@@ -298,7 +298,7 @@ class PresenterImpl(
 
 
     fun getGoodsCollect(type: Int) {
-        page = 0
+        page = 1
         baseView.showLoading()
         baseModel.getGoodsCollect(
             App.getInstance().token,

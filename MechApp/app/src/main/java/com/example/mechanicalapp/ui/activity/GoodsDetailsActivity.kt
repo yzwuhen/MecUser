@@ -18,8 +18,10 @@ import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.adapter.SpecAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReAddCar
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
+import com.example.mechanicalapp.ui.mvp.v.GoodsDetailsView
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
@@ -27,10 +29,11 @@ import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_goods_details.*
+import kotlinx.android.synthetic.main.item_comment.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLevelListener,
-    MecDetailsView<GoodsDetails> {
+    GoodsDetailsView {
 
     private var mShareDialog: BottomSheetDialog? = null
     private var mShareView: View? = null
@@ -78,7 +81,11 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
     private var specIndex2=-1
     private var spec =""
 
+    private var isCollect=false
+
     private var goodDetails:GoodsDetails?=null
+
+    private var bundleData:GoodsDetails.SkuListBean?=null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_goods_details
@@ -110,6 +117,7 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         mPresenter = DetailsPresenter(this)
         mPresenter?.getGoodsDetails(mecId)
         mPresenter?.getCommentList(mecId)
+        mPresenter?.judgeCollect(mecId)
     }
 
     override fun onClick(v: View?) {
@@ -138,7 +146,12 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
             ToastUtils.showText("请先登陆后再操作")
             return
         }
-        mPresenter?.addCollect(mReCollect)
+        if (isCollect){
+            mPresenter?.delCollect(mReCollect)
+        }else{
+            mPresenter?.addCollect(mReCollect)
+        }
+
     }
 
     private fun jumHomePage() {
@@ -171,18 +184,40 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
     }
 
     private fun buy() {
-        jumpActivity(null, SureOrderActivity::class.java)
+        if (bundleData==null){
+            ToastUtils.showText("请先选择规格")
+            return
+        }
+        var bundle =Bundle()
+        bundle.putSerializable("data",bundleData)
+
+        jumpActivity(bundle, SureOrderActivity::class.java)
 
     }
 
     private fun addCar() {
+    //    jumpActivity(null,ShopCarActivity::class.java)
+        if (bundleData==null){
+            ToastUtils.showText("请先选择规格")
+            return
+        }
+        if (TextUtils.isEmpty(App.getInstance().token)){
+            ToastUtils.showText("请先登录后操作")
+            return
+        }
+        var reAddCar=ReAddCar()
+        reAddCar.productId =mecId
+        reAddCar.skuId =bundleData?.id
+        reAddCar.quantity=1
 
-
+        mPresenter?.addShopCar(reAddCar)
     }
 
     private fun jumComment() {
 
-        jumpActivity(null, CommentListActivity::class.java)
+        var bundle =Bundle()
+        bundle.putString("id",mecId)
+        jumpActivity(bundle, CommentListActivity::class.java)
 
     }
 
@@ -274,6 +309,7 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
             for (goods in mSpecLst.iterator()){
                 if (spec == goods.name){
                     showDiaLogText(goods)
+                    bundleData =goods
                 }
             }
         }
@@ -296,6 +332,20 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
     }
 
     override fun err() {
+    }
+
+    override fun comment(mlist: List<CommentData>?) {
+        if (mlist==null|| mlist.isEmpty()){
+            ly_comment_info.visibility =View.GONE
+        }else{
+            ImageLoadUtils.loadImageCenterCrop(this,iv_comment_pic,mlist[0].commentUserHeader,R.mipmap.ic_launcher)
+            tv_comment_user_name.text =mlist[0].commentUserName
+            tv_buy_info.text ="${mlist[0].mecProductSkuName}"
+            tv_comment.text =mlist[0].content
+            ratingBar.rating =mlist[0].star
+
+        }
+
     }
 
     override fun showData(data: GoodsDetails?) {
@@ -354,10 +404,26 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
     }
 
     override fun collectSuccess(netData: NetData?) {
-        if (netData != null && netData.code == 200) {
-            tv_collected.text = "已收藏"
-            tv_collected.isSelected = true
+        if (netData is IsCollectBean){
+            if (netData.result ==1){
+                isCollect =true
+                tv_collected.text = "已收藏"
+                tv_collected.isSelected = true
+            }
+
+        }else{
+            if (netData != null && netData.code == 200) {
+                if (!isCollect){
+                    tv_collected.text = "已收藏"
+                    tv_collected.isSelected = true
+                }else{
+                    tv_collected.text = "收藏"
+                    tv_collected.isSelected = false
+                }
+                isCollect =!isCollect
+            }
+            ToastUtils.showText(netData?.message)
         }
-        ToastUtils.showText(netData?.message)
     }
+
 }

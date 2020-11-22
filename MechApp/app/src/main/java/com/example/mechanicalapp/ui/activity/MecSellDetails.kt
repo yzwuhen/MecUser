@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.BusinessDetails
+import com.example.mechanicalapp.ui.data.IsCollectBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
@@ -41,7 +42,7 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
     private var mPopwindow: PopupWindow? = null
-
+    private var isCollect=false
     var mList: MutableList<BannerData>? = ArrayList<BannerData>()
 
 
@@ -77,7 +78,7 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     override fun initPresenter() {
         mPresenter = DetailsPresenter(this)
         mPresenter?.getBusiness(mecId)
-
+        mPresenter?.judgeCollect(mecId)
     }
 
 
@@ -104,7 +105,11 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             ToastUtils.showText("请先登陆后再操作")
             return
         }
-        mPresenter?.addCollect(mReCollect)
+        if (isCollect){
+            mPresenter?.delCollect(mReCollect)
+        }else{
+            mPresenter?.addCollect(mReCollect)
+        }
     }
 
     private fun jumHomePage() {
@@ -232,9 +237,26 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     }
 
     override fun collectSuccess(netData: NetData?) {
-        if (netData!=null&&netData.code==200){
-            tv_collected.text ="已收藏"
+        if (netData is IsCollectBean){
+            if (netData.result ==1){
+                isCollect =true
+                tv_collected.text = "已收藏"
+                tv_collected.isSelected = true
+            }
+
+        }else{
+            if (netData != null && netData.code == 200) {
+                if (!isCollect){
+                    tv_collected.text = "已收藏"
+                    tv_collected.isSelected = true
+                }else{
+                    tv_collected.text = "收藏"
+                    tv_collected.isSelected = false
+                }
+                isCollect =!isCollect
+            }
+            ToastUtils.showText(netData?.message)
         }
-        ToastUtils.showText(netData?.message)
+
     }
 }

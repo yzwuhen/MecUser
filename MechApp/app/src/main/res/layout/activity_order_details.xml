@@ -27,6 +27,7 @@
                 android:paddingRight="@dimen/dp_10">
 
                 <TextView
+                    android:id="@+id/tv_order_num"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -373,8 +374,8 @@
                 <RatingBar
                     android:id="@+id/ratingBar"
                     style="@style/App_RatingBar"
-                    android:layout_width="80dp"
-                    android:layout_height="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:numStars="5"
                     android:rating="2.5"
@@ -386,7 +387,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="15dp"
                     android:layout_marginLeft="@dimen/dp_8"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginTop="12dp"
                     android:text="2.5分"
                     android:textColor="#FFB923"
                     android:textSize="13sp"

@@ -3,9 +3,11 @@ package com.example.mechanicalapp.ui.mvp.impl
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReAddCar
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
+import com.example.mechanicalapp.ui.mvp.v.GoodsDetailsView
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 
 class DetailsPresenter(
@@ -82,20 +84,24 @@ class DetailsPresenter(
 
 
     fun getCommentList(id: String?) {
-        baseView.showLoading()
-        baseModel.getComment(
+        baseModel.getCommentGoods(
             App.getInstance().token,
             id,0,2,
-            object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
+            object : ISubscriberListener<CommentBean> {
+                override fun onNext(t: CommentBean?) {
+                    if (t?.code==200&&t?.result!=null&&t?.result?.pages!=null){
+                        (baseView as GoodsDetailsView).comment(t?.result?.pages?.records)
+                    }else{
+                        (baseView as GoodsDetailsView).comment(null)
+                    }
+
                 }
 
                 override fun onError(e: Throwable?) {
-                    baseView.hiedLoading()
+                    (baseView as GoodsDetailsView).comment(null)
                 }
 
                 override fun onCompleted() {
-                    baseView.hiedLoading()
                 }
             })
     }
@@ -121,7 +127,59 @@ class DetailsPresenter(
                     baseView.hiedLoading()
                 }
             })
+    }
+    fun delCollect(recollect: ReCollect){
+        baseView.showLoading()
+        baseModel.delCollect(
+            App.getInstance().token,
+            recollect,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as MecDetailsView<NetData>).collectSuccess(t)
+                }
 
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    fun judgeCollect(id: String?){
+        baseModel.judgeCollect(
+            App.getInstance().token,
+            id,
+            0,
+            object : ISubscriberListener<IsCollectBean> {
+                override fun onNext(t: IsCollectBean?) {
+                  (baseView as MecDetailsView<NetData>).collectSuccess(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                }
+
+                override fun onCompleted() {
+                }
+            })
+    }
+
+    fun addShopCar(reAddCar: ReAddCar){
+        baseModel.addShopCar(
+            App.getInstance().token,
+            reAddCar,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                }
+
+                override fun onError(e: Throwable?) {
+                }
+
+                override fun onCompleted() {
+                }
+            })
     }
 
     override fun onDestroy() {

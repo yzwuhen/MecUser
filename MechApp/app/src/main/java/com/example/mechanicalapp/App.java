@@ -17,6 +17,7 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         Hawk.init(this).build();
+        mToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQxNzk5MzAsInVzZXJuYW1lIjoiMTM3NTE3NzM0MDIifQ.ddj_hfOE4suzdlSS0otscZjHzGDyuzJf4PhWs4b2sug";
     }
     public static App getInstance() {
         return instance;
@@ -36,7 +37,7 @@ public class App extends Application {
         mToken =token;
     }
     public String getToken(){
-        return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQxNTYwMjAsInVzZXJuYW1lIjoiMTM3NTE3NzM0MDIifQ.xdcw7xyur9wTXg4IPUXDZSKQuStnt76Graa5T_DI9N8";
+        return mToken;
     }
 
     public DPoint getThisPoint() {

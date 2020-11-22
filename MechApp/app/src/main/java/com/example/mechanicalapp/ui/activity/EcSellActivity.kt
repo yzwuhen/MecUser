@@ -199,6 +199,7 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
             for (str in mPicList) {
                 mReMecBusiness.pic = "$str,"
             }
+            mReMecBusiness.pic= mReMecBusiness.pic.substring(0,mReMecBusiness.pic.length-1)
             (mPresenter as AddManagePresenterImpl).addMecBusiness(mReMecBusiness)
         }
     }

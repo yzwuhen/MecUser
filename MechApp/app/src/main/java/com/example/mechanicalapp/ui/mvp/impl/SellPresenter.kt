@@ -17,7 +17,7 @@ class SellPresenter (
 
 
     private var baseModel: MecBuyModelImpl? = null
-    private var page: Int = 0
+    private var page: Int = 1
     private var pageSize: Int = 30
     private var brandId: String? = null
     private var cateId: String? = null

@@ -17,13 +17,13 @@
 
         <TextView
             android:id="@+id/tv_repair"
-            style="@style/tv_style_22_b5"
+            style="@style/tv_order_title"
             android:gravity="center"
             android:text="维修订单" />
 
         <TextView
             android:id="@+id/tv_engineer"
-            style="@style/tv_style_22_b5"
+            style="@style/tv_order_title"
             android:gravity="center"
             android:text="工程师" />
 

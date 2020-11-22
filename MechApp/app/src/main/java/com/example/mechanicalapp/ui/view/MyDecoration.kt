@@ -1,4 +1,4 @@
-package com.example.ktapp.views
+package com.example.mechanicalapp.ui.view
 
 import android.graphics.Canvas
 import android.graphics.Rect

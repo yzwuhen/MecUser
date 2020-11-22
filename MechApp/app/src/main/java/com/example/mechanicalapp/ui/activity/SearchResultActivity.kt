@@ -27,7 +27,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
 
     private var mMoreFactoryActivity:SearchResultFactoryAdapter?=null
     var mList: MutableList<String> = ArrayList<String>()
-
+    var mOrderList: MutableList<OrderData> = ArrayList<OrderData>()
     var mPartsList: MutableList<PartsData> = ArrayList<PartsData>()
     var mRecruitList: MutableList<RecruitData> = ArrayList<RecruitData>()
     var mLeaseList: MutableList<MecLeaseData> = ArrayList<MecLeaseData>()
@@ -70,7 +70,7 @@ class SearchResultActivity:BaseActivity<NetData>() , OnItemClickListener {
         }
 
         else if (type ==7){
-            mOrderAdapter = OrderAdapter(this, mList, this)
+            mOrderAdapter = OrderAdapter(this, mOrderList, this)
             recycler_list.adapter = mOrderAdapter
         }
         else if (type ==8){

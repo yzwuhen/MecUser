@@ -6,7 +6,6 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.GoodsListActivity
@@ -18,6 +17,7 @@ import com.example.mechanicalapp.ui.data.StoreChildBean
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.StorePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.StoreView
+import com.example.mechanicalapp.ui.view.MyDecoration
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.fragment_store.*

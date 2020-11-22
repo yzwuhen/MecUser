@@ -161,6 +161,7 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
             for (str in mPicList) {
                 mRePartsLease.pic = "$str,"
             }
+            mRePartsLease.pic= mRePartsLease.pic.substring(0,mRePartsLease.pic.length-1)
             (mPresenter as AddManagePresenterImpl).addPartsLease(mRePartsLease)
         }
     }

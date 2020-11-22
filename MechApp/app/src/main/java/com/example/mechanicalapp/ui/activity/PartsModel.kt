@@ -4,14 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.ktapp.views.MyDecoration
+import com.example.mechanicalapp.ui.view.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EcModelAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.MecModelData
-import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
 import com.example.mechanicalapp.ui.mvp.impl.PartsTypePresenter
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import kotlinx.android.synthetic.main.activity_ec_model.*

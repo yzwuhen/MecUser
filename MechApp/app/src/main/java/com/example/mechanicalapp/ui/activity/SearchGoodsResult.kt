@@ -2,14 +2,13 @@ package com.example.mechanicalapp.ui.activity
 
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.GoodsListAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.view.MyDecoration
 import kotlinx.android.synthetic.main.activity_search_result.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 

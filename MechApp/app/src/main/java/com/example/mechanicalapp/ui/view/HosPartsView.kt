@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.ktapp.views.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
@@ -26,7 +25,7 @@ class HosPartsView(var mContext: Context) : LinearLayout(mContext), OnItemClickL
         addView(view)
 
         mAdapter = HotPartsAdapter(mContext, mList, this)
-        recy_hot_parts.addItemDecoration(MyDecoration(2))
+       recy_hot_parts.addItemDecoration(MyDecoration(2))
         recy_hot_parts.layoutManager = GridLayoutManager(mContext, 2)
         recy_hot_parts.adapter = mAdapter
 

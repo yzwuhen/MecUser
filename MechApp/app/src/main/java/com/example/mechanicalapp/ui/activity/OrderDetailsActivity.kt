@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -7,16 +8,19 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
+import com.example.mechanicalapp.ui.mvp.v.BaseView
+import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_order_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
-    PopUtils.onViewListener {
+class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
+    PopUtils.onViewListener,OrderView<NetData> {
 
-    private var type: Int = 0
     private var popInfo: TextView? = null
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
@@ -28,7 +32,12 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
     private var popInputSure: TextView? = null
     private var mInputPopwindow: PopupWindow? = null
 
+    private var orderId=""
+    private var type=0
+    private var popIndex=0
 
+    private var mPresenter:OrderPresenter?=null
+    private var orderData:OrderData?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_order_details
     }
@@ -39,8 +48,11 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
         iv_right.setImageResource(R.mipmap.share_icon)
         tv_title.text = "订单详情"
 
-        type = intent.getIntExtra("order_type", 0)
+        orderId = intent.getStringExtra("id").toString()
+        type =intent.getIntExtra("status",0)
 
+        //type =0 的是是待确认 可以取消订单  默认显示取消订单的
+        //订单被接后 底部的私信和电话功能开通并显示维修工厂内容
         if (type == 1) {
             tv_cancel_order.visibility = View.GONE
             ly_state1.visibility = View.VISIBLE
@@ -76,6 +88,9 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
         tv_call1.setOnClickListener(this)
         ly_look_details2.setOnClickListener(this)
         ly_pay.setOnClickListener(this)
+
+        mPresenter = OrderPresenter(this)
+        mPresenter?.getOrderDetails(orderId)
     }
 
     override fun initPresenter() {
@@ -104,7 +119,7 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
             R.id.ly_look_details -> jumpActivity(null, DetailedListActivity::class.java)
             R.id.ly_look_details1 -> jumpActivity(null, DetailedListActivity::class.java)
             R.id.ly_evaluate -> jumpActivity(null, EvaluateActivity::class.java)
-            R.id.tv_pop_sure -> dismiss(0)
+            R.id.tv_pop_sure -> dismissPop()
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.tv_pop_input_cancel -> goVideo()
             R.id.tv_pop_input_sure -> goVideo()
@@ -114,8 +129,10 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
     }
 
     private fun call() {
-
-
+        //工程师电话没有
+//        if (orderData!=null){
+//            openCall(orderData.re)
+//        }
     }
 
     private fun goToChat() {
@@ -129,7 +146,7 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
     }
 
     private fun showPop(i: Int) {
-
+        popIndex =i
         if (mPopwindow == null) {
             mPopwindow = this?.let {
                 PopUtils.init(
@@ -154,9 +171,13 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
 
     }
 
-    private fun dismiss(types:Int){
+    private fun dismissPop(){
         PopUtils.dismissPop(this)
-        showPop()
+        if (popIndex==0){
+           mPresenter?.cancelOrder(orderId)
+        }else{
+            showPop()
+        }
     }
 
     private fun showPop() {
@@ -190,13 +211,59 @@ class OrderDetailsActivity : BaseActivity<NetData>(), View.OnClickListener,
     }
 
     override fun getView(view: View?) {
-
-
         popCancel = view?.findViewById(R.id.tv_pop_cancel)
         popSure = view?.findViewById(R.id.tv_pop_sure)
         popInfo = view?.findViewById(R.id.tv_pop_info)
-
         popCancel?.setOnClickListener(this)
         popSure?.setOnClickListener(this)
+    }
+
+    override fun showData(data: NetData?) {
+
+        if (data is OrderDetailsBean){
+            showOrderInfo(data.result)
+        }else{
+            ToastUtils.showText(data?.message)
+            if (data?.code==200){
+                finish()
+            }
+        }
+    }
+
+    private fun showOrderInfo(result: OrderData?) {
+
+        orderData =result
+        if (!TextUtils.isEmpty(result?.orderNum)){
+            tv_order_num.text = "订单号：${result?.orderNum}"
+        }else{
+            tv_order_num.text = ""
+        }
+        tv_order_state.text =result?.status_dictText
+
+        tv_ec_type.text = result?.productType
+        tv_ec_brand.text  =result?.productBrand
+        tv_ec_model.text =result?.productModel
+
+        tv_user_name.text =result?.customerName
+        tv_user_phone.text =result?.customerPhone
+
+        tv_company_name.text =result?.companyName
+        tv_company_address.text =result?.adress
+
+//        tv_order_type.text =result?.orderNum
+        tv_progress.text =result?.progress
+        tv_created_time.text =result?.createTime
+        tv_info.text =result?.orderDesc
+
+        tv_factory_name.text =result?.repairFactoryName
+      //  tv_score.text =result?.
+        //ratingBar
+        tv_worker_name.text =result?.repairName
+      //  tv_worker_type.text =result?.
+        //tv_worker_time
+    }
+
+
+    override fun showDataMore(data: NetData?) {
     }
 }

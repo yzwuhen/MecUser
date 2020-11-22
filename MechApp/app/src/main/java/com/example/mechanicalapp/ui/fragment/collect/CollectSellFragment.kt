@@ -59,8 +59,8 @@ class CollectSellFragment : BaseCusFragment(), OnItemClickListener,View.OnClickL
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable = true
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable = true
+        spring_list?.onFinishFreshAndLoad()
     }
 
 

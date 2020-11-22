@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -132,7 +133,11 @@ abstract class BaseCusActivity : AppCompatActivity() {
         }
 
     }
-
+    open fun openCall(phone: String) {
+        val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone"))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
     open fun hasPermissions() {
 
     }

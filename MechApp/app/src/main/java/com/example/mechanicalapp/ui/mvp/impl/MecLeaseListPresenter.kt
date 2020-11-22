@@ -16,7 +16,7 @@ class MecLeaseListPresenter(
 
 
     private var baseModel: MecLeaseModelImp? = null
-    private var page: Int = 0
+    private var page: Int = 1
     private var pageSize: Int = 30
     private var brandId: String? = null
     private var cateId: String? = null

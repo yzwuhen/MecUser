@@ -17,7 +17,7 @@ class MyReleasePresenterImpl(
 
     //不想写那么多了直接都用这个ModelImpl
     private var baseModel = ModelImpl()
-    private var page: Int = 0;
+    private var page: Int = 1;
     private var pageSize: Int = 30;
 
     override fun request() {
@@ -33,7 +33,7 @@ class MyReleasePresenterImpl(
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.records?.let {
                                 (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(
                                     it
@@ -50,7 +50,7 @@ class MyReleasePresenterImpl(
                     } else {
                         (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -138,7 +138,7 @@ class MyReleasePresenterImpl(
             object : ISubscriberListener<MoreSellBean> {
                 override fun onNext(t: MoreSellBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.records?.let {
                                 (baseView as MyReleaseView<MecSellData>)?.refreshUI(
                                     it
@@ -155,7 +155,7 @@ class MyReleasePresenterImpl(
                     } else {
                         (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -243,7 +243,7 @@ class MyReleasePresenterImpl(
             object : ISubscriberListener<PartsBean> {
                 override fun onNext(t: PartsBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.records?.let {
                                 (baseView as MyReleaseView<PartsData>)?.refreshUI(
                                     it
@@ -260,7 +260,7 @@ class MyReleasePresenterImpl(
                     } else {
                         (baseView as MyReleaseView<PartsData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -348,7 +348,7 @@ class MyReleasePresenterImpl(
             object : ISubscriberListener<RecruitBean> {
                 override fun onNext(t: RecruitBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.records?.let {
                                 (baseView as MyReleaseView<RecruitData>)?.refreshUI(
                                     it
@@ -365,7 +365,7 @@ class MyReleasePresenterImpl(
                     } else {
                         (baseView as MyReleaseView<RecruitData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -447,6 +447,6 @@ class MyReleasePresenterImpl(
     }
 
     fun resetPage() {
-        page = 0
+        page = 1
     }
 }

@@ -8,7 +8,6 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.PartsOrderFragment
 import kotlinx.android.synthetic.main.activity_parts_order.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -78,7 +77,6 @@ class PartsOrderActivity:BaseActivity<NetData>(),View.OnClickListener ,ViewPager
             R.id.tv_order3 -> showView(2)
             R.id.tv_order4 -> showView(3)
             R.id.tv_order5 -> showView(4)
-            R.id.tv_order6 -> showView(5)
         }
     }
     private fun showView(index: Int) {

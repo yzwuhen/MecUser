@@ -16,7 +16,7 @@ class FactoryPresenter(
 
 
     private var baseModel: ModelImpl? = null
-    private var page: Int = 0
+    private var page: Int = 1
     private var pageSize: Int = 30
     private var mecType: String? = null
     private var partsType: String? = null

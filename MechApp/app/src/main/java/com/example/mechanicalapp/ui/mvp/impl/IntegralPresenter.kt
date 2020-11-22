@@ -15,7 +15,7 @@ class IntegralPresenter (
 ) :
     BasePresenter {
     private var baseModel = ModelImpl()
-    private var page: Int = 0;
+    private var page: Int = 1;
     private var pageSize: Int = 30;
     override fun request() {
 
@@ -58,7 +58,7 @@ class IntegralPresenter (
                         (baseView as IntegralView<List<IntegralData>>).showDataMore(t?.result?.records)
                     }
                 }
-                page++
+                ++page
             }
 
             override fun onError(e: Throwable?) {

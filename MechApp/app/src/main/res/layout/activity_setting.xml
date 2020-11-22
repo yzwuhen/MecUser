@@ -40,7 +40,7 @@
 
             <TextView
                 style="@style/tv_setting_style_right"
-                android:drawableRight="@mipmap/switch_s" />
+                android:drawableRight="@drawable/swtich_icon" />
         </LinearLayout>
 
         <View style="@style/h_view_1" />
@@ -55,7 +55,7 @@
 
             <TextView
                 style="@style/tv_setting_style_right"
-                android:drawableRight="@mipmap/switch_s" />
+                android:drawableRight="@drawable/swtich_icon" />
         </LinearLayout>
 
         <View style="@style/h_view_1" />

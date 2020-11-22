@@ -29,7 +29,9 @@
                 <TextView
                     style="@style/tv_style_left1"
                     android:text="设备名称" />
-                <EditText android:id="@+id/et_ec_name" android:hint="请输入设备名称" style="@style/et_style" />
+                <EditText android:id="@+id/et_ec_name"
+                    android:hint="请输入设备名称"
+                    style="@style/et_style" />
             </LinearLayout>
 
 
@@ -97,6 +99,7 @@
                 <EditText
                     android:hint="请输入工作时长"
                     android:id="@+id/et_work_time"
+                    android:inputType="numberDecimal"
                     style="@style/et_style" />
                 <View
                     style="@style/v_view_1"/>
@@ -106,13 +109,16 @@
             </LinearLayout>
 
             <View style="@style/h_view_1" />
-            <LinearLayout style="@style/ly_style_h">
+            <LinearLayout
+                android:id="@+id/ly_address"
+                style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
                     android:text="地         址" />
+
                 <TextView
-                    android:id="@+id/et_daaress"
+                    android:id="@+id/et_address"
                     style="@style/et_style" />
 
                 <ImageView

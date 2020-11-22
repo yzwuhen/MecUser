@@ -5,12 +5,12 @@
     <!--默认样式-->
     <item
         android:id="@android:id/background"
-        android:drawable="@mipmap/star_n" />
+        android:drawable="@mipmap/details_collected" />
     <item
         android:id="@android:id/secondaryProgress"
-        android:drawable="@mipmap/star_n" />
+        android:drawable="@mipmap/details_collected" />
     <!--进度样式-->
     <item
         android:id="@android:id/progress"
-        android:drawable="@mipmap/star_s" />
+        android:drawable="@mipmap/details_collect_s" />
 </layer-list>

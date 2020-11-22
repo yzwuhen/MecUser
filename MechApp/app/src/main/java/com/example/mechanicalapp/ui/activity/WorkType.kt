@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ktapp.views.MyDecoration
+import com.example.mechanicalapp.ui.view.MyDecoration
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
@@ -18,7 +18,6 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.MecTypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
-import kotlinx.android.synthetic.main.item_work_type.view.*
 
 class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData> {
 

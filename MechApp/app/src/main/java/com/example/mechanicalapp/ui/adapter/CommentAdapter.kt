@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.CommentData
+import com.example.mechanicalapp.utils.ImageLoadUtils
+import kotlinx.android.synthetic.main.item_comment.view.*
 
-class CommentAdapter  (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CommentAdapter  (var mContext: Context, var mlist:MutableList<CommentData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -17,11 +20,17 @@ class CommentAdapter  (var mContext: Context, var mList:MutableList<String>, var
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_comment_pic,mlist[position].commentUserHeader,R.mipmap.ic_launcher)
+        holder.itemView.tv_comment_user_name.text =mlist[position].commentUserName
+        holder.itemView.tv_buy_info.text ="${mlist[position].mecProductSkuName}"
+        holder.itemView.tv_comment.text =mlist[position].content
+        holder.itemView.ratingBar.rating =mlist[position].star
+
     }
 
     override fun getItemCount(): Int {
 
-        return mList.size
+        return mlist.size
     }
 
     class CommentVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){

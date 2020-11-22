@@ -6,20 +6,19 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.CommentAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.CommentData
 import com.example.mechanicalapp.ui.mvp.impl.CommentPresenter
-import com.example.mechanicalapp.ui.mvp.impl.PresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.CommentView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.activity_comment.*
+import kotlinx.android.synthetic.main.fragment_comment.*
 
 class FragmentComment(private var type:Int,private var id:String): BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     CommentView{
 
 
     private var mAdapter: CommentAdapter?=null
-    private var mList:MutableList<String> =ArrayList<String>()
+    private var mList:MutableList<CommentData> =ArrayList<CommentData>()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_comment
@@ -61,7 +60,7 @@ class FragmentComment(private var type:Int,private var id:String): BaseCusFragme
             (mPresenter as CommentPresenter).getCommentMiddle(id)
         }
         else if (type==3){
-            (mPresenter as CommentPresenter).getCommentMiddle(id)
+            (mPresenter as CommentPresenter).getCommentBad(id)
         }
     }
 
@@ -76,11 +75,19 @@ class FragmentComment(private var type:Int,private var id:String): BaseCusFragme
     override fun onClick(p0: View?) {
     }
 
-    override fun refreshUI(list: List<NetData>?) {
-
+    override fun refreshUI(list: List<CommentData>?) {
+        mList.clear()
+        if (list!=null){
+            mList.addAll(list)
+        }
+        mAdapter?.notifyDataSetChanged()
     }
 
-    override fun loadMore(list: List<NetData>?) {
+    override fun loadMore(list: List<CommentData>?) {
+        if (list!=null){
+            mList.addAll(list)
+            mAdapter?.notifyDataSetChanged()
+        }
     }
 
     override fun showLoading() {
@@ -88,6 +95,7 @@ class FragmentComment(private var type:Int,private var id:String): BaseCusFragme
     }
 
     override fun hiedLoading() {
+        closeRefreshView()
     }
 
     override fun err() {

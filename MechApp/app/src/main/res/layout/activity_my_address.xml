@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <include layout="@layout/layout_title" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="@dimen/dp_45"
-        android:id="@+id/recycler_list"
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/spring_list"
+        android:layout_marginBottom="60dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_45">
 
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recycler_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.liaoinstan.springview.widget.SpringView>
 
     <TextView
         android:id="@+id/tv_btn"

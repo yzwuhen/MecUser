@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.fragment.mine
 
+import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mechanicalapp.App
@@ -11,6 +12,7 @@ import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener {
@@ -38,9 +40,14 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     private fun showInfo() {
 
 
-        tv_user_nick.text =App.getInstance().userInfo.username
-        tv_phone.text =App.getInstance().userInfo.phone
-        ImageLoadUtils.loadImageCenterCrop(mContext,iv_user_pic,App.getInstance().userInfo.avatar,R.mipmap.ic_launcher)
+        tv_user_nick.text = App.getInstance().userInfo.username
+        tv_phone.text = App.getInstance().userInfo.phone
+        ImageLoadUtils.loadImageCenterCrop(
+            mContext,
+            iv_user_pic,
+            App.getInstance().userInfo.avatar,
+            R.mipmap.ic_launcher
+        )
     }
 
     override fun initView() {
@@ -58,21 +65,40 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
         iv_user_pic.setOnClickListener(this)
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     override fun onItemClick(view: View, position: Int) {
 
         when (position) {
-            0 -> jumpActivity(null, PersonalCertification::class.java)
-            1 -> jumpActivity(null, CompanyCertifyActivity::class.java)
-            2 -> jumpActivity(null, MyMecListActivity::class.java)
-            3 -> jumpActivity(null, MyLookActivity::class.java)
-            4 -> jumpActivity(null, OrderCenterActivity::class.java)
-            5 -> jumpActivity(null, PartsOrderActivity::class.java)
-            6 -> jumpActivity(null, FactoryApplyActivity::class.java)
+            0 ->
+                if (isLogin()) {
+                    jumpActivity(null, PersonalCertification::class.java)
+                }
+            1 ->
+                if (isLogin()) {
+                    jumpActivity(null, CompanyCertifyActivity::class.java)
+                }
+            2 ->
+                if (isLogin()) {
+                    jumpActivity(null, MyMecListActivity::class.java)
+                }
+            3 -> if (isLogin()) {
+                jumpActivity(null, MyLookActivity::class.java)
+            }
+            4 -> if (isLogin()) {
+                jumpActivity(null, OrderCenterActivity::class.java)
+            }
+            5 ->  if (isLogin()) {
+                jumpActivity(null, PartsOrderActivity::class.java)
+            }
+            6 ->  if (isLogin()) {
+                jumpActivity(null, FactoryApplyActivity::class.java)
+            }
             7 -> jumpActivity(null, SettingActivity::class.java)
-            9 -> jumpActivity(null, SuggestActivity::class.java)
+            9 -> if (isLogin()) {
+                jumpActivity(null, SuggestActivity::class.java)
+            }
         }
     }
 
@@ -80,12 +106,40 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
 
         when (view?.id) {
             R.id.iv_user_pic -> jumpActivity(null, LoginActivity::class.java)
-            R.id.tv_edit -> jumpActivity(null, UserDataActivity::class.java)
-            R.id.ly_address -> jumpActivity(null, MyAddressActivity::class.java)
-            R.id.ly_integral -> jumpActivity(null, MyIntegralActivity::class.java)
-            R.id.ly_collected -> jumpActivity(null, MyCollectActivity::class.java)
-            R.id.ly_release -> jumpActivity(null, MyReleaseActivity::class.java)
+            R.id.tv_edit -> {
+                if (isLogin()) {
+                    jumpActivity(null, UserDataActivity::class.java)
+                }
+            }
+            R.id.ly_address -> {
+                if (isLogin()) {
+                    jumpActivity(null, MyAddressActivity::class.java)
+                }
+            }
+            R.id.ly_integral -> {
+                if (isLogin()) {
+                    jumpActivity(null, MyIntegralActivity::class.java)
+                }
+            }
+            R.id.ly_collected -> {
+                if (isLogin()) {
+                    jumpActivity(null, MyCollectActivity::class.java)
+                }
+            }
+            R.id.ly_release -> {
+                if (isLogin()) {
+                    jumpActivity(null, MyReleaseActivity::class.java)
+                }
+            }
         }
 
+    }
+
+    private fun isLogin(): Boolean {
+        if (TextUtils.isEmpty(App.getInstance().token)) {
+            ToastUtils.showText("请先登录")
+            return false
+        }
+        return true
     }
 }

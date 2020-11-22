@@ -28,7 +28,7 @@
         <ImageView
             android:layout_width="62dp"
             android:layout_height="34dp"
-            android:src="@mipmap/switch_s" />
+            android:src="@drawable/swtich_icon" />
 
     </LinearLayout>
 

@@ -13,7 +13,7 @@ class MyLookPresenter(
     BasePresenter {
 
     private var baseModel = ModelImpl()
-    private var page: Int = 0
+    private var page: Int = 1
     private var pageSize: Int = 30
     override fun request() {
     }
@@ -28,7 +28,7 @@ class MyLookPresenter(
             object : ISubscriberListener<MyLookLeaseBean> {
                 override fun onNext(t: MyLookLeaseBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.let {
                                 (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(
                                     it
@@ -45,7 +45,7 @@ class MyLookPresenter(
                     } else {
                         (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -68,7 +68,7 @@ class MyLookPresenter(
             object : ISubscriberListener<MyLookLeaseBean> {
                 override fun onNext(t: MyLookLeaseBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.let {
                                 (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(
                                     it
@@ -85,7 +85,7 @@ class MyLookPresenter(
                     } else {
                         (baseView as MyReleaseView<MecLeaseData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -108,7 +108,7 @@ class MyLookPresenter(
             object : ISubscriberListener<LookPartsBean> {
                 override fun onNext(t: LookPartsBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.let {
                                 (baseView as MyReleaseView<PartsData>)?.refreshUI(
                                     it
@@ -125,7 +125,7 @@ class MyLookPresenter(
                     } else {
                         (baseView as MyReleaseView<PartsData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -150,7 +150,7 @@ class MyLookPresenter(
             object : ISubscriberListener<LookRecruitBean> {
                 override fun onNext(t: LookRecruitBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.let {
                                 (baseView as MyReleaseView<RecruitData>)?.refreshUI(
                                     it
@@ -167,7 +167,7 @@ class MyLookPresenter(
                     } else {
                         (baseView as MyReleaseView<RecruitData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -189,7 +189,7 @@ class MyLookPresenter(
             object : ISubscriberListener<LookFactoryBean> {
                 override fun onNext(t: LookFactoryBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.records?.let {
                                 (baseView as MyReleaseView<FactoryData>)?.refreshUI(
                                     it
@@ -206,7 +206,7 @@ class MyLookPresenter(
                     } else {
                         (baseView as MyReleaseView<FactoryData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -230,7 +230,7 @@ class MyLookPresenter(
             object : ISubscriberListener<LookGoodsBean> {
                 override fun onNext(t: LookGoodsBean?) {
                     if (t?.code == 200 && t?.result != null) {
-                        if (page == 0) {
+                        if (page == 1) {
                             t?.result?.let {
                                 (baseView as MyReleaseView<GoodsData>)?.refreshUI(
                                     it
@@ -247,7 +247,7 @@ class MyLookPresenter(
                     } else {
                         (baseView as MyReleaseView<GoodsData>)?.refreshUI(null)
                     }
-                    page++
+                    ++page
                 }
 
                 override fun onError(e: Throwable?) {
@@ -264,6 +264,6 @@ class MyLookPresenter(
     }
 
     fun resetPage() {
-        page = 0
+        page = 1
     }
 }

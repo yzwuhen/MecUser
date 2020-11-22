@@ -238,7 +238,7 @@ public class GoodsDetails implements Serializable {
         this.skuItems = skuItems;
     }
 
-    public static class SkuListBean {
+    public static class SkuListBean implements Serializable{
         /**
          * id : 16038070877750329019
          * createBy : admin

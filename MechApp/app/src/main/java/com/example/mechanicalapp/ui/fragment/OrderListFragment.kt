@@ -7,68 +7,58 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.OrderDetailsActivity
 import com.example.mechanicalapp.ui.adapter.OrderAdapter
-import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.OrderBean
+import com.example.mechanicalapp.ui.data.OrderData
+import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
+import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
-
 import kotlinx.android.synthetic.main.layout_spring_list.*
 
 
-class OrderListFragment(var type: Int) : BaseFragment<NetData>(), OnItemClickListener {
+class OrderListFragment(var type: String) : BaseCusFragment(), OnItemClickListener,OrderView<OrderBean>{
 
 
     private var mAdapter: OrderAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
-    override fun showLoading() {
-
-
-    }
-
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-
-    }
+    var mList: MutableList<OrderData> = ArrayList<OrderData>()
 
     override fun initView() {
         super.initView()
         mAdapter = OrderAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
-
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
-
+        spring_list.type = SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(mContext)
+        spring_list.footer = RefreshHeaderUtils.getFooterView(mContext)
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
-                //  initData()
-                closeRefreshView()
+                spring_list.isEnable = false
+                (mPresenter as OrderPresenter).resetPage()
+                (mPresenter as OrderPresenter).getOrderList(type)
             }
 
-            override fun onLoadmore() {}
+            override fun onLoadmore() {
+                (mPresenter as OrderPresenter).getOrderList(type)
+            }
         })
+
+
+        mPresenter = OrderPresenter( this)
+        (mPresenter as OrderPresenter).getOrderList(type)
+
 
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
 
-
-
     override fun hiedLoading() {
-
+        closeRefreshView()
+    }
+    override fun showLoading() {
     }
 
     override fun getLayoutId(): Int {
@@ -77,9 +67,9 @@ class OrderListFragment(var type: Int) : BaseFragment<NetData>(), OnItemClickLis
 
 
     override fun onItemClick(view: View, position: Int) {
-
         var bundle =Bundle()
-        bundle.putInt("order_type",position)
+        bundle.putString("id",mList[position].id)
+        bundle.putInt("status",mList[position].status)
         jumpActivity(bundle,OrderDetailsActivity::class.java)
 
     }
@@ -87,5 +77,20 @@ class OrderListFragment(var type: Int) : BaseFragment<NetData>(), OnItemClickLis
     override fun err() {
 
 
+    }
+
+    override fun showData(data: OrderBean?) {
+        mList.clear()
+        if (data?.code==200&& data?.result?.records?.isNotEmpty()!!){
+            mList.addAll(data?.result?.records!!)
+        }
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun showDataMore(data: OrderBean?) {
+        if (data?.code==200&& data?.result?.records?.isNotEmpty()!!){
+            mList.addAll(data?.result?.records!!)
+            mAdapter?.notifyDataSetChanged()
+        }
     }
 }

@@ -29,4 +29,21 @@ class AddMecPresenter(
             }
         })
     }
+
+    fun editMec(reAddMec: ReAddMec){
+        baseView.showLoading()
+        baseModel.editMec(App.getInstance().token,reAddMec, object :
+            ISubscriberListener<NetData> {
+            override fun onNext(t: NetData?) {
+                (baseView as PersonCerView).success(t)
+            }
+            override fun onError(e: Throwable?) {
+                baseView.hiedLoading()
+                baseView.err()
+            }
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        })
+    }
 }

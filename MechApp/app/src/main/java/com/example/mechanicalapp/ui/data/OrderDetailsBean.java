@@ -9,13 +9,13 @@ public class OrderDetailsBean  extends NetData{
      * timestamp : 1606057995580
      */
 
-    private OrderData result;
+    private OrderDetailsData result;
 
-    public OrderData getResult() {
+    public OrderDetailsData getResult() {
         return result;
     }
 
-    public void setResult(OrderData result) {
+    public void setResult(OrderDetailsData result) {
         this.result = result;
     }
 }

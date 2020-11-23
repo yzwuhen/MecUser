@@ -24,7 +24,23 @@ import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.youth.banner.indicator.CircleIndicator
+import kotlinx.android.synthetic.main.activity_mec_buy_details.*
 import kotlinx.android.synthetic.main.activity_mec_sell_details.*
+import kotlinx.android.synthetic.main.activity_mec_sell_details.iv_sr
+import kotlinx.android.synthetic.main.activity_mec_sell_details.ly_call
+import kotlinx.android.synthetic.main.activity_mec_sell_details.ly_chat
+import kotlinx.android.synthetic.main.activity_mec_sell_details.ly_user_info
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_address
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_browse
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_browse_time
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_collected
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_details
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_mec_brand
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_mec_model
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_mec_type
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_report
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_user_nick
+import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_work_time
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
@@ -199,7 +215,7 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
                 banner.indicator = CircleIndicator(this)
             }
             tv_details_title.text =data.tittle
-            tv_browse.text ="浏览量："
+            tv_browse.text = "浏览量：${data.viewNum}"
             tv_browse_time.text = DateUtils.dateDiffs(data.createTime,System.currentTimeMillis())
 
             tv_cost.text ="￥${data.price}/元"

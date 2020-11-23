@@ -22,6 +22,21 @@ import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_ask_details.*
+import kotlinx.android.synthetic.main.activity_ask_details.ly_call
+import kotlinx.android.synthetic.main.activity_ask_details.ly_chat
+import kotlinx.android.synthetic.main.activity_ask_details.ly_user_info
+import kotlinx.android.synthetic.main.activity_ask_details.tv_address
+import kotlinx.android.synthetic.main.activity_ask_details.tv_browse
+import kotlinx.android.synthetic.main.activity_ask_details.tv_browse_time
+import kotlinx.android.synthetic.main.activity_ask_details.tv_collected
+import kotlinx.android.synthetic.main.activity_ask_details.tv_details
+import kotlinx.android.synthetic.main.activity_ask_details.tv_factory_time
+import kotlinx.android.synthetic.main.activity_ask_details.tv_mec_brand
+import kotlinx.android.synthetic.main.activity_ask_details.tv_mec_model
+import kotlinx.android.synthetic.main.activity_ask_details.tv_mec_type
+import kotlinx.android.synthetic.main.activity_ask_details.tv_report
+import kotlinx.android.synthetic.main.activity_ask_details.tv_user_nick
+import kotlinx.android.synthetic.main.activity_lease_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
@@ -190,7 +205,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
                 tv_coast_money.text ="￥${data.price}/${data.priceUnit_dictText}"
             }
 
-            tv_browse.text ="浏览量："
+            tv_browse.text = "浏览量：${data.viewNum}"
             tv_browse_time.text = DateUtils.dateDiffs(data.createTime,System.currentTimeMillis())
 
 

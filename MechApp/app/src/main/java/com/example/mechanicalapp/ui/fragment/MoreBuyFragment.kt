@@ -1,10 +1,12 @@
 package com.example.mechanicalapp.ui.fragment
 
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.ProgressListener
 import com.example.mechanicalapp.ui.activity.AskDetailsActivity
@@ -18,34 +20,36 @@ import com.example.mechanicalapp.ui.data.MecBuyData
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.MecBuyPresenter
+import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
+import com.example.mechanicalapp.ui.mvp.impl.SellPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecBuyView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
-class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+class MoreBuyFragment : BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener, ProgressListener, MecBuyView<NetData> {
     var mAdapter: MoreBuyAdapter? = null
     var mList: MutableList<MecSellData> = ArrayList<MecSellData>()
 
-    var popRecy : RecyclerView?=null
-    var mScreenAdapter : ScreenAdapter?=null
+    var popRecy: RecyclerView? = null
+    var mScreenAdapter: ScreenAdapter? = null
 
-    private var mStringList :MutableList<String> = ArrayList<String>()
+    private var mStringList: MutableList<String> = ArrayList<String>()
 
-    private var mButtDialog: BottomSheetDialog?=null
-    private var mDialogView: View?=null
+    private var mButtDialog: BottomSheetDialog? = null
+    private var mDialogView: View? = null
 
-    private var mDialogTvRest: TextView?=null
-    private var mDialogTvSure: TextView?=null
-    private var mProgress1: TwoWayProgressBar?=null
-    private var mProgress2: TwoWayProgressBar?=null
-    private var mProgress3: TwoWayProgressBar?=null
+    private var mDialogTvRest: TextView? = null
+    private var mDialogTvSure: TextView? = null
+    private var mProgress1: TwoWayProgressBar? = null
+    private var mProgress2: TwoWayProgressBar? = null
+    private var mProgress3: TwoWayProgressBar? = null
 
-    private var list1:MutableList<String> =ArrayList<String>()
-    private var list2:MutableList<String> =ArrayList<String>()
-    private var list3:MutableList<String> =ArrayList<String>()
+    private var list1: MutableList<String> = ArrayList<String>()
+    private var list2: MutableList<String> = ArrayList<String>()
+    private var list3: MutableList<String> = ArrayList<String>()
 
 
     override fun initView() {
@@ -69,7 +73,7 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
         ly_screen4.setOnClickListener(this)
         ly_screen5.setOnClickListener(this)
 
-        mPresenter = MecBuyPresenter(mContext,this)
+        mPresenter = MecBuyPresenter(mContext, this)
         (mPresenter as MecBuyPresenter).getBuyList(2)
     }
 
@@ -86,25 +90,38 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
 
     private fun showInput() {
 
-        activity?.let { PopUtils.init(mContext, it,this) }
+        activity?.let { PopUtils.init(mContext, it, this) }
         PopUtils.showPopupWindow(tv_screen1)
     }
 
     override fun onClick(p0: View?) {
-        when(p0?.id){
-            R.id.ly_screen1 ->jumpActivity(null, EcModel::class.java)
-            R.id.ly_screen2->jumpActivity(null, Brand::class.java)
-            R.id.ly_screen3->jumpActivity(null, EcType::class.java)
-            R.id.ly_screen4->showInput()
-            R.id.ly_screen5->showDialogType()
-            R.id.tv_sure->mButtDialog?.dismiss()
-            R.id.tv_reset->mButtDialog?.dismiss()
+        when (p0?.id) {
+            R.id.ly_screen1 -> jumpActivityForResult(
+                Configs.EC_TYPE_RESULT_CODE,
+                0,
+                EcModel::class.java
+            )
+            R.id.ly_screen2 -> jumpActivityForResult(
+                Configs.EC_BRAND_RESULT_CODE,
+                0,
+                Brand::class.java
+            )
+            R.id.ly_screen3 -> jumpActivityForResult(
+                Configs.EC_MODEL_RESULT_CODE,
+                0,
+                EcType::class.java
+            )
+            R.id.ly_screen4 -> showInput()
+            R.id.ly_screen5 -> showDialogType()
+            R.id.tv_sure -> mButtDialog?.dismiss()
+            R.id.tv_reset -> mButtDialog?.dismiss()
         }
     }
-    private fun showDialogType(){
-        if (mButtDialog ==null){
+
+    private fun showDialogType() {
+        if (mButtDialog == null) {
             mButtDialog = BottomSheetDialog(mContext)
-            mDialogView = View.inflate(mContext, R.layout.dialog_screen,null)
+            mDialogView = View.inflate(mContext, R.layout.dialog_screen, null)
             mButtDialog?.setContentView(mDialogView!!)
 
             mDialogTvRest = mDialogView?.findViewById(R.id.tv_reset)
@@ -160,8 +177,9 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
 
         mButtDialog?.show()
     }
+
     override fun getView(view: View?) {
-        popRecy =view?.findViewById(R.id.pop_recycler_list)
+        popRecy = view?.findViewById(R.id.pop_recycler_list)
         mScreenAdapter = ScreenAdapter(mContext, mStringList, this)
         popRecy?.layoutManager = LinearLayoutManager(mContext)
         popRecy?.adapter = mScreenAdapter
@@ -175,6 +193,43 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
+        showResult(
+            requestCode,
+            data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+            data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+        )
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
+        if (extra.isNullOrEmpty()) {
+            return
+        }
+        when (requestCode) {
+            Configs.EC_TYPE_RESULT_CODE -> {
+                tv_screen1.text = extra
+                (mPresenter as MecBuyPresenter)?.setCateId(extraId)
+            }
+            Configs.EC_BRAND_RESULT_CODE -> {
+                tv_screen2.text = extra
+                (mPresenter as MecBuyPresenter)?.setBrandId(extraId)
+            }
+            Configs.EC_MODEL_RESULT_CODE -> {
+                tv_screen3.text = extra
+                (mPresenter as MecBuyPresenter)?.setModelId(extraId)
+            }
+
+        }
+        refresh()
+    }
+
+    private fun refresh() {
+        (mPresenter as MecBuyPresenter).getBuyList(2)
+    }
+
     override fun refreshUI(list: List<MecSellData>) {
         mList.clear()
         mList.addAll(list)
@@ -182,6 +237,8 @@ class MoreBuyFragment: BaseCusFragment(), OnItemClickListener, View.OnClickListe
     }
 
     override fun loadMore(list: List<MecSellData>) {
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
     }
 
     override fun err() {

@@ -1,9 +1,11 @@
 package com.example.mechanicalapp.ui.data.request;
 
+import java.io.Serializable;
+
 /**
  * 出售求购 request
  */
-public class ReMecBusiness {
+public class ReMecBusiness implements Serializable {
 
 
     /**

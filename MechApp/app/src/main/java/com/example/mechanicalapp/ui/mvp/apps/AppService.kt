@@ -235,9 +235,8 @@ interface AppService {
         @Query("bussiessType") bussiessType: Int,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
-        @Query(" brandId") brandId: String?,
         @Query("cateId") cateId: String?,
-        @Query("modelId") modelId: String?
+        @Query("title") title: String?
     ): Observable<PartsBean>
 
 
@@ -252,7 +251,8 @@ interface AppService {
         @Query("pageSize") pageSize: Int,
         @Query(" brandId") brandId: String?,
         @Query("cateId") cateId: String?,
-        @Query("modelId") modelId: String?
+        @Query("modelId") modelId: String?,
+        @Query("title") title: String?
     ): Observable<MoreBusinessData>
 
 
@@ -642,7 +642,7 @@ interface AppService {
      *
      * wo de 地址
      */
-    @GET("/jeecg-boot/shop/mecReceiver/list")
+    @GET("/jeecg-boot/shop/mecReceiver/getMylist")
     fun getAddressList(
         @Header("X-Access-Token") token: String?,
         @Query("pageNo") pageNo: Int,
@@ -918,16 +918,41 @@ interface AppService {
     ): Observable<NetData>
 
     /**
+     * 编辑我的设备
+     */
+    @POST("/jeecg-boot/machine/mecMachine/edit")
+    fun editMec(
+        @Header("X-Access-Token") token: String?,
+        @Body reAddMec: ReAddMec
+    ): Observable<NetData>
+
+
+
+    /**
      *
      *获取维修订单
      */
     @GET("/jeecg-boot/repair/mecRepairOrder/list")
     fun getOrderList(
         @Header("X-Access-Token") token: String?,
-        @Query("state") state: String?,
+        @Query("status") state: String?,
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int?
     ): Observable<OrderBean>
+
+    /**
+     *
+     *获取配件订单
+     */
+    @GET("/jeecg-boot/shop/mecOrder/list")
+    fun getPartsOrderList(
+        @Header("X-Access-Token") token: String?,
+        @Query("status") state: String?,
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int?
+    ): Observable<OrderBean>
+
+
 
     /**
      *
@@ -947,4 +972,19 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<NetData>
+
+
+    /**
+     * 我的商品列表
+     */
+    @GET("/jeecg-boot/shop/mecProd/appListPage")
+    fun getGoodsList(
+        @Header("X-Access-Token") token: String?,
+        @Query("orderByPrice") orderByPrice: Int,
+        @Query("orderByScale") orderByScale: Int,
+        @Query("orderType") orderType: Int,
+        @Query("title")  title: String?,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ): Observable<GoodsListBean>
 }

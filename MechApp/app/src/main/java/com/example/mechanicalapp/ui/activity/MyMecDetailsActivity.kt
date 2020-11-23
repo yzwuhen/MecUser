@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReAddMec
+import com.example.mechanicalapp.ui.data.request.ReMecBusiness
 import com.example.mechanicalapp.ui.data.request.ReMecLease
 import com.example.mechanicalapp.ui.mvp.impl.MyMecPresenter
 import com.example.mechanicalapp.ui.mvp.v.MyMecDetailsView
@@ -114,7 +117,7 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         when (v?.id) {
             R.id.iv_back -> finish()
             R.id.ly_search -> jump()
-            R.id.tv_edit -> finish()
+            R.id.tv_edit -> edit()
             R.id.tv_del -> shoTipDialog()
             R.id.tv_lease -> lease()
             R.id.tv_sell -> sell()
@@ -125,6 +128,34 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
             }
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
         }
+    }
+
+    //编辑
+    private fun edit() {
+        var reAddMec = ReAddMec()
+        reAddMec.titile =mData?.titile
+        reAddMec.cateName =mData?.cateName
+        reAddMec.cateId =mData?.cateId
+
+        reAddMec.brandName =mData?.brandName
+        reAddMec.brandId =mData?.brandId
+
+        reAddMec.modelName =mData?.modelName
+        reAddMec.modelName =mData?.modelId
+        reAddMec.workTime =mData?.workTime
+        reAddMec.address =mData?.address
+        reAddMec.city = mData?.city
+        reAddMec.gpsLat = mData?.gpsLat?.toDouble()!!
+        reAddMec.gpsLon = mData?.gpsLon?.toDouble()!!
+        reAddMec.facDate =mData?.facDate
+        reAddMec.purchaseDate =mData?.purchaseDate
+        reAddMec.briefDesc =mData?.briefDesc
+        reAddMec.pic =mData?.pic
+        reAddMec.id =mData?.id
+        var  bundle =Bundle()
+        bundle.putSerializable("data",reAddMec)
+        bundle.putInt("type",1)
+        jumpActivity(bundle,AddMecActivity::class.java)
     }
 
     //删除
@@ -140,17 +171,65 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
 
     //出售
     private fun sell() {
+        var mReMecBusiness= ReMecBusiness()
 
+        mReMecBusiness.bussiessType ="1"
+        mReMecBusiness.isNew = "0"
+        mReMecBusiness.pic =mData?.pic
+        mReMecBusiness.facDate =mData?.facDate
+        mReMecBusiness.city = mData?.city
+        mReMecBusiness.address = mData?.address
+        mReMecBusiness.gpsLat =  mData?.gpsLat
+        mReMecBusiness.gpsLon =  mData?.gpsLon
+        mReMecBusiness.cateName = mData?.cateName
+        mReMecBusiness.cateId = mData?.cateId
+
+        mReMecBusiness.brandName = mData?.brandName
+        mReMecBusiness.brandId = mData?.brandId
+        mReMecBusiness.modelName = mData?.modelName
+        mReMecBusiness.modelId = mData?.modelId
+
+        mReMecBusiness.tittle =mData?.titile
+        mReMecBusiness.workTime =mData?.workTime
+        mReMecBusiness.contactPhone =App.getInstance().userInfo.phone
+        mReMecBusiness.contactName =App.getInstance().userInfo.realname
+
+        mReMecBusiness.briefDesc=mData?.briefDesc
+
+        var  bundle =Bundle()
+        bundle.putSerializable("data",mReMecBusiness)
+        jumpActivity(bundle,MyEcSellActivity::class.java)
     }
 
     //出租
     private fun lease() {
-//        var mReMecLease= ReMecLease()
-//        mReMecLease.bussiessType = "1"
-//        mReMecLease.pic =mData?.pic
-//        mReMecLease.tittle =mData?.titile
-//        mReMecLease.
+        var mecRelease= ReMecLease()
 
+        mecRelease.bussiessType ="1"
+        mecRelease.isNew = "0"
+        mecRelease.pic =mData?.pic
+        mecRelease.facDate =mData?.facDate
+        mecRelease.city = mData?.city
+        mecRelease.address = mData?.address
+        mecRelease.gpsLat =  mData?.gpsLat?.toDouble()
+        mecRelease.gpsLon =  mData?.gpsLon?.toDouble()
+        mecRelease.cateName = mData?.cateName
+        mecRelease.cateId = mData?.cateId
+
+        mecRelease.brandName = mData?.brandName
+        mecRelease.brandId = mData?.brandId
+        mecRelease.modelName = mData?.modelName
+        mecRelease.modelId = mData?.modelId
+
+        mecRelease.tittle =mData?.titile
+        mecRelease.workTime =mData?.workTime
+        mecRelease.contactPhone =App.getInstance().userInfo.phone
+        mecRelease.contactName =App.getInstance().userInfo.realname
+
+        mecRelease.briefDesc=mData?.briefDesc
+        var  bundle =Bundle()
+        bundle.putSerializable("data",mecRelease)
+        jumpActivity(bundle,MyMecRelease::class.java)
     }
 
     private fun shoTipDialog() {

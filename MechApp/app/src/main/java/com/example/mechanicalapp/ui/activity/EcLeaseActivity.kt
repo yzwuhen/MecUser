@@ -178,7 +178,7 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
     private fun submit() {
         if (checkInfo()){
             for (str in mPicList){
-               mReMecLease.pic ="$str,"
+               mReMecLease.pic +="$str,"
             }
             mReMecLease.pic= mReMecLease.pic.substring(0,mReMecLease.pic.length-1)
             (mPresenter as AddManagePresenterImpl).addMecLease(mReMecLease)

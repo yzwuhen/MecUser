@@ -197,7 +197,7 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
     private fun sumbit() {
         if (checkInfo()) {
             for (str in mPicList) {
-                mReMecBusiness.pic = "$str,"
+                mReMecBusiness.pic += "$str,"
             }
             mReMecBusiness.pic= mReMecBusiness.pic.substring(0,mReMecBusiness.pic.length-1)
             (mPresenter as AddManagePresenterImpl).addMecBusiness(mReMecBusiness)

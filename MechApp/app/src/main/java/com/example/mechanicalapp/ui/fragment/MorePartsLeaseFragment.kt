@@ -67,7 +67,6 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
 
 
     private fun showInput() {
-
         activity?.let { PopUtils.init(mContext, it,this) }
         PopUtils.showPopupWindow(ly_sort)
     }
@@ -98,8 +97,14 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
 
         if (Configs.EC_TYPE_RESULT_CODE==resultCode){
             tv_ec_type.text =data?.getStringExtra(Configs.SCREEN_RESULT_Extra)
+            (mPresenter as MorePartsPresenter).setCateId(data?.getStringExtra(Configs.SCREEN_RESULT_ID))
+            refresh()
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun refresh(){
+        (mPresenter as MorePartsPresenter).getPartsLeaseList(1)
     }
 
     override fun refreshUI(list: List<PartsData>) {

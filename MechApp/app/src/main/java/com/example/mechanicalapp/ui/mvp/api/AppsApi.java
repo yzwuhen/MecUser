@@ -60,6 +60,7 @@ public class AppsApi extends BaseApi<AppService> {
             long t1 = System.nanoTime();
             Request request = chain.request();
             Response response = chain.proceed(request);
+            String param1 = "post".equalsIgnoreCase(request.method()) ? "---REQ：" + "\n" + "       " + request.headers()+ "\n" : "";
             String param = "post".equalsIgnoreCase(request.method()) ? "---REQ：" + "\n" + "       " + bodyToString(request) + "\n" : "";
             String bodyString = response.body().string();
             String beautyPrint;

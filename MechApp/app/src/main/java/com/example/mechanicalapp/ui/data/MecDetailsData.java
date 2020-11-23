@@ -83,6 +83,15 @@ public class MecDetailsData implements Serializable {
     private String avatar;
     private String realname;
     private String priceUnit_dictText;
+    private String viewNum;
+
+    public String getViewNum() {
+        return viewNum;
+    }
+
+    public void setViewNum(String viewNum) {
+        this.viewNum = viewNum;
+    }
 
     public String getPriceUnit_dictText() {
         return TextUtils.isEmpty(priceUnit_dictText)?"元":priceUnit_dictText;

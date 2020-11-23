@@ -1,10 +1,12 @@
 package com.example.mechanicalapp.ui.fragment
 
+import android.content.Intent
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.ProgressListener
 import com.example.mechanicalapp.ui.activity.AskDetailsActivity
@@ -16,7 +18,6 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -93,9 +94,21 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
 
     override fun onClick(p0: View?) {
         when(p0?.id){
-            R.id.ly_screen1 ->jumpActivity(null, EcModel::class.java)
-            R.id.ly_screen2->jumpActivity(null, Brand::class.java)
-            R.id.ly_screen3->jumpActivity(null, EcType::class.java)
+            R.id.ly_screen1 ->jumpActivityForResult(
+                Configs.EC_TYPE_RESULT_CODE,
+                0,
+                EcModel::class.java
+            )
+            R.id.ly_screen2->jumpActivityForResult(
+                Configs.EC_BRAND_RESULT_CODE,
+                0,
+                Brand::class.java
+            )
+            R.id.ly_screen3->jumpActivityForResult(
+                Configs.EC_MODEL_RESULT_CODE,
+                0,
+                EcType::class.java
+            )
             R.id.ly_screen4->showInput()
             R.id.ly_screen5->showDialogType()
             R.id.tv_sure->mButtDialog?.dismiss()
@@ -176,6 +189,41 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
+        showResult(
+            requestCode,
+            data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+            data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+        )
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+    private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
+        if (extra.isNullOrEmpty()) {
+            return
+        }
+        when (requestCode) {
+            Configs.EC_TYPE_RESULT_CODE -> {
+                tv_screen1.text = extra
+                (mPresenter as MecLeaseListPresenter)?.setCateId(extraId)
+            }
+            Configs.EC_BRAND_RESULT_CODE -> {
+                tv_screen2.text = extra
+                (mPresenter as MecLeaseListPresenter)?.setBrandId(extraId)
+            }
+            Configs.EC_MODEL_RESULT_CODE -> {
+                tv_screen3.text = extra
+                (mPresenter as MecLeaseListPresenter)?.setModelId(extraId)
+            }
+
+        }
+        refresh()
+    }
+    private fun refresh(){
+        (mPresenter as MecLeaseListPresenter).getLeaseList(2)
+    }
+
     override fun refreshUI(list: List<MecLeaseData>) {
 
         mList.clear()
@@ -184,6 +232,8 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
     }
 
     override fun loadMore(list: List<MecLeaseData>) {
+        mList.addAll(list)
+        mAdapter?.notifyDataSetChanged()
     }
 
     override fun err() {

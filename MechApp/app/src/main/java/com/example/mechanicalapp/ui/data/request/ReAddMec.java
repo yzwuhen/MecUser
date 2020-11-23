@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.data.request;
 
-public class ReAddMec {
+import java.io.Serializable;
+
+public class ReAddMec  implements Serializable {
 
 
     /**

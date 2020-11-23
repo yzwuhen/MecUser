@@ -37,7 +37,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
     private var popIndex=0
 
     private var mPresenter:OrderPresenter?=null
-    private var orderData:OrderData?=null
+    private var orderData:OrderDetailsData?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_order_details
     }
@@ -230,7 +230,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         }
     }
 
-    private fun showOrderInfo(result: OrderData?) {
+    private fun showOrderInfo(result: OrderDetailsData?) {
 
         orderData =result
         if (!TextUtils.isEmpty(result?.orderNum)){
@@ -238,7 +238,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         }else{
             tv_order_num.text = ""
         }
-        tv_order_state.text =result?.status_dictText
+        tv_order_state.text =result?.statusName
 
         tv_ec_type.text = result?.productType
         tv_ec_brand.text  =result?.productBrand

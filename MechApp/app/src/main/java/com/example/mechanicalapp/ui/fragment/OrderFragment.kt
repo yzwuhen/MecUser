@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.fragment
 
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
@@ -36,10 +37,11 @@ class OrderFragment : BaseCusFragment(), ViewPager.OnPageChangeListener, OnItemC
 
     override fun initView() {
         super.initView()
+
         mAdapter = OrderTitleAdapter(mContext, mList, this)
 
-        var linearLayoutManager = LinearLayoutManager(mContext)
-        linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        var linearLayoutManager = GridLayoutManager(mContext,6)
+     //   linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
         recycle_list.layoutManager =linearLayoutManager
         recycle_list.adapter = mAdapter
 
@@ -74,6 +76,10 @@ class OrderFragment : BaseCusFragment(), ViewPager.OnPageChangeListener, OnItemC
     override fun showData(data: CodeBean?) {
         if (data?.code == 200 && data?.result.isNotEmpty()) {
             mList.clear()
+            var codeData =CodeData()
+            codeData.itemText="全部"
+            codeData.itemValue =""
+            mList.add(codeData)
             mList.addAll(data?.result)
             mAdapter?.notifyDataSetChanged()
             addFragmentView()

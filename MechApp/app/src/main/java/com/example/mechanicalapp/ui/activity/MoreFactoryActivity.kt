@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,11 +10,8 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.MecFactoryAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.FactoryData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.FactoryPresenter
 import com.example.mechanicalapp.ui.mvp.v.FactoryView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -153,7 +151,35 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
     }
 
     private fun setSelect() {
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+
+            showResult(
+                requestCode,
+                data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+                data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+            )
+        super.onActivityResult(requestCode, resultCode, data)
 
     }
+
+    private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
+        if (extra.isNullOrEmpty()) {
+            return
+        }
+        when (requestCode) {
+            Configs.EC_TYPE_RESULT_CODE -> {
+                tv_ec_type.text = extra
+            }
+            Configs.PARTS_TYPE_RESULT_CODE -> {
+                tv_parts_type.text = extra
+
+            }
+
+        }
+
+    }
+
 }

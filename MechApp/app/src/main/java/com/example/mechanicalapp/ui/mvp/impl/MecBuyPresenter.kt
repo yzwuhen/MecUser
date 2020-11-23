@@ -21,7 +21,7 @@ class MecBuyPresenter(
     private var brandId: String? = null
     private var cateId: String? = null
     private var modelId: String? = null
-
+    private var title: String? = null
     init {
         baseModel = MecBuyModelImpl()
     }
@@ -39,6 +39,7 @@ class MecBuyPresenter(
             brandId,
             cateId,
             modelId,
+            title,
             object : ISubscriberListener<MoreBusinessData> {
                 override fun onNext(t: MoreBusinessData?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -56,7 +57,36 @@ class MecBuyPresenter(
                 }
             })
     }
-
+    fun resetPage(){
+        page=1
+    }
+    fun setTitle(s: String?) {
+        this.title =s
+    }
+    fun setBrandId(id:String?){
+        if (id==""){
+            this.brandId=null
+        }else{
+            this.brandId =id
+        }
+        resetPage()
+    }
+    fun setCateId(id:String?){
+        if (id==""){
+            this.cateId=null
+        }else{
+            this.cateId =id
+        }
+        resetPage()
+    }
+    fun setModelId(id:String?){
+        if (id==""){
+            this.modelId=null
+        }else{
+            this.modelId =id
+        }
+        resetPage()
+    }
     override fun onDestroy() {
     }
 }

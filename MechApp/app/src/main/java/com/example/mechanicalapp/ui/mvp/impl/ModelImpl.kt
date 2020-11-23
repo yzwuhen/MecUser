@@ -807,6 +807,19 @@ class ModelImpl : BaseModel {
 
     }
 
+    fun editMec(
+        token: String?,
+        reAddMec: ReAddMec,
+        iSubscriberListener: ISubscriberListener<NetData>
+    ) {
+        appsService?.editMec(token, reAddMec)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+
+    }
+
+
     fun getCity(iSubscriberListener: ISubscriberListener<String>) {
         StringUtils.getJson("city.json", NetSubscribe<String>(iSubscriberListener))
     }
@@ -824,7 +837,19 @@ class ModelImpl : BaseModel {
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)
     }
+    fun getPartsOrderList(
+        token: String?,
+        state: String?,
+        page: Int,
+        pageSize: Int,
+        netSubscribe: NetSubscribe<OrderBean>
+    ) {
 
+        appsService?.getPartsOrderList(token, state, page, pageSize)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
     fun getOrderDetails(
         token: String?,
         orderId: String?,
@@ -847,6 +872,23 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
 
+    }
+
+
+    fun getGoodsList(
+        token: String?,
+        orderByPrice:Int,
+        orderByScale:Int,
+        orderType:Int,
+        title:String?,
+        page: Int,
+        pageSize: Int,
+        netSubscribe: NetSubscribe<GoodsListBean>
+    ) {
+        appsService?.getGoodsList(token, orderByPrice,orderByScale,orderType,title, page, pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
     }
 
 }

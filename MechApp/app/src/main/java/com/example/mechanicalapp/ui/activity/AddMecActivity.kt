@@ -17,9 +17,11 @@ import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReAddMec
+import com.example.mechanicalapp.ui.data.request.ReMecBusiness
 import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import com.example.mechanicalapp.ui.mvp.impl.AddMecPresenter
 import com.example.mechanicalapp.ui.mvp.v.PersonCerView
+import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GlideEngine
 import com.example.mechanicalapp.utils.ToastUtils
@@ -29,6 +31,22 @@ import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_add_mec.*
+import kotlinx.android.synthetic.main.activity_add_mec.et_address
+import kotlinx.android.synthetic.main.activity_add_mec.et_ec_brand
+import kotlinx.android.synthetic.main.activity_add_mec.et_ec_model
+import kotlinx.android.synthetic.main.activity_add_mec.et_ec_name
+import kotlinx.android.synthetic.main.activity_add_mec.et_ec_type
+import kotlinx.android.synthetic.main.activity_add_mec.et_input
+import kotlinx.android.synthetic.main.activity_add_mec.et_production_time
+import kotlinx.android.synthetic.main.activity_add_mec.et_work_time
+import kotlinx.android.synthetic.main.activity_add_mec.ly_address
+import kotlinx.android.synthetic.main.activity_add_mec.ly_ec_brand
+import kotlinx.android.synthetic.main.activity_add_mec.ly_ec_model
+import kotlinx.android.synthetic.main.activity_add_mec.ly_ec_type
+import kotlinx.android.synthetic.main.activity_add_mec.ly_production_time
+import kotlinx.android.synthetic.main.activity_add_mec.ry_pic
+import kotlinx.android.synthetic.main.activity_add_mec.tv_submit
+import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -51,6 +69,7 @@ class AddMecActivity : BaseCusActivity(), View.OnClickListener, OnItemClickListe
     private var mTimePickerView: TimePickerView? = null
 
     private var timeType = 0
+    private var type=0
     override fun getLayoutId(): Int {
 
         return R.layout.activity_add_mec
@@ -78,6 +97,36 @@ class AddMecActivity : BaseCusActivity(), View.OnClickListener, OnItemClickListe
         et_ec_name.addTextChangedListener(this)
         et_work_time.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
+
+        type = intent.getIntExtra("type",0)
+        if (type==0){
+            tv_title.text = "添加设备"
+        }else{
+            tv_title.text = "编辑设备"
+            reAddMec = intent.getSerializableExtra("data") as ReAddMec
+            showInfo()
+        }
+    }
+
+    private fun showInfo() {
+
+        et_ec_name.setText(reAddMec.titile)
+        et_ec_type.text =reAddMec.cateName
+        et_ec_brand.text =reAddMec.brandName
+        et_ec_model.text =reAddMec.modelName
+        et_work_time.setText(reAddMec.workTime)
+        et_address.text =reAddMec.address
+        et_production_time.text =reAddMec.facDate
+        et_buy_time.text =reAddMec.purchaseDate
+
+        et_input.setText(reAddMec.briefDesc)
+
+        if (!TextUtils.isEmpty(reAddMec.pic)){
+            for (str in reAddMec.pic.split(",")){
+                mPicList.add(str)
+            }
+            mPicAdapter?.notifyDataSetChanged()
+        }
     }
 
     override fun initPresenter() {
@@ -118,11 +167,16 @@ class AddMecActivity : BaseCusActivity(), View.OnClickListener, OnItemClickListe
     }
     private fun submit() {
         if (checkInfo()){
+            reAddMec.pic=""
             for (str in mPicList){
-                reAddMec.pic ="$str,"
+                reAddMec.pic +="$str,"
             }
             reAddMec.pic= reAddMec.pic.substring(0,reAddMec.pic.length-1)
-            (mPresenter as AddMecPresenter).addMec(reAddMec)
+            if (type==0){
+                (mPresenter as AddMecPresenter).addMec(reAddMec)
+            }else{
+                (mPresenter as AddMecPresenter).editMec(reAddMec)
+            }
         }
     }
 
@@ -184,10 +238,20 @@ class AddMecActivity : BaseCusActivity(), View.OnClickListener, OnItemClickListe
 
 
     override fun onItemClick(view: View, position: Int) {
-        if (position == mPicList?.size) {
-            showDialogType()
+//        if (position == mPicList?.size) {
+//            showDialogType()
+//        }
+        when (view?.id) {
+            R.id.iv_del -> {
+                mPicList?.removeAt(position)
+                mPicAdapter?.notifyDataSetChanged()
+            }
+            R.id.iv_pic -> {
+                if (position == mPicList?.size) {
+                    showDialogType()
+                }
+            }
         }
-
     }
 
     private fun showDialogType() {

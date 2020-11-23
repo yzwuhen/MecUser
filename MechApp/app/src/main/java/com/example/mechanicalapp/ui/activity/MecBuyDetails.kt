@@ -189,7 +189,7 @@ class MecBuyDetails : BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
             tv_rent_price.text = "￥${data.price}/元"
             tv_coast_money.text = "￥${data.price}/元"
 
-            tv_browse.text = "浏览量："
+            tv_browse.text = "浏览量：${data.viewNum}"
             tv_browse_time.text = DateUtils.dateDiffs(data.createTime, System.currentTimeMillis())
 
 

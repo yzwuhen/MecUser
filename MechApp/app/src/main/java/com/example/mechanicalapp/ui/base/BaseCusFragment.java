@@ -16,7 +16,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mechanicalapp.R;
+import com.example.mechanicalapp.ui.activity.EcType;
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter;
+
+import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseCusFragment extends Fragment {
 
@@ -76,6 +79,23 @@ public abstract class BaseCusFragment extends Fragment {
     }
 
 
+    /**
+     * 跳转到其他界面返回
+     */
+
+    public void jumpActivityForResult(Integer result,int type,
+                                      @SuppressWarnings("rawtypes") Class targetActivity) {
+
+        Intent intent = new Intent();
+        intent.putExtra("type", type);
+        intent.setClass(mContext, targetActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        startActivityForResult(intent, result);
+    }
+
+
+
     public static boolean isLocationEnabled(Context context) {
         int locationMode = 0;
         String locationProviders;
@@ -121,4 +141,5 @@ public abstract class BaseCusFragment extends Fragment {
     }
 
     protected abstract int getLayoutId();
+
 }

@@ -7,16 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.activity.PartsModel
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MorePartsLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -98,19 +95,27 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
+        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra),data?.getStringExtra(Configs.SCREEN_RESULT_ID))
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun showResult(requestCode: Int, extra: String?) {
+    private fun showResult(requestCode: Int, extra: String?, stringExtra: String?) {
         if (extra.isNullOrEmpty()) {
             return
         }
         when (requestCode) {
-            Configs.EC_TYPE_RESULT_CODE -> tv_ec_type.text = extra
+            Configs.EC_TYPE_RESULT_CODE ->
+            {tv_ec_type.text = extra
+                (mPresenter as MorePartsPresenter).setCateId(stringExtra)
+                refresh()
+
+            }
+
         }
     }
-
+    private fun refresh(){
+        (mPresenter as MorePartsPresenter).getPartsLeaseList(1)
+    }
     override fun refreshUI(list: List<PartsData>) {
         mList.clear()
         mList.addAll(list)

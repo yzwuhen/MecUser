@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.fragment.store
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
@@ -73,8 +74,11 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
 
 
         when (view?.id) {
-            R.id.ly_type -> jumpActivity(null, GoodsListActivity::class.java)
-
+            R.id.ly_type -> {
+                var bundle =Bundle()
+                bundle.putString("title",mRightList[position].name)
+                jumpActivity(bundle, GoodsListActivity::class.java)
+            }
             R.id.tv_type->switchData(position)
         }
     }

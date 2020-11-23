@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_color"
     android:orientation="vertical">
 
     <include layout="@layout/layout_search_et" />
@@ -69,11 +70,17 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/spring_list"
         android:layout_marginLeft="@dimen/dp_17"
         android:layout_marginRight="@dimen/dp_17"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
+    </com.liaoinstan.springview.widget.SpringView>
 </LinearLayout>

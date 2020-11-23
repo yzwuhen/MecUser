@@ -60,17 +60,35 @@ class SellPresenter (
                 }
             })
     }
-    fun setTitle(s: String) {
+    fun resetPage(){
+        page=1
+    }
+    fun setTitle(s: String?) {
         this.title =s
     }
-    fun setBrandId(id:String){
-        this.brandId =id
+    fun setBrandId(id:String?){
+        if (id==""){
+            this.brandId=null
+        }else{
+            this.brandId =id
+        }
+        resetPage()
     }
-    fun setCateId(id:String){
-        this.cateId =id
+    fun setCateId(id:String?){
+        if (id==""){
+            this.cateId=null
+        }else{
+            this.cateId =id
+        }
+        resetPage()
     }
-    fun setModelId(id:String){
-        this.modelId =id
+    fun setModelId(id:String?){
+        if (id==""){
+            this.modelId=null
+        }else{
+            this.modelId =id
+        }
+        resetPage()
     }
     override fun onDestroy() {
     }

@@ -7,6 +7,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.GoodsListAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.data.GoodsData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.view.MyDecoration
 import kotlinx.android.synthetic.main.activity_search_result.*
@@ -16,7 +17,7 @@ class SearchGoodsResult : BaseActivity<NetData>(), OnItemClickListener {
 
     //tye== 0 出租出售 1 招牌  2 求职 3 商品（配件）
     private var mGoodsListAdapter: GoodsListAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<GoodsData> = ArrayList<GoodsData>()
 
     private var type: Int = 0;
     override fun getLayoutId(): Int {
@@ -28,10 +29,7 @@ class SearchGoodsResult : BaseActivity<NetData>(), OnItemClickListener {
 
         type = intent.getIntExtra(Configs.SEARCH_RESULT_TYPE, 0)
 
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+
 
         recycler_list.layoutManager = GridLayoutManager(this, 2)
         mGoodsListAdapter = GoodsListAdapter(this, mList, this)

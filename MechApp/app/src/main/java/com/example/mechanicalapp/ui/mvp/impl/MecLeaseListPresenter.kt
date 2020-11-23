@@ -42,12 +42,17 @@ class MecLeaseListPresenter(
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
                     if (t?.code == 200 && t?.result != null) {
-                       t?.result?.records?.let { baseView?.refreshUI(it) }
-                        baseView?.hiedLoading()
+                        if (page==1){
+                            t?.result?.records?.let { baseView?.refreshUI(it) }
+                            baseView?.hiedLoading()
+                        }else{
+                            t?.result?.records?.let { baseView?.loadMore(it) }
+                            baseView?.hiedLoading()
+                        }
                     } else {
                         baseView?.err()
                     }
-
+                    page++
                 }
                 override fun onError(e: Throwable?) {
                     baseView?.err()
@@ -91,16 +96,35 @@ class MecLeaseListPresenter(
     override fun onDestroy() {
     }
 
-    fun setTitle(s: String) {
+    fun resetPage(){
+        page=1
+    }
+    fun setTitle(s: String?) {
         this.title =s
     }
-    fun setBrandId(id:String){
-        this.brandId =id
+    fun setBrandId(id:String?){
+        if (id==""){
+            this.brandId=null
+        }else{
+            this.brandId =id
+        }
+        resetPage()
     }
-    fun setCateId(id:String){
-        this.cateId =id
+    fun setCateId(id:String?){
+        if (id==""){
+            this.cateId=null
+        }else{
+            this.cateId =id
+        }
+        resetPage()
     }
-    fun setModelId(id:String){
-        this.modelId =id
+    fun setModelId(id:String?){
+        if (id==""){
+            this.modelId=null
+        }else{
+            this.modelId =id
+        }
+        resetPage()
     }
+
 }

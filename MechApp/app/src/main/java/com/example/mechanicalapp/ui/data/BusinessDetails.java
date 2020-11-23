@@ -82,7 +82,15 @@ public class BusinessDetails implements Serializable {
     private String paymentType_dictText;
     private String bussiessType_dictText;
     private String contactPhone;
+    private String viewNum;
 
+    public String getViewNum() {
+        return viewNum;
+    }
+
+    public void setViewNum(String viewNum) {
+        this.viewNum = viewNum;
+    }
 
     public String getFacDate() {
         return facDate;

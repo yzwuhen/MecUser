@@ -13,14 +13,19 @@ import com.example.mechanicalapp.ui.activity.PartsOrderDetails
 import com.example.mechanicalapp.ui.adapter.PartsOrderAdapter
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.OrderBean
+import com.example.mechanicalapp.ui.data.OrderData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
+import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
 
-class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickListener,View.OnClickListener ,PopUtils.onViewListener{
+class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickListener,View.OnClickListener ,PopUtils.onViewListener,
+    OrderView<OrderBean> {
 
 
     private var popInfo: TextView? = null
@@ -29,7 +34,7 @@ class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickL
     private var mPopwindow: PopupWindow? = null
 
     private var mAdapter: PartsOrderAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<OrderData> = ArrayList<OrderData>()
 
     private var mButtDialog: BottomSheetDialog?=null
 
@@ -43,42 +48,34 @@ class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickL
 
     }
 
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-
-
-    }
 
     override fun initView() {
         super.initView()
         mAdapter = PartsOrderAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
-
+        spring_list.type = SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(mContext)
+        spring_list.footer = RefreshHeaderUtils.getFooterView(mContext)
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
-                //  initData()
-                closeRefreshView()
+                spring_list.isEnable = false
+                (mPresenter as OrderPresenter).resetPage()
+                (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
             }
 
-            override fun onLoadmore() {}
+            override fun onLoadmore() {
+                (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
+            }
         })
+        mPresenter = OrderPresenter( this)
+        (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
 
     }
-
     fun closeRefreshView() {
-        spring_list.setEnable(true)
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
-
 
 
     override fun hiedLoading() {
@@ -201,7 +198,19 @@ class PartsOrderFragment (var type: Int) : BaseFragment<NetData>(), OnItemClickL
     }
 
     override fun err() {
+    }
+    override fun showData(data: OrderBean?) {
+        mList.clear()
+        if (data?.code==200&& data?.result?.records?.isNotEmpty()!!){
+            mList.addAll(data?.result?.records!!)
+        }
+        mAdapter?.notifyDataSetChanged()
+    }
 
-
+    override fun showDataMore(data: OrderBean?) {
+        if (data?.code==200&& data?.result?.records?.isNotEmpty()!!){
+            mList.addAll(data?.result?.records!!)
+            mAdapter?.notifyDataSetChanged()
+        }
     }
 }

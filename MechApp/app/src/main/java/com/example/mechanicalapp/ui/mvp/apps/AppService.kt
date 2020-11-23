@@ -800,7 +800,7 @@ interface AppService {
      *
      * 获取商品详情
      */
-    @GET("/jeecg-boot/shop/mecProd/queryById")
+    @GET("/jeecg-boot/shop/mecProd/queryByIdApp")
     fun getGoodsDetail(
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
@@ -905,7 +905,7 @@ interface AppService {
     fun addShopCar(
         @Header("X-Access-Token") token: String?,
         @Body reAddCar: ReAddCar?
-    ): Observable<NetData>
+    ): Observable<AddCarBean>
 
 
     /**

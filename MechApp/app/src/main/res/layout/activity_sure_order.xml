@@ -85,6 +85,34 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ly_add_address"
+                android:layout_width="match_parent"
+                android:layout_height="123dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingRight="@dimen/dp_17">
+
+                <ImageView
+                    android:id="@+id/iv_add_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/add_ress" />
+
+                <TextView
+                    android:id="@+id/tv_add_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_25"
+                    android:text="添加收货地址"
+                    android:textColor="@color/color_222"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+
             <View style="@style/h_view_6" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -124,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_17"
-                    android:text="$999"
+                    android:text="￥999"
                     android:textColor="#FC3D38"
                     android:textSize="17sp" />
             </LinearLayout>
@@ -141,7 +169,9 @@
                     android:id="@+id/tv_freight_rule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="运费："
+                    android:drawableRight="@mipmap/yfsm"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:text="运费"
                     android:textColor="@color/color_222"
                     android:textSize="15sp" />
 

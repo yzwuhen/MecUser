@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Spec implements Serializable {
     private String specName;
     private boolean isSelect;
+    private int specNum;
 
     public String getSpecName() {
         return specName;
@@ -12,6 +13,14 @@ public class Spec implements Serializable {
 
     public void setSpecName(String specName) {
         this.specName = specName;
+    }
+
+    public int getSpecNum() {
+        return specNum;
+    }
+
+    public void setSpecNum(int specNum) {
+        this.specNum = specNum;
     }
 
     public boolean isSelect() {

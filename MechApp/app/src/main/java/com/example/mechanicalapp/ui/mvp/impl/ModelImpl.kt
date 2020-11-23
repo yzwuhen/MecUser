@@ -787,12 +787,12 @@ class ModelImpl : BaseModel {
     fun addShopCar(
         token: String?,
         reAddCar: ReAddCar?,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<AddCarBean>
     ) {
         appsService?.addShopCar(token, reAddCar)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<AddCarBean>(iSubscriberListener))
     }
 
     fun addMec(

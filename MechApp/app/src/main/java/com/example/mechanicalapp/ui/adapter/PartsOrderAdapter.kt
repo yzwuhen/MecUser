@@ -9,6 +9,8 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.OrderData
 import com.example.mechanicalapp.ui.data.PartsOrderData
+import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_parts_order.view.*
 
 class PartsOrderAdapter(
@@ -102,8 +104,13 @@ class PartsOrderAdapter(
             }
         }
 
-        holder.itemView.tv_title.text =mList[position].shippingName
-      //  holder.itemView.tv_num.text = mList[position].orderItemList
+        holder.itemView.tv_title.text =mList[position].orderTitle
+        holder.itemView.tv_num.text = "x${mList[position].quantity}"
+
+        holder.itemView.tv_attr.text =mList[position].skuName
+        holder.itemView.tv_money.text ="￥${mList[position].amount}"
+
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,StringUtils.getImgStr(mList[position].picUrl),R.mipmap.ic_launcher)
     }
 
     override fun getItemCount(): Int {

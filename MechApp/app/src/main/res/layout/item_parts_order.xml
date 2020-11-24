@@ -87,6 +87,7 @@
                 app:layout_constraintTop_toTopOf="@+id/iv_pic" />
 
             <TextView
+                android:id="@+id/tv_attr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rect_radio_2_g"
@@ -105,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right|center_vertical"
-            android:text="邮费：￥33"
+            android:text="邮费：包邮"
             android:textColor="@color/color_999"
             android:textSize="15sp" />
 

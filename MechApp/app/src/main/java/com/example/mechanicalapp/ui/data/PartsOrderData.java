@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class PartsOrderData implements Serializable {
 
+
     /**
      * isAllocatedstock : 1
      * isAllocatedstock_dictText : 是
@@ -20,6 +21,8 @@ public class PartsOrderData implements Serializable {
      * skuIds : null
      * paymentType : null
      * completeDate : null
+     * skuName : X,红色
+     * picUrl : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/timg_1603806815224.jpg,https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/电脑_1603806819443.jpg
      * receiverId : 1330423821953454081
      * receiverPhone : 13336
      * updateBy : null
@@ -28,6 +31,7 @@ public class PartsOrderData implements Serializable {
      * sn : null
      * receiverAreaId : 450124
      * paymentTime : null
+     * orderTitle : 回转成走大机械专用设备小机箱也能用设备
      * amount : 234
      * quantity : 1
      * shippingName : null
@@ -51,36 +55,39 @@ public class PartsOrderData implements Serializable {
     private String isAllocatedstock;
     private String isAllocatedstock_dictText;
     private Object orderItemList;
-    private String freight;
-    private String fee;
-    private String createUserPhone;
+    private Object freight;
+    private Object fee;
+    private Object createUserPhone;
     private String orderNum;
     private String memo;
-    private String type_dictText;
+    private Object type_dictText;
     private String createUserName;
     private String status_dictText;
-    private String type;
-    private String skuIds;
-    private String paymentType;
-    private String completeDate;
+    private Object type;
+    private Object skuIds;
+    private Object paymentType;
+    private Object completeDate;
+    private String skuName;
+    private String picUrl;
     private String receiverId;
     private String receiverPhone;
-    private String updateBy;
+    private Object updateBy;
     private String statusName;
     private String id;
-    private String sn;
+    private Object sn;
     private String receiverAreaId;
     private String paymentTime;
+    private String orderTitle;
     private int amount;
     private int quantity;
     private String shippingName;
     private String receiverName;
     private String paymentTypeName;
     private int weight;
-    private String updateTime;
-    private String tax;
+    private Object updateTime;
+    private Object tax;
     private String receiverAddress;
-    private String receiveTime;
+    private Object receiveTime;
     private String createBy;
     private int productAmount;
     private String createTime;
@@ -114,27 +121,27 @@ public class PartsOrderData implements Serializable {
         this.orderItemList = orderItemList;
     }
 
-    public String getFreight() {
+    public Object getFreight() {
         return freight;
     }
 
-    public void setFreight(String freight) {
+    public void setFreight(Object freight) {
         this.freight = freight;
     }
 
-    public String getFee() {
+    public Object getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(Object fee) {
         this.fee = fee;
     }
 
-    public String getCreateUserPhone() {
+    public Object getCreateUserPhone() {
         return createUserPhone;
     }
 
-    public void setCreateUserPhone(String createUserPhone) {
+    public void setCreateUserPhone(Object createUserPhone) {
         this.createUserPhone = createUserPhone;
     }
 
@@ -154,11 +161,11 @@ public class PartsOrderData implements Serializable {
         this.memo = memo;
     }
 
-    public String getType_dictText() {
+    public Object getType_dictText() {
         return type_dictText;
     }
 
-    public void setType_dictText(String type_dictText) {
+    public void setType_dictText(Object type_dictText) {
         this.type_dictText = type_dictText;
     }
 
@@ -178,36 +185,52 @@ public class PartsOrderData implements Serializable {
         this.status_dictText = status_dictText;
     }
 
-    public String getType() {
+    public Object getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Object type) {
         this.type = type;
     }
 
-    public String getSkuIds() {
+    public Object getSkuIds() {
         return skuIds;
     }
 
-    public void setSkuIds(String skuIds) {
+    public void setSkuIds(Object skuIds) {
         this.skuIds = skuIds;
     }
 
-    public String getPaymentType() {
+    public Object getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(String paymentType) {
+    public void setPaymentType(Object paymentType) {
         this.paymentType = paymentType;
     }
 
-    public String getCompleteDate() {
+    public Object getCompleteDate() {
         return completeDate;
     }
 
-    public void setCompleteDate(String completeDate) {
+    public void setCompleteDate(Object completeDate) {
         this.completeDate = completeDate;
+    }
+
+    public String getSkuName() {
+        return skuName;
+    }
+
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
     public String getReceiverId() {
@@ -226,11 +249,11 @@ public class PartsOrderData implements Serializable {
         this.receiverPhone = receiverPhone;
     }
 
-    public String getUpdateBy() {
+    public Object getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(String updateBy) {
+    public void setUpdateBy(Object updateBy) {
         this.updateBy = updateBy;
     }
 
@@ -250,11 +273,11 @@ public class PartsOrderData implements Serializable {
         this.id = id;
     }
 
-    public String getSn() {
+    public Object getSn() {
         return sn;
     }
 
-    public void setSn(String sn) {
+    public void setSn(Object sn) {
         this.sn = sn;
     }
 
@@ -272,6 +295,14 @@ public class PartsOrderData implements Serializable {
 
     public void setPaymentTime(String paymentTime) {
         this.paymentTime = paymentTime;
+    }
+
+    public String getOrderTitle() {
+        return orderTitle;
+    }
+
+    public void setOrderTitle(String orderTitle) {
+        this.orderTitle = orderTitle;
     }
 
     public int getAmount() {
@@ -322,19 +353,19 @@ public class PartsOrderData implements Serializable {
         this.weight = weight;
     }
 
-    public String getUpdateTime() {
+    public Object getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Object updateTime) {
         this.updateTime = updateTime;
     }
 
-    public String getTax() {
+    public Object getTax() {
         return tax;
     }
 
-    public void setTax(String tax) {
+    public void setTax(Object tax) {
         this.tax = tax;
     }
 
@@ -346,11 +377,11 @@ public class PartsOrderData implements Serializable {
         this.receiverAddress = receiverAddress;
     }
 
-    public String getReceiveTime() {
+    public Object getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(String receiveTime) {
+    public void setReceiveTime(Object receiveTime) {
         this.receiveTime = receiveTime;
     }
 

@@ -140,6 +140,27 @@ class OrderPresenter(
                 }
             })
         )
+    }
 
+
+    fun cancelPartsOrder(orderId: String) {
+        baseView.hiedLoading()
+        baseModel.cancelOrder(
+            App.getInstance().token,
+            orderId,
+            NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as OrderView<NetData>).showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
     }
 }

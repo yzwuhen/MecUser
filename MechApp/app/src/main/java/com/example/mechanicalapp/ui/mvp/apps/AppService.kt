@@ -953,6 +953,15 @@ interface AppService {
     ): Observable<PartOrderListBean>
 
 
+    /**
+     *
+     *取消配件订单
+     */
+    @GET("/jeecg-boot/repair/mecRepairOrder/delete")
+    fun cancelPartsOrder(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<NetData>
 
     /**
      *

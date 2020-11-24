@@ -18,6 +18,7 @@ import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
@@ -43,6 +44,8 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     private var mDialogTv3: TextView? = null
     private var mDialogTv4: TextView? = null
 
+    private var popType=0
+    private var clickPosition=0
 
     override fun initView() {
         super.initView()
@@ -91,14 +94,14 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
         when (view?.id) {
 //            R.id.tv_look_logistics->jumpActivity(null,null)
-            R.id.tv_apply_refund -> showPop(1)
-            R.id.tv_cancel_order -> showPop(0)
-            R.id.tv_confirm -> showPop(3)
+            R.id.tv_apply_refund -> showPop(1,position)
+            R.id.tv_cancel_order -> showPop(0,position)
+            R.id.tv_confirm -> showPop(3,position)
             R.id.tv_pay -> showBtnDialog()
             R.id.tv_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
             R.id.tv_look_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
 //            R.id.tv_input_odd_num->jumpActivity(null,null)
-            R.id.tv_cancel_sale -> showPop(4)
+            R.id.tv_cancel_sale -> showPop(4,position)
             R.id.ly_root -> jumAct(position)
         }
 
@@ -128,7 +131,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
         mButtDialog?.show()
     }
 
-    private fun showPop(i: Int) {
+    private fun showPop(i: Int,position: Int) {
 
         if (mPopwindow == null) {
             mPopwindow = activity?.let {
@@ -140,6 +143,8 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
                 )
             }
         }
+        popType= i
+        clickPosition =position
         if (i == 0) {
             popInfo?.text = "确认取消订单吗？"
             popCancel?.text = "取消"
@@ -182,7 +187,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     override fun onClick(v: View?) {
 
         when (v?.id) {
-            R.id.tv_pop_sure -> dismiss(0)
+            R.id.tv_pop_sure -> popYes()
             R.id.tv_pop_cancel -> activity?.let { PopUtils.dismissPop(it) }
 
             R.id.tv_dialog_item1 -> mButtDialog?.dismiss()
@@ -190,6 +195,38 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
             R.id.tv_dialog_item4 -> mButtDialog?.dismiss()
         }
+    }
+
+    private fun popYes() {
+        activity?.let { PopUtils.dismissPop(it) }
+        when(popType){
+            0->cancelOrder()
+            1->applyRefund()
+            3->getGoods()
+            4->cancleSh()
+        }
+
+    }
+
+    //取消售后
+    private fun cancleSh() {
+
+
+    }
+
+    //确认收货
+    private fun getGoods() {
+
+
+    }
+
+    private fun applyRefund() {
+
+
+    }
+
+    private fun cancelOrder() {
+        (mPresenter as OrderPresenter)?.cancelPartsOrder(mList[clickPosition].id)
     }
 
     override fun err() {
@@ -201,6 +238,9 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
                 mList.addAll(data?.result?.records!!)
             }
             mAdapter?.notifyDataSetChanged()
+        }else{
+            ToastUtils.showText(data?.message)
+            spring_list?.callFresh()
         }
 
     }

@@ -873,9 +873,17 @@ class ModelImpl : BaseModel {
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
-
     }
-
+    fun cancelPartsOrder(
+        token: String?,
+        orderId: String?,
+        netSubscribe: NetSubscribe<NetData>
+    ) {
+        appsService?.cancelOrder(token, orderId)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
 
     fun getGoodsList(
         token: String?,

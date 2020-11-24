@@ -51,44 +51,44 @@ public class PartsOrderData implements Serializable {
     private String isAllocatedstock;
     private String isAllocatedstock_dictText;
     private Object orderItemList;
-    private Object freight;
-    private Object fee;
-    private Object createUserPhone;
+    private String freight;
+    private String fee;
+    private String createUserPhone;
     private String orderNum;
-    private Object memo;
-    private Object type_dictText;
+    private String memo;
+    private String type_dictText;
     private String createUserName;
     private String status_dictText;
-    private Object type;
-    private Object skuIds;
-    private Object paymentType;
-    private Object completeDate;
+    private String type;
+    private String skuIds;
+    private String paymentType;
+    private String completeDate;
     private String receiverId;
     private String receiverPhone;
-    private Object updateBy;
+    private String updateBy;
     private String statusName;
     private String id;
-    private Object sn;
+    private String sn;
     private String receiverAreaId;
-    private Object paymentTime;
+    private String paymentTime;
     private int amount;
     private int quantity;
-    private Object shippingName;
+    private String shippingName;
     private String receiverName;
-    private Object paymentTypeName;
+    private String paymentTypeName;
     private int weight;
-    private Object updateTime;
-    private Object tax;
+    private String updateTime;
+    private String tax;
     private String receiverAddress;
-    private Object receiveTime;
+    private String receiveTime;
     private String createBy;
     private int productAmount;
     private String createTime;
     private String expire;
     private String sysOrgCode;
     private String receiverAreaName;
-    private Object paymentType_dictText;
-    private String status;
+    private String paymentType_dictText;
+    private int status;
 
     public String getIsAllocatedstock() {
         return isAllocatedstock;
@@ -114,27 +114,27 @@ public class PartsOrderData implements Serializable {
         this.orderItemList = orderItemList;
     }
 
-    public Object getFreight() {
+    public String getFreight() {
         return freight;
     }
 
-    public void setFreight(Object freight) {
+    public void setFreight(String freight) {
         this.freight = freight;
     }
 
-    public Object getFee() {
+    public String getFee() {
         return fee;
     }
 
-    public void setFee(Object fee) {
+    public void setFee(String fee) {
         this.fee = fee;
     }
 
-    public Object getCreateUserPhone() {
+    public String getCreateUserPhone() {
         return createUserPhone;
     }
 
-    public void setCreateUserPhone(Object createUserPhone) {
+    public void setCreateUserPhone(String createUserPhone) {
         this.createUserPhone = createUserPhone;
     }
 
@@ -146,19 +146,19 @@ public class PartsOrderData implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public Object getMemo() {
+    public String getMemo() {
         return memo;
     }
 
-    public void setMemo(Object memo) {
+    public void setMemo(String memo) {
         this.memo = memo;
     }
 
-    public Object getType_dictText() {
+    public String getType_dictText() {
         return type_dictText;
     }
 
-    public void setType_dictText(Object type_dictText) {
+    public void setType_dictText(String type_dictText) {
         this.type_dictText = type_dictText;
     }
 
@@ -178,35 +178,35 @@ public class PartsOrderData implements Serializable {
         this.status_dictText = status_dictText;
     }
 
-    public Object getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Object type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Object getSkuIds() {
+    public String getSkuIds() {
         return skuIds;
     }
 
-    public void setSkuIds(Object skuIds) {
+    public void setSkuIds(String skuIds) {
         this.skuIds = skuIds;
     }
 
-    public Object getPaymentType() {
+    public String getPaymentType() {
         return paymentType;
     }
 
-    public void setPaymentType(Object paymentType) {
+    public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
 
-    public Object getCompleteDate() {
+    public String getCompleteDate() {
         return completeDate;
     }
 
-    public void setCompleteDate(Object completeDate) {
+    public void setCompleteDate(String completeDate) {
         this.completeDate = completeDate;
     }
 
@@ -226,11 +226,11 @@ public class PartsOrderData implements Serializable {
         this.receiverPhone = receiverPhone;
     }
 
-    public Object getUpdateBy() {
+    public String getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Object updateBy) {
+    public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy;
     }
 
@@ -250,11 +250,11 @@ public class PartsOrderData implements Serializable {
         this.id = id;
     }
 
-    public Object getSn() {
+    public String getSn() {
         return sn;
     }
 
-    public void setSn(Object sn) {
+    public void setSn(String sn) {
         this.sn = sn;
     }
 
@@ -266,11 +266,11 @@ public class PartsOrderData implements Serializable {
         this.receiverAreaId = receiverAreaId;
     }
 
-    public Object getPaymentTime() {
+    public String getPaymentTime() {
         return paymentTime;
     }
 
-    public void setPaymentTime(Object paymentTime) {
+    public void setPaymentTime(String paymentTime) {
         this.paymentTime = paymentTime;
     }
 
@@ -290,11 +290,11 @@ public class PartsOrderData implements Serializable {
         this.quantity = quantity;
     }
 
-    public Object getShippingName() {
+    public String getShippingName() {
         return shippingName;
     }
 
-    public void setShippingName(Object shippingName) {
+    public void setShippingName(String shippingName) {
         this.shippingName = shippingName;
     }
 
@@ -306,11 +306,11 @@ public class PartsOrderData implements Serializable {
         this.receiverName = receiverName;
     }
 
-    public Object getPaymentTypeName() {
+    public String getPaymentTypeName() {
         return paymentTypeName;
     }
 
-    public void setPaymentTypeName(Object paymentTypeName) {
+    public void setPaymentTypeName(String paymentTypeName) {
         this.paymentTypeName = paymentTypeName;
     }
 
@@ -322,19 +322,19 @@ public class PartsOrderData implements Serializable {
         this.weight = weight;
     }
 
-    public Object getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Object updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
-    public Object getTax() {
+    public String getTax() {
         return tax;
     }
 
-    public void setTax(Object tax) {
+    public void setTax(String tax) {
         this.tax = tax;
     }
 
@@ -346,11 +346,11 @@ public class PartsOrderData implements Serializable {
         this.receiverAddress = receiverAddress;
     }
 
-    public Object getReceiveTime() {
+    public String getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(Object receiveTime) {
+    public void setReceiveTime(String receiveTime) {
         this.receiveTime = receiveTime;
     }
 
@@ -402,19 +402,19 @@ public class PartsOrderData implements Serializable {
         this.receiverAreaName = receiverAreaName;
     }
 
-    public Object getPaymentType_dictText() {
+    public String getPaymentType_dictText() {
         return paymentType_dictText;
     }
 
-    public void setPaymentType_dictText(Object paymentType_dictText) {
+    public void setPaymentType_dictText(String paymentType_dictText) {
         this.paymentType_dictText = paymentType_dictText;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

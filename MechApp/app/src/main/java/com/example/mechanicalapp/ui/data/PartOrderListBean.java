@@ -106,6 +106,5 @@ public class PartOrderListBean extends NetData {
             this.records = records;
         }
 
-
     }
 }

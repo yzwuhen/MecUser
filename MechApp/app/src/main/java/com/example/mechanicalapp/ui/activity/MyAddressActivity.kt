@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.MyAddressAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
@@ -21,6 +23,7 @@ import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_my_address.*
+import kotlinx.android.synthetic.main.item_address.view.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class MyAddressActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
@@ -38,6 +41,7 @@ class MyAddressActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
 
     private var delIndex=0
     private var editIndex=0
+    private var type =0
     override fun getLayoutId(): Int {
 
         return R.layout.activity_my_address
@@ -50,6 +54,7 @@ class MyAddressActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
         iv_back.setOnClickListener(this)
         tv_title.text = "我的地址"
 
+        type = intent.getIntExtra("type",0)
         mMyAddressAdapter = MyAddressAdapter(this, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(this)
         recycler_list.adapter = mMyAddressAdapter
@@ -57,6 +62,8 @@ class MyAddressActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
         spring_list.type = SpringView.Type.FOLLOW
         spring_list.header = RefreshHeaderUtils.getHeaderView(this)
         //  spring_list.footer = RefreshHeaderUtils.getFooterView(mContext)
+
+
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
                 spring_list.isEnable = false
@@ -121,9 +128,21 @@ class MyAddressActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
             R.id.tv_del -> del(position)
             R.id.tv_edit -> edit(position)
             R.id.tv_check->checkDefalut(position)
-
+            R.id.ly_root->callBaclk(position)
         }
 
+    }
+
+    private fun callBaclk(position: Int) {
+
+        if (type==1){
+            var intent  = Intent()
+            var bundle = Bundle()
+            bundle.putSerializable(Configs.SCREEN_RESULT_Extra,mList[position])
+            intent.putExtras(bundle)
+            setResult(Configs.ADDRESS_LIST_SELECT_RESULT,intent)
+            finish()
+        }
     }
 
     private fun checkDefalut(position: Int) {

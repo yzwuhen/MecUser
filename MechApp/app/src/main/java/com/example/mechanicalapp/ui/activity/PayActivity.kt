@@ -16,12 +16,22 @@ class PayActivity:BaseActivity<NetData>() ,View.OnClickListener,OnItemClickListe
     private var mAdapter:PayAdapter?=null
     private var mList:MutableList<PayData> =ArrayList<PayData>()
 
+    private var price=0.0
+    private var  orderNum=""
     override fun getLayoutId(): Int {
         return R.layout.activity_pay
     }
 
     override fun initView() {
         super.initView()
+
+
+        price = intent.getDoubleExtra("order_price",0.0)
+        orderNum = intent.getStringExtra("order_num").toString()
+
+
+        tv_tip_info.text ="￥$price"
+        tv_tip_info1.text ="订单号：$orderNum"
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)

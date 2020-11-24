@@ -82,33 +82,6 @@ class DetailsPresenter(
     }
 
 
-
-    fun getCommentList(id: String?) {
-        baseModel.getCommentGoods(
-            App.getInstance().token,
-            id,0,2,
-            object : ISubscriberListener<CommentBean> {
-                override fun onNext(t: CommentBean?) {
-                    if (t?.code==200&&t?.result!=null&&t?.result?.pages!=null){
-                        (baseView as GoodsDetailsView).comment(t?.result?.pages?.records)
-                    }else{
-                        (baseView as GoodsDetailsView).comment(null)
-                    }
-
-                }
-
-                override fun onError(e: Throwable?) {
-                    (baseView as GoodsDetailsView).comment(null)
-                }
-
-                override fun onCompleted() {
-                }
-            })
-    }
-
-
-
-
     fun addCollect(recollect: ReCollect){
         baseView.showLoading()
         baseModel.addCollect(
@@ -167,17 +140,21 @@ class DetailsPresenter(
     }
 
     fun addShopCar(reAddCar: ReAddCar){
+        baseView.showLoading()
         baseModel.addShopCar(
             App.getInstance().token,
             reAddCar,
-            object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
+            object : ISubscriberListener<AddCarBean> {
+                override fun onNext(t: AddCarBean?) {
+                    (baseView as MecDetailsView<NetData>).collectSuccess(t)
                 }
 
                 override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
                 }
 
                 override fun onCompleted() {
+                    baseView.hiedLoading()
                 }
             })
     }

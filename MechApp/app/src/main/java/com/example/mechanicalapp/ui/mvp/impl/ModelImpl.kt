@@ -787,12 +787,12 @@ class ModelImpl : BaseModel {
     fun addShopCar(
         token: String?,
         reAddCar: ReAddCar?,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<AddCarBean>
     ) {
         appsService?.addShopCar(token, reAddCar)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<AddCarBean>(iSubscriberListener))
     }
 
     fun addMec(
@@ -834,15 +834,16 @@ class ModelImpl : BaseModel {
 
         appsService?.getOrderList(token, state, page, pageSize)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
-            AndroidSchedulers.mainThread()
-        )?.subscribe(netSubscribe)
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
     }
+
     fun getPartsOrderList(
         token: String?,
         state: String?,
         page: Int,
         pageSize: Int,
-        netSubscribe: NetSubscribe<OrderBean>
+        netSubscribe: NetSubscribe<PartOrderListBean>
     ) {
 
         appsService?.getPartsOrderList(token, state, page, pageSize)?.subscribeOn(Schedulers.io())
@@ -850,6 +851,7 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
+
     fun getOrderDetails(
         token: String?,
         orderId: String?,
@@ -877,15 +879,35 @@ class ModelImpl : BaseModel {
 
     fun getGoodsList(
         token: String?,
-        orderByPrice:Int,
-        orderByScale:Int,
-        orderType:Int,
-        title:String?,
+        orderByPrice: Int,
+        orderByScale: Int,
+        orderType: Int,
+        title: String?,
         page: Int,
         pageSize: Int,
         netSubscribe: NetSubscribe<GoodsListBean>
     ) {
-        appsService?.getGoodsList(token, orderByPrice,orderByScale,orderType,title, page, pageSize)
+        appsService?.getGoodsList(
+            token,
+            orderByPrice,
+            orderByScale,
+            orderType,
+            title,
+            page,
+            pageSize
+        )
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+
+    fun addOrder(
+        token: String?,
+        reOrder: ReOrder?,
+        netSubscribe: NetSubscribe<CreatOrderBean>
+    ) {
+        appsService?.addOrder(token,reOrder)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)

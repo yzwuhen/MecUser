@@ -800,7 +800,7 @@ interface AppService {
      *
      * 获取商品详情
      */
-    @GET("/jeecg-boot/shop/mecProd/queryById")
+    @GET("/jeecg-boot/shop/mecProd/queryByIdApp")
     fun getGoodsDetail(
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
@@ -905,7 +905,7 @@ interface AppService {
     fun addShopCar(
         @Header("X-Access-Token") token: String?,
         @Body reAddCar: ReAddCar?
-    ): Observable<NetData>
+    ): Observable<AddCarBean>
 
 
     /**
@@ -950,7 +950,7 @@ interface AppService {
         @Query("status") state: String?,
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int?
-    ): Observable<OrderBean>
+    ): Observable<PartOrderListBean>
 
 
 
@@ -987,4 +987,17 @@ interface AppService {
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<GoodsListBean>
+
+
+
+    /**
+     *
+     * wo de 地址
+     */
+    @POST("/jeecg-boot/shop/mecOrder/add")
+    fun addOrder(
+        @Header("X-Access-Token") token: String?,
+        @Body reOrder: ReOrder?
+    ): Observable<CreatOrderBean>
+
 }

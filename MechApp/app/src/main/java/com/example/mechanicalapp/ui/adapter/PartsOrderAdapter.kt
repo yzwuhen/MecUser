@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.OrderData
+import com.example.mechanicalapp.ui.data.PartsOrderData
 import kotlinx.android.synthetic.main.item_parts_order.view.*
 
 class PartsOrderAdapter(
     var mContext: Context,
-    var mList: MutableList<OrderData>,
+    var mList: MutableList<PartsOrderData>,
     var mOnItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

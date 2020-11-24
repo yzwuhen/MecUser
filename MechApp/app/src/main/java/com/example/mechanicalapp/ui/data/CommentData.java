@@ -23,6 +23,7 @@ public class CommentData implements Serializable {
      * commentUserHeader : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/timg_1603806815224.jpg
      */
 
+
     private String id;
     private String createBy;
     private String createTime;

@@ -66,18 +66,19 @@ class OrderPresenter(
     }
 
     fun getPartsOrderList(state: String) {
+        baseView.showLoading()
         baseModel.getPartsOrderList(
             App.getInstance().token,
             state,
             page,
             pageSize,
-            NetSubscribe<OrderBean>(object :
-                ISubscriberListener<OrderBean> {
-                override fun onNext(t: OrderBean?) {
+            NetSubscribe<PartOrderListBean>(object :
+                ISubscriberListener<PartOrderListBean> {
+                override fun onNext(t: PartOrderListBean?) {
                     if (page == 1) {
-                        (baseView as OrderView<OrderBean>).showData(t)
+                        (baseView as OrderView<NetData>).showData(t)
                     } else {
-                        (baseView as OrderView<OrderBean>).showDataMore(t)
+                        (baseView as OrderView<NetData>).showDataMore(t)
                     }
                     page++
                 }

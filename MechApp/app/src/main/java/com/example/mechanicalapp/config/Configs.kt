@@ -25,7 +25,7 @@ object Configs {
     const val ADDRESS_RESULT_CODE:Int =8;//选择地址后返回的result_code
     const val WORK_TYPE_RESULT_CODE:Int =9;//选择公众后后返回的result_code
 
-
+    const val ADDRESS_LIST_SELECT_RESULT:Int =10;//地址列表选择后返回
 
     const val SCREEN_RESULT_Extra:String ="screen_type";//选择后返回得result_string
     const val SCREEN_RESULT_ID:String ="screen_id";//选择后返回得result_code
@@ -41,7 +41,7 @@ object Configs {
 //    const val EC_MODEL_RESULT_Extra:String ="ec_model";//机械型号选择后返回得result_code
 
     //const val BASE_URL:String="http://206e5202m7.imwork.net"
-    const val BASE_URL:String="http://285151h37s.qicp.vip"
+    const val BASE_URL:String="http://taotaopingping.info"
   //  const val TOKEN:String="token"
 
 }

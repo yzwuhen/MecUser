@@ -10,17 +10,19 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import com.example.mechanicalapp.ui.data.Spec
 import kotlinx.android.synthetic.main.activity_goods_details.view.*
 
-class SpecAdapter  (var mContext: Context, var mList:MutableList<Spec>,var type:Int, var mOnItemClickListener: OnItemClickLevelListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SpecAdapter  (var mContext: Context, var mList:MutableList<Spec>,var position:Int, var mOnItemClickListener: OnItemClickLevelListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return SpecVh(LayoutInflater.from(mContext).inflate(R.layout.item_spec,parent,false),mOnItemClickListener,type)
+        return SpecVh(LayoutInflater.from(mContext).inflate(R.layout.item_spec,parent,false),mOnItemClickListener,position)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         holder.itemView.tv_specs.text =mList[position].specName
         holder.itemView.tv_specs.isSelected =mList[position].isSelect
+        holder.itemView.tv_specs.isEnabled =mList[position].specNum!=0
+
     }
 
     override fun getItemCount(): Int {
@@ -28,9 +30,9 @@ class SpecAdapter  (var mContext: Context, var mList:MutableList<Spec>,var type:
         return mList.size
     }
 
-    class SpecVh(itemView: View, mOnItemClickListener: OnItemClickLevelListener, type:Int) : RecyclerView.ViewHolder(itemView){
+    class SpecVh(itemView: View, mOnItemClickListener: OnItemClickLevelListener, position:Int) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition,type) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,position,adapterPosition) })
         }
     }
 }

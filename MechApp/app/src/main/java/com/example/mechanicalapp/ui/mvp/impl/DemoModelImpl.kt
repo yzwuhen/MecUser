@@ -1,9 +1,7 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
-import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.HomeData
-import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService

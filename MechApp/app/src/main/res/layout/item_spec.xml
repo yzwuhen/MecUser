@@ -11,7 +11,7 @@
         android:background="@drawable/attr_bg"
         android:gravity="center"
         android:text="属性"
-        android:textColor="@color/color_222"
+        android:textColor="@drawable/tv_check_color"
         android:textSize="@dimen/sp_13" />
 
 </LinearLayout>

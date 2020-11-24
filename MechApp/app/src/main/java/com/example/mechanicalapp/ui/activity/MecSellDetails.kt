@@ -94,7 +94,7 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     override fun initPresenter() {
         mPresenter = DetailsPresenter(this)
         mPresenter?.getBusiness(mecId)
-        mPresenter?.judgeCollect(mecId)
+        mPresenter?.judgeCollect(mecId,3)
     }
 
 

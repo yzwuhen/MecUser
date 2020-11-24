@@ -90,7 +90,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
     override fun initPresenter() {
         mPresenter = DetailsPresenter(this)
          mPresenter?.getLeaseDetails(mecId)
-        mPresenter?.judgeCollect(mecId)
+        mPresenter?.judgeCollect(mecId,4)
     }
 
     override fun onClick(v: View?) {

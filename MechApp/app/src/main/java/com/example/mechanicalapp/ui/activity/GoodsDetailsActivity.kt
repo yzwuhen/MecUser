@@ -117,7 +117,7 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         mPresenter = DetailsPresenter(this)
         mPresenter?.getGoodsDetails(mecId)
         mPresenter?.getCommentList(mecId)
-        mPresenter?.judgeCollect(mecId)
+        mPresenter?.judgeCollect(mecId,0)
     }
 
     override fun onClick(v: View?) {

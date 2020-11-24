@@ -148,11 +148,11 @@ class DetailsPresenter(
             })
     }
 
-    fun judgeCollect(id: String?){
+    fun judgeCollect(id: String?,type:Int){
         baseModel.judgeCollect(
             App.getInstance().token,
             id,
-            0,
+            type,
             object : ISubscriberListener<IsCollectBean> {
                 override fun onNext(t: IsCollectBean?) {
                   (baseView as MecDetailsView<NetData>).collectSuccess(t)

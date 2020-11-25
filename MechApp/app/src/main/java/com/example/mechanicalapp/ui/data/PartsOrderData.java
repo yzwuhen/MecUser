@@ -64,7 +64,7 @@ public class PartsOrderData implements Serializable {
     private String createUserName;
     private String status_dictText;
     private Object type;
-    private Object skuIds;
+    private String skuIds;
     private Object paymentType;
     private Object completeDate;
     private String skuName;
@@ -193,11 +193,11 @@ public class PartsOrderData implements Serializable {
         this.type = type;
     }
 
-    public Object getSkuIds() {
+    public String getSkuIds() {
         return skuIds;
     }
 
-    public void setSkuIds(Object skuIds) {
+    public void setSkuIds(String skuIds) {
         this.skuIds = skuIds;
     }
 

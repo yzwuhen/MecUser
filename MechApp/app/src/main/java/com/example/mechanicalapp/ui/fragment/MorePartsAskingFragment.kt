@@ -129,4 +129,8 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
 
     override fun err() {
     }
+
+    fun reFresh() {
+        (mPresenter as MorePartsPresenter).getPartsLeaseList(2)
+    }
 }

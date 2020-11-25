@@ -82,7 +82,7 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
             }
         }
         else if (v?.id==R.id.tv_demand_more){
-            jumAct(0)
+            jumAct(1)
         }
     }
 

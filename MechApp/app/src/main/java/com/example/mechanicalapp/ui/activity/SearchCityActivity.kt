@@ -12,6 +12,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.impl.CityPresenter
 import kotlinx.android.synthetic.main.activity_search_city.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 
@@ -21,6 +22,8 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
     private var mLetterAdapter : LetterAdapter?=null
     private var mCityLinearLayoutManager :LinearLayoutManager ?=null
     private var mLetterLinearLayoutManager :LinearLayoutManager ?=null
+
+    private var mPresenter:CityPresenter?=null
 
     private var mCityList :MutableList<String> =ArrayList<String>()
     private val items = listOf(
@@ -79,6 +82,9 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
 
         iv_back.setOnClickListener(this)
         ly_search.setOnClickListener(this)
+
+        mPresenter = CityPresenter(this)
+        mPresenter?.getCityList()
     }
 
     override fun initPresenter() {

@@ -220,7 +220,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
         }
         refresh()
     }
-    private fun refresh(){
+     fun refresh(){
         (mPresenter as MecLeaseListPresenter).getLeaseList(2)
     }
 

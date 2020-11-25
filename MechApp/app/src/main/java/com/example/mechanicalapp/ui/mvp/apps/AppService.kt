@@ -926,6 +926,61 @@ interface AppService {
         @Body reAddMec: ReAddMec
     ): Observable<NetData>
 
+    /**
+     *
+     *获取维修订单
+     */
+    @GET("/jeecg-boot/shop/mecArea/rootList")
+    fun getCity(
+        @Header("X-Access-Token") token: String?
+    ): Observable<NetData>
+
+
+    /**
+     *
+     *获取广告轮播
+     */
+    @GET("/jeecg-boot/shop/mecShopAd/list")
+    fun getBanner(
+        @Header("X-Access-Token") token: String?,
+        @Query("type")type:Int
+    ): Observable<BannerBean>
+
+
+    /**
+     *
+     *购物车列表
+     */
+    @GET("/jeecg-boot/shop/mecShoppingCard/listMy")
+    fun getCarList(
+        @Header("X-Access-Token") token: String?,
+        @Query("type") type: Int?,
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int?
+    ): Observable<ShopCarBean>
+
+
+    /**
+     *
+     *编辑购物车列表
+     */
+    @POST("/jeecg-boot/shop/mecShoppingCard/edit")
+    fun editCar(
+        @Header("X-Access-Token") token: String?,
+       @Body shopCarData: ShopCarData
+    ): Observable<NetData>
+
+
+    /**
+     *
+     *删除单个购物车
+     */
+    @POST("/jeecg-boot/shop/mecShoppingCard/delete")
+    fun delCar(
+        @Header("X-Access-Token") token: String?,
+        @Body id: String?
+    ): Observable<NetData>
+
 
 
     /**

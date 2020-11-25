@@ -226,7 +226,7 @@ class MoreBuyFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
         refresh()
     }
 
-    private fun refresh() {
+     fun refresh() {
         (mPresenter as MecBuyPresenter).getBuyList(2)
     }
 

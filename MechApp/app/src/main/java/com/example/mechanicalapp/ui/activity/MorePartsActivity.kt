@@ -9,11 +9,15 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.BannerBean
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.MorePartsAskingFragment
 import com.example.mechanicalapp.ui.fragment.MorePartsLeaseFragment
+import com.example.mechanicalapp.ui.mvp.impl.BannerPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.appbar.AppBarLayout
 import com.liaoinstan.springview.widget.SpringView
@@ -25,22 +29,23 @@ import kotlinx.android.synthetic.main.layout_more_data_title.*
 /**
  * 更多 得配件
  */
-class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPager.OnPageChangeListener,
-    AppBarLayout.OnOffsetChangedListener {
+class MorePartsActivity : BaseCusActivity(), View.OnClickListener, ViewPager.OnPageChangeListener,
+    AppBarLayout.OnOffsetChangedListener, NetDataView<BannerBean> {
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
-    var mList: MutableList<BannerData>? = ArrayList<BannerData>()
+    var mList: MutableList<BannerData> = ArrayList<BannerData>()
 
     private var type: Int = 0
+
+    private var mPresenter : BannerPresenter?=null
+    private var imageAdapter:ImageAdapter ?=null
+
+    private var mMorePartsLeaseFragment =MorePartsLeaseFragment()
+    private var mMorePartsAskingFragment =MorePartsAskingFragment()
     override fun getLayoutId(): Int {
 
         return R.layout.activity_more_data
-    }
-
-    init {
-        mFragmentList?.add(MorePartsLeaseFragment())
-        mFragmentList?.add(MorePartsAskingFragment())
     }
 
 
@@ -52,7 +57,8 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
         tv_screen_left.text = "出租"
         tv_screen_right.text = "求租"
 
-
+        mFragmentList?.add(mMorePartsLeaseFragment)
+        mFragmentList?.add(mMorePartsAskingFragment)
         mTabPageAdapter = FragmentListPageAdapter(this.supportFragmentManager, mFragmentList!!)
         cus_page.adapter = mTabPageAdapter
         tv_screen_right.setOnClickListener(this)
@@ -61,14 +67,8 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
         tv_screen_left.performClick()
 
 
-        var bannerData = BannerData()
-        bannerData.img =
-            "https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723"
-
-        mList?.add(bannerData)
-        mList?.add(bannerData)
-
-        banner.adapter = ImageAdapter(mList)
+        imageAdapter =ImageAdapter(mList)
+        banner.adapter = imageAdapter
         banner.indicator = CircleIndicator(this)
 
 
@@ -86,22 +86,24 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
                 spring_list.isEnable=false
-                //  initData()
-                closeRefreshView()
+                mPresenter?.getBanner(3)
+                refreshFregment()
             }
-
             override fun onLoadmore() {}
         })
-
     }
 
     fun closeRefreshView() {
         spring_list.isEnable=true
         spring_list.onFinishFreshAndLoad()
     }
-
+    private fun refreshFregment() {
+        mMorePartsLeaseFragment.reFresh()
+        mMorePartsAskingFragment.reFresh()
+    }
     override fun initPresenter() {
-
+        mPresenter = BannerPresenter(this)
+        mPresenter?.getBanner(3)
     }
 
     override fun showLoading() {
@@ -109,7 +111,7 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
     }
 
     override fun hiedLoading() {
-
+        closeRefreshView()
     }
 
     override fun err()  {
@@ -162,5 +164,14 @@ class MorePartsActivity : BaseActivity<NetData>(), View.OnClickListener, ViewPag
     override fun onPageSelected(position: Int) {
         showView(position)
     }
+    override fun refreshUI(data: BannerBean?) {
+        if (data!=null&&data.code==200&&data.result!=null&&data.result?.records!=null){
+            mList.clear()
+            mList.addAll(data.result.records)
+            imageAdapter?.notifyDataSetChanged()
+        }
+    }
 
+    override fun loadMore(data: BannerBean?) {
+    }
 }

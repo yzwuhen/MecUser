@@ -1,10 +1,12 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.request.ReApplyRefund
 import kotlinx.android.synthetic.main.activity_parts_details.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -109,6 +111,10 @@ class PartsOrderDetails : BaseActivity<NetData>(), View.OnClickListener {
     }
 
     private fun applyRefund() {
+        var bundle = Bundle()
+        var reApplyRefund =ReApplyRefund()
+        reApplyRefund.businessId
+
         jumpActivity(null,ApplyRefundActivity::class.java)
     }
 

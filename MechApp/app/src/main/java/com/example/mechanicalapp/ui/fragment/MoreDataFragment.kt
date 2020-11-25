@@ -223,7 +223,7 @@ class MoreDataFragment(var type:Int): BaseCusFragment(), OnItemClickListener,Vie
         refresh()
     }
 
-    private fun refresh(){
+    fun refresh(){
         (mPresenter as MecLeaseListPresenter).getLeaseList(1)
     }
 

@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/iv_check"
             android:layout_width="@dimen/dp_18"
             android:layout_height="@dimen/dp_18"
             android:src="@drawable/check_icon" />
@@ -26,8 +27,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="@dimen/dp_17"
         app:layout_constraintStart_toEndOf="@+id/ly_check"
-        app:layout_constraintTop_toTopOf="@+id/ly_check" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_title"

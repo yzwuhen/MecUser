@@ -20,7 +20,7 @@ import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
-class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+class RecruitFragment:BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,WorkAboutView {
     var mAdapter: MoreRecruitAdapter? = null
     var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
@@ -49,12 +49,12 @@ class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View
         ly_screen1.setOnClickListener(this)
         ly_screen2.setOnClickListener(this)
         ly_screen3.setOnClickListener(this)
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
-
+        spring_list.type=SpringView.Type.FOLLOW
+        spring_list.header=RefreshHeaderUtils.getHeaderView(mContext)
+        spring_list.footer =RefreshHeaderUtils.getFooterView(mContext)
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
+                spring_list.isEnable=false
                 //  initData()
                 closeRefreshView()
             }
@@ -67,7 +67,7 @@ class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
+        spring_list.isEnable =true
         spring_list.onFinishFreshAndLoad()
     }
 
@@ -122,5 +122,9 @@ class RecruitFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View
 
     override fun onItemClick(view: View, position: Int) {
         jumpActivity(null,RecruitDetailsActivity::class.java)
+    }
+
+    fun reFresh() {
+        (mPresenter as RecruitPresenter)?.getRecruitList(1)
     }
 }

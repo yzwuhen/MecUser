@@ -8,6 +8,8 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.BannerBean
 import com.example.mechanicalapp.ui.data.BannerData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
@@ -15,6 +17,8 @@ import com.example.mechanicalapp.ui.fragment.MoreBuyFragment
 import com.example.mechanicalapp.ui.fragment.MoreDataSellFragment
 import com.example.mechanicalapp.ui.fragment.MoreDataFragment
 import com.example.mechanicalapp.ui.fragment.MoreRentFragment
+import com.example.mechanicalapp.ui.mvp.impl.BannerPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.appbar.AppBarLayout
 import com.liaoinstan.springview.widget.SpringView
@@ -22,12 +26,14 @@ import com.youth.banner.indicator.CircleIndicator
 import kotlinx.android.synthetic.main.activity_more_data.*
 import kotlinx.android.synthetic.main.layout_more_data_title.*
 
-class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
-    ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener {
+class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
+    ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener, NetDataView<BannerBean> {
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
-    var mList: MutableList<BannerData>? = ArrayList<BannerData>()
+    var mList: MutableList<BannerData> = ArrayList<BannerData>()
+    private var mPresenter: BannerPresenter? = null
+    private var imageAdapter: ImageAdapter? = null
 
     private var type: Int = 0
     override fun getLayoutId(): Int {
@@ -41,7 +47,7 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
 
         type = intent.getIntExtra(Configs.MORE_VIEW_TYPE, 0)
 
-        if (type == 0) {
+        if (type == 1) {
             tv_screen_left.text = "出租"
             tv_screen_right.text = "求租"
             mFragmentList?.add(MoreDataFragment(type))
@@ -56,8 +62,6 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
 
 
 
-
-
         mTabPageAdapter = FragmentListPageAdapter(this.supportFragmentManager, mFragmentList!!)
         cus_page.adapter = mTabPageAdapter
         tv_screen_right.setOnClickListener(this)
@@ -66,14 +70,8 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
         tv_screen_left.performClick()
 
 
-        val bannerData = BannerData()
-        bannerData.img =
-            "https://t8.baidu.com/it/u=2247852322,986532796&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1600708280&t=2c8b3ed72148e0c4fb274061565e6723"
-
-        mList?.add(bannerData)
-        mList?.add(bannerData)
-
-        banner.adapter = ImageAdapter(mList)
+        imageAdapter = ImageAdapter(mList)
+        banner.adapter = imageAdapter
         banner.indicator = CircleIndicator(this)
 
 
@@ -86,14 +84,14 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
 
         app_bar.addOnOffsetChangedListener(this)
 
-        spring_list.type=SpringView.Type.FOLLOW
-        spring_list.header=RefreshHeaderUtils.getHeaderView(this)
+        spring_list.type = SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(this)
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.isEnable=false
-                //  initData()
-                closeRefreshView()
+                spring_list.isEnable = false
+                mPresenter?.getBanner(type)
+                refreshFregment()
             }
 
             override fun onLoadmore() {}
@@ -102,11 +100,23 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable=true
+        spring_list.isEnable = true
         spring_list.onFinishFreshAndLoad()
     }
+    private fun refreshFregment() {
+        if (type==1){
+            (mFragmentList?.get(0) as MoreDataFragment).refresh()
+            (mFragmentList?.get(1) as MoreRentFragment).refresh()
+        }else{
+            (mFragmentList?.get(0) as MoreDataSellFragment).refresh()
+            (mFragmentList?.get(1) as MoreBuyFragment).refresh()
+        }
 
+    }
     override fun initPresenter() {
+
+        mPresenter = BannerPresenter(this)
+        mPresenter?.getBanner(type)
 
     }
 
@@ -115,10 +125,10 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
     }
 
     override fun hiedLoading() {
-
+        closeRefreshView()
     }
 
-    override fun err()  {
+    override fun err() {
 
     }
 
@@ -159,5 +169,16 @@ class MoreDataActivity : BaseActivity<NetData>(), View.OnClickListener,
 
     override fun onOffsetChanged(p0: AppBarLayout?, p1: Int) {
         spring_list.isEnable = p1 == 0
+    }
+
+    override fun refreshUI(data: BannerBean?) {
+        if (data != null && data.code == 200 && data.result != null && data.result?.records != null) {
+            mList.clear()
+            mList.addAll(data.result.records)
+            imageAdapter?.notifyDataSetChanged()
+        }
+    }
+
+    override fun loadMore(data: BannerBean?) {
     }
 }

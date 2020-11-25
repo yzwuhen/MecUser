@@ -8,12 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.ApplyRefundActivity
 import com.example.mechanicalapp.ui.activity.EvaluatePartsActivity
 import com.example.mechanicalapp.ui.activity.PartsOrderDetails
 import com.example.mechanicalapp.ui.adapter.PartsOrderAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReApplyRefund
 import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -222,7 +224,15 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     private fun applyRefund() {
 
-
+        var bundle = Bundle()
+        var reApplyRefund = ReApplyRefund()
+        reApplyRefund.mecOrderId =mList[clickPosition].id
+        reApplyRefund.imgs =mList[clickPosition].picUrl
+        reApplyRefund.mecProductSkuId =mList[clickPosition].skuIds
+        reApplyRefund.state =mList[clickPosition].status.toString()
+        reApplyRefund.statusName =mList[clickPosition].statusName
+        bundle.putSerializable("data",reApplyRefund)
+        jumpActivity(bundle, ApplyRefundActivity::class.java)
     }
 
     private fun cancelOrder() {

@@ -71,9 +71,9 @@ class ItemMenu(var mContext: Context) : LinearLayout(mContext) , OnItemClickList
 
     override fun onItemClick(view: View, position: Int) {
         when(position){
-            0->jumMoreDataAct(0)
+            0->jumMoreDataAct(1)
             1->jumParts()
-            2->jumMoreDataAct(1)
+            2->jumMoreDataAct(2)
             3->jumAct3()
             4->jumAct2()
             5->jumAct1()

@@ -51,7 +51,7 @@ class PartsOrderActivity:BaseActivity<NetData>(),View.OnClickListener ,ViewPager
 
         tv_order1.performClick()
 
-        cus_page.offscreenPageLimit =5
+      //  cus_page.offscreenPageLimit =5
         cus_page.setTouchEvent(true)
         cus_page.addOnPageChangeListener(this)
     }

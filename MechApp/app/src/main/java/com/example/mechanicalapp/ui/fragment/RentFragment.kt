@@ -22,7 +22,7 @@ import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_more_data.*
 
 
-class RentFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.OnClickListener,
+class RentFragment:BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,WorkAboutView {
     var mAdapter: MoreJobWantAdapter? = null
     var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
@@ -53,7 +53,7 @@ class RentFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.On
         ly_screen3.setOnClickListener(this)
 
         spring_list.type=SpringView.Type.FOLLOW
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
+        spring_list.header=RefreshHeaderUtils.getHeaderView(mContext)
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
@@ -124,5 +124,9 @@ class RentFragment(var type:Int):BaseCusFragment(), OnItemClickListener, View.On
 
     override fun onItemClick(view: View, position: Int) {
         jumpActivity(null,JobWantDetails::class.java)
+    }
+
+    fun reFresh() {
+        (mPresenter as RecruitPresenter)?.getRecruitList(2)
     }
 }

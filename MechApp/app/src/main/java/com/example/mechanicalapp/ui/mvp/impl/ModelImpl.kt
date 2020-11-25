@@ -838,6 +838,64 @@ class ModelImpl : BaseModel {
             )?.subscribe(netSubscribe)
     }
 
+
+    fun getShopList(
+        token: String?,
+        page: Int,
+        pageSize: Int,
+        netSubscribe: NetSubscribe<ShopCarBean>
+    ) {
+
+        appsService?.getCarList(token,0,page, pageSize)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+    fun editShopCar(
+        token: String?,
+        shopCarData: ShopCarData,
+        netSubscribe: NetSubscribe<NetData>
+    ) {
+
+        appsService?.editCar(token,shopCarData)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+    fun delShopCar(
+        token: String?,
+        id: String?,
+        netSubscribe: NetSubscribe<NetData>
+    ) {
+
+        appsService?.delCar(token,id)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+    fun getCity(
+        token: String?,
+        netSubscribe: NetSubscribe<NetData>
+    ) {
+        appsService?.getCity(token)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+    fun getBanner(
+        token: String?,
+        type:Int,
+        netSubscribe: NetSubscribe<BannerBean>
+    ) {
+        appsService?.getBanner(token,type)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+
     fun getPartsOrderList(
         token: String?,
         state: String?,

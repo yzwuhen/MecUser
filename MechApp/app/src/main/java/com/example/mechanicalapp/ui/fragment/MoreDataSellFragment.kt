@@ -225,7 +225,7 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
         refresh()
     }
 
-    private fun refresh() {
+    fun refresh() {
         (mPresenter as SellPresenter).getSellList(1)
     }
 

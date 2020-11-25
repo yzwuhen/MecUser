@@ -964,7 +964,7 @@ interface AppService {
      *
      *编辑购物车列表
      */
-    @POST("/jeecg-boot/shop/mecShoppingCard/edit")
+    @POST("/jeecg-boot/shop/mecShoppingCard/editPost")
     fun editCar(
         @Header("X-Access-Token") token: String?,
        @Body shopCarData: ShopCarData
@@ -975,10 +975,11 @@ interface AppService {
      *
      *删除单个购物车
      */
-    @POST("/jeecg-boot/shop/mecShoppingCard/delete")
+    @FormUrlEncoded
+    @POST("/jeecg-boot/shop/mecShoppingCard/deletePost")
     fun delCar(
         @Header("X-Access-Token") token: String?,
-        @Body id: String?
+        @Field("id") id: String?
     ): Observable<NetData>
 
 

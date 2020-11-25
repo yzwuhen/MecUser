@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.activity.PartsModel
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
@@ -76,7 +77,7 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
 
             R.id.ly_ec_type -> jumpActivityForReSult(
                 Configs.EC_TYPE_RESULT_CODE,
-                PartsModel::class.java
+                EcType::class.java
             )
             R.id.ly_sort -> showInput()
         }

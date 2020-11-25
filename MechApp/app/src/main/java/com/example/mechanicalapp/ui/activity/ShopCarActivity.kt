@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -19,7 +18,6 @@ import com.example.mechanicalapp.ui.base.WeakHandler
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.ShopCarBean
 import com.example.mechanicalapp.ui.data.ShopCarData
-import com.example.mechanicalapp.ui.data.SkuBean
 import com.example.mechanicalapp.ui.mvp.impl.ShopCarPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.MyDecoration
@@ -30,7 +28,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_shop_car.*
 import kotlinx.android.synthetic.main.layout_title.*
-import java.io.Serializable
 
 
 class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
@@ -86,9 +83,8 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
         super.initView()
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
-        tv_title.text = "购物车（0）"
         tv_right.visibility = View.VISIBLE
-
+        tv_title.text = "购物车"
         tv_right.setOnClickListener(this)
         tv_check_all.setOnClickListener(this)
         tv_settlement.setOnClickListener(this)
@@ -347,11 +343,20 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     override fun refreshUI(data: NetData?) {
 
         if (data != null && data is ShopCarBean) {
+
             mList.clear()
             if (data?.result != null && data.result.records != null) {
+                tv_title.text = "购物车(${data.result.total})"
                 data?.result?.records?.let { mList.addAll(it) }
             }
             mShopCarAdapter?.notifyDataSetChanged()
+        }else{
+            if (data!=null){
+                ToastUtils.showText(data.message)
+                if (data.code==200){
+                    spring_list.callFresh()
+                }
+            }
         }
     }
 

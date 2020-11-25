@@ -66,6 +66,8 @@ class ShopCarPresenter(
                 ISubscriberListener<NetData> {
                 override fun onNext(t: NetData?) {
 
+                    //编辑不需要立即更新UI 因为已经更新过一次、不考虑失败后的信息差情况
+                 //   (baseView as NetDataView<NetData>).refreshUI(t)
                 }
 
                 override fun onError(e: Throwable?) {
@@ -88,7 +90,7 @@ class ShopCarPresenter(
             NetSubscribe<NetData>(object :
                 ISubscriberListener<NetData> {
                 override fun onNext(t: NetData?) {
-
+                    (baseView as NetDataView<NetData>).refreshUI(t)
                 }
 
                 override fun onError(e: Throwable?) {

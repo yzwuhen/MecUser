@@ -8,6 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcModel
+import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.PartsModel
 import com.example.mechanicalapp.ui.adapter.MorePartsAdapter
@@ -21,6 +22,7 @@ import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MorePartsLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
+import java.lang.reflect.Type
 
 class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,MorePartsLeaseView<NetData> {
@@ -76,7 +78,7 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
 
             R.id.ly_ec_type->jumpActivityForReSult(
                 Configs.EC_TYPE_RESULT_CODE,
-                PartsModel::class.java
+                EcType::class.java
             )
             R.id.ly_sort->showInput()
         }

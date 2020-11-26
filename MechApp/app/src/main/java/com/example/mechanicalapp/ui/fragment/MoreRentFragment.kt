@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -182,7 +183,10 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
     }
 
     override fun onItemClick(view: View, position: Int) {
-        jumpActivity(null,AskDetailsActivity::class.java)
+        val bundle = Bundle()
+        bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE,0)
+        bundle.putString(Configs.MEC_ID, mList[position].id)
+        jumpActivity(bundle,AskDetailsActivity::class.java)
     }
 
     override fun progress(leftPos: Double, rightPos: Double) {
@@ -221,6 +225,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
         refresh()
     }
      fun refresh(){
+         (mPresenter as MecLeaseListPresenter).resetPage()
         (mPresenter as MecLeaseListPresenter).getLeaseList(2)
     }
 

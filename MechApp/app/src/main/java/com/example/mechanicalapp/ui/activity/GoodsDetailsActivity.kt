@@ -145,9 +145,10 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
     }
 
     private fun jumHomePage() {
-        var bundle = Bundle()
-        bundle.putInt(Configs.USER_HOME_PAGE, 3)
-        jumpActivity(bundle, UserHomePage::class.java)
+//        var bundle = Bundle()
+//        bundle.putInt(Configs.USER_HOME_PAGE, 1)
+//        bundle.putString(Configs.USER_HOME_PAGE_NAME,goodsProduct?.createBy)
+//        jumpActivity(bundle, UserHomePage::class.java)
 
     }
 

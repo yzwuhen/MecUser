@@ -306,12 +306,12 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
         if (TextUtils.isEmpty(et_company_name_.text.toString().trim())) {
             return false
         }
-        mReBean.contactName =et_company_name_.text.toString().trim()
+        mReBean.company =et_company_name_.text.toString().trim()
 
         if (TextUtils.isEmpty(et_company_address.text.toString().trim())) {
             return false
         }
-        mReBean.company =et_company_address.text.toString().trim()
+        mReBean.companyAddress =et_company_address.text.toString().trim()
 
         if (TextUtils.isEmpty(mReBean.cateName)) {
             return false

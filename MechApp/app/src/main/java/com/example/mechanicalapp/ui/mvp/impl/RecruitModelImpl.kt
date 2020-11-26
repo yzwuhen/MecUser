@@ -21,9 +21,9 @@ class RecruitModelImpl  : BaseModel {
     }
 
 
-    fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,sort:String?,jobTitle:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
+    fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,typeWorkId:String?,sort:Int,jobTitle:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
 
-        appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,sort,jobTitle)
+        appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,typeWorkId,sort,jobTitle)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<RecruitBean>(mISubscriberListener))

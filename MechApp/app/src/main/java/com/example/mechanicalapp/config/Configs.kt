@@ -10,7 +10,8 @@ object Configs {
     const val MEC_ID :String="mec_id"//传的机械id
     const val MEC_ASK_DETAILS_TYPE :String="mec_ask_details_type"// 0是求租 1 是求购
 
-    const val USER_HOME_PAGE :String="user_home_page"// 0是出售求购  1是出租求组  2求职招聘 3 配件出租求组
+    const val USER_HOME_PAGE_NAME :String="user_home_page_name"//creat_by
+    const val USER_HOME_PAGE :String="user_home_page"//1 是配件  2 是机械出售 3 是机械租赁 4 是招聘
     const val USER_HOME_PAGE_Index :String="user_home_page_index"// 0是左  1 是右
 
     const val MORE_VIEW_TYPE :String="more_view_type"//  出租 出售  求租求购区分   0是租 1 是买卖
@@ -40,8 +41,8 @@ object Configs {
 //    const val EC_BRAND_RESULT_Extra:String ="ec_brand";//机械品牌选择后返回得result_code
 //    const val EC_MODEL_RESULT_Extra:String ="ec_model";//机械型号选择后返回得result_code
 
-    const val BASE_URL:String="http://206e5202m7.imwork.net"
-    // const val BASE_URL:String="http://taotaopingping.info"
+    // const val BASE_URL:String="http://206e5202m7.imwork.net"
+     const val BASE_URL:String="http://taotaopingping.info"
   //  const val TOKEN:String="token"
 
 }

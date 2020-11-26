@@ -65,7 +65,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/dp_17"
                             android:layout_marginTop="@dimen/dp_12"
-                            android:text="求租 大型履带挖掘机"
+                            android:text=""
                             android:textColor="@color/color_222"
                             android:textSize="17sp"
                             app:layout_constraintStart_toEndOf="@+id/iv_ask_user_pic"
@@ -173,7 +173,7 @@
                         android:paddingLeft="@dimen/dp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="挖掘机司机"
+                        android:text=""
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
@@ -201,7 +201,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dp_10"
-                        android:text="5年以上"
+                        android:text=""
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
@@ -255,7 +255,7 @@
                         android:layout_marginTop="@dimen/dp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="2020年10月12日21:18:36"
+                        android:text=""
                         android:paddingLeft="@dimen/dp_10"
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
@@ -283,7 +283,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dp_10"
-                        android:text="5000-8000/月"
+                        android:text=""
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
@@ -311,7 +311,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:paddingLeft="@dimen/dp_10"
-                        android:text="广州天河区五山路"
+                        android:text=""
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
@@ -333,7 +333,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:text="卡特彼勒D11T推土机主要用来开挖路堑、构筑路堤、回填基坑、铲除障碍、清除积雪、乎整场地等，也可完成短距离松散物料"
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -363,7 +362,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_20"
-                        android:text="昵称：谭老板"
                         android:textColor="@color/color_666"
                         android:textSize="@dimen/sp_16" />
 
@@ -416,7 +414,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_40"
-            android:drawableTop="@mipmap/details_collected"
+            android:drawableTop="@drawable/details_collect_icon"
             android:drawablePadding="@dimen/dp_5"
             android:text="收藏"
             android:textColor="@color/color_222"

@@ -131,9 +131,9 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     private fun jumHomePage() {
         var bundle = Bundle()
         if (intentType == 0) {
-            bundle.putInt(Configs.USER_HOME_PAGE, 1)
+            bundle.putInt(Configs.USER_HOME_PAGE, 3)
         } else {
-            bundle.putInt(Configs.USER_HOME_PAGE, 0)
+            bundle.putInt(Configs.USER_HOME_PAGE, 2)
         }
         bundle.putInt(Configs.USER_HOME_PAGE_Index, 0)
         jumpActivity(bundle, UserHomePage::class.java)

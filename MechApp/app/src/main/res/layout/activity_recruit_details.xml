@@ -22,6 +22,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingRight="@dimen/dp_17"
                 android:layout_marginTop="@dimen/dp_20"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -32,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:paddingLeft="@dimen/dp_17"
-                    android:text="招聘挖掘机驾驶员卡特彼勒D11T推土机 出租"
+                    android:text="招聘挖掘 出租"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold" />
@@ -44,7 +45,18 @@
                     android:text="15K/月"
                     android:textColor="#FC3D38"
                     android:textSize="22sp" />
-
+                <TextView
+                    android:id="@+id/tv_label"
+                    android:visibility="gone"
+                    android:layout_width="39dp"
+                    android:layout_height="22dp"
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/dp_17"
+                    android:text="面议"
+                    android:textColor="#FE9418"
+                    android:textSize="12sp"
+                    android:background="@drawable/label_bg"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -300,7 +312,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_40"
-            android:drawableTop="@mipmap/details_collected"
+            android:drawableTop="@drawable/details_collect_icon"
             android:drawablePadding="@dimen/dp_5"
             android:text="收藏"
             android:textColor="@color/color_222"

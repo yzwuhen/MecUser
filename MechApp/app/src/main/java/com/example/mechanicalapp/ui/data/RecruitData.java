@@ -88,6 +88,11 @@ public class RecruitData  implements Serializable {
     private boolean isSelect;
     private String realname;
 
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
 
     public String getRealname() {
         return realname;

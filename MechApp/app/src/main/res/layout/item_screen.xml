@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:background="#fff"
+    android:id="@+id/ly_item_screen_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:gravity="center_vertical"
-        android:textColor="@color/color_222"
+        android:textColor="@drawable/tv_color_b_y"
         android:paddingLeft="@dimen/dp_17"
         android:text="智能排序"/>
     <View

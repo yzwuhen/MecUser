@@ -664,6 +664,18 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<MecDetailsBean>(iSubscriberListener))
     }
 
+    fun getPartsLeaseDetails(
+        token: String?,
+        id: String?,
+        iSubscriberListener: ISubscriberListener<PartsDetailsBean>
+    ) {
+        appsService?.getPartsLeaseDetails(token, id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<PartsDetailsBean>(iSubscriberListener))
+    }
+
+
     fun getBusinessDetails(
         token: String?,
         id: String?,
@@ -686,6 +698,9 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<GoodsDetailsBean>(iSubscriberListener))
     }
+
+
+
 
     fun getComment(
         token: String?,
@@ -846,18 +861,19 @@ class ModelImpl : BaseModel {
         netSubscribe: NetSubscribe<ShopCarBean>
     ) {
 
-        appsService?.getCarList(token,0,page, pageSize)?.subscribeOn(Schedulers.io())
+        appsService?.getCarList(token, 0, page, pageSize)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
+
     fun editShopCar(
         token: String?,
         shopCarData: ShopCarData,
         netSubscribe: NetSubscribe<NetData>
     ) {
 
-        appsService?.editCar(token,shopCarData)?.subscribeOn(Schedulers.io())
+        appsService?.editCar(token, shopCarData)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -869,7 +885,7 @@ class ModelImpl : BaseModel {
         netSubscribe: NetSubscribe<NetData>
     ) {
 
-        appsService?.delCar(token,id)?.subscribeOn(Schedulers.io())
+        appsService?.delCar(token, id)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -884,12 +900,13 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
+
     fun getBanner(
         token: String?,
-        type:Int,
+        type: Int,
         netSubscribe: NetSubscribe<BannerBean>
     ) {
-        appsService?.getBanner(token,type)?.subscribeOn(Schedulers.io())
+        appsService?.getBanner(token, type)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -932,6 +949,7 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
+
     fun cancelPartsOrder(
         token: String?,
         orderId: String?,
@@ -973,10 +991,35 @@ class ModelImpl : BaseModel {
         reOrder: ReOrder?,
         netSubscribe: NetSubscribe<CreatOrderBean>
     ) {
-        appsService?.addOrder(token,reOrder)
+        appsService?.addOrder(token, reOrder)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
 
+    fun addCarOrder(
+        token: String?,
+        reOrder: ReOrderCar?,
+        netSubscribe: NetSubscribe<CreatOrderBean>
+    ) {
+        appsService?.addCarOrder(token, reOrder)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+    fun getUserInfo(token: String?,type: Int, user: String, netSubscribe: NetSubscribe<UserInfoBean>) {
+        appsService?.getUserInfo(token,user, type)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+    fun getRecruitDetails(token: String?, id: String?, netSubscribe: NetSubscribe<RecruitDetailsBean>) {
+
+        appsService?.getRecruitDetails(token,id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
 }

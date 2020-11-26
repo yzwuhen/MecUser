@@ -4,13 +4,13 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.view.HotCityView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import kotlinx.android.synthetic.main.item_city.view.*
 
 
-class CityAdapter  (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class CityAdapter  (var mContext: Context, var mList:MutableList<String>, var mOnItemClickListener: OnItemClickLevelListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
 
     override fun getItemViewType(position: Int): Int {
@@ -26,10 +26,10 @@ class CityAdapter  (var mContext: Context, var mList:MutableList<String>, var mO
         else if (viewType == 1){
             return NewLocalVh(View.inflate(parent.context, R.layout.item_new_local_view,null))
         }else if (viewType ==2){
-            return HotCityVh(HotCityView(mContext))
+            return HotCityVh(HotCityView(mContext,mOnItemClickListener,viewType))
         }
 
-        return CityVh(View.inflate(parent.context, R.layout.item_city,null))
+        return CityVh(View.inflate(parent.context, R.layout.item_city,null),mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -52,5 +52,9 @@ class CityAdapter  (var mContext: Context, var mList:MutableList<String>, var mO
     class LocalVh (itemView: View): RecyclerView.ViewHolder(itemView)
     class NewLocalVh (itemView: View): RecyclerView.ViewHolder(itemView)
     class HotCityVh (itemView: View): RecyclerView.ViewHolder(itemView)
-    class CityVh (itemView: View): RecyclerView.ViewHolder(itemView)
+    class CityVh(itemView: View, mOnItemClickListener: OnItemClickLevelListener): RecyclerView.ViewHolder(itemView){
+        init {
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,3,adapterPosition) })
+        }
+    }
 }

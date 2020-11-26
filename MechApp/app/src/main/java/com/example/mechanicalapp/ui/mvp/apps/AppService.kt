@@ -282,8 +282,9 @@ interface AppService {
         @Query("pageSize") pageSize: Int,
         @Query("recruitType") recruitType: String,
         @Query(" region") region: String?,
-        @Query("typeWork") typeWork: String?,
-        @Query("sort") sort: String?,
+        @Query("cateName") typeWork: String?,
+        @Query("cateId") typeWorkId: String?,
+        @Query("sort") sort: Int,
         @Query("jobTittle") jobTittle: String?
     ): Observable<RecruitBean>
 
@@ -783,6 +784,15 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<MecDetailsBean>
+    /**
+     *
+     * 获取配件出租 求租详情
+     */
+    @GET("/jeecg-boot/market/mecMarketParts/queryById")
+    fun getPartsLeaseDetails(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<PartsDetailsBean>
 
 
     /**
@@ -1057,12 +1067,41 @@ interface AppService {
 
     /**
      *
-     * wo de 地址
+     * 生成订单
      */
     @POST("/jeecg-boot/shop/mecOrder/add")
     fun addOrder(
         @Header("X-Access-Token") token: String?,
         @Body reOrder: ReOrder?
     ): Observable<CreatOrderBean>
+    /**
+     *
+     *购物车里生成订单
+     */
+    @POST("/jeecg-boot/shop/mecOrder/add")
+    fun addCarOrder(
+        @Header("X-Access-Token") token: String?,
+        @Body reOrder: ReOrderCar?
+    ): Observable<CreatOrderBean>
 
+    /**
+     *
+     *用户信息==非个人
+     */
+    @GET("/jeecg-boot/market/userIndex/queryById")
+    fun getUserInfo(
+        @Header("X-Access-Token") token: String?,
+        @Query("create_by")  create_by: String?,
+        @Query("type")  type: Int
+    ): Observable<UserInfoBean>
+
+    /**
+     *
+     *查询 招聘 求职详情
+     */
+    @GET("/jeecg-boot/market/mecMarketRecruit/queryById")
+    fun getRecruitDetails(
+        @Header("X-Access-Token") token: String?,
+        @Query("id")  id: String?
+    ): Observable<RecruitDetailsBean>
 }

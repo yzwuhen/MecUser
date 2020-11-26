@@ -13,8 +13,10 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_more_job_want.view.*
+
 
 class MoreJobWantAdapter (var mContext: Context, var mList:MutableList<RecruitData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -46,6 +48,8 @@ class MoreJobWantAdapter (var mContext: Context, var mList:MutableList<RecruitDa
         }km"
         holder.itemView.tv_job_seekers.text ="${mList[position].realname}·求职者 "
 
+
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_job_pic,mList[position].avatar)
         holder.itemView.tv_time.text = DateUtils.dateDiffs(mList[position].updateTime, System.currentTimeMillis())
 
         holder.itemView.tv_sex.text =mList[position].sex_dictText
@@ -66,7 +70,7 @@ class MoreJobWantAdapter (var mContext: Context, var mList:MutableList<RecruitDa
 
     class MoreJobWantVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.item_root,adapterPosition) })
         }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,230 +13,267 @@
 
         <include layout="@layout/layout_title" />
 
-        <LinearLayout
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="232dp"
-            android:layout_margin="@dimen/dp_10"
-            android:background="@drawable/rect_radio_6_white"
-            android:orientation="vertical">
-
-            <LinearLayout
+            android:layout_height="match_parent">
+            <!--第一部分：伸缩工具栏-->
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar"
                 android:layout_width="match_parent"
-                android:layout_height="106dp"
-                android:orientation="horizontal"
-                android:padding="@dimen/dp_17">
+                android:layout_height="wrap_content"
+                android:background="@color/bg_color"
+                app:elevation="0dp">
 
-                <ImageView
-                    android:id="@+id/iv_user_pic"
-                    android:layout_width="73dp"
-                    android:layout_height="73dp"
-                    android:src="@mipmap/user_default" />
-
-                <LinearLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/dp_17"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:title=""
+                    app:titleEnabled="false">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_height="232dp"
+                        android:layout_margin="@dimen/dp_10"
+                        android:background="@drawable/rect_radio_6_white"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="谭老板"
-                            android:textColor="@color/color_222"
-                            android:textSize="17sp"
-                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="106dp"
+                            android:orientation="horizontal"
+                            android:padding="@dimen/dp_17">
 
-                        <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="18dp"
-                            android:src="@mipmap/sr" />
+                            <ImageView
+                                android:id="@+id/iv_user_pic"
+                                android:layout_width="73dp"
+                                android:layout_height="73dp"
+                                android:src="@mipmap/user_default" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="@dimen/dp_17"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tv_user_name"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="谭老板"
+                                        android:textColor="@color/color_222"
+                                        android:textSize="17sp"
+                                        android:textStyle="bold" />
+
+                                    <ImageView
+                                        android:id="@+id/iv_ser"
+                                        android:layout_width="25dp"
+                                        android:layout_height="18dp"
+                                        android:src="@mipmap/sr" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tv_company"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/dp_5"
+                                    android:drawableLeft="@mipmap/company_icon"
+                                    android:drawablePadding="@dimen/dp_8"
+                                    android:text="广州市莹宝维修有限公司"
+                                    android:textColor="@color/color_222"
+                                    android:textSize="@dimen/sp_13" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <View
+                            style="@style/h_view_1"
+                            android:layout_marginLeft="@dimen/dp_17"
+                            android:layout_marginRight="@dimen/dp_17" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/ly_user_menu1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableTop="@mipmap/user_home_page_icon1"
+                                    android:drawablePadding="@dimen/dp_10"
+                                    android:gravity="center"
+                                    android:text="设备买卖 "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_num1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(2) "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ly_user_menu2"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableTop="@mipmap/user_home_page_icon2"
+                                    android:drawablePadding="@dimen/dp_10"
+                                    android:gravity="center"
+                                    android:text="机械租赁 "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_num2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(2) "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ly_user_menu3"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableTop="@mipmap/user_home_page_icon4"
+                                    android:drawablePadding="@dimen/dp_10"
+                                    android:gravity="center"
+                                    android:text="招聘 "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_num3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(2) "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ly_user_menu4"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableTop="@mipmap/user_home_page_icon4"
+                                    android:drawablePadding="@dimen/dp_10"
+                                    android:gravity="center"
+                                    android:text="配件租赁 "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/tv_num4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(2) "
+                                    android:textColor="@color/color_222"
+                                    android:textSize="15sp" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:drawableLeft="@mipmap/company_icon"
-                        android:drawablePadding="@dimen/dp_8"
-                        android:text="广州市莹宝维修有限公司"
-                        android:textColor="@color/color_222"
-                        android:textSize="@dimen/sp_13" />
-                </LinearLayout>
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-
-            </LinearLayout>
-
-            <View
-                style="@style/h_view_1"
-                android:layout_marginLeft="@dimen/dp_17"
-                android:layout_marginRight="@dimen/dp_17" />
+            </com.google.android.material.appbar.AppBarLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_marginTop="@dimen/dp_17"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <LinearLayout
-                    android:id="@+id/ly_user_menu1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@drawable/rect_radio_6_white"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@mipmap/user_home_page_icon1"
-                        android:drawablePadding="@dimen/dp_10"
-                        android:gravity="center"
-                        android:text="设备买卖 "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                    <LinearLayout
+                        android:id="@+id/ly_screen_left"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(2) "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tv_screen_left"
+                            style="@style/user_home_page_tv"
+                            android:gravity="center"
+                            android:text="出售" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ly_screen_right"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/tv_screen_right"
+                            style="@style/user_home_page_tv"
+                            android:gravity="center"
+                            android:text="求购" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/ly_user_menu2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@mipmap/user_home_page_icon2"
-                        android:drawablePadding="@dimen/dp_10"
-                        android:gravity="center"
-                        android:text="机械租赁 "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(2) "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ly_user_menu3"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@mipmap/user_home_page_icon4"
-                        android:drawablePadding="@dimen/dp_10"
-                        android:gravity="center"
-                        android:text="招聘 "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(2) "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ly_user_menu4"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@mipmap/user_home_page_icon4"
-                        android:drawablePadding="@dimen/dp_10"
-                        android:gravity="center"
-                        android:text="配件租赁 "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(2) "
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
+                <com.example.mechanicalapp.ui.view.CusViewPage
+                    android:id="@+id/cus_page"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
             </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:background="@drawable/rect_radio_6_white"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/ly_screen_left"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/tv_screen_left"
-                    style="@style/user_home_page_tv"
-                    android:gravity="center"
-                    android:text="出售" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ly_screen_right"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/tv_screen_right"
-                    style="@style/user_home_page_tv"
-                    android:gravity="center"
-                    android:text="求购" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <com.example.mechanicalapp.ui.view.CusViewPage
-            android:id="@+id/cus_page"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -287,6 +325,6 @@
                 android:textColor="@color/color_222"
                 android:textSize="15sp" />
         </LinearLayout>
-
     </LinearLayout>
+
 </FrameLayout>

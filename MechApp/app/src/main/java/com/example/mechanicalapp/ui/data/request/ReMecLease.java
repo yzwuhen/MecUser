@@ -1,5 +1,7 @@
 package com.example.mechanicalapp.ui.data.request;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 public class ReMecLease implements Serializable {
@@ -288,7 +290,7 @@ public class ReMecLease implements Serializable {
     }
 
     public String getPic() {
-        return pic;
+        return TextUtils.isEmpty(pic)?"":pic;
     }
 
     public void setPic(String pic) {

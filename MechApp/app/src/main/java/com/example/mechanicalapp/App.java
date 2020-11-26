@@ -17,7 +17,7 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         Hawk.init(this).build();
-        mToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ1ODMzOTMsInVzZXJuYW1lIjoiMTM3NTE3NzM0MDIifQ.hR6uZYHHlvY1nNeGkZiDAtvaiAyvORCvkOp9vQKMIFc";
+        mToken ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ2NzU1NzYsInVzZXJuYW1lIjoiMTM3NTE3NzM0MDIifQ.xdV6NQJ_tAGgwQ99taNBvC30aIYtBLaNwSoMijgwdMI";
     }
     public static App getInstance() {
         return instance;

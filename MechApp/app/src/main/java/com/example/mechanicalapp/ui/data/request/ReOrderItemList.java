@@ -6,6 +6,8 @@ public class ReOrderItemList implements Serializable {
     private String mecProductSkuId;
     private int quantity;
 
+
+
     public String getMecProductSkuId() {
         return mecProductSkuId;
     }

@@ -7,9 +7,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.HotCityAdapter
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import kotlinx.android.synthetic.main.layout_hot_city.view.*
 
-class HotCityView (var mContext: Context) :FrameLayout(mContext) , OnItemClickListener {
+class HotCityView(
+    var mContext: Context,
+    var mOnItemClickListener: OnItemClickLevelListener,
+    var viewType: Int
+) :FrameLayout(mContext) , OnItemClickListener {
     private var mList :MutableList<String> = ArrayList<String>()
     var mAdapter : HotCityAdapter?=null
     init {
@@ -33,5 +38,6 @@ class HotCityView (var mContext: Context) :FrameLayout(mContext) , OnItemClickLi
 
 
     override fun onItemClick(view: View, position: Int) {
+        mOnItemClickListener.onItemClick(view,viewType,position)
     }
 }

@@ -17,9 +17,10 @@ class RecruitPresenter (
     private var baseModel: RecruitModelImpl? = null
     private var page: Int = 1
     private var pageSize: Int = 30
-    private var region: String? = null
+    private var city: String? = null
     private var typeWork: String? = null
-    private var sort: String? = null
+    private var typeWorkId:String?=null
+    private var sort: Int=0
     private var jobTitle:String?=null
 
     init {
@@ -35,8 +36,9 @@ class RecruitPresenter (
         baseModel?.getRecruitList(type,
             page,
             pageSize,
-            region,
+            city,
             typeWork,
+            typeWorkId,
             sort,
             jobTitle,
             object : ISubscriberListener<RecruitBean> {
@@ -59,10 +61,27 @@ class RecruitPresenter (
             })
     }
 
+
+    fun workType(type:String?,id:String?){
+        typeWork =type
+        typeWorkId =id
+    }
+    fun setCity(str:String?){
+        city =str
+    }
+
+
     fun setTitle(s:String){
         this.jobTitle = s
     }
+    fun resetPage(){
+        page=1
+    }
 
     override fun onDestroy() {
+    }
+
+    fun setScreen(position: Int) {
+        sort =position
     }
 }

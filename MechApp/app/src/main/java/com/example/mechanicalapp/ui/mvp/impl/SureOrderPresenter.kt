@@ -6,6 +6,7 @@ import com.example.mechanicalapp.ui.data.CreatOrderBean
 import com.example.mechanicalapp.ui.data.MyAddressBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReOrder
+import com.example.mechanicalapp.ui.data.request.ReOrderCar
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
@@ -16,6 +17,7 @@ class SureOrderPresenter(
 ) :
     BasePresenter {
     private var baseModel = ModelImpl()
+
 
     override fun request() {
     }
@@ -58,7 +60,25 @@ class SureOrderPresenter(
             })
         )
     }
+    fun creatOrderCar(reOrder: ReOrderCar) {
+        baseView.showLoading()
+        baseModel.addCarOrder(
+            App.getInstance().token,
+            reOrder, NetSubscribe(object :ISubscriberListener<CreatOrderBean>{
+                override fun onNext(t: CreatOrderBean?) {
+                    (baseView as NetDataView<NetData>).refreshUI(t)
+                }
 
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+    }
 
     override fun onDestroy() {
     }

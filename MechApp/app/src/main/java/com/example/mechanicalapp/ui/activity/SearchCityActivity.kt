@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.adapter.CityAdapter
 import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
@@ -16,7 +17,7 @@ import com.example.mechanicalapp.ui.mvp.impl.CityPresenter
 import kotlinx.android.synthetic.main.activity_search_city.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 
-class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnClickListener {
+class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnClickListener,OnItemClickLevelListener {
 
     private var mCityAdapter : CityAdapter?=null
     private var mLetterAdapter : LetterAdapter?=null
@@ -111,9 +112,7 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
     }
 
     override fun onItemClick(view: View, position: Int) {
-        when(view?.id){
-            R.id.ly_city_root->callback(mCityList[position])
-        }
+
     }
 
     private fun callback(extra: String) {
@@ -124,5 +123,14 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
         setResult(Configs.CITY_RESULT_CODE,intent)
         finish()
 
+    }
+
+    override fun onItemClick(view: View, position: Int, childPosition: Int) {
+
+        if (position>2){
+            when(view?.id){
+                R.id.ly_city_root->callback(mCityList[childPosition])
+            }
+        }
     }
 }

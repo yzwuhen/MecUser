@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_more_recruit.view.*
 
@@ -35,6 +36,17 @@ class MoreRecruitAdapter  (var mContext: Context, var mList:MutableList<RecruitD
                 )
             )
         }km"
+
+        if (mList[position].price_dictText=="面议"){
+            holder.itemView.tv_label.visibility =View.VISIBLE
+            holder.itemView.tv_label1.visibility =View.GONE
+        }else{
+            holder.itemView.tv_label.visibility =View.GONE
+            holder.itemView.tv_label1.visibility =View.VISIBLE
+            holder.itemView.tv_label1.text =mList[position].price_dictText
+        }
+
+
         holder.itemView.tv_recruit_user.text ="${mList[position].realname}·招聘"
 
         if (mList[position].isPerson=="1"){
@@ -42,6 +54,7 @@ class MoreRecruitAdapter  (var mContext: Context, var mList:MutableList<RecruitD
         }else{
             holder.itemView.iv_ser.visibility =View.GONE
         }
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_recruit_pic,mList[position].avatar)
 
         holder.itemView.tv_recruit_time.text = DateUtils.dateDiffs(mList[position].updateTime, System.currentTimeMillis())
     }
@@ -54,7 +67,7 @@ class MoreRecruitAdapter  (var mContext: Context, var mList:MutableList<RecruitD
 
     class MoreRecruitVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.item_root,adapterPosition) })
         }
     }
 }

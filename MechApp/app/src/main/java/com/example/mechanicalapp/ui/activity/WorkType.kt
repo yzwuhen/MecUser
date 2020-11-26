@@ -19,12 +19,12 @@ import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.MecTypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
 
-class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData> {
+class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData>,View.OnClickListener{
 
 
     private var mLeftAdapter: EcTypeLeftAdapter? = null
     private var mRightAdapter: WorkTypeAdapter? = null
-    var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
+    private var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
     var mLeftList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
 
     private var mPresenter: AddManagePresenterImpl ?=null
@@ -51,6 +51,8 @@ class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData> {
 
         mPresenter = AddManagePresenterImpl(this,this)
         (mPresenter as AddManagePresenterImpl).getWorkType()
+
+        tv_unlimited.setOnClickListener(this)
     }
 
     override fun initPresenter() {
@@ -118,5 +120,10 @@ class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData> {
     override fun loadRightMore(list: List<MecTypeChildData>) {
         mRightList.addAll(list)
         mRightAdapter?.notifyDataSetChanged()
+    }
+
+    override fun onClick(p0: View?) {
+
+        callback(null,null)
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,10 +10,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.ProgressListener
-import com.example.mechanicalapp.ui.activity.Brand
-import com.example.mechanicalapp.ui.activity.EcModel
-import com.example.mechanicalapp.ui.activity.EcType
-import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
+import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.MoreSellAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
@@ -184,7 +182,10 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
     }
 
     override fun onItemClick(view: View, position: Int) {
-        jumpActivity(null, LeaseDetailsActivity::class.java)
+        var bundle =Bundle()
+        bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 1)
+        bundle.putString(Configs.MEC_ID, mList[position].id)
+        jumpActivity(bundle, MecSellDetails::class.java)
     }
 
     override fun progress(leftPos: Double, rightPos: Double) {
@@ -226,6 +227,7 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
     }
 
     fun refresh() {
+        (mPresenter as SellPresenter).resetPage()
         (mPresenter as SellPresenter).getSellList(1)
     }
 

@@ -38,7 +38,6 @@ class SureOrderActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLi
     private var num = 0
 
     private var reOrder = ReOrder()
-    private var reOrderItemList = ReOrderItemList()
     private var skuList = ArrayList<ReOrderItemList>()
 
     override fun getLayoutId(): Int {
@@ -67,6 +66,10 @@ class SureOrderActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLi
             for (sku in mList) {
                 price += sku.skuListData.price * sku.num
                 num += sku.num
+                var reOrderItemList = ReOrderItemList()
+                reOrderItemList.mecProductSkuId = sku.skuListData.id
+                reOrderItemList.quantity =sku.num
+                skuList.add(reOrderItemList)
             }
         }
         tv_goods_num.text = "共计${num}件商品"
@@ -75,10 +78,6 @@ class SureOrderActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLi
         tv_all_money.text = "合计： ￥$price"
 
 
-        reOrderItemList.mecProductSkuId = mList[0].skuListData.id
-        reOrderItemList.quantity = mList[0].num
-
-        skuList.add(reOrderItemList)
         reOrder.orderItemList = skuList
         et_remarks.addTextChangedListener(this)
 

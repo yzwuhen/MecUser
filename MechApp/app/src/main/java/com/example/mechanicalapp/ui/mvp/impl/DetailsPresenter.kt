@@ -5,6 +5,7 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReAddCar
 import com.example.mechanicalapp.ui.data.request.ReCollect
+import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.GoodsDetailsView
@@ -61,6 +62,29 @@ class DetailsPresenter(
     }
 
 
+
+    fun getPartsLeaseDetails(id: String?) {
+        baseView.showLoading()
+        baseModel.getPartsLeaseDetails(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<PartsDetailsBean> {
+                override fun onNext(t: PartsDetailsBean?) {
+                    (baseView as MecDetailsView<PartsDetailsData>).showData(t?.result)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
+    }
+
+
     fun getGoodsDetails(id: String?) {
         baseView.showLoading()
         baseModel.getGoodsDetails(
@@ -80,6 +104,28 @@ class DetailsPresenter(
                 }
             })
     }
+
+
+    fun getRecruitDetails(id: String?) {
+        baseView.showLoading()
+        baseModel.getRecruitDetails(
+            App.getInstance().token,
+            id,
+           NetSubscribe<RecruitDetailsBean>(object :ISubscriberListener<RecruitDetailsBean>{
+               override fun onNext(t: RecruitDetailsBean?) {
+                   (baseView as MecDetailsView<NetData>).showData(t)
+               }
+
+               override fun onError(e: Throwable?) {
+                   baseView.hiedLoading()
+               }
+
+               override fun onCompleted() {
+                   baseView.hiedLoading()
+               }
+           }))
+    }
+
 
 
     fun addCollect(recollect: ReCollect){

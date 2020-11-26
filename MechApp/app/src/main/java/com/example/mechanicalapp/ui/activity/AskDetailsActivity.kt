@@ -19,24 +19,10 @@ import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_ask_details.*
-import kotlinx.android.synthetic.main.activity_ask_details.ly_call
-import kotlinx.android.synthetic.main.activity_ask_details.ly_chat
-import kotlinx.android.synthetic.main.activity_ask_details.ly_user_info
-import kotlinx.android.synthetic.main.activity_ask_details.tv_address
-import kotlinx.android.synthetic.main.activity_ask_details.tv_browse
-import kotlinx.android.synthetic.main.activity_ask_details.tv_browse_time
-import kotlinx.android.synthetic.main.activity_ask_details.tv_collected
-import kotlinx.android.synthetic.main.activity_ask_details.tv_details
-import kotlinx.android.synthetic.main.activity_ask_details.tv_factory_time
-import kotlinx.android.synthetic.main.activity_ask_details.tv_mec_brand
-import kotlinx.android.synthetic.main.activity_ask_details.tv_mec_model
-import kotlinx.android.synthetic.main.activity_ask_details.tv_mec_type
-import kotlinx.android.synthetic.main.activity_ask_details.tv_report
-import kotlinx.android.synthetic.main.activity_ask_details.tv_user_nick
-import kotlinx.android.synthetic.main.activity_lease_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
@@ -125,11 +111,12 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
     private fun jumHomePage() {
         var bundle =Bundle()
         if (intentType==0){
-            bundle.putInt(Configs.USER_HOME_PAGE,1)
+            bundle.putInt(Configs.USER_HOME_PAGE,3)
         }else{
-            bundle.putInt(Configs.USER_HOME_PAGE,0)
+            bundle.putInt(Configs.USER_HOME_PAGE,2)
         }
         bundle.putInt(Configs.USER_HOME_PAGE_Index,1)
+        bundle.putString(Configs.USER_HOME_PAGE_NAME,mData?.createBy)
         jumpActivity(bundle,UserHomePage::class.java)
 
     }
@@ -209,6 +196,8 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
             tv_browse_time.text = DateUtils.dateDiffs(data.createTime,System.currentTimeMillis())
 
 
+            ImageLoadUtils.loadCircle(this,iv_ask_user_pic,data.avatar)
+            ImageLoadUtils.loadCircle(this,iv_user_pic,data.avatar)
 
             tv_address.text="所在地：${data.address}"
 

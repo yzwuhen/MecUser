@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -41,8 +42,6 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
         mAdapter = MorePartsAdapter(mContext, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(mContext)
         recycler_list.adapter = mAdapter
-
-
 
         mStringList?.add("智能排序")
         mStringList?.add("距离由远至近")
@@ -92,7 +91,9 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
     }
 
     override fun onItemClick(view: View, position: Int) {
-        jumpActivity(null,PartsLeaseDetailsActivity::class.java)
+        var bundle =Bundle()
+        bundle.putString(Configs.MEC_ID, mList[position].id)
+        jumpActivity(bundle,PartsLeaseDetailsActivity::class.java)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -124,6 +125,7 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
     }
 
     fun reFresh() {
+        (mPresenter as MorePartsPresenter).resetPage()
         (mPresenter as MorePartsPresenter).getPartsLeaseList(1)
     }
 }

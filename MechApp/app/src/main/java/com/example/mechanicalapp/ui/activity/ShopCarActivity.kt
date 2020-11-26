@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -15,9 +16,7 @@ import com.example.mechanicalapp.ui.adapter.AttrAdapter
 import com.example.mechanicalapp.ui.adapter.ShopCarAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.base.WeakHandler
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.ShopCarBean
-import com.example.mechanicalapp.ui.data.ShopCarData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.ShopCarPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.MyDecoration
@@ -28,6 +27,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_shop_car.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.Serializable
 
 
 class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
@@ -163,19 +163,25 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
 
     private fun buy() {
 
-//        var bundle = Bundle()
-//
-//        var mgoList: MutableList<SkuBean> = ArrayList<SkuBean>()
-//        for (data in mList) {
-//            if (data.isSelect) {
+        var bundle = Bundle()
+
+        var mgoList: MutableList<ShopCarData> = ArrayList<ShopCarData>()
+        for (data in mList) {
+            if (data.isSelect) {
 //                var skuBean = SkuBean()
 //                skuBean.num = data.quantity
-//              //  skuBean.skuListData = data.productId
-//                mgoList.add(skuBean)
-//            }
-//        }
-//        bundle.putSerializable("data", mgoList as Serializable)
-//        jumpActivity(bundle, SureOrderActivity::class.java)
+//                var skuList =SkuListData()
+//                skuList.price =data.price
+//                skuList.picture =data.picture
+//                skuList.mecProductName =data.productName
+//                skuList.name =data.skuName
+//                skuList.id =data.skuId
+//                skuBean.skuListData=skuList
+                mgoList.add(data)
+            }
+        }
+        bundle.putSerializable("data", mgoList as Serializable)
+        jumpActivity(bundle, SureOrderCarActivity::class.java)
 
     }
 

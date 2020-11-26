@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
@@ -87,5 +88,11 @@ public class ImageLoadUtils {
 
     }
 
+    public static void loadCircle(Context mContext, ImageView imageView, String url){
+
+        Glide.with(mContext).load(url)
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(imageView);
+    }
 
 }

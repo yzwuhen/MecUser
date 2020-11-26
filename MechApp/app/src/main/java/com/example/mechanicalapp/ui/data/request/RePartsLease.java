@@ -1,5 +1,7 @@
 package com.example.mechanicalapp.ui.data.request;
 
+import android.text.TextUtils;
+
 public class RePartsLease {
 
 
@@ -240,7 +242,7 @@ public class RePartsLease {
     }
 
     public String getPic() {
-        return pic;
+        return TextUtils.isEmpty(pic)?"":pic;
     }
 
     public void setPic(String pic) {

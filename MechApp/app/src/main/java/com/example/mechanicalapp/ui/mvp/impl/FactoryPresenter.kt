@@ -66,4 +66,9 @@ class FactoryPresenter(
 
     override fun onDestroy() {
     }
+
+    fun resetPage() {
+
+        page =1
+    }
 }

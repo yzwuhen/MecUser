@@ -13,12 +13,15 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.ui.mvp.impl.FactoryPresenter
+import com.example.mechanicalapp.ui.mvp.impl.MyLookPresenter
 import com.example.mechanicalapp.ui.mvp.v.FactoryView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_more_factory.*
+import kotlinx.android.synthetic.main.activity_more_factory.spring_list
 import kotlinx.android.synthetic.main.layout_more_data_title.*
+import kotlinx.android.synthetic.main.layout_spring_list.*
 
 class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.onViewListener,
     OnItemClickListener,FactoryView {
@@ -61,26 +64,28 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
         recycle_list.layoutManager = LinearLayoutManager(this)
         recycle_list.adapter = mMecFactoryShopAdapter
 
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(this))
-
+        spring_list.header = RefreshHeaderUtils.getHeaderView(this)
+        spring_list.footer = RefreshHeaderUtils.getFooterView(this)
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
-                //  initData()
-                closeRefreshView()
+                spring_list.isEnable = false
+                (mPresenter as FactoryPresenter).resetPage()
+                (mPresenter as FactoryPresenter).getFactoryList()
             }
 
-            override fun onLoadmore() {}
+            override fun onLoadmore() {
+                (mPresenter as FactoryPresenter).getFactoryList()
+            }
         })
+
 
         mPresenter = FactoryPresenter(this,this)
         mPresenter?.getFactoryList()
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable=true
+        spring_list?.onFinishFreshAndLoad()
     }
 
 
@@ -100,9 +105,12 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
+        closeRefreshView()
     }
 
     override fun err()  {
@@ -154,7 +162,6 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
 
             showResult(
                 requestCode,

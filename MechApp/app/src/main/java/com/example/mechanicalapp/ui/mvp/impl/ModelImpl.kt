@@ -1022,4 +1022,16 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
+
+    fun getMapMecLease(
+        token: String?,
+        lag: Double,
+        lot: Double,
+        type: Int,
+        title:String?,
+        netSubscribe: NetSubscribe<NetData>
+    ) {
+
+
+    }
 }

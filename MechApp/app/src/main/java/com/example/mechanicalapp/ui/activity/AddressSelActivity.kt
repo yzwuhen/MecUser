@@ -14,7 +14,6 @@ import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
 import com.amap.api.services.core.LatLonPoint
 import com.amap.api.services.core.PoiItem
-import com.amap.api.services.core.SuggestionCity
 import com.amap.api.services.geocoder.GeocodeResult
 import com.amap.api.services.geocoder.GeocodeSearch
 import com.amap.api.services.geocoder.RegeocodeQuery
@@ -158,17 +157,8 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
 
     private fun addMark(latitude: Double, longitude: Double) {
         if (marker == null) {
-            marker = aMap!!.addMarker(
-                MarkerOptions()
-                    .position(LatLng(latitude, longitude))
-                    .icon(
-                        BitmapDescriptorFactory.fromBitmap(
-                            BitmapFactory
-                                .decodeResource(resources, R.mipmap.progress_icon)
-                        )
-                    )
-                    .draggable(true)
-            )
+            var view = layoutInflater.inflate(R.layout.map_center_view, null)
+            marker =aMap!!.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).icon(BitmapDescriptorFactory.fromView(view)))
         } else {
             marker?.position = LatLng(latitude, longitude)
         }

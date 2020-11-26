@@ -11,14 +11,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/dp_50"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingRight="@dimen/dp_17"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/et_search"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
+            android:layout_height="@dimen/dp_45"
+            android:background="@drawable/rect_radio_6_g"
             android:hint="请输入地址"
             android:paddingLeft="17dp"
             android:paddingRight="17dp" />

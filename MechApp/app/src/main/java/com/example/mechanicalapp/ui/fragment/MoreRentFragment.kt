@@ -189,7 +189,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
         jumpActivity(bundle,AskDetailsActivity::class.java)
     }
 
-    override fun progress(leftPos: Double, rightPos: Double) {
+    override fun progress(leftPos: Double, rightPos: Double,view: View) {
 
     }
 

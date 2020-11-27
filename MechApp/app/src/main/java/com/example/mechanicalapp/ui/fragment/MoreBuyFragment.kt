@@ -190,7 +190,7 @@ class MoreBuyFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
         jumpActivity(bundle, MecBuyDetails::class.java)
     }
 
-    override fun progress(leftPos: Double, rightPos: Double) {
+    override fun progress(leftPos: Double, rightPos: Double,view: View) {
 
     }
 

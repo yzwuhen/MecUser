@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
@@ -104,13 +105,11 @@ class PartsOrderAdapter(
             }
         }
 
-        holder.itemView.tv_title.text =mList[position].orderTitle
-        holder.itemView.tv_num.text = "x${mList[position].quantity}"
+        holder.itemView.recycle_list_item.layoutManager =LinearLayoutManager(mContext)
+        var mPartsOrderChildAdapter = PartsOrderChildAdapter(mContext,mList[position].orderItemList)
+        holder.itemView.recycle_list_item.adapter =mPartsOrderChildAdapter
 
-        holder.itemView.tv_attr.text =mList[position].skuName
         holder.itemView.tv_money.text ="￥${mList[position].amount}"
-
-        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,StringUtils.getImgStr(mList[position].picUrl),R.mipmap.ic_launcher)
     }
 
     override fun getItemCount(): Int {

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+<View
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/bg_color"/>
+    <ImageView
+        android:layout_marginTop="@dimen/dp_10"
+        android:id="@+id/iv_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_50"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="回转支承旋转轴承大型机专用配件支持大小型机使用"
+        android:textColor="@color/color_222"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_num"
+        app:layout_constraintStart_toEndOf="@+id/iv_pic"
+        app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="X1"
+        android:textColor="@color/color_222"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+    <TextView
+        android:id="@+id/tv_attr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:background="@drawable/rect_radio_2_g"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:text="蓝色，均码"
+        android:textColor="@color/color_666"
+        android:textSize="@dimen/sp_13"
+        app:layout_constraintBottom_toBottomOf="@id/iv_pic"
+        app:layout_constraintStart_toStartOf="@+id/tv_title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -201,7 +201,31 @@
                     android:layout_gravity="end|bottom"/>
 
             </FrameLayout>
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
 
+                    style="@style/tv_style_left"
+                    android:layout_width="wrap_content"
+                    android:text="添加图片、视频" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_666"
+                    android:textSize="11sp"
+                    android:text="（前方左右45角度照片两张+后方一张，至少一张照片)"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/dp_17"
+                android:id="@+id/ry_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/tv_submit"

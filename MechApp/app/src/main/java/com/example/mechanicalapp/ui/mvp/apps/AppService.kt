@@ -793,7 +793,15 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<PartsDetailsBean>
-
+    /**
+     *
+     * 获取维修厂详情
+     */
+    @GET("/jeecg-boot/repair/mecRepaireFactory/queryById")
+    fun getFactoryDetails(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<FactoryDetailsBean>
 
     /**
      *
@@ -1104,4 +1112,25 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id")  id: String?
     ): Observable<RecruitDetailsBean>
+
+
+    /**
+     *
+     *举报
+     */
+    @POST("/jeecg-boot/report/mecReport/add")
+    fun report(
+        @Header("X-Access-Token") token: String?,
+       @Body report: ReReport?
+    ): Observable<NetData>
+
+    /**
+     *
+     *获取举报说明列表
+     */
+    @GET("/jeecg-boot/report/mecReport/list")
+    fun getReportList(
+        @Header("X-Access-Token") token: String?
+    ): Observable<ReportBean>
+
 }

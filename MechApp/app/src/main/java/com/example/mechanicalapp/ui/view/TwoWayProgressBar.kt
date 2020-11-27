@@ -189,7 +189,7 @@ class TwoWayProgressBar(
 
         mProgressListener?.progress(
             ((width - bitMapSize) - rectLeft?.left) / ((width - bitMapSize).toDouble()),
-            ((width - bitMapSize) - rectRight?.left) / ((width - bitMapSize).toDouble())
+            ((width - bitMapSize) - rectRight?.left) / ((width - bitMapSize).toDouble()),this
         )
     }
 

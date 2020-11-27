@@ -1,5 +1,7 @@
 package com.example.mechanicalapp.ui.data;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 public class UserInfo implements Serializable {
@@ -37,9 +39,9 @@ public class UserInfo implements Serializable {
     private String id;
     private String username;
     private String realname;
-    private Object avatar;
+    private String avatar;
     private Object birthday;
-    private Object sex;
+    private int sex;
     private Object email;
     private String phone;
     private Object orgCode;
@@ -71,7 +73,7 @@ public class UserInfo implements Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return TextUtils.isEmpty(username)?"********":username;
     }
 
     public void setUsername(String username) {
@@ -86,11 +88,11 @@ public class UserInfo implements Serializable {
         this.realname = realname;
     }
 
-    public Object getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(Object avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 
@@ -102,11 +104,11 @@ public class UserInfo implements Serializable {
         this.birthday = birthday;
     }
 
-    public Object getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(Object sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -119,7 +121,7 @@ public class UserInfo implements Serializable {
     }
 
     public String getPhone() {
-        return phone;
+        return TextUtils.isEmpty(phone)?"********":phone;
     }
 
     public void setPhone(String phone) {

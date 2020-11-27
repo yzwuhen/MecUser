@@ -69,9 +69,10 @@
     <RatingBar
         android:id="@+id/ratingBar"
         style="@style/App_RatingBar"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginTop="@dimen/dp_10"
+        android:isIndicator="true"
         android:numStars="5"
         android:rating="2.5"
         app:layout_constraintStart_toStartOf="@+id/tv_item_title"

@@ -224,15 +224,15 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     private fun applyRefund() {
 
-        var bundle = Bundle()
-        var reApplyRefund = ReApplyRefund()
-        reApplyRefund.mecOrderId =mList[clickPosition].id
-        reApplyRefund.imgs =mList[clickPosition].picUrl
-        reApplyRefund.mecProductSkuId =mList[clickPosition].skuIds
-        reApplyRefund.state =mList[clickPosition].status.toString()
-        reApplyRefund.statusName =mList[clickPosition].statusName
-        bundle.putSerializable("data",reApplyRefund)
-        jumpActivity(bundle, ApplyRefundActivity::class.java)
+//        var bundle = Bundle()
+//        var reApplyRefund = ReApplyRefund()
+//        reApplyRefund.mecOrderId =mList[clickPosition].id
+//        reApplyRefund.imgs =mList[clickPosition].picUrl
+//        reApplyRefund.mecProductSkuId =mList[clickPosition].skuIds
+//        reApplyRefund.state =mList[clickPosition].status.toString()
+//        reApplyRefund.statusName =mList[clickPosition].statusName
+//        bundle.putSerializable("data",reApplyRefund)
+//        jumpActivity(bundle, ApplyRefundActivity::class.java)
     }
 
     private fun cancelOrder() {

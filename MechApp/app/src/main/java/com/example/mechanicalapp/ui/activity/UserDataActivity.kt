@@ -47,6 +47,17 @@ class UserDataActivity : BaseActivity<NetData>(), View.OnClickListener {
         ly_user_pic.setOnClickListener(this)
         ly_sex.setOnClickListener(this)
         ly_nick.setOnClickListener(this)
+
+        ImageLoadUtils.loadCircle(this,iv_user_pic,App.getInstance().userInfo.avatar)
+        tv_user_nick.text = App.getInstance().userInfo.realname
+
+        if (App.getInstance().userInfo.sex==1){
+            tv_user_sex.text ="男"
+        }else{
+            tv_user_sex.text ="女"
+        }
+
+        tv_user_phone.text =App.getInstance().userInfo.phone
     }
 
     override fun initPresenter() {

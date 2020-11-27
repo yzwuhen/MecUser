@@ -38,10 +38,9 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     }
 
     private fun showInfo() {
-
-
-        tv_user_nick.text = App.getInstance().userInfo.username
+        tv_user_nick.text = App.getInstance().userInfo.realname
         tv_phone.text = App.getInstance().userInfo.phone
+        tv_company.text =App.getInstance().userInfo.realname
         ImageLoadUtils.loadImageCenterCrop(
             mContext,
             iv_user_pic,
@@ -137,7 +136,8 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
 
     private fun isLogin(): Boolean {
         if (TextUtils.isEmpty(App.getInstance().token)) {
-            ToastUtils.showText("请先登录")
+            //ToastUtils.showText("请先登录")
+            jumpActivity(null,LoginActivity::class.java)
             return false
         }
         return true

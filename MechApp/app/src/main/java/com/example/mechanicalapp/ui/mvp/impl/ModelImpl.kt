@@ -664,6 +664,18 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<MecDetailsBean>(iSubscriberListener))
     }
 
+    fun getFactoryDetails(
+        token: String?,
+        id: String?,
+        iSubscriberListener: ISubscriberListener<FactoryDetailsBean>
+    ) {
+        appsService?.getFactoryDetails(token, id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<FactoryDetailsBean>(iSubscriberListener))
+    }
+
+
     fun getPartsLeaseDetails(
         token: String?,
         id: String?,
@@ -1032,6 +1044,22 @@ class ModelImpl : BaseModel {
         netSubscribe: NetSubscribe<NetData>
     ) {
 
+
+    }
+
+    fun report(token: String?, reReport: ReReport, netSubscribe: NetSubscribe<NetData>) {
+        appsService?.report(token,reReport)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+
+    }
+
+    fun getReportList(token: String?, netSubscribe: NetSubscribe<ReportBean>) {
+        appsService?.getReportList(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
 
     }
 }

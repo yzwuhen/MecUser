@@ -28,7 +28,6 @@ open class UpdateFilePresenterImpl(
     fun upLoadFile(fileUrl: String){
 
         val file: File = File(fileUrl)
-        Log.v("sssssssssss","sssssssssssssssssssss${file.exists()}")
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
 
@@ -39,7 +38,6 @@ open class UpdateFilePresenterImpl(
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("upLoadFile","=======upLoadFile=====${e}")
                 baseView.hiedLoading()
                 (baseView as UpLoadFileView).uploadFail(e?.message.toString())
             }

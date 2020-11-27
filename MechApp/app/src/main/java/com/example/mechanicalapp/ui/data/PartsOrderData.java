@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.data;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PartsOrderData implements Serializable {
 
@@ -8,11 +9,11 @@ public class PartsOrderData implements Serializable {
     /**
      * isAllocatedstock : 1
      * isAllocatedstock_dictText : 是
-     * orderItemList : null
+     * orderItemList : [{"productSum":234,"thumbnail":null,"quantity":1,"orderId":"020201126102345747564","productSkuImg":"https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/timg_1603806815224.jpg,https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/电脑_1603806819443.jpg","freight":null,"weight":null,"updateTime":null,"isBaoyou":null,"skuName":null,"totalSum":234,"createBy":"13751773402","isDelivery":null,"createTime":"2020-11-26 10:23:46","updateBy":null,"price":234,"prodName":"苹果999","sysOrgCode":"A02","id":"1331785689544577025","mecProductSkuId":"16061452639240298040"}]
      * freight : null
      * fee : null
-     * createUserPhone : null
-     * orderNum : 20201124165015350634
+     * createUserPhone : 13751773402
+     * orderNum : 20201126102346631412
      * memo : null
      * type_dictText : null
      * createUserName : 13751773402
@@ -21,17 +22,17 @@ public class PartsOrderData implements Serializable {
      * skuIds : null
      * paymentType : null
      * completeDate : null
-     * skuName : X,红色
-     * picUrl : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/timg_1603806815224.jpg,https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/电脑_1603806819443.jpg
+     * skuName : null
+     * picUrl : null
      * receiverId : 1330423821953454081
      * receiverPhone : 13336
      * updateBy : null
      * statusName : 待支付
-     * id : 020201124165015133670
+     * id : 020201126102345747564
      * sn : null
      * receiverAreaId : 450124
      * paymentTime : null
-     * orderTitle : 回转成走大机械专用设备小机箱也能用设备
+     * orderTitle : null
      * amount : 234
      * quantity : 1
      * shippingName : null
@@ -44,8 +45,8 @@ public class PartsOrderData implements Serializable {
      * receiveTime : null
      * createBy : 13751773402
      * productAmount : 234
-     * createTime : 2020-11-24 16:50:16
-     * expire : 2020-11-24 16:55:16
+     * createTime : 2020-11-26 10:23:46
+     * expire : 2020-11-26 10:28:46
      * sysOrgCode : A02
      * receiverAreaName : 广西壮族自治区,南宁市,马山县
      * paymentType_dictText : null
@@ -54,17 +55,16 @@ public class PartsOrderData implements Serializable {
 
     private String isAllocatedstock;
     private String isAllocatedstock_dictText;
-    private Object orderItemList;
     private Object freight;
     private Object fee;
-    private Object createUserPhone;
+    private String createUserPhone;
     private String orderNum;
-    private String memo;
+    private Object memo;
     private Object type_dictText;
     private String createUserName;
     private String status_dictText;
     private Object type;
-    private String skuIds;
+    private Object skuIds;
     private Object paymentType;
     private Object completeDate;
     private String skuName;
@@ -76,13 +76,13 @@ public class PartsOrderData implements Serializable {
     private String id;
     private Object sn;
     private String receiverAreaId;
-    private String paymentTime;
+    private Object paymentTime;
     private String orderTitle;
     private int amount;
     private int quantity;
-    private String shippingName;
+    private Object shippingName;
     private String receiverName;
-    private String paymentTypeName;
+    private Object paymentTypeName;
     private int weight;
     private Object updateTime;
     private Object tax;
@@ -96,6 +96,7 @@ public class PartsOrderData implements Serializable {
     private String receiverAreaName;
     private String paymentType_dictText;
     private int status;
+    private List<OrderItemListBean> orderItemList;
 
     public String getIsAllocatedstock() {
         return isAllocatedstock;
@@ -111,14 +112,6 @@ public class PartsOrderData implements Serializable {
 
     public void setIsAllocatedstock_dictText(String isAllocatedstock_dictText) {
         this.isAllocatedstock_dictText = isAllocatedstock_dictText;
-    }
-
-    public Object getOrderItemList() {
-        return orderItemList;
-    }
-
-    public void setOrderItemList(Object orderItemList) {
-        this.orderItemList = orderItemList;
     }
 
     public Object getFreight() {
@@ -137,11 +130,11 @@ public class PartsOrderData implements Serializable {
         this.fee = fee;
     }
 
-    public Object getCreateUserPhone() {
+    public String getCreateUserPhone() {
         return createUserPhone;
     }
 
-    public void setCreateUserPhone(Object createUserPhone) {
+    public void setCreateUserPhone(String createUserPhone) {
         this.createUserPhone = createUserPhone;
     }
 
@@ -153,11 +146,11 @@ public class PartsOrderData implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public String getMemo() {
+    public Object getMemo() {
         return memo;
     }
 
-    public void setMemo(String memo) {
+    public void setMemo(Object memo) {
         this.memo = memo;
     }
 
@@ -193,11 +186,11 @@ public class PartsOrderData implements Serializable {
         this.type = type;
     }
 
-    public String getSkuIds() {
+    public Object getSkuIds() {
         return skuIds;
     }
 
-    public void setSkuIds(String skuIds) {
+    public void setSkuIds(Object skuIds) {
         this.skuIds = skuIds;
     }
 
@@ -289,7 +282,7 @@ public class PartsOrderData implements Serializable {
         this.receiverAreaId = receiverAreaId;
     }
 
-    public String getPaymentTime() {
+    public Object getPaymentTime() {
         return paymentTime;
     }
 
@@ -321,11 +314,11 @@ public class PartsOrderData implements Serializable {
         this.quantity = quantity;
     }
 
-    public String getShippingName() {
+    public Object getShippingName() {
         return shippingName;
     }
 
-    public void setShippingName(String shippingName) {
+    public void setShippingName(Object shippingName) {
         this.shippingName = shippingName;
     }
 
@@ -337,11 +330,11 @@ public class PartsOrderData implements Serializable {
         this.receiverName = receiverName;
     }
 
-    public String getPaymentTypeName() {
+    public Object getPaymentTypeName() {
         return paymentTypeName;
     }
 
-    public void setPaymentTypeName(String paymentTypeName) {
+    public void setPaymentTypeName(Object paymentTypeName) {
         this.paymentTypeName = paymentTypeName;
     }
 
@@ -447,5 +440,219 @@ public class PartsOrderData implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public List<OrderItemListBean> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItemListBean> orderItemList) {
+        this.orderItemList = orderItemList;
+    }
+
+    public static class OrderItemListBean {
+        /**
+         * productSum : 234
+         * thumbnail : null
+         * quantity : 1
+         * orderId : 020201126102345747564
+         * productSkuImg : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/timg_1603806815224.jpg,https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/电脑_1603806819443.jpg
+         * freight : null
+         * weight : null
+         * updateTime : null
+         * isBaoyou : null
+         * skuName : null
+         * totalSum : 234
+         * createBy : 13751773402
+         * isDelivery : null
+         * createTime : 2020-11-26 10:23:46
+         * updateBy : null
+         * price : 234
+         * prodName : 苹果999
+         * sysOrgCode : A02
+         * id : 1331785689544577025
+         * mecProductSkuId : 16061452639240298040
+         */
+
+        private int productSum;
+        private Object thumbnail;
+        private int quantity;
+        private String orderId;
+        private String productSkuImg;
+        private Object freight;
+        private Object weight;
+        private Object updateTime;
+        private Object isBaoyou;
+        private String skuName;
+        private int totalSum;
+        private String createBy;
+        private Object isDelivery;
+        private String createTime;
+        private Object updateBy;
+        private int price;
+        private String prodName;
+        private String sysOrgCode;
+        private String id;
+        private String mecProductSkuId;
+
+        public int getProductSum() {
+            return productSum;
+        }
+
+        public void setProductSum(int productSum) {
+            this.productSum = productSum;
+        }
+
+        public Object getThumbnail() {
+            return thumbnail;
+        }
+
+        public void setThumbnail(Object thumbnail) {
+            this.thumbnail = thumbnail;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public void setQuantity(int quantity) {
+            this.quantity = quantity;
+        }
+
+        public String getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(String orderId) {
+            this.orderId = orderId;
+        }
+
+        public String getProductSkuImg() {
+            return productSkuImg;
+        }
+
+        public void setProductSkuImg(String productSkuImg) {
+            this.productSkuImg = productSkuImg;
+        }
+
+        public Object getFreight() {
+            return freight;
+        }
+
+        public void setFreight(Object freight) {
+            this.freight = freight;
+        }
+
+        public Object getWeight() {
+            return weight;
+        }
+
+        public void setWeight(Object weight) {
+            this.weight = weight;
+        }
+
+        public Object getUpdateTime() {
+            return updateTime;
+        }
+
+        public void setUpdateTime(Object updateTime) {
+            this.updateTime = updateTime;
+        }
+
+        public Object getIsBaoyou() {
+            return isBaoyou;
+        }
+
+        public void setIsBaoyou(Object isBaoyou) {
+            this.isBaoyou = isBaoyou;
+        }
+
+        public String getSkuName() {
+            return skuName;
+        }
+
+        public void setSkuName(String skuName) {
+            this.skuName = skuName;
+        }
+
+        public int getTotalSum() {
+            return totalSum;
+        }
+
+        public void setTotalSum(int totalSum) {
+            this.totalSum = totalSum;
+        }
+
+        public String getCreateBy() {
+            return createBy;
+        }
+
+        public void setCreateBy(String createBy) {
+            this.createBy = createBy;
+        }
+
+        public Object getIsDelivery() {
+            return isDelivery;
+        }
+
+        public void setIsDelivery(Object isDelivery) {
+            this.isDelivery = isDelivery;
+        }
+
+        public String getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
+        }
+
+        public Object getUpdateBy() {
+            return updateBy;
+        }
+
+        public void setUpdateBy(Object updateBy) {
+            this.updateBy = updateBy;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+
+        public void setPrice(int price) {
+            this.price = price;
+        }
+
+        public String getProdName() {
+            return prodName;
+        }
+
+        public void setProdName(String prodName) {
+            this.prodName = prodName;
+        }
+
+        public String getSysOrgCode() {
+            return sysOrgCode;
+        }
+
+        public void setSysOrgCode(String sysOrgCode) {
+            this.sysOrgCode = sysOrgCode;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getMecProductSkuId() {
+            return mecProductSkuId;
+        }
+
+        public void setMecProductSkuId(String mecProductSkuId) {
+            this.mecProductSkuId = mecProductSkuId;
+        }
     }
 }

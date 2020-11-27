@@ -70,7 +70,7 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
     override fun initPresenter() {
         mPresenter = DetailsPresenter(this)
         mPresenter?.getRecruitDetails(id)
-        mPresenter?.judgeCollect(id,4)
+        mPresenter?.judgeCollect(id,5)
     }
 
     private fun collect() {
@@ -100,7 +100,12 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
         when(v?.id){
             R.id.iv_left->finish()
             R.id.iv_right->showShare()
-            R.id.tv_report->jumpActivity(null,ReportActivity::class.java)
+            R.id.tv_report->{
+                var bundle =Bundle()
+                bundle.putString("id",id)
+                bundle.putInt("type",5)
+                jumpActivity(bundle,ReportActivity::class.java)
+            }
             R.id.ly_call->showPhone()
             R.id.ly_wx->mShareDialog?.dismiss()
             R.id.ly_qq->mShareDialog?.dismiss()

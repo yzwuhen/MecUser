@@ -13,7 +13,6 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.ui.mvp.impl.FactoryPresenter
-import com.example.mechanicalapp.ui.mvp.impl.MyLookPresenter
 import com.example.mechanicalapp.ui.mvp.v.FactoryView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
@@ -21,7 +20,6 @@ import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_more_factory.*
 import kotlinx.android.synthetic.main.activity_more_factory.spring_list
 import kotlinx.android.synthetic.main.layout_more_data_title.*
-import kotlinx.android.synthetic.main.layout_spring_list.*
 
 class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.onViewListener,
     OnItemClickListener,FactoryView {
@@ -154,11 +152,14 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
 
         when(view?.id){
             R.id.tv_screen->tv_sort.text=mStringList[position]
-            R.id.ly_item_mec_factory->setSelect()
+            R.id.root_view->setSelect(position)
         }
     }
 
-    private fun setSelect() {
+    private fun setSelect(position: Int) {
+        var bundle =Bundle()
+        bundle.putString("id",mList[position].id)
+        jumpActivity(bundle,FactoryDetails::class.java)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

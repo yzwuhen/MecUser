@@ -1,30 +1,66 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.PicAdapter
+import com.example.mechanicalapp.ui.adapter.ReportPopAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.ReportBean
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.request.ReReport
+import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
+import com.example.mechanicalapp.ui.mvp.impl.ReportPresenter
+import com.example.mechanicalapp.ui.mvp.v.ReportView
 import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.GlideEngine
+import com.example.mechanicalapp.utils.ToastUtils
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.luck.picture.lib.PictureSelector
+import com.luck.picture.lib.config.PictureMimeType
+import com.luck.picture.lib.entity.LocalMedia
+import com.luck.picture.lib.listener.OnResultCallbackListener
+import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.activity_report.*
+import kotlinx.android.synthetic.main.activity_report.et_input
+import kotlinx.android.synthetic.main.activity_report.ry_pic
+import kotlinx.android.synthetic.main.activity_report.tv_submit
 import kotlinx.android.synthetic.main.layout_search_et.iv_back
 import kotlinx.android.synthetic.main.layout_title.*
+import java.net.IDN
 
-class ReportActivity: BaseActivity<NetData>() , OnItemClickListener,View.OnClickListener,
-    PopUtils.onViewListener {
+class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListener,
+    PopUtils.onViewListener ,TextWatcher, ReportView {
 
     private var mPicAdapter :PicAdapter?=null
 
-    private var mPicList :MutableList<String> ?=null
-    private var mStringList :MutableList<String> = ArrayList<String>()
+    private var mPicList :MutableList<String> = ArrayList<String>()
+    private var mStringList :MutableList<ReportBean.ResultBean.RecordsBean> = ArrayList<ReportBean.ResultBean.RecordsBean>()
     private var popRecy : RecyclerView?=null
-    private var mScreenAdapter :ScreenAdapter ?=null
+    private var mScreenAdapter : ReportPopAdapter?=null
+
+
+    private var mButtDialog: BottomSheetDialog? = null
+
+    private var mDialogView: View? = null
+    private var mDialogTv1: TextView? = null
+    private var mDialogTv2: TextView? = null
+    private var mDialogTv3: TextView? = null
+
+    private var id=""
+    private var type =0
+    private var mPresenter :ReportPresenter?=null
+    private var reReport =ReReport()
     override fun getLayoutId(): Int {
 
         return R.layout.activity_report
@@ -32,15 +68,7 @@ class ReportActivity: BaseActivity<NetData>() , OnItemClickListener,View.OnClick
 
     override fun initView() {
         super.initView()
-        mPicList = ArrayList<String>()
-        mPicList?.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600716333897&di=963fb5b0077fce243ce0cbf1d70b44cf&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290")
-        mPicList?.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1600716333897&di=963fb5b0077fce243ce0cbf1d70b44cf&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3571592872%2C3353494284%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D1200%26h%3D1290")
 
-
-        mStringList?.add("信息内容不真实")
-        mStringList?.add("发布涉黄内容")
-        mStringList?.add("违法违规")
-        mStringList?.add("不友善内容")
         mPicAdapter = PicAdapter(this, mPicList as ArrayList<String>,this)
 
         ry_pic.layoutManager =GridLayoutManager(this,3)
@@ -50,15 +78,52 @@ class ReportActivity: BaseActivity<NetData>() , OnItemClickListener,View.OnClick
         iv_back.setOnClickListener(this)
         tv_title.text ="举报"
         tv_report_reason.setOnClickListener(this)
+        tv_submit.setOnClickListener(this)
+        et_input.addTextChangedListener(this)
+
+        id = intent.getStringExtra("id").toString()
+        type =intent.getIntExtra("type",0)
+        reReport.reportId =id
+        reReport.type =type
     }
 
     override fun initPresenter() {
+        mPresenter = ReportPresenter(this,this)
+        mPresenter?.getReportList()
+    }
+
+    override fun showSuccess(netData: NetData?) {
+        if (netData!=null &&netData is ReportBean){
+            if (netData.result!=null&&netData.result.records!=null){
+                mStringList.clear()
+                mStringList.addAll(netData.result.records)
+            }
+        }else{
+            ToastUtils.showText(netData?.message)
+            if (netData?.code==200){
+                finish()
+            }
+        }
+    }
+
+    override fun showImg(netData: NetData?) {
+        if (netData != null && netData.code == 200) {
+            mPicList?.add(netData.message)
+            mPicAdapter?.notifyDataSetChanged()
+            changeBtn()
+        }
+    }
+
+    override fun uploadFail(str: String) {
+        ToastUtils.showText(str)
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err()  {
@@ -68,9 +133,32 @@ class ReportActivity: BaseActivity<NetData>() , OnItemClickListener,View.OnClick
         when(v?.id){
             R.id.iv_back->finish()
             R.id.tv_report_reason->showInput()
+            R.id.tv_dialog_item1 -> setItem()
+            R.id.tv_dialog_item2 -> setItem1()
+            R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
+            R.id.tv_submit->submit()
         }
     }
 
+    private fun submit() {
+        if (checkInfo()){
+            for (str in mPicList){
+                reReport.pic +="$str,"
+            }
+            reReport.pic= reReport.pic.substring(0,reReport.pic.length-1)
+            (mPresenter as ReportPresenter).report(reReport)
+        }
+    }
+
+    private fun setItem1() {
+        mButtDialog?.dismiss()
+        verifyStoragePermissions(this)
+    }
+
+    private fun setItem() {
+        mButtDialog?.dismiss()
+        takePoto()
+    }
     private fun showInput() {
 
         this?.let { PopUtils.init(this, it,this) }
@@ -80,12 +168,107 @@ class ReportActivity: BaseActivity<NetData>() , OnItemClickListener,View.OnClick
     override fun getView(view: View?) {
 
         popRecy =view?.findViewById(R.id.pop_recycler_list)
-        mScreenAdapter = ScreenAdapter(this,mStringList,this)
+        mScreenAdapter = ReportPopAdapter(this,mStringList,this)
         popRecy?.layoutManager = LinearLayoutManager(this)
         popRecy?.adapter = mScreenAdapter
     }
 
     override fun onItemClick(view: View, position: Int) {
+        when (view?.id) {
 
+            R.id.tv_screen->{
+                PopUtils.dismissPop(this)
+                reReport.reportId =mStringList[position].reportReasonId
+                tv_report_reason.text =mStringList[position].reportReasonId_dictText
+            }
+            R.id.iv_del -> {
+                mPicList?.removeAt(position)
+                mPicAdapter?.notifyDataSetChanged()
+            }
+            R.id.iv_pic -> {
+                if (position == mPicList?.size) {
+                    showDialogType()
+                }
+            }
+        }
+    }
+    private fun takePoto() {
+        mButtDialog?.dismiss()
+        PictureSelector.create(this)
+            .openCamera(PictureMimeType.ofImage())
+            .forResult(object : OnResultCallbackListener<LocalMedia?> {
+                override fun onResult(result: MutableList<LocalMedia?>) {
+                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                }
+
+                override fun onCancel() {
+                }
+            });
+    }
+
+    private fun takePicture() {
+        mButtDialog?.dismiss()
+        PictureSelector.create(this)
+            .openGallery(PictureMimeType.ofAll())
+            .imageEngine(GlideEngine.createGlideEngine())
+            .forResult(object : OnResultCallbackListener<LocalMedia?> {
+                override fun onResult(result: List<LocalMedia?>) {
+                    // 结果回调
+                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                }
+
+                override fun onCancel() {
+                    // 取消
+                }
+            })
+    }
+
+    override fun hasPermissions() {
+        super.hasPermissions()
+        takePicture()
+    }
+    private fun showDialogType() {
+        if (mButtDialog == null) {
+            mButtDialog = BottomSheetDialog(this)
+            mDialogView = View.inflate(this, R.layout.dialog_user_data_buttom, null)
+            mButtDialog?.setContentView(mDialogView!!)
+            mDialogTv1 = mDialogView?.findViewById(R.id.tv_dialog_item1)
+            mDialogTv2 = mDialogView?.findViewById(R.id.tv_dialog_item2)
+            mDialogTv3 = mDialogView?.findViewById(R.id.tv_dialog_item3)
+        }
+        mDialogTv1?.setOnClickListener(this)
+        mDialogTv2?.setOnClickListener(this)
+        mDialogTv3?.setOnClickListener(this)
+
+        mButtDialog?.show()
+    }
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        changeBtn()
+    }
+
+    private fun changeBtn() {
+
+        tv_submit.isSelected =checkInfo()
+    }
+
+    private fun checkInfo(): Boolean {
+
+        if (TextUtils.isEmpty(reReport.reportId)){
+            return false
+        }
+        if (TextUtils.isEmpty(et_input.text.toString())){
+            return false
+        }
+        reReport.reportReasonContent =et_input.text.toString()
+        if (mPicList.size==0){
+            return false
+        }
+      return true
     }
 }

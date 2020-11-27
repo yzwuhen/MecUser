@@ -188,7 +188,7 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
         jumpActivity(bundle, MecSellDetails::class.java)
     }
 
-    override fun progress(leftPos: Double, rightPos: Double) {
+    override fun progress(leftPos: Double, rightPos: Double,view: View) {
 
 
     }

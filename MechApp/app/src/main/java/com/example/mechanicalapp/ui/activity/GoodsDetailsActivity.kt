@@ -175,6 +175,10 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
     }
 
     private fun buy() {
+        if (TextUtils.isEmpty(App.getInstance().token)) {
+            ToastUtils.showText("请先登陆后再操作")
+            return
+        }
         if (bundleData == null) {
             ToastUtils.showText("请先选择规格")
             return

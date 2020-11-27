@@ -46,7 +46,6 @@ class ItemMenu(var mContext: Context) : LinearLayout(mContext) , OnItemClickList
         val intent = Intent()
         intent.setClass(mContext, MoreFactoryActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-
         mContext.startActivity(intent)
     }
 

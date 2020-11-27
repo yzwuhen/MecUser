@@ -193,7 +193,10 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
         jumpActivity(bundle, LeaseDetailsActivity::class.java)
     }
 
-    override fun progress(leftPos: Double, rightPos: Double) {
+    override fun progress(leftPos: Double, rightPos: Double,view: View) {
+//        when(view?.id){
+//
+//        }
     }
 
 
@@ -235,7 +238,6 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
     }
 
     override fun refreshUI(list: List<MecLeaseData>) {
-
         mList.clear()
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()

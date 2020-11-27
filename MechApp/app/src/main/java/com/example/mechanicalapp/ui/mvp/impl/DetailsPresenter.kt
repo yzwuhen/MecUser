@@ -126,7 +126,26 @@ class DetailsPresenter(
            }))
     }
 
+    fun getFactoryDetails(id: String?) {
+        baseView.showLoading()
+        baseModel.getFactoryDetails(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<FactoryDetailsBean> {
+                override fun onNext(t: FactoryDetailsBean?) {
+                    (baseView as MecDetailsView<NetData>).showData(t)
+                }
 
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
+    }
 
     fun addCollect(recollect: ReCollect){
         baseView.showLoading()
@@ -166,6 +185,7 @@ class DetailsPresenter(
                 }
             })
     }
+    //0商品1维修厂2配件租赁3二手设备租赁4机械租赁5招聘
 
     fun judgeCollect(id: String?,type:Int){
         baseModel.judgeCollect(

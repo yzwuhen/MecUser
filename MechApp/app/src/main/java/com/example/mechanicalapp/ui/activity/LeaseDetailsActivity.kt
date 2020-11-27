@@ -105,7 +105,12 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         when (v?.id) {
             R.id.iv_left -> finish()
             R.id.iv_right -> showShare()
-            R.id.tv_report -> jumpActivity(null, ReportActivity::class.java)
+            R.id.tv_report -> {
+                var bundle =Bundle()
+                bundle.putString("id",mecId)
+                bundle.putInt("type",4)
+                jumpActivity(bundle, ReportActivity::class.java)
+            }
             R.id.ly_call -> showPhone()
             R.id.ly_wx -> mShareDialog?.dismiss()
             R.id.ly_qq -> mShareDialog?.dismiss()

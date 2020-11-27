@@ -22,6 +22,21 @@ class MecLeaseListPresenter(
     private var cateId: String? = null
     private var modelId: String? = null
     private var title: String? = null
+
+    private var mSGriceLe :String ?=null
+    private var mSPriceGe:String ?=null
+
+    private var mSTenancyGe:String ?=null
+    private var mSTenancyLe:String ?=null
+
+    private var mSWorkTimeGe:String ?=null
+    private var mSWorkTimeLe:String ?=null
+
+    private var sort=0
+
+    private var lon=0.0
+    private var lat=0.0
+
     init {
         baseModel = MecLeaseModelImp()
     }
@@ -39,6 +54,13 @@ class MecLeaseListPresenter(
             cateId,
             modelId,
             title,
+            sort,
+            mSGriceLe,
+            mSPriceGe,
+            mSTenancyGe,
+            mSTenancyLe,
+            mSWorkTimeGe,
+            mSWorkTimeLe,
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -73,6 +95,13 @@ class MecLeaseListPresenter(
             cateId,
             modelId,
             title,
+            sort,
+            mSGriceLe,
+            mSPriceGe,
+            mSTenancyGe,
+            mSTenancyLe,
+            mSWorkTimeGe,
+            mSWorkTimeLe,
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -125,6 +154,19 @@ class MecLeaseListPresenter(
             this.modelId =id
         }
         resetPage()
+    }
+    fun setPriceQJ(startPrice:String?,endPrice:String){
+        mSGriceLe =endPrice
+        mSPriceGe =startPrice
+    }
+
+    fun setJL(startJL:String?,endJL:String){
+        mSTenancyLe =endJL
+        mSTenancyGe =startJL
+    }
+    fun setWorkTime(startWork:String?,endWork:String){
+        mSWorkTimeLe =endWork
+        mSWorkTimeGe =startWork
     }
 
 }

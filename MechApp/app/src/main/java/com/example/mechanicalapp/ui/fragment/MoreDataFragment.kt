@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -194,6 +195,9 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
     }
 
     override fun progress(leftPos: Double, rightPos: Double,view: View) {
+        Log.v("ssss","$leftPos=====sssssss========$rightPos")
+
+        Log.v("ssss","${(1-leftPos)*100}=====sssssss========$rightPos")
 //        when(view?.id){
 //
 //        }

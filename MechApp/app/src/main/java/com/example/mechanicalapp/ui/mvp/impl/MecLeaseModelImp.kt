@@ -24,7 +24,22 @@ class MecLeaseModelImp: BaseModel {
 
 
     //出租==求租
-    fun getLeaseList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,mISubscriberListener: ISubscriberListener<MoreLeaseData>) {
+    fun getLeaseList(
+                     type: Int,
+                     pageIndex: Int,
+                     pageSize: Int,
+                     brandId: String?,
+                     cateId: String?,
+                     modelId: String?,
+                     title: String?,
+                     sort: Int,
+                     mSGriceLe: String?,
+                     mSPriceGe: String?,
+                     mSTenancyGe: String?,
+                     mSTenancyLe: String?,
+                     mSWorkTimeGe: String?,
+                     SWorkTimeLe: String?,
+                     mISubscriberListener: ISubscriberListener<MoreLeaseData>) {
         appsService?.getMecList(type,pageIndex,pageSize,brandId,cateId,modelId,title)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()

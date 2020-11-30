@@ -532,7 +532,7 @@ public class DateUtils {
         String str = "";
         str = DateUtils.getWeek(sdate);
         int day = 0;
-        if ("星期日".equals(str)) {
+        if ("星期天".equals(str)) {
             day=0;
         } else if ("星期一".equals(str)) {
             day=1;
@@ -591,6 +591,33 @@ public class DateUtils {
         long day = (date.getTime() - mydate.getTime()) / (24 * 60 * 60 * 1000);
         return day;
     }
+
+
+    /**
+     * 两个时间之间的相差小时数
+     *
+     * @param date1
+     * @param date2
+     * @return
+     */
+    public static long getHours(String date1, String date2) {
+        if (date1 == null || date1.equals(""))
+            return 0;
+        if (date2 == null || date2.equals(""))
+            return 0;
+        // 转换为标准时间
+        SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = null;
+        Date mydate = null;
+        try {
+            date = myFormatter.parse(date1);
+            mydate = myFormatter.parse(date2);
+        } catch (Exception e) {
+        }
+        long hours = (date.getTime() - mydate.getTime()) / (60 * 60 * 1000);
+        return hours;
+    }
+
 
     /**
      * 形成如下的日历 ， 根据传入的一个时间返回一个结构 星期日 星期一 星期二 星期三 星期四 星期五 星期六 下面是当月的各个时间

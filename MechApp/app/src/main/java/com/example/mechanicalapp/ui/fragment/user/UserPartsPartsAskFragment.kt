@@ -4,12 +4,11 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.PartsAdapter
 import com.example.mechanicalapp.ui.adapter.PartsAskAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.PartsData
 import com.example.mechanicalapp.ui.data.UserInfoBean
-import com.example.mechanicalapp.ui.mvp.impl.UserInfoPresenter
+import com.example.mechanicalapp.ui.mvp.impl.UserInfoThreePresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -35,7 +34,7 @@ class UserPartsPartsAskFragment (private var user: String, var  type: Int) : Bas
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
                 spring_list.isEnable = false
-                (mPresenter as UserInfoPresenter).getUserLease(user,type)
+                (mPresenter as UserInfoThreePresenter).getUserLease(user,type)
             }
 
             override fun onLoadmore() {
@@ -43,8 +42,8 @@ class UserPartsPartsAskFragment (private var user: String, var  type: Int) : Bas
             }
         })
 
-        mPresenter = UserInfoPresenter(this)
-        (mPresenter as UserInfoPresenter).getUserLease(user,type)
+        mPresenter = UserInfoThreePresenter(this)
+        (mPresenter as UserInfoThreePresenter).getUserLease(user,type)
     }
 
     fun closeRefreshView() {

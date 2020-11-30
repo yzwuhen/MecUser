@@ -4,23 +4,23 @@ import android.view.View
 import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.UserInfo
+import com.example.mechanicalapp.ui.mvp.impl.UserInfoPresenter
+import com.example.mechanicalapp.ui.mvp.v.UserView
 import com.example.mechanicalapp.utils.GlideEngine
 import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_user_data.*
-import kotlinx.android.synthetic.main.item_job_want.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class UserDataActivity : BaseActivity<NetData>(), View.OnClickListener {
-
-
+class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
 
     private var mButtDialog: BottomSheetDialog?=null
 
@@ -31,6 +31,8 @@ class UserDataActivity : BaseActivity<NetData>(), View.OnClickListener {
 
     private var dialogType:Int =0
 
+    private var mPresenter:UserInfoPresenter?=null
+    private var userInfo:UserInfo?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_user_data
@@ -48,25 +50,55 @@ class UserDataActivity : BaseActivity<NetData>(), View.OnClickListener {
         ly_sex.setOnClickListener(this)
         ly_nick.setOnClickListener(this)
 
+
+
+        userInfo =App.getInstance().userInfo
+    }
+
+    override fun initPresenter() {
+        mPresenter = UserInfoPresenter(this,this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showInfo()
+    }
+
+    private fun showInfo() {
         ImageLoadUtils.loadCircle(this,iv_user_pic,App.getInstance().userInfo.avatar)
         tv_user_nick.text = App.getInstance().userInfo.realname
-
         if (App.getInstance().userInfo.sex==1){
             tv_user_sex.text ="男"
         }else{
             tv_user_sex.text ="女"
         }
-
         tv_user_phone.text =App.getInstance().userInfo.phone
+
+    }
+    override fun success(netData: NetData?) {
+
+        ToastUtils.showText(netData?.message)
     }
 
-    override fun initPresenter() {
+    override fun showImg(netData: NetData?) {
+        if (netData != null && netData.code == 200) {
+          userInfo?.avatar =netData.message
+            ImageLoadUtils.loadCircle(this,iv_user_pic,netData.message)
+            mPresenter?.editUserInfo(userInfo)
+        }
+    }
+
+    override fun uploadFail(str: String) {
+
+        ToastUtils.showText(str)
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err()  {
@@ -85,10 +117,13 @@ class UserDataActivity : BaseActivity<NetData>(), View.OnClickListener {
     }
 
     private fun setItem1() {
+        mButtDialog?.dismiss()
         if (dialogType==0){
             verifyStoragePermissions(this)
         }else{
-            tv_sex.text ="女"
+            tv_user_sex.text ="女"
+            userInfo?.sex =2
+            mPresenter?.editUserInfo(userInfo)
         }
 
     }
@@ -98,19 +133,21 @@ class UserDataActivity : BaseActivity<NetData>(), View.OnClickListener {
         if (dialogType==0){
             verifyStoragePermissions(this)
         }else{
-            tv_sex.text ="男"
+            tv_user_sex.text ="男"
+            userInfo?.sex =1
+            mPresenter?.editUserInfo(userInfo)
         }
     }
 
     private fun takePicture() {
-        mButtDialog?.dismiss()
         PictureSelector.create(this)
             .openGallery(PictureMimeType.ofAll())
            .imageEngine(GlideEngine.createGlideEngine())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_user_pic,result[0]?.path,R.mipmap.user_default)
+                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                   // ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_user_pic,result[0]?.path,R.mipmap.user_default)
                 }
                 override fun onCancel() {
                     // 取消
@@ -124,6 +161,7 @@ class UserDataActivity : BaseActivity<NetData>(), View.OnClickListener {
     }
 
      private fun showDialogType(type:Int){
+         dialogType= type
         if (mButtDialog ==null){
             mButtDialog = BottomSheetDialog(this)
             mDialogView = View.inflate(this,R.layout.dialog_user_data_buttom,null)

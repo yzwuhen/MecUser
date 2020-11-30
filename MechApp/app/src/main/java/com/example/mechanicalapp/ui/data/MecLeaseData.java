@@ -83,8 +83,15 @@ public class MecLeaseData implements Serializable {
     private String sysOrgCode;
     private Object isEnterprise;
     private String bussiessType_dictText;
+    private String avatar;
+
+
 
     private boolean isSelect;
+
+    public String getAvatar() {
+        return avatar;
+    }
 
     public boolean isSelect() {
         return isSelect;

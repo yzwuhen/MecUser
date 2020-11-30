@@ -2,12 +2,11 @@ package com.example.mechanicalapp.ui.mvp.impl
 
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.ShopCarBean
-import com.example.mechanicalapp.ui.data.ShopCarData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
+import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 
 class ShopCarPresenter(
@@ -104,4 +103,25 @@ class ShopCarPresenter(
             })
         )
     }
+
+    fun getGoodsDetails(id: String?) {
+        baseView.showLoading()
+        baseModel.getGoodsDetails(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<GoodsDetailsBean> {
+                override fun onNext(t: GoodsDetailsBean?) {
+                    (baseView as NetDataView<GoodsDetailsBean>).refreshUI(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
 }

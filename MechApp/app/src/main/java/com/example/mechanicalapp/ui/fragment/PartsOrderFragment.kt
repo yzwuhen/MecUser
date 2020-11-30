@@ -24,6 +24,7 @@ import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.layout_spring_list.*
+import java.io.Serializable
 
 class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
     View.OnClickListener, PopUtils.onViewListener,
@@ -111,7 +112,8 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     private fun jumAct(position: Int) {
         var bundle = Bundle()
-        bundle.putInt("order_type", position)
+        bundle.putInt("order_type", mList[position].status)
+        bundle.putString("order_id",mList[position].id)
         jumpActivity(bundle, PartsOrderDetails::class.java)
     }
 
@@ -172,10 +174,6 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     }
 
-    private fun dismiss(types: Int) {
-        activity?.let { PopUtils.dismissPop(it) }
-    }
-
     override fun getView(view: View?) {
         popCancel = view?.findViewById(R.id.tv_pop_cancel)
         popSure = view?.findViewById(R.id.tv_pop_sure)
@@ -224,15 +222,11 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     private fun applyRefund() {
 
-//        var bundle = Bundle()
-//        var reApplyRefund = ReApplyRefund()
-//        reApplyRefund.mecOrderId =mList[clickPosition].id
-//        reApplyRefund.imgs =mList[clickPosition].picUrl
-//        reApplyRefund.mecProductSkuId =mList[clickPosition].skuIds
-//        reApplyRefund.state =mList[clickPosition].status.toString()
-//        reApplyRefund.statusName =mList[clickPosition].statusName
-//        bundle.putSerializable("data",reApplyRefund)
-//        jumpActivity(bundle, ApplyRefundActivity::class.java)
+        var bundle = Bundle()
+        bundle.putSerializable("data",mList[clickPosition].orderItemList as Serializable)
+        bundle.putInt("num",mList[clickPosition].quantity)
+        bundle.putInt("price",mList[clickPosition].amount)
+        jumpActivity(bundle, ApplyRefundActivity::class.java)
     }
 
     private fun cancelOrder() {

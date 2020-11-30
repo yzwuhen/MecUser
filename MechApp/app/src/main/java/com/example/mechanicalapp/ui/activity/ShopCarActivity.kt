@@ -7,21 +7,22 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.AttrAdapter
 import com.example.mechanicalapp.ui.adapter.ShopCarAdapter
+import com.example.mechanicalapp.ui.adapter.SpecAttrAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.base.WeakHandler
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.ShopCarPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
-import com.example.mechanicalapp.ui.view.MyDecoration
 import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
@@ -30,7 +31,7 @@ import kotlinx.android.synthetic.main.layout_title.*
 import java.io.Serializable
 
 
-class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
+class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,OnItemClickLevelListener,
     OnItemClickListener,
     NetDataView<NetData> {
 
@@ -38,13 +39,22 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     private var mShopCarAdapter: ShopCarAdapter? = null
 
 
-    private var mAttrDialog: BottomSheetDialog? = null
-    private var mAttrDialogView: View? = null
-    private var mRecAttrTypeDialog: RecyclerView? = null
-    private var mRecAttrSizeDialog: RecyclerView? = null
-    private var mCloseDialog: ImageView? = null
-    private var mAttrTypeList: MutableList<String> = ArrayList<String>()
-    private var mAttrSzieList: MutableList<String> = ArrayList<String>()
+    private var mSpecsDialog: BottomSheetDialog? = null
+    private var mSpecsView: View? = null
+    private var mIvPic: ImageView? = null
+    private var mTvMoney: TextView? = null
+    private var mTvBtn: TextView? = null
+    private var mTvTitle: TextView? = null
+    private var mIvClose: ImageView? = null
+    private var mSpecRecycler: RecyclerView? = null
+    private var mSpecAttrAdapter: SpecAttrAdapter? = null
+    private var goodsProduct: GoodsProduct? = null
+    private var isChange = false
+    private var strSpec = ""
+   // private var bundleData: SkuListData? = null
+    //选择规格属性的时候修改时使用
+    private var attrIndex=0
+
 
     private var mPresenter: ShopCarPresenter? = null
     private var popInputInfo: EditText? = null
@@ -62,6 +72,14 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     private var carIndex = 0
     private var isEdit = false//是否在编辑状态
     private var isCheckAll = false//是否已经全选
+
+
+    private var mSpecList: MutableList<GoodsDetails.SkuNameListBean> =
+        ArrayList<GoodsDetails.SkuNameListBean>()
+    //skuList
+    private var mSkuList: MutableList<SkuListData> =
+        ArrayList<SkuListData>()
+
 
     private var handler = WeakHandler { msg ->
         when (msg.what) {
@@ -108,17 +126,6 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             }
         })
 
-
-
-        mAttrTypeList.add("红色")
-        mAttrTypeList.add("黄色")
-        mAttrTypeList.add("黑色")
-        mAttrTypeList.add("蓝色")
-
-        mAttrSzieList.add("XL")
-        mAttrSzieList.add("XXL")
-        mAttrSzieList.add("XXXL")
-        mAttrSzieList.add("L")
     }
 
     fun closeRefreshView() {
@@ -156,6 +163,11 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             R.id.tv_check_all -> selectCarAll()
             R.id.tv_pop_sure -> delGoods()
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
+            R.id.iv_dialog_close -> mSpecsDialog?.dismiss()
+            R.id.tv_dialog_submit -> {
+                //编辑后不会立即刷新列表 不考虑信息差的情况
+                mPresenter?.edit(mList[attrIndex])
+                mSpecsDialog?.dismiss()}
         }
 
     }
@@ -211,7 +223,7 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     override fun onItemClick(view: View, position: Int) {
 
         when (view?.id) {
-            R.id.tv_attr -> showAttrSel()
+            R.id.tv_attr -> getGoodsAttr(position)
             R.id.item_root -> {
                 if (isEdit) {
                     showDel(position)
@@ -288,39 +300,45 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
         }
     }
 
+    private fun getGoodsAttr(position: Int){
+        mPresenter?.getGoodsDetails(mList[position].productId)
+        attrIndex =position
+    }
+
     private fun showAttrSel() {
-        mAttrDialog = BottomSheetDialog(this)
+        if (mSpecsDialog ==null){
+            mSpecsDialog = BottomSheetDialog(this)
+            mSpecsView = View.inflate(this, R.layout.dialog_specs, null)
+            mSpecsDialog?.setContentView(mSpecsView!!)
 
-        mAttrDialogView = View.inflate(this, R.layout.dialog_attr, null)
-        mAttrDialog?.setContentView(mAttrDialogView!!)
-        mRecAttrTypeDialog = mAttrDialogView?.findViewById(R.id.recycle_type)
+            mIvPic = mSpecsView?.findViewById(R.id.iv_dialog_goods_pic)
+            mIvClose = mSpecsView?.findViewById(R.id.iv_dialog_close)
 
-        mRecAttrTypeDialog?.layoutManager = GridLayoutManager(this, 4)
-        mRecAttrTypeDialog?.addItemDecoration(MyDecoration(4))
-        mRecAttrTypeDialog?.adapter =
-            AttrAdapter(this, mAttrTypeList, object : OnItemClickListener {
-                override fun onItemClick(view: View, position: Int) {
+            mTvMoney = mSpecsView?.findViewById(R.id.tv_dialog_money)
+            mTvTitle = mSpecsView?.findViewById(R.id.tv_dialog_info)
 
-                }
+            mSpecRecycler = mSpecsView?.findViewById(R.id.spec_recycle_list)
+            mTvBtn = mSpecsView?.findViewById(R.id.tv_dialog_submit)
 
-            })
+            mTvBtn?.setOnClickListener(this)
+            mIvClose?.setOnClickListener(this)
 
+            mSpecRecycler?.layoutManager = LinearLayoutManager(this)
+            mSpecAttrAdapter = SpecAttrAdapter(this, mSpecList, this)
+            mSpecRecycler?.adapter = mSpecAttrAdapter
 
-        mRecAttrSizeDialog = mAttrDialogView?.findViewById(R.id.recycle_size)
-
-        mRecAttrSizeDialog?.layoutManager = GridLayoutManager(this, 4)
-        mRecAttrSizeDialog?.addItemDecoration(MyDecoration(4))
-        mRecAttrSizeDialog?.adapter =
-            AttrAdapter(this, mAttrSzieList, object : OnItemClickListener {
-                override fun onItemClick(view: View, position: Int) {
-
-                }
-
-            })
-
-        mCloseDialog = mAttrDialogView?.findViewById(R.id.iv_close)
-        mCloseDialog?.setOnClickListener(View.OnClickListener { mAttrDialog?.dismiss() })
-        mAttrDialog?.show()
+            if (goodsProduct != null) {
+                ImageLoadUtils.loadImageCenterCrop(
+                    this,
+                    mIvPic,
+                    StringUtils.getImgStr(goodsProduct?.images),
+                    R.mipmap.ic_launcher
+                )
+                mTvMoney?.text = "￥${goodsProduct?.price}"
+                mTvTitle?.text = goodsProduct?.title
+            }
+        }
+        mSpecsDialog?.show()
 
     }
 
@@ -356,7 +374,32 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
                 data?.result?.records?.let { mList.addAll(it) }
             }
             mShopCarAdapter?.notifyDataSetChanged()
-        }else{
+        }else if (data!=null&&data is GoodsDetailsBean){
+            mSpecList.clear()
+            mSpecList.addAll(data.result.skuNameList)
+            goodsProduct = data.result.product
+            try {
+                for (str in mSpecList) {
+                    var specList = ArrayList<Spec>()
+                    for (attr in str.nameList) {
+                        var spec = Spec()
+                        spec.specName = attr.split(",")[0]
+                        spec.specNum = attr.split(",")[1].toInt()
+                        specList.add(spec)
+                    }
+                    str.setmSpecList(specList)
+                }
+
+
+            } catch (e: Exception) {
+
+            }
+
+            mSkuList.clear()
+            mSkuList.addAll(data.result.skuList)
+            showAttrSel()
+        }
+        else{
             if (data!=null){
                 ToastUtils.showText(data.message)
                 if (data.code==200){
@@ -373,5 +416,56 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
                 mShopCarAdapter?.notifyDataSetChanged()
             }
         }
+    }
+
+    override fun onItemClick(view: View, parentPosition: Int, childPosition: Int) {
+        isChange = false
+        for (index in mSpecList[parentPosition].getmSpecList().indices) {
+            if (mSpecList[parentPosition].getmSpecList()[index].specNum > 0) {
+                mSpecList[parentPosition].getmSpecList()[index].isSelect =
+                    index == childPosition
+                isChange = true
+            }
+        }
+        if (isChange) {
+            mSpecAttrAdapter?.notifyItemChanged(parentPosition)
+            showAttrText()
+        }
+    }
+    //匹配规格
+    private fun showAttrText() {
+        strSpec = ""
+        for (attr in mSpecList) {
+            strSpec += "${attr.typeName}:"
+            for (spec in attr.getmSpecList()) {
+                if (spec.isSelect) {
+                    strSpec += spec.specName
+                }
+            }
+            strSpec += ","
+        }
+        strSpec = strSpec.substring(0, strSpec.length - 1)
+        for (sku in mSkuList.iterator()) {
+            if (strSpec == sku.name) {
+                showDiaLogText(sku)
+            }
+        }
+
+
+    }
+    //显示相关内容
+    private fun showDiaLogText(sku: SkuListData) {
+
+        mList[attrIndex].price =sku.price
+        mList[attrIndex].skuName =sku.name
+        mList[attrIndex].skuId =sku.id
+        mList[attrIndex].stock =sku.stock
+        mList[attrIndex].productName =sku.mecProductName
+        //编辑后不会立即刷新列表 不考虑信息差的情况
+        mShopCarAdapter?.notifyItemChanged(attrIndex)
+
+        ImageLoadUtils.loadImageCenterCrop(this, mIvPic, sku.picture, R.mipmap.ic_launcher)
+        mTvMoney?.text = "￥${sku.price}"
+        mTvTitle?.text = sku.mecProductName
     }
 }

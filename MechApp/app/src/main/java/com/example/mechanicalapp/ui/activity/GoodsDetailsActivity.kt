@@ -291,7 +291,6 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         strSpec = strSpec.substring(0, strSpec.length - 1)
         for (sku in mSkuList.iterator()) {
             if (strSpec == sku.name) {
-                showDiaLogText(sku)
                 bundleData = sku
                 showDiaLogText(sku)
             }

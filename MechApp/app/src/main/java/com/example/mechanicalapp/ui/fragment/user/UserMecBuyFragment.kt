@@ -8,7 +8,7 @@ import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.UserInfoBean
-import com.example.mechanicalapp.ui.mvp.impl.UserInfoPresenter
+import com.example.mechanicalapp.ui.mvp.impl.UserInfoThreePresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
@@ -34,7 +34,7 @@ class UserMecBuyFragment  (private var user: String, var  type: Int) : BaseCusFr
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
                 spring_list.isEnable = false
-                (mPresenter as UserInfoPresenter).getUserLease(user,type)
+                (mPresenter as UserInfoThreePresenter).getUserLease(user,type)
             }
 
             override fun onLoadmore() {
@@ -42,8 +42,8 @@ class UserMecBuyFragment  (private var user: String, var  type: Int) : BaseCusFr
             }
         })
 
-        mPresenter = UserInfoPresenter(this)
-        (mPresenter as UserInfoPresenter).getUserLease(user,type)
+        mPresenter = UserInfoThreePresenter(this)
+        (mPresenter as UserInfoThreePresenter).getUserLease(user,type)
     }
 
     fun closeRefreshView() {

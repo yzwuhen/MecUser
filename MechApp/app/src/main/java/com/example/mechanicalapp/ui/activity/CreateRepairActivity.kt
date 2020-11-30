@@ -55,9 +55,11 @@ class CreateRepairActivity :BaseCusActivity(),View.OnClickListener,OnItemClickLi
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err()  {

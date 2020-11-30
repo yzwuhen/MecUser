@@ -37,6 +37,8 @@ class MecLeaseListPresenter(
     private var lon=0.0
     private var lat=0.0
 
+    private var type=1
+
     init {
         baseModel = MecLeaseModelImp()
     }
@@ -45,8 +47,8 @@ class MecLeaseListPresenter(
 
     }
 
-    fun getLeaseList(type:Int) {
-
+    fun getLeaseList(types:Int) {
+        type =types
         baseModel?.getLeaseList(type,
             page,
             pageSize,
@@ -155,18 +157,24 @@ class MecLeaseListPresenter(
         }
         resetPage()
     }
-    fun setPriceQJ(startPrice:String?,endPrice:String){
-        mSGriceLe =endPrice
-        mSPriceGe =startPrice
+    fun setPriceQJ(startPrice:Double?,endPrice:Double){
+        mSGriceLe =endPrice.toString()
+        mSPriceGe =startPrice.toString()
+        resetPage()
+        getLeaseList(type)
     }
 
     fun setJL(startJL:String?,endJL:String){
         mSTenancyLe =endJL
         mSTenancyGe =startJL
+        resetPage()
+        getLeaseList(type)
     }
     fun setWorkTime(startWork:String?,endWork:String){
         mSWorkTimeLe =endWork
         mSWorkTimeGe =startWork
+        resetPage()
+        getLeaseList(type)
     }
 
 }

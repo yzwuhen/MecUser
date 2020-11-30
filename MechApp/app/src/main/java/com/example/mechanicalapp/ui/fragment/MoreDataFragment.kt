@@ -25,8 +25,10 @@ import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
+import com.example.mechanicalapp.utils.StringUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
+import kotlin.math.ceil
 
 
 class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
@@ -48,6 +50,9 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
     private var mProgress1: TwoWayProgressBar? = null
     private var mProgress2: TwoWayProgressBar? = null
     private var mProgress3: TwoWayProgressBar? = null
+    private var mTvProgress1: TextView? = null
+    private var mTvProgress2: TextView? = null
+    private var mTvProgress3: TextView? = null
 
     private var list1: MutableList<String> = ArrayList<String>()
     private var list2: MutableList<String> = ArrayList<String>()
@@ -99,6 +104,10 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
             mDialogTvRest = mDialogView?.findViewById(R.id.tv_reset)
             mDialogTvSure = mDialogView?.findViewById(R.id.tv_sure)
 
+
+            mTvProgress1 =mDialogView?.findViewById(R.id.tv_progress1)
+            mTvProgress2 =mDialogView?.findViewById(R.id.tv_progress2)
+            mTvProgress3 =mDialogView?.findViewById(R.id.tv_progress3)
 
             list1.add("￥0")
             list1.add("￥10")
@@ -195,12 +204,30 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
     }
 
     override fun progress(leftPos: Double, rightPos: Double,view: View) {
-        Log.v("ssss","$leftPos=====sssssss========$rightPos")
 
-        Log.v("ssss","${(1-leftPos)*100}=====sssssss========$rightPos")
-//        when(view?.id){
-//
-//        }
+        Log.v("ssss","${ceil((1-leftPos)*60)}=====sssssss========${ceil((1-rightPos)*60)}")
+        when(view?.id){
+
+            R.id.progress1->{
+            //    (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*50),ceil((1-rightPos)*50))
+
+                mTvProgress1?.text ="￥${ceil((1-rightPos)*60).toInt().toString()}"
+            }
+            R.id.progress2->{
+            //    (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),ceil((1-rightPos)*10).toInt().toString())
+
+                mTvProgress2?.text ="${ceil((1-rightPos)*10).toInt()}年"
+            }
+            R.id.progress3->{
+              // (mPresenter as MecLeaseListPresenter)?.setWorkTime(ceil((1-leftPos)*14000).toInt().toString(),ceil((1-rightPos)*14000).toInt().toString())
+
+
+                Log.v("ssss","${leftPos*100}==========sssssss============${rightPos*100}")
+
+                mTvProgress3?.text ="${ceil((1-rightPos)*100).toInt()}小时"
+
+            }
+        }
     }
 
 

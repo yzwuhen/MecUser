@@ -35,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/dp_17"
+        android:isIndicator="true"
         android:layout_marginTop="@dimen/dp_10"
         android:numStars="5"
         android:rating="2.5"

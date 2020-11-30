@@ -81,7 +81,7 @@ class OrderListFragment(var type: String) : BaseCusFragment(), OnItemClickListen
 
     override fun showData(data: OrderBean?) {
         mList.clear()
-        if (data?.code==200&& data?.result?.records?.isNotEmpty()!!){
+        if (data?.code==200&& data?.result!=null&& data?.result?.records?.isNotEmpty()!!){
             mList.addAll(data?.result?.records!!)
         }
         mAdapter?.notifyDataSetChanged()

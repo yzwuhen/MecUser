@@ -96,7 +96,7 @@ public class PartsOrderData implements Serializable {
     private String receiverAreaName;
     private String paymentType_dictText;
     private int status;
-    private List<OrderItemListBean> orderItemList;
+    private List<PartsOrderGoodsList> orderItemList;
 
     public String getIsAllocatedstock() {
         return isAllocatedstock;
@@ -405,11 +405,6 @@ public class PartsOrderData implements Serializable {
     public String getExpire() {
         return expire;
     }
-
-    public void setExpire(String expire) {
-        this.expire = expire;
-    }
-
     public String getSysOrgCode() {
         return sysOrgCode;
     }
@@ -422,16 +417,8 @@ public class PartsOrderData implements Serializable {
         return receiverAreaName;
     }
 
-    public void setReceiverAreaName(String receiverAreaName) {
-        this.receiverAreaName = receiverAreaName;
-    }
-
     public String getPaymentType_dictText() {
         return paymentType_dictText;
-    }
-
-    public void setPaymentType_dictText(String paymentType_dictText) {
-        this.paymentType_dictText = paymentType_dictText;
     }
 
     public int getStatus() {
@@ -442,217 +429,8 @@ public class PartsOrderData implements Serializable {
         this.status = status;
     }
 
-    public List<OrderItemListBean> getOrderItemList() {
+    public List<PartsOrderGoodsList> getOrderItemList() {
         return orderItemList;
     }
 
-    public void setOrderItemList(List<OrderItemListBean> orderItemList) {
-        this.orderItemList = orderItemList;
-    }
-
-    public static class OrderItemListBean {
-        /**
-         * productSum : 234
-         * thumbnail : null
-         * quantity : 1
-         * orderId : 020201126102345747564
-         * productSkuImg : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/timg_1603806815224.jpg,https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/temp/电脑_1603806819443.jpg
-         * freight : null
-         * weight : null
-         * updateTime : null
-         * isBaoyou : null
-         * skuName : null
-         * totalSum : 234
-         * createBy : 13751773402
-         * isDelivery : null
-         * createTime : 2020-11-26 10:23:46
-         * updateBy : null
-         * price : 234
-         * prodName : 苹果999
-         * sysOrgCode : A02
-         * id : 1331785689544577025
-         * mecProductSkuId : 16061452639240298040
-         */
-
-        private int productSum;
-        private Object thumbnail;
-        private int quantity;
-        private String orderId;
-        private String productSkuImg;
-        private Object freight;
-        private Object weight;
-        private Object updateTime;
-        private Object isBaoyou;
-        private String skuName;
-        private int totalSum;
-        private String createBy;
-        private Object isDelivery;
-        private String createTime;
-        private Object updateBy;
-        private int price;
-        private String prodName;
-        private String sysOrgCode;
-        private String id;
-        private String mecProductSkuId;
-
-        public int getProductSum() {
-            return productSum;
-        }
-
-        public void setProductSum(int productSum) {
-            this.productSum = productSum;
-        }
-
-        public Object getThumbnail() {
-            return thumbnail;
-        }
-
-        public void setThumbnail(Object thumbnail) {
-            this.thumbnail = thumbnail;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
-        }
-
-        public String getOrderId() {
-            return orderId;
-        }
-
-        public void setOrderId(String orderId) {
-            this.orderId = orderId;
-        }
-
-        public String getProductSkuImg() {
-            return productSkuImg;
-        }
-
-        public void setProductSkuImg(String productSkuImg) {
-            this.productSkuImg = productSkuImg;
-        }
-
-        public Object getFreight() {
-            return freight;
-        }
-
-        public void setFreight(Object freight) {
-            this.freight = freight;
-        }
-
-        public Object getWeight() {
-            return weight;
-        }
-
-        public void setWeight(Object weight) {
-            this.weight = weight;
-        }
-
-        public Object getUpdateTime() {
-            return updateTime;
-        }
-
-        public void setUpdateTime(Object updateTime) {
-            this.updateTime = updateTime;
-        }
-
-        public Object getIsBaoyou() {
-            return isBaoyou;
-        }
-
-        public void setIsBaoyou(Object isBaoyou) {
-            this.isBaoyou = isBaoyou;
-        }
-
-        public String getSkuName() {
-            return skuName;
-        }
-
-        public void setSkuName(String skuName) {
-            this.skuName = skuName;
-        }
-
-        public int getTotalSum() {
-            return totalSum;
-        }
-
-        public void setTotalSum(int totalSum) {
-            this.totalSum = totalSum;
-        }
-
-        public String getCreateBy() {
-            return createBy;
-        }
-
-        public void setCreateBy(String createBy) {
-            this.createBy = createBy;
-        }
-
-        public Object getIsDelivery() {
-            return isDelivery;
-        }
-
-        public void setIsDelivery(Object isDelivery) {
-            this.isDelivery = isDelivery;
-        }
-
-        public String getCreateTime() {
-            return createTime;
-        }
-
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
-        }
-
-        public Object getUpdateBy() {
-            return updateBy;
-        }
-
-        public void setUpdateBy(Object updateBy) {
-            this.updateBy = updateBy;
-        }
-
-        public int getPrice() {
-            return price;
-        }
-
-        public void setPrice(int price) {
-            this.price = price;
-        }
-
-        public String getProdName() {
-            return prodName;
-        }
-
-        public void setProdName(String prodName) {
-            this.prodName = prodName;
-        }
-
-        public String getSysOrgCode() {
-            return sysOrgCode;
-        }
-
-        public void setSysOrgCode(String sysOrgCode) {
-            this.sysOrgCode = sysOrgCode;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getMecProductSkuId() {
-            return mecProductSkuId;
-        }
-
-        public void setMecProductSkuId(String mecProductSkuId) {
-            this.mecProductSkuId = mecProductSkuId;
-        }
-    }
 }

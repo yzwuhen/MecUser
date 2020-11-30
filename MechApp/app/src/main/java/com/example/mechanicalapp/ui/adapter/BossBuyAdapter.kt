@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.data.MecBuyData
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_user_rent.view.*
 
@@ -63,6 +64,7 @@ class BossBuyAdapter (var mContext: Context, var mList:MutableList<MecSellData>,
                 "￥${mList[position].price}/${mList[position].priceUnit_dictText}"
         }
 
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_rent_user, mList[position].avatar)
 
     }
 

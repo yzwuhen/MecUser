@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_17"
+    android:paddingRight="@dimen/dp_17">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_17"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_17"
+        android:paddingBottom="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_goods_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="回转支承旋转轴承大型机专用配件支持大小型机使用"
+            android:textColor="@color/color_222"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_num"
+            app:layout_constraintStart_toEndOf="@+id/iv_pic"
+            app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="X1"
+            android:textColor="@color/color_222"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_pic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rect_radio_2_g"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:text="蓝色，均码"
+            android:textColor="@color/color_666"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintBottom_toBottomOf="@id/iv_pic"
+            app:layout_constraintStart_toStartOf="@+id/tv_goods_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_post_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right|center_vertical"
+        android:paddingRight="@dimen/dp_17"
+        android:text="邮费：￥33"
+        android:textColor="@color/color_999"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|right"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/dp_17"
+        android:paddingBottom="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tv_all_nun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="共2件商品"
+            android:textColor="@color/color_222"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="￥999"
+            android:textColor="#FC3D38"
+            android:textSize="17sp" />
+    </LinearLayout>
+
+    <View style="@style/h_view_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_40"
+        android:text="评分"
+        android:textColor="@color/color_222"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/App_RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:stepSize="1"
+            android:numStars="5"
+            android:rating="2.5" />
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="2.5分"
+            android:textColor="#FFB923"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <EditText
+
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="174dp"
+        android:layout_marginTop="@dimen/dp_35"
+        android:background="@drawable/rect_radio_6_g"
+        android:gravity="start"
+        android:padding="@dimen/dp_10"
+        android:hint="评价"
+        android:textColor="@color/color_222"
+        android:textSize="14sp" />
+
+
+</LinearLayout>

@@ -951,6 +951,18 @@ class ModelImpl : BaseModel {
 
     }
 
+    fun getPartsOrderDetails(
+        token: String?,
+        orderId: String?,
+        netSubscribe: NetSubscribe<PartsOrderDetailsBean>
+    ) {
+        appsService?.getPartsOrderDetails(token, orderId)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+
+    }
+
     fun cancelOrder(
         token: String?,
         orderId: String?,
@@ -1061,5 +1073,13 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
 
+    }
+
+    fun editUser(token:String,userInfo: UserInfo?, netSubscribe: NetSubscribe<NetData>) {
+
+        appsService?.editUserInfo(token,userInfo)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
     }
 }

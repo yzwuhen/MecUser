@@ -65,8 +65,8 @@ class FragmentComment(private var type:Int,private var id:String): BaseCusFragme
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable = true
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable = true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     override fun onItemClick(view: View, position: Int) {

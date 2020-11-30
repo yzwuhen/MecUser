@@ -79,6 +79,11 @@ public class MecSellData {
     private String priceUnit;
     private String priceUnit_dictText;
     private boolean isSelect;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
 
     public boolean isSelect() {
         return isSelect;

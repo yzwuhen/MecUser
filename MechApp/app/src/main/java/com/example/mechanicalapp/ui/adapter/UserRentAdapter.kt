@@ -11,6 +11,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_user_rent.view.*
 
@@ -59,6 +60,8 @@ class UserRentAdapter (var mContext: Context, var mList:MutableList<MecLeaseData
             holder.itemView.tv_rent.text ="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
         }
 
+
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_rent_user,mList[position].avatar)
     }
 
     override fun getItemCount(): Int {

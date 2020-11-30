@@ -2,17 +2,26 @@ package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.adapter.PartsOrderChildAdapter
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.PartsOrderDetailsBean
 import com.example.mechanicalapp.ui.data.request.ReApplyRefund
+import com.example.mechanicalapp.ui.mvp.impl.OrderDetailsPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.utils.DateUtils
 import kotlinx.android.synthetic.main.activity_parts_details.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class PartsOrderDetails : BaseActivity<NetData>(), View.OnClickListener {
+class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<NetData> {
 
     private var orderType: Int = 0
+    private var orderId=""
+    private var mPresenter: OrderDetailsPresenter?=null
+
+
     override fun getLayoutId(): Int {
 
         return R.layout.activity_parts_details
@@ -24,6 +33,7 @@ class PartsOrderDetails : BaseActivity<NetData>(), View.OnClickListener {
         iv_back.setOnClickListener(this)
 
         orderType = intent.getIntExtra("order_type", 0)
+        orderId = intent.getStringExtra("order_id").toString()
 
         if (orderType == 0) {
             tv_title.text = "待支付订单"
@@ -77,6 +87,9 @@ class PartsOrderDetails : BaseActivity<NetData>(), View.OnClickListener {
     }
 
     override fun initPresenter() {
+
+        mPresenter = OrderDetailsPresenter(this)
+        mPresenter?.getPartsOrderDetails(orderId)
     }
 
     override fun showLoading() {
@@ -125,5 +138,40 @@ class PartsOrderDetails : BaseActivity<NetData>(), View.OnClickListener {
     private fun cancelOrder() {
 
 
+    }
+
+    override fun refreshUI(data: NetData?) {
+        if (data!=null &&data is PartsOrderDetailsBean&&data.result!=null){
+            showData(data.result)
+        }
+
+    }
+
+    private fun showData(data: PartsOrderDetailsBean.ResultBean) {
+        tv_user_name.text =data.order.receiverName
+        tv_user_phone.text = data.order.receiverPhone
+        tv_address.text =data.order.receiverAddress
+        //备注
+        tv_remarks.text =data.order.memo
+
+        tv_order_num.text =data.order.orderNum
+        tv_created_time.text =data.order.createTime
+
+        //支付时间
+        tv_pay_time.text =data.order.paymentTime
+//        tv_send_goods_time.text=data.order.
+
+        recycle_list.layoutManager = LinearLayoutManager(this)
+        var mPartsOrderChildAdapter = PartsOrderChildAdapter(this,data.productList)
+        recycle_list.adapter =mPartsOrderChildAdapter
+
+        tv_all_nun.text ="共${data.order.quantity}件商品"
+        tv_money.text ="￥${data.order.amount}"
+
+
+        tv_tip_info.text="还剩${DateUtils.getHours(data.order.expire,DateUtils.getDateByLongWithFormat(System.currentTimeMillis(),"yyyy-MM-dd hh:mm:ss"))}小时自动关闭订单"
+    }
+
+    override fun loadMore(data: NetData?) {
     }
 }

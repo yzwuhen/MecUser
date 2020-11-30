@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.PartsOrderData
+import com.example.mechanicalapp.ui.data.PartsOrderGoodsList
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_parts_order_child.view.*
 
 class PartsOrderChildAdapter (
     var mContext: Context,
-    var mList: MutableList<PartsOrderData.OrderItemListBean>
+    var mList: List<PartsOrderGoodsList>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

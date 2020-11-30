@@ -1,13 +1,18 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemChangeListener
+import com.example.mechanicalapp.ui.adapter.EvaluateAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import kotlinx.android.synthetic.main.activity_evaluate_parts.*
+import kotlinx.android.synthetic.main.item_order_evaluate.view.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener {
+class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener,OnItemChangeListener {
     override fun getLayoutId(): Int {
 
         return R.layout.activity_evaluate_parts
@@ -18,7 +23,11 @@ class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener {
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
+        tv_btn.setOnClickListener(this)
         tv_title.text = "我的评价"
+
+        recycle_list.layoutManager =LinearLayoutManager(this)
+        recycle_list.adapter = EvaluateAdapter(this,null,this)
     }
 
     override fun initPresenter() {
@@ -37,6 +46,23 @@ class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener {
 
         when(v?.id){
             R.id.iv_back->finish()
+            R.id.tv_btn ->submit()
+        }
+    }
+
+    private fun submit() {
+
+
+    }
+
+    override fun onItemClick(view: View, position: Int, any: Any) {
+        when(view?.id){
+            R.id.ratingBar->{
+                Log.v("ssss","ssss====== ${any}")
+            }
+            R.id.tv_info->{
+                Log.v("ssss","ssss====== ${any}")
+            }
         }
     }
 }

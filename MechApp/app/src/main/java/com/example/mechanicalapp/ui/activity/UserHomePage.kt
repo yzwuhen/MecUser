@@ -9,9 +9,8 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.UserInfoBean
-import com.example.mechanicalapp.ui.fragment.collect.*
 import com.example.mechanicalapp.ui.fragment.user.*
-import com.example.mechanicalapp.ui.mvp.impl.UserInfoPresenter
+import com.example.mechanicalapp.ui.mvp.impl.UserInfoThreePresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.google.android.material.appbar.AppBarLayout
@@ -36,7 +35,7 @@ class UserHomePage : BaseCusActivity(), View.OnClickListener , ViewPager.OnPageC
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
-    private var mPresenter:UserInfoPresenter?=null
+    private var mPresenter:UserInfoThreePresenter?=null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_user_home_page
@@ -98,7 +97,7 @@ class UserHomePage : BaseCusActivity(), View.OnClickListener , ViewPager.OnPageC
     }
 
     override fun initPresenter() {
-        mPresenter = UserInfoPresenter(this)
+        mPresenter = UserInfoThreePresenter(this)
         mPresenter?.getUserLease(user,type)
     }
 

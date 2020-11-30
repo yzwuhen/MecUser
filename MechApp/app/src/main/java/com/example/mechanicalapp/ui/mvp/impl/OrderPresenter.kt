@@ -9,6 +9,9 @@ import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.mvp.v.ReleaseView
 
+/**
+ * 都是维修订单
+ */
 class OrderPresenter(
     private var baseView: BaseView<NetData>
 ) :

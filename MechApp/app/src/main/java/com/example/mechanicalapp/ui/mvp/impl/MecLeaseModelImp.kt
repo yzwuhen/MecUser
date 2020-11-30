@@ -38,9 +38,12 @@ class MecLeaseModelImp: BaseModel {
                      mSTenancyGe: String?,
                      mSTenancyLe: String?,
                      mSWorkTimeGe: String?,
-                     SWorkTimeLe: String?,
+                     mSWorkTimeLe: String?,
                      mISubscriberListener: ISubscriberListener<MoreLeaseData>) {
-        appsService?.getMecList(type,pageIndex,pageSize,brandId,cateId,modelId,title)
+        appsService?.getMecList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
+            mSGriceLe,mSPriceGe,
+            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe
+        )
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreLeaseData>(mISubscriberListener))

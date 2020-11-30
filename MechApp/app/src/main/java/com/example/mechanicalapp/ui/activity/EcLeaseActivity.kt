@@ -55,7 +55,6 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
     private var mReMecLease = ReMecLease()
 
     private var mButtDialog: BottomSheetDialog? = null
-
     private var mDialogView: View? = null
     private var mDialogTv1: TextView? = null
     private var mDialogTv2: TextView? = null

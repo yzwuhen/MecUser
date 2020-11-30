@@ -44,7 +44,14 @@ interface AppService {
         @Query(" brandId") brandId: String?,
         @Query("cateId") cateId: String?,
         @Query("modelId") modelId: String?,
-        @Query("tittle") title: String?
+        @Query("tittle") title: String?,
+        @Query("sort") sort: Int?,
+        @Query("SGriceLe") mSGriceLe: String?,
+    @Query("SPriceGe") mSPriceGe: String?,
+    @Query(" STenancyGe") mSTenancyGe: String?,
+    @Query("STenancyLe") mSTenancyLe: String?,
+    @Query("SWorkTimeGe") mSWorkTimeGe: String?,
+    @Query("SWorkTimeLe") mSWorkTimeLe: String?
     ): Observable<MoreLeaseData>
 
     /**
@@ -1133,4 +1140,25 @@ interface AppService {
         @Header("X-Access-Token") token: String?
     ): Observable<ReportBean>
 
+
+    /**
+     *
+     *获取订单详情
+     */
+    @GET("/jeecg-boot/shop/mecOrder/detail")
+    fun getPartsOrderDetails(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<PartsOrderDetailsBean>
+
+
+    /**
+     *
+     *修改用户信息
+     */
+    @POST("/jeecg-boot/my/mecMyInfo/edit")
+    fun editUserInfo(
+        @Header("X-Access-Token") token: String?,
+        @Body userInfo: UserInfo?
+    ): Observable<NetData>
 }

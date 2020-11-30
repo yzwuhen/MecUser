@@ -100,7 +100,8 @@ class TwoWayProgressBar(
         textY = height / 4f + 100f
 
         //计算出间距
-        textX = (width - bitMapSize) / (mlistText.size) * 1f
+        // textX = (width - bitMapSize) / (mlistText.size) * 1f
+           textX = width / (mlistText.size) * 1f
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -145,7 +146,7 @@ class TwoWayProgressBar(
         if (mlistText?.size!! > 0) {
 
             for (index in mlistText?.indices!!) {
-                //文本再进度条下方 不考虑 text的基线等问题
+                //文本在进度条下方 不考虑 text的基线等问题
                 if (textW == 0f) {
                     textW = textPaint?.measureText(mlistText[index])!!
                 }
@@ -155,20 +156,34 @@ class TwoWayProgressBar(
                     textPaint?.let {
                         canvas?.drawText(
                             mlistText[index],
-                            bitMapSize / 2 + textX * index + textW * index - 10f,
+                            bitMapSize/2*1f,
                             textY,
                             it
                         )
                     }
-                } else {
+                }
+                else if (index ==mlistText.size){
                     textPaint?.let {
-                        canvas?.drawText(
-                            mlistText[index],
-                            bitMapSize / 2 + textX * index + textW * index,
-                            textY,
+                        canvas?.drawText(mlistText[index],width-textW,textY,
                             it
                         )
                     }
+                }
+                else {
+                    textPaint?.let {
+                        canvas?.drawText(mlistText[index],bitMapSize/2*1f+textX*index-textW/2,textY,
+                            it
+                        )
+                    }
+
+//                    textPaint?.let {
+//                        canvas?.drawText(
+//                            mlistText[index],
+//                            bitMapSize / 2 + textX * index + textW * index,
+//                            textY,
+//                            it
+//                        )
+//                    }
                 }
 
             }

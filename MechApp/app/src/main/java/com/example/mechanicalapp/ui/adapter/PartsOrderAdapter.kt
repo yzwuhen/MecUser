@@ -126,6 +126,10 @@ class PartsOrderAdapter(
                     adapterPosition
                 )
             })
+            itemView.recycle_list_item.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(
+                itemView.ly_root,
+                adapterPosition
+            ) })
             itemView.tv_look_logistics.setOnClickListener(View.OnClickListener {
                 mOnItemClickListener.onItemClick(
                     itemView.tv_look_logistics,

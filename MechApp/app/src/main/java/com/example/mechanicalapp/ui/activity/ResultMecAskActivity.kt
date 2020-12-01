@@ -68,6 +68,7 @@ class ResultMecAskActivity : BaseCusActivity(), OnItemClickListener, View.OnClic
 
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
+        mPresenter?.setTitle(title)
         mPresenter?.getLeaseList(2)
     }
 

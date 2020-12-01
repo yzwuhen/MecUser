@@ -187,7 +187,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
     override fun showData(data: MecDetailsData?) {
         if (data != null) {
             mData =data
-            tv_goods_title.text =data.tittle
+            tv_goods_title.text =data.title
 
             if (data.priceUnit=="3"){
                 tv_rent_price.text ="租赁价格：面议"

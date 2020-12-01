@@ -19,7 +19,7 @@ public class MecSellData {
      * isNew_dictText : 是
      * id : 1324004673299951617
      * isTop_dictText : null
-     * tittle : 推土机SD13型号
+     * title : 推土机SD13型号
      * brandName : 八达重工
      * gpsLon : 1.22333
      * bussiessType : 1
@@ -56,7 +56,7 @@ public class MecSellData {
     private String isNew_dictText;
     private String id;
     private Object isTop_dictText;
-    private String tittle;
+    private String title;
     private String brandName;
     private Double gpsLon;
     private String bussiessType;
@@ -160,8 +160,8 @@ public class MecSellData {
         return isTop_dictText;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
     public String getBrandName() {

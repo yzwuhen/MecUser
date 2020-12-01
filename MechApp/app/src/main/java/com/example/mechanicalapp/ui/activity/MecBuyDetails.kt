@@ -189,7 +189,7 @@ class MecBuyDetails : BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
     override fun showData(data: BusinessDetails?) {
         if (data != null) {
             mData =data
-            tv_goods_title.text = data.tittle
+            tv_goods_title.text = data.title
 
             tv_rent_price.text = "￥${data.price}/元"
             tv_coast_money.text = "￥${data.price}/元"

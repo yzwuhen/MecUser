@@ -19,7 +19,7 @@ public class BusinessDetails implements Serializable {
      * isNew_dictText : 是
      * id : 1324004673299951617
      * isTop_dictText : null
-     * tittle : 推土机SD13型号
+     * title : 推土机SD13型号
      * brandName : 八达重工
      * gpsLon : 1.22333
      * address : null
@@ -59,7 +59,7 @@ public class BusinessDetails implements Serializable {
     private String isNew_dictText;
     private String id;
     private Object isTop_dictText;
-    private String tittle;
+    private String title;
     private String brandName;
     private String gpsLon;
     private Object address;
@@ -212,12 +212,12 @@ public class BusinessDetails implements Serializable {
         this.isTop_dictText = isTop_dictText;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getBrandName() {

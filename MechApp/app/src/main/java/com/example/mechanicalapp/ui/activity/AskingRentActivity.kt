@@ -323,7 +323,7 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
         if (TextUtils.isEmpty(et_ec_name.text.toString().trim())) {
             return false
         }
-        mReMecLease.tittle = et_ec_name.text.toString().trim()
+        mReMecLease.title = et_ec_name.text.toString().trim()
 
         if (TextUtils.isEmpty(et_way.text.toString().trim())) {
             return false

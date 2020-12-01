@@ -25,7 +25,7 @@ public class ReWorkAbout {
      * isTop :
      * jobAddress :
      * jobEx : 0
-     * jobTittle :
+     * jobtitle :
      * needNumber : 0
      * orderTime :
      * price : 0
@@ -58,7 +58,7 @@ public class ReWorkAbout {
     private String isTop;
     private String jobAddress;
     private String jobEx;
-    private String jobTittle;
+    private String jobtitle;
     private String needNumber;
     private String orderTime;
     private String price;
@@ -250,12 +250,12 @@ public class ReWorkAbout {
         this.jobEx = jobEx;
     }
 
-    public String getJobTittle() {
-        return jobTittle;
+    public String getJobtitle() {
+        return jobtitle;
     }
 
-    public void setJobTittle(String jobTittle) {
-        this.jobTittle = jobTittle;
+    public void setJobtitle(String jobtitle) {
+        this.jobtitle = jobtitle;
     }
 
     public String getNeedNumber() {

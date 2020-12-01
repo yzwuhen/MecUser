@@ -12,7 +12,7 @@ public class MecDetailsData implements Serializable {
      * updateBy : admin
      * updateTime : 2020-11-05 20:16:35
      * sysOrgCode : string
-     * tittle : 大臂机械
+     * title : 大臂机械
      * cateId : 1323668504007696385
      * brandId : 1321490471452721153
      * modelId : 1321491075206004738
@@ -51,7 +51,7 @@ public class MecDetailsData implements Serializable {
     private String updateBy;
     private String updateTime;
     private String sysOrgCode;
-    private String tittle;
+    private String title;
     private String cateId;
     private String brandId;
     private String modelId;
@@ -149,12 +149,12 @@ public class MecDetailsData implements Serializable {
         this.sysOrgCode = sysOrgCode;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCateId() {

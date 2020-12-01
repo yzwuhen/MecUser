@@ -64,7 +64,7 @@ class MyMecRelease : BaseCusActivity(), OnItemClickListener, View.OnClickListene
     }
 
     private fun showInfo() {
-        et_ec_name.text =mReMecLease.tittle
+        et_ec_name.text =mReMecLease.title
         et_ec_type.text =mReMecLease.cateName
         et_ec_brand.text =mReMecLease.brandName
         et_ec_model.text =mReMecLease.modelName

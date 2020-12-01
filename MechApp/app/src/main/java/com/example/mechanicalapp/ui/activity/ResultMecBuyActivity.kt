@@ -69,6 +69,7 @@ class ResultMecBuyActivity  : BaseCusActivity(), OnItemClickListener, View.OnCli
 
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
+        mPresenter?.setTitle(title)
         mPresenter?.getSellList(2)
     }
 

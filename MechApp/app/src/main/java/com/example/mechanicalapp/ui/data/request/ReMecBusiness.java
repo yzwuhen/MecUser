@@ -39,7 +39,7 @@ public class ReMecBusiness implements Serializable {
      * pic :
      * price :
      * sysOrgCode :
-     * tittle :
+     * title :
      * updateBy :
      * updateTime :
      * workTime :
@@ -73,7 +73,7 @@ public class ReMecBusiness implements Serializable {
     private String pic;
     private String price;
     private String sysOrgCode;
-    private String tittle;
+    private String title;
     private String updateBy;
     private String updateTime;
     private String workTime;
@@ -302,12 +302,12 @@ public class ReMecBusiness implements Serializable {
         this.sysOrgCode = sysOrgCode;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUpdateBy() {

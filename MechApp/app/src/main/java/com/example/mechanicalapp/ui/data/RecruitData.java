@@ -43,7 +43,7 @@ public class RecruitData  implements Serializable {
      * gpsLat : null
      * sysOrgCode : null
      * isEnterprise : null
-     * jobTittle : 司机
+     * jobtitle : 司机
      * contactPhone : 13886943851
      * age : null
      */
@@ -83,7 +83,7 @@ public class RecruitData  implements Serializable {
     private String gpsLat;
     private String sysOrgCode;
     private String isEnterprise;
-    private String jobTittle;
+    private String jobtitle;
     private String contactPhone;
     private boolean isSelect;
     private String realname;
@@ -250,8 +250,8 @@ public class RecruitData  implements Serializable {
         return isEnterprise;
     }
 
-    public String getJobTittle() {
-        return jobTittle;
+    public String getJobtitle() {
+        return jobtitle;
     }
 
     public String getContactPhone() {

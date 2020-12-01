@@ -67,6 +67,7 @@ class ResultFactoryActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
 
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
+        mPresenter?.setTitle(title)
         mPresenter?.getFactoryList()
     }
 

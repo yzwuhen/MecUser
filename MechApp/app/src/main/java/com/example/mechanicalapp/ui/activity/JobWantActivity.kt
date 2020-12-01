@@ -277,7 +277,7 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
         if (TextUtils.isEmpty(et_post_name.text.toString().trim())) {
             return false
         }
-        mReBean.jobTittle = et_post_name.text.toString().trim()
+        mReBean.jobtitle = et_post_name.text.toString().trim()
 
 
 

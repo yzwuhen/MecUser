@@ -68,6 +68,7 @@ class ResultPartsLeaseActivity  : BaseCusActivity(), OnItemClickListener, View.O
 
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
+        mPresenter?.setTitle(title)
         mPresenter?.getPartsLeaseList(1)
     }
 

@@ -24,7 +24,7 @@ class MoreRecruitAdapter  (var mContext: Context, var mList:MutableList<RecruitD
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.tv_recruit_title.text =mList[position].jobTittle
+        holder.itemView.tv_recruit_title.text =mList[position].jobtitle
         holder.itemView.tv_recruit_address.text =mList[position].city
         holder.itemView.tv_recruit_exp.text =mList[position].jobEx_dictText
         holder.itemView.tv_recruit_num.text="${mList[position].needNumber}人"

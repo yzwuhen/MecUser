@@ -33,7 +33,7 @@ class RecruitAdapter(
             holder.itemView.ly_check.visibility = View.GONE
         }
 
-        holder.itemView.tv_recruit_title.text = mList[position].jobTittle
+        holder.itemView.tv_recruit_title.text = mList[position].jobtitle
         if (mList[position].price > 0) {
             holder.itemView.tv_label.visibility = View.GONE
             holder.itemView.tv_label1.visibility = View.VISIBLE

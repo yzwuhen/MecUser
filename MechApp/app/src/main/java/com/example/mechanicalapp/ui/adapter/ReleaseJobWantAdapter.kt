@@ -29,7 +29,7 @@ class ReleaseJobWantAdapter (var mContext: Context, var mList:MutableList<Recrui
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.tv_job_info.text =mList[position].jobTittle
+        holder.itemView.tv_job_info.text =mList[position].jobtitle
         holder.itemView.tv_address.text =mList[position].city
 
         if (mList[position].price_dictText=="面议"){

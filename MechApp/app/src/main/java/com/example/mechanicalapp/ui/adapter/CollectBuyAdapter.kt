@@ -33,7 +33,7 @@ class CollectBuyAdapter  (var mContext: Context, var mList:MutableList<MecSellDa
         holder.itemView.tv_rent_user_nick.text =mList[position].contactName
         holder.itemView.tv_rent_address_data.text="${mList[position].city} | ${mList[position].facDate}"
 
-        holder.itemView.tv_rent_equipment.text =mList[position].tittle
+        holder.itemView.tv_rent_equipment.text =mList[position].title
 
         holder.itemView.tv_rent_time.text =DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
     }

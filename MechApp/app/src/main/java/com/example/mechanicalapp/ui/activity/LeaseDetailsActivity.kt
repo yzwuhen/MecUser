@@ -221,7 +221,7 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
                 banner.adapter = ImageAdapter(mList)
                 banner.indicator = CircleIndicator(this)
             }
-            tv_details_title.text = data.tittle
+            tv_details_title.text = data.title
             tv_browse.text = "浏览量：${data.viewNum}"
             tv_browse_time.text = DateUtils.dateDiffs(data.createTime, System.currentTimeMillis())
 

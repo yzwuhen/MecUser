@@ -189,7 +189,7 @@ class EcBuyActivity : BaseCusActivity(), View.OnClickListener,TextWatcher,
         if (TextUtils.isEmpty(et_ec_name.text.toString().trim())) {
             return false
         }
-        mReMecBusiness.tittle = et_ec_name.text.toString().trim()
+        mReMecBusiness.title = et_ec_name.text.toString().trim()
 
 
         if (TextUtils.isEmpty(mReMecBusiness.address)) {

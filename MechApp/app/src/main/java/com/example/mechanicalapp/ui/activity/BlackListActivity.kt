@@ -84,15 +84,12 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
     }
 
     override fun showLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun hiedLoading() {
-        TODO("Not yet implemented")
     }
 
     override fun err()  {
-        TODO("Not yet implemented")
     }
 
 

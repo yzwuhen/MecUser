@@ -44,7 +44,7 @@ interface AppService {
         @Query(" brandId") brandId: String?,
         @Query("cateId") cateId: String?,
         @Query("modelId") modelId: String?,
-        @Query("tittle") title: String?,
+        @Query("title") title: String?,
         @Query("sort") sort: Int?,
         @Query("SGriceLe") mSGriceLe: String?,
     @Query("SPriceGe") mSPriceGe: String?,
@@ -307,7 +307,7 @@ interface AppService {
         @Query("cateName") typeWork: String?,
         @Query("cateId") typeWorkId: String?,
         @Query("sort") sort: Int,
-        @Query("jobTittle") jobTittle: String?
+        @Query("jobtitle") jobtitle: String?
     ): Observable<RecruitBean>
 
 
@@ -325,7 +325,7 @@ interface AppService {
         @Query(
             "sort"
         ) sort: String?,
-        @Query("jobTittle") jobTittle: String?
+        @Query("jobtitle") jobtitle: String?
     ): Observable<NetData>
 
 

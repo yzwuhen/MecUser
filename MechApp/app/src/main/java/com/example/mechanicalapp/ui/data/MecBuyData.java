@@ -8,7 +8,7 @@ public class MecBuyData {
      * updateBy : admin
      * updateTime : 2020-11-05 20:16:35
      * sysOrgCode : A01A03
-     * tittle : 推土机SD13型号
+     * title : 推土机SD13型号
      * isNew : 1
      * cateId : 1321476604976406530
      * brandId : 1321490471452721153
@@ -41,7 +41,7 @@ public class MecBuyData {
     private String updateBy;
     private String updateTime;
     private String sysOrgCode;
-    private String tittle;
+    private String title;
     private String isNew;
     private String cateId;
     private String brandId;
@@ -91,8 +91,8 @@ public class MecBuyData {
         return sysOrgCode;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String gettitle() {
+        return title;
     }
 
     public String getIsNew() {

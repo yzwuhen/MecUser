@@ -177,7 +177,7 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
     override fun showData(data: NetData?) {
 
         if (data!=null&&data is RecruitDetailsBean &&data.result!=null){
-            tv_goods_title.text ="求职${data.result.jobTittle}"
+            tv_goods_title.text ="求职${data.result.jobtitle}"
 
             tv_ask_user.text = data.result.contactName
 

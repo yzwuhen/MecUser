@@ -44,7 +44,7 @@ public class RecruitDetailsData implements Serializable {
      * gpsLat : null
      * sysOrgCode : null
      * isEnterprise : null
-     * jobTittle : 驾驶员
+     * jobtitle : 驾驶员
      * contactPhone : 13886943851
      * age : null
      */
@@ -89,7 +89,7 @@ public class RecruitDetailsData implements Serializable {
     private Object gpsLat;
     private Object sysOrgCode;
     private Object isEnterprise;
-    private String jobTittle;
+    private String jobtitle;
     private String contactPhone;
     private Object age;
 
@@ -413,12 +413,12 @@ public class RecruitDetailsData implements Serializable {
         this.isEnterprise = isEnterprise;
     }
 
-    public String getJobTittle() {
-        return jobTittle;
+    public String getJobtitle() {
+        return jobtitle;
     }
 
-    public void setJobTittle(String jobTittle) {
-        this.jobTittle = jobTittle;
+    public void setJobtitle(String jobtitle) {
+        this.jobtitle = jobtitle;
     }
 
     public String getContactPhone() {

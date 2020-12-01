@@ -39,7 +39,7 @@ public class ReMecLease implements Serializable {
      * priceUnit :
      * sysOrgCode :
      * tenancy :
-     * tittle :
+     * title :
      * updateBy :
      * updateTime :
      * workTime :
@@ -76,7 +76,7 @@ public class ReMecLease implements Serializable {
     private String priceUnit;
     private String sysOrgCode;
     private String tenancy;
-    private String tittle;
+    private String title;
     private String updateBy;
     private String updateTime;
     private String workTime;
@@ -329,12 +329,12 @@ public class ReMecLease implements Serializable {
         this.tenancy = tenancy;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUpdateBy() {

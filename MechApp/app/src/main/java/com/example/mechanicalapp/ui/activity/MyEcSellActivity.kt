@@ -74,7 +74,7 @@ class MyEcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLis
     }
 
     private fun showInfo() {
-        et_ec_name.text = mReMecBusiness.tittle
+        et_ec_name.text = mReMecBusiness.title
 
         if (mReMecBusiness.isNew=="1"){
             tv_yes.isSelected =true

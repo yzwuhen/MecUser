@@ -300,7 +300,7 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
         if (TextUtils.isEmpty(et_post_name.text.toString().trim())) {
             return false
         }
-        mReBean.jobTittle = et_post_name.text.toString().trim()
+        mReBean.jobtitle = et_post_name.text.toString().trim()
 
 
         if (TextUtils.isEmpty(et_company_name_.text.toString().trim())) {

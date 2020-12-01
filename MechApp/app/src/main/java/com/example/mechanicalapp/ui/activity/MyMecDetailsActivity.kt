@@ -189,7 +189,7 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         mReMecBusiness.modelName = mData?.modelName
         mReMecBusiness.modelId = mData?.modelId
 
-        mReMecBusiness.tittle =mData?.titile
+        mReMecBusiness.title =mData?.titile
         mReMecBusiness.workTime =mData?.workTime
         mReMecBusiness.contactPhone =App.getInstance().userInfo.phone
         mReMecBusiness.contactName =App.getInstance().userInfo.realname
@@ -221,7 +221,7 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         mecRelease.modelName = mData?.modelName
         mecRelease.modelId = mData?.modelId
 
-        mecRelease.tittle =mData?.titile
+        mecRelease.title =mData?.titile
         mecRelease.workTime =mData?.workTime
         mecRelease.contactPhone =App.getInstance().userInfo.phone
         mecRelease.contactName =App.getInstance().userInfo.realname

@@ -32,7 +32,7 @@ class ReleaseLeaseAdapter (var mContext: Context, var mList:MutableList<MecLease
 
         ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,StringUtils.getImgStr(mList[position].pic),R.mipmap.ic_launcher)
 
-        holder.itemView.tv_title.text =mList[position].tittle
+        holder.itemView.tv_title.text =mList[position].title
 
         holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].facDate}"
 

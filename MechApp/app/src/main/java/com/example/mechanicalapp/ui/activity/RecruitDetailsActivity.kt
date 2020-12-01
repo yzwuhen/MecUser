@@ -176,7 +176,7 @@ class RecruitDetailsActivity  : BaseCusActivity(), View.OnClickListener, PopUtil
     override fun showData(data: NetData?) {
 
         if (data!=null&&data is RecruitDetailsBean&&data.result!=null){
-            tv_details_title.text ="招聘${data.result.jobTittle}"
+            tv_details_title.text ="招聘${data.result.jobtitle}"
             tv_cost.text =data.result.price_dictText
             tv_browse.text ="浏览量:${data.result.viewNum}"
             tv_experience.text =data.result.jobEx_dictText

@@ -24,7 +24,7 @@ public class MecLeaseData implements Serializable {
      * isNew_dictText : 是
      * id : 1318136162723864517
      * isTop_dictText : null
-     * tittle : 大臂机械20
+     * title : 大臂机械20
      * priceUnit : 1
      * brandName : 八达重工
      * gpsLon : 1.22333
@@ -63,7 +63,7 @@ public class MecLeaseData implements Serializable {
     private String isNew_dictText;
     private String id;
     private Object isTop_dictText;
-    private String tittle;
+    private String title;
     private String priceUnit;
     private String brandName;
     private Double gpsLon;
@@ -237,12 +237,16 @@ public class MecLeaseData implements Serializable {
         this.isTop_dictText = isTop_dictText;
     }
 
-    public String getTittle() {
-        return tittle;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getPriceUnit() {

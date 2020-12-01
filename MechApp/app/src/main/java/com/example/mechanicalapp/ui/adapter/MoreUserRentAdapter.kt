@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_more_user_rent.view.*
 
@@ -25,12 +26,11 @@ class MoreUserRentAdapter  (var mContext: Context, var mList:MutableList<MecLeas
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       // holder.itemView.tv_rent_user_nick.text =mList[position].contactName
         holder.itemView.tv_rent_user_nick.text =mList[position].contactName
 
         holder.itemView.tv_rent_address_data.text="${mList[position].city} | 租用时间：${mList[position].tenancy}天"
 
-        holder.itemView.tv_rent_equipment.text =mList[position].brandName
+        holder.itemView.tv_rent_equipment.text =mList[position].modelName +mList[position].tittle
 
         holder.itemView.tv_rent_distance.text = "距离：${StringUtils.getDistance(
             CoordinateConverter.calculateLineDistance(
@@ -55,6 +55,7 @@ class MoreUserRentAdapter  (var mContext: Context, var mList:MutableList<MecLeas
             holder.itemView.tv_rent.text ="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
         }
 
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_rent_user,mList[position].avatar)
 
     }
 

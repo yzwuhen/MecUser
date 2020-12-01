@@ -243,7 +243,8 @@ interface AppService {
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
         @Query("cateId") cateId: String?,
-        @Query("title") title: String?
+        @Query("title") title: String?,
+        @Query("sort") sort: Int?
     ): Observable<PartsBean>
 
 
@@ -259,7 +260,14 @@ interface AppService {
         @Query(" brandId") brandId: String?,
         @Query("cateId") cateId: String?,
         @Query("modelId") modelId: String?,
-        @Query("title") title: String?
+        @Query("title") title: String?,
+        @Query("sort") sort: Int?,
+        @Query("SGriceLe") mSGriceLe: String?,
+        @Query("SPriceGe") mSPriceGe: String?,
+        @Query(" STenancyGe") mSTenancyGe: String?,
+        @Query("STenancyLe") mSTenancyLe: String?,
+        @Query("SWorkTimeGe") mSWorkTimeGe: String?,
+        @Query("SWorkTimeLe") mSWorkTimeLe: String?
     ): Observable<MoreBusinessData>
 
 
@@ -275,7 +283,14 @@ interface AppService {
         @Query(" brandId") brandId: String?,
         @Query("cateId") cateId: String?,
         @Query("modelId") modelId: String?,
-        @Query("title") title: String?
+        @Query("title") title: String?,
+        @Query("sort") sort: Int?,
+        @Query("SGriceLe") mSGriceLe: String?,
+        @Query("SPriceGe") mSPriceGe: String?,
+        @Query(" STenancyGe") mSTenancyGe: String?,
+        @Query("STenancyLe") mSTenancyLe: String?,
+        @Query("SWorkTimeGe") mSWorkTimeGe: String?,
+        @Query("SWorkTimeLe") mSWorkTimeLe: String?
     ): Observable<MoreSellBean>
 
 
@@ -1160,5 +1175,16 @@ interface AppService {
     fun editUserInfo(
         @Header("X-Access-Token") token: String?,
         @Body userInfo: UserInfo?
+    ): Observable<NetData>
+
+
+    /**
+     *
+     *意见反馈
+     */
+    @POST("/jeecg-boot/my/mecMyInfo/edit")
+    fun postSuggest(
+        @Header("X-Access-Token") token: String?,
+        @Body reSuggest: ReSuggest?
     ): Observable<NetData>
 }

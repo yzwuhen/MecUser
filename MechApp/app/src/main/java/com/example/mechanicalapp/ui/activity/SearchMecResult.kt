@@ -13,9 +13,11 @@ import kotlinx.android.synthetic.main.activity_search_goods_result.*
 import kotlinx.android.synthetic.main.activity_search_result.recycler_list
 import kotlinx.android.synthetic.main.layout_search_et.*
 
+/**
+ * 我的设备
+ */
 class SearchMecResult: BaseActivity<NetData>(), OnItemClickListener {
 
-    //tye== 0 出租出售 1 招牌  2 求职 3 商品（配件）
     private var myMecAdapter: MyMecAdapter? = null
     var mList: MutableList<MecData> = ArrayList<MecData>()
 

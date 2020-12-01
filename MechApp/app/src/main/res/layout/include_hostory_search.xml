@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/dp_20">
 
     <TextView
-        android:id="@+id/tv_history_delede"
+        android:id="@+id/tv_history_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableRight="@mipmap/clear_icon"

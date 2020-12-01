@@ -23,9 +23,19 @@ class MecBuyModelImpl : BaseModel {
         appsService = appsApi?.service
     }
 
-    fun getSellList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,mISubscriberListener: ISubscriberListener<MoreSellBean>) {
+    fun getSellList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
+                    sort: Int,
+                    mSGriceLe: String?,
+                    mSPriceGe: String?,
+                    mSTenancyGe: String?,
+                    mSTenancyLe: String?,
+                    mSWorkTimeGe: String?,
+                    mSWorkTimeLe: String?,
+                    mISubscriberListener: ISubscriberListener<MoreSellBean>) {
 
-        appsService?.getSellList(type,pageIndex,pageSize,brandId,cateId,modelId,title)
+        appsService?.getSellList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
+            mSGriceLe,mSPriceGe,
+            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreSellBean>(mISubscriberListener))
@@ -33,9 +43,19 @@ class MecBuyModelImpl : BaseModel {
 
     }
 
-    fun getMecBuyList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,mISubscriberListener: ISubscriberListener<MoreBusinessData>) {
+    fun getMecBuyList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
+                      sort: Int,
+                      mSGriceLe: String?,
+                      mSPriceGe: String?,
+                      mSTenancyGe: String?,
+                      mSTenancyLe: String?,
+                      mSWorkTimeGe: String?,
+                      mSWorkTimeLe: String?,
+                      mISubscriberListener: ISubscriberListener<MoreBusinessData>) {
 
-        appsService?.getMecBuyList(type,pageIndex,pageSize,brandId,cateId,modelId,title)
+        appsService?.getMecBuyList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
+            mSGriceLe,mSPriceGe,
+            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreBusinessData>(mISubscriberListener))

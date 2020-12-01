@@ -7,6 +7,7 @@
     android:layout_marginRight="@dimen/dp_10"
     android:layout_marginBottom="5dp"
     android:background="@drawable/rect_radio_6_white"
+    android:id="@+id/item_root"
     android:paddingLeft="@dimen/dp_10"
     android:paddingTop="@dimen/dp_15"
     android:paddingRight="@dimen/dp_10">

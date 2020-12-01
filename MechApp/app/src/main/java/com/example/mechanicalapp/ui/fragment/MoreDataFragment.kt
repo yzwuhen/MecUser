@@ -2,7 +2,6 @@ package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,11 +20,9 @@ import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
-import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
-import com.example.mechanicalapp.utils.StringUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
 import kotlin.math.ceil
@@ -70,7 +67,7 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
 
         mStringList?.add("智能排序")
         mStringList?.add("最新上架")
-        mStringList?.add("最新上架")
+        mStringList?.add("机龄最短")
         mStringList?.add("工作时长最短")
 
         ly_screen1.setOnClickListener(this)
@@ -84,9 +81,11 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun getLayoutId(): Int {
@@ -133,8 +132,8 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
             list3.add("0")
             list3.add("2000")
             list3.add("4000")
+            list3.add("6000")
             list3.add("8000")
-            list3.add("12000")
             list3.add("不限")
 
             mProgress1 = mDialogView?.findViewById(R.id.progress1)
@@ -170,7 +169,7 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
             R.id.ly_screen1 -> jumpActivityForResult(
                 Configs.EC_TYPE_RESULT_CODE,
                 0,
-                EcModel::class.java
+                EcType::class.java
             )
             R.id.ly_screen2 -> jumpActivityForResult(
                 Configs.EC_BRAND_RESULT_CODE,
@@ -180,7 +179,7 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
             R.id.ly_screen3 -> jumpActivityForResult(
                 Configs.EC_MODEL_RESULT_CODE,
                 0,
-                EcType::class.java
+                EcModel::class.java
             )
             R.id.ly_screen4 -> showInput()
             R.id.ly_screen5 -> showDialogType()
@@ -197,39 +196,66 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
     }
 
     override fun onItemClick(view: View, position: Int) {
-        val bundle = Bundle()
-        bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 0)
-        bundle.putString(Configs.MEC_ID, mList[position].id)
-        jumpActivity(bundle, LeaseDetailsActivity::class.java)
-    }
-
-    override fun progress(leftPos: Double, rightPos: Double,view: View) {
-
-        Log.v("ssss","${ceil((1-leftPos)*60)}=====sssssss========${ceil((1-rightPos)*60)}")
         when(view?.id){
-
-            R.id.progress1->{
-            //    (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*50),ceil((1-rightPos)*50))
-
-                mTvProgress1?.text ="￥${ceil((1-rightPos)*60).toInt().toString()}"
+            R.id.tv_screen->{
+                tv_screen4.text=mStringList[position]
+                (mPresenter as MecLeaseListPresenter).setSort(position)
+                PopUtils.dismissPop()
             }
-            R.id.progress2->{
-            //    (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),ceil((1-rightPos)*10).toInt().toString())
-
-                mTvProgress2?.text ="${ceil((1-rightPos)*10).toInt()}年"
-            }
-            R.id.progress3->{
-              // (mPresenter as MecLeaseListPresenter)?.setWorkTime(ceil((1-leftPos)*14000).toInt().toString(),ceil((1-rightPos)*14000).toInt().toString())
-
-
-                Log.v("ssss","${leftPos*100}==========sssssss============${rightPos*100}")
-
-                mTvProgress3?.text ="${ceil((1-rightPos)*100).toInt()}小时"
-
+            R.id.item_root->{
+                val bundle = Bundle()
+                bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 0)
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle, LeaseDetailsActivity::class.java)
             }
         }
     }
 
+    override fun progress(leftPos: Double, rightPos: Double,isUp:Boolean,view: View) {
+
+        when(view?.id){
+            R.id.progress1->{
+                if (rightPos==0.0){
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),null)
+                    }
+                    mTvProgress1?.text ="不限"
+                }else{
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),ceil((1-rightPos)*60).toString())
+                    }
+                    mTvProgress1?.text ="￥${ceil((1-rightPos)*60).toInt()}"
+                }
+
+            }
+            R.id.progress2->{
+                if (rightPos==0.0){
+                    mTvProgress2?.text ="不限"
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),null)
+                    }
+                }else{
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),ceil((1-rightPos)*10).toInt().toString())
+                    }
+                    mTvProgress2?.text ="${ceil((1-rightPos)*10).toInt()}年"
+                }
+            }
+            R.id.progress3->{
+                if (rightPos==0.0){
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),null)
+                    }
+                    mTvProgress3?.text="不限"
+                }else{
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),(ceil((1-rightPos)*5).toInt()*2000).toString())
+                    }
+                    mTvProgress3?.text ="${ceil((1-rightPos)*5).toInt()*2000}小时"
+                }
+            }
+        }
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 

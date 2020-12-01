@@ -46,10 +46,8 @@
         </activity>
         <activity android:name=".ui.activity.SearchCityActivity"/>
         <activity android:name=".ui.activity.HistorySearchActivity"/>
-        <activity android:name=".ui.activity.SearchMecActivity"/>
         <activity android:name=".ui.activity.CloudBoxActivity"/>
         <activity android:name=".ui.activity.MoreDataActivity"/>
-        <activity android:name=".ui.activity.SearchResultActivity"/>
         <activity android:name=".ui.activity.EcModel"/>
         <activity android:name=".ui.activity.EcType"/>
         <activity android:name=".ui.activity.Brand"/>
@@ -141,6 +139,16 @@
         <activity android:name=".ui.activity.MyMecRelease"/>
         <activity android:name=".ui.activity.SureOrderCarActivity"/>
         <activity android:name=".ui.activity.FactoryDetails"/>
+        <activity android:name=".ui.activity.ResultMecLeaseActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultMecAskActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultMecSellActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultMecBuyActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultPartsLeaseActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultPartsAskActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultFactoryActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultRecruitActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.ResultJobWantActivity" android:windowSoftInputMode="adjustPan" />
+
 
         <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
         </meta-data>

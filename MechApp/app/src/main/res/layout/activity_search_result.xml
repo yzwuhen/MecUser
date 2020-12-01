@@ -8,6 +8,7 @@
     <include layout="@layout/layout_search_et" />
 
     <TextView
+        android:id="@+id/tv_result_num"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:background="#F6F7FB"

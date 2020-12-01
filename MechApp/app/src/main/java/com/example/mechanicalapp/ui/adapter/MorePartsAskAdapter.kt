@@ -48,7 +48,7 @@ class MorePartsAskAdapter (
         init {
             itemView.setOnClickListener(View.OnClickListener {
                 mOnItemClickListener.onItemClick(
-                    itemView,
+                    itemView.item_root,
                     adapterPosition
                 )
             })

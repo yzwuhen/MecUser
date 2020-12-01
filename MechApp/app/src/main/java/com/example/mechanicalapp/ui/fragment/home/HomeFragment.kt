@@ -3,7 +3,6 @@ package com.example.mechanicalapp.ui.fragment.home
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import com.amap.api.location.AMapLocation
 import com.example.mechanicalapp.R
@@ -98,7 +97,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
     private fun jumpSearch() {
 
         var bundle = Bundle()
-        bundle.putInt(Configs.HISTORY_TYPE,9)
+        bundle.putInt(Configs.HISTORY_TYPE,10)
         jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 

@@ -71,4 +71,11 @@ class FactoryPresenter(
 
         page =1
     }
+
+    fun setSort(position: Int) {
+
+        sort =position.toString()
+        resetPage()
+        getFactoryList()
+    }
 }

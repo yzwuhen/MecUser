@@ -257,6 +257,62 @@ class ModelImpl : BaseModel {
     }
 
 
+    //出租==求租
+    fun getLeaseList(
+        type: Int,
+        pageIndex: Int,
+        pageSize: Int,
+        brandId: String?,
+        cateId: String?,
+        modelId: String?,
+        title: String?,
+        sort: Int,
+        mSGriceLe: String?,
+        mSPriceGe: String?,
+        mSTenancyGe: String?,
+        mSTenancyLe: String?,
+        mSWorkTimeGe: String?,
+        mSWorkTimeLe: String?,
+        mISubscriberListener: ISubscriberListener<MoreLeaseData>) {
+        appsService?.getMecList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
+            mSGriceLe,mSPriceGe,
+            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe
+        )
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MoreLeaseData>(mISubscriberListener))
+
+    }
+
+    //出售
+    fun getSellList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
+                    sort: Int,
+                    mSGriceLe: String?,
+                    mSPriceGe: String?,
+                    mSTenancyGe: String?,
+                    mSTenancyLe: String?,
+                    mSWorkTimeGe: String?,
+                    mSWorkTimeLe: String?,
+                    mISubscriberListener: ISubscriberListener<MoreSellBean>) {
+
+        appsService?.getSellList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
+            mSGriceLe,mSPriceGe,
+            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<MoreSellBean>(mISubscriberListener))
+
+
+    }
+
+    fun getPartsLeaseList(type:Int,pageIndex:Int,pageSize:Int,cateId:String?,title:String?,sort: Int,mISubscriberListener: ISubscriberListener<PartsBean>) {
+        appsService?.getPartsList(type,pageIndex,pageSize,cateId,title,sort)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<PartsBean>(mISubscriberListener))
+
+
+    }
     fun refreshLease(
         token: String?,
         id: String,
@@ -1081,5 +1137,23 @@ class ModelImpl : BaseModel {
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
+    }
+
+    fun postSuggest(token: String?,reSuggest: ReSuggest, netSubscribe: NetSubscribe<NetData>) {
+        appsService?.postSuggest(token,reSuggest)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+
+    fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,typeWorkId:String?,sort:Int,jobTitle:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
+
+        appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,typeWorkId,sort,jobTitle)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<RecruitBean>(mISubscriberListener))
+
+
     }
 }

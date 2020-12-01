@@ -8,22 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.activity.EcModel
 import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
-import com.example.mechanicalapp.ui.activity.PartsModel
 import com.example.mechanicalapp.ui.adapter.MorePartsAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MorePartsLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
-import java.lang.reflect.Type
 
 class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,MorePartsLeaseView<NetData> {
@@ -91,9 +86,19 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
     }
 
     override fun onItemClick(view: View, position: Int) {
-        var bundle =Bundle()
-        bundle.putString(Configs.MEC_ID, mList[position].id)
-        jumpActivity(bundle,PartsLeaseDetailsActivity::class.java)
+
+        when(view?.id){
+            R.id.tv_screen->{
+                (mPresenter as MorePartsPresenter).setSort(position)
+                PopUtils.dismissPop()
+            }
+            R.id.item_root->{
+                var bundle =Bundle()
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle,PartsLeaseDetailsActivity::class.java)
+            }
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

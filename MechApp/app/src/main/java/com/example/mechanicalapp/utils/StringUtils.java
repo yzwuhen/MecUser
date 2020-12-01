@@ -5,6 +5,8 @@ import android.content.res.AssetManager;
 import android.text.TextUtils;
 
 import com.example.mechanicalapp.App;
+import com.example.mechanicalapp.config.Configs;
+import com.example.mechanicalapp.ui.activity.SearchGoodsResult;
 import com.example.mechanicalapp.ui.data.NetData;
 import com.example.mechanicalapp.ui.mvp.NetSubscribe;
 
@@ -69,68 +71,41 @@ public class StringUtils {
                 AndroidSchedulers.mainThread()
         ).subscribe(netSubscribe);
     }
+    //0 机械出租 1 机械求租 2 机械出售 3 机械求购  4配件出租 5 配件求租 6维修厂 7搜索我的设备 8 搜索维修订单 9 工程师 10home搜索  11 搜索商品
+    //12 求职 13 招聘
+   public static String getHawkKey(int type){
+        switch (type){
+            case 0:
+                return Configs.HISTORY_MEC_LEASE;
+            case 1:
+                return Configs.HISTORY_MEC_ASK;
+            case 2:
+                return Configs.HISTORY_MEC_SELL;
+            case 3:
+                return Configs.HISTORY_MEC_BUY;
+            case 4:
+                return Configs.HISTORY_PARTS_LEASE;
+            case 5:
+                return Configs.HISTORY_PARTS_ASK;
+            case 6:
+                return Configs.HISTORY_FACTORY;
+            case 7:
+                return Configs.HISTORY_MY_MEC;
+            case 8:
+                return Configs.HISTORY_REPAIR;
+            case 9:
+                return Configs.HISTORY_WORKER;
+            case 10:
+                return Configs.HISTORY_HOME;
+            case 11:
+                return Configs.HISTORY_GOODS;
+            case 12:
+                return Configs.HISTORY_RECRUIT;
+            case 13:
+                return Configs.HISTORY_JOB_WANT;
 
-    public static double getNum(double num){
+        }
+       return Configs.HISTORY_MEC_LEASE;
+   }
 
-        if (num==0){
-            return 0;
-        }
-        if (num>0&&num<=0.5){
-            return 0.5;
-        }
-        if (num>0.5&&num<=1){
-            return 1;
-        }
-        if (num>1&&num<=1.5){
-            return 1.5;
-        }
-        if (num>1.5&&num<=2){
-            return 2;
-        }
-        if (num>2&&num<=2.5){
-            return 2.5;
-        }
-        if (num>2.5&&num<=3){
-            return 3;
-        }if (num>3&&num<=3.5){
-            return 3.5;
-        }if (num>3.5&&num<=4){
-            return 4;
-        }if (num>4&&num<=4.5){
-            return 4.5;
-        }
-        if (num>4.5&&num<=5){
-            return 5;
-        }
-        if (num>5&&num<=5.5){
-            return 5.5;
-        }
-        if (num>5.5&&num<=6){
-            return 6;
-        }
-        if (num>6&&num<=6.5){
-            return 6.5;
-        }
-        if (num>6.5&&num<=7){
-            return 7;
-        }
-        if (num>7&&num<=7.5){
-            return 7.5;
-        }
-        if (num>7.5&&num<=8){
-            return 8;
-        }
-        if (num>8&&num<=8.5){
-            return 8.5;
-        }
-
-        if (num>8.5&&num<=9){
-            return 9;
-        }
-        if (num>9&&num<=9.5){
-            return 9.5;
-        }
-
-        return 10;
-    }
 }

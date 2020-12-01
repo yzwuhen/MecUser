@@ -22,6 +22,23 @@ class MecBuyPresenter(
     private var cateId: String? = null
     private var modelId: String? = null
     private var title: String? = null
+
+    private var mSGriceLe :String ?=null
+    private var mSPriceGe:String ?=null
+
+    private var mSTenancyGe:String ?=null
+    private var mSTenancyLe:String ?=null
+
+    private var mSWorkTimeGe:String ?=null
+    private var mSWorkTimeLe:String ?=null
+
+    private var sort=0
+
+    private var lon=0.0
+    private var lat=0.0
+
+    private var type=1
+
     init {
         baseModel = MecBuyModelImpl()
     }
@@ -31,8 +48,8 @@ class MecBuyPresenter(
     }
 
     //type 1 是出售 2 是求购
-    fun getBuyList(type:Int) {
-
+    fun getBuyList(types:Int) {
+        type =types
         baseModel?.getMecBuyList(type,
             page,
             pageSize,
@@ -40,6 +57,13 @@ class MecBuyPresenter(
             cateId,
             modelId,
             title,
+            sort,
+            mSGriceLe,
+            mSPriceGe,
+            mSTenancyGe,
+            mSTenancyLe,
+            mSWorkTimeGe,
+            mSWorkTimeLe,
             object : ISubscriberListener<MoreBusinessData> {
                 override fun onNext(t: MoreBusinessData?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -87,6 +111,29 @@ class MecBuyPresenter(
         }
         resetPage()
     }
+
+
+    fun setPriceQJ(startPrice:String?,endPrice:String?){
+        mSGriceLe =endPrice
+        mSPriceGe =startPrice
+        resetPage()
+        getBuyList(type)
+    }
+
+    fun setJL(startJL:String?,endJL:String?){
+        mSTenancyLe =endJL
+        mSTenancyGe =startJL
+        resetPage()
+        getBuyList(type)
+    }
+    fun setWorkTime(startWork:String?,endWork:String?){
+        mSWorkTimeLe =endWork
+        mSWorkTimeGe =startWork
+        resetPage()
+        getBuyList(type)
+    }
+
+
     override fun onDestroy() {
     }
 }

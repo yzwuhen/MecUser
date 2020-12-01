@@ -121,11 +121,11 @@ class MorePartsActivity : BaseCusActivity(), View.OnClickListener, ViewPager.OnP
     private fun showView(index: Int) {
         cus_page.currentItem = index
         if (index == 0) {
-            type = 5//===>跳转到搜索结果时匹配得布局
+            type = 4//===>跳转到搜索结果时匹配得布局
             tv_screen_left?.isSelected = true
             tv_screen_right?.isSelected = false
         } else {
-            type = 4//===>跳转到搜索结果时匹配得布局
+            type = 5//===>跳转到搜索结果时匹配得布局
 
             tv_screen_left?.isSelected = false
             tv_screen_right?.isSelected = true
@@ -143,7 +143,6 @@ class MorePartsActivity : BaseCusActivity(), View.OnClickListener, ViewPager.OnP
     }
 
     private fun jump() {
-
         var bundle = Bundle()
         bundle.putInt(Configs.HISTORY_TYPE, type)
         jumpActivity(bundle, HistorySearchActivity::class.java)

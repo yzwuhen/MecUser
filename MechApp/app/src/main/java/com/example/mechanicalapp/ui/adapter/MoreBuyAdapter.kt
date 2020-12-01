@@ -40,7 +40,7 @@ class MoreBuyAdapter  (var mContext: Context, var mList:MutableList<MecSellData>
 
     class MoreBuyVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.item_root,adapterPosition) })
         }
     }
 }

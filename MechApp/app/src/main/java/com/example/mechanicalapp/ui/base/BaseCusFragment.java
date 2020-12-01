@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -29,7 +30,7 @@ public abstract class BaseCusFragment extends Fragment {
     public BasePresenter mPresenter;
 
     protected View mLoadingView;
-
+    private View mEmptyView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,6 +79,11 @@ public abstract class BaseCusFragment extends Fragment {
         startActivityForResult(intent, result);
     }
 
+    public void openCall(String phone){
+        Intent intent =new Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone"));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+    }
 
     /**
      * 跳转到其他界面返回
@@ -129,6 +135,21 @@ public abstract class BaseCusFragment extends Fragment {
         }
     }
 
+    public void showEmptyView(){
+        if (mEmptyView == null) {
+            mEmptyView = View.inflate(mContext, R.layout.empty_view, null);
+        }
+        if (mEmptyView.getParent() == null) {
+            mContanier.addView(mEmptyView);
+        }
+    }
+    public void hideEmptyView(){
+        if (mEmptyView != null) {
+            if (mEmptyView.getParent() != null) {
+                mContanier.removeView(mEmptyView);
+            }
+        }
+    }
 
 
     /**

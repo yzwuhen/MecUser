@@ -10,6 +10,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
+import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
 import com.example.mechanicalapp.ui.activity.PartsModel
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
@@ -20,6 +21,7 @@ import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MorePartsLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
+import kotlinx.android.synthetic.main.item_more_parts_ask.view.*
 
 /**
  * 求组 配件
@@ -92,9 +94,23 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
     }
 
     override fun onItemClick(view: View, position: Int) {
-        var bundle = Bundle()
-        bundle.putString(Configs.MEC_ID, mList[position].id)
-        jumpActivity(bundle,PartsAskDetailsActivity::class.java)
+
+        when(view?.id){
+            R.id.tv_screen->{
+                (mPresenter as MorePartsPresenter).setSort(position)
+                PopUtils.dismissPop()
+            }
+            R.id.item_root->{
+
+                var bundle = Bundle()
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle,PartsAskDetailsActivity::class.java)
+            }
+            R.id.iv_phone->{
+                openCall(mList[position].contactPhone)
+            }
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

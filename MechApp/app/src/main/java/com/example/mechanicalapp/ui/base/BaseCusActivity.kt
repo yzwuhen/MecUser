@@ -25,6 +25,7 @@ abstract class BaseCusActivity : AppCompatActivity() {
     )
 
     private var mLoadingView: View? = null
+    private var mEmptyView: View? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_base)
@@ -148,6 +149,21 @@ abstract class BaseCusActivity : AppCompatActivity() {
         }
         if (mLoadingView?.parent == null) {
             fl_root.addView(mLoadingView)
+        }
+    }
+    open fun showEmptyView(){
+        if (mEmptyView == null) {
+            mEmptyView = View.inflate(this, R.layout.empty_view, null)
+        }
+        if (mEmptyView?.parent == null) {
+            fl_root.addView(mEmptyView)
+        }
+    }
+    open fun hideEmptyView(){
+        if (mEmptyView != null) {
+            if (mEmptyView?.parent != null) {
+                fl_root.removeView(mEmptyView)
+            }
         }
     }
 

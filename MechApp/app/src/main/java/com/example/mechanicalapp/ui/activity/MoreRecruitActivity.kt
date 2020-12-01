@@ -110,11 +110,11 @@ class MoreRecruitActivity :BaseCusActivity(), View.OnClickListener,
     private fun showView(index: Int) {
         cus_page.currentItem = index
         if (index == 0) {
-            type = 1;
+            type = 12
             tv_screen_left?.isSelected = true
             tv_screen_right?.isSelected = false
         } else {
-            type = 2;
+            type = 13
             tv_screen_left?.isSelected = false
             tv_screen_right?.isSelected = true
         }

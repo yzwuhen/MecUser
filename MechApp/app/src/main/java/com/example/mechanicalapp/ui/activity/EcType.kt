@@ -91,7 +91,7 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener, MecTy
         }
     }
 
-    private fun callback(callbackStr: String,id:String) {
+    private fun callback(callbackStr: String,id:String?) {
         var intent  =Intent()
         var bundle =Bundle()
         bundle.putString(Configs.SCREEN_RESULT_Extra,callbackStr)
@@ -104,7 +104,7 @@ class EcType:BaseCusActivity(), OnItemClickListener ,View.OnClickListener, MecTy
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.iv_back->finish()
-            R.id.tv_unlimited->callback("不限","0")
+            R.id.tv_unlimited->callback("不限",null)
         }
 
     }

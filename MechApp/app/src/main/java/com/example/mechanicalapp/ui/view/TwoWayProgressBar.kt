@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.view
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.example.mechanicalapp.R
@@ -147,9 +148,7 @@ class TwoWayProgressBar(
 
             for (index in mlistText?.indices!!) {
                 //文本在进度条下方 不考虑 text的基线等问题
-                if (textW == 0f) {
-                    textW = textPaint?.measureText(mlistText[index])!!
-                }
+                textW = textPaint?.measureText(mlistText[index])!!
                 //这里第一个要减去描边得宽度 否则对不上
                 //检查发现 不对 不是描边的原因= =
                 if (index == 0) {
@@ -162,7 +161,7 @@ class TwoWayProgressBar(
                         )
                     }
                 }
-                else if (index ==mlistText.size){
+                else if (index ==mlistText.size-1){
                     textPaint?.let {
                         canvas?.drawText(mlistText[index],width-textW,textY,
                             it
@@ -171,19 +170,10 @@ class TwoWayProgressBar(
                 }
                 else {
                     textPaint?.let {
-                        canvas?.drawText(mlistText[index],bitMapSize/2*1f+textX*index-textW/2,textY,
+                        canvas?.drawText(mlistText[index],bitMapSize/2*1f+textX*index,textY,
                             it
                         )
                     }
-
-//                    textPaint?.let {
-//                        canvas?.drawText(
-//                            mlistText[index],
-//                            bitMapSize / 2 + textX * index + textW * index,
-//                            textY,
-//                            it
-//                        )
-//                    }
                 }
 
             }
@@ -202,10 +192,12 @@ class TwoWayProgressBar(
         paint1?.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_OVER)
         paint1?.let { canvas?.drawBitmap(bitMapleft!!, rectBitmap, rectRight, it) }
 
-        mProgressListener?.progress(
-            ((width - bitMapSize) - rectLeft?.left) / ((width - bitMapSize).toDouble()),
-            ((width - bitMapSize) - rectRight?.left) / ((width - bitMapSize).toDouble()),this
-        )
+        if (mProgressListener!=null){
+            mProgressListener?.progress(
+                ((width - bitMapSize) - rectLeft?.left) / ((width - bitMapSize).toDouble()),
+                ((width - bitMapSize) - rectRight?.left) / ((width - bitMapSize).toDouble()),false,this
+            )
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -221,6 +213,12 @@ class TwoWayProgressBar(
     private fun up(x: Float) {
         moveLeft = false
         moveRight = false
+        if (mProgressListener!=null){
+            mProgressListener?.progress(
+                ((width - bitMapSize) - rectLeft?.left) / ((width - bitMapSize).toDouble()),
+                ((width - bitMapSize) - rectRight?.left) / ((width - bitMapSize).toDouble()),true,this
+            )
+        }
     }
 
     private fun moveTo(x: Float) {

@@ -48,6 +48,7 @@ class MecLeaseListPresenter(
     }
 
     fun getLeaseList(types:Int) {
+        baseView.showLoading()
         type =types
         baseModel?.getLeaseList(type,
             page,
@@ -79,17 +80,19 @@ class MecLeaseListPresenter(
                     page++
                 }
                 override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
                     baseView?.err()
                 }
 
                 override fun onCompleted() {
+                    baseView.hiedLoading()
                 }
             })
     }
 
     //求租
     fun getRentList(type:Int) {
-
+        baseView.showLoading()
         baseModel?.getLeaseList(type,
             page,
             pageSize,
@@ -115,10 +118,12 @@ class MecLeaseListPresenter(
 
                 }
                 override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
                     baseView?.err()
                 }
 
                 override fun onCompleted() {
+                    baseView.hiedLoading()
                 }
             })
     }
@@ -132,6 +137,8 @@ class MecLeaseListPresenter(
     }
     fun setTitle(s: String?) {
         this.title =s
+        resetPage()
+        getLeaseList(type)
     }
     fun setBrandId(id:String?){
         if (id==""){
@@ -141,6 +148,13 @@ class MecLeaseListPresenter(
         }
         resetPage()
     }
+    fun setSort(int: Int){
+
+        sort =int
+        resetPage()
+        getLeaseList(type)
+    }
+
     fun setCateId(id:String?){
         if (id==""){
             this.cateId=null
@@ -157,20 +171,20 @@ class MecLeaseListPresenter(
         }
         resetPage()
     }
-    fun setPriceQJ(startPrice:Double?,endPrice:Double){
-        mSGriceLe =endPrice.toString()
-        mSPriceGe =startPrice.toString()
+    fun setPriceQJ(startPrice:String?,endPrice:String?){
+        mSGriceLe =endPrice
+        mSPriceGe =startPrice
         resetPage()
         getLeaseList(type)
     }
 
-    fun setJL(startJL:String?,endJL:String){
+    fun setJL(startJL:String?,endJL:String?){
         mSTenancyLe =endJL
         mSTenancyGe =startJL
         resetPage()
         getLeaseList(type)
     }
-    fun setWorkTime(startWork:String?,endWork:String){
+    fun setWorkTime(startWork:String?,endWork:String?){
         mSWorkTimeLe =endWork
         mSWorkTimeGe =startWork
         resetPage()

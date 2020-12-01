@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bigkoo.pickerview.builder.TimePickerBuilder
@@ -71,9 +72,8 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
     override fun initView() {
         super.initView()
         mPicAdapter = PicAdapter(this, mPicList, this)
-        var mLinearLayoutManager = LinearLayoutManager(this)
-        mLinearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        ry_pic.layoutManager = mLinearLayoutManager
+
+        ry_pic.layoutManager = GridLayoutManager(this,3)
         ry_pic.adapter = mPicAdapter
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
@@ -313,8 +313,6 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
                     mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
-//                    mPicList?.add(result[0]?.realPath.toString())
-//                    mPicAdapter?.notifyDataSetChanged()
 
                 }
 

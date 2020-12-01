@@ -70,7 +70,7 @@ class EcModel :BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecA
     override fun onItemClick(view: View, position: Int) {
         callback(mList[position].modelName,mList[position].id)
     }
-    private fun callback(extra: String,id:String) {
+    private fun callback(extra: String,id:String?) {
 
         var intent  = Intent()
         var bundle = Bundle()
@@ -84,7 +84,7 @@ class EcModel :BaseCusActivity(), OnItemClickListener ,View.OnClickListener,MecA
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.iv_back->finish()
-            R.id.tv_unlimited->callback("不限","0")
+            R.id.tv_unlimited->callback("不限",null)
         }
 
     }

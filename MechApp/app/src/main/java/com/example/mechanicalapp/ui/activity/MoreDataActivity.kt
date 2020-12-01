@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -36,6 +37,7 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
     private var imageAdapter: ImageAdapter? = null
 
     private var type: Int = 0
+    private var position=0
     override fun getLayoutId(): Int {
 
         return R.layout.activity_more_data
@@ -100,8 +102,8 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable = true
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable = true
+        spring_list?.onFinishFreshAndLoad()
     }
     private fun refreshFregment() {
         if (type==1){
@@ -133,6 +135,7 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
     }
 
     fun showView(index: Int) {
+        position =index
         cus_page.currentItem = index
         if (index == 0) {
             tv_screen_left?.isSelected = true
@@ -149,10 +152,21 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
             R.id.tv_screen_left -> showView(0)
             R.id.tv_screen_right -> showView(1)
             R.id.iv_back -> finish()
-            R.id.tv_search -> jumpActivity(null, HistorySearchActivity::class.java)
+            R.id.tv_search ->jumSearch()
             R.id.tv_map -> jumpActivity(null, MapActivity::class.java)
 
         }
+    }
+
+    private fun jumSearch() {
+        var bundle =Bundle()
+        if (type==1){
+            //刚好 0是机械出租 1是机械求租
+            bundle.putInt(Configs.HISTORY_TYPE,position)
+        }else{
+            bundle.putInt(Configs.HISTORY_TYPE,position+2)
+        }
+        jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 
     override fun onPageScrollStateChanged(state: Int) {

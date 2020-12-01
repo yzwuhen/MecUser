@@ -105,9 +105,9 @@ class SearchCityActivity :BaseActivity<NetData>() , OnItemClickListener,View.OnC
         if (view?.id==R.id.iv_back){
             finish()
         }
-        else if (view?.id == R.id.ly_search){
-            jumpActivity(null,HistorySearchActivity::class.java)
-        }
+//        else if (view?.id == R.id.ly_search){
+//            jumpActivity(null,HistorySearchActivity::class.java)
+//        }
 
     }
 

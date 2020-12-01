@@ -21,6 +21,8 @@ class MorePartsPresenter(
     private var cateId: String? = null
     private var title: String? = null
 
+    private var type= 1
+    private var sort=0
     init {
         baseModel = MecLeaseModelImp()
     }
@@ -29,13 +31,14 @@ class MorePartsPresenter(
 
     }
 
-    fun getPartsLeaseList(type: Int) {
-
+    fun getPartsLeaseList(types: Int) {
+        type =types
         baseModel?.getPartsLeaseList(type,
             page,
             pageSize,
             cateId,
             title,
+            sort,
             object : ISubscriberListener<PartsBean> {
                 override fun onNext(t: PartsBean?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -77,5 +80,11 @@ class MorePartsPresenter(
     }
 
     override fun onDestroy() {
+    }
+
+    fun setSort(position: Int) {
+        sort =position
+        resetPage()
+        getPartsLeaseList(type)
     }
 }

@@ -62,8 +62,8 @@ class MecCollectLeaseFragment(var type: Int) : BaseCusFragment(), OnItemClickLis
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable = true
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable = true
+        spring_list?.onFinishFreshAndLoad()
     }
 
 

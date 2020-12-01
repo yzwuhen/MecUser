@@ -6,20 +6,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.activity.AskDetailsActivity
 import com.example.mechanicalapp.ui.activity.CreateRepairActivity
-import com.example.mechanicalapp.ui.adapter.MecFactoryAdapter
-import com.example.mechanicalapp.ui.adapter.RecruitAdapter
 import com.example.mechanicalapp.ui.adapter.SearchFactoryAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.FactoryData
+import com.example.mechanicalapp.ui.data.MoreFactoryBean
+import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
 
-class SearchFactoryFragment  : BaseCusFragment() , OnItemClickListener {
+class SearchFactoryFragment (var title:String?) : BaseCusFragment() , OnItemClickListener ,
+    NetDataView<NetData> {
 
 
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<FactoryData> = ArrayList<FactoryData>()
     private var mAdapter: SearchFactoryAdapter? = null
 
     override fun getLayoutId(): Int {
@@ -28,10 +31,7 @@ class SearchFactoryFragment  : BaseCusFragment() , OnItemClickListener {
 
     override fun initView() {
         super.initView()
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+
 
         mAdapter = SearchFactoryAdapter(mContext, mList,  this)
 
@@ -45,15 +45,17 @@ class SearchFactoryFragment  : BaseCusFragment() , OnItemClickListener {
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
                 spring_list.isEnable = false
-                //  initData()
-                closeRefreshView()
+                (mPresenter as ResultPresenter).resetPage()
+                (mPresenter as ResultPresenter).getFactoryList()
             }
 
             override fun onLoadmore() {
-                //     closeRefreshView()
+                (mPresenter as ResultPresenter).getFactoryList()
             }
         })
-
+        mPresenter = ResultPresenter(this)
+        (mPresenter as ResultPresenter).setTitle(title)
+        (mPresenter as ResultPresenter).getFactoryList()
     }
 
     fun closeRefreshView() {
@@ -65,5 +67,45 @@ class SearchFactoryFragment  : BaseCusFragment() , OnItemClickListener {
         var bundle = Bundle()
         bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 0)
         jumpActivity(bundle, CreateRepairActivity::class.java)
+    }
+
+
+    override fun refreshUI(data: NetData?) {
+        if (data != null && data is MoreFactoryBean) {
+            if (data.result != null && data.result.records != null) {
+                mList.clear()
+                mList.addAll(data.result.records)
+                mAdapter?.notifyDataSetChanged()
+                tv_result_num.text="共为您找到${data.result.total}条搜索结果"
+                if (mList.size == 0) {
+                    showEmptyView()
+                } else {
+                    hideEmptyView()
+                }
+            }
+        }
+
+    }
+
+    override fun loadMore(data: NetData?) {
+        if (data != null && data is MoreFactoryBean) {
+            if (data.result != null && data.result.records != null) {
+                mList.addAll(data.result.records)
+                mAdapter?.notifyDataSetChanged()
+            }
+        }
+
+    }
+
+    override fun showLoading() {
+        showLoadView()
+    }
+
+    override fun hiedLoading() {
+        hideLoadingView()
+        closeRefreshView()
+    }
+
+    override fun err() {
     }
 }

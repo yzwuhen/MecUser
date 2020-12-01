@@ -101,7 +101,7 @@ class MyMecListActivity : BaseCusActivity(),OnItemClickListener ,View.OnClickLis
     private fun jump() {
 
         var bundle = Bundle()
-        bundle.putInt(Configs.HISTORY_TYPE,6)
+        bundle.putInt(Configs.HISTORY_TYPE,7)
         jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 

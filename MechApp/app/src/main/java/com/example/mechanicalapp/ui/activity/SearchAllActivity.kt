@@ -5,17 +5,21 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.fragment.search.*
 import kotlinx.android.synthetic.main.activity_search_all.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
+/**
+ * 结合五个列表 这里应该是首页跳转进来的
+ */
 class SearchAllActivity:BaseCusActivity(),View.OnClickListener,ViewPager.OnPageChangeListener{
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
     private var mTabPageAdapter: FragmentListPageAdapter?=null
     private var mTextViewList:MutableList<TextView>  =ArrayList<TextView>()
-
+    private var title = ""
     override fun getLayoutId(): Int {
 
         return R.layout.activity_search_all
@@ -29,13 +33,13 @@ class SearchAllActivity:BaseCusActivity(),View.OnClickListener,ViewPager.OnPageC
         mTextViewList.add(tv_parts)
         mTextViewList.add(tv_recruit)
         mTextViewList.add(tv_repair)
+        title = intent.getStringExtra(Configs.SEARCH_RESULT_TITLE).toString()
 
-
-        mFragmentList?.add(SearchMecLeaseFragment())
-        mFragmentList?.add(SearchMecDealFragment())
-        mFragmentList?.add(SearchPartsFragment())
-        mFragmentList?.add(SearchRecruitFragment())
-        mFragmentList?.add(SearchFactoryFragment())
+        mFragmentList?.add(SearchMecLeaseFragment(title))
+        mFragmentList?.add(SearchMecDealFragment(title))
+        mFragmentList?.add(SearchPartsFragment(title))
+        mFragmentList?.add(SearchRecruitFragment(title))
+        mFragmentList?.add(SearchFactoryFragment(title))
 
 
         mTabPageAdapter = FragmentListPageAdapter(this.supportFragmentManager, mFragmentList!!)

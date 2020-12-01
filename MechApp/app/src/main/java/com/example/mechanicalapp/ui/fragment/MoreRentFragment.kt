@@ -25,6 +25,7 @@ import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.ui.view.TwoWayProgressBar
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_more_data.*
+import kotlin.math.ceil
 
 class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,ProgressListener ,MecLeaseView<NetData>{
@@ -44,6 +45,9 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
     private var mProgress1: TwoWayProgressBar?=null
     private var mProgress2: TwoWayProgressBar?=null
     private var mProgress3: TwoWayProgressBar?=null
+    private var mTvProgress1: TextView? = null
+    private var mTvProgress2: TextView? = null
+    private var mTvProgress3: TextView? = null
 
     private var list1:MutableList<String> =ArrayList<String>()
     private var list2:MutableList<String> =ArrayList<String>()
@@ -60,9 +64,8 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
 
         mStringList?.add("智能排序")
         mStringList?.add("最新上架")
-        mStringList?.add("最新上架")
+        mStringList?.add("机龄最短")
         mStringList?.add("工作时长最短")
-
 
         ly_screen1.setOnClickListener(this)
         ly_screen2.setOnClickListener(this)
@@ -98,7 +101,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
             R.id.ly_screen1 ->jumpActivityForResult(
                 Configs.EC_TYPE_RESULT_CODE,
                 0,
-                EcModel::class.java
+                EcType::class.java
             )
             R.id.ly_screen2->jumpActivityForResult(
                 Configs.EC_BRAND_RESULT_CODE,
@@ -108,7 +111,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
             R.id.ly_screen3->jumpActivityForResult(
                 Configs.EC_MODEL_RESULT_CODE,
                 0,
-                EcType::class.java
+                EcModel::class.java
             )
             R.id.ly_screen4->showInput()
             R.id.ly_screen5->showDialogType()
@@ -125,7 +128,9 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
             mDialogTvRest = mDialogView?.findViewById(R.id.tv_reset)
             mDialogTvSure = mDialogView?.findViewById(R.id.tv_sure)
 
-
+            mTvProgress1 =mDialogView?.findViewById(R.id.tv_progress1)
+            mTvProgress2 =mDialogView?.findViewById(R.id.tv_progress2)
+            mTvProgress3 =mDialogView?.findViewById(R.id.tv_progress3)
             list1.add("￥0")
             list1.add("￥10")
             list1.add("￥20")
@@ -150,8 +155,8 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
             list3.add("0")
             list3.add("2000")
             list3.add("4000")
+            list3.add("6000")
             list3.add("8000")
-            list3.add("12000")
             list3.add("不限")
 
             mProgress1 = mDialogView?.findViewById(R.id.progress1)
@@ -183,14 +188,66 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
     }
 
     override fun onItemClick(view: View, position: Int) {
-        val bundle = Bundle()
-        bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE,0)
-        bundle.putString(Configs.MEC_ID, mList[position].id)
-        jumpActivity(bundle,AskDetailsActivity::class.java)
+
+        when(view?.id){
+            R.id.tv_screen->{
+                tv_screen4.text=mStringList[position]
+                (mPresenter as MecLeaseListPresenter).setSort(position)
+                PopUtils.dismissPop()
+            }
+            R.id.item_root->{
+                val bundle = Bundle()
+                bundle.putInt(Configs.MEC_ASK_DETAILS_TYPE,0)
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle,AskDetailsActivity::class.java)
+            }
+        }
     }
 
-    override fun progress(leftPos: Double, rightPos: Double,view: View) {
+    override fun progress(leftPos: Double, rightPos: Double,isUp:Boolean,view: View) {
+        when(view?.id){
+            R.id.progress1->{
+                if (rightPos==0.0){
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),null)
+                    }
+                    mTvProgress1?.text ="不限"
+                }else{
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),ceil((1-rightPos)*60).toString())
+                    }
+                    mTvProgress1?.text ="￥${ceil((1-rightPos)*60).toInt()}"
+                }
 
+            }
+            R.id.progress2->{
+
+                if (rightPos==0.0){
+                    mTvProgress2?.text ="不限"
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),null)
+                    }
+                }else{
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),ceil((1-rightPos)*10).toInt().toString())
+                    }
+                    mTvProgress2?.text ="${ceil((1-rightPos)*10).toInt()}年"
+                }
+            }
+            R.id.progress3->{
+                if (rightPos==0.0){
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),null)
+                    }
+                    mTvProgress3?.text="不限"
+                }else{
+                    if (isUp){
+                        (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),(ceil((1-rightPos)*5).toInt()*2000).toString())
+                    }
+                    mTvProgress3?.text ="${ceil((1-rightPos)*5).toInt()*2000}小时"
+                }
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

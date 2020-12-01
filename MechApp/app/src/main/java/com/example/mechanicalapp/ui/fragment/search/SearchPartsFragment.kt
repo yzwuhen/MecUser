@@ -9,14 +9,14 @@ import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import kotlinx.android.synthetic.main.fragment_mec_leasing.*
 
-class SearchPartsFragment : BaseCusFragment() , View.OnClickListener, ViewPager.OnPageChangeListener  {
+class SearchPartsFragment(var title:String?) : BaseCusFragment() , View.OnClickListener, ViewPager.OnPageChangeListener  {
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mTextViewList: MutableList<TextView> = ArrayList<TextView>()
 
     init {
-        mFragmentList?.add(SearchPartsLease())
-        mFragmentList?.add(SearchPartsAsk())
+        mFragmentList?.add(SearchPartsLease(title))
+        mFragmentList?.add(SearchPartsAsk(title))
     }
 
 

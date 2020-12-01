@@ -51,8 +51,8 @@ class MecLeaseModelImp: BaseModel {
     }
 
 
-    fun getPartsLeaseList(type:Int,pageIndex:Int,pageSize:Int,cateId:String?,title:String?,mISubscriberListener: ISubscriberListener<PartsBean>) {
-        appsService?.getPartsList(type,pageIndex,pageSize,cateId,title)
+    fun getPartsLeaseList(type:Int,pageIndex:Int,pageSize:Int,cateId:String?,title:String?,sort: Int,mISubscriberListener: ISubscriberListener<PartsBean>) {
+        appsService?.getPartsList(type,pageIndex,pageSize,cateId,title,sort)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<PartsBean>(mISubscriberListener))

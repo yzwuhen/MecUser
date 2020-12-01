@@ -253,7 +253,7 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
 
     private fun jump() {
         var bundle = Bundle()
-        bundle.putInt(Configs.HISTORY_TYPE, 6)
+        bundle.putInt(Configs.HISTORY_TYPE, 7)
         jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 

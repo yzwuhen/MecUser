@@ -13,7 +13,7 @@ class HistoryAdapter(var mList: MutableList<String>) : TagAdapter<String>(mList)
     override fun getView(parent: FlowLayout?, position: Int, t: String?): View {
         ly = View.inflate(parent!!.context,R.layout.item_search_tv,null)
         tv = ly?.findViewById(R.id.tv_history_tv)
-        tv?.text ="历史记录$t"
+        tv?.text ="$t"
         return (ly as View?)!!
     }
 }

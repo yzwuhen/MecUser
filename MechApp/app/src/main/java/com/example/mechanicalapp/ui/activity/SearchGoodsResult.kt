@@ -13,9 +13,11 @@ import com.example.mechanicalapp.ui.view.MyDecoration
 import kotlinx.android.synthetic.main.activity_search_result.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
+/**
+ * 搜索商品结果
+ */
 class SearchGoodsResult : BaseActivity<NetData>(), OnItemClickListener {
 
-    //tye== 0 出租出售 1 招牌  2 求职 3 商品（配件）
     private var mGoodsListAdapter: GoodsListAdapter? = null
     var mList: MutableList<GoodsData> = ArrayList<GoodsData>()
 
@@ -28,8 +30,6 @@ class SearchGoodsResult : BaseActivity<NetData>(), OnItemClickListener {
         super.initView()
 
         type = intent.getIntExtra(Configs.SEARCH_RESULT_TYPE, 0)
-
-
 
         recycler_list.layoutManager = GridLayoutManager(this, 2)
         mGoodsListAdapter = GoodsListAdapter(this, mList, this)

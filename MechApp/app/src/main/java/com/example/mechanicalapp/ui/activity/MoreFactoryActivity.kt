@@ -13,6 +13,7 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.ui.mvp.impl.FactoryPresenter
+import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
 import com.example.mechanicalapp.ui.mvp.v.FactoryView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
@@ -132,8 +133,9 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
     }
     private fun jumAct(){
         var bundle :Bundle = Bundle()
-        bundle.putInt(Configs.HISTORY_TYPE,10)
+        bundle.putInt(Configs.HISTORY_TYPE,6)
         jumpActivity(bundle, HistorySearchActivity::class.java)
+
     }
 
     private fun showPop() {
@@ -151,7 +153,11 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.tv_screen->tv_sort.text=mStringList[position]
+            R.id.tv_screen->{
+                tv_sort.text=mStringList[position]
+                (mPresenter as FactoryPresenter).setSort(position)
+                PopUtils.dismissPop()
+            }
             R.id.root_view->setSelect(position)
         }
     }

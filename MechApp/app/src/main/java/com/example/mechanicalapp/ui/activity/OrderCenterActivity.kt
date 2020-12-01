@@ -63,9 +63,9 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
 
         var bundle = Bundle()
         if (type==0){
-            bundle.putInt(Configs.HISTORY_TYPE,7)
-        }else{
             bundle.putInt(Configs.HISTORY_TYPE,8)
+        }else{
+            bundle.putInt(Configs.HISTORY_TYPE,9)
         }
 
         jumpActivity(bundle, HistorySearchActivity::class.java)

@@ -91,7 +91,7 @@ class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecA
 //        }
         when(view?.id){
             R.id.iv_back->finish()
-            R.id.tv_unlimited->callback("不限","0")
+            R.id.tv_unlimited->callback("不限",null)
         }
     }
 
@@ -102,7 +102,7 @@ class Brand : BaseCusActivity() , OnItemClickListener, View.OnClickListener,MecA
         }
     }
 
-    private fun callback(extra: String,id:String) {
+    private fun callback(extra: String,id:String?) {
 
         var intent  = Intent()
         var bundle = Bundle()

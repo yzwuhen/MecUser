@@ -85,7 +85,7 @@
         android:id="@+id/tv_rent_equipment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/dp_15"
         android:text="WD-180机锁杆旋挖钻机"
         android:textColor="#5C5C5C"
         android:textSize="15sp"

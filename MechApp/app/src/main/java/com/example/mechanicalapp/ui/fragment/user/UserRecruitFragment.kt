@@ -75,9 +75,9 @@ class UserRecruitFragment (private var user: String, var  type: Int) : BaseCusFr
         mLeaseList.clear()
         if (data!=null&&data.result!=null&&data.result.mecMarketRecruit!=null&&data.result.mecMarketRecruit.size>0){
             for (mec in data.result.mecMarketRecruit){
-//                if (mec.bussiessType==2){
+                if (mec.recruitType=="1"){
                     mLeaseList.add(mec)
-//                }
+                }
             }
         }
         mAdapter?.notifyDataSetChanged()

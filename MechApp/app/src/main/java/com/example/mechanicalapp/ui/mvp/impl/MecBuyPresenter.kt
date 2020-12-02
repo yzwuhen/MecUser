@@ -37,7 +37,7 @@ class MecBuyPresenter(
     private var lon=0.0
     private var lat=0.0
 
-    private var type=1
+    private var type:String?=null
 
     init {
         baseModel = MecBuyModelImpl()
@@ -48,7 +48,7 @@ class MecBuyPresenter(
     }
 
     //type 1 是出售 2 是求购
-    fun getBuyList(types:Int) {
+    fun getBuyList(types:String?) {
         type =types
         baseModel?.getMecBuyList(type,
             page,

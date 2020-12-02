@@ -50,6 +50,17 @@ public class FactoryData implements Serializable {
 
     private boolean isSelect;
 
+    private String gpsLat;
+    private String gpsLon;
+
+    public Double getGpsLon() {
+        return TextUtils.isEmpty(gpsLon)?0.0d:Double.valueOf(gpsLon);
+    }
+
+    public Double getGpsLat() {
+        return TextUtils.isEmpty(gpsLat)?0.0d:Double.valueOf(gpsLat);
+    }
+
     public boolean isSelect() {
         return isSelect;
     }

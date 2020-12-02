@@ -329,9 +329,9 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-//                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
-                                        mPicList?.add(result[0]?.realPath.toString())
-                    mPicAdapter?.notifyDataSetChanged()
+                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+//                                        mPicList?.add(result[0]?.realPath.toString())
+//                    mPicAdapter?.notifyDataSetChanged()
                 }
 
                 override fun onCancel() {

@@ -77,7 +77,7 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
         ly_screen5.setOnClickListener(this)
 
         mPresenter = SellPresenter(mContext, this)
-        (mPresenter as SellPresenter).getSellList(1)
+        (mPresenter as SellPresenter).getSellList("1")
     }
 
     override fun showLoading() {
@@ -288,7 +288,7 @@ class MoreDataSellFragment : BaseCusFragment(), OnItemClickListener, View.OnClic
 
     fun refresh() {
         (mPresenter as SellPresenter).resetPage()
-        (mPresenter as SellPresenter).getSellList(1)
+        (mPresenter as SellPresenter).getSellList("1")
     }
 
     override fun refreshUI(list: List<MecSellData>) {

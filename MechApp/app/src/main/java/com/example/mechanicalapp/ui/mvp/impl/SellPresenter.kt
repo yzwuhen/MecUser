@@ -39,7 +39,7 @@ class SellPresenter (
     private var lon=0.0
     private var lat=0.0
 
-    private var type=1
+    private var type:String?=null
 
     init {
         baseModel = MecBuyModelImpl()
@@ -49,7 +49,7 @@ class SellPresenter (
 
     }
 
-    fun getSellList(types:Int) {
+    fun getSellList(types:String?) {
         type =types
         baseModel?.getSellList(type,
             page,

@@ -48,11 +48,11 @@ class ResultMecLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
             override fun onRefresh() {
                 spring_list.isEnable = false
                 mPresenter?.resetPage()
-                mPresenter?.getLeaseList(1)
+                mPresenter?.getLeaseList("1")
             }
 
             override fun onLoadmore() {
-                mPresenter?.getLeaseList(1)
+                mPresenter?.getLeaseList("1")
             }
         })
 
@@ -69,7 +69,7 @@ class ResultMecLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setTitle(title)
-        mPresenter?.getLeaseList(1)
+        mPresenter?.getLeaseList("1")
     }
 
     override fun onClick(view: View?) {
@@ -91,7 +91,7 @@ class ResultMecLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
-        mPresenter?.getLeaseList(1)
+        mPresenter?.getLeaseList("1")
     }
 
     override fun onItemClick(view: View, position: Int) {

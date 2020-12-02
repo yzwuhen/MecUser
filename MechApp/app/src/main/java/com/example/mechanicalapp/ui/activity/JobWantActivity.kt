@@ -125,6 +125,11 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
                 Configs.WORK_TYPE_RESULT_CODE,
                 WorkType::class.java
             )
+            R.id.ly_address -> jumpActivityForResult(
+                Configs.ADDRESS_RESULT_CODE,
+                1,
+                AddressSelActivity::class.java
+            )
             R.id.ly_work_experience -> showExperience()
             R.id.ly_salary -> showSalary()
             R.id.ly_birth_day -> showTime()
@@ -321,10 +326,34 @@ class JobWantActivity : BaseCusActivity(), View.OnClickListener, OnItemClickList
                     data?.getStringExtra(Configs.SCREEN_RESULT_ID)!!
                 )
             }
+        }else if (requestCode == Configs.ADDRESS_RESULT_CODE) {
+            data?.getStringExtra(Configs.SCREEN_RESULT_Extra)?.let {
+                showAddress(
+                    it,
+                    data?.getStringExtra(Configs.SCREEN_RESULT_ID),
+                    data?.getStringExtra(Configs.CITY_NAME),
+                    data?.getDoubleExtra(Configs.CITY_LAT, 0.0),
+                    data?.getDoubleExtra(Configs.CITY_LOT, 0.0)
+                )
+            }
         }
 
         super.onActivityResult(requestCode, resultCode, data)
 
+    }
+    private fun showAddress(
+        address: String,
+        cityId: String?,
+        city: String?,
+        lat: Double,
+        lot: Double
+    ) {
+        tv_work_address.text = address
+        mReBean.city = city
+        mReBean.jobAddress = address
+        mReBean.gpsLat = lat.toString()
+        mReBean.gpsLon = lot.toString()
+        mReBean.gpsId =cityId
     }
 
     private fun showResult(it: String, stringExtra: String) {

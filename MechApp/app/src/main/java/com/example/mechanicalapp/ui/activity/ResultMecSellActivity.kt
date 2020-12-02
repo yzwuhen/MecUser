@@ -47,11 +47,11 @@ class ResultMecSellActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
             override fun onRefresh() {
                 spring_list.isEnable = false
                 mPresenter?.resetPage()
-                mPresenter?.getSellList(1)
+                mPresenter?.getSellList("1")
             }
 
             override fun onLoadmore() {
-                mPresenter?.getSellList(1)
+                mPresenter?.getSellList("1")
             }
         })
 
@@ -68,7 +68,7 @@ class ResultMecSellActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setTitle(title)
-        mPresenter?.getSellList(1)
+        mPresenter?.getSellList("1")
     }
 
     override fun onClick(view: View?) {

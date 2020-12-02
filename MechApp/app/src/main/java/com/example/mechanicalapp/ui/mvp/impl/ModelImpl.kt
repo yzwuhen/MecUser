@@ -259,7 +259,7 @@ class ModelImpl : BaseModel {
 
     //出租==求租
     fun getLeaseList(
-        type: Int,
+        type: String?,
         pageIndex: Int,
         pageSize: Int,
         brandId: String?,
@@ -273,10 +273,16 @@ class ModelImpl : BaseModel {
         mSTenancyLe: String?,
         mSWorkTimeGe: String?,
         mSWorkTimeLe: String?,
-        mISubscriberListener: ISubscriberListener<MoreLeaseData>) {
-        appsService?.getMecList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
-            mSGriceLe,mSPriceGe,
-            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe
+        isMap: String?,
+        lat: String?,
+        lon: String?,
+        mISubscriberListener: ISubscriberListener<MoreLeaseData>
+    ) {
+
+        appsService?.getMecList(
+            type, pageIndex, pageSize, brandId, cateId, modelId, title, sort,
+            mSGriceLe, mSPriceGe,
+            mSTenancyGe, mSTenancyLe, mSWorkTimeGe, mSWorkTimeLe, isMap, lat, lon
         )
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
@@ -285,19 +291,31 @@ class ModelImpl : BaseModel {
     }
 
     //出售
-    fun getSellList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
-                    sort: Int,
-                    mSGriceLe: String?,
-                    mSPriceGe: String?,
-                    mSTenancyGe: String?,
-                    mSTenancyLe: String?,
-                    mSWorkTimeGe: String?,
-                    mSWorkTimeLe: String?,
-                    mISubscriberListener: ISubscriberListener<MoreSellBean>) {
-
-        appsService?.getSellList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
-            mSGriceLe,mSPriceGe,
-            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe)
+    fun getSellList(
+        type: String?,
+        pageIndex: Int,
+        pageSize: Int,
+        brandId: String?,
+        cateId: String?,
+        modelId: String?,
+        title: String?,
+        sort: Int,
+        mSGriceLe: String?,
+        mSPriceGe: String?,
+        mSTenancyGe: String?,
+        mSTenancyLe: String?,
+        mSWorkTimeGe: String?,
+        mSWorkTimeLe: String?,
+        isMap: String?,
+        lat: String?,
+        lon: String?,
+        mISubscriberListener: ISubscriberListener<MoreSellBean>
+    ) {
+        appsService?.getSellList(
+            type, pageIndex, pageSize, brandId, cateId, modelId, title, sort,
+            mSGriceLe, mSPriceGe,
+            mSTenancyGe, mSTenancyLe, mSWorkTimeGe, mSWorkTimeLe, isMap, lat, lon
+        )
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreSellBean>(mISubscriberListener))
@@ -305,14 +323,26 @@ class ModelImpl : BaseModel {
 
     }
 
-    fun getPartsLeaseList(type:Int,pageIndex:Int,pageSize:Int,cateId:String?,title:String?,sort: Int,mISubscriberListener: ISubscriberListener<PartsBean>) {
-        appsService?.getPartsList(type,pageIndex,pageSize,cateId,title,sort)
+    fun getPartsLeaseList(
+        type: String?,
+        pageIndex: Int,
+        pageSize: Int,
+        cateId: String?,
+        title: String?,
+        sort: Int,
+        isMap: String?,
+        lat: String?,
+        lon: String?,
+        mISubscriberListener: ISubscriberListener<PartsBean>
+    ) {
+        appsService?.getPartsList(type, pageIndex, pageSize, cateId, title, sort, isMap, lat, lon)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<PartsBean>(mISubscriberListener))
 
 
     }
+
     fun refreshLease(
         token: String?,
         id: String,
@@ -768,8 +798,6 @@ class ModelImpl : BaseModel {
     }
 
 
-
-
     fun getComment(
         token: String?,
         id: String?,
@@ -1088,35 +1116,33 @@ class ModelImpl : BaseModel {
             )?.subscribe(netSubscribe)
     }
 
-    fun getUserInfo(token: String?,type: Int, user: String, netSubscribe: NetSubscribe<UserInfoBean>) {
-        appsService?.getUserInfo(token,user, type)
-            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-                AndroidSchedulers.mainThread()
-            )?.subscribe(netSubscribe)
-    }
-
-    fun getRecruitDetails(token: String?, id: String?, netSubscribe: NetSubscribe<RecruitDetailsBean>) {
-
-        appsService?.getRecruitDetails(token,id)
-            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-                AndroidSchedulers.mainThread()
-            )?.subscribe(netSubscribe)
-    }
-
-    fun getMapMecLease(
+    fun getUserInfo(
         token: String?,
-        lag: Double,
-        lot: Double,
         type: Int,
-        title:String?,
-        netSubscribe: NetSubscribe<NetData>
+        user: String,
+        netSubscribe: NetSubscribe<UserInfoBean>
+    ) {
+        appsService?.getUserInfo(token, user, type)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
+    fun getRecruitDetails(
+        token: String?,
+        id: String?,
+        netSubscribe: NetSubscribe<RecruitDetailsBean>
     ) {
 
-
+        appsService?.getRecruitDetails(token, id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
     }
 
+
     fun report(token: String?, reReport: ReReport, netSubscribe: NetSubscribe<NetData>) {
-        appsService?.report(token,reReport)
+        appsService?.report(token, reReport)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -1131,25 +1157,48 @@ class ModelImpl : BaseModel {
 
     }
 
-    fun editUser(token:String,userInfo: UserInfo?, netSubscribe: NetSubscribe<NetData>) {
+    fun editUser(token: String, userInfo: UserInfo?, netSubscribe: NetSubscribe<NetData>) {
 
-        appsService?.editUserInfo(token,userInfo)
+        appsService?.editUserInfo(token, userInfo)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
 
-    fun postSuggest(token: String?,reSuggest: ReSuggest, netSubscribe: NetSubscribe<NetData>) {
-        appsService?.postSuggest(token,reSuggest)
+    fun postSuggest(token: String?, reSuggest: ReSuggest, netSubscribe: NetSubscribe<NetData>) {
+        appsService?.postSuggest(token, reSuggest)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
 
 
-    fun getRecruitList(type:Int,pageIndex:Int,pageSize:Int,region:String?,typeWork:String?,typeWorkId:String?,sort:Int,jobTitle:String?,mISubscriberListener: ISubscriberListener<RecruitBean>) {
+    fun getRecruitList(
+        type: String?,
+        pageIndex: Int,
+        pageSize: Int,
+        region: String?,
+        typeWork: String?,
+        typeWorkId: String?,
+        sort: Int,
+        jobTitle: String?,
+        isMap: String?,
+        lat: String?,
+        lon: String?,
+        mISubscriberListener: ISubscriberListener<RecruitBean>
+    ) {
 
-        appsService?.getRecruitList(pageIndex,pageSize,type.toString(),region,typeWork,typeWorkId,sort,jobTitle)
+        appsService?.getRecruitList(
+            pageIndex,
+            pageSize,
+            type.toString(),
+            region,
+            typeWork,
+            typeWorkId,
+            sort,
+            jobTitle,
+            isMap, lat, lon
+        )
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<RecruitBean>(mISubscriberListener))

@@ -36,6 +36,12 @@ class MoreSellAdapter  (var mContext: Context, var mList:MutableList<MecSellData
             holder.itemView.tv_label.visibility= View.GONE
         }
 
+        if (DateUtils.getUserDate("yyyy-mm-dd")==mList[position].createTime){
+            holder.itemView.tv_new_pic.visibility =View.VISIBLE
+        }else{
+            holder.itemView.tv_new_pic.visibility =View.INVISIBLE
+        }
+
         if (mList[position].isPerson == "1"){
             holder.itemView.iv_sr.visibility= View.VISIBLE
         }else{

@@ -53,7 +53,7 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
         ly_sort.setOnClickListener(this)
         ly_ec_type.setOnClickListener(this)
         mPresenter = MorePartsPresenter(mContext,this)
-        (mPresenter as MorePartsPresenter).getPartsLeaseList(2)
+        (mPresenter as MorePartsPresenter).getPartsLeaseList("2")
     }
 
     override fun showLoading() {
@@ -134,7 +134,7 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
         }
     }
     private fun refresh(){
-        (mPresenter as MorePartsPresenter).getPartsLeaseList(1)
+        (mPresenter as MorePartsPresenter).getPartsLeaseList("2")
     }
     override fun refreshUI(list: List<PartsData>) {
         mList.clear()
@@ -152,6 +152,6 @@ class MorePartsAskingFragment  : BaseCusFragment(), OnItemClickListener, View.On
 
     fun reFresh() {
         (mPresenter as MorePartsPresenter).resetPage()
-        (mPresenter as MorePartsPresenter).getPartsLeaseList(2)
+        (mPresenter as MorePartsPresenter).getPartsLeaseList("2")
     }
 }

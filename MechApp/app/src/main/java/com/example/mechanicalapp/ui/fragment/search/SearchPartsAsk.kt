@@ -45,17 +45,17 @@ class SearchPartsAsk (var title:String?)  : BaseCusFragment() , OnItemClickListe
             override fun onRefresh() {
                 spring_list.isEnable =false
                 (mPresenter as ResultPresenter).resetPage()
-                (mPresenter as ResultPresenter).getPartsLeaseList(2)
+                (mPresenter as ResultPresenter).getPartsLeaseList("2")
             }
 
             override fun onLoadmore() {
-                (mPresenter as ResultPresenter).getPartsLeaseList(2)
+                (mPresenter as ResultPresenter).getPartsLeaseList("2")
             }
         })
 
         mPresenter = ResultPresenter(this)
         (mPresenter as ResultPresenter).setTitle(title)
-        (mPresenter as ResultPresenter).getPartsLeaseList(2)
+        (mPresenter as ResultPresenter).getPartsLeaseList("2")
 
     }
 

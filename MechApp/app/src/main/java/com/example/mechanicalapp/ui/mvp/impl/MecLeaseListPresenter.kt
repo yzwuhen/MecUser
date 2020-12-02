@@ -15,7 +15,7 @@ class MecLeaseListPresenter(
     BasePresenter {
 
 
-    private var baseModel: MecLeaseModelImp? = null
+    private var baseModel: ModelImpl? = null
     private var page: Int = 1
     private var pageSize: Int = 30
     private var brandId: String? = null
@@ -34,20 +34,18 @@ class MecLeaseListPresenter(
 
     private var sort=0
 
-    private var lon=0.0
-    private var lat=0.0
 
-    private var type=1
+    private var type :String?=null
 
     init {
-        baseModel = MecLeaseModelImp()
+        baseModel = ModelImpl()
     }
 
     override fun request() {
 
     }
 
-    fun getLeaseList(types:Int) {
+    fun getLeaseList(types:String?) {
         baseView.showLoading()
         type =types
         baseModel?.getLeaseList(type,
@@ -64,6 +62,7 @@ class MecLeaseListPresenter(
             mSTenancyLe,
             mSWorkTimeGe,
             mSWorkTimeLe,
+            null,null,null,
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
                     if (t?.code == 200 && t?.result != null) {
@@ -91,7 +90,7 @@ class MecLeaseListPresenter(
     }
 
     //求租
-    fun getRentList(type:Int) {
+    fun getRentList(type:String) {
         baseView.showLoading()
         baseModel?.getLeaseList(type,
             page,
@@ -107,6 +106,7 @@ class MecLeaseListPresenter(
             mSTenancyLe,
             mSWorkTimeGe,
             mSWorkTimeLe,
+            null,null,null,
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
                     if (t?.code == 200 && t?.result != null) {

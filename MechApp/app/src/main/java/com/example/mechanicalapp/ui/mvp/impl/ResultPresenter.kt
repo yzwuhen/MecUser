@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import com.amap.api.location.DPoint
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
@@ -27,13 +28,13 @@ class ResultPresenter (
 
     private var mSWorkTimeGe:String ?=null
     private var mSWorkTimeLe:String ?=null
-
+    private var isMap:String ?=null
     private var sort=0
 
-    private var lon=0.0
-    private var lat=0.0
+    private var lon :String?=null
+    private var lat:String?=null
 
-    private var type=1
+    private var type :String?=null
 
     init {
         baseModel = ModelImpl()
@@ -43,7 +44,7 @@ class ResultPresenter (
 
     }
 
-    fun getLeaseList(types:Int) {
+    fun getLeaseList(types:String?) {
         baseView.showLoading()
         type =types
         baseModel?.getLeaseList(type,
@@ -60,22 +61,25 @@ class ResultPresenter (
             mSTenancyLe,
             mSWorkTimeGe,
             mSWorkTimeLe,
+            isMap,
+            lat,
+            lon,
             object : ISubscriberListener<MoreLeaseData> {
                 override fun onNext(t: MoreLeaseData?) {
-                    if (t?.code == 200 && t?.result != null) {
+                    if (t?.code == 200 && t.result != null) {
                         if (page==1){
                             baseView.refreshUI(t)
                         }else{
                             baseView.loadMore(t)
                         }
                     } else {
-                        baseView?.err()
+                        baseView.err()
                     }
                     page++
                 }
                 override fun onError(e: Throwable?) {
                     baseView.hiedLoading()
-                    baseView?.err()
+                    baseView.err()
                 }
 
                 override fun onCompleted() {
@@ -85,7 +89,7 @@ class ResultPresenter (
     }
 
 
-    fun getSellList(types:Int) {
+    fun getSellList(types:String?) {
         type =types
         baseView.showLoading()
         baseModel?.getSellList(type,
@@ -102,27 +106,30 @@ class ResultPresenter (
             mSTenancyLe,
             mSWorkTimeGe,
             mSWorkTimeLe,
+            isMap,
+            lat,
+            lon,
             object : ISubscriberListener<MoreSellBean> {
                 override fun onNext(t: MoreSellBean?) {
-                    if (t?.code == 200 && t?.result != null) {
-                        if (t?.code == 200 && t?.result != null) {
+                    if (t?.code == 200 && t.result != null) {
+                        if (t?.code == 200 && t.result != null) {
                             if (page==1){
                                 baseView.refreshUI(t)
                             }else{
                                 baseView.loadMore(t)
                             }
                         } else {
-                            baseView?.err()
+                            baseView.err()
                         }
                         page++
                     } else {
-                        baseView?.err()
+                        baseView.err()
                     }
 
                 }
 
                 override fun onError(e: Throwable?) {
-                    baseView?.err()
+                    baseView.err()
                     baseView.hiedLoading()
                 }
 
@@ -133,7 +140,7 @@ class ResultPresenter (
     }
 
 
-    fun getPartsLeaseList(types: Int) {
+    fun getPartsLeaseList(types: String?) {
         type =types
         baseModel?.getPartsLeaseList(type,
             page,
@@ -141,27 +148,30 @@ class ResultPresenter (
             cateId,
             title,
             sort,
+            isMap,
+            lat,
+            lon,
             object : ISubscriberListener<PartsBean> {
                 override fun onNext(t: PartsBean?) {
-                    if (t?.code == 200 && t?.result != null) {
+                    if (t?.code == 200 && t.result != null) {
                         if (page==1){
                             baseView.refreshUI(t)
                         }else{
                             baseView.loadMore(t)
                         }
                     } else {
-                        baseView?.err()
+                        baseView.err()
                     }
                     page++
                 }
 
                 override fun onError(e: Throwable?) {
-                    baseView?.err()
-                    baseView?.hiedLoading()
+                    baseView.err()
+                    baseView.hiedLoading()
                 }
 
                 override fun onCompleted() {
-                    baseView?.hiedLoading()
+                    baseView.hiedLoading()
                 }
             })
     }
@@ -178,7 +188,7 @@ class ResultPresenter (
             title,
             object : ISubscriberListener<MoreFactoryBean> {
                 override fun onNext(t: MoreFactoryBean?) {
-                    if (t?.code == 200 && t?.result != null) {
+                    if (t?.code == 200 && t.result != null) {
                         if (page==1){
                             baseView.refreshUI(t)
                         }else{
@@ -186,13 +196,13 @@ class ResultPresenter (
                         }
                         page++
                     } else {
-                        baseView?.err()
+                        baseView.err()
                     }
 
                 }
 
                 override fun onError(e: Throwable?) {
-                    baseView?.err()
+                    baseView.err()
                     baseView.hiedLoading()
                 }
 
@@ -203,7 +213,7 @@ class ResultPresenter (
     }
 
 
-    fun getRecruitList(type:Int) {
+    fun getRecruitList(type:String?) {
 
         baseModel?.getRecruitList(type,
             page,
@@ -213,9 +223,12 @@ class ResultPresenter (
             null,
             sort,
             title,
+            isMap,
+            lat,
+            lon,
             object : ISubscriberListener<RecruitBean> {
                 override fun onNext(t: RecruitBean?) {
-                    if (t?.code == 200 && t?.result != null) {
+                    if (t?.code == 200 && t.result != null) {
                         if (page==1){
                             baseView.refreshUI(t)
                         }else{
@@ -223,13 +236,13 @@ class ResultPresenter (
                         }
                         page++
                     } else {
-                        baseView?.err()
+                        baseView.err()
                     }
 
                 }
 
                 override fun onError(e: Throwable?) {
-                    baseView?.err()
+                    baseView.err()
                     baseView.hiedLoading()
                 }
 
@@ -241,6 +254,13 @@ class ResultPresenter (
 
 
     override fun onDestroy() {
+    }
+
+
+    fun setLocation(thisPoint: DPoint) {
+        this.lat =thisPoint.latitude.toString()
+        this.lon =thisPoint.longitude.toString()
+        resetPage()
     }
 
     fun resetPage(){
@@ -296,6 +316,10 @@ class ResultPresenter (
         mSWorkTimeLe =endWork
         mSWorkTimeGe =startWork
         resetPage()
+    }
+
+    fun setIsMap() {
+        isMap ="1"
     }
 
 }

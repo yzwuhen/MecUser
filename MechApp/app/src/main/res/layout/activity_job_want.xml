@@ -54,6 +54,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+            <View style="@style/h_view_1" />
+
+
+            <LinearLayout
+                android:id="@+id/ly_address"
+                style="@style/ly_style_h">
+
+                <TextView
+                    style="@style/tv_style_left1"
+                    android:text="现居地址" />
+                <TextView
+                    android:id="@+id/tv_work_address"
+                    style="@style/et_style" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/address"/>
+            </LinearLayout>
 
             <View style="@style/h_view_1" />
             <LinearLayout
@@ -175,7 +194,6 @@
                     android:id="@+id/et_phone"
                     style="@style/et_style" />
             </LinearLayout>
-
 
             <View style="@style/h_view_1" />
 

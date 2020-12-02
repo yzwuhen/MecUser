@@ -74,7 +74,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
         ly_screen5.setOnClickListener(this)
 
         mPresenter = MecLeaseListPresenter(mContext,this)
-        (mPresenter as MecLeaseListPresenter).getRentList(2)
+        (mPresenter as MecLeaseListPresenter).getRentList("2")
     }
 
     override fun showLoading() {
@@ -283,7 +283,7 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
     }
      fun refresh(){
          (mPresenter as MecLeaseListPresenter).resetPage()
-        (mPresenter as MecLeaseListPresenter).getLeaseList(2)
+        (mPresenter as MecLeaseListPresenter).getLeaseList("2")
     }
 
     override fun refreshUI(list: List<MecLeaseData>) {

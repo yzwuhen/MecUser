@@ -47,11 +47,11 @@ class ResultRecruitActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
             override fun onRefresh() {
                 spring_list.isEnable = false
                 mPresenter?.resetPage()
-                mPresenter?.getRecruitList(1)
+                mPresenter?.getRecruitList("1")
             }
 
             override fun onLoadmore() {
-                mPresenter?.getRecruitList(1)
+                mPresenter?.getRecruitList("1")
             }
         })
 
@@ -68,7 +68,7 @@ class ResultRecruitActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setTitle(title)
-        mPresenter?.getRecruitList(1)
+        mPresenter?.getRecruitList("1")
     }
 
     override fun onClick(view: View?) {

@@ -15,23 +15,23 @@ class MorePartsPresenter(
     BasePresenter {
 
 
-    private var baseModel: MecLeaseModelImp? = null
+    private var baseModel: ModelImpl? = null
     private var page: Int = 1
     private var pageSize: Int = 30
     private var cateId: String? = null
     private var title: String? = null
 
-    private var type= 1
+    private var type :String ?=null
     private var sort=0
     init {
-        baseModel = MecLeaseModelImp()
+        baseModel = ModelImpl()
     }
 
     override fun request() {
 
     }
 
-    fun getPartsLeaseList(types: Int) {
+    fun getPartsLeaseList(types: String?) {
         type =types
         baseModel?.getPartsLeaseList(type,
             page,
@@ -39,6 +39,7 @@ class MorePartsPresenter(
             cateId,
             title,
             sort,
+            null,null,null,
             object : ISubscriberListener<PartsBean> {
                 override fun onNext(t: PartsBean?) {
                     if (t?.code == 200 && t?.result != null) {

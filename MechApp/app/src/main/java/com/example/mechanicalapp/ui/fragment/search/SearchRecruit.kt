@@ -44,16 +44,16 @@ class SearchRecruit (var title:String?): BaseCusFragment() , OnItemClickListener
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as ResultPresenter).resetPage()
-                (mPresenter as ResultPresenter).getRecruitList(1)
+                (mPresenter as ResultPresenter).getRecruitList("1")
             }
 
             override fun onLoadmore() {
-                (mPresenter as ResultPresenter).getRecruitList(1)
+                (mPresenter as ResultPresenter).getRecruitList("1")
             }
         })
         mPresenter = ResultPresenter(this)
         (mPresenter as ResultPresenter).setTitle(title)
-        (mPresenter as ResultPresenter).getRecruitList(1)
+        (mPresenter as ResultPresenter).getRecruitList("1")
     }
 
     fun closeRefreshView() {

@@ -77,7 +77,7 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
         ly_screen5.setOnClickListener(this)
 
         mPresenter = MecLeaseListPresenter(mContext, this)
-        (mPresenter as MecLeaseListPresenter).getLeaseList(1)
+        (mPresenter as MecLeaseListPresenter).getLeaseList("1")
     }
 
     override fun showLoading() {
@@ -291,7 +291,7 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
 
     fun refresh() {
         (mPresenter as MecLeaseListPresenter).resetPage()
-        (mPresenter as MecLeaseListPresenter).getLeaseList(1)
+        (mPresenter as MecLeaseListPresenter).getLeaseList("1")
     }
 
     override fun refreshUI(list: List<MecLeaseData>) {

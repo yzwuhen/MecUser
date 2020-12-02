@@ -46,7 +46,7 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
         ly_ec_type.setOnClickListener(this)
 
         mPresenter = MorePartsPresenter(mContext,this)
-        (mPresenter as MorePartsPresenter).getPartsLeaseList(1)
+        (mPresenter as MorePartsPresenter).getPartsLeaseList("1")
 
     }
 
@@ -112,7 +112,7 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
     }
 
     private fun refresh(){
-        (mPresenter as MorePartsPresenter).getPartsLeaseList(1)
+        (mPresenter as MorePartsPresenter).getPartsLeaseList("1")
     }
 
     override fun refreshUI(list: List<PartsData>) {
@@ -131,6 +131,6 @@ class MorePartsLeaseFragment : BaseCusFragment(), OnItemClickListener, View.OnCl
 
     fun reFresh() {
         (mPresenter as MorePartsPresenter).resetPage()
-        (mPresenter as MorePartsPresenter).getPartsLeaseList(1)
+        (mPresenter as MorePartsPresenter).getPartsLeaseList("1")
     }
 }

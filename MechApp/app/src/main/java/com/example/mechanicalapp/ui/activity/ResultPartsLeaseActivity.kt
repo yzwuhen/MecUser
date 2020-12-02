@@ -48,11 +48,11 @@ class ResultPartsLeaseActivity  : BaseCusActivity(), OnItemClickListener, View.O
             override fun onRefresh() {
                 spring_list.isEnable = false
                 mPresenter?.resetPage()
-                mPresenter?.getPartsLeaseList(1)
+                mPresenter?.getPartsLeaseList("1")
             }
 
             override fun onLoadmore() {
-                mPresenter?.getPartsLeaseList(1)
+                mPresenter?.getPartsLeaseList("1")
             }
         })
 
@@ -69,7 +69,7 @@ class ResultPartsLeaseActivity  : BaseCusActivity(), OnItemClickListener, View.O
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setTitle(title)
-        mPresenter?.getPartsLeaseList(1)
+        mPresenter?.getPartsLeaseList("1")
     }
 
     override fun onClick(view: View?) {

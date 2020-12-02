@@ -49,11 +49,11 @@ class ResultMecBuyActivity  : BaseCusActivity(), OnItemClickListener, View.OnCli
             override fun onRefresh() {
                 spring_list.isEnable = false
                 mPresenter?.resetPage()
-                mPresenter?.getSellList(2)
+                mPresenter?.getSellList("2")
             }
 
             override fun onLoadmore() {
-                mPresenter?.getSellList(2)
+                mPresenter?.getSellList("2")
             }
         })
 
@@ -70,7 +70,7 @@ class ResultMecBuyActivity  : BaseCusActivity(), OnItemClickListener, View.OnCli
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setTitle(title)
-        mPresenter?.getSellList(2)
+        mPresenter?.getSellList("2")
     }
 
     override fun onClick(view: View?) {
@@ -92,7 +92,7 @@ class ResultMecBuyActivity  : BaseCusActivity(), OnItemClickListener, View.OnCli
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
-        mPresenter?.getSellList(2)
+        mPresenter?.getSellList("2")
     }
 
     override fun onItemClick(view: View, position: Int) {

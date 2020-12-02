@@ -148,8 +148,11 @@
         <activity android:name=".ui.activity.ResultFactoryActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.ResultRecruitActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.ResultJobWantActivity" android:windowSoftInputMode="adjustPan" />
-
-
+        <activity android:name=".ui.activity.MapTypeSelActivity"/>
+        <activity android:name=".ui.activity.MapMecBusinessActivity"/>
+        <activity android:name=".ui.activity.MapPartsActivity"/>
+        <activity android:name=".ui.activity.MapJobAboutActivity"/>
+        <activity android:name=".ui.activity.MapFactoryActivity"/>
         <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
         </meta-data>
         <service android:name="com.amap.api.location.APSService" android:foregroundServiceType="location"/>

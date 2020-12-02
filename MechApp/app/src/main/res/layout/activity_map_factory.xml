@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_search_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_17"
+            android:paddingRight="@dimen/dp_17">
+
+            <LinearLayout
+                android:id="@+id/ly_screen1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_screen1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/map_down"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:gravity="center"
+                    android:text="机型"
+                    android:textColor="@color/color_222"
+                    android:textSize="@dimen/sp_16" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/dp_40"
+                android:background="@color/bg_color" />
+
+            <LinearLayout
+                android:id="@+id/ly_screen2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_screen2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/map_down"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:gravity="center"
+                    android:text="品牌"
+                    android:textColor="@color/color_222"
+                    android:textSize="@dimen/sp_16" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/dp_40"
+                android:background="@color/bg_color" />
+
+            <LinearLayout
+                android:id="@+id/ly_screen3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_screen3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/map_down"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:gravity="center"
+                    android:text="地区"
+                    android:textColor="@color/color_222"
+                    android:textSize="@dimen/sp_16" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/dp_40"
+                android:background="@color/bg_color" />
+
+            <LinearLayout
+                android:id="@+id/ly_screen4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_screen4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/map_down"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:gravity="center"
+                    android:text="排序"
+                    android:textColor="@color/color_222"
+                    android:textSize="@dimen/sp_16" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <!--底部显示内容-->
+    <?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/dp_17"
+        android:id="@+id/root_view"
+        android:background="@drawable/rect_radio_6_white">
+
+        <LinearLayout
+            android:id="@+id/ly_check"
+            android:layout_width="35dp"
+            android:layout_height="112dp"
+            android:layout_marginTop="@dimen/dp_17"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/check_icon" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_item_pic"
+            android:layout_width="@dimen/dp_75"
+            android:layout_height="@dimen/dp_75"
+            android:layout_marginLeft="@dimen/dp_17"
+            android:layout_marginTop="@dimen/dp_17"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintStart_toEndOf="@+id/ly_check"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="广州市莹宝维修中心"
+            android:textColor="@color/color_222"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_want"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_pic"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_pic" />
+
+        <TextView
+            android:id="@+id/tv_need"
+            android:layout_width="90dp"
+            android:layout_height="34dp"
+            android:layout_marginRight="@dimen/dp_17"
+            android:background="@drawable/rect_radio_6_y"
+            android:gravity="center"
+            android:text="我要维修"
+            android:textColor="@color/color_222"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_pic" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@style/App_RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="2.5"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_title" />
+
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:layout_marginTop="12dp"
+            android:text="2.5分"
+            android:textColor="#FFB923"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_title" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="白云区 |"
+            android:textColor="@color/color_222"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_item_pic"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_title" />
+
+        <TextView
+            android:id="@+id/tv_distance"
+            style="@style/distance_style"
+            android:layout_marginLeft="@dimen/dp_5"
+            app:layout_constraintStart_toEndOf="@+id/tv_address"
+            app:layout_constraintTop_toTopOf="@+id/tv_address" />
+
+        <ImageView
+            android:id="@+id/iv_ser"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginRight="@dimen/dp_10"
+            android:src="@mipmap/sr"
+            app:layout_constraintEnd_toStartOf="@+id/iv_jk"
+            app:layout_constraintTop_toTopOf="@+id/iv_jk" />
+
+        <ImageView
+            android:id="@+id/iv_jk"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginTop="1dp"
+            android:src="@drawable/jk"
+            app:layout_constraintEnd_toEndOf="@+id/tv_need"
+            app:layout_constraintTop_toTopOf="@+id/tv_distance" />
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="32dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="简介：公司致力于工程机械行业的销售、服务维 修、配件、二手机等业务…"
+            android:textColor="@color/color_666"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dp_15"
+            app:layout_constraintTop_toBottomOf="@+id/tv_introduce" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--底部显示内容-->
+</FrameLayout>

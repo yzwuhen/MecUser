@@ -23,7 +23,7 @@ class MecBuyModelImpl : BaseModel {
         appsService = appsApi?.service
     }
 
-    fun getSellList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
+    fun getSellList(type:String?,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
                     sort: Int,
                     mSGriceLe: String?,
                     mSPriceGe: String?,
@@ -35,7 +35,7 @@ class MecBuyModelImpl : BaseModel {
 
         appsService?.getSellList(type,pageIndex,pageSize,brandId,cateId,modelId,title,sort,
             mSGriceLe,mSPriceGe,
-            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe)
+            mSTenancyGe,mSTenancyLe,mSWorkTimeGe,mSWorkTimeLe,null,null,null)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreSellBean>(mISubscriberListener))
@@ -43,7 +43,7 @@ class MecBuyModelImpl : BaseModel {
 
     }
 
-    fun getMecBuyList(type:Int,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
+    fun getMecBuyList(type:String?,pageIndex:Int,pageSize:Int,brandId:String?,cateId:String?,modelId:String?,title:String?,
                       sort: Int,
                       mSGriceLe: String?,
                       mSPriceGe: String?,

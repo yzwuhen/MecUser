@@ -38,7 +38,7 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketMechanics/list")
     fun getMecList(
-        @Query("bussiessType") bussiessType: Int,
+        @Query("bussiessType") bussiessType: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
         @Query(" brandId") brandId: String?,
@@ -47,11 +47,14 @@ interface AppService {
         @Query("title") title: String?,
         @Query("sort") sort: Int?,
         @Query("SGriceLe") mSGriceLe: String?,
-    @Query("SPriceGe") mSPriceGe: String?,
-    @Query(" STenancyGe") mSTenancyGe: String?,
-    @Query("STenancyLe") mSTenancyLe: String?,
-    @Query("SWorkTimeGe") mSWorkTimeGe: String?,
-    @Query("SWorkTimeLe") mSWorkTimeLe: String?
+        @Query("SPriceGe") mSPriceGe: String?,
+        @Query(" STenancyGe") mSTenancyGe: String?,
+        @Query("STenancyLe") mSTenancyLe: String?,
+        @Query("SWorkTimeGe") mSWorkTimeGe: String?,
+        @Query("SWorkTimeLe") mSWorkTimeLe: String?,
+        @Query("isMap") isMap: String?,
+        @Query("SGpsLat") lat: String?,
+        @Query("SGpsLon") lon: String?
     ): Observable<MoreLeaseData>
 
     /**
@@ -239,12 +242,15 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketParts/list")
     fun getPartsList(
-        @Query("bussiessType") bussiessType: Int,
+        @Query("bussiessType") bussiessType: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
         @Query("cateId") cateId: String?,
         @Query("title") title: String?,
-        @Query("sort") sort: Int?
+        @Query("sort") sort: Int?,
+        @Query("isMap") isMap: String?,
+        @Query("SGpsLat") lat: String?,
+        @Query("SGpsLon") lon: String?
     ): Observable<PartsBean>
 
 
@@ -254,7 +260,7 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
     fun getMecBuyList(
-        @Query("bussiessType") bussiessType: Int,
+        @Query("bussiessType") bussiessType: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
         @Query(" brandId") brandId: String?,
@@ -277,7 +283,7 @@ interface AppService {
      */
     @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
     fun getSellList(
-        @Query("bussiessType") bussiessType: Int,
+        @Query("bussiessType") bussiessType: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
         @Query(" brandId") brandId: String?,
@@ -290,7 +296,10 @@ interface AppService {
         @Query(" STenancyGe") mSTenancyGe: String?,
         @Query("STenancyLe") mSTenancyLe: String?,
         @Query("SWorkTimeGe") mSWorkTimeGe: String?,
-        @Query("SWorkTimeLe") mSWorkTimeLe: String?
+        @Query("SWorkTimeLe") mSWorkTimeLe: String?,
+        @Query("isMap") isMap: String?,
+        @Query("SGpsLat") lat: String?,
+        @Query("SGpsLon") lon: String?
     ): Observable<MoreSellBean>
 
 
@@ -307,7 +316,10 @@ interface AppService {
         @Query("cateName") typeWork: String?,
         @Query("cateId") typeWorkId: String?,
         @Query("sort") sort: Int,
-        @Query("jobtitle") jobtitle: String?
+        @Query("jobtitle") jobtitle: String?,
+        @Query("isMap") isMap: String?,
+        @Query("SGpsLat") lat: String?,
+        @Query("SGpsLon") lon: String?
     ): Observable<RecruitBean>
 
 
@@ -673,7 +685,6 @@ interface AppService {
     ): Observable<MyAddressBean>
 
 
-
     /**
      * 租赁机械表-分页列表查询
      * wo de 地址
@@ -692,7 +703,7 @@ interface AppService {
     @GET("/jeecg-boot/shop/mecReceiver/delete")
     fun delAddress(
         @Header("X-Access-Token") token: String?,
-        @Query("id")id: String?
+        @Query("id") id: String?
     ): Observable<NetData>
 
 
@@ -806,6 +817,7 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<MecDetailsBean>
+
     /**
      *
      * 获取配件出租 求租详情
@@ -815,6 +827,7 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<PartsDetailsBean>
+
     /**
      *
      * 获取维修厂详情
@@ -983,7 +996,7 @@ interface AppService {
     @GET("/jeecg-boot/shop/mecShopAd/list")
     fun getBanner(
         @Header("X-Access-Token") token: String?,
-        @Query("type")type:Int
+        @Query("type") type: Int
     ): Observable<BannerBean>
 
 
@@ -1007,7 +1020,7 @@ interface AppService {
     @POST("/jeecg-boot/shop/mecShoppingCard/editPost")
     fun editCar(
         @Header("X-Access-Token") token: String?,
-       @Body shopCarData: ShopCarData
+        @Body shopCarData: ShopCarData
     ): Observable<NetData>
 
 
@@ -1021,7 +1034,6 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Field("id") id: String?
     ): Observable<NetData>
-
 
 
     /**
@@ -1068,6 +1080,7 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<OrderDetailsBean>
+
     /**
      *
      *取消维修订单
@@ -1088,11 +1101,10 @@ interface AppService {
         @Query("orderByPrice") orderByPrice: Int,
         @Query("orderByScale") orderByScale: Int,
         @Query("orderType") orderType: Int,
-        @Query("title")  title: String?,
+        @Query("title") title: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<GoodsListBean>
-
 
 
     /**
@@ -1104,6 +1116,7 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Body reOrder: ReOrder?
     ): Observable<CreatOrderBean>
+
     /**
      *
      *购物车里生成订单
@@ -1121,8 +1134,8 @@ interface AppService {
     @GET("/jeecg-boot/market/userIndex/queryById")
     fun getUserInfo(
         @Header("X-Access-Token") token: String?,
-        @Query("create_by")  create_by: String?,
-        @Query("type")  type: Int
+        @Query("create_by") create_by: String?,
+        @Query("type") type: Int
     ): Observable<UserInfoBean>
 
     /**
@@ -1132,7 +1145,7 @@ interface AppService {
     @GET("/jeecg-boot/market/mecMarketRecruit/queryById")
     fun getRecruitDetails(
         @Header("X-Access-Token") token: String?,
-        @Query("id")  id: String?
+        @Query("id") id: String?
     ): Observable<RecruitDetailsBean>
 
 
@@ -1143,7 +1156,7 @@ interface AppService {
     @POST("/jeecg-boot/report/mecReport/add")
     fun report(
         @Header("X-Access-Token") token: String?,
-       @Body report: ReReport?
+        @Body report: ReReport?
     ): Observable<NetData>
 
     /**

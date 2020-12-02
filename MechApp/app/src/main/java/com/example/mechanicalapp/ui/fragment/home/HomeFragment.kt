@@ -9,6 +9,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.HistorySearchActivity
 import com.example.mechanicalapp.ui.activity.MapActivity
+import com.example.mechanicalapp.ui.activity.MapTypeSelActivity
 import com.example.mechanicalapp.ui.activity.SearchCityActivity
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.*
@@ -109,12 +110,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
     }
 
     private fun jumMap() {
-        if (isLocationEnabled(mContext)){
-            jumpActivity(null, MapActivity::class.java)
-        }else{
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(intent)
-        }
+        jumpActivity(null,MapTypeSelActivity::class.java)
     }
 
 

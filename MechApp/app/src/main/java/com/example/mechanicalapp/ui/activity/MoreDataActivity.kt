@@ -153,7 +153,13 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
             R.id.tv_screen_right -> showView(1)
             R.id.iv_back -> finish()
             R.id.tv_search ->jumSearch()
-            R.id.tv_map -> jumpActivity(null, MapActivity::class.java)
+            R.id.tv_map -> {
+                if (type ==1){
+                    jumpActivity(null, MapActivity::class.java)
+                }else{
+                    jumpActivity(null, MapMecBusinessActivity::class.java)
+                }
+            }
 
         }
     }

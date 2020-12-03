@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.amap.api.location.CoordinateConverter
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.data.FactoryData
+import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_mec_factory.view.*
 
 class MecFactoryAdapter(
@@ -33,8 +37,18 @@ class MecFactoryAdapter(
         } else {
             holder.itemView.ly_check.visibility = View.GONE
         }
-        holder.itemView.tv_item_title.text =mList[position].name
-        holder.itemView.tv_address.text ="${mList[position].address}  |"
+        holder.itemView.tv_item_title.text =mList[position].companyName
+        holder.itemView.ratingBar.rating =mList[position].star
+        holder.itemView.tv_score.text="${mList[position].star}分"
+        holder.itemView.tv_address.text ="${mList[position].city}  | "
+        holder.itemView.tv_distance.text="距离：${
+            StringUtils.getDistance(
+                CoordinateConverter.calculateLineDistance(
+                    App.getInstance().thisPoint,
+                    GdMapUtils.getPoint(mList[position].lat, mList[position].lng)
+                )
+            )
+        }km"
         holder.itemView.tv_introduce.text ="简介：${mList[position].introduction}"
 
         ImageLoadUtils.loadImage(mContext,holder.itemView.iv_item_pic,mList[position].factoryPicture,R.mipmap.ic_launcher)

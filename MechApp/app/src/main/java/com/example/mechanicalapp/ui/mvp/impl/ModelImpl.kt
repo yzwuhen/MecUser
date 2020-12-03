@@ -69,9 +69,12 @@ class ModelImpl : BaseModel {
         partType: String?,
         sort: String?,
         name: String?,
+        isMap: String?,
+        lat: String?,
+        lon: String?,
         iSubscriberListener: ISubscriberListener<MoreFactoryBean>
     ) {
-        appsService?.getFactoryList(page, pageSize, mecType, partType, sort, name)
+        appsService?.getFactoryList(page, pageSize, mecType, partType, sort, name, isMap, lat, lon)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MoreFactoryBean>(iSubscriberListener))

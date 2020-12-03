@@ -118,7 +118,7 @@ class MaintenanceActivity : BaseCusActivity(), View.OnClickListener, PopUtils.on
         var intent = Intent()
         var bundle = Bundle()
         bundle.putString(Configs.SCREEN_RESULT_Extra,mList[index].name)
-        bundle.putString(Configs.SCREEN_RESULT_ID,mList[index].companyId)
+        bundle.putString(Configs.SCREEN_RESULT_ID,mList[index].id)
         bundle.putString(Configs.FACTORY_ADDRESS,mList[index].address)
         intent.putExtras(bundle)
         setResult(Configs.FACTORY_RESULT_CODE, intent)

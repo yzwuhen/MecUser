@@ -186,6 +186,9 @@ class ResultPresenter (
             null,
             sort.toString(),
             title,
+            isMap,
+            lat,
+            lon,
             object : ISubscriberListener<MoreFactoryBean> {
                 override fun onNext(t: MoreFactoryBean?) {
                     if (t?.code == 200 && t.result != null) {

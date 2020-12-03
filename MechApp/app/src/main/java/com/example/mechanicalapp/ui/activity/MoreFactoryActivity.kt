@@ -128,7 +128,7 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
             )
             R.id.ly_sort ->showPop()
             R.id.tv_search ->jumAct()
-            R.id.tv_map->jumpActivity(null,MapActivity::class.java)
+            R.id.tv_map->jumpActivity(null,MapFactoryActivity::class.java)
         }
     }
     private fun jumAct(){

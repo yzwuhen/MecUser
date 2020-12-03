@@ -352,7 +352,10 @@ interface AppService {
         @Query("mecType") mecType: String?,
         @Query(" partsType") partsType: String?,
         @Query("sort") sort: String?,
-        @Query("name") name: String?
+        @Query("name") name: String?,
+        @Query("isMap") isMap: String?,
+        @Query("SGpsLat") lat: String?,
+        @Query("SGpsLon") lon: String?
     ): Observable<MoreFactoryBean>
 
 

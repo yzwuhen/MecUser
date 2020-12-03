@@ -34,7 +34,7 @@
                     android:drawableRight="@mipmap/map_down"
                     android:drawablePadding="@dimen/dp_8"
                     android:gravity="center"
-                    android:text="机型"
+                    android:text="机械类型"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
@@ -58,7 +58,7 @@
                     android:drawableRight="@mipmap/map_down"
                     android:drawablePadding="@dimen/dp_8"
                     android:gravity="center"
-                    android:text="品牌"
+                    android:text="配件类型"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
@@ -121,7 +121,6 @@
     </LinearLayout>
 
     <!--底部显示内容-->
-    <?xml version="1.0" encoding="utf-8"?>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -39,7 +39,7 @@ class FactoryPresenter(
             mecType,
             partsType,
             sort,
-            name,
+            name,null,null,null,
             object : ISubscriberListener<MoreFactoryBean> {
                 override fun onNext(t: MoreFactoryBean?) {
                     if (t?.code == 200 && t?.result != null) {

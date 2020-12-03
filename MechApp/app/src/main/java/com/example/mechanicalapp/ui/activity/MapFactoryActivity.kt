@@ -5,10 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amap.api.location.AMapLocation
+import com.amap.api.location.CoordinateConverter
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
@@ -25,6 +25,8 @@ import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.activity_map_factory.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 
@@ -234,7 +236,7 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
         for (index in mList.indices) {
 
             var marks = aMap!!.addMarker(
-                MarkerOptions().position(LatLng(mList[index].gpsLat, mList[index].gpsLon)).icon(
+                MarkerOptions().position(LatLng(mList[index].lat, mList[index].lng)).icon(
                     BitmapDescriptorFactory.fromView(
                         getView(
                             getRes(
@@ -297,7 +299,22 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
         if (mList.size==0){
             return
         }
+        root_view.visibility =View.VISIBLE
+       tv_item_title.text =mList[position].companyName
+       ratingBar.rating =mList[position].star
+        tv_score.text="${mList[position].star}分"
+        tv_address.text ="${mList[position].city}  | "
+        tv_distance.text="距离：${
+            StringUtils.getDistance(
+                CoordinateConverter.calculateLineDistance(
+                    App.getInstance().thisPoint,
+                    GdMapUtils.getPoint(mList[position].lat, mList[position].lng)
+                )
+            )
+        }km"
+        tv_introduce.text ="简介：${mList[position].introduction}"
 
+        ImageLoadUtils.loadImage(this,iv_item_pic,mList[position].factoryPicture,R.mipmap.ic_launcher)
     }
 
     private fun getRes(isSelect: Boolean): Int {

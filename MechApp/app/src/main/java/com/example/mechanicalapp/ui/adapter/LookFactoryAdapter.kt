@@ -5,16 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.amap.api.location.CoordinateConverter
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.FactoryData
+import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_look_factory.view.*
-import kotlinx.android.synthetic.main.item_look_factory.view.iv_item_pic
-import kotlinx.android.synthetic.main.item_look_factory.view.tv_address
-import kotlinx.android.synthetic.main.item_look_factory.view.tv_introduce
-import kotlinx.android.synthetic.main.item_look_factory.view.tv_item_title
-import kotlinx.android.synthetic.main.item_mec_factory.view.*
 
 class LookFactoryAdapter  (var mContext: Context, var mList:MutableList<FactoryData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -23,8 +22,19 @@ class LookFactoryAdapter  (var mContext: Context, var mList:MutableList<FactoryD
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_item_title.text =mList[position].name
-        holder.itemView.tv_address.text ="${mList[position].address}  |"
+
+        holder.itemView.tv_item_title.text =mList[position].companyName
+        holder.itemView.ratingBar.rating =mList[position].star
+        holder.itemView.tv_score.text="${mList[position].star}分"
+        holder.itemView.tv_address.text ="${mList[position].city}  | "
+        holder.itemView.tv_distance.text="距离：${
+            StringUtils.getDistance(
+                CoordinateConverter.calculateLineDistance(
+                    App.getInstance().thisPoint,
+                    GdMapUtils.getPoint(mList[position].lat, mList[position].lng)
+                )
+            )
+        }km"
         holder.itemView.tv_introduce.text ="简介：${mList[position].introduction}"
 
         ImageLoadUtils.loadImage(mContext,holder.itemView.iv_item_pic,mList[position].factoryPicture,R.mipmap.ic_launcher)

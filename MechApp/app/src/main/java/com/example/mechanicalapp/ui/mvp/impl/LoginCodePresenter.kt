@@ -60,7 +60,35 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
             }))
 
     }
+    fun loginPwd(phone: String?, code: String?) {
 
+        baseView.showLoading()
+        var mLoginCode = LoginCode()
+        mLoginCode.password=code
+        mLoginCode.mobile =phone
+        appsService?.loginPwd(mLoginCode)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<LoginCodeBean>(object : ISubscriberListener<LoginCodeBean> {
+                override fun onNext(t: LoginCodeBean?) {
+                    if (t != null) {
+                        baseView.loginSuccess(t)
+                    }else{
+                        baseView.loginErr("数据是空")
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                    baseView.loginErr(e?.message)
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            }))
+
+    }
     override fun onDestroy() {
 
     }

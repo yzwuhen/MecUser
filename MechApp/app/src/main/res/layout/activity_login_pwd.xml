@@ -52,6 +52,7 @@
             android:layout_marginLeft="54dp"
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginRight="54dp"
+
             android:text="密码"
             android:textColor="@color/color_9a"
             android:textSize="@dimen/sp_14" />

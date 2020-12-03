@@ -40,11 +40,10 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
         et_phone.setText("13751773402")
         et_code.setText("123456")
 
-
-        mPresenter = LoginCodePresenter(this,this)
     }
 
     override fun initPresenter() {
+        mPresenter = LoginCodePresenter(this,this)
     }
 
     override fun showLoading() {
@@ -100,7 +99,6 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
             tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check,0,0,0)
         }
     }
-
 
     private fun login() {
 

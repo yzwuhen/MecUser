@@ -1,18 +1,26 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.text.TextUtils
 import android.view.View
+import com.example.mechanicalapp.App
+import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
-
+import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
+import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
+import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_login_pwd.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class LoginPwdActivity : BaseActivity<NetData>(), View.OnClickListener {
+class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<NetData> {
 
     private var isCheck: Boolean = false
     private var isEyes: Boolean = false
+    private var phone:String?=null
+    private var pwd:String?=null
+    private var mPresenter: LoginCodePresenter?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_login_pwd
@@ -31,19 +39,23 @@ class LoginPwdActivity : BaseActivity<NetData>(), View.OnClickListener {
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
 
-        et_phone.setText("13886943851")
-        et_pwd.setText("123456")
+//        et_phone.setText("13886943851")
+//        et_pwd.setText("123456")
     }
 
     override fun initPresenter() {
+        mPresenter = LoginCodePresenter(this,this)
     }
 
     override fun showLoading() {
+        tv_login.isEnabled =false
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        tv_login.isEnabled =true
+        hideLoadingView()
     }
-
     override fun err()  {
     }
 
@@ -86,7 +98,47 @@ class LoginPwdActivity : BaseActivity<NetData>(), View.OnClickListener {
             tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check, 0, 0, 0)
         }
     }
-
     private fun login() {
+
+        if (verification()){
+            mPresenter?.loginPwd(phone,pwd)
+        }
     }
+
+    private fun verification():Boolean{
+        phone = et_phone.text.toString().trim()
+        pwd = et_pwd.text.toString().trim()
+
+        if (TextUtils.isEmpty(phone)){
+            ToastUtils.showText("请输入手机号码")
+            return false
+        }
+        if (TextUtils.isEmpty(pwd)){
+            ToastUtils.showText("请输入m密码")
+            return false
+        }
+        if (!isCheck){
+            ToastUtils.showText("请先阅读并同意用户协议")
+            return false
+        }
+        return true
+    }
+    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
+        if (mLoginCodeBean.code==200){
+            jumpActivity(null, MainActivity::class.java)
+            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
+            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
+            App.getInstance().token=mLoginCodeBean.result?.token
+            finish()
+        }else{
+            ToastUtils.showText(mLoginCodeBean.message)
+        }
+
+    }
+
+    override fun loginErr(exception: String?) {
+
+        ToastUtils.showText(exception)
+    }
+
 }

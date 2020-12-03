@@ -19,6 +19,10 @@ interface AppService {
     @POST("/jeecg-boot/sys/appPhoneLogin")
     fun loginCode(@Body requestBody: LoginCode): Observable<LoginCodeBean>
 
+    @POST("/jeecg-boot/sys/appPhonePasswordLogin")
+    fun loginPwd(@Body requestBody: LoginCode): Observable<LoginCodeBean>
+
+
     /*
     * 首页数据
     * */

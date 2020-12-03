@@ -58,8 +58,8 @@ object Configs {
     const val HISTORY_REPAIR:String ="history_repair"//历史记录 维修订单
     const val HISTORY_HOME:String ="history_home"//历史记录 首页搜索
 
-     const val BASE_URL:String="http://206e5202m7.imwork.net"
-    // const val BASE_URL:String="http://taotaopingping.info"
+    // const val BASE_URL:String="http://206e5202m7.imwork.net"
+     const val BASE_URL:String="http://taotaopingping.info"
   //  const val TOKEN:String="token"
 
 }

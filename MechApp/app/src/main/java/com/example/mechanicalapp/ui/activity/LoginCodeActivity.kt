@@ -5,11 +5,10 @@ import android.view.View
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.base.WeakHandler
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
@@ -21,6 +20,28 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
     private var mPresenter:LoginCodePresenter?=null
     private var phone:String?=null
     private var code:String?=null
+    private var sTime = 60
+
+    private var handler = WeakHandler { msg ->
+        when (msg.what) {
+            1 -> downTime()
+        }
+        false
+    }
+
+    private fun downTime() {
+            sTime--
+            tv_get_code.setText(sTime.toString() + "s")
+            if (sTime > 0) {
+                handler.sendEmptyMessageDelayed(1, 1000)
+            } else {
+                tv_get_code.setText("获取验证码")
+                tv_get_code.setEnabled(true)
+                handler.removeCallbacksAndMessages(null)
+            }
+    }
+
+
     override fun getLayoutId(): Int {
 
         return R.layout.activity_login_code
@@ -29,7 +50,7 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
     override fun initView() {
         super.initView()
         tv_title.text = "验证码登录"
-        iv_back.setOnClickListener(this)
+        ly_left.setOnClickListener(this)
         tv_login.setOnClickListener(this)
         tv_check.setOnClickListener(this)
         tv_get_code.setOnClickListener(this)
@@ -37,8 +58,8 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
         tv_pwd_login.setOnClickListener(this)
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
-        et_phone.setText("13751773402")
-        et_code.setText("123456")
+//        et_phone.setText("13751773402")
+//        et_code.setText("123456")
 
     }
 
@@ -62,7 +83,7 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
     override fun onClick(v: View?) {
 
         when (v?.id) {
-            R.id.iv_back -> finish()
+            R.id.ly_left -> finish()
             R.id.tv_login -> login()
             R.id.tv_check -> check()
             R.id.tv_get_code->getCodes()
@@ -73,6 +94,8 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
         }
 
     }
+
+
 
     private fun loginPwd() {
 
@@ -88,7 +111,9 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
 
     private fun getCodes() {
 
-
+        sTime = 60
+        handler.sendEmptyMessage(1)
+        tv_get_code.setEnabled(false)
     }
 
     private fun check() {

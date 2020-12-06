@@ -79,7 +79,7 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
             R.id.iv_side_pic -> showDialogType(1)
             R.id.iv_company_pic -> showDialogType(2)
             R.id.tv_dialog_item1 -> setItem()
-            R.id.tv_dialog_item2 -> setItem()
+            R.id.tv_dialog_item2 -> setItem1()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
             R.id.tv_submit->submit()
         }
@@ -91,7 +91,24 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
     }
 
     private fun setItem() {
+        takePoto()
+    }
+    private fun setItem1() {
         verifyStoragePermissions(this)
+    }
+
+    private fun takePoto() {
+        mButtDialog?.dismiss()
+        PictureSelector.create(this)
+            .openCamera(PictureMimeType.ofImage())
+            .forResult(object : OnResultCallbackListener<LocalMedia?> {
+                override fun onResult(result: MutableList<LocalMedia?>) {
+                    (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                }
+
+                override fun onCancel() {
+                }
+            });
     }
 
     override fun hasPermissions() {

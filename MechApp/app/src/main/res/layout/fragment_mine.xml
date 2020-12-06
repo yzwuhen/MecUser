@@ -47,7 +47,7 @@
                     android:layout_height="78dp"
                     android:layout_marginLeft="@dimen/dp_17"
                     android:layout_marginTop="@dimen/dp_17"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@mipmap/user_default"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shape_type="round" />
@@ -110,11 +110,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/iv_user_pic" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_company"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:drawableLeft="@mipmap/phone"
+                    android:drawableLeft="@mipmap/company_icon"
                     android:drawablePadding="@dimen/dp_10"
                     android:text="********"
                     android:textColor="@color/color_222"

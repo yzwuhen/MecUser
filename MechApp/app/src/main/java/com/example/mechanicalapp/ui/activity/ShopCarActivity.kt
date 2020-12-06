@@ -83,7 +83,7 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
 
     private var handler = WeakHandler { msg ->
         when (msg.what) {
-            1 -> editShopCar()
+            1 -> {editShopCar()}
         }
         false
     }

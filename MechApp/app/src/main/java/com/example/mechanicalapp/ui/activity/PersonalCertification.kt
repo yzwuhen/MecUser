@@ -86,7 +86,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
                 mRePersonCer.sex = "女"
             }
             R.id.tv_dialog_item1 -> setItem()
-            R.id.tv_dialog_item2 -> setItem()
+            R.id.tv_dialog_item2 -> setItem1()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
             R.id.tv_submit->submit()
         }
@@ -100,9 +100,12 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
     }
 
     private fun setItem() {
+        mButtDialog?.dismiss()
+        takePoto()
+    }
+    private fun setItem1() {
         verifyStoragePermissions(this)
     }
-
     override fun hasPermissions() {
         super.hasPermissions()
         takePicture()
@@ -127,7 +130,19 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
 
         mButtDialog?.show()
     }
+    private fun takePoto() {
+        mButtDialog?.dismiss()
+        PictureSelector.create(this)
+            .openCamera(PictureMimeType.ofImage())
+            .forResult(object : OnResultCallbackListener<LocalMedia?> {
+                override fun onResult(result: MutableList<LocalMedia?>) {
+                    (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                }
 
+                override fun onCancel() {
+                }
+            });
+    }
 
     private fun takePicture() {
         mButtDialog?.dismiss()

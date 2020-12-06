@@ -34,7 +34,7 @@ class IntegralInfoActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         super.initView()
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
-        tv_title.text = "我的积分"
+        tv_title.text = "积分明细"
 
 
         mIntegralAdapter = IntegralAdapter(this, mList, this)

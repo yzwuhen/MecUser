@@ -40,13 +40,23 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     private fun showInfo() {
         tv_user_nick.text = App.getInstance().userInfo.realname
         tv_phone.text = App.getInstance().userInfo.phone
-        tv_company.text =App.getInstance().userInfo.realname
-        ImageLoadUtils.loadImageCenterCrop(
-            mContext,
-            iv_user_pic,
-            App.getInstance().userInfo.avatar,
-            R.mipmap.ic_launcher
-        )
+        if (App.getInstance().userInfo.isEnterprise=="1"){
+            tv_company.visibility =View.VISIBLE
+                  tv_company.text =App.getInstance().userInfo.realname
+        }else{
+            tv_company.visibility =View.GONE
+        }
+
+        if (TextUtils.isEmpty(App.getInstance().userInfo.avatar)){
+            iv_user_pic.setImageResource(R.mipmap.user_default)
+        }else{
+            ImageLoadUtils.loadImageCenterCrop(
+                mContext,
+                iv_user_pic,
+                App.getInstance().userInfo.avatar,
+                R.mipmap.user_default
+            )
+        }
     }
 
     override fun initView() {
@@ -104,7 +114,9 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     override fun onClick(view: View?) {
 
         when (view?.id) {
-            R.id.iv_user_pic -> jumpActivity(null, LoginActivity::class.java)
+            R.id.iv_user_pic ->  if (isLogin()) {
+                jumpActivity(null, UserDataActivity::class.java)
+            }
             R.id.tv_edit -> {
                 if (isLogin()) {
                     jumpActivity(null, UserDataActivity::class.java)

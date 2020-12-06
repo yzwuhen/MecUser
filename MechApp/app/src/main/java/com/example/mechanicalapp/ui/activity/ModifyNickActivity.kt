@@ -44,6 +44,9 @@ class ModifyNickActivity: BaseCusActivity() ,View.OnClickListener, UserView {
 
     override fun success(netData: NetData?) {
 
+        if (netData?.code==200){
+            finish()
+        }
         ToastUtils.showText(netData?.message)
     }
 

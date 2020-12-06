@@ -4,10 +4,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
+import com.example.mechanicalapp.App
+import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.UserInfo
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.MyDataCleanManager
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -124,6 +127,9 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
     }
     private fun dismiss(){
         PopUtils.dismissPop(this)
+        App.getInstance().token=""
+        App.getInstance().setUser(UserInfo())
+    finish()
     }
 
     private fun loginout() {

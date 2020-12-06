@@ -80,8 +80,9 @@
 
         <RatingBar
             android:id="@+id/ratingBar"
-            android:layout_width="80dp"
-            android:layout_height="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
             android:numStars="5"
             android:rating="2.5"
             style="@style/App_RatingBar"
@@ -94,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="15dp"
             android:layout_marginLeft="@dimen/dp_8"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="15dp"
             android:textSize="13sp"
             android:textColor="#FFB923"
             app:layout_constraintStart_toEndOf="@+id/ratingBar"

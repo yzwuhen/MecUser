@@ -64,15 +64,12 @@ class ReleaseBuyAdapter(
         }else{
             holder.itemView.tv_down.text="重新上架"
         }
-        if (mList[position].priceUnit == "3") {
-            holder.itemView.tv_rent_price.visibility = View.VISIBLE
-            holder.itemView.tv_rent.visibility = View.GONE
-        } else {
+
             holder.itemView.tv_rent_price.visibility = View.GONE
             holder.itemView.tv_rent.visibility = View.VISIBLE
             holder.itemView.tv_rent.text =
-                "￥${mList[position].price}/${mList[position].priceUnit_dictText}"
-        }
+                "￥${mList[position].price}/元"
+
     }
 
     override fun getItemCount(): Int {

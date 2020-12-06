@@ -22,6 +22,8 @@ interface AppService {
     @POST("/jeecg-boot/sys/appPhonePasswordLogin")
     fun loginPwd(@Body requestBody: LoginCode): Observable<LoginCodeBean>
 
+    @POST("/jeecg-boot/sys/register")
+    fun register(@Body requestBody: ReRegister): Observable<LoginCodeBean>
 
     /*
     * 首页数据
@@ -741,6 +743,7 @@ interface AppService {
     @GET("/jeecg-boot/market/mecMarketPointsLog/list")
     fun getIntegralList(
         @Header("X-Access-Token") token: String?,
+        @Query("createBy") createBy: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<IntegralListBean>

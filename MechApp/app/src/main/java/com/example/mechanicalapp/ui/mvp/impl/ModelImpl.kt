@@ -694,12 +694,13 @@ class ModelImpl : BaseModel {
 
     fun getIntegralList(
         token: String?,
+        user: String?,
         page: Int,
         pageSize: Int,
         iSubscriberListener: ISubscriberListener<IntegralListBean>
     ) {
 
-        appsService?.getIntegralList(token, page, pageSize)
+        appsService?.getIntegralList(token,user, page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<IntegralListBean>(iSubscriberListener))

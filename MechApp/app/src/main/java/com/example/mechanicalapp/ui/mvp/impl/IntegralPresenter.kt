@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.IntegralBean
@@ -46,8 +47,9 @@ class IntegralPresenter (
     }
 
     fun getIntegralList() {
+        Log.v("sss","sssssssssss=====${App.getInstance().token}")
         baseView.showLoading()
-        baseModel.getIntegralList(App.getInstance().token,page,pageSize,object :ISubscriberListener<IntegralListBean>{
+        baseModel.getIntegralList(App.getInstance().token,App.getInstance().userInfo.username,page,pageSize,object :ISubscriberListener<IntegralListBean>{
             override fun onNext(t: IntegralListBean?) {
                 if (page==0){
                     if (t?.code==200){

@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:textColor="#FC3D38"
             android:textSize="12sp"
-            android:text="提示： 虚假信息认证承担相应法律责任，本平台将严格保密用户身份 信息。"/>
+            android:text="提示： 虚假信息认证承担相应法律责任，本平台将严格保密用户身份信息。"/>
 
 
         <TextView

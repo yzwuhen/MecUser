@@ -20,6 +20,7 @@ import com.amap.api.services.geocoder.RegeocodeQuery
 import com.amap.api.services.geocoder.RegeocodeResult
 import com.amap.api.services.poisearch.PoiResult
 import com.amap.api.services.poisearch.PoiSearch
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
@@ -31,7 +32,7 @@ import com.example.mechanicalapp.utils.GdMapUtils
 import kotlinx.android.synthetic.main.activity_address_sel.*
 
 
-class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
+class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,View.OnClickListener,
     OnItemClickListener, TextWatcher {
 
     var aMap: AMap? = null
@@ -67,6 +68,10 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
 
     private fun initListener() {
         //地图移动的时候 监听
+        //隐藏地图默认方法缩小控件
+        iv_locat.setOnClickListener(this)
+        tv_cancel.setOnClickListener(this)
+        aMap?.uiSettings?.isZoomControlsEnabled=false
         aMap?.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
             override fun onCameraChange(cameraPosition: CameraPosition?) {
                 if (cameraPosition != null) {
@@ -242,6 +247,15 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         map?.onSaveInstanceState(outState)
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.iv_locat->     moveMap(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
+            R.id.tv_cancel->finish()
+        }
+
+
     }
 
 }

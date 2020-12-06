@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_17"
-            android:text="昵称"
+            android:text=""
             android:textColor="@color/color_999"
             android:textSize="@dimen/sp_16" />
 
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_17"
-            android:text="男"
+            android:text=""
             android:textColor="@color/color_999"
             android:textSize="@dimen/sp_16" />
 
@@ -125,7 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_17"
-            android:text="1222*****2212"
+            android:text=""
             android:textColor="@color/color_999"
             android:textSize="@dimen/sp_16" />
 

@@ -80,6 +80,7 @@
 
             <ImageView
                 android:id="@+id/iv_pwd"
+                android:padding="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/pw_n" />

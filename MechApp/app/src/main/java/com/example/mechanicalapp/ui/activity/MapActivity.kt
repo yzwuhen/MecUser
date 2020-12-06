@@ -100,6 +100,7 @@ class MapActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Location
         root_view1.setOnClickListener(this)
         root_view2.setOnClickListener(this)
         //地图移动的时候 监听
+        aMap?.uiSettings?.isZoomControlsEnabled=false
         aMap?.setOnCameraChangeListener(object : AMap.OnCameraChangeListener {
             override fun onCameraChange(cameraPosition: CameraPosition?) {
                 if (cameraPosition != null) {

@@ -38,6 +38,7 @@ open class UpdateFilePresenterImpl(
             }
 
             override fun onError(e: Throwable?) {
+                Log.v("ssss","sssssssssss=======$e")
                 baseView.hiedLoading()
                 (baseView as UpLoadFileView).uploadFail(e?.message.toString())
             }

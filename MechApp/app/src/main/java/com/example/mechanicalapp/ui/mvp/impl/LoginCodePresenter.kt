@@ -6,6 +6,7 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.LoginCode
+import com.example.mechanicalapp.ui.data.request.ReRegister
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
@@ -91,5 +92,31 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
     }
     override fun onDestroy() {
 
+    }
+
+    fun register(reRegister: ReRegister) {
+
+        baseView.showLoading()
+        appsService?.register(reRegister)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<LoginCodeBean>(object : ISubscriberListener<LoginCodeBean> {
+                override fun onNext(t: LoginCodeBean?) {
+                    if (t != null) {
+                        baseView.loginSuccess(t)
+                    }else{
+                        baseView.loginErr("数据是空")
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                    baseView.loginErr(e?.message)
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            }))
     }
 }

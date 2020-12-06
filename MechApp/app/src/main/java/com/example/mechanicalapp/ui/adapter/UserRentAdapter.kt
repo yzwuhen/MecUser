@@ -35,7 +35,7 @@ class UserRentAdapter (var mContext: Context, var mList:MutableList<MecLeaseData
 
         holder.itemView.tv_rent_address_data.text="${mList[position].city} | 租用时间：${mList[position].tenancy}天"
 
-        holder.itemView.tv_rent_equipment.text =mList[position].brandName
+        holder.itemView.tv_rent_equipment.text =mList[position].title
 
         holder.itemView.tv_rent_distance.text = "距离：${StringUtils.getDistance(
             CoordinateConverter.calculateLineDistance(
@@ -57,7 +57,7 @@ class UserRentAdapter (var mContext: Context, var mList:MutableList<MecLeaseData
         }else{
             holder.itemView.tv_rent_price.visibility =View.GONE
             holder.itemView.tv_rent.visibility =View.VISIBLE
-            holder.itemView.tv_rent.text ="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
+            holder.itemView.tv_rent.text ="￥${mList[position].price}${mList[position].priceUnit_dictText}"
         }
 
 

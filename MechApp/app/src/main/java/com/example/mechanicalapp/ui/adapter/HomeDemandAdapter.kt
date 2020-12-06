@@ -66,9 +66,9 @@ class HomeDemandAdapter(var mContext: Context, var mList:MutableList<MecLeaseDat
         }else{
             holder.itemView.iv_qy.visibility= View.GONE
         }
-        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}"
+        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}小时"
 
-        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
+        holder.itemView.tv_rent.text="￥${mList[position].price}${mList[position].priceUnit_dictText}"
 
         holder.itemView.tv_time.text= DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
 

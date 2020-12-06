@@ -134,6 +134,7 @@
 
             <ImageView
                 android:id="@+id/iv_pwd1"
+                android:padding="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/pw_n" />
@@ -164,7 +165,7 @@
 
 
             <EditText
-                android:id="@+id/wt_pwd"
+                android:id="@+id/et_pwd"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -177,6 +178,7 @@
 
             <ImageView
                 android:id="@+id/iv_pwd2"
+                android:padding="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/pw_n" />

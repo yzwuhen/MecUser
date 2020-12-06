@@ -30,12 +30,12 @@ class BossBuyAdapter (var mContext: Context, var mList:MutableList<MecSellData>,
             holder.itemView.ly_check.visibility = View.GONE
         }
 
-        holder.itemView.tv_rent_user_nick.text =mList[position].createBy
+        holder.itemView.tv_rent_user_nick.text =mList[position].contactName
 
         holder.itemView.tv_rent_address_data.text =
             "${mList[position].city} | ${mList[position].facDate}"
 
-        holder.itemView.tv_rent_equipment.text = mList[position].brandName
+        holder.itemView.tv_rent_equipment.text = mList[position].title
 
         holder.itemView.tv_rent_distance.text = "距离：${
         StringUtils.getDistance(
@@ -54,15 +54,10 @@ class BossBuyAdapter (var mContext: Context, var mList:MutableList<MecSellData>,
             holder.itemView.iv_rent_sr.visibility = View.GONE
         }
 
-        if (mList[position].priceUnit == "3") {
-            holder.itemView.tv_rent_price.visibility = View.VISIBLE
-            holder.itemView.tv_rent.visibility = View.GONE
-        } else {
             holder.itemView.tv_rent_price.visibility = View.GONE
             holder.itemView.tv_rent.visibility = View.VISIBLE
             holder.itemView.tv_rent.text =
-                "￥${mList[position].price}/${mList[position].priceUnit_dictText}"
-        }
+                "￥${mList[position].price}/元"
 
         ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_rent_user, mList[position].avatar)
 

@@ -1,10 +1,7 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.data.BrandBean
-import com.example.mechanicalapp.ui.data.MecModelBean
-import com.example.mechanicalapp.ui.data.MecTypeChildBean
-import com.example.mechanicalapp.ui.data.MecTypeParentBean
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
@@ -33,12 +30,12 @@ class MecAttrsModelImpl : BaseModel {
 
 
     }
-    fun getMecTypeList(pageIndex:Int,pageSize:Int,mISubscriberListener: ISubscriberListener<MecTypeParentBean>) {
+    fun getMecTypeList(pageIndex:Int,pageSize:Int,mISubscriberListener: ISubscriberListener<MecTypeRootBean>) {
 
         appsService?.getMecParentType(pageIndex,pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeParentBean>(mISubscriberListener))
+            )?.subscribe(NetSubscribe<MecTypeRootBean>(mISubscriberListener))
     }
 
     fun getMecTypeChildList(pageIndex:Int,pageSize:Int,pid:String,mISubscriberListener: ISubscriberListener<MecTypeChildBean>) {

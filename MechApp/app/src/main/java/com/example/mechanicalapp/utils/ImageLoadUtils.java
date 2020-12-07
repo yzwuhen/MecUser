@@ -97,4 +97,20 @@ public class ImageLoadUtils {
                 .into(imageView);
     }
 
+    public static void loadVideo(Context mContext, ImageView imageView, String url){
+        WeakReference<ImageView> weakReference = new WeakReference<ImageView>(imageView);
+        if (url==null){
+            return;
+        }
+        Glide.with(mContext)
+                .setDefaultRequestOptions(
+                        new RequestOptions()
+                                .frame(4000000)
+                                .centerCrop()
+                                .error(R.mipmap.ic_launcher)//可以忽略
+                )
+                .load(url)
+                .into(imageView);
+    }
+
 }

@@ -7,29 +7,32 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.GoodsListActivity
 import com.example.mechanicalapp.ui.activity.ShopCarActivity
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.BannerData
-import com.example.mechanicalapp.ui.data.StoreChildBean
 import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.StorePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.StoreView
 import com.example.mechanicalapp.ui.view.MyDecoration
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.youth.banner.indicator.CircleIndicator
+import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.fragment_store.*
+import kotlinx.android.synthetic.main.fragment_store.recycler_list_left
+import kotlinx.android.synthetic.main.fragment_store.recycler_list_right
 
 
-class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewListener,
+class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewListener,OnItemClickLevelListener,
     View.OnClickListener,StoreView<StoreLeftBean> {
     private var mLeftAdapter: StoreLeftAdapter? = null
     private var mRightAdapter: StoreRightAdapter? = null
     private var mLeftList: MutableList<StoreLeftBean> = ArrayList<StoreLeftBean>()
-    var mRightList: MutableList<StoreChildBean> = ArrayList<StoreChildBean>()
     private var mBannerList: MutableList<BannerData>? = ArrayList<BannerData>()
 
 
@@ -41,7 +44,7 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
 
 
     private var selectIndex:Int =0;
-
+    private var rightIndex:Int=0
 
     override fun getLayoutId(): Int {
 
@@ -55,9 +58,8 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
         recycler_list_left.layoutManager = LinearLayoutManager(mContext)
         recycler_list_left.adapter = mLeftAdapter
 
-        mRightAdapter = StoreRightAdapter(mContext, mRightList, this)
-        recycler_list_right.layoutManager = GridLayoutManager(mContext, 2)
-        recycler_list_right.addItemDecoration(MyDecoration(2))
+        mRightAdapter = StoreRightAdapter(mContext, mLeftList, this)
+        recycler_list_right.layoutManager = LinearLayoutManager(mContext)
         recycler_list_right.adapter = mRightAdapter
 
         banner.adapter = ImageAdapter(mBannerList)
@@ -68,34 +70,51 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
 
         mPresenter = StorePresenterImpl(mContext,this)
         mPresenter?.request()
+
+
+        recycler_list_right.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState==0){
+                    //recycler_list_left.scrollToPosition()
+                    selectLeft(rightIndex,false)
+                }
+
+            }
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                var layoutManager = recyclerView.layoutManager
+                if (layoutManager is LinearLayoutManager) {
+                    rightIndex =(layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                }
+            }
+        })
+
+
     }
 
     override fun onItemClick(view: View, position: Int) {
-
-
         when (view?.id) {
-            R.id.ly_type -> {
-                var bundle =Bundle()
-                bundle.putString("title",mRightList[position].name)
-                jumpActivity(bundle, GoodsListActivity::class.java)
-            }
-            R.id.tv_type->switchData(position)
+            R.id.tv_type->selectLeft(position,true)
         }
     }
 
-    private fun switchData(position: Int) {
+    private fun selectLeft(position: Int, b: Boolean) {
         if (selectIndex!=position){
             mLeftList[selectIndex].isSelect =false
             mLeftAdapter?.notifyItemChanged(selectIndex)
             mLeftList[position].isSelect =true
             mLeftAdapter?.notifyItemChanged(position)
-            mRightList.clear()
-            mRightList.addAll(mLeftList[position].children)
-            mRightAdapter?.notifyDataSetChanged()
-            selectIndex =position;
+            selectIndex =position
+            if (b){
+                scrollRight()
+            }
         }
-
-
+    }
+    private fun scrollRight(){
+        if (selectIndex< recycler_list_right?.adapter?.itemCount!!){
+            recycler_list_right?.scrollToPosition(selectIndex)
+        }
     }
 
     private fun showPhone() {
@@ -145,9 +164,11 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun showAd(adList: List<BannerData>) {
@@ -161,12 +182,18 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
 
         mLeftList.clear()
         mLeftList.addAll(list)
+
         if (mLeftList.size>0){
             mLeftList[0].isSelect =true
-            mRightList.clear()
-            mRightList.addAll(mLeftList[0].children)
         }
         mLeftAdapter?.notifyDataSetChanged()
         mRightAdapter?.notifyDataSetChanged()
+    }
+
+    override fun onItemClick(view: View, position: Int, childPosition: Int) {
+            var bundle =Bundle()
+            bundle.putString("title",mLeftList[position].children[childPosition].name)
+            jumpActivity(bundle, GoodsListActivity::class.java)
+
     }
 }

@@ -79,10 +79,6 @@ class MoreSelectMecType :BaseCusActivity(), OnItemClickListener ,View.OnClickLis
                   //  var firstVisibleItemPosition =(layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                     rightIndex =(layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
                   //  var lastCompletelyVisibleItemPosition =(layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-              //      Log.v("sssssssssss", "============ssssss=====================$lastVisibleItemPosition")
-                //    Log.v("sssssssssss", "============dddddd=====================$firstVisibleItemPosition")
-                 //   Log.v("sssssssssss", "==============ggggg===================$firstCompletelyVisibleItemPosition")
-                  //  Log.v("sssssssssss", "==============hhhhh===================$lastCompletelyVisibleItemPosition")
                 }
 
             }

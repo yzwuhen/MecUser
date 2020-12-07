@@ -2,7 +2,9 @@ package com.example.mechanicalapp.utils;
 
 
 import android.content.res.AssetManager;
+import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.mechanicalapp.App;
 import com.example.mechanicalapp.config.Configs;
@@ -13,10 +15,13 @@ import com.example.mechanicalapp.ui.mvp.NetSubscribe;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -108,4 +113,87 @@ public class StringUtils {
        return Configs.HISTORY_MEC_LEASE;
    }
 
+    /**
+     * 获取指定文件大小
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    public static long getFileSize(File file) throws Exception
+    {
+        long size = 0;
+        if (file.exists()){
+            FileInputStream fis = null;
+            fis = new FileInputStream(file);
+            size = fis.available();
+        }
+        else{
+            file.createNewFile();
+            Log.e("获取文件大小","文件不存在!");
+        }
+        return size;
+    }
+    /**
+     * 获取指定文件夹
+     * @param f
+     * @return
+     * @throws Exception
+     */
+    public static long getFileSizes(File f) throws Exception
+    {
+        long size = 0;
+        File flist[] = f.listFiles();
+        for (int i = 0; i < flist.length; i++){
+            if (flist[i].isDirectory()){
+                size = size + getFileSizes(flist[i]);
+            }
+            else{
+                size =size + getFileSize(flist[i]);
+            }
+        }
+        return size;
+    }
+
+    /**
+     * 转换文件大小
+     * @param fileS
+     * @return
+     */
+    public static String FormetFileSize(long fileS)
+    {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString = "";
+        String wrongSize="0B";
+        if(fileS==0){
+            return wrongSize;
+        }
+        if (fileS < 1024){
+            fileSizeString = df.format((double) fileS) + "B";
+        }
+        else if (fileS < 1048576){
+            fileSizeString = df.format((double) fileS / 1024) + "KB";
+        }
+        else {
+            fileSizeString = df.format((double) fileS / 1048576) + "MB";
+        }
+//        else if (fileS < 1073741824){
+//            fileSizeString = df.format((double) fileS / 1048576) + "MB";
+//        }
+//        else{
+//            fileSizeString = df.format((double) fileS / 1073741824) + "GB";
+//        }
+        return fileSizeString;
+    }
+
+    public static int getRingDuring(String mUri){
+        try {
+            MediaMetadataRetriever media = new MediaMetadataRetriever();
+            media.setDataSource(mUri);
+            String duration = media.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION); //
+            return Integer.parseInt(duration);
+        }catch (Exception e){
+            return 0;
+        }
+
+    }
 }

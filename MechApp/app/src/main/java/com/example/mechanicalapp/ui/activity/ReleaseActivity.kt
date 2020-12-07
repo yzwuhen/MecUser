@@ -58,10 +58,10 @@ class ReleaseActivity : BaseActivity<NetData>(), View.OnClickListener, OnItemCli
     }
 
     override fun onItemClick(view: View, position: Int) {
-        if (TextUtils.isEmpty(App.getInstance().token)){
-            jumpActivity(null, LoginActivity::class.java)
-            return
-        }
+//        if (TextUtils.isEmpty(App.getInstance().token)){
+//            jumpActivity(null, LoginActivity::class.java)
+//            return
+//        }
         when (position) {
             0 -> jumpActivity(null, EcLeaseActivity::class.java)
             1 -> jumpActivity(null, EcSellActivity::class.java)

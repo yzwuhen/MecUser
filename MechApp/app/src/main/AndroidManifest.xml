@@ -63,7 +63,7 @@
         <activity android:name=".ui.activity.AskingRentPatsActivity"/>
         <activity android:name=".ui.activity.RecruitActivity"/>
         <activity android:name=".ui.activity.JobWantActivity"/>
-        <activity android:name=".ui.activity.GoodsListActivity"/>
+        <activity android:name=".ui.activity.GoodsListActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.SearchGoodsResult"/>
         <activity android:name=".ui.activity.MorePartsActivity"/>
         <activity android:name=".ui.activity.ShopCarActivity"/>

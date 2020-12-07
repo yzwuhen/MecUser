@@ -22,12 +22,12 @@ class StorePresenterImpl(
     }
 
     override fun request() {
+        baseView.showLoading()
         baseModel?.getStoreData(object : ISubscriberListener<StoreBean> {
             override fun onNext(t: StoreBean?) {
                 if (t?.code == 200 && t?.result != null) {
                     t?.result?.adList?.let { baseView?.showAd(it) }
                     baseView?.showData(t?.result.productCategoryVoList)
-                    baseView?.hiedLoading()
                 } else {
                     baseView?.err()
                 }
@@ -36,9 +36,11 @@ class StorePresenterImpl(
 
             override fun onError(e: Throwable?) {
                 baseView?.err()
+                baseView?.hiedLoading()
             }
 
             override fun onCompleted() {
+                baseView?.hiedLoading()
             }
         })
     }

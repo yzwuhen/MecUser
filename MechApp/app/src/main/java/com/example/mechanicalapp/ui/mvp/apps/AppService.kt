@@ -403,11 +403,11 @@ interface AppService {
      * 机械父级类型
      *
      */
-    @GET("/jeecg-boot/machine/mecMachineCate/rootList")
+    @GET("/jeecg-boot/machine/mecMachineCate/getTreeList")
     fun getMecParentType(
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
-    ): Observable<MecTypeParentBean>
+    ): Observable<MecTypeRootBean>
 
     /**
      * 机械子级类型

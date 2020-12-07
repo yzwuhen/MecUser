@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.data;
 
 
+import java.util.List;
+
 public class MecTypeParentData extends BaseData {
     /**
      * isHot_dictText : 是
@@ -33,6 +35,16 @@ public class MecTypeParentData extends BaseData {
     private String id;
     private String isHot;
     private boolean isSelect;
+
+    private List<MecTypeChildData> childList;
+
+    public List<MecTypeChildData> getChildList() {
+        return childList;
+    }
+
+    public void setChildList(List<MecTypeChildData> childList) {
+        this.childList = childList;
+    }
 
     public boolean isSelect() {
         return isSelect;

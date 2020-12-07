@@ -48,8 +48,6 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
         super.initView()
 
         tv_sort.isSelected = true;
-
-
         mAdapter = GoodsListAdapter(this,mList,this)
         recycle_list.layoutManager = GridLayoutManager(this,2)
         recycle_list.addItemDecoration(MyDecoration(2))
@@ -161,6 +159,11 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
                 mList.addAll(data.result.records)
             }
             mAdapter?.notifyDataSetChanged()
+        }
+        if (mList.size==0){
+            showEmptyView()
+        }else{
+            hideEmptyView()
         }
 
     }

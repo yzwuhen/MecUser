@@ -4,33 +4,44 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.data.StoreChildBean
-import com.example.mechanicalapp.utils.ImageLoadUtils
-import kotlinx.android.synthetic.main.item_ec_type_right.view.*
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
+import com.example.mechanicalapp.ui.data.StoreLeftBean
+import kotlinx.android.synthetic.main.item_type_right.view.*
 
-class StoreRightAdapter  (var mContext: Context, var mList:MutableList<StoreChildBean>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class StoreRightAdapter (
+    var mContext: Context,
+    var mList: MutableList<StoreLeftBean>,
+    private var mOnItemClickLevelListener: OnItemClickLevelListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return StoreRightVh(LayoutInflater.from(mContext).inflate(R.layout.item_ec_type_right,parent,false),mOnItemClickListener)
+        return StoreRightVh(
+            LayoutInflater.from(mContext).inflate(R.layout.item_type_right,parent,false)
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_type_name.text = mList[position].name
-        ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].icon,R.mipmap.ic_launcher)
+        if (mList[position].children.size>0){
+            holder.itemView.tv_type.text = "${mList[position].name}$position"
+            var mRightAdapter = StoreRightChildAdapter(
+                mContext,
+                mList[position].children,
+                position,
+                mOnItemClickLevelListener
+            )
+            holder.itemView.item_recycler.layoutManager = GridLayoutManager(mContext, 3)
+            holder.itemView.item_recycler.adapter = mRightAdapter
+        }
     }
 
     override fun getItemCount(): Int {
-
         return mList.size
     }
 
-    class StoreRightVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
-        init {
-            itemView.ly_type.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.ly_type,adapterPosition) })
-        }
-    }
+    class StoreRightVh(itemView: View) :
+        RecyclerView.ViewHolder(itemView)
 }

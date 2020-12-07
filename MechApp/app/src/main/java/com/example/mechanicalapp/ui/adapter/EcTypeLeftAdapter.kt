@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.data.MecTypeParentData
+import com.example.mechanicalapp.ui.data.MecTypeRootBean
 import kotlinx.android.synthetic.main.item_ec_type_left.view.*
 
 class EcTypeLeftAdapter (var mContext: Context, var mList:MutableList<MecTypeParentData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {

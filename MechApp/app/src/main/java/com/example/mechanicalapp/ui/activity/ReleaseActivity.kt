@@ -24,9 +24,6 @@ class ReleaseActivity : BaseActivity<NetData>(), View.OnClickListener, OnItemCli
     override fun initView() {
         super.initView()
 
-
-
-
         recycle_list.layoutManager = GridLayoutManager(this, 4)
         recycle_list.adapter = ReleaseAdapter(this!!, this)
 
@@ -50,7 +47,13 @@ class ReleaseActivity : BaseActivity<NetData>(), View.OnClickListener, OnItemCli
 
         when (v?.id) {
             R.id.iv_close -> finish()
-            R.id.iv_release -> jumpActivity(null, CreateRepairActivity::class.java)
+            R.id.iv_release -> {
+                if (TextUtils.isEmpty(App.getInstance().token)){
+                    jumpActivity(null, LoginActivity::class.java)
+                    return
+                }
+                jumpActivity(null, CreateRepairActivity::class.java)
+            }
         }
     }
 

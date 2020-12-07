@@ -15,6 +15,7 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.example.mechanicalapp.R;
 
 import java.lang.ref.WeakReference;
 
@@ -92,6 +93,7 @@ public class ImageLoadUtils {
 
         Glide.with(mContext).load(url)
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .error(R.mipmap.user_default)
                 .into(imageView);
     }
 

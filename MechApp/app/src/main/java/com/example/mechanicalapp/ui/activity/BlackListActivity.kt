@@ -1,24 +1,22 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.BlackListAdapter
-import com.example.mechanicalapp.ui.adapter.LetterAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.view.SideBarView
 import kotlinx.android.synthetic.main.activity_search_city.*
 import kotlinx.android.synthetic.main.layout_search_title.iv_back
 import kotlinx.android.synthetic.main.layout_title.*
 
-class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnClickListener {
+class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnClickListener ,SideBarView.OnClickListener{
 
     private var mBlackListAdapter : BlackListAdapter?=null
-    private var mLetterAdapter : LetterAdapter?=null
     private var mCityLinearLayoutManager : LinearLayoutManager?=null
-    private var mLetterLinearLayoutManager : LinearLayoutManager?=null
 
     private var mCityList :MutableList<String> ?=null
     private val items = listOf(
@@ -47,9 +45,6 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
         mCityLinearLayoutManager?.orientation = LinearLayoutManager.VERTICAL
 
 
-        mLetterLinearLayoutManager = LinearLayoutManager(this)
-        mLetterLinearLayoutManager?.orientation = LinearLayoutManager.VERTICAL
-
         mCityList = ArrayList<String>()
         mCityList?.add("陈生")
         mCityList?.add("陈生")
@@ -67,15 +62,16 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
         mCityList?.add("阿迪斯")
         mCityList?.add("阿斯顿")
 
-        mLetterAdapter = LetterAdapter(this, items,this)
 
         mBlackListAdapter = BlackListAdapter(this, mCityList as MutableList<String>,this)
 
         ry_city.layoutManager = mCityLinearLayoutManager
-        cy_letter.layoutManager = mLetterLinearLayoutManager
 
         ry_city.adapter =mBlackListAdapter
-        cy_letter.adapter = mLetterAdapter
+
+        sb_letter.setContentDataList(items)
+        sb_letter.setEqualItemSpace(true)
+        sb_letter.setOnSidleClickListener(this)
 
         iv_back.setOnClickListener(this)
     }
@@ -101,6 +97,17 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
 
     }
 
+    override fun onItemDown(position: Int, itemContent: String?) {
+        Log.v("sssss","onItemDown====$position")
+    }
+
+    override fun onItemMove(position: Int, itemContent: String?) {
+        Log.v("sssss","onItemMove====$position")
+    }
+
+    override fun onItemUp(position: Int, itemContent: String?) {
+        Log.v("sssss","onItemUp====$position")
+    }
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){

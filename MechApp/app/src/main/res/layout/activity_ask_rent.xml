@@ -37,7 +37,7 @@
 
                 <TextView
                     style="@style/tv_style_left"
-                    android:text="租凭价格" />
+                    android:text="租赁价格" />
                 <EditText android:id="@+id/et_way"
                     android:inputType="numberDecimal"
                     android:hint="请输入计费方式" style="@style/et_style" />
@@ -49,6 +49,8 @@
                     style="@style/tv_style_left"
                     android:paddingLeft="@dimen/dp_10"
                     android:layout_gravity="center"
+                    android:drawableRight="@mipmap/map_down"
+                    android:drawablePadding="@dimen/dp_10"
                     android:text="元/月" />
 
             </LinearLayout>
@@ -114,7 +116,7 @@
                 style="@style/ly_style_h">
 
                 <TextView
-                    style="@style/tv_style_left1"
+                    style="@style/tv_style_left"
                     android:text="出厂时间" />
                 <TextView
                     android:hint="请选择出厂日期"
@@ -145,7 +147,7 @@
 
                 <TextView
                     style="@style/tv_style_left"
-                    android:text="租凭工期" />
+                    android:text="租赁工期" />
                 <EditText
                     android:hint="请输入租赁工期"
                     android:id="@+id/et_work_time"
@@ -199,6 +201,9 @@
                     android:text="施工地点" />
                 <TextView
                     android:id="@+id/et_address"
+                    android:maxLines="1"
+                    android:hint="请选择施工地址"
+                    android:ellipsize="end"
                     style="@style/et_style" />
 
                 <ImageView

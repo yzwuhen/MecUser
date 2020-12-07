@@ -136,9 +136,8 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
                 }
-
                 override fun onCancel() {
                 }
             });

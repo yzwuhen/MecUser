@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.BrandData
-import kotlinx.android.synthetic.main.item_city.view.*
+import kotlinx.android.synthetic.main.item_brand.view.*
 
 class BrandAdapter(
     var mContext: Context,
@@ -18,17 +18,16 @@ class BrandAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return BrandVh(View.inflate(parent.context, R.layout.item_city, null), mOnItemClickListener)
+        return BrandVh(View.inflate(parent.context, R.layout.item_brand, null), mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_city.text = mList[position].brandName
-
+      holder.itemView.tv_city.text = mList[position].brandName
         if (position == 0) {
             holder.itemView.tv_letter.visibility = View.VISIBLE
             holder.itemView.tv_letter.text = mList[position].brandFirst
         } else {
-            if (mList[position].brandFirst == mList[position - 1].brandFirst) {
+            if (mList[position].brandFirst == mList[position - 1].brandFirst||mList[position].brandFirst==null) {
                 holder.itemView.tv_letter.visibility = View.GONE
             } else {
                 holder.itemView.tv_letter.visibility = View.VISIBLE

@@ -18,10 +18,7 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenDataAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.RecruitData
-import com.example.mechanicalapp.ui.data.ScreenData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.RecruitPresenter
 import com.example.mechanicalapp.ui.mvp.v.WorkAboutView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -168,16 +165,30 @@ class RentFragment:BaseCusFragment(), OnItemClickListener, View.OnClickListener,
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
+        if (requestCode==Configs.CITY_RESULT_CODE){
+            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)!=null){
+                showResultAddress(requestCode, data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)as HomeCityData)
+            }
+        }else{
 
         showResult(
             requestCode,
             data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
             data?.getStringExtra(Configs.SCREEN_RESULT_ID)
-        )
+        )}
         super.onActivityResult(requestCode, resultCode, data)
 
     }
+    private fun showResultAddress(requestCode: Int, homeCityData: HomeCityData) {
+        tv_screen3.text = homeCityData.name
+        if (TextUtils.isEmpty(homeCityData.name)) {
+            tv_screen1.text = "地区"
+        } else {
+            tv_screen1.text = homeCityData.name
+        }
+        (mPresenter as RecruitPresenter)?.setCity(homeCityData.name)
+    }
+
 
 
     private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
@@ -190,15 +201,6 @@ class RentFragment:BaseCusFragment(), OnItemClickListener, View.OnClickListener,
                     tv_screen2.text = extra
                 }
                 (mPresenter as RecruitPresenter)?.workType(extra, extraId)
-            }
-            Configs.CITY_RESULT_CODE -> {
-
-                if (TextUtils.isEmpty(extra)) {
-                    tv_screen1.text = "地区"
-                } else {
-                    tv_screen1.text = extra
-                }
-                (mPresenter as RecruitPresenter)?.setCity(extra)
             }
         }
         reFresh()

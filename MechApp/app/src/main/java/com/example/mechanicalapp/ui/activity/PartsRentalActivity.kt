@@ -80,8 +80,8 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
 
 
         mRePartsLease.bussiessType = 1
-        mRePartsLease.isTalk = "1"
-        tv_yes.isSelected = true
+      //  mRePartsLease.isTalk = "1"
+     //   tv_yes.isSelected = true
         mPresenter = AddManagePresenterImpl(this, this)
         mUpLoadFilePresenter = UpdateFilePresenterImpl(this, this)
 

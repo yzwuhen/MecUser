@@ -15,6 +15,7 @@ import com.example.mechanicalapp.ui.activity.WorkType
 import com.example.mechanicalapp.ui.adapter.MoreRecruitAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenDataAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.data.HomeCityData
 import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.ui.data.ScreenData
 import com.example.mechanicalapp.ui.mvp.impl.RecruitPresenter
@@ -44,7 +45,7 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
 
         var screen1 = ScreenData()
         screen1.screen = "智能排序"
-        screen1.isSelect =true
+        screen1.isSelect = true
         var screen2 = ScreenData()
         screen2.screen = "距离近到远"
         var screen3 = ScreenData()
@@ -92,8 +93,10 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
         mList.addAll(list)
         mAdapter?.notifyDataSetChanged()
     }
+
     override fun err() {
     }
+
     override fun showLoading() {
     }
 
@@ -131,7 +134,7 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
 
     override fun getView(view: View?) {
         popRecy = view?.findViewById(R.id.pop_recycler_list)
-        mScreenAdapter = ScreenDataAdapter(mContext, mStringList,this)
+        mScreenAdapter = ScreenDataAdapter(mContext, mStringList, this)
 
         popRecy?.layoutManager = LinearLayoutManager(mContext)
         popRecy?.adapter = mScreenAdapter
@@ -148,7 +151,7 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
                 (mPresenter as RecruitPresenter)?.setScreen(position)
                 reFresh()
             }
-            R.id.item_root->{
+            R.id.item_root -> {
 
                 var bundle = Bundle()
                 bundle.putString("id", mList[position].id)
@@ -158,15 +161,32 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == Configs.CITY_RESULT_CODE) {
+            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra) != null) {
+                showResultAddress(
+                    requestCode,
+                    data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra) as HomeCityData
+                )
+            }
+        } else {
 
-
-        showResult(
-            requestCode,
-            data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
-            data?.getStringExtra(Configs.SCREEN_RESULT_ID)
-        )
+            showResult(
+                requestCode,
+                data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+                data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+            )
+        }
         super.onActivityResult(requestCode, resultCode, data)
 
+    }
+    private fun showResultAddress(requestCode: Int, homeCityData: HomeCityData) {
+        tv_screen3.text = homeCityData.name
+        if (TextUtils.isEmpty(homeCityData.name)) {
+            tv_screen1.text = "地区"
+        } else {
+            tv_screen1.text = homeCityData.name
+        }
+        (mPresenter as RecruitPresenter)?.setCity(homeCityData.name)
     }
 
 
@@ -181,15 +201,7 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
                 }
                 (mPresenter as RecruitPresenter)?.workType(extra, extraId)
             }
-            Configs.CITY_RESULT_CODE -> {
 
-                if (TextUtils.isEmpty(extra)) {
-                    tv_screen1.text = "地区"
-                } else {
-                    tv_screen1.text = extra
-                }
-                (mPresenter as RecruitPresenter)?.setCity(extra)
-            }
         }
         reFresh()
     }

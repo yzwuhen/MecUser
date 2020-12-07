@@ -101,6 +101,7 @@ class ReleaseLeaseFragment(var type: Int) : BaseCusFragment(), OnItemClickListen
             R.id.item_root -> {
                 val bundle = Bundle()
                 bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, type)
+                bundle.putString(Configs.MEC_ID, mList[position].id)
                 jumpActivity(bundle, LeaseDetailsActivity::class.java)
             }
             R.id.tv_del -> showPop(position)

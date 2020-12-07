@@ -141,6 +141,7 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             bundle.putInt(Configs.USER_HOME_PAGE, 2)
         }
         bundle.putInt(Configs.USER_HOME_PAGE_Index, 0)
+        bundle.putString(Configs.USER_HOME_PAGE_NAME,mData?.createBy)
         jumpActivity(bundle, UserHomePage::class.java)
 
     }

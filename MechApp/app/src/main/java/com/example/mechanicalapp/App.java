@@ -1,8 +1,10 @@
 package com.example.mechanicalapp;
 
 import android.app.Application;
+import android.text.TextUtils;
 
 import com.amap.api.location.DPoint;
+import com.example.mechanicalapp.ui.data.HomeCityData;
 import com.example.mechanicalapp.ui.data.UserInfo;
 import com.orhanobut.hawk.Hawk;
 
@@ -10,8 +12,8 @@ public class App extends Application {
     private static App instance;
     private UserInfo userInfoBean;
     private String mToken;
-
     private DPoint thisPoint;
+    private HomeCityData homeCityData;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -46,5 +48,13 @@ public class App extends Application {
 
     public void setThisPoint(DPoint thisPoint) {
         this.thisPoint = thisPoint;
+    }
+
+    public HomeCityData getHomeCityData() {
+        return homeCityData==null?new HomeCityData():homeCityData;
+    }
+
+    public void setHomeCityData(HomeCityData homeCityData) {
+        this.homeCityData = homeCityData;
     }
 }

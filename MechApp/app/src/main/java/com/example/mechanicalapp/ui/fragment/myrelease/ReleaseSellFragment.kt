@@ -10,6 +10,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.LeaseDetailsActivity
+import com.example.mechanicalapp.ui.activity.MecSellDetails
 import com.example.mechanicalapp.ui.adapter.ReleaseLeaseAdapter
 import com.example.mechanicalapp.ui.adapter.ReleaseSellAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
@@ -101,9 +102,10 @@ class ReleaseSellFragment  : BaseCusFragment(), OnItemClickListener, PopUtils.on
     override fun onItemClick(view: View, position: Int) {
         when(view?.id){
             R.id.item_root->{
-                val bundle = Bundle()
-//                bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE)
-                jumpActivity(bundle, LeaseDetailsActivity::class.java)
+                var bundle =Bundle()
+                bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 1)
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle, MecSellDetails::class.java)
             }
             R.id.tv_del -> showPop(position)
             R.id.tv_refresh -> refreshItem(position)

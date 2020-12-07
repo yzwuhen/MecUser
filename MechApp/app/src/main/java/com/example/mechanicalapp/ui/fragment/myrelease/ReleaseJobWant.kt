@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.fragment.myrelease
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
@@ -100,7 +101,9 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
 
         when (view?.id) {
             R.id.item_root -> {
-                jumpActivity(null, JobWantDetails::class.java)
+                var  bundle = Bundle()
+                bundle.putString("id", mList[position].id)
+                jumpActivity(bundle, JobWantDetails::class.java)
             }
             R.id.tv_del -> showPop(position)
             R.id.tv_refresh -> refreshItem(position)

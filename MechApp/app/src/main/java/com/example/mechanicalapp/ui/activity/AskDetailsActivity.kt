@@ -99,6 +99,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
             R.id.tv_pop_cancel-> PopUtils.dismissPop(this)
             R.id.ly_user_info->jumHomePage()
             R.id.tv_collected->collect()
+            R.id.tv_address->jumThreeMap(mData?.gpsLat,mData?.gpsLon,mData?.address)
         }
     }
 
@@ -190,10 +191,10 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
             tv_goods_title.text =data.title
 
             if (data.priceUnit=="3"){
-                tv_rent_price.text ="租赁价格：面议"
+                tv_rent_price.text ="面议"
                 tv_coast_money.text ="面议"
             }else{
-                tv_rent_price.text ="租赁价格：￥${data.price}/${data.priceUnit_dictText}"
+                tv_rent_price.text ="￥${data.price}/${data.priceUnit_dictText}"
                 tv_coast_money.text ="￥${data.price}/${data.priceUnit_dictText}"
             }
 
@@ -211,8 +212,11 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
             tv_factory_time.text ="${data.facTime}年"
             tv_mec_model.text =data.modelName
             tv_mec_num.text =data.mecUnit
-            tv_ask_time.text=data.workTime
-
+            if (TextUtils.isEmpty(data.workTime)){
+                tv_ask_time.text ="10天"
+            }else{
+                tv_ask_time.text=data.workTime
+            }
             tv_details.text =data.briefDesc
 
             tv_user_nick.text ="昵称：${data.contactName}"

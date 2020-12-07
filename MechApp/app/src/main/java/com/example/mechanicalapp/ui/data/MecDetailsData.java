@@ -78,7 +78,7 @@ public class MecDetailsData implements Serializable {
     private Object isTop;
     private String contactName;
     private String contactPhone;
-    private Object address;
+    private String address;
     private int facTime;
     private String avatar;
     private String realname;
@@ -365,11 +365,11 @@ public class MecDetailsData implements Serializable {
         this.contactPhone = contactPhone;
     }
 
-    public Object getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Object address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

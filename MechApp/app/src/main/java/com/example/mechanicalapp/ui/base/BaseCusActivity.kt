@@ -11,12 +11,14 @@ import android.os.Bundle
 import android.provider.Settings
 import android.provider.Settings.SettingNotFoundException
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.utils.Density
+import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.act_base.*
 
 abstract class BaseCusActivity : AppCompatActivity() {
@@ -101,6 +103,7 @@ abstract class BaseCusActivity : AppCompatActivity() {
                 hasPermissions()
             }
         } catch (e: Exception) {
+            Log.v("sss", "sssss授权错误$e")
             e.printStackTrace()
         }
     }
@@ -145,6 +148,25 @@ abstract class BaseCusActivity : AppCompatActivity() {
         startActivity(intent)
     }
     open fun hasPermissions() {
+
+    }
+    open fun jumThreeMap(lat: String?, lon: String?, name: String?){
+
+        try {
+//            val intent = Intent.getIntent(
+//                "androidamap://navi?sourceApplication=&poiname=${name}&lat=${lat}&lon=${lon}&dev=0"
+//            )
+            val intent = Intent.getIntent(
+                ("intent://map/direction?destination=latlng:${lat},${lon}|name:${name}&mode=driving&" +  //选择导航方式 此处为驾驶
+                        "region=" +  //
+                        "&src=#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
+            ))
+            startActivity(intent)
+        }catch (e: java.lang.Exception){
+
+            Log.v("sssss", "ssssssssss$e")
+            ToastUtils.showText("跳转失败")
+        }
 
     }
 

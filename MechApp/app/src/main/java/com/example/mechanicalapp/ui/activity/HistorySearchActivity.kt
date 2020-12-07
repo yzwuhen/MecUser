@@ -1,12 +1,14 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.HistoryAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
@@ -18,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_history_search.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 
 
-class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickListener,TextView.OnEditorActionListener,
+class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickListener,TextView.OnEditorActionListener,OnItemClickListener,
     View.OnClickListener {
 
     private var mHisToryFl: TagFlowLayout? = null
@@ -113,10 +115,10 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
             stub_history.inflate()
             mHisToryFl = findViewById<View>(R.id.tag_history_fl) as TagFlowLayout
             tvDeleteHistory = getViewTo(R.id.tv_history_delete)
-            mHistoryAdapter = HistoryAdapter(mHistoryList)
+            mHistoryAdapter = HistoryAdapter(mHistoryList,this)
             mHisToryFl?.setAdapter(mHistoryAdapter)
             tvDeleteHistory?.setOnClickListener(this)
-            mHisToryFl?.setOnTagClickListener(this)
+         //   mHisToryFl?.setOnTagClickListener(this)
         }
     }
 
@@ -132,9 +134,11 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
         when(view?.id){
             R.id.iv_back ->finish()
             R.id.tv_history_delete->{
-                Hawk.delete(Hawk.get(StringUtils.getHawkKey(type)))
-                mHistoryList.clear()
-                mHistoryAdapter?.notifyDataChanged()
+                if (mHistoryList.size>0){
+                    Hawk.delete(StringUtils.getHawkKey(type))
+                    mHistoryList.clear()
+                    mHistoryAdapter?.notifyDataChanged()
+                }
             }
         }
 
@@ -147,6 +151,20 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
     }
 
     override fun err()  {
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+        when(view.id){
+            R.id.tv_history_tv->{
+                jumpAct(mHistoryList[position])
+            }
+            R.id.iv_del->{
+                mHistoryList.removeAt(position)
+                mHistoryAdapter?.notifyDataChanged()
+                Hawk.put(StringUtils.getHawkKey(type),mHistoryList)
+            }
+        }
+
     }
 
 

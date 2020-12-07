@@ -161,7 +161,7 @@
                     android:id="@+id/tv_mec_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="设备详情"
+                    android:text="求租描述"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
 

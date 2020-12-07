@@ -196,7 +196,7 @@ class AddressSelActivity : BaseActivity<NetData>(), GdMapUtils.LocationListener,
     }
 
     override fun onItemClick(view: View, position: Int) {
-        callback( "${mList[position].provinceName}${mList[position].cityName} ${mList[position].adName}",
+        callback( "${mList[position].provinceName}${mList[position].cityName} ${mList[position].adName}${mList[position].title}",
             mList[position].cityCode,mList[position].cityName,
             mList[position].latLonPoint.latitude,mList[position].latLonPoint.longitude)
     }

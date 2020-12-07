@@ -26,7 +26,7 @@ class MorePartsAdapter (var mContext: Context, var mList:MutableList<PartsData>,
         ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
 
         holder.itemView.tv_title.text =mList[position].title
-        holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].partsType}"
+        holder.itemView.tv_address_data.text="${mList[position].city} ${mList[position].brand}| ${mList[position].partsType}"
         holder.itemView.tv_distance.text ="距离：${
             StringUtils.getDistance(
                 CoordinateConverter.calculateLineDistance(
@@ -35,7 +35,7 @@ class MorePartsAdapter (var mContext: Context, var mList:MutableList<PartsData>,
                 )
             )
         }km"
-        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
+        holder.itemView.tv_rent.text="￥${mList[position].price}${mList[position].priceUnit_dictText}"
         holder.itemView.tv_time.text =DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
 
         if (mList[position].isPerson==1){

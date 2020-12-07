@@ -19,6 +19,7 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.HomeCityData
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.MoreSellBean
 import com.example.mechanicalapp.ui.data.NetData
@@ -44,7 +45,7 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
     private var mMarkerList = ArrayList<Marker>()
     private var mTvList = ArrayList<TextView>()
     private var mPosition = 0
-
+    private var markerLocat: Marker? = null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_map_business
@@ -163,10 +164,18 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
     }
 
     private fun locat() {
-
-        moveMap(App.getInstance().thisPoint.latitude, App.getInstance().thisPoint.longitude)
+        moveMap(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
+        addMark(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
     }
 
+    private fun addMark(latitude: Double, longitude: Double) {
+        if (markerLocat == null) {
+            var view = layoutInflater.inflate(R.layout.map_center_view, null)
+            markerLocat =aMap!!.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).icon(BitmapDescriptorFactory.fromView(view)))
+        } else {
+            markerLocat?.position = LatLng(latitude, longitude)
+        }
+    }
 
     private fun showPop() {
         this?.let { PopUtils.init(this, it, this) }
@@ -220,9 +229,19 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
+        if (requestCode==Configs.CITY_RESULT_CODE){
+            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)!=null){
+                showResultAddress(requestCode, data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)as HomeCityData)
+            }
+        }else{
+            showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
+        }
+
         super.onActivityResult(requestCode, resultCode, data)
 
+    }
+    private fun showResultAddress(requestCode: Int, homeCityData: HomeCityData) {
+        tv_screen3.text = homeCityData.name
     }
 
     private fun showResult(requestCode: Int, extra: String?) {
@@ -232,7 +251,6 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
         when (requestCode) {
             Configs.EC_TYPE_RESULT_CODE -> tv_screen1.text = extra
             Configs.EC_BRAND_RESULT_CODE -> tv_screen2.text = extra
-            Configs.CITY_RESULT_CODE -> tv_screen3.text = extra
         }
 
     }
@@ -253,6 +271,7 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
     private fun addMarks() {
         aMap?.clear(true)
         mMarkerList.clear()
+        addMark(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
         for (index in mList.indices) {
 
             var marks = aMap!!.addMarker(

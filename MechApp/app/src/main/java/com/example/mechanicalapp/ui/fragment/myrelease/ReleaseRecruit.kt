@@ -1,11 +1,13 @@
 package com.example.mechanicalapp.ui.fragment.myrelease
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.RecruitDetailsActivity
 import com.example.mechanicalapp.ui.adapter.ReleaseRecruitAdapter
@@ -98,7 +100,9 @@ class ReleaseRecruit : BaseCusFragment() , OnItemClickListener, PopUtils.onViewL
     override fun onItemClick(view: View, position: Int) {
         when(view?.id){
             R.id.item_root->{
-                jumpActivity(null, RecruitDetailsActivity::class.java)
+                var  bundle = Bundle()
+                bundle.putString("id", mList[position].id)
+                jumpActivity(bundle, RecruitDetailsActivity::class.java)
             }
             R.id.tv_del -> showPop(position)
             R.id.tv_refresh -> refreshItem(position)

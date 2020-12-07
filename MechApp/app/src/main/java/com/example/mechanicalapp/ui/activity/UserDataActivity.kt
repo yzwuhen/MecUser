@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.mechanicalapp.App
@@ -7,6 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.UserInfo
+import com.example.mechanicalapp.ui.mvp.impl.PersonCerPresenter
 import com.example.mechanicalapp.ui.mvp.impl.UserInfoPresenter
 import com.example.mechanicalapp.ui.mvp.v.UserView
 import com.example.mechanicalapp.utils.GlideEngine
@@ -19,6 +21,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_user_data.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
 
@@ -119,6 +122,7 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
     private fun setItem1() {
         mButtDialog?.dismiss()
         if (dialogType==0){
+            takePicture()
             verifyStoragePermissions(this)
         }else{
             tv_user_sex.text ="女"
@@ -138,7 +142,23 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
             mPresenter?.editUserInfo(userInfo)
         }
     }
+    private fun takePoto() {
+        mButtDialog?.dismiss()
+        PictureSelector.create(this)
+            .openCamera(PictureMimeType.ofImage())
+            .forResult(object : OnResultCallbackListener<LocalMedia?> {
+                override fun onResult(result: MutableList<LocalMedia?>) {
+//
+//
+//                    Log.v("ssssss=========sss","===========q========${File(result[0]?.realPath.toString()).exists()}")
+//                    Log.v("ssssss=========sss","========2===========${File(result[0]?.path.toString()).exists()}")
+                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                }
 
+                override fun onCancel() {
+                }
+            });
+    }
     private fun takePicture() {
         PictureSelector.create(this)
             .openGallery(PictureMimeType.ofAll())
@@ -157,7 +177,8 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
 
     override fun hasPermissions() {
         super.hasPermissions()
-        takePicture()
+        Log.v("sss","sssss授权成功打开相机")
+        takePoto()
     }
 
      private fun showDialogType(type:Int){

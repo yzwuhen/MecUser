@@ -7,8 +7,10 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.AskDetailsActivity
+import com.example.mechanicalapp.ui.activity.MecBuyDetails
 import com.example.mechanicalapp.ui.adapter.ReleaseBuyAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecSellData
@@ -91,9 +93,10 @@ class ReleaseBuyFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onVi
     override fun onItemClick(view: View, position: Int) {
         when (view?.id) {
             R.id.item_root -> {
-                val bundle = Bundle()
-//                bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, type)
-                jumpActivity(bundle, AskDetailsActivity::class.java)
+                var bundle = Bundle()
+                bundle.putInt(Configs.MEC_Lease_DETAILS_TYPE, 1)
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle, MecBuyDetails::class.java)
             }
             R.id.tv_del -> showPop(position)
             R.id.tv_refresh -> refreshItem(position)

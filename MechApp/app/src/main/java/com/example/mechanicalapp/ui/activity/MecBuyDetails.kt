@@ -98,6 +98,7 @@ class MecBuyDetails : BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.ly_user_info -> jumHomePage()
             R.id.tv_collected->collect()
+            R.id.tv_address->jumThreeMap(mData?.gpsLat,mData?.gpsLon,mData?.address)
         }
     }
 
@@ -121,6 +122,7 @@ class MecBuyDetails : BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
             bundle.putInt(Configs.USER_HOME_PAGE, 2)
         }
         bundle.putInt(Configs.USER_HOME_PAGE_Index, 1)
+        bundle.putString(Configs.USER_HOME_PAGE_NAME,mData?.createBy)
         jumpActivity(bundle, UserHomePage::class.java)
 
     }

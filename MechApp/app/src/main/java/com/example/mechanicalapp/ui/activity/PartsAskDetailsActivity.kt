@@ -93,6 +93,7 @@ class PartsAskDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtil
             R.id.tv_pop_cancel-> PopUtils.dismissPop(this)
             R.id.ly_user_info->jumHomePage()
             R.id.tv_collected->collect()
+            R.id.tv_address->jumThreeMap(mData?.gpsLat,mData?.gpsLon,mData?.address)
         }
     }
     private fun collect() {

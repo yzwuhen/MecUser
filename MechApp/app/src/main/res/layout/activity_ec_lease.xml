@@ -51,6 +51,8 @@
                     style="@style/tv_style_left"
                     android:paddingLeft="@dimen/dp_20"
                     android:layout_gravity="center"
+                    android:drawableRight="@mipmap/map_down"
+                    android:drawablePadding="@dimen/dp_10"
                     android:text="元/月" />
 
             </LinearLayout>
@@ -182,6 +184,8 @@
                     android:text="地        址" />
                 <TextView
                     android:id="@+id/et_address"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     style="@style/et_style" />
 
                 <ImageView

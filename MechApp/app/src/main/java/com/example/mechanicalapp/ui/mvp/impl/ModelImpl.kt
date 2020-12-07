@@ -993,7 +993,7 @@ class ModelImpl : BaseModel {
 
     fun getCity(
         token: String?,
-        netSubscribe: NetSubscribe<NetData>
+        netSubscribe: NetSubscribe<CityListBean>
     ) {
         appsService?.getCity(token)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(

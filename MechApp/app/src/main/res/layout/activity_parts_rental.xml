@@ -176,6 +176,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:gravity="center_vertical"
                     android:layout_gravity="center|right"
+                    android:drawableRight="@mipmap/map_down"
                     android:text="元/月" />
 
 
@@ -285,7 +286,7 @@
                 android:orientation="horizontal">
                 <TextView
 
-                    style="@style/tv_style_left"
+                    style="@style/tv_style_left1"
                     android:layout_width="wrap_content"
                     android:text="添加图片、视频" />
 

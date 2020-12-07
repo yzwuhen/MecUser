@@ -993,10 +993,10 @@ interface AppService {
      *
      *获取维修订单
      */
-    @GET("/jeecg-boot/shop/mecArea/rootList")
+    @GET("/jeecg-boot/shop/mecArea/groupList")
     fun getCity(
         @Header("X-Access-Token") token: String?
-    ): Observable<NetData>
+    ): Observable<CityListBean>
 
 
     /**

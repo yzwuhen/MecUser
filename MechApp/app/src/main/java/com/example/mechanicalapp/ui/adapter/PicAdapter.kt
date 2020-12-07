@@ -59,7 +59,7 @@ class PicAdapter(
     override fun getItemCount(): Int {
         if (mList.isEmpty()) {
             return 1
-        } else if (mList.size < 3) {
+        } else if (mList.size < 5) {
             return mList.size + 1
         } else {
             return mList.size

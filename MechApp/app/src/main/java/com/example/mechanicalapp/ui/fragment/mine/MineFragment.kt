@@ -38,6 +38,19 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     }
 
     private fun showInfo() {
+
+        if (TextUtils.isEmpty(App.getInstance().token)){
+            tv_user_nick.visibility =View.GONE
+            iv_sex.visibility=View.GONE
+            iv_user_sr.visibility =View.GONE
+            tv_phone.visibility=View.GONE
+        }else{
+            tv_user_nick.visibility =View.VISIBLE
+            iv_sex.visibility=View.VISIBLE
+            iv_user_sr.visibility =View.VISIBLE
+            tv_phone.visibility=View.VISIBLE
+        }
+
         tv_user_nick.text = App.getInstance().userInfo.realname
         tv_phone.text = App.getInstance().userInfo.phone
         if (App.getInstance().userInfo.isEnterprise=="1"){
@@ -45,6 +58,11 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
                   tv_company.text =App.getInstance().userInfo.realname
         }else{
             tv_company.visibility =View.GONE
+        }
+        if (App.getInstance().userInfo.sex==1){
+            iv_sex.setImageResource(R.mipmap.sex_man)
+        }else{
+            iv_sex.setImageResource(R.mipmap.sex_women)
         }
 
         if (TextUtils.isEmpty(App.getInstance().userInfo.avatar)){

@@ -11,10 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cy_letter"
+    <com.example.mechanicalapp.ui.view.SideBarView
+        android:layout_marginTop="150dp"
+        android:id="@+id/sb_letter"
         android:layout_gravity="right|center_vertical"
-        android:layout_width="35dp"
+        android:layout_width="@dimen/dp_50"
         android:layout_height="wrap_content"/>
 
 </FrameLayout>

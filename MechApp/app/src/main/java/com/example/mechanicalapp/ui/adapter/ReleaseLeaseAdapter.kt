@@ -61,7 +61,7 @@ class ReleaseLeaseAdapter (var mContext: Context, var mList:MutableList<MecLease
         }else{
             holder.itemView.iv_qy.visibility=View.GONE
         }
-        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}"
+        holder.itemView.tv_work_time.text="工作时长${mList[position].workTime}/小时"
 
         holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
 

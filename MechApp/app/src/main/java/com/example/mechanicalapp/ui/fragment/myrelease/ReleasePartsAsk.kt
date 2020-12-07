@@ -1,11 +1,13 @@
 package com.example.mechanicalapp.ui.fragment.myrelease
 
+import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
 import com.example.mechanicalapp.ui.adapter.ReleasePartsAskAdapter
@@ -96,7 +98,9 @@ class ReleasePartsAsk : BaseCusFragment(), OnItemClickListener, PopUtils.onViewL
         when (view?.id) {
             R.id.item_root -> {
 
-                jumpActivity(null, PartsAskDetailsActivity::class.java)
+                var bundle = Bundle()
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle,PartsAskDetailsActivity::class.java)
             }
             R.id.tv_del -> showPop(position)
             R.id.tv_refresh -> refreshItem(position)

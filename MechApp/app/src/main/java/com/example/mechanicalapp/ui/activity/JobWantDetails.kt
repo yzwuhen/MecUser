@@ -11,9 +11,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.IsCollectBean
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.RecruitDetailsBean
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
@@ -45,6 +43,8 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
     private var isCollect=false
     private var id =""
     private var mPresenter : DetailsPresenter?=null
+
+    private var mData: RecruitDetailsData?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_job_want_details
     }
@@ -169,7 +169,7 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
         var bundle = Bundle()
             bundle.putInt(Configs.USER_HOME_PAGE,4)
             bundle.putInt(Configs.USER_HOME_PAGE_Index,1)
-
+        bundle.putString(Configs.USER_HOME_PAGE_NAME,mData?.createBy)
         jumpActivity(bundle,UserHomePage::class.java)
 
     }
@@ -181,7 +181,7 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
 
             tv_ask_user.text = data.result.contactName
 
-
+            mData =data.result
             tv_browse.text ="浏览量:${data.result.viewNum}"
             tv_browse_time.text = DateUtils.dateDiffs(data.result.createTime, System.currentTimeMillis())
 

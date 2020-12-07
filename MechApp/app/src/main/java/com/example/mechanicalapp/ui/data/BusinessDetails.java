@@ -62,7 +62,7 @@ public class BusinessDetails implements Serializable {
     private String title;
     private String brandName;
     private String gpsLon;
-    private Object address;
+    private String address;
     private String bussiessType;
     private String contactName;
     private String updateTime;
@@ -236,11 +236,11 @@ public class BusinessDetails implements Serializable {
         this.gpsLon = gpsLon;
     }
 
-    public Object getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Object address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

@@ -45,7 +45,7 @@
                 style="@style/ly_style_h">
 
                 <TextView
-                    style="@style/tv_style_left"
+                    style="@style/tv_style_left1"
                     android:text="机械类型" />
 
                 <TextView

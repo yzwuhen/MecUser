@@ -117,18 +117,17 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (Configs.CITY_RESULT_CODE == resultCode) {
-            showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
-
+            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)!=null){
+                showResult(requestCode, data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)as HomeCityData)
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun showResult(requestCode: Int, extra: String?) {
-        if (extra.isNullOrEmpty()) {
-            return
-        }
+    private fun showResult(requestCode: Int, homeCityData: HomeCityData) {
+
         when (requestCode) {
-            Configs.CITY_RESULT_CODE -> tv_address.text = extra
+            Configs.CITY_RESULT_CODE -> tv_address.text = homeCityData.name
         }
     }
 

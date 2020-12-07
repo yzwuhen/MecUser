@@ -35,7 +35,7 @@ class MorePartsAskAdapter (
         ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
 
         holder.itemView.tv_title.text =mList[position].title
-        holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].partsType}"
+        holder.itemView.tv_address_data.text="${mList[position].city} ${mList[position].brand} | ${mList[position].partsType}"
         holder.itemView.tv_distance.text ="距离：${
             StringUtils.getDistance(
                 CoordinateConverter.calculateLineDistance(

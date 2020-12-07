@@ -202,6 +202,7 @@
     </style>
 
     <style name="tv_style_left1" parent="tv_style_left">
+        <item name="android:drawablePadding">5dp</item>
         <item name="android:drawableLeft">@drawable/circle_red</item>
     </style>
     <style name="et_style">
@@ -213,6 +214,8 @@
         <item name="android:textColorHint">#cacaca</item>
         <item name="android:paddingLeft">@dimen/dp_10</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
         <item name="android:background">@null</item>
     </style>
 

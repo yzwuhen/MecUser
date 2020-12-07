@@ -30,7 +30,7 @@ class MoreSellAdapter  (var mContext: Context, var mList:MutableList<MecSellData
 
         holder.itemView.tv_distance.text="距离：${mList[position].gpsLon}"
 
-        if (mList[position].isNew == "1"){
+        if (mList[position].isNew == "0"){
             holder.itemView.tv_label.visibility= View.VISIBLE
         }else{
             holder.itemView.tv_label.visibility= View.GONE

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import kotlinx.android.synthetic.main.item_city.view.*
+import kotlinx.android.synthetic.main.item_brand.view.*
 
 class BlackListAdapter(
     var mContext: Context,
@@ -23,7 +23,7 @@ class BlackListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return BlackListVh(
-            View.inflate(parent.context, R.layout.item_city, null),
+            View.inflate(parent.context, R.layout.item_brand, null),
             mOnItemClickListener
         )
     }

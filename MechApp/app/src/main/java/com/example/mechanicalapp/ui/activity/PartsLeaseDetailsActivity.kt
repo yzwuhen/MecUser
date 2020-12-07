@@ -100,6 +100,7 @@ class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUt
             R.id.tv_pop_cancel-> PopUtils.dismissPop(this)
             R.id.ly_user_info->jumHomePage()
             R.id.tv_collected->collect()
+            R.id.tv_address->jumThreeMap(mData?.gpsLat,mData?.gpsLon,mData?.address)
         }
     }
     private fun collect() {
@@ -193,7 +194,7 @@ class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUt
                 banner.indicator = CircleIndicator(this)
             }
 
-            tv_details_title.text = data.title
+            tv_details_title.text = "${data.title}  出租"
             tv_browse.text = "浏览量：${data.viewNum}"
             tv_browse_time.text = DateUtils.dateDiffs(data.createTime, System.currentTimeMillis())
 
@@ -213,7 +214,7 @@ class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUt
             }else{
                 tv_lease_user_sr.visibility =View.GONE
             }
-         //   tv_mec_type.text =data.partsType
+           tv_mec_type.text =data.cateName
             tv_parts_brand.text =data.brand
             tv_parts_type.text =data.partsType
             tv_details.text = data.content

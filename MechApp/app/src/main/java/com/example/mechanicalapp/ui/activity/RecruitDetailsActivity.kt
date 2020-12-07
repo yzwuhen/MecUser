@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.IsCollectBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.RecruitDetailsBean
+import com.example.mechanicalapp.ui.data.RecruitDetailsData
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
@@ -45,6 +46,7 @@ class RecruitDetailsActivity  : BaseCusActivity(), View.OnClickListener, PopUtil
     private var isCollect=false
     private var id =""
     private var mPresenter :DetailsPresenter?=null
+    private var mData:RecruitDetailsData?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_recruit_details
     }
@@ -123,6 +125,7 @@ class RecruitDetailsActivity  : BaseCusActivity(), View.OnClickListener, PopUtil
         var bundle = Bundle()
         bundle.putInt(Configs.USER_HOME_PAGE,4)
         bundle.putInt(Configs.USER_HOME_PAGE_Index,1)
+        bundle.putString(Configs.USER_HOME_PAGE_NAME,mData?.createBy)
         jumpActivity(bundle,UserHomePage::class.java)
 
     }
@@ -176,6 +179,9 @@ class RecruitDetailsActivity  : BaseCusActivity(), View.OnClickListener, PopUtil
     override fun showData(data: NetData?) {
 
         if (data!=null&&data is RecruitDetailsBean&&data.result!=null){
+
+            mData =data.result
+
             tv_details_title.text ="招聘${data.result.jobtitle}"
             tv_cost.text =data.result.price_dictText
             tv_browse.text ="浏览量:${data.result.viewNum}"

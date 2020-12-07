@@ -5,6 +5,7 @@ import com.amap.api.location.*
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode
 import com.amap.api.maps.model.MyLocationStyle
 import com.example.mechanicalapp.App
+import com.example.mechanicalapp.ui.data.HomeCityData
 
 
 object GdMapUtils {
@@ -57,6 +58,13 @@ object GdMapUtils {
                 ) {
                     Log.e("yz_map", "成功了 可以回调了")
 
+
+                    var homeCityData =HomeCityData()
+                    homeCityData.name =amapLocation.city
+                    homeCityData.lat =amapLocation.latitude.toString()
+                    homeCityData.lng =amapLocation.longitude.toString()
+
+                    App.getInstance().homeCityData=homeCityData
                     App.getInstance().thisPoint = getPoint(amapLocation.latitude,amapLocation.longitude)
                     mLocationListener?.locationSuccess(amapLocation)
                 } else {

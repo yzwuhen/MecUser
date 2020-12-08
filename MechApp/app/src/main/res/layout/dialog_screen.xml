@@ -117,6 +117,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp" />
 
+            <LinearLayout
+                android:id="@+id/ly_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,6 +140,7 @@
                 android:textColor="@color/color_222"
                 android:textSize="15sp" />
 
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

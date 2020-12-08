@@ -152,9 +152,6 @@ class MoreDataFragment(var type: Int) : BaseCusFragment(), OnItemClickListener,
             mDialogTvRest?.setOnClickListener(this)
             mDialogTvSure?.setOnClickListener(this)
         }
-
-
-
         mButtDialog?.show()
     }
 

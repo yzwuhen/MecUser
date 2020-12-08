@@ -33,6 +33,8 @@
                     android:drawableRight="@mipmap/map_down"
                     android:drawablePadding="@dimen/dp_8"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="机型"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
@@ -57,6 +59,8 @@
                     android:drawableRight="@mipmap/map_down"
                     android:drawablePadding="@dimen/dp_8"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="品牌"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
@@ -81,6 +85,8 @@
                     android:drawableRight="@mipmap/map_down"
                     android:drawablePadding="@dimen/dp_8"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="地区"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
@@ -105,11 +111,36 @@
                     android:drawableRight="@mipmap/map_down"
                     android:drawablePadding="@dimen/dp_8"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="排序"
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
 
+            <View
+                android:layout_width="1dp"
+                android:layout_height="@dimen/dp_40"
+                android:background="@color/bg_color" />
+
+            <LinearLayout
+                android:id="@+id/ly_screen5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tv_screen5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@mipmap/map_down"
+                    android:drawablePadding="@dimen/dp_8"
+                    android:gravity="center"
+                    android:text="筛选"
+                    android:textColor="@color/color_222"
+                    android:textSize="@dimen/sp_16" />
+            </LinearLayout>
         </LinearLayout>
 
         <com.amap.api.maps.MapView

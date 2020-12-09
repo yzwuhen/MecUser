@@ -19,7 +19,6 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.FactoryData
-import com.example.mechanicalapp.ui.data.HomeCityData
 import com.example.mechanicalapp.ui.data.MoreFactoryBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
@@ -60,10 +59,9 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
         }
         GdMapUtils.location(this)
 
-        mStringList.add("智能排序")
-        mStringList.add("最新上架")
-        mStringList.add("距离由远到近")
-        mStringList.add("价格低")
+        mStringList?.add("智能排序")
+        mStringList?.add("距离由近到远")
+        mStringList?.add("最新上架")
 
         initListener()
     }
@@ -71,12 +69,12 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setIsMap()
+        //根据type 去请求接口
+        mPresenter?.setLocation(App.getInstance().thisPoint)
         getData()
     }
 
     private fun getData() {
-        //根据type 去请求接口
-        mPresenter?.setLocation(App.getInstance().thisPoint)
         mPresenter?.getFactoryList()
     }
 
@@ -85,7 +83,6 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
         ly_screen1.setOnClickListener(this)
         ly_screen2.setOnClickListener(this)
         ly_screen3.setOnClickListener(this)
-        ly_screen4.setOnClickListener(this)
       //  iv_locat.setOnClickListener(this)
         root_view.setOnClickListener(this)
         //地图移动的时候 监听
@@ -122,14 +119,10 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
                 EcType::class.java
             )
             R.id.ly_screen2 -> jumpActivityForReSult(
-                Configs.EC_BRAND_RESULT_CODE,
-                Brand::class.java
+                Configs.PARTS_TYPE_RESULT_CODE,
+                PartsTypeActivity::class.java
             )
-            R.id.ly_screen3 -> jumpActivityForReSult(
-                Configs.CITY_RESULT_CODE,
-                SearchCityActivity::class.java
-            )
-            R.id.ly_screen4 -> showPop()
+            R.id.ly_screen3 -> showPop()
             R.id.iv_locat -> locat()
             R.id.item_root -> jum()
         }
@@ -209,33 +202,53 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode==Configs.CITY_RESULT_CODE){
-            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)!=null){
-                showResultAddress(requestCode, data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)as HomeCityData)
-            }
-        }else{
-            showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
-        }
+
+        showResult(
+            requestCode,
+            data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+            data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+        )
         super.onActivityResult(requestCode, resultCode, data)
 
     }
 
-    private fun showResultAddress(requestCode: Int, homeCityData: HomeCityData) {
-        tv_screen3.text = homeCityData.name
-    }
-    private fun showResult(requestCode: Int, extra: String?) {
+    private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
         if (extra.isNullOrEmpty()) {
             return
         }
         when (requestCode) {
-            Configs.EC_TYPE_RESULT_CODE -> tv_screen1.text = extra
-            Configs.EC_BRAND_RESULT_CODE -> tv_screen2.text = extra
-        }
+            Configs.EC_TYPE_RESULT_CODE -> {
+                tv_screen1.text = extra
+                if (extra =="不限"){
+                    mPresenter?.setRepaireType(null)
+                }else{
+                    mPresenter?.setRepaireType(extra)
+                }
+            }
+            Configs.PARTS_TYPE_RESULT_CODE -> {
+                tv_screen2.text = extra
+                if (extra =="不限"){
+                    mPresenter?.setComponentType(null)
+                }else{
+                    mPresenter?.setComponentType(extra)
+                }
 
+            }
+
+        }
+        getData()
     }
 
     override fun onItemClick(view: View, position: Int) {
+        when(view?.id){
+            R.id.tv_screen->{
+                tv_screen3.text=mStringList[position]
+                mPresenter?.setSort(position)
+                getData()
+                PopUtils.dismissPop()
+            }
 
+        }
     }
 
     override fun refreshUI(data: NetData?) {
@@ -250,6 +263,7 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     private fun addMarks() {
         aMap?.clear(true)
         mMarkerList.clear()
+        markerLocat=null
         addMark(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
         for (index in mList.indices) {
 
@@ -315,6 +329,7 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     @SuppressLint("SetTextI18n")
     private fun showViewInfo(position: Int) {
         if (mList.size==0){
+            root_view.visibility =View.GONE
             return
         }
         root_view.visibility =View.VISIBLE
@@ -338,11 +353,11 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     private fun getRes(isSelect: Boolean): Int {
 
             if (isSelect) {
-                R.mipmap.map_marks_s1
+                R.mipmap.map_marks_n6
             } else {
-                R.mipmap.map_marks_n1
+                R.mipmap.map_marks_n6
             }
-        return R.mipmap.map_marks_n1
+        return R.mipmap.map_marks_n6
     }
 
     fun getView(res: Int): View {

@@ -32,7 +32,18 @@ public class MecTypeChildData extends BaseData {
     private String sysOrgCode;
     private String id;
     private String isHot;
+    private String name;//配件专用
+    private String pictures;//配件专用
+
     private boolean isSelect;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPictures() {
+        return pictures;
+    }
 
     public boolean isSelect() {
         return isSelect;

@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
@@ -103,7 +104,7 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
         et_production_time.addTextChangedListener(this)
         et_address.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
-
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
     }
 
     override fun initPresenter() {
@@ -404,6 +405,7 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
         if (TextUtils.isEmpty(et_address.text.toString().trim())) {
             return false
         }
+        tv_tip.text="${et_input.text.length}/200"
         mReMecLease.address = et_address.text.toString().trim()
         mReMecLease.briefDesc = et_input.text.toString().trim()
         if (mPicList.size==0) {

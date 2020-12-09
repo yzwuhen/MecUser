@@ -12,25 +12,22 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PartsTypeLeftAdapter
 import com.example.mechanicalapp.ui.adapter.PartsTypeRightAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.MecTypeBean
 import com.example.mechanicalapp.ui.data.MecTypeChildData
-import com.example.mechanicalapp.ui.data.MecTypeParentData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
+import com.example.mechanicalapp.ui.data.MecTypeData
 import com.example.mechanicalapp.ui.mvp.impl.PartsTypePresenter
-import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
-import com.example.mechanicalapp.ui.mvp.v.MecTypeView
+import com.example.mechanicalapp.ui.mvp.v.TypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
-    MecTypeView<NetData> {
+    TypeView<MecTypeBean> {
 
 
     private var mLeftAdapter: PartsTypeLeftAdapter? = null
     private var mRightAdapter: PartsTypeRightAdapter? = null
-    var mList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
-
+    var mLeftList: MutableList<MecTypeData> = ArrayList<MecTypeData>()
+    private var index:Int =0
     private var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
     private var mPresenter: PartsTypePresenter?=null
     override fun getLayoutId(): Int {
@@ -41,7 +38,7 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun initView() {
         super.initView()
 
-        mLeftAdapter = PartsTypeLeftAdapter(this, mList, this)
+        mLeftAdapter = PartsTypeLeftAdapter(this, mLeftList, this)
         recycler_list_left.layoutManager = LinearLayoutManager(this)
         recycler_list_left.adapter = mLeftAdapter
 
@@ -51,7 +48,7 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
         recycler_list_right.adapter = mRightAdapter
 
 
-        tv_title.text="机械类型"
+        tv_title.text="配件类型"
 
         tv_unlimited.setOnClickListener(this)
         iv_back.setOnClickListener(this)
@@ -76,7 +73,20 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.ly_type->callback(mRightList[position].cateName,mRightList[position].id)
+            R.id.tv_type->{
+                if (index!=position){
+                    mLeftList[index].isSelect =false
+                    mLeftAdapter?.notifyItemChanged(index)
+                    mLeftList[position].isSelect =true
+                    mLeftAdapter?.notifyItemChanged(position)
+
+                    mRightList.clear()
+                    mRightList.addAll(mLeftList[position].partsList)
+                    mRightAdapter?.notifyDataSetChanged()
+                    index = position
+                }
+            }
+            R.id.ly_type->callback(mRightList[position].name,mRightList[position].id)
         }
     }
 
@@ -100,28 +110,19 @@ class PartsTypeActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
 
     }
 
+    override fun refreshLeftUI(bean: MecTypeBean?) {
+        mLeftList.clear()
+        if (bean!=null&&bean?.code==200){
+            mLeftList.addAll(bean?.result)
+            if (mLeftList.size>0){
+                mLeftList[0].isSelect =true
+                mRightList.addAll(bean.result[0].partsList)
 
-    override fun refreshLeftUI(list: List<MecTypeParentData>) {
-        mList.clear()
-        mList.addAll(list)
-        mList[0].isSelect =true
+            }
+        }
         mLeftAdapter?.notifyDataSetChanged()
-    }
-
-    override fun loadLeftMore(list: List<MecTypeParentData>) {
-        mList.addAll(list)
-        mLeftAdapter?.notifyDataSetChanged()
-    }
-
-    override fun refreshRightUI(list: MutableList<MecTypeChildData>) {
-        mRightList.clear()
-        mRightList.addAll(list)
         mRightAdapter?.notifyDataSetChanged()
-    }
 
-    override fun loadRightMore(list: List<MecTypeChildData>) {
-        mRightList.addAll(list)
-        mRightAdapter?.notifyDataSetChanged()
     }
 
 }

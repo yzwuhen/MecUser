@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amap.api.location.DPoint
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
@@ -183,10 +184,12 @@ class RentFragment:BaseCusFragment(), OnItemClickListener, View.OnClickListener,
         tv_screen3.text = homeCityData.name
         if (TextUtils.isEmpty(homeCityData.name)) {
             tv_screen1.text = "地区"
+            (mPresenter as RecruitPresenter)?.setCity(null)
         } else {
             tv_screen1.text = homeCityData.name
+            (mPresenter as RecruitPresenter)?.setCity(homeCityData.name)
         }
-        (mPresenter as RecruitPresenter)?.setCity(homeCityData.name)
+
     }
 
 

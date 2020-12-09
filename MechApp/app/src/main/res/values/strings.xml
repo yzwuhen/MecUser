@@ -11,8 +11,8 @@
 
     <string name="hot_apparatus">热门器械</string>
     
-    <string name="search_mec_tv1">汽车租赁</string>
-    <string name="search_mec_tv2">器械交易</string>
+    <string name="search_mec_tv1">机械租赁</string>
+    <string name="search_mec_tv2">机械交易</string>
     <string name="search_mec_tv3">配件租赁</string>
     <string name="search_mec_tv4">招聘求职</string>
     <string name="search_mec_tv5">维修厂</string>

@@ -36,6 +36,13 @@ class ResultPresenter (
 
     private var type :String?=null
 
+    private var repaireType:String?=null//机械类型 （维修类型）
+    private var  componentType:String?=null //配件类型
+
+    private var city: String? = null
+    private var typeWork: String? = null
+    private var typeWorkId:String?=null
+
     init {
         baseModel = ModelImpl()
     }
@@ -182,8 +189,8 @@ class ResultPresenter (
         baseModel?.getFactoryList(
             page,
             pageSize,
-            null,
-            null,
+            repaireType,
+            componentType,
             sort.toString(),
             title,
             isMap,
@@ -221,9 +228,9 @@ class ResultPresenter (
         baseModel?.getRecruitList(type,
             page,
             pageSize,
-            null,
-            null,
-            null,
+            city,
+            typeWork,
+            typeWorkId,
             sort,
             title,
             isMap,
@@ -321,8 +328,26 @@ class ResultPresenter (
         resetPage()
     }
 
+    fun setRepaireType(mecType:String?){
+        repaireType =mecType
+        resetPage()
+    }
+    fun setComponentType(partsType:String?){
+        componentType =partsType
+        resetPage()
+    }
+
     fun setIsMap() {
         isMap ="1"
+    }
+    fun workType(type:String?,id:String?){
+        typeWork =type
+        typeWorkId =id
+        resetPage()
+    }
+    fun setCity(str:String?){
+        city =str
+        resetPage()
     }
 
 }

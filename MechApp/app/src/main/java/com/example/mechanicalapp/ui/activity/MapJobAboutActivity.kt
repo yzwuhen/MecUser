@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amap.api.location.AMapLocation
 import com.amap.api.location.CoordinateConverter
+import com.amap.api.location.DPoint
 import com.amap.api.maps.AMap
 import com.amap.api.maps.CameraUpdateFactory
 import com.amap.api.maps.model.*
@@ -18,12 +19,9 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.ScreenAdapter
+import com.example.mechanicalapp.ui.adapter.ScreenDataAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.HomeCityData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.RecruitBean
-import com.example.mechanicalapp.ui.data.RecruitData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -38,8 +36,8 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     OnItemClickListener, PopUtils.onViewListener, NetDataView<NetData>, AMap.OnMarkerClickListener {
     var aMap: AMap? = null
     var popRecy: RecyclerView? = null
-    private var mScreenAdapter: ScreenAdapter? = null
-    private var mStringList: MutableList<String> = ArrayList<String>()
+    private var mScreenAdapter: ScreenDataAdapter? = null
+    private var mStringList: MutableList<ScreenData> = ArrayList<ScreenData>()
     private var mPresenter: ResultPresenter? = null
 
     private var mList = ArrayList<RecruitData>()
@@ -64,10 +62,17 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
         }
         GdMapUtils.location(this)
 
-        mStringList.add("智能排序")
-        mStringList.add("最新上架")
-        mStringList.add("距离由远到近")
-        mStringList.add("价格低")
+        var screen1 = ScreenData()
+        screen1.screen = "智能排序"
+        screen1.isSelect = true
+        var screen2 = ScreenData()
+        screen2.screen = "距离近到远"
+        var screen3 = ScreenData()
+        screen3.screen = "更新时间"
+
+        mStringList.add(screen1)
+        mStringList.add(screen2)
+        mStringList.add(screen3)
 
         tv_all.isSelected = true
 
@@ -80,12 +85,12 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setIsMap()
+        //根据type 去请求接口
+        mPresenter?.setLocation(App.getInstance().thisPoint)
         getData()
     }
 
     private fun getData() {
-        //根据type 去请求接口
-        mPresenter?.setLocation(App.getInstance().thisPoint)
         mPresenter?.getRecruitList(null)
     }
 
@@ -94,7 +99,6 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
         ly_screen1.setOnClickListener(this)
         ly_screen2.setOnClickListener(this)
         ly_screen3.setOnClickListener(this)
-        ly_screen4.setOnClickListener(this)
         tv_all.setOnClickListener(this)
         tv_condition1.setOnClickListener(this)
         tv_condition2.setOnClickListener(this)
@@ -129,19 +133,18 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
 
         when (v?.id) {
             R.id.iv_back -> finish()
-            R.id.ly_screen1 -> jumpActivityForReSult(
-                Configs.EC_TYPE_RESULT_CODE,
-                EcType::class.java
+            R.id.ly_screen1 -> {
+                jumpActivityForReSult(
+                    Configs.CITY_RESULT_CODE,
+                    SearchCityActivity::class.java
+                )
+            }
+            R.id.ly_screen2 -> jumpActivityForResult(
+                Configs.WORK_TYPE_RESULT_CODE,
+                1,
+                WorkType::class.java
             )
-            R.id.ly_screen2 -> jumpActivityForReSult(
-                Configs.EC_BRAND_RESULT_CODE,
-                Brand::class.java
-            )
-            R.id.ly_screen3 -> jumpActivityForReSult(
-                Configs.CITY_RESULT_CODE,
-                SearchCityActivity::class.java
-            )
-            R.id.ly_screen4 -> showPop()
+            R.id.ly_screen3 -> showPop()
             R.id.tv_all -> showView(0)
             R.id.tv_condition1 -> showView(1)
             R.id.tv_condition2 -> showView(2)
@@ -184,7 +187,7 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
 
     override fun getView(view: View?) {
         popRecy = view?.findViewById(R.id.pop_recycler_list)
-        mScreenAdapter = ScreenAdapter(this, mStringList, this)
+        mScreenAdapter = ScreenDataAdapter(this, mStringList, this)
         popRecy?.layoutManager = LinearLayoutManager(this)
         popRecy?.adapter = mScreenAdapter
     }
@@ -229,29 +232,56 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode==Configs.CITY_RESULT_CODE){
-            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)!=null){
-                showResultAddress(requestCode, data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)as HomeCityData)
+        if (requestCode == Configs.CITY_RESULT_CODE) {
+            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra) != null) {
+                showResultAddress(
+                    requestCode,
+                    data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra) as HomeCityData
+                )
             }
-        }else{
-            showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
+        } else {
+
+            showResult(
+                requestCode,
+                data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+                data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+            )
         }
         super.onActivityResult(requestCode, resultCode, data)
 
     }
     private fun showResultAddress(requestCode: Int, homeCityData: HomeCityData) {
         tv_screen3.text = homeCityData.name
-    }
-    private fun showResult(requestCode: Int, extra: String?) {
-        if (extra.isNullOrEmpty()) {
-            return
-        }
-        when (requestCode) {
-            Configs.EC_TYPE_RESULT_CODE -> tv_screen1.text = extra
-            Configs.EC_BRAND_RESULT_CODE -> tv_screen2.text = extra
+        if (TextUtils.isEmpty(homeCityData.name)) {
+            tv_screen1.text = "地区"
+            mPresenter?.setCity(null)
+        } else {
+            tv_screen1.text = homeCityData.name
+            mPresenter?.setCity(homeCityData.name)
+            mPresenter?.setLocation(DPoint(homeCityData.lat.toDouble(),homeCityData.lng.toDouble()))
         }
 
+        getData()
     }
+
+
+    private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
+
+        when (requestCode) {
+            Configs.WORK_TYPE_RESULT_CODE -> {
+                if (TextUtils.isEmpty(extra)) {
+                    tv_screen2.text = "不限"
+                    mPresenter?.workType(null, null)
+                } else {
+                    tv_screen2.text = extra
+                    mPresenter?.workType(extra, extraId)
+                }
+            }
+
+        }
+     getData()
+    }
+
 
     override fun onItemClick(view: View, position: Int) {
 
@@ -269,6 +299,7 @@ class MapJobAboutActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     private fun addMarks() {
         aMap?.clear(true)
         mMarkerList.clear()
+        markerLocat=null
         addMark(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
         for (index in mList.indices) {
 

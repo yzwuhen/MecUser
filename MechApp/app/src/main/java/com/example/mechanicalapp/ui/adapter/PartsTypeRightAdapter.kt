@@ -19,8 +19,8 @@ class PartsTypeRightAdapter (var mContext: Context, var mList:MutableList<MecTyp
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_type_name.text = mList[position].cateName
-        ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].cateLogo,R.mipmap.ic_launcher)
+        holder.itemView.tv_type_name.text = mList[position].name
+        ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].pictures,R.mipmap.ic_launcher)
     }
 
     override fun getItemCount(): Int {

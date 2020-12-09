@@ -318,7 +318,7 @@ interface AppService {
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
         @Query("recruitType") recruitType: String,
-        @Query(" region") region: String?,
+        @Query("city") region: String?,
         @Query("cateName") typeWork: String?,
         @Query("cateId") typeWorkId: String?,
         @Query("sort") sort: Int,
@@ -330,24 +330,6 @@ interface AppService {
 
 
     /**
-     * 求职列表
-     * region：地区
-     */
-    @GET("/jeecg-boot/market/mecMarketRecruit/list")
-    fun getWantWorkList(
-        @Query("pageNo") pageNo: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("recruitType") recruitType: String,
-        @Query(" region") region: String?,
-        @Query("typeWork") typeWork: String?,
-        @Query(
-            "sort"
-        ) sort: String?,
-        @Query("jobtitle") jobtitle: String?
-    ): Observable<NetData>
-
-
-    /**
      * 工厂列表
      * region：地区
      */
@@ -355,8 +337,8 @@ interface AppService {
     fun getFactoryList(
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
-        @Query("mecType") mecType: String?,
-        @Query(" partsType") partsType: String?,
+        @Query("repaireType") mecType: String?,//机械类型
+        @Query("componentType") partsType: String?,
         @Query("sort") sort: String?,
         @Query("name") name: String?,
         @Query("isMap") isMap: String?,
@@ -370,23 +352,11 @@ interface AppService {
      * region：地区
      * 返回格式与机械类型差不多 就直接用了
      */
-    @GET("/jeecg-boot/market/mecMarketRecruitCate/rootList")
+    @GET("/jeecg-boot/market/mecMarketRecruitCate/getTreeList")
     fun getWorkTypeList(
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
-    ): Observable<MecTypeParentBean>
-
-    /**
-     * 获取工种 子级
-     * region：地区
-     * 返回格式与机械类型差不多 就直接用了
-     */
-    @GET("/jeecg-boot/market/mecMarketRecruitCate/rootList")
-    fun getWorkTypeChildList(
-        @Query("pageNo") pageNo: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("id") id: String
-    ): Observable<MecTypeChildBean>
+    ): Observable<WorkTypeBean>
 
 
     /**

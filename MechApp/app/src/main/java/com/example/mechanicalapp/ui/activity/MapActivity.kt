@@ -452,6 +452,7 @@ class MapActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Location
     private fun addMarks() {
         aMap?.clear(true)
         mMarkerList.clear()
+        markerLocat=null
         addMark(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
         for (index in mList.indices){
 

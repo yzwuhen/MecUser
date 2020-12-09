@@ -123,7 +123,7 @@ class MoreSelPartsType : BaseCusActivity(), OnItemClickListener, View.OnClickLis
             if (mLeftList[index].partsList.size>0){
                 for (childData in mLeftList[index].partsList.iterator()){
                     if (childData.isSelect){
-                        callbackkStr += "${childData.cateName},"
+                        callbackkStr += "${childData.name},"
                     }
                 }
             }

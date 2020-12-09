@@ -19,7 +19,9 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.PartsBean
+import com.example.mechanicalapp.ui.data.PartsData
 import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -28,12 +30,11 @@ import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.activity_map_parts.*
-import kotlinx.android.synthetic.main.item_more_parts.view.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 
 class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.LocationListener,
     OnItemClickListener, PopUtils.onViewListener, NetDataView<NetData>, AMap.OnMarkerClickListener {
-    var aMap: AMap? = null
+    private var aMap: AMap? = null
     var popRecy: RecyclerView? = null
     private var mScreenAdapter: ScreenAdapter? = null
     private var mStringList: MutableList<String> = ArrayList<String>()
@@ -77,12 +78,12 @@ class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Loc
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setIsMap()
+        mPresenter?.setLocation(App.getInstance().thisPoint)
         getData()
     }
 
     private fun getData() {
         //根据type 去请求接口
-        mPresenter?.setLocation(App.getInstance().thisPoint)
         mPresenter?.getPartsLeaseList(null)
     }
 
@@ -90,8 +91,6 @@ class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Loc
         iv_back.setOnClickListener(this)
         ly_screen1.setOnClickListener(this)
         ly_screen2.setOnClickListener(this)
-        ly_screen3.setOnClickListener(this)
-        ly_screen4.setOnClickListener(this)
         tv_all.setOnClickListener(this)
         tv_condition1.setOnClickListener(this)
         tv_condition2.setOnClickListener(this)
@@ -130,15 +129,7 @@ class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Loc
                 Configs.EC_TYPE_RESULT_CODE,
                 EcType::class.java
             )
-            R.id.ly_screen2 -> jumpActivityForReSult(
-                Configs.EC_BRAND_RESULT_CODE,
-                Brand::class.java
-            )
-            R.id.ly_screen3 -> jumpActivityForReSult(
-                Configs.CITY_RESULT_CODE,
-                SearchCityActivity::class.java
-            )
-            R.id.ly_screen4 -> showPop()
+            R.id.ly_screen2 -> showPop()
             R.id.tv_all -> showView(0)
             R.id.tv_condition1 -> showView(1)
             R.id.tv_condition2 -> showView(2)
@@ -161,14 +152,17 @@ class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Loc
     }
 
     private fun locat() {
-        moveMap(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
-        addMark(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
+        moveMap(App.getInstance().thisPoint.latitude, App.getInstance().thisPoint.longitude)
+        addMark(App.getInstance().thisPoint.latitude, App.getInstance().thisPoint.longitude)
     }
 
     private fun addMark(latitude: Double, longitude: Double) {
         if (markerLocat == null) {
             var view = layoutInflater.inflate(R.layout.map_center_view, null)
-            markerLocat =aMap!!.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).icon(BitmapDescriptorFactory.fromView(view)))
+            markerLocat = aMap!!.addMarker(
+                MarkerOptions().position(LatLng(latitude, longitude))
+                    .icon(BitmapDescriptorFactory.fromView(view))
+            )
         } else {
             markerLocat?.position = LatLng(latitude, longitude)
         }
@@ -226,29 +220,26 @@ class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Loc
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode==Configs.CITY_RESULT_CODE){
-            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)!=null){
-                showResultAddress(requestCode, data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)as HomeCityData)
-            }
-        }else{
-            showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
-        }
+
+        showResult(
+            requestCode,
+            data?.getStringExtra(Configs.SCREEN_RESULT_Extra),
+            data?.getStringExtra(Configs.SCREEN_RESULT_ID)
+        )
+
         super.onActivityResult(requestCode, resultCode, data)
 
     }
-    private fun showResultAddress(requestCode: Int, homeCityData: HomeCityData) {
-        tv_screen3.text = homeCityData.name
-    }
 
-    private fun showResult(requestCode: Int, extra: String?) {
+
+    private fun showResult(requestCode: Int, extra: String?, extraId: String?) {
         if (extra.isNullOrEmpty()) {
             return
         }
-        when (requestCode) {
-            Configs.EC_TYPE_RESULT_CODE -> tv_screen1.text = extra
-            Configs.EC_BRAND_RESULT_CODE -> tv_screen2.text = extra
-        }
 
+        tv_screen1.text = extra
+        mPresenter?.setCateId(extraId)
+        getData()
     }
 
     override fun onItemClick(view: View, position: Int) {
@@ -267,7 +258,8 @@ class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Loc
     private fun addMarks() {
         aMap?.clear(true)
         mMarkerList.clear()
-        addMark(App.getInstance().thisPoint.latitude,App.getInstance().thisPoint.longitude)
+        markerLocat=null
+        addMark(App.getInstance().thisPoint.latitude, App.getInstance().thisPoint.longitude)
         for (index in mList.indices) {
 
             var marks = aMap!!.addMarker(
@@ -354,7 +346,7 @@ class MapPartsActivity : BaseCusActivity(), View.OnClickListener, GdMapUtils.Loc
     //点击marker 底部显示对应的信息
     @SuppressLint("SetTextI18n")
     private fun showViewInfo(position: Int) {
-        if (mList.size==0){
+        if (mList.size == 0) {
             return
         }
         root_view1.visibility = View.VISIBLE

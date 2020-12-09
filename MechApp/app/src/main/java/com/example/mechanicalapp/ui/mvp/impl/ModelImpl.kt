@@ -38,26 +38,12 @@ class ModelImpl : BaseModel {
     fun getWorkTypeList(
         page: Int,
         pageSize: Int,
-        iSubscriberListener: ISubscriberListener<MecTypeParentBean>
+        iSubscriberListener: ISubscriberListener<WorkTypeBean>
     ) {
         appsService?.getWorkTypeList(page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeParentBean>(iSubscriberListener))
-
-    }
-
-    //获取工种子级
-    fun getWorkTypeChildList(
-        page: Int,
-        pageSize: Int,
-        pid: String,
-        iSubscriberListener: ISubscriberListener<MecTypeChildBean>
-    ) {
-        appsService?.getWorkTypeChildList(page, pageSize, pid)
-            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-                AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeChildBean>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<WorkTypeBean>(iSubscriberListener))
 
     }
 

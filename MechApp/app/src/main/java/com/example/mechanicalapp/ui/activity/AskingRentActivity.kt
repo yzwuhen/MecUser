@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
@@ -84,6 +85,7 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
         et_name.addTextChangedListener(this)
         et_phone.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
     }
 
     override fun initPresenter() {
@@ -372,7 +374,7 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
         }
         mReMecLease.address = et_address.text.toString().trim()
         mReMecLease.briefDesc = et_input.text.toString().trim()
-
+        tv_tip.text="${et_input.text.length}/200"
         return true
     }
 }

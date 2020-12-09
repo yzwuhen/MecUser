@@ -6,15 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.data.MecTypeData
-import com.example.mechanicalapp.ui.data.MecTypeParentData
+import com.example.mechanicalapp.ui.data.WorkTypeBean
 import kotlinx.android.synthetic.main.item_ec_type_left.view.*
 
-class PartsTypeLeftAdapter  (var mContext: Context, var mList:MutableList<MecTypeData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LeftWorkAdapter(
+    var mContext: Context,
+    var mList: MutableList<WorkTypeBean.ResultBean>,
+    var mOnItemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PartsTypeLeftVh(View.inflate(parent.context, R.layout.item_ec_type_left,null),mOnItemClickListener)
+        return LeftWorktVh(
+            View.inflate(parent.context, R.layout.item_ec_type_left, null),
+            mOnItemClickListener
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -28,9 +34,15 @@ class PartsTypeLeftAdapter  (var mContext: Context, var mList:MutableList<MecTyp
         return mList.size
     }
 
-    class PartsTypeLeftVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
+    class LeftWorktVh(itemView: View, mOnItemClickListener: OnItemClickListener) :
+        RecyclerView.ViewHolder(itemView) {
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.tv_type,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener {
+                mOnItemClickListener.onItemClick(
+                    itemView.tv_type,
+                    adapterPosition
+                )
+            })
         }
     }
 }

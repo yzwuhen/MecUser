@@ -31,11 +31,11 @@ class MoreSelMecTypeAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.iv_check.isSelected = mList[position].isSelect
-        holder.itemView.tv_type_name.text = mList[position].cateName
+        holder.itemView.tv_type_name.text = mList[position].name
         ImageLoadUtils.loadImageCenterCrop(
             mContext,
             holder.itemView.iv_pic,
-            mList[position].cateLogo,
+            mList[position].pictures,
             R.mipmap.ic_launcher
         )
     }

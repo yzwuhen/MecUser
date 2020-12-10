@@ -28,6 +28,7 @@
     <!--用于申请获取蓝牙信息进行室内定位-->
     <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -153,9 +154,39 @@
         <activity android:name=".ui.activity.MapPartsActivity"/>
         <activity android:name=".ui.activity.MapJobAboutActivity"/>
         <activity android:name=".ui.activity.MapFactoryActivity"/>
+        <activity android:name=".ui.activity.BindPhoneActivity"/>
         <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
         </meta-data>
         <service android:name="com.amap.api.location.APSService" android:foregroundServiceType="location"/>
+
+
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:configChanges="orientation|keyboardHidden"/>
+        <provider
+            android:authorities="com.example.mechanicalapp.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
+
+
     </application>
 
 </manifest>

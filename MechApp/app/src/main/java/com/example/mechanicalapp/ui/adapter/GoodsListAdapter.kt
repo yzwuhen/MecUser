@@ -32,7 +32,7 @@ class GoodsListAdapter (var mContext: Context, var mList:MutableList<GoodsData>,
 
     class HotPartVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView){
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView,adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.root_view,adapterPosition) })
         }
     }
 }

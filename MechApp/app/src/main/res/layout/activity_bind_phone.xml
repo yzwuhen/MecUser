@@ -34,7 +34,7 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="请输入手机号码"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:textColor="@color/color_222"
                 android:textColorHint="@color/color_ccc"
                 android:textSize="15sp" />
@@ -153,7 +153,7 @@
 
 
             <EditText
-                android:id="@+id/wt_pwd"
+                android:id="@+id/et_pwd"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

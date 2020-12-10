@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 import com.amap.api.location.DPoint
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 
@@ -348,6 +349,24 @@ class ResultPresenter (
     fun setCity(str:String?){
         city =str
         resetPage()
+    }
+
+    fun getHotCode() {
+        baseView.showLoading()
+        baseModel?.getHotCode(NetSubscribe(object :ISubscriberListener<HotCodeBean>{
+            override fun onNext(t: HotCodeBean?) {
+                baseView.refreshUI(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+
     }
 
 }

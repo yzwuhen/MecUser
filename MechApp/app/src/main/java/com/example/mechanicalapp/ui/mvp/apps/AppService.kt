@@ -25,6 +25,14 @@ interface AppService {
     @POST("/jeecg-boot/sys/register")
     fun register(@Body requestBody: ReRegister): Observable<LoginCodeBean>
 
+
+    @POST("/jeecg-boot/sys/appLoginByThirdId")
+    fun loginThree(@Body requestBody: ReLoginThree): Observable<LoginCodeBean>
+
+    @POST("/jeecg-boot/sys/appBindUserByThirdId")
+    fun bindThree(@Body requestBody: ReLoginThree?): Observable<LoginCodeBean>
+
+
     /*
     * 首页数据
     * */
@@ -1078,9 +1086,9 @@ interface AppService {
     @GET("/jeecg-boot/shop/mecProd/appListPage")
     fun getGoodsList(
         @Header("X-Access-Token") token: String?,
-        @Query("orderByPrice") orderByPrice: Int,
-        @Query("orderByScale") orderByScale: Int,
-        @Query("orderType") orderType: Int,
+        @Query("orderByPrice") orderByPrice: String?,
+        @Query("orderByScale") orderByScale: String?,
+        @Query("orderType") orderType: String?,
         @Query("title") title: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
@@ -1180,4 +1188,14 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Body reSuggest: ReSuggest?
     ): Observable<NetData>
+
+
+    /**
+     *
+     *获取热门搜索关键词
+     */
+    @GET("/jeecg-boot/shop/mecHotSearchKeyword/keywords")
+    fun getHotCode(
+        @Header("X-Access-Token") token: String?
+    ): Observable<HotCodeBean>
 }

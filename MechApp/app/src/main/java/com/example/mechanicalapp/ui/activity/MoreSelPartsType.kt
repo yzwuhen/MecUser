@@ -18,6 +18,7 @@ import com.example.mechanicalapp.ui.mvp.impl.MoreTypePresenter
 import com.example.mechanicalapp.ui.mvp.v.TypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.lang.Exception
 
 class MoreSelPartsType : BaseCusActivity(), OnItemClickListener, View.OnClickListener,OnItemClickLevelListener,
     TypeView<MecTypeBean> {
@@ -69,7 +70,7 @@ class MoreSelPartsType : BaseCusActivity(), OnItemClickListener, View.OnClickLis
                 super.onScrolled(recyclerView, dx, dy)
                 var layoutManager = recyclerView.layoutManager
                 if (layoutManager is LinearLayoutManager) {
-                    rightIndex =(layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                    rightIndex =(layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 }
 
             }
@@ -100,16 +101,21 @@ class MoreSelPartsType : BaseCusActivity(), OnItemClickListener, View.OnClickLis
     }
 
     private fun selectLeft(position: Int, b: Boolean) {
-        if (leftIndex!=position){
-            mLeftList[leftIndex].isSelect= false
-            mLeftAdapter?.notifyItemChanged(leftIndex)
-            mLeftList[position].isSelect =true
-            mLeftAdapter?.notifyItemChanged(position)
-            leftIndex =position
-            if (b){
-                scrollRight()
+        try {
+            if (leftIndex!=position){
+                mLeftList[leftIndex].isSelect= false
+                mLeftAdapter?.notifyItemChanged(leftIndex)
+                mLeftList[position].isSelect =true
+                mLeftAdapter?.notifyItemChanged(position)
+                leftIndex =position
+                if (b){
+                    scrollRight()
+                }
             }
+        }catch (e:Exception){
+
         }
+
     }
 
     private fun scrollRight(){

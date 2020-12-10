@@ -19,6 +19,7 @@ import com.example.mechanicalapp.ui.mvp.impl.MoreTypePresenter
 import com.example.mechanicalapp.ui.mvp.v.TypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.lang.Exception
 
 class MoreSelectMecType :BaseCusActivity(), OnItemClickListener ,View.OnClickListener,OnItemClickLevelListener,
     TypeView<MecTypeBean> {
@@ -77,7 +78,7 @@ class MoreSelectMecType :BaseCusActivity(), OnItemClickListener ,View.OnClickLis
                 if (layoutManager is LinearLayoutManager) {
                   //  var  lastVisibleItemPosition =(layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
                   //  var firstVisibleItemPosition =(layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                    rightIndex =(layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                    rightIndex =(layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                   //  var lastCompletelyVisibleItemPosition =(layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                 }
 
@@ -98,16 +99,21 @@ class MoreSelectMecType :BaseCusActivity(), OnItemClickListener ,View.OnClickLis
     }
 
     private fun selectLeft(position: Int, b: Boolean) {
-        if (leftIndex!=position){
-            mLeftList[leftIndex].isSelect= false
-            mLeftAdapter?.notifyItemChanged(leftIndex)
-            mLeftList[position].isSelect =true
-            mLeftAdapter?.notifyItemChanged(position)
-            leftIndex =position
-            if (b){
-                scrollRight()
+        try {
+            if (leftIndex!=position){
+                mLeftList[leftIndex].isSelect= false
+                mLeftAdapter?.notifyItemChanged(leftIndex)
+                mLeftList[position].isSelect =true
+                mLeftAdapter?.notifyItemChanged(position)
+                leftIndex =position
+                if (b){
+                    scrollRight()
+                }
             }
+        }catch (e:Exception){
+
         }
+
     }
 
     private fun scrollRight(){

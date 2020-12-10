@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.ShopCarAdapter
@@ -228,7 +230,9 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
                 if (isEdit) {
                     showDel(position)
                 } else {
-                    jumpActivity(null, GoodsDetailsActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putString(Configs.MEC_ID, mList[position].productId)
+                    jumpActivity(bundle,GoodsDetailsActivity::class.java)
                 }
             }
             R.id.tv_num -> showPopInput(position)
@@ -337,6 +341,8 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
                 mTvMoney?.text = "￥${goodsProduct?.price}"
                 mTvTitle?.text = goodsProduct?.title
             }
+        }else{
+            mSpecAttrAdapter?.notifyDataSetChanged()
         }
         mSpecsDialog?.show()
 
@@ -444,6 +450,7 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             }
             strSpec += ","
         }
+        Log.v("sss==","ss==========$strSpec")
         strSpec = strSpec.substring(0, strSpec.length - 1)
         for (sku in mSkuList.iterator()) {
             if (strSpec == sku.name) {

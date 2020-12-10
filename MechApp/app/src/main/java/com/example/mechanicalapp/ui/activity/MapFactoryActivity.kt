@@ -353,7 +353,7 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
     private fun getRes(isSelect: Boolean): Int {
 
             if (isSelect) {
-                R.mipmap.map_marks_n6
+                R.mipmap.map_marks_s6
             } else {
                 R.mipmap.map_marks_n6
             }

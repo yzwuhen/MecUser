@@ -6,28 +6,43 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.HistoryAdapter
+import com.example.mechanicalapp.ui.adapter.HotCodeAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.HotCodeBean
+import com.example.mechanicalapp.ui.data.HotCodeData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.widget.FlowLayout
 import com.example.mechanicalapp.ui.widget.TagFlowLayout
 import com.example.mechanicalapp.utils.StringUtils
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_history_search.*
+import kotlinx.android.synthetic.main.item_hot_code.view.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 
 
-class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickListener,TextView.OnEditorActionListener,OnItemClickListener,
-    View.OnClickListener {
+class HistorySearchActivity : BaseCusActivity(), TagFlowLayout.OnTagClickListener,TextView.OnEditorActionListener,OnItemClickListener,
+    View.OnClickListener,NetDataView<NetData> {
 
     private var mHisToryFl: TagFlowLayout? = null
     private var tvDeleteHistory: TextView? = null
     private var mHistoryAdapter: HistoryAdapter? = null
 
+
+    private var mHotRv:RecyclerView?=null
+    private var mHotList =ArrayList<HotCodeData>()
+    private var mHotAdapter :HotCodeAdapter?=null
+
     private var mHistoryList: MutableList<String> = ArrayList<String>()
+    private var mPresenter:ResultPresenter?=null
 
     //0 机械出租 1 机械求租 2 机械出售 3 机械求购  4配件出租 5 配件求租 6维修厂 7搜索我的设备 8 搜索维修订单 9 工程师 10home搜索  11 搜索商品
     //12 求职 13 招聘
@@ -40,7 +55,8 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
 
     override fun initPresenter() {
 
-
+        mPresenter = ResultPresenter(this)
+        mPresenter?.getHotCode()
     }
 
     override fun initView() {
@@ -99,6 +115,9 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
         else if (type==10){
             jumpActivity(bundle, SearchAllActivity::class.java)
         }
+        else if (type==11){
+            jumpActivity(bundle, SearchGoodsResult::class.java)
+        }
         //11 商品可能用不到jumpActivity(bundle, SearchGoodsResult::class.java)
         else if (type==12){
             jumpActivity(bundle, ResultRecruitActivity::class.java)
@@ -119,6 +138,17 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
             mHisToryFl?.setAdapter(mHistoryAdapter)
             tvDeleteHistory?.setOnClickListener(this)
          //   mHisToryFl?.setOnTagClickListener(this)
+        }
+    }
+
+    private fun showHot() {
+
+        if (mHotRv == null) {
+            stub_hot.inflate()
+            mHotRv = findViewById<RecyclerView>(R.id.rv_hot_search)
+            mHotAdapter = HotCodeAdapter(this,mHotList,this)
+            mHotRv?.layoutManager=GridLayoutManager(this,4)
+            mHotRv?.setAdapter(mHotAdapter)
         }
     }
 
@@ -163,8 +193,24 @@ class HistorySearchActivity : BaseActivity<NetData>(), TagFlowLayout.OnTagClickL
                 mHistoryAdapter?.notifyDataChanged()
                 Hawk.put(StringUtils.getHawkKey(type),mHistoryList)
             }
+            R.id.root_view->{
+                jumpAct(mHotList[position].name)
+            }
         }
 
+    }
+
+    override fun refreshUI(data: NetData?) {
+        if (data!=null&&data is HotCodeBean&&data.result!=null&&data.result.records!=null){
+            mHotList.clear()
+            mHotList.addAll(data.result.records)
+            showHot()
+        }
+
+    }
+
+
+    override fun loadMore(data: NetData?) {
     }
 
 

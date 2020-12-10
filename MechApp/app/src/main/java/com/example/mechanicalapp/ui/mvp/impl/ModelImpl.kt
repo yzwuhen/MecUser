@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.*
@@ -1061,9 +1062,9 @@ class ModelImpl : BaseModel {
 
     fun getGoodsList(
         token: String?,
-        orderByPrice: Int,
-        orderByScale: Int,
-        orderType: Int,
+        orderByPrice: String?,
+        orderByScale: String?,
+        orderType: String?,
         title: String?,
         page: Int,
         pageSize: Int,
@@ -1192,7 +1193,13 @@ class ModelImpl : BaseModel {
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<RecruitBean>(mISubscriberListener))
-
-
     }
+
+    fun getHotCode(netSubscribe: NetSubscribe<HotCodeBean>) {
+        appsService?.getHotCode(App.getInstance().token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+
 }

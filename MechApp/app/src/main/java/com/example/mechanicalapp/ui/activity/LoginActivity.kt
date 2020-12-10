@@ -4,21 +4,34 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Bundle
 import android.telephony.TelephonyManager
+import android.util.Log
 import android.view.View
 import androidx.core.app.ActivityCompat
+import com.example.mechanicalapp.App
+import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.request.ReLoginThree
+import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
+import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
+import com.example.mechanicalapp.utils.ToastUtils
+import com.umeng.socialize.UMAuthListener
+import com.umeng.socialize.UMShareAPI
+import com.umeng.socialize.UMShareConfig
+import com.umeng.socialize.bean.SHARE_MEDIA
 import kotlinx.android.synthetic.main.activity_login_third.*
 import kotlinx.android.synthetic.main.layout_title.*
-import java.lang.Exception
 
-class LoginActivity : BaseActivity<NetData>(), View.OnClickListener {
+
+class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView<NetData>,UMAuthListener {
     private var isCheck:Boolean=false
-    var telephonyManager: TelephonyManager? = null
-
+    private var telephonyManager: TelephonyManager? = null
+    private var mPresenter:LoginCodePresenter?=null
+    private var reLoginThree =ReLoginThree()
     override fun getLayoutId(): Int {
 
         return R.layout.activity_login_third
@@ -69,6 +82,7 @@ class LoginActivity : BaseActivity<NetData>(), View.OnClickListener {
     }
 
     override fun initPresenter() {
+        mPresenter=  LoginCodePresenter(this,this)
     }
 
     override fun showLoading() {
@@ -88,7 +102,7 @@ class LoginActivity : BaseActivity<NetData>(), View.OnClickListener {
             R.id.ly_wx -> LoginWx()
             R.id.ly_qq -> LoginQQ()
             R.id.tv_check -> check()
-            R.id.tv_other_login->otherLogin()
+            R.id.tv_other_login -> otherLogin()
             R.id.tv_agreement -> jumpActivity(null, AgreementActivity::class.java)
             R.id.tv_privacy -> jumpActivity(null, PrivacyActivity::class.java)
         }
@@ -97,31 +111,89 @@ class LoginActivity : BaseActivity<NetData>(), View.OnClickListener {
     private fun otherLogin() {
 
 
-        jumpActivity(null,LoginCodeActivity::class.java)
+        jumpActivity(null, LoginCodeActivity::class.java)
     }
 
     private fun check() {
         isCheck =!isCheck
         if (isCheck){
-            tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check_s,0,0,0)
+            tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check_s, 0, 0, 0)
         }else{
-            tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check,0,0,0)
+            tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check, 0, 0, 0)
         }
 
     }
 
     private fun LoginQQ() {
-
+        val config = UMShareConfig()
+        config.isNeedAuthOnGetUserInfo(true)
+        UMShareAPI.get(this).setShareConfig(config)
+        UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.QQ, this)
 
     }
 
     private fun LoginWx() {
-
+        if (!isCheck){
+            ToastUtils.showText("请先阅读并同意用户协议")
+            return
+        }
+        val config = UMShareConfig()
+        config.isNeedAuthOnGetUserInfo(true)
+        UMShareAPI.get(this).setShareConfig(config)
+        UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.WEIXIN, this)
 
     }
 
     private fun login() {
 
 
+    }
+
+    override fun onStart(p0: SHARE_MEDIA?) {
+
+    }
+
+    override fun onComplete(platform: SHARE_MEDIA?, action: Int, data: MutableMap<String, String>?) {
+        Log.v("sss", "==============================")
+
+        if (platform==SHARE_MEDIA.QQ){
+            reLoginThree.type ="2"
+
+        }else if (platform ==SHARE_MEDIA.WEIXIN){
+            reLoginThree.type ="1"
+            reLoginThree.thirdId=data?.get("openid")
+            App.getInstance().userInfo.sex=1
+            App.getInstance().userInfo.avatar=data?.get("profile_image_url")
+            App.getInstance().userInfo.realname=data?.get("name")
+        }
+        mPresenter?.loginThree(reLoginThree)
+    }
+
+    override fun onError(platform: SHARE_MEDIA?, action: Int, e: Throwable?) {
+        Log.v("sss", "==============================$action")
+    }
+
+    override fun onCancel(platform: SHARE_MEDIA?, action: Int) {
+    }
+
+    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
+        if (mLoginCodeBean.code==200){
+            jumpActivity(null, MainActivity::class.java)
+            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
+            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
+            App.getInstance().token=mLoginCodeBean.result?.token
+            finish()
+        }else if (mLoginCodeBean.code==201){
+            var bundle =Bundle()
+            bundle.putSerializable("data",reLoginThree)
+            jumpActivity(bundle, BindPhoneActivity::class.java)
+            finish()
+        }
+        else{
+            ToastUtils.showText(mLoginCodeBean.message)
+        }
+    }
+
+    override fun loginErr(exception: String?) {
     }
 }

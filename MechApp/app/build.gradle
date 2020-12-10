@@ -14,6 +14,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders= [qqappid: "101830139"]
     }
     signingConfigs {
         debug {
@@ -87,4 +88,13 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation "com.orhanobut:hawk:2.0.1"
+
+    implementation  'com.umeng.umsdk:common:9.3.2'
+    implementation "com.umeng.umsdk:asms:1.1.3" // asms包依赖(必选)
+    implementation "com.umeng.umsdk:crash:0.0.4" // native crash包依赖(必选)
+    implementation  'com.umeng.umsdk:share-core:7.1.3'
+    implementation  'com.umeng.umsdk:share-board:7.1.3'
+    implementation  'com.umeng.umsdk:share-qq:7.1.3'
+    implementation  'com.umeng.umsdk:share-wx:7.1.3'
+    implementation  'com.umeng.umsdk:share-sina:7.1.3'
 }

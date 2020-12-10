@@ -30,6 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inflatedId="@+id/ly_history"
-            android:layout="@layout/include_hostory_search"/>
+            android:layout="@layout/inculde_hot_search"/>
     </LinearLayout>
 </LinearLayout>

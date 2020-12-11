@@ -32,7 +32,11 @@ interface AppService {
     @POST("/jeecg-boot/sys/appBindUserByThirdId")
     fun bindThree(@Body requestBody: ReLoginThree?): Observable<LoginCodeBean>
 
+    @POST("/jeecg-boot/sys/user/appChangePassword")
+    fun resetPwd( @Header("X-Access-Token") token: String?,@Body requestBody: ResetPwd): Observable<LoginCodeBean>
 
+    @POST("/jeecg-boot/sys/sms")
+    fun getMsgCode(@Body requestBody:ReGetMsgCode): Observable<NetData>
     /*
     * 首页数据
     * */

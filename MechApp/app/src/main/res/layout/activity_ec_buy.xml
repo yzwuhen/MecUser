@@ -160,7 +160,7 @@
 
                 <TextView
                     style="@style/tv_style_left"
-                    android:text="预算价格" />
+                    android:text="预算" />
                 <EditText android:id="@+id/et_price"
                     android:inputType="numberDecimal"
                     android:hint="请输入预算价格"

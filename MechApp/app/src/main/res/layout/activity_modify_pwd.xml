@@ -14,6 +14,7 @@
         android:padding="@dimen/dp_17">
 
         <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_20"
@@ -28,8 +29,10 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/et_code"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:paddingLeft="@dimen/dp_10"
                 android:layout_weight="1"
                 android:background="@drawable/rect_radio_6_g"
                 android:hint="请输入验证码"
@@ -38,6 +41,7 @@
                 android:textSize="@dimen/sp_16" />
 
             <TextView
+                android:id="@+id/tv_get_code"
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
@@ -54,10 +58,13 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/et_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rect_radio_6_g"
                 android:hint="请输入6-12位新密码"
+                android:paddingLeft="@dimen/dp_10"
+                android:inputType="textPassword"
                 android:textColor="@color/color_222"
                 android:textColorHint="#cacaca"
                 android:textSize="@dimen/sp_16" />
@@ -70,9 +77,12 @@
             android:orientation="horizontal">
 
             <EditText
+                android:id="@+id/et_pwd1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rect_radio_6_g"
+                android:paddingLeft="@dimen/dp_10"
+                android:inputType="textPassword"
                 android:hint="请再次输入新密码"
                 android:textColor="@color/color_222"
                 android:textColorHint="#cacaca"
@@ -84,13 +94,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_next"
+        android:id="@+id/tv_rest_pwd"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:textSize="17sp"
         android:layout_margin="@dimen/dp_17"
         android:gravity="center"
-        android:background="@drawable/rect_radio_6_cacaca"
+        android:background="@drawable/rect_radio_6_y"
         android:text="重置密码"
         android:textColor="@color/color_222"
         android:layout_height="56dp"/>

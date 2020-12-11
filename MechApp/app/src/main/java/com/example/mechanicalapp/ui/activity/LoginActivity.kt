@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_login_third.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 
-class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView<NetData>,UMAuthListener {
+class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UMAuthListener {
     private var isCheck:Boolean=false
     private var telephonyManager: TelephonyManager? = null
     private var mPresenter:LoginCodePresenter?=null
@@ -176,22 +176,25 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView<Ne
     override fun onCancel(platform: SHARE_MEDIA?, action: Int) {
     }
 
-    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
-        if (mLoginCodeBean.code==200){
-            jumpActivity(null, MainActivity::class.java)
-            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
-            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
-            App.getInstance().token=mLoginCodeBean.result?.token
-            finish()
-        }else if (mLoginCodeBean.code==201){
-            var bundle =Bundle()
-            bundle.putSerializable("data",reLoginThree)
-            jumpActivity(bundle, BindPhoneActivity::class.java)
-            finish()
+    override fun success(netData: NetData) {
+        if (netData!=null &&netData is LoginCodeBean){
+            if (netData.code==200){
+                jumpActivity(null, MainActivity::class.java)
+                // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
+                App.getInstance().setUser(netData.result?.userInfo)
+                App.getInstance().token=netData.result?.token
+                finish()
+            }else if (netData.code==201){
+                var bundle =Bundle()
+                bundle.putSerializable("data",reLoginThree)
+                jumpActivity(bundle, BindPhoneActivity::class.java)
+                finish()
+            }
+            else{
+                ToastUtils.showText(netData.message)
+            }
         }
-        else{
-            ToastUtils.showText(mLoginCodeBean.message)
-        }
+
     }
 
     override fun loginErr(exception: String?) {

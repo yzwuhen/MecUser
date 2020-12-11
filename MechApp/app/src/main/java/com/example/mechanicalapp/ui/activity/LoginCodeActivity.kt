@@ -9,13 +9,14 @@ import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.base.WeakHandler
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReGetMsgCode
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_login_code.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView<NetData> {
+class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView{
     private var isCheck:Boolean=false
     private var mPresenter:LoginCodePresenter?=null
     private var phone:String?=null
@@ -111,9 +112,20 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
 
     private fun getCodes() {
 
+        phone = et_phone.text.toString().trim()
+
+        if (TextUtils.isEmpty(phone)){
+            ToastUtils.showText("请输入手机号码")
+            return
+        }
+
         sTime = 60
         handler.sendEmptyMessage(1)
         tv_get_code.setEnabled(false)
+        var mReGetMsgCode =ReGetMsgCode()
+        mReGetMsgCode.mobile =phone
+        mReGetMsgCode.smsmode="0"
+        mPresenter?.getMsgCode(mReGetMsgCode)
     }
 
     private fun check() {
@@ -151,15 +163,18 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
         return true
     }
 
-    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
-        if (mLoginCodeBean.code==200){
-            jumpActivity(null, MainActivity::class.java)
-            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
-            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
-            App.getInstance().token=mLoginCodeBean.result?.token
-            finish()
-        }else{
-            ToastUtils.showText(mLoginCodeBean.message)
+    override fun success(netData: NetData) {
+        if (netData!=null &&netData is LoginCodeBean){
+            if (netData.code==200){
+                jumpActivity(null, MainActivity::class.java)
+                // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
+                App.getInstance().setUser(netData.result?.userInfo)
+                App.getInstance().token=netData.result?.token
+                finish()
+            }else{
+                ToastUtils.showText(netData.message)
+            }
+
         }
 
     }

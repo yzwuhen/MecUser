@@ -113,7 +113,7 @@ class SidleView(var mContext: Context, attrs: AttributeSet? = null) : View(
         // drawText(canvas)
         frontPaint?.let {
             canvas?.drawRoundRect(
-                rectLeft?.left.toFloat() + bitMapSize,
+                rectLeft?.left.toFloat() ,
                 0f,
                 width * 1f,
                 height * 1f,

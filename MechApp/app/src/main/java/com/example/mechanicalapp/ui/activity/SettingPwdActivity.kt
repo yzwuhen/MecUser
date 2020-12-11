@@ -9,8 +9,6 @@ import kotlinx.android.synthetic.main.layout_title.*
 
 class SettingPwdActivity : BaseActivity<NetData>(), View.OnClickListener {
     override fun getLayoutId(): Int {
-
-
         return R.layout.activity_setting_pwd
     }
 

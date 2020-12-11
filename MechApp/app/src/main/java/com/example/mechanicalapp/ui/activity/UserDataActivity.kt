@@ -148,11 +148,13 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-//
-//
 //                    Log.v("ssssss=========sss","===========q========${File(result[0]?.realPath.toString()).exists()}")
 //                    Log.v("ssssss=========sss","========2===========${File(result[0]?.path.toString()).exists()}")
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -166,8 +168,13 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                 //   mPresenter?.upLoadFile(result[0]?.realPath.toString())
                    // ImageLoadUtils.loadImage(App.getInstance().applicationContext,iv_user_pic,result[0]?.path,R.mipmap.user_default)
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
                 override fun onCancel() {
                     // 取消
@@ -177,7 +184,6 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
 
     override fun hasPermissions() {
         super.hasPermissions()
-        Log.v("sss","sssss授权成功打开相机")
         takePoto()
     }
 

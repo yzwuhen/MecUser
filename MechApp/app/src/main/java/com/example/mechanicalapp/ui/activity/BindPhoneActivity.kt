@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.os.Bundle
 import android.text.InputFilter
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
@@ -9,7 +8,6 @@ import android.view.View
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.base.WeakHandler
 import com.example.mechanicalapp.ui.data.LoginCodeBean
@@ -19,15 +17,9 @@ import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_bind_phone.*
-import kotlinx.android.synthetic.main.activity_bind_phone.et_phone
-import kotlinx.android.synthetic.main.activity_bind_phone.et_pwd
-import kotlinx.android.synthetic.main.activity_bind_phone.tv_agreement
-import kotlinx.android.synthetic.main.activity_bind_phone.tv_check
-import kotlinx.android.synthetic.main.activity_bind_phone.tv_privacy
-import kotlinx.android.synthetic.main.activity_login_pwd.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class BindPhoneActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<NetData> {
+class BindPhoneActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView {
     private var isCheck: Boolean = false
     private var isEyes1: Boolean = false
     private var isEyes2: Boolean = false
@@ -198,17 +190,20 @@ class BindPhoneActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView
         }
     }
 
-    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
-        if (mLoginCodeBean.code==200){
-            jumpActivity(null, MainActivity::class.java)
-            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
-            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
-            App.getInstance().token=mLoginCodeBean.result?.token
-            finish()
+    override fun success(netData: NetData) {
+        if (netData!=null && netData is LoginCodeBean){
+            if (netData.code==200){
+                jumpActivity(null, MainActivity::class.java)
+                // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
+                App.getInstance().setUser(netData.result?.userInfo)
+                App.getInstance().token=netData.result?.token
+                finish()
+            }
+            else{
+                ToastUtils.showText(netData.message)
+            }
         }
-        else{
-            ToastUtils.showText(mLoginCodeBean.message)
-        }
+
     }
 
     override fun loginErr(exception: String?) {

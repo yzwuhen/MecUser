@@ -68,7 +68,7 @@
                 style="@style/ly_style_h">
 
                 <TextView
-                    style="@style/tv_style_left"
+                    style="@style/tv_style_left1"
                     android:text="选择工种" />
                 <TextView
                     android:hint="请选择工种"
@@ -86,7 +86,7 @@
                 style="@style/ly_style_h">
 
                 <TextView
-                    style="@style/tv_style_left"
+                    style="@style/tv_style_left1"
                     android:text="工作经验" />
                 <TextView
                     android:hint="请选择工作经验"
@@ -105,7 +105,7 @@
                 style="@style/ly_style_h">
 
                 <TextView
-                    style="@style/tv_style_left"
+                    style="@style/tv_style_left1"
                     android:text="工资薪酬" />
                 <TextView
                     android:hint="请选择公司薪酬"

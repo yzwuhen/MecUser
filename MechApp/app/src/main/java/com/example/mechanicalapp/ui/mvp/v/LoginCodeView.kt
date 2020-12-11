@@ -1,9 +1,9 @@
 package com.example.mechanicalapp.ui.mvp.v
 
-import com.example.mechanicalapp.ui.data.LoginCodeBean
+import com.example.mechanicalapp.ui.data.NetData
 
 
-interface LoginCodeView<NetData> :BaseView<NetData> {
-    fun loginSuccess(mLoginCodeBean: LoginCodeBean)
+interface LoginCodeView:BaseView<NetData> {
+    fun success(netData: NetData)
     fun loginErr(exception: String?)
 }

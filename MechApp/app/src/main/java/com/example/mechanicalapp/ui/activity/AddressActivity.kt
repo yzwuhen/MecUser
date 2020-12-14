@@ -198,21 +198,25 @@ class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView {
     private fun submit() {
         if (TextUtils.isEmpty(et_user_name.text.toString())) {
             ToastUtils.showText("请输入联系人姓名")
+            return
         }
         reAddress.name = et_user_name.text.toString()
 
 
         if (TextUtils.isEmpty(et_user_phone.text.toString())) {
             ToastUtils.showText("请输入您的手机号码")
+            return
         }
         reAddress.phone = et_user_phone.text.toString()
 
         if (TextUtils.isEmpty(et_take_goods_address.text.toString())) {
             ToastUtils.showText("请选择地区")
+            return
         }
 
         if (TextUtils.isEmpty(et_address_details.text.toString())) {
             ToastUtils.showText("请输入详细地址")
+            return
         }
         reAddress.adress = et_address_details.text.toString()
 

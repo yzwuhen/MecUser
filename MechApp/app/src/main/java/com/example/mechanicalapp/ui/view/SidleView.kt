@@ -220,6 +220,13 @@ class SidleView(var mContext: Context, attrs: AttributeSet? = null) : View(
 
     }
 
+    public fun resetView(){
+        rectLeft.left =0
+        rectLeft.right =bitMapSize
+        str="滑动滑块完成验证"
+        invalidate()
+    }
+
     private fun down(x: Float) {
         if (x >= rectLeft?.left && x <= rectLeft?.right) {
 

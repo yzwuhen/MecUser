@@ -6,162 +6,20 @@
 
     <include layout="@layout/layout_title" />
 
-    <ScrollView
+    <com.liaoinstan.springview.widget.SpringView
+        android:id="@+id/spring_list"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_45"
-        android:paddingBottom="60dp"
-        android:scrollbars="none"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="配件"
-                android:textColor="@color/color_222"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_parts_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="小计：￥2000"
-                android:textColor="#FC3E39"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <View style="@style/h_view_1" />
+        android:layout_marginBottom="60dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_parts"
+            android:id="@+id/recycle_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
-        <View style="@style/h_view_10" />
+    </com.liaoinstan.springview.widget.SpringView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="工时费"
-                android:textColor="@color/color_222"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_work_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="小计：￥2000"
-                android:textColor="#FC3E39"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <View style="@style/h_view_1" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_work"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <View style="@style/h_view_10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="差旅费"
-                android:textColor="@color/color_222"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_travel_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="小计：￥2000"
-                android:textColor="#FC3E39"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <View style="@style/h_view_1" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_travel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <View style="@style/h_view_10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="其他费用"
-                android:textColor="@color/color_222"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_other_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="小计：￥2000"
-                android:textColor="#FC3E39"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <View style="@style/h_view_1" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_other"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <View style="@style/h_view_10" />
-
-    </LinearLayout>
-
-    </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -182,7 +40,7 @@
             android:id="@+id/tv_all_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥2000"
+            android:text="￥0"
             android:textColor="#FC3E39"
             android:textSize="16sp" />
     </LinearLayout>

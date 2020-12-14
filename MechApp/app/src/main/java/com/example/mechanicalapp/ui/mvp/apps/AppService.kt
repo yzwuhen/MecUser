@@ -37,6 +37,13 @@ interface AppService {
 
     @POST("/jeecg-boot/sys/sms")
     fun getMsgCode(@Body requestBody:ReGetMsgCode): Observable<NetData>
+
+
+    @POST("/jeecg-boot/sys/user/checkCaptcha")
+    fun verifyCode(@Body requestBody:ReGetMsgCode): Observable<NetData>
+    @POST("/jeecg-boot/sys/user/forgotPassword")
+    fun forgotPwd(@Body requestBody:ReGetMsgCode): Observable<NetData>
+
     /*
     * 首页数据
     * */
@@ -1202,4 +1209,22 @@ interface AppService {
     fun getHotCode(
         @Header("X-Access-Token") token: String?
     ): Observable<HotCodeBean>
+
+    /*
+* 清单列表
+* */
+    @GET("/jeecg-boot/repair/mecRepairOrderDetail/queryByRepairOrderId")
+    fun getList(
+        @Header("X-Access-Token") token: String?,
+        @Query("status") status: Int,
+        @Query("repairOrderId") repairOrderId: String?
+    ): Observable<ListBean>
+
+    /* 工程订单评论
+    * */
+    @GET("/jeecg-boot/repair/mecRepairComment/queryById")
+    fun getEvaluate(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<ListBean>
 }

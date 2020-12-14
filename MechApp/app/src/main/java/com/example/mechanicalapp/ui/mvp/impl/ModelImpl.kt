@@ -1201,5 +1201,21 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
+    //清单列表
+    fun getList(token:String?,type:Int,id: String?,mNetSubscribe:NetSubscribe<ListBean>){
+        appsService?.getList(token,type,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
 
+    }
+
+    //清单列表
+    fun getEvaluate(token:String?,id: String?,mNetSubscribe:NetSubscribe<ListBean>){
+        appsService?.getEvaluate(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
 }

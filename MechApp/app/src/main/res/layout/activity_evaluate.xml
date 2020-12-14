@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <include layout="@layout/layout_title" />
@@ -22,6 +23,7 @@
             android:paddingRight="@dimen/dp_10">
 
             <TextView
+                android:id="@+id/tv_order_num"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -59,7 +61,7 @@
                 android:id="@+id/tv_ec_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="挖掘机"
+                android:text=""
                 android:textColor="@color/color_222"
                 android:textSize="16sp" />
 
@@ -163,8 +165,8 @@
             <RatingBar
                 android:id="@+id/ratingBar"
                 style="@style/App_RatingBar"
-                android:layout_width="80dp"
-                android:layout_height="@dimen/dp_40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:numStars="5"
                 android:rating="2.5" />
@@ -181,7 +183,6 @@
         </LinearLayout>
 
         <EditText
-
             android:id="@+id/tv_info"
             android:layout_width="match_parent"
             android:layout_height="174dp"
@@ -189,7 +190,7 @@
             android:background="@drawable/rect_radio_6_g"
             android:gravity="start"
             android:padding="@dimen/dp_10"
-            android:text="维修师傅态度很好，很专业很尽责，维修后的效果也 不错。"
+            android:text=""
             android:textColor="@color/color_222"
             android:textSize="14sp" />
 

@@ -223,6 +223,59 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
                 }
             }))
     }
+    fun verifyCode(requestBody: ReGetMsgCode) {
 
+        baseView.showLoading()
+        appsService?.verifyCode(requestBody)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                //    ToastUtils.showText(t?.message)
+                    if (t != null) {
+                        baseView.success(t)
+                    }else{
+                        baseView.err()
+                    }
+
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                    baseView.loginErr(e?.message)
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            }))
+    }
+    fun forgotPwd(requestBody: ReGetMsgCode) {
+
+        baseView.showLoading()
+        appsService?.forgotPwd(requestBody)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    //    ToastUtils.showText(t?.message)
+                    if (t != null) {
+                        baseView.success(t)
+                    }else{
+                        baseView.err()
+                    }
+
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                    baseView.loginErr(e?.message)
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            }))
+    }
 
 }

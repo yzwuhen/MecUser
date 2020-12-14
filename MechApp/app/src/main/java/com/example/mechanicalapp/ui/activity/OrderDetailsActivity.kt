@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
@@ -89,11 +90,11 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         ly_look_details2.setOnClickListener(this)
         ly_pay.setOnClickListener(this)
 
-        mPresenter = OrderPresenter(this)
-        mPresenter?.getOrderDetails(orderId)
     }
 
     override fun initPresenter() {
+        mPresenter = OrderPresenter(this)
+        mPresenter?.getOrderDetails(orderId)
     }
 
     override fun showLoading() {
@@ -116,16 +117,26 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             R.id.ly_call -> call()
             R.id.tv_letter -> goToChat()
             R.id.tv_call -> call()
-            R.id.ly_look_details -> jumpActivity(null, DetailedListActivity::class.java)
-            R.id.ly_look_details1 -> jumpActivity(null, DetailedListActivity::class.java)
-            R.id.ly_evaluate -> jumpActivity(null, EvaluateActivity::class.java)
+            R.id.ly_look_details ->  jumDetailedList()
+            R.id.ly_look_details1 ->  jumDetailedList()
+            R.id.ly_evaluate ->
+            {
+                var bundle =Bundle()
+                bundle.putSerializable("key",orderData)
+                jumpActivity(bundle, EvaluateActivity::class.java)
+            }
             R.id.tv_pop_sure -> dismissPop()
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.tv_pop_input_cancel -> goVideo()
             R.id.tv_pop_input_sure -> goVideo()
-            R.id.ly_look_details2 -> jumpActivity(null, DetailedListActivity::class.java)
+            R.id.ly_look_details2 -> jumDetailedList()
 //            R.id.ly_pay -> jumpActivity(null, null)
         }
+    }
+    private fun jumDetailedList(){
+        var bundle =Bundle()
+        bundle.putString("id",orderData?.id)
+        jumpActivity(bundle, DetailedListActivity::class.java)
     }
 
     private fun call() {
@@ -251,14 +262,14 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         tv_company_address.text =result?.adress
 
 //        tv_order_type.text =result?.orderNum
-        tv_progress.text =result?.progress
+//        tv_progress.text =result?.progress
         tv_created_time.text =result?.createTime
         tv_info.text =result?.orderDesc
 
         tv_factory_name.text =result?.repairFactoryName
       //  tv_score.text =result?.
         //ratingBar
-        tv_worker_name.text =result?.repairName
+//        tv_worker_name.text =result?.mecRepaireFactory?.
       //  tv_worker_type.text =result?.
         //tv_worker_time
     }

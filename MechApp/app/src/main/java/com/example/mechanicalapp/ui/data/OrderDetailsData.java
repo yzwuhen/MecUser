@@ -1,54 +1,57 @@
 package com.example.mechanicalapp.ui.data;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class OrderDetailsData implements Serializable {
 
 
     /**
-     * id : 1328357286455894018
+     * id : 1338387637587709953
      * createBy : 13751773402
-     * createTime : 2020-11-16 23:20:31
-     * updateBy : null
-     * updateTime : null
+     * createTime : 2020-12-14 15:37:33
+     * updateBy : 16620164051
+     * updateTime : 2020-12-14 17:36:33
      * sysOrgCode : A02
-     * repairFactoryId : null
+     * repairFactoryId : 1332262998391255042
      * repairFactoryName : 锅碗瓢盆
-     * repairFactoryAddress : 广州市海珠区
-     * orderNum : null
+     * repairFactoryAddress : 广州市天河区天河路228号正佳广场6楼
+     * orderNum : 120201214153733406951
      * repairType : null
      * repairTypeName : null
      * orderSum : null
      * payTime : null
      * payType : null
      * payTypeName : null
-     * status : 0
-     * statusName : null
+     * status : 3
+     * statusName : 待付款
      * progress : null
      * progressName : null
      * repairId : null
      * repairName : null
      * customerId : null
-     * customerName : 你现在在
-     * customerPhone : 13333
+     * customerName : yz
+     * customerPhone : 1333333
      * productId : null
-     * productModel : awd-663
-     * productModelId : 1326574064199434242
-     * productType : 挖掘机
-     * productTypeId : 1321476604976406530
+     * productModel : ad533
+     * productModelId : 1326573901854703617
+     * productType : 挖掘机子类
+     * productTypeId : 1323668504007696385
      * productBrandId : 1321490471452721153
-     * productBrand : 八达重工
-     * orderDesc : 你现在在
-     * receiveTime : null
-     * reachTime : null
+     * productBrand : 玛莎拉蒂
+     * orderDesc : 故障描述
+     * receiveTime : 2020-12-14 15:58:27
+     * reachTime : 2020-12-14 16:41:06
      * startRepairTime : null
      * finishedRepairTime : null
-     * engineerIds : null
-     * adress : 广东省深圳市 宝安区
-     * lng : 113.939388
-     * lat : 22.681693
-     * companyName : null
+     * engineerIds : 5
+     * adress : 广东省深圳市 宝安区西乡街道
+     * lng : 113.883902
+     * lat : 22.580897
+     * companyName : yz公司
      * city : null
+     * mecRepaireFactory : {"id":"1332262998391255042","createBy":null,"createTime":"2020-11-27 18:00:26","updateBy":null,"updateTime":"2020-12-10 12:30:51","sysOrgCode":null,"name":"锅碗瓢盆","responsePersonId":null,"responsePersonName":null,"responsePersonPhone":"13886943851","repaireType":"挖掘机子类","componentType":"配件1","address":"广州市天河区天河路228号正佳广场6楼","lng":"113.327011","lat":"23.131704","isApprove":null,"businessLicense":"https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/448318f3-c7d5-4fdf-9243-af159deaa606_1606471217052.jpg","factoryPicture":"https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/34b653f1-d531-4dc3-bd7d-4d2fdd7fbe07_1606471224514.jpg","introduction":"添加维修厂测试，添加维修厂测试","userId":null,"companyName":"广州一帆风顺维修厂","companyId":null,"isTop":null,"city":"广州市","star":3,"viewNum":11}
+     * mecRepairEngineer : [{"id":"5","createBy":"admin","createTime":"2020-10-14 23:59:38","updateBy":"admin","updateTime":"2020-10-16 21:25:36","sysOrgCode":"A01A03","headPicture":"temp/timg22_1602691158438.jpg","name":"龙哥哥","repairFactoryId":"1","repairFactoryName":"维修厂1","phone":"16620164051","repairNum":222,"repairAge":22,"post":"2","userId":null}]
      */
 
     private String id;
@@ -61,22 +64,22 @@ public class OrderDetailsData implements Serializable {
     private String repairFactoryName;
     private String repairFactoryAddress;
     private String orderNum;
-    private String repairType;
-    private String repairTypeName;
-    private String orderSum;
-    private String payTime;
-    private String payType;
-    private String payTypeName;
+    private Object repairType;
+    private Object repairTypeName;
+    private Object orderSum;
+    private Object payTime;
+    private Object payType;
+    private Object payTypeName;
     private String status;
     private String statusName;
-    private String progress;
-    private String progressName;
-    private String repairId;
-    private String repairName;
-    private String customerId;
+    private Object progress;
+    private Object progressName;
+    private Object repairId;
+    private Object repairName;
+    private Object customerId;
     private String customerName;
     private String customerPhone;
-    private String productId;
+    private Object productId;
     private String productModel;
     private String productModelId;
     private String productType;
@@ -86,14 +89,16 @@ public class OrderDetailsData implements Serializable {
     private String orderDesc;
     private String receiveTime;
     private String reachTime;
-    private String startRepairTime;
-    private String finishedRepairTime;
+    private Object startRepairTime;
+    private Object finishedRepairTime;
     private String engineerIds;
     private String adress;
     private String lng;
     private String lat;
     private String companyName;
-    private String city;
+    private Object city;
+    private MecRepaireFactoryBean mecRepaireFactory;
+    private List<MecRepairEngineerBean> mecRepairEngineer;
 
     public String getId() {
         return id;
@@ -175,51 +180,51 @@ public class OrderDetailsData implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public String getRepairType() {
+    public Object getRepairType() {
         return repairType;
     }
 
-    public void setRepairType(String repairType) {
+    public void setRepairType(Object repairType) {
         this.repairType = repairType;
     }
 
-    public String getRepairTypeName() {
+    public Object getRepairTypeName() {
         return repairTypeName;
     }
 
-    public void setRepairTypeName(String repairTypeName) {
+    public void setRepairTypeName(Object repairTypeName) {
         this.repairTypeName = repairTypeName;
     }
 
-    public String getOrderSum() {
+    public Object getOrderSum() {
         return orderSum;
     }
 
-    public void setOrderSum(String orderSum) {
+    public void setOrderSum(Object orderSum) {
         this.orderSum = orderSum;
     }
 
-    public String getPayTime() {
+    public Object getPayTime() {
         return payTime;
     }
 
-    public void setPayTime(String payTime) {
+    public void setPayTime(Object payTime) {
         this.payTime = payTime;
     }
 
-    public String getPayType() {
+    public Object getPayType() {
         return payType;
     }
 
-    public void setPayType(String payType) {
+    public void setPayType(Object payType) {
         this.payType = payType;
     }
 
-    public String getPayTypeName() {
+    public Object getPayTypeName() {
         return payTypeName;
     }
 
-    public void setPayTypeName(String payTypeName) {
+    public void setPayTypeName(Object payTypeName) {
         this.payTypeName = payTypeName;
     }
 
@@ -239,43 +244,43 @@ public class OrderDetailsData implements Serializable {
         this.statusName = statusName;
     }
 
-    public String getProgress() {
+    public Object getProgress() {
         return progress;
     }
 
-    public void setProgress(String progress) {
+    public void setProgress(Object progress) {
         this.progress = progress;
     }
 
-    public String getProgressName() {
+    public Object getProgressName() {
         return progressName;
     }
 
-    public void setProgressName(String progressName) {
+    public void setProgressName(Object progressName) {
         this.progressName = progressName;
     }
 
-    public String getRepairId() {
+    public Object getRepairId() {
         return repairId;
     }
 
-    public void setRepairId(String repairId) {
+    public void setRepairId(Object repairId) {
         this.repairId = repairId;
     }
 
-    public String getRepairName() {
+    public Object getRepairName() {
         return repairName;
     }
 
-    public void setRepairName(String repairName) {
+    public void setRepairName(Object repairName) {
         this.repairName = repairName;
     }
 
-    public String getCustomerId() {
+    public Object getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(Object customerId) {
         this.customerId = customerId;
     }
 
@@ -295,11 +300,11 @@ public class OrderDetailsData implements Serializable {
         this.customerPhone = customerPhone;
     }
 
-    public String getProductId() {
+    public Object getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Object productId) {
         this.productId = productId;
     }
 
@@ -375,19 +380,19 @@ public class OrderDetailsData implements Serializable {
         this.reachTime = reachTime;
     }
 
-    public String getStartRepairTime() {
+    public Object getStartRepairTime() {
         return startRepairTime;
     }
 
-    public void setStartRepairTime(String startRepairTime) {
+    public void setStartRepairTime(Object startRepairTime) {
         this.startRepairTime = startRepairTime;
     }
 
-    public String getFinishedRepairTime() {
+    public Object getFinishedRepairTime() {
         return finishedRepairTime;
     }
 
-    public void setFinishedRepairTime(String finishedRepairTime) {
+    public void setFinishedRepairTime(Object finishedRepairTime) {
         this.finishedRepairTime = finishedRepairTime;
     }
 
@@ -431,11 +436,449 @@ public class OrderDetailsData implements Serializable {
         this.companyName = companyName;
     }
 
-    public String getCity() {
+    public Object getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(Object city) {
         this.city = city;
+    }
+
+    public MecRepaireFactoryBean getMecRepaireFactory() {
+        return mecRepaireFactory;
+    }
+
+    public void setMecRepaireFactory(MecRepaireFactoryBean mecRepaireFactory) {
+        this.mecRepaireFactory = mecRepaireFactory;
+    }
+
+    public List<MecRepairEngineerBean> getMecRepairEngineer() {
+        return mecRepairEngineer;
+    }
+
+    public void setMecRepairEngineer(List<MecRepairEngineerBean> mecRepairEngineer) {
+        this.mecRepairEngineer = mecRepairEngineer;
+    }
+
+    public static class MecRepaireFactoryBean implements Serializable{
+        /**
+         * id : 1332262998391255042
+         * createBy : null
+         * createTime : 2020-11-27 18:00:26
+         * updateBy : null
+         * updateTime : 2020-12-10 12:30:51
+         * sysOrgCode : null
+         * name : 锅碗瓢盆
+         * responsePersonId : null
+         * responsePersonName : null
+         * responsePersonPhone : 13886943851
+         * repaireType : 挖掘机子类
+         * componentType : 配件1
+         * address : 广州市天河区天河路228号正佳广场6楼
+         * lng : 113.327011
+         * lat : 23.131704
+         * isApprove : null
+         * businessLicense : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/448318f3-c7d5-4fdf-9243-af159deaa606_1606471217052.jpg
+         * factoryPicture : https://mechanical-gang-oss.oss-cn-shenzhen.aliyuncs.com/upload/34b653f1-d531-4dc3-bd7d-4d2fdd7fbe07_1606471224514.jpg
+         * introduction : 添加维修厂测试，添加维修厂测试
+         * userId : null
+         * companyName : 广州一帆风顺维修厂
+         * companyId : null
+         * isTop : null
+         * city : 广州市
+         * star : 3
+         * viewNum : 11
+         */
+
+        private String id;
+        private String createBy;
+        private String createTime;
+        private String updateBy;
+        private String updateTime;
+        private String sysOrgCode;
+        private String name;
+        private String responsePersonId;
+        private String responsePersonName;
+        private String responsePersonPhone;
+        private String repaireType;
+        private String componentType;
+        private String address;
+        private String lng;
+        private String lat;
+        private String isApprove;
+        private String businessLicense;
+        private String factoryPicture;
+        private String introduction;
+        private String userId;
+        private String companyName;
+        private String companyId;
+        private String isTop;
+        private String city;
+        private int star;
+        private int viewNum;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getCreateBy() {
+            return createBy;
+        }
+
+        public void setCreateBy(String createBy) {
+            this.createBy = createBy;
+        }
+
+        public String getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
+        }
+
+        public String getUpdateBy() {
+            return updateBy;
+        }
+
+        public void setUpdateBy(String updateBy) {
+            this.updateBy = updateBy;
+        }
+
+        public String getUpdateTime() {
+            return updateTime;
+        }
+
+        public void setUpdateTime(String updateTime) {
+            this.updateTime = updateTime;
+        }
+
+        public String getSysOrgCode() {
+            return sysOrgCode;
+        }
+
+        public void setSysOrgCode(String sysOrgCode) {
+            this.sysOrgCode = sysOrgCode;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getResponsePersonId() {
+            return responsePersonId;
+        }
+
+        public void setResponsePersonId(String responsePersonId) {
+            this.responsePersonId = responsePersonId;
+        }
+
+        public String getResponsePersonName() {
+            return responsePersonName;
+        }
+
+        public void setResponsePersonName(String responsePersonName) {
+            this.responsePersonName = responsePersonName;
+        }
+
+        public String getResponsePersonPhone() {
+            return responsePersonPhone;
+        }
+
+        public void setResponsePersonPhone(String responsePersonPhone) {
+            this.responsePersonPhone = responsePersonPhone;
+        }
+
+        public String getRepaireType() {
+            return repaireType;
+        }
+
+        public void setRepaireType(String repaireType) {
+            this.repaireType = repaireType;
+        }
+
+        public String getComponentType() {
+            return componentType;
+        }
+
+        public void setComponentType(String componentType) {
+            this.componentType = componentType;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getLng() {
+            return lng;
+        }
+
+        public void setLng(String lng) {
+            this.lng = lng;
+        }
+
+        public String getLat() {
+            return lat;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
+
+        public String getIsApprove() {
+            return isApprove;
+        }
+
+        public void setIsApprove(String isApprove) {
+            this.isApprove = isApprove;
+        }
+
+        public String getBusinessLicense() {
+            return businessLicense;
+        }
+
+        public void setBusinessLicense(String businessLicense) {
+            this.businessLicense = businessLicense;
+        }
+
+        public String getFactoryPicture() {
+            return factoryPicture;
+        }
+
+        public void setFactoryPicture(String factoryPicture) {
+            this.factoryPicture = factoryPicture;
+        }
+
+        public String getIntroduction() {
+            return introduction;
+        }
+
+        public void setIntroduction(String introduction) {
+            this.introduction = introduction;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+
+        public String getCompanyName() {
+            return companyName;
+        }
+
+        public void setCompanyName(String companyName) {
+            this.companyName = companyName;
+        }
+
+        public String getCompanyId() {
+            return companyId;
+        }
+
+        public void setCompanyId(String companyId) {
+            this.companyId = companyId;
+        }
+
+        public String getIsTop() {
+            return isTop;
+        }
+
+        public void setIsTop(String isTop) {
+            this.isTop = isTop;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public int getStar() {
+            return star;
+        }
+
+        public void setStar(int star) {
+            this.star = star;
+        }
+
+        public int getViewNum() {
+            return viewNum;
+        }
+
+        public void setViewNum(int viewNum) {
+            this.viewNum = viewNum;
+        }
+    }
+
+    public static class MecRepairEngineerBean implements Serializable {
+        /**
+         * id : 5
+         * createBy : admin
+         * createTime : 2020-10-14 23:59:38
+         * updateBy : admin
+         * updateTime : 2020-10-16 21:25:36
+         * sysOrgCode : A01A03
+         * headPicture : temp/timg22_1602691158438.jpg
+         * name : 龙哥哥
+         * repairFactoryId : 1
+         * repairFactoryName : 维修厂1
+         * phone : 16620164051
+         * repairNum : 222
+         * repairAge : 22
+         * post : 2
+         * userId : null
+         */
+
+        private String id;
+        private String createBy;
+        private String createTime;
+        private String updateBy;
+        private String updateTime;
+        private String sysOrgCode;
+        private String headPicture;
+        private String name;
+        private String repairFactoryId;
+        private String repairFactoryName;
+        private String phone;
+        private int repairNum;
+        private int repairAge;
+        private String post;
+        private Object userId;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getCreateBy() {
+            return createBy;
+        }
+
+        public void setCreateBy(String createBy) {
+            this.createBy = createBy;
+        }
+
+        public String getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
+        }
+
+        public String getUpdateBy() {
+            return updateBy;
+        }
+
+        public void setUpdateBy(String updateBy) {
+            this.updateBy = updateBy;
+        }
+
+        public String getUpdateTime() {
+            return updateTime;
+        }
+
+        public void setUpdateTime(String updateTime) {
+            this.updateTime = updateTime;
+        }
+
+        public String getSysOrgCode() {
+            return sysOrgCode;
+        }
+
+        public void setSysOrgCode(String sysOrgCode) {
+            this.sysOrgCode = sysOrgCode;
+        }
+
+        public String getHeadPicture() {
+            return headPicture;
+        }
+
+        public void setHeadPicture(String headPicture) {
+            this.headPicture = headPicture;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getRepairFactoryId() {
+            return repairFactoryId;
+        }
+
+        public void setRepairFactoryId(String repairFactoryId) {
+            this.repairFactoryId = repairFactoryId;
+        }
+
+        public String getRepairFactoryName() {
+            return repairFactoryName;
+        }
+
+        public void setRepairFactoryName(String repairFactoryName) {
+            this.repairFactoryName = repairFactoryName;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public int getRepairNum() {
+            return repairNum;
+        }
+
+        public void setRepairNum(int repairNum) {
+            this.repairNum = repairNum;
+        }
+
+        public int getRepairAge() {
+            return repairAge;
+        }
+
+        public void setRepairAge(int repairAge) {
+            this.repairAge = repairAge;
+        }
+
+        public String getPost() {
+            return post;
+        }
+
+        public void setPost(String post) {
+            this.post = post;
+        }
+
+        public Object getUserId() {
+            return userId;
+        }
+
+        public void setUserId(Object userId) {
+            this.userId = userId;
+        }
     }
 }

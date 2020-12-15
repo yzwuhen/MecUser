@@ -39,6 +39,8 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     private var mPresenter:OrderPresenter?=null
     private var orderData:OrderDetailsData?=null
+
+    private var mMecRepairEngineerBean: OrderDetailsData.MecRepairEngineerBean?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_order_details
     }
@@ -261,17 +263,21 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         tv_company_name.text =result?.companyName
         tv_company_address.text =result?.adress
 
-//        tv_order_type.text =result?.orderNum
-//        tv_progress.text =result?.progress
+        tv_order_type.text =result?.repairTypeName
+       tv_progress.text =result?.progressName
         tv_created_time.text =result?.createTime
         tv_info.text =result?.orderDesc
 
-        tv_factory_name.text =result?.repairFactoryName
-      //  tv_score.text =result?.
-        //ratingBar
-//        tv_worker_name.text =result?.mecRepaireFactory?.
-      //  tv_worker_type.text =result?.
-        //tv_worker_time
+        tv_factory_name.text =result?.mecRepaireFactory?.name
+        tv_score.text ="${result?.mecRepaireFactory?.star}分"
+        ratingBar.rating = result?.mecRepaireFactory?.star?.toFloat()!!
+        if (result?.mecRepairEngineer!=null&&result.mecRepairEngineer.size>0){
+            mMecRepairEngineerBean =result?.mecRepairEngineer[0]
+            tv_worker_name.text =mMecRepairEngineerBean?.name
+          //  tv_worker_type.text =
+            tv_worker_time.text="${mMecRepairEngineerBean?.repairAge}年"
+        }
+
     }
 
 

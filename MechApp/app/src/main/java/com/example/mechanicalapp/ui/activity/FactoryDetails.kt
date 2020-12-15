@@ -9,21 +9,25 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.BannerData
+import com.example.mechanicalapp.ui.data.FactoryDetailsBean
+import com.example.mechanicalapp.ui.data.IsCollectBean
+import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.luck.picture.lib.PictureSelector
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_factory_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickListener,
+class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickListener,OnBannerListener<BannerData>,
     MecDetailsView<NetData> {
     private var mShareDialog: BottomSheetDialog? = null
     private var mShareView: View? = null
@@ -183,6 +187,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
                 }
                 banner.adapter = ImageAdapter(mList)
                 banner.indicator = CircleIndicator(this)
+                banner.setOnBannerListener(this)
             }
 
             tv_factory_name.text =mData?.name
@@ -217,5 +222,11 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
             ToastUtils.showText(netData?.message)
         }
 
+    }
+
+    override fun OnBannerClick(data: BannerData?, position: Int) {
+        if (data?.img?.endsWith("mp4")!!){
+            PictureSelector.create(this).externalPictureVideo(data.img);
+        }
     }
 }

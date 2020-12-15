@@ -4,6 +4,7 @@ import android.app.Application;
 import android.text.TextUtils;
 
 import com.amap.api.location.DPoint;
+import com.example.mechanicalapp.config.Configs;
 import com.example.mechanicalapp.ui.data.HomeCityData;
 import com.example.mechanicalapp.ui.data.UserInfo;
 import com.orhanobut.hawk.Hawk;
@@ -42,10 +43,15 @@ public class App extends Application {
         return instance;
     }
     public void setUser(UserInfo user){
+        Hawk.put(Configs.USER_INFO,user);
         this.userInfoBean =user;
     }
 
     public UserInfo getUserInfo(){
+        if (userInfoBean ==null){
+            userInfoBean = Hawk.get(Configs.USER_INFO);
+        }
+
         if (userInfoBean ==null){
             userInfoBean =new  UserInfo();
         }
@@ -53,9 +59,13 @@ public class App extends Application {
     }
 
     public void setToken(String token){
+        Hawk.put(Configs.TOKEN,token);
         mToken =token;
     }
     public String getToken(){
+        if (TextUtils.isEmpty(mToken)){
+            mToken= Hawk.get(Configs.TOKEN);
+        }
         return mToken;
     }
 

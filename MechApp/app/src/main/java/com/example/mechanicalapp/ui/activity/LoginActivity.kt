@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
@@ -19,6 +20,7 @@ import com.example.mechanicalapp.ui.data.request.ReLoginThree
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
+import com.orhanobut.hawk.Hawk
 import com.umeng.socialize.UMAuthListener
 import com.umeng.socialize.UMShareAPI
 import com.umeng.socialize.UMShareConfig
@@ -180,9 +182,9 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
         if (netData!=null &&netData is LoginCodeBean){
             if (netData.code==200){
                 jumpActivity(null, MainActivity::class.java)
-                // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
                 App.getInstance().setUser(netData.result?.userInfo)
                 App.getInstance().token=netData.result?.token
+
                 finish()
             }else if (netData.code==201){
                 var bundle =Bundle()

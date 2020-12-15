@@ -64,19 +64,19 @@ public class OrderDetailsData implements Serializable {
     private String repairFactoryName;
     private String repairFactoryAddress;
     private String orderNum;
-    private Object repairType;
-    private Object repairTypeName;
+    private String repairType;
+    private String repairTypeName;
     private Object orderSum;
     private Object payTime;
     private Object payType;
     private Object payTypeName;
     private String status;
     private String statusName;
-    private Object progress;
-    private Object progressName;
-    private Object repairId;
-    private Object repairName;
-    private Object customerId;
+    private String progress;
+    private String progressName;
+    private String repairId;
+    private String repairName;
+    private String customerId;
     private String customerName;
     private String customerPhone;
     private Object productId;
@@ -180,19 +180,19 @@ public class OrderDetailsData implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public Object getRepairType() {
+    public String getRepairType() {
         return repairType;
     }
 
-    public void setRepairType(Object repairType) {
+    public void setRepairType(String repairType) {
         this.repairType = repairType;
     }
 
-    public Object getRepairTypeName() {
+    public String getRepairTypeName() {
         return repairTypeName;
     }
 
-    public void setRepairTypeName(Object repairTypeName) {
+    public void setRepairTypeName(String repairTypeName) {
         this.repairTypeName = repairTypeName;
     }
 
@@ -244,43 +244,43 @@ public class OrderDetailsData implements Serializable {
         this.statusName = statusName;
     }
 
-    public Object getProgress() {
+    public String getProgress() {
         return progress;
     }
 
-    public void setProgress(Object progress) {
+    public void setProgress(String progress) {
         this.progress = progress;
     }
 
-    public Object getProgressName() {
+    public String getProgressName() {
         return progressName;
     }
 
-    public void setProgressName(Object progressName) {
+    public void setProgressName(String progressName) {
         this.progressName = progressName;
     }
 
-    public Object getRepairId() {
+    public String getRepairId() {
         return repairId;
     }
 
-    public void setRepairId(Object repairId) {
+    public void setRepairId(String repairId) {
         this.repairId = repairId;
     }
 
-    public Object getRepairName() {
+    public String getRepairName() {
         return repairName;
     }
 
-    public void setRepairName(Object repairName) {
+    public void setRepairName(String repairName) {
         this.repairName = repairName;
     }
 
-    public Object getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Object customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 

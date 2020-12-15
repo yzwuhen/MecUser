@@ -7,12 +7,14 @@ import android.view.View
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_login_pwd.*
 import kotlinx.android.synthetic.main.layout_title.*
 

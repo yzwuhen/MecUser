@@ -87,7 +87,7 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
         ly_sales.setOnClickListener(this)
         ly_sort.setOnClickListener(this)
         ly_search.setOnClickListener(this)
-
+        iv_back.setOnClickListener(this)
         title=  intent.getStringExtra("title").toString()
 
 
@@ -146,6 +146,7 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
 
     override fun onClick(view: View?) {
         when(view?.id){
+            R.id.iv_back->finish()
           R.id.ly_search ->jumAct()
             R.id.ly_price->
             {

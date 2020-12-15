@@ -26,7 +26,7 @@ class MecFactoryShopAdapter (var mContext: Context, var mList:MutableList<Factor
         holder.itemView.tv_address.text ="${mList[position].address}  |"
         holder.itemView.tv_introduce.text ="简介：${mList[position].introduction}"
         holder.itemView.tv_score.text ="${mList[position].star}分"
-
+        holder.itemView.ratingBar.rating =mList[position].star
         ImageLoadUtils.loadImage(mContext,holder.itemView.iv_item_pic,mList[position].factoryPicture,R.mipmap.ic_launcher)
     }
 

@@ -2,9 +2,11 @@ package com.example.mechanicalapp.ui.mvp
 
 import android.content.Intent
 import com.example.mechanicalapp.App
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.activity.LoginActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.orhanobut.hawk.Hawk
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
@@ -21,11 +23,14 @@ class NetSubscribe<T>(var call: ISubscriberListener<T>): Observer<T> {
 
     override fun onNext(t: T) {
         if (t != null && mListtener != null) {
-//            if (t is NetData&&t.code==403){
+            if (t is NetData&&t.code==403){
+                Hawk.delete(Configs.TOKEN)//清除token
+                Hawk.delete(Configs.USER_INFO)
+                App.getInstance().token =null
 //                var intent =Intent()
 //                intent.setClass(App.getInstance().applicationContext,LoginActivity::class.java)
 //                App.getInstance().applicationContext.startActivity(intent)
-//            }
+            }
             mListtener!!.onNext(t)
         }
     }

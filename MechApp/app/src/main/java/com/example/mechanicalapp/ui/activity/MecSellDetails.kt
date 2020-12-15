@@ -23,7 +23,9 @@ import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.luck.picture.lib.PictureSelector
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_mec_buy_details.*
 import kotlinx.android.synthetic.main.activity_mec_sell_details.*
 import kotlinx.android.synthetic.main.activity_mec_sell_details.iv_sr
@@ -43,7 +45,7 @@ import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_user_nick
 import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_work_time
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
+class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,OnBannerListener<BannerData>,
     MecDetailsView<BusinessDetails> {
     private var mShareDialog: BottomSheetDialog? = null
     private var mShareView: View? = null
@@ -219,6 +221,7 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
                 }
                 banner.adapter = ImageAdapter(mList)
                 banner.indicator = CircleIndicator(this)
+                banner.setOnBannerListener(this)
             }
             tv_details_title.text =data.title
             tv_browse.text = "浏览量：${data.viewNum}"
@@ -280,5 +283,11 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             ToastUtils.showText(netData?.message)
         }
 
+    }
+
+    override fun OnBannerClick(data: BannerData?, position: Int) {
+        if (data?.img?.endsWith("mp4")!!){
+            PictureSelector.create(this).externalPictureVideo(data.img);
+        }
     }
 }

@@ -11,9 +11,11 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.BannerData
+import com.example.mechanicalapp.ui.data.IsCollectBean
+import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.PartsDetailsData
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
@@ -22,11 +24,13 @@ import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.luck.picture.lib.PictureSelector
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_parts_lease_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
+class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,OnBannerListener<BannerData>,
     MecDetailsView<PartsDetailsData> {
     private var mShareDialog: BottomSheetDialog?=null
     private var mShareView: View?=null
@@ -192,6 +196,7 @@ class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUt
                 }
                 banner.adapter = ImageAdapter(mList)
                 banner.indicator = CircleIndicator(this)
+                banner.setOnBannerListener(this)
             }
 
             tv_details_title.text = "${data.title}  出租"
@@ -253,5 +258,11 @@ class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUt
             ToastUtils.showText(netData?.message)
         }
 
+    }
+
+    override fun OnBannerClick(data: BannerData?, position: Int) {
+        if (data?.img?.endsWith("mp4")!!){
+            PictureSelector.create(this).externalPictureVideo(data.img);
+        }
     }
 }

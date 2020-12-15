@@ -24,11 +24,13 @@ import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.luck.picture.lib.PictureSelector
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_lease_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
-class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
+class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,OnBannerListener<BannerData>,
     MecDetailsView<MecDetailsData> {
     private var mShareDialog: BottomSheetDialog? = null
     private var mShareView: View? = null
@@ -207,6 +209,7 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
                 }
                 banner.adapter = ImageAdapter(mList)
                 banner.indicator = CircleIndicator(this)
+                banner.setOnBannerListener(this)
             }
             tv_details_title.text = "${data.title}  出租"
             tv_browse.text = "浏览量：${data.viewNum}"
@@ -258,5 +261,12 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
             ToastUtils.showText(netData?.message)
         }
 
+    }
+
+    override fun OnBannerClick(data: BannerData?, position: Int) {
+
+        if (data?.img?.endsWith("mp4")!!){
+            PictureSelector.create(this).externalPictureVideo(data.img);
+        }
     }
 }

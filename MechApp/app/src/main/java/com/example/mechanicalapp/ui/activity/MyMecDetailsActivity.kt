@@ -20,12 +20,14 @@ import com.example.mechanicalapp.ui.mvp.impl.MyMecPresenter
 import com.example.mechanicalapp.ui.mvp.v.MyMecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
+import com.luck.picture.lib.PictureSelector
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_my_mec_details.*
 import kotlinx.android.synthetic.main.activity_my_mec_details.banner
 import kotlinx.android.synthetic.main.layout_title.*
 
-class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
+class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,OnBannerListener<BannerData>,
     MyMecDetailsView {
     var mList: MutableList<BannerData>? = ArrayList<BannerData>()
     private var popCancel: TextView? = null
@@ -87,6 +89,7 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
                 }
                 banner.adapter = ImageAdapter(mList)
                 banner.indicator = CircleIndicator(this)
+                banner.setOnBannerListener(this)
             }
             tv_mec_name.text = data.titile
 
@@ -263,5 +266,11 @@ class MyMecDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         popSure = view?.findViewById(R.id.tv_pop_sure)
         popCancel?.setOnClickListener(this)
         popSure?.setOnClickListener(this)
+    }
+
+    override fun OnBannerClick(data: BannerData?, position: Int) {
+        if (data?.img?.endsWith("mp4")!!){
+            PictureSelector.create(this).externalPictureVideo(data.img);
+        }
     }
 }

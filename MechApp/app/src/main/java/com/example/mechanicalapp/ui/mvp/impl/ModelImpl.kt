@@ -1210,9 +1210,18 @@ class ModelImpl : BaseModel {
 
     }
 
-    //清单列表
+    //获取评论信息
     fun getEvaluate(token:String?,id: String?,mNetSubscribe:NetSubscribe<ListBean>){
         appsService?.getEvaluate(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //提交维修订单评论
+    fun postEvaluate(token:String?,reEvaluate: ReEvaluate?,mNetSubscribe:NetSubscribe<NetData>){
+        appsService?.postEvaluate(token,reEvaluate)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(mNetSubscribe)

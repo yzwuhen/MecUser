@@ -6,6 +6,11 @@
     android:orientation="vertical">
 
     <include layout="@layout/layout_title" />
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -168,8 +173,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
+                android:stepSize="1"
                 android:numStars="5"
-                android:rating="2.5" />
+                android:rating="3" />
 
             <TextView
                 android:id="@+id/tv_score"
@@ -177,7 +183,7 @@
                 android:layout_height="15dp"
                 android:layout_marginLeft="@dimen/dp_8"
                 android:layout_marginTop="10dp"
-                android:text="2.5分"
+                android:text="3分"
                 android:textColor="#FFB923"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -186,7 +192,6 @@
             android:id="@+id/tv_info"
             android:layout_width="match_parent"
             android:layout_height="174dp"
-            android:layout_marginTop="@dimen/dp_35"
             android:background="@drawable/rect_radio_6_g"
             android:gravity="start"
             android:padding="@dimen/dp_10"
@@ -204,11 +209,12 @@
             android:layout_marginBottom="@dimen/dp_50"
             android:background="@drawable/rect_radio_6_y"
             android:gravity="center"
-            android:text="返回订单"
+            android:text="确定"
             android:textColor="@color/color_222"
             android:textSize="@dimen/sp_16" />
 
 
     </LinearLayout>
 
+    </ScrollView>
 </LinearLayout>

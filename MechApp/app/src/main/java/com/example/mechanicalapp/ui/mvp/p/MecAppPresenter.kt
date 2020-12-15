@@ -5,6 +5,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.ListBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReEvaluate
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.impl.ModelImpl
 import com.example.mechanicalapp.ui.mvp.v.BaseView
@@ -58,5 +59,24 @@ class MecAppPresenter(
             }
         }))
 
+    }
+
+    fun postEvaluate(mReEvaluate: ReEvaluate?) {
+        baseView.showLoading()
+        baseModel.postEvaluate(App.getInstance().token,mReEvaluate, NetSubscribe<NetData>(object :
+            ISubscriberListener<NetData> {
+            override fun onNext(t: NetData?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                Log.v("ssss","sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
     }
 }

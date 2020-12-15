@@ -1227,4 +1227,12 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<ListBean>
+
+    /*提交工程订单评论
+  * */
+    @POST("/jeecg-boot/repair/mecRepairComment/add")
+    fun postEvaluate(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: ReEvaluate?
+    ): Observable<NetData>
 }

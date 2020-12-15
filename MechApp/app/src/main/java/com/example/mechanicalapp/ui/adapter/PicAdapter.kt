@@ -35,21 +35,34 @@ class PicAdapter(
                     holder.itemView.iv_pic.setImageResource(R.mipmap.add_pic_n)
                 } else {
                     holder.itemView.iv_del.visibility = View.VISIBLE
+                    if (mList[position].endsWith("mp4")){
+                        ImageLoadUtils.loadVideo(mContext,holder.itemView.iv_pic,mList[position])
+                        holder.itemView.iv_video.visibility =View.VISIBLE
+                    }else{
+                        ImageLoadUtils.loadImageCenterCrop(
+                            mContext,
+                            holder.itemView.iv_pic,
+                            mList[position],
+                            R.mipmap.add_pic_n
+                        )
+                        holder.itemView.iv_video.visibility =View.GONE
+                    }
+
+                }
+            } else {
+                holder.itemView.iv_del.visibility = View.VISIBLE
+                if (mList[position].endsWith("mp4")){
+                    ImageLoadUtils.loadVideo(mContext,holder.itemView.iv_pic,mList[position])
+                    holder.itemView.iv_video.visibility =View.VISIBLE
+                }else{
                     ImageLoadUtils.loadImageCenterCrop(
                         mContext,
                         holder.itemView.iv_pic,
                         mList[position],
                         R.mipmap.add_pic_n
                     )
+                    holder.itemView.iv_video.visibility =View.GONE
                 }
-            } else {
-                holder.itemView.iv_del.visibility = View.VISIBLE
-                ImageLoadUtils.loadImageCenterCrop(
-                    mContext,
-                    holder.itemView.iv_pic,
-                    mList[position],
-                    R.mipmap.add_pic_n
-                )
             }
 
         }

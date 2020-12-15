@@ -25,13 +25,15 @@ import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.luck.picture.lib.PictureSelector
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_goods_details.*
 import kotlinx.android.synthetic.main.item_comment.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 import java.io.Serializable
 
-class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLevelListener,
+class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLevelListener,OnBannerListener<BannerData>,
     GoodsDetailsView {
 
     private var mShareDialog: BottomSheetDialog? = null
@@ -347,6 +349,7 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
                 }
                 banner.adapter = ImageAdapter(mList2)
                 banner.indicator = CircleIndicator(this)
+                banner.setOnBannerListener(this)
             }
 
             tv_details_title.text = goodsProduct?.title
@@ -411,6 +414,13 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
             }
             ToastUtils.showText(netData?.message)
         }
+    }
+
+    override fun OnBannerClick(data: BannerData?, position: Int) {
+        if (data?.img?.endsWith("mp4")!!){
+            PictureSelector.create(this).externalPictureVideo(data.img);
+        }
+
     }
 
 }

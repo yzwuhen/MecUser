@@ -106,6 +106,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 //            R.id.tv_input_odd_num->jumpActivity(null,null)
             R.id.tv_cancel_sale -> showPop(4,position)
             R.id.ly_root -> jumAct(position)
+            R.id.item_child_root->jumAct(position)
         }
 
     }

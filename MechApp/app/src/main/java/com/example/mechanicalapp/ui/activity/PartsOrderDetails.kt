@@ -162,7 +162,7 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
 //        tv_send_goods_time.text=data.order.
 
         recycle_list.layoutManager = LinearLayoutManager(this)
-        var mPartsOrderChildAdapter = PartsOrderChildAdapter(this,data.productList)
+        var mPartsOrderChildAdapter = PartsOrderChildAdapter(this,data.productList,0,null)
         recycle_list.adapter =mPartsOrderChildAdapter
 
         tv_all_nun.text ="共${data.order.quantity}件商品"

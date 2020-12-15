@@ -70,7 +70,7 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
         price =intent.getIntExtra("price",0)
         num =intent.getIntExtra("num",0)
         recycle_list.layoutManager = LinearLayoutManager(this)
-        var mPartsOrderChildAdapter = orderItemList?.let { PartsOrderChildAdapter(this, it) }
+        var mPartsOrderChildAdapter = orderItemList?.let { PartsOrderChildAdapter(this, it,0,null) }
         recycle_list.adapter =mPartsOrderChildAdapter
 
         tv_all_nun.text ="共${num}件商品"

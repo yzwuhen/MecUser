@@ -78,7 +78,7 @@ public class PartsOrderData implements Serializable {
     private String receiverAreaId;
     private Object paymentTime;
     private String orderTitle;
-    private int amount;
+    private double amount;
     private int quantity;
     private Object shippingName;
     private String receiverName;
@@ -298,11 +298,11 @@ public class PartsOrderData implements Serializable {
         this.orderTitle = orderTitle;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

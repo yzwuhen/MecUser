@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="18小时后关闭订单，请尽快付款"
+                android:text="24小时后关闭订单，请尽快付款"
                 android:textColor="@color/color_red"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>

@@ -155,6 +155,11 @@
         <activity android:name=".ui.activity.MapJobAboutActivity"/>
         <activity android:name=".ui.activity.MapFactoryActivity"/>
         <activity android:name=".ui.activity.BindPhoneActivity"/>
+        <activity android:name=".ui.activity.ResultEngineerActivity" android:windowSoftInputMode="adjustPan"/>
+
+        <activity android:name=".wxapi.WXPayEntryActivity" android:launchMode="singleTop" android:exported="true"/>
+        <activity android:name=".ui.activity.PayResultActivity"/>
+
         <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
         </meta-data>
         <service android:name="com.amap.api.location.APSService" android:foregroundServiceType="location"/>
@@ -171,6 +176,7 @@
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"

@@ -1,5 +1,7 @@
 package com.example.mechanicalapp
 
+import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -54,7 +56,12 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
          verifyStoragePermissions(this)
      }
 
-     private fun selectText(index: Int) {
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.v("Main","=====================onNewIntent")
+    }
+
+    private fun selectText(index: Int) {
          for ((i,e) in mTextViews?.withIndex()!!) {
              mTextViews[i].isSelected =i == index
          }

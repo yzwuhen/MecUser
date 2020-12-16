@@ -112,6 +112,13 @@ class HistorySearchActivity : BaseCusActivity(), TagFlowLayout.OnTagClickListene
         else if (type==7){
             jumpActivity(bundle, SearchMecResult::class.java)
         }
+//        else if (type==8){  维修订单
+//            jumpActivity(bundle, SearchMecResult::class.java)
+//        }
+        //工程师
+        else if (type==9){
+            jumpActivity(bundle, ResultEngineerActivity::class.java)
+        }
         else if (type==10){
             jumpActivity(bundle, SearchAllActivity::class.java)
         }

@@ -1227,4 +1227,31 @@ class ModelImpl : BaseModel {
         )?.subscribe(mNetSubscribe)
 
     }
+
+    //微信支付
+    fun payWx(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<WxPayBean>){
+        appsService?.payWx(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //获取工程师列表
+    fun getEng(token: String?, title: String?,mNetSubscribe: NetSubscribe<EngListBean>) {
+        appsService?.getEngList(token,title)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //获取工程师列表
+    fun getEng(token: String?, title: String?,page: Int,pageSize: Int,mNetSubscribe: NetSubscribe<EngListBean>) {
+        appsService?.getEngList(token,title,page,pageSize)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
 }

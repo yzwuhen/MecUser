@@ -10,11 +10,10 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.EngineerFragment
 import com.example.mechanicalapp.ui.fragment.OrderFragment
 import kotlinx.android.synthetic.main.activity_order.*
-import kotlinx.android.synthetic.main.layout_search_et.*
+import kotlinx.android.synthetic.main.layout_search_tv.*
 
 class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPager.OnPageChangeListener{
 

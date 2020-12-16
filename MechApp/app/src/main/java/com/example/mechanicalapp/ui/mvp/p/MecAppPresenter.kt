@@ -3,9 +3,12 @@ package com.example.mechanicalapp.ui.mvp.p
 import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
+import com.example.mechanicalapp.ui.data.EngListBean
 import com.example.mechanicalapp.ui.data.ListBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.WxPayBean
 import com.example.mechanicalapp.ui.data.request.ReEvaluate
+import com.example.mechanicalapp.ui.data.request.RePay
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.impl.ModelImpl
 import com.example.mechanicalapp.ui.mvp.v.BaseView
@@ -19,16 +22,17 @@ class MecAppPresenter(
     override fun request() {
 
     }
+
     fun getList(type: Int, id: String?) {
         baseView.showLoading()
-        baseModel.getList(App.getInstance().token,type,id, NetSubscribe<ListBean>(object :
+        baseModel.getList(App.getInstance().token, type, id, NetSubscribe<ListBean>(object :
             ISubscriberListener<ListBean> {
             override fun onNext(t: ListBean?) {
-               (baseView as NetDataView<NetData>).refreshUI(t)
+                (baseView as NetDataView<NetData>).refreshUI(t)
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss","sss=========$e")
+                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -43,14 +47,37 @@ class MecAppPresenter(
     }
 
     fun getEvaluate(repairOrderId: String?) {
-        baseModel.getEvaluate(App.getInstance().token,repairOrderId, NetSubscribe<ListBean>(object :
-            ISubscriberListener<ListBean> {
-            override fun onNext(t: ListBean?) {
+        baseModel.getEvaluate(
+            App.getInstance().token,
+            repairOrderId,
+            NetSubscribe<ListBean>(object :
+                ISubscriberListener<ListBean> {
+                override fun onNext(t: ListBean?) {
+                    (baseView as NetDataView<NetData>).refreshUI(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    Log.v("ssss", "sss=========$e")
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
+    }
+
+    fun postEvaluate(mReEvaluate: ReEvaluate?) {
+        baseView.showLoading()
+        baseModel.postEvaluate(App.getInstance().token, mReEvaluate, NetSubscribe<NetData>(object :
+            ISubscriberListener<NetData> {
+            override fun onNext(t: NetData?) {
                 (baseView as NetDataView<NetData>).refreshUI(t)
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss","sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -58,19 +85,39 @@ class MecAppPresenter(
                 baseView.hiedLoading()
             }
         }))
-
     }
 
-    fun postEvaluate(mReEvaluate: ReEvaluate?) {
+    fun payWx(orderId: String) {
+        var mRePay = RePay()
+        mRePay.id = orderId
         baseView.showLoading()
-        baseModel.postEvaluate(App.getInstance().token,mReEvaluate, NetSubscribe<NetData>(object :
-            ISubscriberListener<NetData> {
-            override fun onNext(t: NetData?) {
+        baseModel.payWx(App.getInstance().token, mRePay, NetSubscribe<WxPayBean>(object :
+            ISubscriberListener<WxPayBean> {
+            override fun onNext(t: WxPayBean?) {
                 (baseView as NetDataView<NetData>).refreshUI(t)
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss","sss=========$e")
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
+
+    fun getEngList() {
+        baseView.showLoading()
+        baseModel.getEng(App.getInstance().token, null, NetSubscribe<EngListBean>(object :
+            ISubscriberListener<EngListBean> {
+            override fun onNext(t: EngListBean?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 

@@ -153,6 +153,8 @@ class SureOrderCarActivity  : BaseCusActivity(), View.OnClickListener, OnItemCli
     private fun jumAct(result: CreatOrderBean.ResultBean?) {
         var bundle = Bundle()
         bundle.putString("order_num",result?.orderNum)
+        bundle.putString("order_id",result?.id)
+        bundle.putString("created_time",result?.createTime)
         result?.amount?.let { bundle.putDouble("order_price", it) }
         jumpActivity(bundle, PayActivity::class.java)
     }

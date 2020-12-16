@@ -21,6 +21,7 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     private var orderId=""
     private var mPresenter: OrderDetailsPresenter?=null
 
+    private var datas:PartsOrderDetailsBean.ResultBean.OrderBean?=null
 
     override fun getLayoutId(): Int {
 
@@ -132,7 +133,12 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     }
 
     private fun goPay() {
-        jumpActivity(null,PayActivity::class.java)
+        var bundle =Bundle()
+        bundle.putString("order_num",datas?.orderNum)
+        bundle.putString("order_id",datas?.id)
+        bundle.putString("created_time",datas?.createTime)
+        datas?.amount?.let { bundle.putDouble("order_price", it) }
+        jumpActivity(bundle,PayActivity::class.java)
     }
 
     private fun cancelOrder() {
@@ -148,6 +154,7 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     }
 
     private fun showData(data: PartsOrderDetailsBean.ResultBean) {
+        datas =data.order
         tv_user_name.text =data.order.receiverName
         tv_user_phone.text = data.order.receiverPhone
         tv_address.text =data.order.receiverAddress

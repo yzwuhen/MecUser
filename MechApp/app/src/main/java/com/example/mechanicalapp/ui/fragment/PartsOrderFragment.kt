@@ -226,7 +226,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
         var bundle = Bundle()
         bundle.putSerializable("data",mList[clickPosition].orderItemList as Serializable)
         bundle.putInt("num",mList[clickPosition].quantity)
-        bundle.putInt("price",mList[clickPosition].amount)
+        bundle.putDouble("price",mList[clickPosition].amount)
         jumpActivity(bundle, ApplyRefundActivity::class.java)
     }
 

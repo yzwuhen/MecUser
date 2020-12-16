@@ -9,27 +9,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.MoreJobWantAdapter
-import com.example.mechanicalapp.ui.adapter.MoreRecruitAdapter
+import com.example.mechanicalapp.ui.adapter.EngineerAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.EngListBean
+import com.example.mechanicalapp.ui.data.EngineerData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.RecruitBean
-import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.activity_search_result.*
+import kotlinx.android.synthetic.main.activity_search_engineer.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
-class ResultJobWantActivity  : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
-    TextView.OnEditorActionListener, NetDataView<NetData> {
-    var mAdapter: MoreJobWantAdapter? = null
-    var mList: MutableList<RecruitData> = ArrayList<RecruitData>()
+class ResultEngineerActivity  : BaseCusActivity(), OnItemClickListener, TextView.OnEditorActionListener,
+    NetDataView<NetData> {
+
+    private var mAdapter: EngineerAdapter? = null
+    var mList: MutableList<EngineerData> = ArrayList<EngineerData>()
     private var mPresenter: ResultPresenter? = null
     private var title = ""
     override fun getLayoutId(): Int {
-        return R.layout.activity_search_result
+        return R.layout.activity_search_engineer
     }
 
     override fun initView() {
@@ -38,9 +38,12 @@ class ResultJobWantActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
         title = intent.getStringExtra(Configs.SEARCH_RESULT_TITLE).toString()
         et_search.setText(title)
 
-        mAdapter = MoreJobWantAdapter(this, mList,  this)
+        mAdapter = EngineerAdapter(this, mList,  this)
         recycler_list.layoutManager = LinearLayoutManager(this)
         recycler_list.adapter = mAdapter
+
+        iv_back.setOnClickListener(View.OnClickListener { finish() })
+
 
         spring_list.type = SpringView.Type.FOLLOW
         spring_list.header = RefreshHeaderUtils.getHeaderView(this)
@@ -49,36 +52,14 @@ class ResultJobWantActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
             override fun onRefresh() {
                 spring_list.isEnable = false
                 mPresenter?.resetPage()
-                mPresenter?.getRecruitList("2")
+                mPresenter?.getEngList()
             }
 
             override fun onLoadmore() {
-                mPresenter?.getRecruitList("2")
+                mPresenter?.getEngList()
             }
         })
-
-        tv_search.setOnClickListener(this)
-        iv_back.setOnClickListener(this)
         et_search.setOnEditorActionListener(this)
-    }
-
-    fun closeRefreshView() {
-        spring_list?.isEnable = true
-        spring_list?.onFinishFreshAndLoad()
-    }
-
-    override fun initPresenter() {
-        mPresenter = ResultPresenter(this)
-        mPresenter?.setTitle(title)
-        mPresenter?.getRecruitList("2")
-    }
-
-    override fun onClick(view: View?) {
-        when (view?.id) {
-            R.id.iv_back -> finish()
-            R.id.tv_screen -> search(et_search.text.toString())
-        }
-
     }
 
     override fun onEditorAction(tv: TextView?, actionId: Int, event: KeyEvent?): Boolean {
@@ -92,14 +73,18 @@ class ResultJobWantActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
-        mPresenter?.getRecruitList("2")
+        mPresenter?.getEngList()
+    }
+    override fun initPresenter() {
+
+        mPresenter = ResultPresenter(this)
+        mPresenter?.setTitle(title)
+        mPresenter?.getEngList()
     }
 
-    override fun onItemClick(view: View, position: Int) {
-        var bundle = Bundle()
-        bundle.putString(Configs.MEC_ID, mList[position].id)
-        jumpActivity(bundle,PartsLeaseDetailsActivity::class.java)
-
+    fun closeRefreshView() {
+        spring_list?.isEnable = true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     override fun showLoading() {
@@ -114,30 +99,37 @@ class ResultJobWantActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
     override fun err() {
     }
 
+    override fun onItemClick(view: View, position: Int) {
+        val bundle = Bundle()
+        bundle.putString(Configs.MEC_ID, mList[position].id)
+        jumpActivity(bundle, GoodsDetailsActivity::class.java)
+
+    }
+
+
     override fun refreshUI(data: NetData?) {
-        if (data != null && data is RecruitBean) {
+        if (data is EngListBean) {
+            mList.clear()
             if (data.result != null && data.result.records != null) {
-                mList.clear()
                 mList.addAll(data.result.records)
-                mAdapter?.notifyDataSetChanged()
-                tv_result_num.text="共为您找到${data.result.total}条搜索结果"
-                if (mList.size == 0) {
-                    showEmptyView()
-                } else {
-                    hideEmptyView()
-                }
             }
+            mAdapter?.notifyDataSetChanged()
+            tv_list_count.text ="共为您找到${data.result.total}条搜索结果"
+        }
+        if (mList.size == 0) {
+            showEmptyView()
+        } else {
+            hideEmptyView()
         }
 
     }
 
     override fun loadMore(data: NetData?) {
-        if (data != null && data is RecruitBean) {
+        if (data is EngListBean) {
             if (data.result != null && data.result.records != null) {
                 mList.addAll(data.result.records)
                 mAdapter?.notifyDataSetChanged()
             }
         }
-
     }
 }

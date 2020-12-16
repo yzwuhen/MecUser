@@ -91,6 +91,7 @@ class ResultPartsLeaseActivity  : BaseCusActivity(), OnItemClickListener, View.O
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
+        mPresenter?.getPartsLeaseList("1")
     }
 
     override fun onItemClick(view: View, position: Int) {

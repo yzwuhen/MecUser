@@ -64,5 +64,7 @@ object Configs {
 
     const val TOKEN:String="token"
     const val USER_INFO:String="user_info"
+    
+    const val WX_APP_ID="wxcee9e76d06d68a8f"
 
 }

@@ -90,6 +90,7 @@ class ResultRecruitActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
+        mPresenter?.getRecruitList("1")
     }
 
     override fun onItemClick(view: View, position: Int) {

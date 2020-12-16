@@ -1235,4 +1235,31 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Body requestBody: ReEvaluate?
     ): Observable<NetData>
+
+
+    /*提交工程订单评论
+  * */
+    @POST("/jeecg-boot/shop/mecOrder/wxPay")
+    fun payWx(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: RePay?
+    ): Observable<WxPayBean>
+
+    /* 获取工程师列表
+* */
+    @GET("/jeecg-boot/repair/mecRepairEngineer/list")
+    fun getEngList(
+        @Header("X-Access-Token") token: String?,
+        @Query("name") name: String?
+    ): Observable<EngListBean>
+
+    /* 获取工程师列表
+* */
+    @GET("/jeecg-boot/repair/mecRepairEngineer/list")
+    fun getEngList(
+        @Header("X-Access-Token") token: String?,
+        @Query("name") name: String?,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ): Observable<EngListBean>
 }

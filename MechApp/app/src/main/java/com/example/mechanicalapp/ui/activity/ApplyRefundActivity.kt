@@ -38,7 +38,7 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
 
     private var orderItemList: List<PartsOrderGoodsList>? = null
 
-    private var price=0
+    private var price=0.0
     private var num=0
 
     private var mButtDialog: BottomSheetDialog? = null
@@ -67,7 +67,7 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
 
 
         orderItemList = intent.getSerializableExtra("data") as List<PartsOrderGoodsList>?
-        price =intent.getIntExtra("price",0)
+        price =intent.getDoubleExtra("price",0.0)
         num =intent.getIntExtra("num",0)
         recycle_list.layoutManager = LinearLayoutManager(this)
         var mPartsOrderChildAdapter = orderItemList?.let { PartsOrderChildAdapter(this, it,0,null) }

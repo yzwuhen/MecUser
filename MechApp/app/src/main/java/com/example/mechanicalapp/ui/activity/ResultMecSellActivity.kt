@@ -90,6 +90,7 @@ class ResultMecSellActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
+        mPresenter?.getSellList("1")
     }
 
     override fun onItemClick(view: View, position: Int) {

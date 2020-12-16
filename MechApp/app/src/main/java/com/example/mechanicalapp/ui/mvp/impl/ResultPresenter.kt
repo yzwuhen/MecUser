@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import android.util.Log
 import com.amap.api.location.DPoint
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
@@ -262,7 +264,33 @@ class ResultPresenter (
                 }
             })
     }
+    fun getEngList() {
+        baseView.showLoading()
+        baseModel?.getEng(App.getInstance().token, title,page,pageSize ,NetSubscribe<EngListBean>(object :
+            ISubscriberListener<EngListBean> {
+            override fun onNext(t: EngListBean?) {
+                if (t?.code == 200 && t.result != null) {
+                    if (page==1){
+                        baseView.refreshUI(t)
+                    }else{
+                        baseView.loadMore(t)
+                    }
+                    page++
+                } else {
+                    baseView.err()
+                }
+            }
 
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
 
     override fun onDestroy() {
     }

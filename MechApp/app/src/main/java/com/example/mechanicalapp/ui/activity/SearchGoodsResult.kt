@@ -19,7 +19,7 @@ import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.MyDecoration
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
-import kotlinx.android.synthetic.main.activity_search_result.*
+import kotlinx.android.synthetic.main.activity_search_goods_result.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 
 /**
@@ -76,6 +76,7 @@ class SearchGoodsResult : BaseCusActivity(), OnItemClickListener, TextView.OnEdi
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
+        mPresenter?.getGoodsList()
     }
     override fun initPresenter() {
 
@@ -115,6 +116,7 @@ class SearchGoodsResult : BaseCusActivity(), OnItemClickListener, TextView.OnEdi
                 mList.addAll(data.result.records)
             }
             mAdapter?.notifyDataSetChanged()
+            tv_list_count.text ="共为您找到${data.result.total}条搜索结果"
         }
         if (mList.size == 0) {
             showEmptyView()

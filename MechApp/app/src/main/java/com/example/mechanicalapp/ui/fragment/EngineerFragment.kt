@@ -5,17 +5,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EngineerAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
+import com.example.mechanicalapp.ui.data.EngListBean
+import com.example.mechanicalapp.ui.data.EngineerData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.SideBarView
 import kotlinx.android.synthetic.main.fragment_engineer.*
 
-class EngineerFragment :BaseFragment<NetData>(), SideBarView.OnClickListener,OnItemClickListener{
+class EngineerFragment :BaseCusFragment(), SideBarView.OnClickListener,OnItemClickListener,NetDataView<NetData>{
 
-    private var mBlackListAdapter : EngineerAdapter?=null
+    private var mEngListAdapter : EngineerAdapter?=null
     private var mCityLinearLayoutManager : LinearLayoutManager?=null
+    private var mMecAppPresenter :MecAppPresenter?=null
 
-    private var mCityList :MutableList<String> ?=null
+    private var mEngList :MutableList<EngineerData> =ArrayList<EngineerData>()
     private val items = listOf(
         "A",
         "B",
@@ -35,40 +41,20 @@ class EngineerFragment :BaseFragment<NetData>(), SideBarView.OnClickListener,OnI
         mCityLinearLayoutManager?.orientation = LinearLayoutManager.VERTICAL
 
 
-        mCityList = ArrayList<String>()
-        mCityList?.add("陈生")
-        mCityList?.add("陈生")
-        mCityList?.add("陈生")
-        mCityList?.add("陈生")
-        mCityList?.add("陈阿斯顿")
-        mCityList?.add("戴文")
-        mCityList?.add("戴文")
-        mCityList?.add("戴尔")
-        mCityList?.add("阿迪斯")
-        mCityList?.add("阿斯顿")
-        mCityList?.add("戴文")
-        mCityList?.add("戴文")
-        mCityList?.add("戴尔")
-        mCityList?.add("阿迪斯")
-        mCityList?.add("阿斯顿")
-
-
-        mBlackListAdapter = EngineerAdapter(mContext, mCityList as MutableList<String>,this)
+        mEngListAdapter = EngineerAdapter(mContext, mEngList,this)
 
         ry_left.layoutManager = mCityLinearLayoutManager
 
-        ry_left.adapter =mBlackListAdapter
+        ry_left.adapter =mEngListAdapter
 
         sb_letter.setContentDataList(items)
         sb_letter.setEqualItemSpace(true)
         sb_letter.setOnSidleClickListener(this)
+
+        mMecAppPresenter = MecAppPresenter(this)
+        mMecAppPresenter?.getEngList()
     }
 
-    override fun showLoading() {
-    }
-
-    override fun hiedLoading() {
-    }
     override fun onItemDown(position: Int, itemContent: String?) {
 
     }
@@ -89,9 +75,25 @@ class EngineerFragment :BaseFragment<NetData>(), SideBarView.OnClickListener,OnI
 
     }
 
+    override fun refreshUI(data: NetData?) {
+        if (data!=null&&data is EngListBean){
+            mEngList.clear()
+            data?.result?.records?.let { mEngList.addAll(it) }
+            mEngListAdapter?.notifyDataSetChanged()
+        }
+
+    }
+
+    override fun loadMore(data: NetData?) {
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hiedLoading() {
+    }
+
     override fun err() {
-
-
     }
 
 

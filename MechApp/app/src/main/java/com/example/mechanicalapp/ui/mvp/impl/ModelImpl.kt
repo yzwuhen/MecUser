@@ -1054,7 +1054,7 @@ class ModelImpl : BaseModel {
         orderId: String?,
         netSubscribe: NetSubscribe<NetData>
     ) {
-        appsService?.cancelOrder(token, orderId)?.subscribeOn(Schedulers.io())
+        appsService?.cancelPartsOrder(token, orderId)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)

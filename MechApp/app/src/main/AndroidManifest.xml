@@ -2,15 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mechanicalapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_SOCIAL_STREAM"/>
-    <uses-permission android:name="android.permission.READ_SOCIAL_STREAM"/>
+    <uses-permission android:name="android.permission.WRITE_SOCIAL_STREAM" />
+    <uses-permission android:name="android.permission.READ_SOCIAL_STREAM" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <!--允许程序获取网络状态-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -20,7 +22,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!--用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
     <!--用于申请调用A-GPS模块-->
@@ -29,170 +31,267 @@
     <uses-permission android:name="android.permission.BLUETOOTH"></uses-permission>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"></uses-permission>
 
+    <!-- 多媒体相关 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- 控制呼吸灯，振动器等，用于新消息提醒 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- 8.0+系统需要-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <permission
+        android:name="com.netease.nim.demo.permission.RECEIVE_MSG"
+        android:protectionLevel="signature" />
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:name=".App"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" android:launchMode="singleTask">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.SearchCityActivity"/>
-        <activity android:name=".ui.activity.HistorySearchActivity"/>
-        <activity android:name=".ui.activity.CloudBoxActivity"/>
-        <activity android:name=".ui.activity.MoreDataActivity"/>
-        <activity android:name=".ui.activity.EcModel"/>
-        <activity android:name=".ui.activity.EcType"/>
-        <activity android:name=".ui.activity.Brand"/>
-        <activity android:name=".ui.activity.ReportActivity"/>
-        <activity android:name=".ui.activity.MoreRecruitActivity"/>
-        <activity android:name=".ui.activity.WorkType"/>
-        <activity android:name=".ui.activity.ReleaseActivity"/>
-        <activity android:name=".ui.activity.EcLeaseActivity"/>
-        <activity android:name=".ui.activity.AskingRentActivity"/>
-        <activity android:name=".ui.activity.EcSellActivity"/>
-        <activity android:name=".ui.activity.EcBuyActivity"/>
-        <activity android:name=".ui.activity.PartsRentalActivity"/>
-        <activity android:name=".ui.activity.AskingRentPatsActivity"/>
-        <activity android:name=".ui.activity.RecruitActivity"/>
-        <activity android:name=".ui.activity.JobWantActivity"/>
-        <activity android:name=".ui.activity.GoodsListActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.SearchGoodsResult"/>
-        <activity android:name=".ui.activity.MorePartsActivity"/>
-        <activity android:name=".ui.activity.ShopCarActivity"/>
-        <activity android:name=".ui.activity.SysMsgActivity"/>
-        <activity android:name=".ui.activity.BlackListActivity"/>
-        <activity android:name=".ui.activity.BlackListSettActivity"/>
-        <activity android:name=".ui.activity.CreateRepairActivity"/>
-        <activity android:name=".ui.activity.MaintenanceActivity"/>
-        <activity android:name=".ui.activity.UserDataActivity"/>
-        <activity android:name=".ui.activity.ModifyNickActivity"/>
-        <activity android:name=".ui.activity.PersonalCertification"/>
-        <activity android:name=".ui.activity.CompanyCertifyActivity"/>
-        <activity android:name=".ui.activity.MyIntegralActivity"/>
-        <activity android:name=".ui.activity.IntegralInfoActivity"/>
-        <activity android:name=".ui.activity.IntegralRuleActivity"/>
-        <activity android:name=".ui.activity.SketchActivity"/>
-        <activity android:name=".ui.activity.MyCollectActivity"/>
-        <activity android:name=".ui.activity.MyMecListActivity"/>
-        <activity android:name=".ui.activity.MyMecDetailsActivity"/>
-        <activity android:name=".ui.activity.SearchMecResult"/>
-        <activity android:name=".ui.activity.AddMecActivity"/>
-        <activity android:name=".ui.activity.OrderCenterActivity"/>
-        <activity android:name=".ui.activity.OrderDetailsActivity"/>
-        <activity android:name=".ui.activity.VideoListActivity"/>
-        <activity android:name=".ui.activity.EvaluateActivity"/>
-        <activity android:name=".ui.activity.DetailedListActivity"/>
-        <activity android:name=".ui.activity.MyAddressActivity"/>
-        <activity android:name=".ui.activity.AddressActivity"/>
-        <activity android:name=".ui.activity.MyReleaseActivity"/>
-        <activity android:name=".ui.activity.AboutUsActivity"/>
-        <activity android:name=".ui.activity.PrivacyActivity"/>
-        <activity android:name=".ui.activity.AgreementActivity"/>
-        <activity android:name=".ui.activity.SettingActivity"/>
-        <activity android:name=".ui.activity.FactoryApplyActivity"/>
-        <activity android:name=".ui.activity.MoreSelPartsType"/>
-        <activity android:name=".ui.activity.MoreSelectMecType"/>
-        <activity android:name=".ui.activity.MyLookActivity"/>
-        <activity android:name=".ui.activity.PartsOrderActivity"/>
-        <activity android:name=".ui.activity.PartsOrderDetails"/>
-        <activity android:name=".ui.activity.EvaluatePartsActivity"/>
-        <activity android:name=".ui.activity.ApplyRefundActivity"/>
-        <activity android:name=".ui.activity.SuggestActivity"/>
-        <activity android:name=".ui.activity.ModifyPhoneGetCodeActivity"/>
-        <activity android:name=".ui.activity.ModifyPhoneActivity"/>
-        <activity android:name=".ui.activity.ModifyPwdActivity"/>
-        <activity android:name=".ui.activity.PayActivity"/>
-        <activity android:name=".ui.activity.MapActivity"/>
-        <activity android:name=".ui.activity.AddressSelActivity"/>
-        <activity android:name=".ui.activity.LeaseDetailsActivity"/>
-        <activity android:name=".ui.activity.AskDetailsActivity"/>
-        <activity android:name=".ui.activity.PartsLeaseDetailsActivity"/>
-        <activity android:name=".ui.activity.PartsAskDetailsActivity"/>
-        <activity android:name=".ui.activity.RecruitDetailsActivity"/>
-        <activity android:name=".ui.activity.JobWantDetails"/>
-        <activity android:name=".ui.activity.GoodsDetailsActivity"/>
-        <activity android:name=".ui.activity.CommentListActivity"/>
-        <activity android:name=".ui.activity.SureOrderActivity"/>
-        <activity android:name=".ui.activity.FreightRuleActivity"/>
-        <activity android:name=".ui.activity.UserHomePage"/>
-        <activity android:name=".ui.activity.LoginActivity"/>
-        <activity android:name=".ui.activity.LoginCodeActivity"/>
-        <activity android:name=".ui.activity.LoginPwdActivity"/>
-        <activity android:name=".ui.activity.RegisterActivity"/>
-        <activity android:name=".ui.activity.FindPwdActivity"/>
-        <activity android:name=".ui.activity.SettingPwdActivity"/>
-        <activity android:name=".ui.activity.MoreFactoryActivity"/>
-        <activity android:name=".ui.activity.SearchAllActivity"/>
-        <activity android:name=".ui.activity.PartsTypeActivity"/>
-        <activity android:name=".ui.activity.PartsModel"/>
-        <activity android:name=".ui.activity.MecSellDetails"/>
-        <activity android:name=".ui.activity.MecBuyDetails"/>
-        <activity android:name=".ui.activity.MyEcSellActivity"/>
-        <activity android:name=".ui.activity.MyMecRelease"/>
-        <activity android:name=".ui.activity.SureOrderCarActivity"/>
-        <activity android:name=".ui.activity.FactoryDetails"/>
-        <activity android:name=".ui.activity.ResultMecLeaseActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultMecAskActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultMecSellActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultMecBuyActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultPartsLeaseActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultPartsAskActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultFactoryActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultRecruitActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.ResultJobWantActivity" android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.activity.MapTypeSelActivity"/>
-        <activity android:name=".ui.activity.MapMecBusinessActivity"/>
-        <activity android:name=".ui.activity.MapPartsActivity"/>
-        <activity android:name=".ui.activity.MapJobAboutActivity"/>
-        <activity android:name=".ui.activity.MapFactoryActivity"/>
-        <activity android:name=".ui.activity.BindPhoneActivity"/>
-        <activity android:name=".ui.activity.ResultEngineerActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.activity.SearchCityActivity" />
+        <activity android:name=".ui.activity.HistorySearchActivity" />
+        <activity android:name=".ui.activity.CloudBoxActivity" />
+        <activity android:name=".ui.activity.MoreDataActivity" />
+        <activity android:name=".ui.activity.EcModel" />
+        <activity android:name=".ui.activity.EcType" />
+        <activity android:name=".ui.activity.Brand" />
+        <activity android:name=".ui.activity.ReportActivity" />
+        <activity android:name=".ui.activity.MoreRecruitActivity" />
+        <activity android:name=".ui.activity.WorkType" />
+        <activity android:name=".ui.activity.ReleaseActivity" />
+        <activity android:name=".ui.activity.EcLeaseActivity" />
+        <activity android:name=".ui.activity.AskingRentActivity" />
+        <activity android:name=".ui.activity.EcSellActivity" />
+        <activity android:name=".ui.activity.EcBuyActivity" />
+        <activity android:name=".ui.activity.PartsRentalActivity" />
+        <activity android:name=".ui.activity.AskingRentPatsActivity" />
+        <activity android:name=".ui.activity.RecruitActivity" />
+        <activity android:name=".ui.activity.JobWantActivity" />
+        <activity
+            android:name=".ui.activity.GoodsListActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.SearchGoodsResult" />
+        <activity android:name=".ui.activity.MorePartsActivity" />
+        <activity android:name=".ui.activity.ShopCarActivity" />
+        <activity android:name=".ui.activity.SysMsgActivity" />
+        <activity android:name=".ui.activity.BlackListActivity" />
+        <activity android:name=".ui.activity.BlackListSettActivity" />
+        <activity android:name=".ui.activity.CreateRepairActivity" />
+        <activity android:name=".ui.activity.MaintenanceActivity" />
+        <activity android:name=".ui.activity.UserDataActivity" />
+        <activity android:name=".ui.activity.ModifyNickActivity" />
+        <activity android:name=".ui.activity.PersonalCertification" />
+        <activity android:name=".ui.activity.CompanyCertifyActivity" />
+        <activity android:name=".ui.activity.MyIntegralActivity" />
+        <activity android:name=".ui.activity.IntegralInfoActivity" />
+        <activity android:name=".ui.activity.IntegralRuleActivity" />
+        <activity android:name=".ui.activity.SketchActivity" />
+        <activity android:name=".ui.activity.MyCollectActivity" />
+        <activity android:name=".ui.activity.MyMecListActivity" />
+        <activity android:name=".ui.activity.MyMecDetailsActivity" />
+        <activity android:name=".ui.activity.SearchMecResult" />
+        <activity android:name=".ui.activity.AddMecActivity" />
+        <activity android:name=".ui.activity.OrderCenterActivity" />
+        <activity android:name=".ui.activity.OrderDetailsActivity" />
+        <activity android:name=".ui.activity.VideoListActivity" />
+        <activity android:name=".ui.activity.EvaluateActivity" />
+        <activity android:name=".ui.activity.DetailedListActivity" />
+        <activity android:name=".ui.activity.MyAddressActivity" />
+        <activity android:name=".ui.activity.AddressActivity" />
+        <activity android:name=".ui.activity.MyReleaseActivity" />
+        <activity android:name=".ui.activity.AboutUsActivity" />
+        <activity android:name=".ui.activity.PrivacyActivity" />
+        <activity android:name=".ui.activity.AgreementActivity" />
+        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.FactoryApplyActivity" />
+        <activity android:name=".ui.activity.MoreSelPartsType" />
+        <activity android:name=".ui.activity.MoreSelectMecType" />
+        <activity android:name=".ui.activity.MyLookActivity" />
+        <activity android:name=".ui.activity.PartsOrderActivity" />
+        <activity android:name=".ui.activity.PartsOrderDetails" />
+        <activity android:name=".ui.activity.EvaluatePartsActivity" />
+        <activity android:name=".ui.activity.ApplyRefundActivity" />
+        <activity android:name=".ui.activity.SuggestActivity" />
+        <activity android:name=".ui.activity.ModifyPhoneGetCodeActivity" />
+        <activity android:name=".ui.activity.ModifyPhoneActivity" />
+        <activity android:name=".ui.activity.ModifyPwdActivity" />
+        <activity android:name=".ui.activity.PayActivity" />
+        <activity android:name=".ui.activity.MapActivity" />
+        <activity android:name=".ui.activity.AddressSelActivity" />
+        <activity android:name=".ui.activity.LeaseDetailsActivity" />
+        <activity android:name=".ui.activity.AskDetailsActivity" />
+        <activity android:name=".ui.activity.PartsLeaseDetailsActivity" />
+        <activity android:name=".ui.activity.PartsAskDetailsActivity" />
+        <activity android:name=".ui.activity.RecruitDetailsActivity" />
+        <activity android:name=".ui.activity.JobWantDetails" />
+        <activity android:name=".ui.activity.GoodsDetailsActivity" />
+        <activity android:name=".ui.activity.CommentListActivity" />
+        <activity android:name=".ui.activity.SureOrderActivity" />
+        <activity android:name=".ui.activity.FreightRuleActivity" />
+        <activity android:name=".ui.activity.UserHomePage" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.LoginCodeActivity" />
+        <activity android:name=".ui.activity.LoginPwdActivity" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.FindPwdActivity" />
+        <activity android:name=".ui.activity.SettingPwdActivity" />
+        <activity android:name=".ui.activity.MoreFactoryActivity" />
+        <activity android:name=".ui.activity.SearchAllActivity" />
+        <activity android:name=".ui.activity.PartsTypeActivity" />
+        <activity android:name=".ui.activity.PartsModel" />
+        <activity android:name=".ui.activity.MecSellDetails" />
+        <activity android:name=".ui.activity.MecBuyDetails" />
+        <activity android:name=".ui.activity.MyEcSellActivity" />
+        <activity android:name=".ui.activity.MyMecRelease" />
+        <activity android:name=".ui.activity.SureOrderCarActivity" />
+        <activity android:name=".ui.activity.FactoryDetails" />
+        <activity
+            android:name=".ui.activity.ResultMecLeaseActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultMecAskActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultMecSellActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultMecBuyActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultPartsLeaseActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultPartsAskActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultFactoryActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultRecruitActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.ResultJobWantActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.activity.MapTypeSelActivity" />
+        <activity android:name=".ui.activity.MapMecBusinessActivity" />
+        <activity android:name=".ui.activity.MapPartsActivity" />
+        <activity android:name=".ui.activity.MapJobAboutActivity" />
+        <activity android:name=".ui.activity.MapFactoryActivity" />
+        <activity android:name=".ui.activity.BindPhoneActivity" />
+        <activity
+            android:name=".ui.activity.ResultEngineerActivity"
+            android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".wxapi.WXPayEntryActivity" android:launchMode="singleTop" android:exported="true"/>
-        <activity android:name=".ui.activity.PayResultActivity"/>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        <activity android:name=".ui.activity.PayResultActivity" />
 
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="adc1469b3ce2624c2e7b411e6d7f9ce3">
-        </meta-data>
-        <service android:name="com.amap.api.location.APSService" android:foregroundServiceType="location"/>
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="adc1469b3ce2624c2e7b411e6d7f9ce3"></meta-data>
+        <service
+            android:name="com.amap.api.location.APSService"
+            android:foregroundServiceType="location" />
 
 
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
 
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:configChanges="orientation|keyboardHidden"/>
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <provider
-            android:authorities="com.example.mechanicalapp.fileprovider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.mechanicalapp.fileprovider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
+        <!--==================================网易云信=========================================-->
+        <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
+      如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
+        <meta-data
+            android:name="com.netease.nim.appKey"
+            android:value="9e8fb70c281535d3aa54f78d55b831c7" />
 
+        <!-- 云信后台服务，请使用独立进程。 -->
+        <service
+            android:name="com.netease.nimlib.service.NimService"
+            android:process=":core" />
 
+        <!-- 云信后台辅助服务 -->
+        <service
+            android:name="com.netease.nimlib.service.NimService$Aux"
+            android:process=":core" />
+
+        <!-- 云信后台辅助服务 -->
+        <service
+            android:name="com.netease.nimlib.job.NIMJobService"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":core" />
+
+        <!-- 云信监视系统启动和网络变化的广播接收器，保持和 NimService 同一进程 -->
+        <receiver
+            android:name="com.netease.nimlib.service.NimReceiver"
+            android:exported="false"
+            android:process=":core">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 云信进程间通信 Receiver -->
+        <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
+
+        <!-- 云信进程间通信service -->
+        <service android:name="com.netease.nimlib.service.ResponseService" />
+
+        <!-- 云信进程间通信provider -->
+        <provider
+            android:name="com.netease.nimlib.ipc.NIMContentProvider"
+            android:authorities="com.example.mechanicalapp.ipc.provider"
+            android:exported="false"
+            android:process=":core" />
+
+        <!-- 云信内部使用的进程间通信provider -->
+        <!-- SDK启动时会强制检测该组件的声明是否配置正确，如果检测到该声明不正确，SDK会主动抛出异常引发崩溃 -->
+        <provider
+        android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider"
+        android:authorities="com.example.mechanicalapp.ipc.provider.preference"
+        android:exported="false"/>
+        <!--==================================网易云信=========================================-->
     </application>
 
 </manifest>

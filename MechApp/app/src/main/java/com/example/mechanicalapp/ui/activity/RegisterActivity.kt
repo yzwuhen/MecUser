@@ -75,9 +75,11 @@ class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView{
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err() {

@@ -10,8 +10,10 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsOrderDetailsBean
 import com.example.mechanicalapp.ui.data.request.ReApplyRefund
 import com.example.mechanicalapp.ui.mvp.impl.OrderDetailsPresenter
+import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_parts_details.*
 import kotlinx.android.synthetic.main.layout_title.*
 
@@ -94,9 +96,11 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err()  {
@@ -142,13 +146,18 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     }
 
     private fun cancelOrder() {
-
-
+        mPresenter?.cancelPartsOrder(orderId)
     }
 
     override fun refreshUI(data: NetData?) {
         if (data!=null &&data is PartsOrderDetailsBean&&data.result!=null){
             showData(data.result)
+        }else{
+            //取消订单
+            if (data?.code==200){
+                finish()
+            }
+            ToastUtils.showText(data?.message)
         }
 
     }

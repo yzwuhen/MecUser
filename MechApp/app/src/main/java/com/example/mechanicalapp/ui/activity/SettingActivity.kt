@@ -5,20 +5,19 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import com.example.mechanicalapp.App
-import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.UserInfo
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.MyDataCleanManager
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.auth.AuthService
 import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_title.*
-import kotlinx.android.synthetic.main.layout_title.rl_title
-import kotlinx.android.synthetic.main.layout_title.tv_title
+
 
 class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.onViewListener {
 
@@ -115,7 +114,7 @@ class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.
             popSure?.text = "确定"
         }
 
-        this?.let { PopUtils.showPopupWindow(ly_login_out, it) }
+        this?.let { PopUtils.showPopupWindow(ly_clear, it) }
 
     }
 
@@ -134,6 +133,7 @@ class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.
         App.getInstance().setUser(UserInfo())
         Hawk.delete(Configs.TOKEN)
         Hawk.delete(Configs.USER_INFO)
+        NIMClient.getService(AuthService::class.java).logout()
         finish()
     }
 

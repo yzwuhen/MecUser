@@ -148,7 +148,7 @@ class OrderPresenter(
 
     fun cancelPartsOrder(orderId: String) {
         baseView.hiedLoading()
-        baseModel.cancelOrder(
+        baseModel.cancelPartsOrder(
             App.getInstance().token,
             orderId,
             NetSubscribe<NetData>(object : ISubscriberListener<NetData> {

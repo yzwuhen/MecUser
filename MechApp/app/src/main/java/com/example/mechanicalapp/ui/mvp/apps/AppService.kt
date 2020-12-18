@@ -1064,7 +1064,7 @@ interface AppService {
      *
      *取消配件订单
      */
-    @GET("/jeecg-boot/repair/mecRepairOrder/delete")
+    @GET("/jeecg-boot/shop/mecOrder/deleteGet")
     fun cancelPartsOrder(
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?

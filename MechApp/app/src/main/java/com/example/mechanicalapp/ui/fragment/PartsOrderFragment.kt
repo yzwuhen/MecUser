@@ -70,8 +70,11 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             }
         })
         mPresenter = OrderPresenter(this)
-        (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
+    }
 
+    override fun onResume() {
+        super.onResume()
+        (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
     }
 
     fun closeRefreshView() {

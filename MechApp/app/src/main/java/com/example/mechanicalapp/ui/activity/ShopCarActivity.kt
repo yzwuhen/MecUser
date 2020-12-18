@@ -450,7 +450,6 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             }
             strSpec += ","
         }
-        Log.v("sss==","ss==========$strSpec")
         strSpec = strSpec.substring(0, strSpec.length - 1)
         for (sku in mSkuList.iterator()) {
             if (strSpec == sku.name) {

@@ -3,22 +3,27 @@ package com.example.mechanicalapp.ui.activity
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.UserInfo
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
-import com.orhanobut.hawk.Hawk
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.auth.AuthService
+import com.netease.nimlib.sdk.auth.LoginInfo
 import kotlinx.android.synthetic.main.activity_login_pwd.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView{
+
+class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView,RequestCallback<LoginInfo>{
 
     private var isCheck: Boolean = false
     private var isEyes: Boolean = false
@@ -141,7 +146,9 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView{
                 // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
                 App.getInstance().setUser(netData.result?.userInfo)
                 App.getInstance().token = netData.result?.token
-                finish()
+
+                logIm(netData.result?.userInfo)
+             //   finish()
             } else {
                 ToastUtils.showText(netData.message)
             }
@@ -149,9 +156,26 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView{
         }
     }
 
+    private fun logIm(userInfo: UserInfo?) {
+        var mLoginInfo =LoginInfo(userInfo?.imId,userInfo?.imToken)
+        NIMClient.getService(AuthService::class.java).login(mLoginInfo).setCallback(this)
+    }
+
     override fun loginErr(exception: String?) {
 
         ToastUtils.showText(exception)
+    }
+
+    override fun onSuccess(param: LoginInfo?) {
+        Log.v("sssss","sssssssss====================onSuccess=====$param")
+    }
+
+    override fun onFailed(code: Int) {
+        Log.v("sssss","sssssssss====================onFailed====$code")
+    }
+
+    override fun onException(exception: Throwable?) {
+        Log.v("sssss","sssssssss====================onException====$exception")
     }
 
 }

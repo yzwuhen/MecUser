@@ -1,11 +1,14 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.RePay
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.mvp.v.ReleaseView
 
@@ -96,6 +99,26 @@ class OrderPresenter(
 
             })
         )
+    }
+    fun payWx(orderId: String) {
+        var mRePay = RePay()
+        mRePay.id = orderId
+        baseView.showLoading()
+        baseModel.payWx(App.getInstance().token, mRePay, NetSubscribe<WxPayBean>(object :
+            ISubscriberListener<WxPayBean> {
+            override fun onNext(t: WxPayBean?) {
+                (baseView as OrderView<NetData>).showData(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
     }
 
     override fun request() {

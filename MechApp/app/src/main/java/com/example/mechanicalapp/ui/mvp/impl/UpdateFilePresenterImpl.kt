@@ -35,7 +35,6 @@ open class UpdateFilePresenterImpl(
             ToastUtils.showText("无法获取文件")
             return
         }
-
         //
      if (fileUrl.contains(".mp4")&&StringUtils.getRingDuring(fileUrl)>0){
         if (StringUtils.getRingDuring(fileUrl)>6000){

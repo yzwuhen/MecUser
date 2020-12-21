@@ -22,6 +22,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_company_certify.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerView,
     TextWatcher {
@@ -103,7 +104,11 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -147,7 +152,11 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    (mPresenter as PersonCerPresenter).upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {

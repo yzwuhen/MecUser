@@ -36,6 +36,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -297,7 +298,11 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -313,8 +318,11 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
-
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -367,24 +375,24 @@ class EcLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnClickList
         }
         mReMecLease.title = et_ec_name.text.toString().trim()
 
-        if (TextUtils.isEmpty(et_way.text.toString().trim())) {
-            return false
-        }
+//        if (TextUtils.isEmpty(et_way.text.toString().trim())) {
+//            return false
+//        }
         mReMecLease.price = et_way.text.toString().trim()
 
-        if (TextUtils.isEmpty(mReMecLease.cateName)) {
-            return false
-        }
-        if (TextUtils.isEmpty(mReMecLease.brandName)) {
-            return false
-        }
-        if (TextUtils.isEmpty(mReMecLease.modelName)) {
-            return false
-        }
+//        if (TextUtils.isEmpty(mReMecLease.cateName)) {
+//            return false
+//        }
+//        if (TextUtils.isEmpty(mReMecLease.brandName)) {
+//            return false
+//        }
+//        if (TextUtils.isEmpty(mReMecLease.modelName)) {
+//            return false
+//        }
 
-        if (TextUtils.isEmpty(et_work_time.text.toString().trim())) {
-            return false
-        }
+//        if (TextUtils.isEmpty(et_work_time.text.toString().trim())) {
+//            return false
+//        }
         mReMecLease.workTime = et_work_time.text.toString().trim()
 
         if (TextUtils.isEmpty(et_phone.text.toString().trim())) {

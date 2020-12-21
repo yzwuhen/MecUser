@@ -38,6 +38,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_ec_sell.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -75,7 +76,7 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         super.initView()
 
         mPicAdapter = PicAdapter(this, mPicList, this)
-        ry_pic.layoutManager = GridLayoutManager(this, 3)
+        ry_pic.layoutManager =  GridLayoutManager(this,3)
         ry_pic.adapter = mPicAdapter
 
 
@@ -314,7 +315,11 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -330,7 +335,11 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
 //                                        mPicList?.add(result[0]?.realPath.toString())
 //                    mPicAdapter?.notifyDataSetChanged()
                 }

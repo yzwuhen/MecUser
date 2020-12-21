@@ -761,6 +761,16 @@ public class OrderDetailsData implements Serializable {
         private String post;
         private Object userId;
 
+        private String engineerImId;
+
+        public String getEngineerImId() {
+            return engineerImId;
+        }
+
+        public void setEngineerImId(String engineerImId) {
+            this.engineerImId = engineerImId;
+        }
+
         public String getId() {
             return id;
         }

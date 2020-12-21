@@ -16,6 +16,7 @@ import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
+import com.netease.nim.uikit.api.NimUIKit
 import kotlinx.android.synthetic.main.activity_order_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
@@ -115,8 +116,10 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             R.id.ly_right -> share()
             R.id.iv_look -> showPop(1)
             R.id.tv_cancel_order -> showPop(0)
+            R.id.tv_letter1->goToChat()
             R.id.ly_letter -> goToChat()
             R.id.ly_call -> call()
+            R.id.tv_call1->call()
             R.id.tv_letter -> goToChat()
             R.id.tv_call -> call()
             R.id.ly_look_details ->  jumDetailedList()
@@ -143,13 +146,15 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     private fun call() {
         //工程师电话没有
-//        if (orderData!=null){
-//            openCall(orderData.re)
-//        }
+        if (orderData!=null&&orderData?.mecRepairEngineer!=null&& orderData?.mecRepairEngineer!!.size>0){
+            openCall(orderData?.mecRepairEngineer!![0].phone)
+        }
     }
 
     private fun goToChat() {
-
+        if (orderData!=null&&orderData?.mecRepairEngineer!=null&& orderData?.mecRepairEngineer!!.size>0){
+            NimUIKit.startP2PSession(this, orderData?.mecRepairEngineer!![0].engineerImId)
+        }
 
     }
 

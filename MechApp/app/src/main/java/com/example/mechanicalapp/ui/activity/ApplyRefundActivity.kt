@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_apply_refund.ry_pic
 import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.item_parts_order.view.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClickListener,
     ApplyRefundView {
@@ -105,7 +106,11 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -121,7 +126,11 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {

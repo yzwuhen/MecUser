@@ -148,8 +148,6 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-//                    Log.v("ssssss=========sss","===========q========${File(result[0]?.realPath.toString()).exists()}")
-//                    Log.v("ssssss=========sss","========2===========${File(result[0]?.path.toString()).exists()}")
                     if (File(result[0]?.realPath.toString()).exists()){
                         mPresenter?.upLoadFile(result[0]?.realPath.toString())
                     }else{

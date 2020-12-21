@@ -8,6 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="300dp">
 
+
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
         <TextView
             android:id="@+id/tv_cancel"
             android:layout_width="65dp"
@@ -17,14 +23,8 @@
             android:gravity="center"
             android:background="@drawable/rect_half_w"
             android:text="取消"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:textColor="@color/color_222"/>
-
-        <com.amap.api.maps.MapView
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
-
         <ImageView
             android:id="@+id/iv_locat"
             android:layout_width="wrap_content"

@@ -27,6 +27,7 @@ import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_ask_rent.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.lang.Exception
 
 class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener, MecMecAskRentView, TextWatcher {
@@ -192,11 +193,12 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
 
     private fun selectTime() {
         mButtDialog?.dismiss()
-        if (index > 0) {
+        try {
             et_production_time.text = mYears[index].itemText
             mReMecLease.facTime = mYears[index].itemValue
-        }
+        }catch (e:Exception){
 
+        }
     }
 
     private fun showInput() {

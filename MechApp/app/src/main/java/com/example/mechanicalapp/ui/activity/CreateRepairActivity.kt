@@ -55,7 +55,6 @@ class CreateRepairActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         ly_address.setOnClickListener(this)
         ly_mec_factory.setOnClickListener(this)
         tv_submit.setOnClickListener(this)
-
         et_contacts.addTextChangedListener(this)
         et_phone.addTextChangedListener(this)
         et_company_name.addTextChangedListener(this)

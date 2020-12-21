@@ -50,17 +50,17 @@ class ReleaseLeaseFragment(var type: Int) : BaseCusFragment(), OnItemClickListen
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as MyReleasePresenterImpl).resetPage()
-                (mPresenter as MyReleasePresenterImpl).getLeaseList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyLeaseList(1)
             }
 
             override fun onLoadmore() {
-                (mPresenter as MyReleasePresenterImpl).getLeaseList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyLeaseList(1)
             }
         })
 
 
         mPresenter = MyReleasePresenterImpl(mContext, this)
-        (mPresenter as MyReleasePresenterImpl).getLeaseList(1)
+        (mPresenter as MyReleasePresenterImpl).getMyLeaseList(1)
     }
 
     fun closeRefreshView() {

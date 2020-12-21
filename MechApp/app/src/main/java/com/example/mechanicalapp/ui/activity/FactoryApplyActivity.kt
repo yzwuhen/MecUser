@@ -25,6 +25,7 @@ import com.luck.picture.lib.listener.OnResultCallbackListener
 
 import kotlinx.android.synthetic.main.activity_factory_apply.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerView,
     TextWatcher {
@@ -118,7 +119,11 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    (mPresenter as PersonCerPresenter).upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
                 override fun onCancel() {
                     // 取消

@@ -48,6 +48,14 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView,
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
 
+        phone =intent.getStringExtra("phone")
+        pwd =intent.getStringExtra("pwd")
+
+        if (!TextUtils.isEmpty(phone)){
+            et_phone.setText(phone)
+            et_pwd.setText(pwd)
+        }
+
 //        et_phone.setText("13886943851")
 //        et_pwd.setText("123456")
     }
@@ -143,10 +151,8 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView,
         if (netData!=null&&netData is LoginCodeBean){
             if (netData.code == 200) {
                 jumpActivity(null, MainActivity::class.java)
-                // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
                 App.getInstance().setUser(netData.result?.userInfo)
                 App.getInstance().token = netData.result?.token
-
                 logIm(netData.result?.userInfo)
              //   finish()
             } else {
@@ -162,20 +168,17 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView,
     }
 
     override fun loginErr(exception: String?) {
-
         ToastUtils.showText(exception)
     }
 
     override fun onSuccess(param: LoginInfo?) {
-        Log.v("sssss","sssssssss====================onSuccess=====$param")
+
     }
 
     override fun onFailed(code: Int) {
-        Log.v("sssss","sssssssss====================onFailed====$code")
     }
 
     override fun onException(exception: Throwable?) {
-        Log.v("sssss","sssssssss====================onException====$exception")
     }
 
 }

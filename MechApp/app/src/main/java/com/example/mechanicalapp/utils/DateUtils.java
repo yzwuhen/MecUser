@@ -638,7 +638,13 @@ public class DateUtils {
             mydate = myFormatter.parse(date2);
         } catch (Exception e) {
         }
-        long hours = (date.getTime() - mydate.getTime()) / (60 * 60 * 1000);
+        long hours =0;
+        try {
+            hours=  (date.getTime() - mydate.getTime()) / (60 * 60 * 1000);
+        }catch (Exception e){
+
+        }
+
         return hours;
     }
 

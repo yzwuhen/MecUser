@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_address.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.lang.Exception
 
-class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView {
+class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView,TextWatcher {
 
     private var mPresenter: AddressPresenterImpl? = null
     private var mPopwindow: PopupWindow? = null
@@ -42,6 +44,7 @@ class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView {
 
     private var reAddress = ReAddress()
     private var type = 0
+    private var isEtAll =false
 
     override fun getLayoutId(): Int {
 
@@ -66,7 +69,12 @@ class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView {
 
         ly_sel_address.setOnClickListener(this)
         tv_btn.setOnClickListener(this)
-        tv_default.setOnClickListener(this)
+        ly_switch.setOnClickListener(this)
+
+        et_user_name.addTextChangedListener(this)
+        et_user_phone.addTextChangedListener(this)
+        et_take_goods_address.addTextChangedListener(this)
+        et_address_details.addTextChangedListener(this)
     }
 
     private fun showAddress() {
@@ -117,17 +125,17 @@ class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView {
             R.id.ly_sel_address -> showCityDialog()
             R.id.tv_cancel -> PopUtils.dismissPop(this)
             R.id.tv_sure -> selCity()
-            R.id.tv_default -> checkDefault()
+            R.id.ly_switch -> checkDefault()
         }
     }
 
     private fun checkDefault() {
         //修正
         if (reAddress.isDefault == 0) {
-            tv_default.isSelected = true
+            iv_switch.isSelected = true
             reAddress.isDefault = 1
         } else {
-            tv_default.isSelected = false
+            iv_switch.isSelected = false
             reAddress.isDefault = 0
         }
     }
@@ -192,34 +200,10 @@ class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView {
                 )
             }
         }
-        this?.let { PopUtils.showPopupWindow(tv_btn, it) }
+        this?.let { PopUtils.showPopupWindow(ly_sel_address, it) }
     }
 
     private fun submit() {
-        if (TextUtils.isEmpty(et_user_name.text.toString())) {
-            ToastUtils.showText("请输入联系人姓名")
-            return
-        }
-        reAddress.name = et_user_name.text.toString()
-
-
-        if (TextUtils.isEmpty(et_user_phone.text.toString())) {
-            ToastUtils.showText("请输入您的手机号码")
-            return
-        }
-        reAddress.phone = et_user_phone.text.toString()
-
-        if (TextUtils.isEmpty(et_take_goods_address.text.toString())) {
-            ToastUtils.showText("请选择地区")
-            return
-        }
-
-        if (TextUtils.isEmpty(et_address_details.text.toString())) {
-            ToastUtils.showText("请输入详细地址")
-            return
-        }
-        reAddress.adress = et_address_details.text.toString()
-
         if (type == 0) {
             mPresenter?.addAddress(reAddress)
         } else {
@@ -252,6 +236,45 @@ class AddressActivity : BaseCusActivity(), View.OnClickListener, AddressView {
         updateAdapter1()
     }
     private var mCallBack3 = OnItemSelectedListener {
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        changeBtn()
+    }
+
+    private fun changeBtn() {
+        isEtAll =checkInfo()
+        tv_btn.isSelected =isEtAll
+        tv_btn.isEnabled =isEtAll
+    }
+    private fun checkInfo(): Boolean {
+        if (TextUtils.isEmpty(et_user_name.text.toString())) {
+            return false
+        }
+        reAddress.name = et_user_name.text.toString()
+
+
+        if (TextUtils.isEmpty(et_user_phone.text.toString())) {
+            return false
+        }
+        reAddress.phone = et_user_phone.text.toString()
+
+        if (TextUtils.isEmpty(et_take_goods_address.text.toString())) {
+            return false
+        }
+
+        if (TextUtils.isEmpty(et_address_details.text.toString())) {
+            return false
+        }
+        reAddress.adress = et_address_details.text.toString()
+        return true
     }
 }
 

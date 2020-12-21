@@ -52,17 +52,17 @@ class ReleaseSellFragment  : BaseCusFragment(), OnItemClickListener, PopUtils.on
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as MyReleasePresenterImpl).resetPage()
-                (mPresenter as MyReleasePresenterImpl).getBusinessSellList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyBusinessSellList(1)
             }
 
             override fun onLoadmore() {
-                (mPresenter as MyReleasePresenterImpl).getBusinessSellList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyBusinessSellList(1)
             }
         })
 
 
         mPresenter = MyReleasePresenterImpl(mContext, this)
-        (mPresenter as MyReleasePresenterImpl).getBusinessSellList(1)
+        (mPresenter as MyReleasePresenterImpl).getMyBusinessSellList(1)
 
     }
 

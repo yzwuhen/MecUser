@@ -23,6 +23,7 @@ import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_person_certify.*
 import kotlinx.android.synthetic.main.activity_person_certify.tv_submit
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCerView, TextWatcher {
 
@@ -136,7 +137,11 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
                 override fun onCancel() {
                 }
@@ -150,7 +155,11 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
             .imageEngine(GlideEngine.createGlideEngine())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
-                    (mUpFilePresenter as PersonCerPresenter).upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
                 override fun onCancel() {
                     // 取消

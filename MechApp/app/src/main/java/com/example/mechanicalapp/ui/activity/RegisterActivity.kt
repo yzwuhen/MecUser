@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -203,7 +204,10 @@ class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView{
     override fun success(netData: NetData) {
         if (netData!=null&&netData is LoginCodeBean){
             if (netData.code == 200) {
-                jumpActivity(null, LoginActivity::class.java)
+                var bundle =Bundle()
+                bundle.putString("phone",phone)
+                bundle.putString("pwd",pwd1)
+                jumpActivity(bundle, LoginPwdActivity::class.java)
                 // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
 //                App.getInstance().setUser(netData.result?.userInfo)
 //                App.getInstance().token = netData.result?.token

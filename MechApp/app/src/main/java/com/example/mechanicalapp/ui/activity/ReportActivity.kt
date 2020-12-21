@@ -37,6 +37,7 @@ import kotlinx.android.synthetic.main.activity_report.ry_pic
 import kotlinx.android.synthetic.main.activity_report.tv_submit
 import kotlinx.android.synthetic.main.layout_search_et.iv_back
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 import java.net.IDN
 
 class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListener,
@@ -198,7 +199,11 @@ class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListene
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -214,7 +219,11 @@ class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListene
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {

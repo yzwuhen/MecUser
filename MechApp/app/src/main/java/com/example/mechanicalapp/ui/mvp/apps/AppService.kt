@@ -86,7 +86,7 @@ interface AppService {
      * 租赁机械表-分页列表查询
      * 出租求组
      */
-    @GET("/jeecg-boot/market/mecMarketMechanics/list")
+    @GET("/jeecg-boot/market/mecMarketRecruit/getMyList")
     fun getMyLeaseList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,
@@ -99,7 +99,7 @@ interface AppService {
      * 租赁机械表-分页列表查询
      * 出售 求购
      */
-    @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
+    @GET("/jeecg-boot/market/mecMarketOldMechanics/getMyList")
     fun getMyBusinessList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,
@@ -175,7 +175,7 @@ interface AppService {
      * 出租 求租
      * bussiessType 1出租2求租
      */
-    @GET("/jeecg-boot/market/mecMarketParts/list")
+    @GET("/jeecg-boot/market/mecMarketParts/getMyList")
     fun getReleasePartsList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,
@@ -218,12 +218,12 @@ interface AppService {
     /**
      * 求职招聘-分页列表查询
      * 求职招聘
-     * bussiessType 1出租2求租
+     * recruitType
      */
-    @GET("/jeecg-boot/market/mecMarketRecruit/list")
+    @GET("/jeecg-boot/market/mecMarketRecruit/getMyList")
     fun getReleaseWorkList(
         @Header("X-Access-Token") token: String?,
-        @Query("bussiessType") bussiessType: Int,
+        @Query("recruitType") recruitType: Int,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<RecruitBean>
@@ -1120,7 +1120,7 @@ interface AppService {
      *
      *购物车里生成订单
      */
-    @POST("/jeecg-boot/shop/mecOrder/add")
+    @POST("/jeecg-boot/shop/mecOrder/addOrderByShoppingCart")
     fun addCarOrder(
         @Header("X-Access-Token") token: String?,
         @Body reOrder: ReOrderCar?

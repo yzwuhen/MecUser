@@ -220,7 +220,7 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
-    fun getLeaseList(
+    fun getMyLeaseList(
         token: String?,
         type: Int,
         page: Int,
@@ -233,7 +233,7 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
     }
 
-    fun getBusinessList(
+    fun getMyBusinessList(
         token: String?,
         type: Int,
         page: Int,
@@ -411,7 +411,7 @@ class ModelImpl : BaseModel {
     }
 
 
-    fun getPartsList(
+    fun getMyPartsList(
         token: String?,
         type: Int,
         page: Int,
@@ -463,7 +463,7 @@ class ModelImpl : BaseModel {
     }
 
 
-    fun getWorkList(
+    fun getMyWorkList(
         token: String?,
         type: Int,
         page: Int,

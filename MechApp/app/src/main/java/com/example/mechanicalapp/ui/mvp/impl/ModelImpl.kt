@@ -1254,4 +1254,31 @@ class ModelImpl : BaseModel {
         )?.subscribe(mNetSubscribe)
 
     }
+
+    fun applyRefund(
+        token: String?,
+        reApplyRefund: ReApplyRefund,
+        netSubscribe: NetSubscribe<NetData>
+    ) {
+        appsService?.applyRefund(token,reApplyRefund)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+        Schedulers.io())?.observeOn(
+        AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+
+
+    }
+
+    fun getApplyInfo(
+        token: String?,
+        type: String,
+        createBy: String?,
+        netSubscribe: NetSubscribe<ApplyInfoBean>
+    ) {
+
+        appsService?.getApplyInfo(token,type,createBy)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+
+    }
 }

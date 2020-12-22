@@ -73,9 +73,15 @@ class OrderPresenter(
 
     fun getPartsOrderList(state: String) {
         baseView.showLoading()
+        var type:String?=null
+        if (state=="0"){
+            type = null
+        }else{
+            type =state
+        }
         baseModel.getPartsOrderList(
             App.getInstance().token,
-            state,
+            type,
             page,
             pageSize,
             NetSubscribe<PartOrderListBean>(object :

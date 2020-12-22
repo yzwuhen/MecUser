@@ -33,16 +33,20 @@ interface AppService {
     fun bindThree(@Body requestBody: ReLoginThree?): Observable<LoginCodeBean>
 
     @POST("/jeecg-boot/sys/user/appChangePassword")
-    fun resetPwd( @Header("X-Access-Token") token: String?,@Body requestBody: ResetPwd): Observable<LoginCodeBean>
+    fun resetPwd(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: ResetPwd
+    ): Observable<LoginCodeBean>
 
     @POST("/jeecg-boot/sys/sms")
-    fun getMsgCode(@Body requestBody:ReGetMsgCode): Observable<NetData>
+    fun getMsgCode(@Body requestBody: ReGetMsgCode): Observable<NetData>
 
 
     @POST("/jeecg-boot/sys/user/checkCaptcha")
-    fun verifyCode(@Body requestBody:ReGetMsgCode): Observable<NetData>
+    fun verifyCode(@Body requestBody: ReGetMsgCode): Observable<NetData>
+
     @POST("/jeecg-boot/sys/user/forgotPassword")
-    fun forgotPwd(@Body requestBody:ReGetMsgCode): Observable<NetData>
+    fun forgotPwd(@Body requestBody: ReGetMsgCode): Observable<NetData>
 
     /*
     * 首页数据
@@ -1262,4 +1266,28 @@ interface AppService {
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<EngListBean>
+
+
+    /**
+     * 申请售后
+     */
+    @POST(
+        "/jeecg-boot/shop/mecOrderBack/add"
+    )
+    fun applyRefund(
+        @Header("X-Access-Token") token: String?,
+        @Body reApplyRefund: ReApplyRefund?
+    ): Observable<NetData>
+
+
+    /**
+     * 获取认证信息 (2个人,3企业,4维修厂)
+     */
+    @GET("/jeecg-boot/market/mecUserApprove/list")
+    fun getApplyInfo(
+        @Header("X-Access-Token") token: String?,
+        @Query("apporveType") apporveType: String?,
+        @Query("createBy") createBy: String?
+    ): Observable<ApplyInfoBean>
+
 }

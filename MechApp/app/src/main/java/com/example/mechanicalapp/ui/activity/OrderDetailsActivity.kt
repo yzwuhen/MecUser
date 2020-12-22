@@ -153,7 +153,9 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     private fun goToChat() {
         if (orderData!=null&&orderData?.mecRepairEngineer!=null&& orderData?.mecRepairEngineer!!.size>0){
-            NimUIKit.startP2PSession(this, orderData?.mecRepairEngineer!![0].engineerImId)
+            if (!TextUtils.isEmpty(orderData?.mecRepairEngineer!![0].engineerImId)){
+                NimUIKit.startP2PSession(this, orderData?.mecRepairEngineer!![0].engineerImId)
+            }
         }
 
     }
@@ -250,37 +252,39 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     private fun showOrderInfo(result: OrderDetailsData?) {
 
-        orderData =result
-        if (!TextUtils.isEmpty(result?.orderNum)){
-            tv_order_num.text = "订单号：${result?.orderNum}"
-        }else{
-            tv_order_num.text = ""
-        }
-        tv_order_state.text =result?.statusName
+        if (result!=null){
+            orderData =result
+            if (!TextUtils.isEmpty(result?.orderNum)){
+                tv_order_num.text = "订单号：${result?.orderNum}"
+            }else{
+                tv_order_num.text = ""
+            }
+            tv_order_state.text =result?.statusName
 
-        tv_ec_type.text = result?.productType
-        tv_ec_brand.text  =result?.productBrand
-        tv_ec_model.text =result?.productModel
+            tv_ec_type.text = result?.productType
+            tv_ec_brand.text  =result?.productBrand
+            tv_ec_model.text =result?.productModel
 
-        tv_user_name.text =result?.customerName
-        tv_user_phone.text =result?.customerPhone
+            tv_user_name.text =result?.customerName
+            tv_user_phone.text =result?.customerPhone
 
-        tv_company_name.text =result?.companyName
-        tv_company_address.text =result?.adress
+            tv_company_name.text =result?.companyName
+            tv_company_address.text =result?.adress
 
-        tv_order_type.text =result?.repairTypeName
-       tv_progress.text =result?.progressName
-        tv_created_time.text =result?.createTime
-        tv_info.text =result?.orderDesc
+            tv_order_type.text =result?.repairTypeName
+            tv_progress.text =result?.progressName
+            tv_created_time.text =result?.createTime
+            tv_info.text =result?.orderDesc
 
-        tv_factory_name.text =result?.mecRepaireFactory?.name
-        tv_score.text ="${result?.mecRepaireFactory?.star}分"
-        ratingBar.rating = result?.mecRepaireFactory?.star?.toFloat()!!
-        if (result?.mecRepairEngineer!=null&&result.mecRepairEngineer.size>0){
-            mMecRepairEngineerBean =result?.mecRepairEngineer[0]
-            tv_worker_name.text =mMecRepairEngineerBean?.name
-          //  tv_worker_type.text =
-            tv_worker_time.text="${mMecRepairEngineerBean?.repairAge}年"
+            tv_factory_name.text =result?.mecRepaireFactory?.name
+            tv_score.text ="${result?.mecRepaireFactory?.star}分"
+            ratingBar.rating = result?.mecRepaireFactory?.star?.toFloat()!!
+            if (result?.mecRepairEngineer!=null&&result.mecRepairEngineer.size>0){
+                mMecRepairEngineerBean =result?.mecRepairEngineer[0]
+                tv_worker_name.text =mMecRepairEngineerBean?.name
+                //  tv_worker_type.text =
+                tv_worker_time.text="${mMecRepairEngineerBean?.repairAge}年"
+            }
         }
 
     }

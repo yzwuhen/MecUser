@@ -47,6 +47,7 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
 
     override fun initPresenter() {
         mPresenter = PersonCerPresenter(this, this)
+        mPresenter?.getApporve("4")
     }
 
     override fun initView() {

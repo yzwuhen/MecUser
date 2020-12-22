@@ -4,6 +4,8 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PicAdapter
@@ -54,7 +56,9 @@ class SuggestActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListene
         tv_title.text ="意见反馈"
 
         mPicAdapter = PicAdapter(this, mPicList,this)
-        ry_pic.layoutManager = GridLayoutManager(this,3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
         tv_submit.setOnClickListener(this)

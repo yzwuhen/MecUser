@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.ApplyInfoBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCer
 import com.example.mechanicalapp.ui.mvp.impl.PersonCerPresenter
@@ -37,7 +38,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
     private var type: Int = 0
     private var mRePersonCer = ReCer()
 
-    private var mUpFilePresenter: PersonCerPresenter? = null
+    private var mPresenter: PersonCerPresenter? = null
 
     override fun getLayoutId(): Int {
 
@@ -56,6 +57,9 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
         tv_man.setOnClickListener(this)
         tv_woman.setOnClickListener(this)
         tv_submit.setOnClickListener(this)
+        tv_modify.setOnClickListener(this)
+        ly_cus_server1.setOnClickListener(this)
+        ly_cus_server.setOnClickListener(this)
 
         tv_man.isSelected = true
         mRePersonCer.apporveType=2
@@ -65,7 +69,8 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
     }
 
     override fun initPresenter() {
-        mUpFilePresenter = PersonCerPresenter(this, this)
+        mPresenter = PersonCerPresenter(this, this)
+        (mPresenter as PersonCerPresenter).getApporve("2")
     }
 
 
@@ -90,13 +95,23 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
             R.id.tv_dialog_item2 -> setItem1()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
             R.id.tv_submit->submit()
+            R.id.tv_modify->modify()
+            R.id.ly_cus_server->openCall("400-654-9874")
+            R.id.ly_cus_server1->openCall("400-654-9874")
         }
+    }
+
+    private fun modify() {
+
+        ly_not_apply.visibility =View.VISIBLE
+        ly_apply_fail.visibility =View.GONE
+
     }
 
     private fun submit() {
 
         if (checkInfo()){
-            mUpFilePresenter?.submitCer(mRePersonCer)
+            mPresenter?.submitCer(mRePersonCer)
         }
     }
 
@@ -138,9 +153,9 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
                     if (File(result[0]?.realPath.toString()).exists()){
-                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
                     }else{
-                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
                     }
                 }
                 override fun onCancel() {
@@ -156,9 +171,9 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     if (File(result[0]?.realPath.toString()).exists()){
-                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
                     }else{
-                        (mUpFilePresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
                     }
                 }
                 override fun onCancel() {
@@ -206,9 +221,30 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
     }
 
     override fun success(netData: NetData?) {
-        ToastUtils.showText(netData?.message)
-        if (netData?.code==200){
-            finish()
+        if (netData!=null&& netData is ApplyInfoBean){
+            if (netData.result==null||netData.result.records==null||netData.result.records.size==0){
+                    ly_not_apply.visibility =View.VISIBLE
+            }else{
+                mRePersonCer =netData.result.records[0]
+                if (mRePersonCer.apporveStatus==1){
+                    ly_apply_ing.visibility =View.VISIBLE
+                }else if  (mRePersonCer.apporveStatus==2){
+                    ly_apply_success.visibility =View.VISIBLE
+                    tv_success_name.text ="真实姓名：${mRePersonCer.name}"
+                    tv_success_code.text ="身份证：${mRePersonCer.idCard}"
+                    ImageLoadUtils.loadImage(this,iv_success_pic,App.getInstance().userInfo.avatar,R.mipmap.user_default)
+                }else{
+                    ly_apply_fail.visibility =View.VISIBLE
+                }
+            }
+
+
+
+        }else{
+            ToastUtils.showText(netData?.message)
+            if (netData?.code==200){
+                finish()
+            }
         }
     }
 

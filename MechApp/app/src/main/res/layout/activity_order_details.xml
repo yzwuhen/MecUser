@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp_45"
         android:layout_marginBottom="60dp"
+        android:background="@color/white"
         android:scrollbars="none">
 
         <LinearLayout
@@ -32,7 +33,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="订单号：123456789774"
+                    android:text="订单号："
                     android:textColor="#9a9a9a"
                     android:textSize="16sp" />
 
@@ -66,7 +67,7 @@
                     android:id="@+id/tv_ec_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="挖掘机"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -92,7 +93,7 @@
                     android:id="@+id/tv_ec_brand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DOOSAN"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -118,7 +119,7 @@
                     android:id="@+id/tv_ec_model"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AS321654"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -144,7 +145,7 @@
                     android:id="@+id/tv_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="谭老板"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -170,7 +171,7 @@
                     android:id="@+id/tv_user_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15964257913"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -196,7 +197,7 @@
                     android:id="@+id/tv_company_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="广州城建"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -222,7 +223,7 @@
                     android:id="@+id/tv_company_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="广州市天河区珠江新城"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -300,7 +301,7 @@
                     android:id="@+id/tv_created_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2020年5月1日"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 
@@ -324,7 +325,6 @@
                 android:layout_margin="@dimen/dp_10"
                 android:background="@drawable/rect_radio_6_g"
                 android:padding="@dimen/dp_10"
-                android:text="1.发动机常见故障及维修建议 发动机常见故障及维修建议完 全暖机后发动机转速提高时,发动机机油报警 面对这种情况, 我们一般会"
                 android:textColor="@color/color_666"
                 android:textSize="14sp" />
 
@@ -357,7 +357,7 @@
                     android:id="@+id/tv_factory_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="广州市莹宝维修中心"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -380,7 +380,7 @@
                     android:isIndicator="true"
                     android:layout_marginTop="@dimen/dp_10"
                     android:numStars="5"
-                    android:rating="2.5"
+                    android:rating="3"
                     app:layout_constraintStart_toStartOf="@+id/tv_factory_name"
                     app:layout_constraintTop_toBottomOf="@+id/tv_factory_name" />
 
@@ -390,7 +390,7 @@
                     android:layout_height="15dp"
                     android:layout_marginLeft="@dimen/dp_8"
                     android:layout_marginTop="12dp"
-                    android:text="2.5分"
+                    android:text="3分"
                     android:textColor="#FFB923"
                     android:textSize="13sp"
                     app:layout_constraintStart_toEndOf="@+id/ratingBar"
@@ -420,7 +420,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_12"
-                    android:text="陈工"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16"
                     app:layout_constraintStart_toEndOf="@+id/tv_worker_tip"
@@ -443,7 +443,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_12"
-                    android:text="电焊工"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -467,7 +467,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_5"
                     android:layout_marginTop="@dimen/dp_12"
-                    android:text="3年"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="@dimen/sp_16"
                     app:layout_constraintStart_toEndOf="@+id/tv_worker_time_tip"

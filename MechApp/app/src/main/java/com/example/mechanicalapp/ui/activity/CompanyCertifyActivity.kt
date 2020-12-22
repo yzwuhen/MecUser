@@ -67,6 +67,8 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
 
     override fun initPresenter() {
         mPresenter = PersonCerPresenter(this, this)
+
+        (mPresenter as PersonCerPresenter).getApporve("3")
     }
 
 

@@ -47,6 +47,16 @@ public class ReCer {
     private double gpsLat;
     private double gpsLon;
 
+    private int apporveStatus;
+
+    public int getApporveStatus() {
+        return apporveStatus;
+    }
+
+    public void setApporveStatus(int apporveStatus) {
+        this.apporveStatus = apporveStatus;
+    }
+
     public double getGpsLat() {
         return gpsLat;
     }

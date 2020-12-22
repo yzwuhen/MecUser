@@ -105,6 +105,7 @@ class PartsOrderAdapter(
             }
         }
 
+        holder.itemView.tv_all_nun.text="共${mList[position].quantity}件商品"
         holder.itemView.recycle_list_item.layoutManager =LinearLayoutManager(mContext)
         var mPartsOrderChildAdapter = PartsOrderChildAdapter(mContext,mList[position].orderItemList,position,mOnItemClickListener)
         holder.itemView.recycle_list_item.adapter =mPartsOrderChildAdapter

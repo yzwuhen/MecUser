@@ -71,8 +71,9 @@ class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListene
         super.initView()
 
         mPicAdapter = PicAdapter(this, mPicList as ArrayList<String>,this)
-
-        ry_pic.layoutManager =GridLayoutManager(this,3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation =RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))

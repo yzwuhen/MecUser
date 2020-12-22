@@ -76,7 +76,9 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         super.initView()
 
         mPicAdapter = PicAdapter(this, mPicList, this)
-        ry_pic.layoutManager =  GridLayoutManager(this,3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation =RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
 

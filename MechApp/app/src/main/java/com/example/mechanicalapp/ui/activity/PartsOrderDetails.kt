@@ -8,23 +8,23 @@ import com.example.mechanicalapp.ui.adapter.PartsOrderChildAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsOrderDetailsBean
-import com.example.mechanicalapp.ui.data.request.ReApplyRefund
+import com.example.mechanicalapp.ui.data.PartsOrderGoodsList
 import com.example.mechanicalapp.ui.mvp.impl.OrderDetailsPresenter
-import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_parts_details.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.Serializable
 
-class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<NetData> {
+class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<NetData> {
 
     private var orderType: Int = 0
-    private var orderId=""
-    private var mPresenter: OrderDetailsPresenter?=null
+    private var orderId = ""
+    private var mPresenter: OrderDetailsPresenter? = null
 
-    private var datas:PartsOrderDetailsBean.ResultBean.OrderBean?=null
-
+    private lateinit var datas: PartsOrderDetailsBean.ResultBean.OrderBean
+    var mList: MutableList<PartsOrderGoodsList> = ArrayList<PartsOrderGoodsList>()
     override fun getLayoutId(): Int {
 
         return R.layout.activity_parts_details
@@ -103,21 +103,21 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
         hideLoadingView()
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     override fun onClick(v: View?) {
 
-        when(v?.id){
-            R.id.iv_back->finish()
-            R.id.tv_cancel_order->cancelOrder()
-            R.id.tv_pay->goPay()
-            R.id.tv_apply_refund->applyRefund()
+        when (v?.id) {
+            R.id.iv_back -> finish()
+            R.id.tv_cancel_order -> cancelOrder()
+            R.id.tv_pay -> goPay()
+            R.id.tv_apply_refund -> applyRefund()
 //            R.id.tv_look_logistics->finish()
-            R.id.tv_apply_refund3->applyRefund()
-            R.id.tv_confirm->confirm()
-            R.id.tv_evaluate->jumpActivity(null,EvaluatePartsActivity::class.java)
-            R.id.tv_look_evaluate->jumpActivity(null,EvaluatePartsActivity::class.java)
+            R.id.tv_apply_refund3 -> applyRefund()
+            R.id.tv_confirm -> confirm()
+            R.id.tv_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
+            R.id.tv_look_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
 
         }
 
@@ -129,20 +129,23 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     }
 
     private fun applyRefund() {
-        var bundle = Bundle()
-        var reApplyRefund =ReApplyRefund()
-        reApplyRefund.businessId
-
-        jumpActivity(null,ApplyRefundActivity::class.java)
+        if (datas!=null){
+            var bundle = Bundle()
+            bundle.putSerializable("data",mList as Serializable)
+            bundle.putInt("num",datas.quantity)
+            bundle.putDouble("price", datas.amount)
+            bundle.putString("id",datas.id)
+            jumpActivity(bundle, ApplyRefundActivity::class.java)
+        }
     }
 
     private fun goPay() {
-        var bundle =Bundle()
-        bundle.putString("order_num",datas?.orderNum)
-        bundle.putString("order_id",datas?.id)
-        bundle.putString("created_time",datas?.createTime)
+        var bundle = Bundle()
+        bundle.putString("order_num", datas?.orderNum)
+        bundle.putString("order_id", datas?.id)
+        bundle.putString("created_time", datas?.createTime)
         datas?.amount?.let { bundle.putDouble("order_price", it) }
-        jumpActivity(bundle,PayActivity::class.java)
+        jumpActivity(bundle, PayActivity::class.java)
     }
 
     private fun cancelOrder() {
@@ -150,11 +153,11 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     }
 
     override fun refreshUI(data: NetData?) {
-        if (data!=null &&data is PartsOrderDetailsBean&&data.result!=null){
+        if (data != null && data is PartsOrderDetailsBean && data.result != null) {
             showData(data.result)
-        }else{
+        } else {
             //取消订单
-            if (data?.code==200){
+            if (data?.code == 200) {
                 finish()
             }
             ToastUtils.showText(data?.message)
@@ -163,29 +166,43 @@ class PartsOrderDetails :BaseCusActivity(), View.OnClickListener,NetDataView<Net
     }
 
     private fun showData(data: PartsOrderDetailsBean.ResultBean) {
-        datas =data.order
-        tv_user_name.text =data.order.receiverName
-        tv_user_phone.text = data.order.receiverPhone
-        tv_address.text =data.order.receiverAddress
-        //备注
-        tv_remarks.text =data.order.memo
 
-        tv_order_num.text =data.order.orderNum
-        tv_created_time.text =data.order.createTime
+        if (data.order != null) {
+            datas = data.order
+            mList.clear()
+            mList.addAll(data.productList)
 
-        //支付时间
-        tv_pay_time.text =data.order.paymentTime
+            tv_user_name.text = data.order.receiverName
+            tv_user_phone.text = data.order.receiverPhone
+            tv_address.text = data.order.receiverAddress
+            //备注
+            tv_remarks.text = data.order.memo
+
+            tv_order_num.text = data.order.orderNum
+            tv_created_time.text = data.order.createTime
+
+            //支付时间
+            tv_pay_time.text = data.order.paymentTime
 //        tv_send_goods_time.text=data.order.
 
-        recycle_list.layoutManager = LinearLayoutManager(this)
-        var mPartsOrderChildAdapter = PartsOrderChildAdapter(this,data.productList,0,null)
-        recycle_list.adapter =mPartsOrderChildAdapter
+            recycle_list.layoutManager = LinearLayoutManager(this)
+            var mPartsOrderChildAdapter = PartsOrderChildAdapter(this, data.productList, 0, null)
+            recycle_list.adapter = mPartsOrderChildAdapter
 
-        tv_all_nun.text ="共${data.order.quantity}件商品"
-        tv_money.text ="￥${data.order.amount}"
+            tv_all_nun.text = "共${data.order.quantity}件商品"
+            tv_money.text = "￥${data.order.amount}"
 
+            tv_tip_info.text = "还剩${
+                DateUtils.getHours(
+                    data.order.expire,
+                    DateUtils.getDateByLongWithFormat(
+                        System.currentTimeMillis(),
+                        "yyyy-MM-dd hh:mm:ss"
+                    )
+                )
+            }小时自动关闭订单"
 
-        tv_tip_info.text="还剩${DateUtils.getHours(data.order.expire,DateUtils.getDateByLongWithFormat(System.currentTimeMillis(),"yyyy-MM-dd hh:mm:ss"))}小时自动关闭订单"
+        }
     }
 
     override fun loadMore(data: NetData?) {

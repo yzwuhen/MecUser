@@ -1,48 +1,44 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
-import com.example.mechanicalapp.ui.data.MecTypeData
+import com.example.mechanicalapp.ui.data.EngLetterParentData
 import kotlinx.android.synthetic.main.item_type_right.view.*
 
-class TypeRightAdapter(
+class EngineerParentAdapter (
     var mContext: Context,
-    var mList: MutableList<MecTypeData>,
+    var mList: List<EngLetterParentData>,
     private var mOnItemClickLevelListener: OnItemClickLevelListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return TypeRightVh(
+        return EngineerParentVh(
             LayoutInflater.from(mContext).inflate(R.layout.item_type_right,parent,false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       // if (mList[position].childList.size>0){
-            holder.itemView.tv_type.text = "${mList[position].cateName}"
-            var mRightAdapter = MoreSelMecTypeAdapter(
-                mContext,
-                mList[position].childList,
-                position,
-                mOnItemClickLevelListener
-            )
-            holder.itemView.item_recycler.layoutManager = GridLayoutManager(mContext, 3)
-            holder.itemView.item_recycler.adapter = mRightAdapter
-      //  }
+        holder.itemView.tv_type.text = "${mList[position].key}"
+        var mRightAdapter = EngineerAdapter(
+            mContext,
+            mList[position].data,
+            position,
+            mOnItemClickLevelListener
+        )
+        holder.itemView.item_recycler.layoutManager =LinearLayoutManager(mContext)
+        holder.itemView.item_recycler.adapter = mRightAdapter
     }
 
     override fun getItemCount(): Int {
         return mList.size
     }
 
-    class TypeRightVh(itemView: View) :
+    class EngineerParentVh(itemView: View) :
         RecyclerView.ViewHolder(itemView)
 }

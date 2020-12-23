@@ -1,5 +1,7 @@
 package com.example.mechanicalapp.ui.data;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 public class FactoryData implements Serializable {
@@ -151,7 +153,7 @@ public class FactoryData implements Serializable {
     }
 
     public String getIntroduction() {
-        return introduction;
+        return TextUtils.isEmpty(introduction)?"":introduction;
     }
 
     public void setIntroduction(String introduction) {

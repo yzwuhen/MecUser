@@ -8,6 +8,7 @@ import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.ui.mvp.v.OrderView
 
 class ResultPresenter (
     private var baseView: NetDataView<NetData>
@@ -397,4 +398,70 @@ class ResultPresenter (
 
     }
 
+
+    fun getMecList() {
+        baseView.showLoading()
+        baseModel?.getMyMecList(
+            App.getInstance().token,
+            title,
+            page,
+            pageSize,
+            object : ISubscriberListener<MyMecListBean> {
+                override fun onNext(t: MyMecListBean?) {
+                    if (t?.code == 200 && t.result != null) {
+                        if (page==1){
+                            baseView.refreshUI(t)
+                        }else{
+                            baseView.loadMore(t)
+                        }
+                        page++
+                    } else {
+                        baseView.err()
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
+    }
+
+    fun getOrderList(modelName: String?) {
+        baseModel?.getOrderList(
+            App.getInstance().token,
+            "",
+            modelName,
+            page,
+            pageSize,
+            NetSubscribe<OrderBean>(object :
+                ISubscriberListener<OrderBean> {
+                override fun onNext(t: OrderBean?) {
+                    if (t?.code == 200 && t.result != null) {
+                        if (page==1){
+                            baseView.refreshUI(t)
+                        }else{
+                            baseView.loadMore(t)
+                        }
+                        page++
+                    } else {
+                        baseView.err()
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+
+            })
+        )
+    }
 }

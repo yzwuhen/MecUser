@@ -238,8 +238,6 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
                 }
             }
 
-
-
         }else{
             ToastUtils.showText(netData?.message)
             if (netData?.code==200){

@@ -3,10 +3,7 @@ package com.example.mechanicalapp.ui.mvp.p
 import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.data.EngListBean
-import com.example.mechanicalapp.ui.data.ListBean
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.WxPayBean
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReEvaluate
 import com.example.mechanicalapp.ui.data.request.RePay
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
@@ -110,10 +107,10 @@ class MecAppPresenter(
 
     fun getEngList() {
         baseView.showLoading()
-        baseModel.getEng(App.getInstance().token, null, NetSubscribe<EngListBean>(object :
-            ISubscriberListener<EngListBean> {
-            override fun onNext(t: EngListBean?) {
-                (baseView as NetDataView<NetData>).refreshUI(t)
+        baseModel.getEngLetter(App.getInstance().token, NetSubscribe<EngListLetterBean>(object :
+            ISubscriberListener<EngListLetterBean> {
+            override fun onNext(t: EngListLetterBean?) {
+              (baseView as NetDataView<NetData>).refreshUI(t)
             }
 
             override fun onError(e: Throwable?) {

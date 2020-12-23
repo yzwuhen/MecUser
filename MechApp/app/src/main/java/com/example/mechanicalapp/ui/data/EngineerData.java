@@ -38,6 +38,15 @@ public class EngineerData implements Serializable {
     private String sysOrgCode;
     private String id;
     private int repairAge;
+    private String key;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getPost_dictText() {
         return post_dictText;

@@ -185,6 +185,9 @@
         <activity
             android:name=".ui.activity.ResultJobWantActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.activity.SearchOrderActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.activity.MapTypeSelActivity" />
         <activity android:name=".ui.activity.MapMecBusinessActivity" />
         <activity android:name=".ui.activity.MapPartsActivity" />

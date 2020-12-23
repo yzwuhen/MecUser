@@ -9,6 +9,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.OnItemLongClick
 import com.example.mechanicalapp.utils.DateUtils
+import com.netease.nim.uikit.common.util.sys.TimeUtil
 import com.netease.nimlib.sdk.msg.model.RecentContact
 import kotlinx.android.synthetic.main.item_chat.view.*
 
@@ -22,16 +23,18 @@ class ChatAdapter(var mContext: Context, var mList: MutableList<RecentContact>, 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.tv_user_nick.text = mList[position].fromNick
-        holder.itemView.tv_msg.text = mList[position].content
-        if (mList[position].unreadCount>0){
+        holder.itemView.tv_user_nick.text = mList[position]?.fromNick
+        holder.itemView.tv_msg.text = mList[position]?.content
+        if (mList[position]?.unreadCount!! >0){
             holder.itemView.tv_msg_num.visibility =View.VISIBLE
         }else{
             holder.itemView.tv_msg_num.visibility = View.GONE
         }
-        holder.itemView.tv_msg_num.text =mList[position].unreadCount.toString()
+        holder.itemView.tv_msg_num.text =mList[position]?.unreadCount.toString()
 
-        holder.itemView.tv_time.text =DateUtils.dateDiff(mList[position].time, System.currentTimeMillis())
+        holder.itemView.tv_time.text =
+            mList[position]?.time?.let { TimeUtil.getTimeShowString(it, true) };
+     //   holder.itemView.tv_time.text =DateUtils.dateDiff(mList[position]?.time, System.currentTimeMillis())
     }
 
     override fun getItemCount(): Int {

@@ -55,6 +55,7 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
         })
 
         mPresenter = MsgPresenter(this)
+        mPresenter?.request()
     }
 
     fun closeRefreshView() {
@@ -71,7 +72,7 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
     }
 
     private fun jumChat(position: Int) {
-        NimUIKit.startP2PSession(context, "0");
+       // NimUIKit.startP2PSession(context, mList[position]?.fromAccount);
     }
 
     override fun onItemLongClick(view: View, position: Int) {

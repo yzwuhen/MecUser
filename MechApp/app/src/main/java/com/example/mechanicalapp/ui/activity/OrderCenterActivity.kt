@@ -44,7 +44,6 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
         tv_repair.setOnClickListener(this)
         tv_engineer.setOnClickListener(this)
         tv_repair.performClick()
-
         cus_page.setTouchEvent(true)
         cus_page.addOnPageChangeListener(this)
     }

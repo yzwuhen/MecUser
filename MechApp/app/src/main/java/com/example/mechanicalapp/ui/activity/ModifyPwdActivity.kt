@@ -76,7 +76,7 @@ class ModifyPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.iv_left->finish()
+            R.id.ly_left->finish()
             R.id.tv_get_code->getCodes()
             R.id.tv_rest_pwd->retPwd()
         }

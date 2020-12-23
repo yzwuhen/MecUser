@@ -590,11 +590,12 @@ class ModelImpl : BaseModel {
 
     fun getMyMecList(
         token: String?,
+        title: String?,
         page: Int,
         pageSize: Int,
         iSubscriberListener: ISubscriberListener<MyMecListBean>
     ) {
-        appsService?.getMyMecList(token, page, pageSize)
+        appsService?.getMyMecList(token,title, page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MyMecListBean>(iSubscriberListener))
@@ -929,12 +930,13 @@ class ModelImpl : BaseModel {
     fun getOrderList(
         token: String?,
         state: String?,
+        modelName:String?,
         page: Int,
         pageSize: Int,
         netSubscribe: NetSubscribe<OrderBean>
     ) {
 
-        appsService?.getOrderList(token, state, page, pageSize)?.subscribeOn(Schedulers.io())
+        appsService?.getOrderList(token, state,modelName, page, pageSize)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -1246,6 +1248,14 @@ class ModelImpl : BaseModel {
 
     }
 
+    //获取工程师列表 带字母
+    fun getEngLetter(token: String?,mNetSubscribe: NetSubscribe<EngListLetterBean>) {
+        appsService?.getEngListLetter(token)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
     //获取工程师列表
     fun getEng(token: String?, title: String?,page: Int,pageSize: Int,mNetSubscribe: NetSubscribe<EngListBean>) {
         appsService?.getEngList(token,title,page,pageSize)?.subscribeOn(Schedulers.io())?.unsubscribeOn(

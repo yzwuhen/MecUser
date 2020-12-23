@@ -124,13 +124,13 @@ class MoreSelectMecType :BaseCusActivity(), OnItemClickListener ,View.OnClickLis
 
     private fun selType(){
         for (index in mLeftList.indices){
-            if (mLeftList[index].childList.size>0){
+           // if (mLeftList[index].childList.size>0){
                 for (childData in mLeftList[index].childList.iterator()){
                     if (childData.isSelect){
                         callbackkStr += "${childData.cateName},"
                     }
                 }
-            }
+          //  }
         }
         callback()
     }
@@ -169,9 +169,9 @@ class MoreSelectMecType :BaseCusActivity(), OnItemClickListener ,View.OnClickLis
             if (mLeftList.size>0){
                 mLeftList[0].isSelect =true
                 for (data in mLeftList.iterator()){
-                    if (data.childList.size>0){
+                  //  if (data.childList.size>0){
                         mRightList.add(data)
-                    }
+                  // }
                 }
             }
         }
@@ -181,7 +181,10 @@ class MoreSelectMecType :BaseCusActivity(), OnItemClickListener ,View.OnClickLis
     }
 
     override fun onItemClick(view: View, position: Int, childPosition: Int) {
-        mLeftList[position].childList[childPosition].isSelect = !mLeftList[position].childList[childPosition].isSelect
-        mRightAdapter?.notifyItemChanged(position)
+        try {
+            mLeftList[position].childList[childPosition].isSelect = !mLeftList[position].childList[childPosition].isSelect
+            mRightAdapter?.notifyItemChanged(position)
+        }catch (e:Exception){
+        }
     }
 }

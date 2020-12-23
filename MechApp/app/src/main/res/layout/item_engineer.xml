@@ -25,14 +25,15 @@
             android:id="@+id/tv_text1"
             android:text="xxx"
             android:paddingLeft="@dimen/dp_17"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="16sp"
             android:gravity="start|center_vertical"
             android:textColor="#222222"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="44dp"/>
 
         <TextView
-            android:layout_marginLeft="@dimen/dp_50"
             android:id="@+id/tv_text2"
             android:text="工种：电焊工"
             android:paddingLeft="@dimen/dp_17"

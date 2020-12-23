@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.layout_title.*
 
 class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.onViewListener {
 
-    private var type: Int = 0
     private var popInfo: TextView? = null
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
@@ -114,7 +113,7 @@ class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.
             popSure?.text = "确定"
         }
 
-        this?.let { PopUtils.showPopupWindow(ly_clear, it) }
+        this?.let { PopUtils.showPopupWindow(ly_left, it) }
 
     }
 

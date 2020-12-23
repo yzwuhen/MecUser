@@ -10,6 +10,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.ApplyInfoBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCer
 import com.example.mechanicalapp.ui.mvp.impl.PersonCerPresenter
@@ -22,7 +23,6 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
-
 import kotlinx.android.synthetic.main.activity_factory_apply.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.io.File
@@ -64,7 +64,9 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
         tv_submit.setOnClickListener(this)
         reCompanyCer.apporveType = 4
 
-
+        tv_modify.setOnClickListener(this)
+        ly_cus_server1.setOnClickListener(this)
+        ly_cus_server.setOnClickListener(this)
         et_company_name.addTextChangedListener(this)
         et_user_name.addTextChangedListener(this)
         et_contacts_phone.addTextChangedListener(this)
@@ -73,7 +75,7 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
 
 
     private fun submit() {
-        if (checkInfo()){
+        if (checkInfo()) {
             mPresenter?.submitCer(reCompanyCer)
         }
     }
@@ -95,23 +97,36 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
             R.id.tv_dialog_item1 -> setItem()
             R.id.tv_dialog_item2 -> setItem()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
-            R.id.tv_submit->submit()
+            R.id.tv_submit -> submit()
             R.id.ly_address -> jumpActivityForResult(
                 Configs.ADDRESS_RESULT_CODE,
                 1,
                 AddressSelActivity::class.java
             )
+            R.id.tv_modify -> modify()
+            R.id.ly_cus_server -> openCall("400-654-9874")
+            R.id.ly_cus_server1 -> openCall("400-654-9874")
         }
+    }
+
+
+    private fun modify() {
+
+        ly_not_apply.visibility = View.VISIBLE
+        ly_apply_fail.visibility = View.GONE
+
     }
 
     private fun setItem() {
         mButtDialog?.dismiss()
         verifyStoragePermissions(this)
     }
+
     override fun hasPermissions() {
         super.hasPermissions()
         takePicture()
     }
+
     private fun takePicture() {
         mButtDialog?.dismiss()
         PictureSelector.create(this)
@@ -120,19 +135,21 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    if (File(result[0]?.realPath.toString()).exists()){
+                    if (File(result[0]?.realPath.toString()).exists()) {
                         (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
-                    }else{
+                    } else {
                         (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
                     }
                 }
+
                 override fun onCancel() {
                     // 取消
                 }
             })
     }
+
     private fun showDialogType(type: Int) {
-        picType =type
+        picType = type
         if (mButtDialog == null) {
             mButtDialog = BottomSheetDialog(this)
             mDialogView = View.inflate(this, R.layout.dialog_user_data_buttom, null)
@@ -163,12 +180,13 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
                     data?.getDoubleExtra(Configs.CITY_LOT, 0.0)
                 )
             }
-        }else{
+        } else {
             showResult(requestCode, data?.getStringExtra(Configs.SCREEN_RESULT_Extra))
         }
         super.onActivityResult(requestCode, resultCode, data)
 
     }
+
     private fun showAddress(
         address: String,
         cityId: String?,
@@ -259,9 +277,25 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
     }
 
     override fun success(netData: NetData?) {
-        ToastUtils.showText(netData?.message)
-        if (netData?.code == 200) {
-            finish()
+        if (netData != null && netData is ApplyInfoBean) {
+            if (netData.result == null || netData.result.records == null || netData.result.records.size == 0) {
+                ly_not_apply.visibility = View.VISIBLE
+            } else {
+                reCompanyCer = netData.result.records[0]
+                if (reCompanyCer.apporveStatus == 1) {
+                    ly_apply_ing.visibility = View.VISIBLE
+                } else if (reCompanyCer.apporveStatus == 2) {
+                    ly_apply_success.visibility = View.VISIBLE
+                } else {
+                    ly_apply_fail.visibility = View.VISIBLE
+                }
+            }
+
+        } else {
+            ToastUtils.showText(netData?.message)
+            if (netData?.code == 200) {
+                finish()
+            }
         }
     }
 

@@ -126,13 +126,13 @@ class MoreSelPartsType : BaseCusActivity(), OnItemClickListener, View.OnClickLis
 
     private fun selType(){
         for (index in mLeftList.indices){
-            if (mLeftList[index].partsList.size>0){
+          //  if (mLeftList[index].partsList.size>0){
                 for (childData in mLeftList[index].partsList.iterator()){
                     if (childData.isSelect){
                         callbackkStr += "${childData.name},"
                     }
                 }
-            }
+          //  }
         }
         callback()
     }
@@ -160,9 +160,9 @@ class MoreSelPartsType : BaseCusActivity(), OnItemClickListener, View.OnClickLis
                 mLeftList[0].isSelect =true
 
                 for (data in mLeftList.iterator()){
-                    if (data.partsList.size>0){
+                   // if (data.partsList.size>0){
                         mRightList.add(data)
-                    }
+                 //   }
                 }
             }
         }

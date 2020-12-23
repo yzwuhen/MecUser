@@ -784,6 +784,7 @@ interface AppService {
     @GET("/jeecg-boot/machine/mecMachine/list")
     fun getMyMecList(
         @Header("X-Access-Token") token: String?,
+        @Query("title") title: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<MyMecListBean>
@@ -1047,6 +1048,7 @@ interface AppService {
     fun getOrderList(
         @Header("X-Access-Token") token: String?,
         @Query("status") state: String?,
+        @Query("productType") productType: String?,
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int?
     ): Observable<OrderBean>
@@ -1267,6 +1269,13 @@ interface AppService {
         @Query("pageSize") pageSize: Int
     ): Observable<EngListBean>
 
+    /**
+     * 带首字母的工程师列表
+     */
+    @GET("jeecg-boot/repair/mecRepairEngineer/groupList")
+    fun getEngListLetter(
+        @Header("X-Access-Token") token: String?
+    ): Observable<EngListLetterBean>
 
     /**
      * 申请售后

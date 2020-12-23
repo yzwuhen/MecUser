@@ -17,6 +17,12 @@
         android:layout_gravity="right|center_vertical"
         android:layout_width="@dimen/dp_50"
         android:layout_height="400dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/dp_45"
+        android:visibility="visible"
+        android:id="@+id/recycle_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
 

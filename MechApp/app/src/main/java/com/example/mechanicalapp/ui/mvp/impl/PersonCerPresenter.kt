@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
 import android.content.Context
+import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.ApplyInfoBean
@@ -40,6 +41,7 @@ class PersonCerPresenter(
             }
 
             override fun onError(e: Throwable?) {
+                Log.v("ssss","sssssssssssss=====$e")
                 baseView.hiedLoading()
             }
 

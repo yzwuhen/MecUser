@@ -75,7 +75,7 @@ class ResultMecLeaseActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.iv_back -> finish()
-            R.id.tv_screen -> search(et_search.text.toString())
+            R.id.tv_search -> search(et_search.text.toString())
         }
 
     }

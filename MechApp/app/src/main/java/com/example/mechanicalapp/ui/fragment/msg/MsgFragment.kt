@@ -34,7 +34,8 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
     }
 
     init {
-        mFragmentList?.add(ConversationFragment())
+        //   mFragmentList?.add(ConversationFragment())
+       mFragmentList?.add(ChatMsgFragment())
         mFragmentList?.add(ChatEnFragment())
         mFragmentList?.add(ChatSysFragment())
     }

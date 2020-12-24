@@ -75,10 +75,10 @@ class OrderPresenter(
     fun getPartsOrderList(state: String) {
         baseView.showLoading()
         var type:String?=null
-        if (state=="0"){
-            type = null
+        type = if (state=="0"){
+            null
         }else{
-            type =state
+            state
         }
         baseModel.getPartsOrderList(
             App.getInstance().token,
@@ -107,6 +107,36 @@ class OrderPresenter(
             })
         )
     }
+
+    fun getPartsOrderAfterSaleList() {
+        baseView.showLoading()
+        baseModel.getPartsOrderAfterSaleList(
+            App.getInstance().token,
+            page,
+            pageSize,
+            NetSubscribe<PartOrderListBean>(object :
+                ISubscriberListener<PartOrderListBean> {
+                override fun onNext(t: PartOrderListBean?) {
+                    if (page == 1) {
+                        (baseView as OrderView<NetData>).showData(t)
+                    } else {
+                        (baseView as OrderView<NetData>).showDataMore(t)
+                    }
+                    page++
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+
+            })
+        )
+    }
+
     fun payWx(orderId: String) {
         var mRePay = RePay()
         mRePay.id = orderId

@@ -209,6 +209,13 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
         }
     }
 
+    override fun successData(date: NetData?) {
+        ToastUtils.showText(date?.message)
+        if (date?.code==200){
+            finish()
+        }
+    }
+
     override fun showImg(netData: NetData?) {
         if (netData != null && netData.code == 200) {
             mPicList?.add(netData.message)

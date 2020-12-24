@@ -1,17 +1,11 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.util.Log
 import android.view.View
 import android.widget.RatingBar
-import android.widget.Toast
-import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.OrderData
 import com.example.mechanicalapp.ui.data.OrderDetailsData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.request.ReEvaluate
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView

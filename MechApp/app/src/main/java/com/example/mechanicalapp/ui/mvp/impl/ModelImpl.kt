@@ -1015,7 +1015,17 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
-
+    fun getPartsOrderAfterSaleList(
+        token: String?,
+        page: Int,
+        pageSize: Int,
+        netSubscribe: NetSubscribe<PartOrderListBean>
+    ) {
+        appsService?.getPartsOrderAfterSaleList(token, page, pageSize)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
     fun getOrderDetails(
         token: String?,
         orderId: String?,
@@ -1039,7 +1049,17 @@ class ModelImpl : BaseModel {
             )?.subscribe(netSubscribe)
 
     }
+    fun getPartsOrderAfterDetails(
+        token: String?,
+        orderId: String?,
+        netSubscribe: NetSubscribe<PartsOrderDetailsBean>
+    ) {
+        appsService?.getPartsOrderAfterDetails(token, orderId)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
 
+    }
     fun cancelOrder(
         token: String?,
         orderId: String?,
@@ -1286,6 +1306,14 @@ class ModelImpl : BaseModel {
     ) {
 
         appsService?.getApplyInfo(token,type,createBy)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+
+    }
+
+    fun postExpress(token: String?, mReExpress: ReExpress, netSubscribe: NetSubscribe<NetData>) {
+        appsService?.postExpress(token,mReExpress)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)

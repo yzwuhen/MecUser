@@ -10,6 +10,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.ApplyRefundActivity
+import com.example.mechanicalapp.ui.activity.EvaluateActivity
 import com.example.mechanicalapp.ui.activity.EvaluatePartsActivity
 import com.example.mechanicalapp.ui.activity.PartsOrderDetails
 import com.example.mechanicalapp.ui.adapter.PartsOrderAdapter
@@ -64,11 +65,11 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as OrderPresenter).resetPage()
-                (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
+                getDataList()
             }
 
             override fun onLoadmore() {
-                (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
+                getDataList()
             }
         })
         mPresenter = OrderPresenter(this)
@@ -77,7 +78,11 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     override fun onResume() {
         super.onResume()
-        (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
+      getDataList()
+    }
+
+    fun getDataList(){
+      (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
     }
 
     fun closeRefreshView() {
@@ -107,14 +112,23 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             R.id.tv_cancel_order -> showPop(0,position)
             R.id.tv_confirm -> showPop(3,position)
             R.id.tv_pay -> showBtnDialog(position)
-            R.id.tv_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
-            R.id.tv_look_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
-//            R.id.tv_input_odd_num->jumpActivity(null,null)
-            R.id.tv_cancel_sale -> showPop(4,position)
+            R.id.tv_evaluate -> jumEvaluate(position)
+            R.id.tv_look_evaluate -> jumLookEvaluate(position)
             R.id.ly_root -> jumAct(position)
             R.id.item_child_root->jumAct(position)
         }
 
+    }
+    private fun  jumLookEvaluate(position: Int) {
+        jumpActivity(null, EvaluateActivity::class.java)
+    }
+
+    private fun  jumEvaluate(position: Int) {
+        var bundle = Bundle()
+        bundle.putSerializable("data",mList[clickPosition].orderItemList as Serializable)
+        bundle.putInt("num",mList[clickPosition].quantity)
+        bundle.putString("id",mList[clickPosition].id)
+        jumpActivity(bundle, EvaluatePartsActivity::class.java)
     }
 
     private fun jumAct(position: Int) {
@@ -173,10 +187,6 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             popInfo?.text = "确认收货后不可再申请退货 请确认商品没问题后再进行操作"
             popCancel?.text = "取消"
             popSure?.text = "确认收货"
-        } else if (i == 4) {
-            popInfo?.text = "售后取消后不可再发起申请 是否继续操作？"
-            popCancel?.text = "取消"
-            popSure?.text = "取消售后"
         }
         activity?.let { PopUtils.showPopupWindow(fl_bottom, it) }
 

@@ -1064,6 +1064,16 @@ interface AppService {
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int?
     ): Observable<PartOrderListBean>
+    /**
+     *
+     *获取售后配件订单
+     */
+    @GET("/jeecg-boot/shop/mecOrderBack/queryMyPageList")
+    fun getPartsOrderAfterSaleList(
+        @Header("X-Access-Token") token: String?,
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int?
+    ): Observable<PartOrderListBean>
 
 
     /**
@@ -1183,6 +1193,15 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<PartsOrderDetailsBean>
+    /**
+     *
+     *获取售后订单详情
+     */
+    @GET("/jeecg-boot/shop/mecOrderBack/detail")
+    fun getPartsOrderAfterDetails(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<PartsOrderDetailsBean>
 
 
     /**
@@ -1299,4 +1318,15 @@ interface AppService {
         @Query("createBy") createBy: String?
     ): Observable<ApplyInfoBean>
 
+
+
+
+    /**
+     * 添加物流信息
+     */
+    @POST("/jeecg-boot/shop/mecOrderShipping/add")
+    fun postExpress(
+        @Header("X-Access-Token") token: String?,
+        @Body body: ReExpress?
+    ): Observable<NetData>
 }

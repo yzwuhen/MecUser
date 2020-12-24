@@ -28,8 +28,18 @@ public class PartsOrderDetailsBean extends NetData {
          */
 
         private OrderDeliveryBean orderDelivery;
+        private OrderBackData orderBack;
         private OrderBean order;
         private List<PartsOrderGoodsList> productList;
+
+
+        public OrderBackData getOrderBack() {
+            return orderBack;
+        }
+
+        public void setOrderBack(OrderBackData orderBack) {
+            this.orderBack = orderBack;
+        }
 
         public OrderDeliveryBean getOrderDelivery() {
             return orderDelivery;
@@ -55,201 +65,6 @@ public class PartsOrderDetailsBean extends NetData {
             this.productList = productList;
         }
 
-        public static class OrderDeliveryBean {
-            /**
-             * id : null
-             * createBy : null
-             * createTime : null
-             * updateBy : null
-             * updateTime : null
-             * sysOrgCode : null
-             * areaId : null
-             * areaName : null
-             * address : null
-             * consignee : null
-             * shippingMethod : null
-             * deliveryCorp : null
-             * trackingNo : null
-             * freight : null
-             * phone : null
-             * memo : null
-             * deliverycorpCode : null
-             * deliverycorpUrl : null
-             * orderId : null
-             */
-
-            private Object id;
-            private Object createBy;
-            private Object createTime;
-            private Object updateBy;
-            private Object updateTime;
-            private Object sysOrgCode;
-            private Object areaId;
-            private Object areaName;
-            private Object address;
-            private Object consignee;
-            private Object shippingMethod;
-            private Object deliveryCorp;
-            private Object trackingNo;
-            private Object freight;
-            private Object phone;
-            private Object memo;
-            private Object deliverycorpCode;
-            private Object deliverycorpUrl;
-            private Object orderId;
-
-            public Object getId() {
-                return id;
-            }
-
-            public void setId(Object id) {
-                this.id = id;
-            }
-
-            public Object getCreateBy() {
-                return createBy;
-            }
-
-            public void setCreateBy(Object createBy) {
-                this.createBy = createBy;
-            }
-
-            public Object getCreateTime() {
-                return createTime;
-            }
-
-            public void setCreateTime(Object createTime) {
-                this.createTime = createTime;
-            }
-
-            public Object getUpdateBy() {
-                return updateBy;
-            }
-
-            public void setUpdateBy(Object updateBy) {
-                this.updateBy = updateBy;
-            }
-
-            public Object getUpdateTime() {
-                return updateTime;
-            }
-
-            public void setUpdateTime(Object updateTime) {
-                this.updateTime = updateTime;
-            }
-
-            public Object getSysOrgCode() {
-                return sysOrgCode;
-            }
-
-            public void setSysOrgCode(Object sysOrgCode) {
-                this.sysOrgCode = sysOrgCode;
-            }
-
-            public Object getAreaId() {
-                return areaId;
-            }
-
-            public void setAreaId(Object areaId) {
-                this.areaId = areaId;
-            }
-
-            public Object getAreaName() {
-                return areaName;
-            }
-
-            public void setAreaName(Object areaName) {
-                this.areaName = areaName;
-            }
-
-            public Object getAddress() {
-                return address;
-            }
-
-            public void setAddress(Object address) {
-                this.address = address;
-            }
-
-            public Object getConsignee() {
-                return consignee;
-            }
-
-            public void setConsignee(Object consignee) {
-                this.consignee = consignee;
-            }
-
-            public Object getShippingMethod() {
-                return shippingMethod;
-            }
-
-            public void setShippingMethod(Object shippingMethod) {
-                this.shippingMethod = shippingMethod;
-            }
-
-            public Object getDeliveryCorp() {
-                return deliveryCorp;
-            }
-
-            public void setDeliveryCorp(Object deliveryCorp) {
-                this.deliveryCorp = deliveryCorp;
-            }
-
-            public Object getTrackingNo() {
-                return trackingNo;
-            }
-
-            public void setTrackingNo(Object trackingNo) {
-                this.trackingNo = trackingNo;
-            }
-
-            public Object getFreight() {
-                return freight;
-            }
-
-            public void setFreight(Object freight) {
-                this.freight = freight;
-            }
-
-            public Object getPhone() {
-                return phone;
-            }
-
-            public void setPhone(Object phone) {
-                this.phone = phone;
-            }
-
-            public Object getMemo() {
-                return memo;
-            }
-
-            public void setMemo(Object memo) {
-                this.memo = memo;
-            }
-
-            public Object getDeliverycorpCode() {
-                return deliverycorpCode;
-            }
-
-            public void setDeliverycorpCode(Object deliverycorpCode) {
-                this.deliverycorpCode = deliverycorpCode;
-            }
-
-            public Object getDeliverycorpUrl() {
-                return deliverycorpUrl;
-            }
-
-            public void setDeliverycorpUrl(Object deliverycorpUrl) {
-                this.deliverycorpUrl = deliverycorpUrl;
-            }
-
-            public Object getOrderId() {
-                return orderId;
-            }
-
-            public void setOrderId(Object orderId) {
-                this.orderId = orderId;
-            }
-        }
 
         public static class OrderBean {
             /**

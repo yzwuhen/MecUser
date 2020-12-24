@@ -4,6 +4,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsOrderDetailsBean
+import com.example.mechanicalapp.ui.data.request.ReExpress
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
@@ -47,6 +48,29 @@ class OrderDetailsPresenter(
 
     }
 
+    //获取售后配件订单详情
+    fun getPartsOrderAfterDetails(orderId: String) {
+        baseView.showLoading()
+        baseModel.getPartsOrderAfterDetails(
+            App.getInstance().token,
+            orderId,
+            NetSubscribe<PartsOrderDetailsBean>(object :
+                ISubscriberListener<PartsOrderDetailsBean> {
+                override fun onNext(t: PartsOrderDetailsBean?) {
+                    (baseView as NetDataView<NetData>).refreshUI(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
+    }
 
     override fun onDestroy() {
     }
@@ -70,5 +94,27 @@ class OrderDetailsPresenter(
                 }
             })
         )
+    }
+
+    fun postExpress(mReExpress: ReExpress) {
+        baseView.hiedLoading()
+        baseModel.postExpress(
+            App.getInstance().token,
+            mReExpress,
+            NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                  //  (baseView as NetDataView<NetData>).refreshUI(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
     }
 }

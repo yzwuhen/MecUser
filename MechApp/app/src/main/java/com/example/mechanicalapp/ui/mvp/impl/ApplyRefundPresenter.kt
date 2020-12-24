@@ -6,6 +6,7 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReApplyRefund
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
+import com.example.mechanicalapp.ui.mvp.v.ApplyRefundView
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.PersonCerView
 
@@ -20,6 +21,7 @@ class ApplyRefundPresenter (
         baseModel.applyRefund(App.getInstance().token,reApplyRefund,NetSubscribe<NetData>(object :ISubscriberListener<NetData>{
             override fun onNext(t: NetData?) {
 
+                (baseView as ApplyRefundView).successData(t)
             }
 
             override fun onError(e: Throwable?) {

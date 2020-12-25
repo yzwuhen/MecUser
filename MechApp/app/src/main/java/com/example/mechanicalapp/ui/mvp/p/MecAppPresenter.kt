@@ -5,6 +5,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReEvaluate
+import com.example.mechanicalapp.ui.data.request.ReEvaluateParts
 import com.example.mechanicalapp.ui.data.request.RePay
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.impl.ModelImpl
@@ -69,6 +70,24 @@ class MecAppPresenter(
     fun postEvaluate(mReEvaluate: ReEvaluate?) {
         baseView.showLoading()
         baseModel.postEvaluate(App.getInstance().token, mReEvaluate, NetSubscribe<NetData>(object :
+            ISubscriberListener<NetData> {
+            override fun onNext(t: NetData?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
+
+    fun postPartsEvaluate(mReEvaluate: ReEvaluateParts?) {
+        baseView.showLoading()
+        baseModel.postEvaluateParts(App.getInstance().token, mReEvaluate, NetSubscribe<NetData>(object :
             ISubscriberListener<NetData> {
             override fun onNext(t: NetData?) {
                 (baseView as NetDataView<NetData>).refreshUI(t)

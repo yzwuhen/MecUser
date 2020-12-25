@@ -1249,7 +1249,14 @@ class ModelImpl : BaseModel {
         )?.subscribe(mNetSubscribe)
 
     }
+    //提交配件订单评论
+    fun postEvaluateParts(token:String?,reEvaluate: ReEvaluateParts?,mNetSubscribe:NetSubscribe<NetData>){
+        appsService?.postEvaluateParts(token,reEvaluate)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
 
+    }
     //微信支付
     fun payWx(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<WxPayBean>){
         appsService?.payWx(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(

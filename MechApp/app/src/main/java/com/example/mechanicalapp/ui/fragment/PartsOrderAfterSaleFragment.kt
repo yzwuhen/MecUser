@@ -169,9 +169,7 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
             popSure?.text = "取消售后"
         }
         clickPosition =position
-
-
-
+        
         activity?.let { PopUtils.showPopupWindow(fl_bottom, it) }
 
     }

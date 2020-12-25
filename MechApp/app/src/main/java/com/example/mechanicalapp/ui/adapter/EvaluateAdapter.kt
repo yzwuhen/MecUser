@@ -45,7 +45,7 @@ class EvaluateAdapter(
         init {
             itemView.ratingBar.setOnRatingBarChangeListener(object :RatingBar.OnRatingBarChangeListener{
                 override fun onRatingChanged(p0: RatingBar?, p1: Float, p2: Boolean) {
-                    onItemChangeListener.onItemClick(itemView.ratingBar,adapterPosition,p1)
+                    onItemChangeListener.onItemClick(itemView.ratingBar,adapterPosition,p1.toString())
                 }
             })
             itemView.tv_info.addTextChangedListener(object :TextWatcher{

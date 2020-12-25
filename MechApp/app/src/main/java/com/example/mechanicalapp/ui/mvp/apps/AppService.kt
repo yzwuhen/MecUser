@@ -1262,7 +1262,17 @@ interface AppService {
     ): Observable<NetData>
 
 
-    /*提交工程订单评论
+    /**
+     * 提交配件订单评价
+     */
+    @POST("/jeecg-boot/shop/mecProductComment/addBatch")
+    fun postEvaluateParts(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: ReEvaluateParts?
+    ): Observable<NetData>
+
+
+    /*微信支付
   * */
     @POST("/jeecg-boot/shop/mecOrder/wxPay")
     fun payWx(

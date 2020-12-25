@@ -13,6 +13,9 @@ import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_evaluate.*
 import kotlinx.android.synthetic.main.layout_title.*
 
+/**
+ * 工程评价
+ */
 class EvaluateActivity:BaseCusActivity(),View.OnClickListener ,NetDataView<NetData>,RatingBar.OnRatingBarChangeListener{
     private var orderData: OrderDetailsData?=null
     private var mPresenter: MecAppPresenter?=null

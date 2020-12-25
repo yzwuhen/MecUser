@@ -4,6 +4,8 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsOrderDetailsBean
+import com.example.mechanicalapp.ui.data.PostExpressBean
+import com.example.mechanicalapp.ui.data.ReCancelRefundBean
 import com.example.mechanicalapp.ui.data.request.ReExpress
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
@@ -101,9 +103,31 @@ class OrderDetailsPresenter(
         baseModel.postExpress(
             App.getInstance().token,
             mReExpress,
-            NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
-                  //  (baseView as NetDataView<NetData>).refreshUI(t)
+            NetSubscribe<PostExpressBean>(object : ISubscriberListener<PostExpressBean> {
+                override fun onNext(t: PostExpressBean?) {
+                    (baseView as NetDataView<PostExpressBean>).refreshUI(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
+    }
+
+    fun cancelRefund(id: String?) {
+        baseView.hiedLoading()
+        baseModel.cancelRefund(
+            App.getInstance().token,
+            id,
+            NetSubscribe<ReCancelRefundBean>(object : ISubscriberListener<ReCancelRefundBean> {
+                override fun onNext(t: ReCancelRefundBean?) {
+                    (baseView as NetDataView<ReCancelRefundBean>).refreshUI(t)
                 }
 
                 override fun onError(e: Throwable?) {

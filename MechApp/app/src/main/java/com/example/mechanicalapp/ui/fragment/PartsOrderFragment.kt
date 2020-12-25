@@ -78,6 +78,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     override fun onResume() {
         super.onResume()
+        (mPresenter as OrderPresenter).resetPage()
       getDataList()
     }
 
@@ -252,6 +253,10 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     private fun applyRefund() {
 
+        if (mList[clickPosition].isBackOrder=="1"){
+            ToastUtils.showText("已经申请过售后，请耐心等待结果")
+            return
+        }
         var bundle = Bundle()
         bundle.putSerializable("data",mList[clickPosition].orderItemList as Serializable)
         bundle.putInt("num",mList[clickPosition].quantity)

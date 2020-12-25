@@ -1,31 +1,31 @@
 package com.example.mechanicalapp.ui.data.request;
 
 public class ReExpress {
-    private String orderId;
-    private String deliveryCorp;
-    private String trackingNo;
+    private String id;
+    private String deliverycorpCode;
+    private String trackNo;
 
-    public String getOrderId() {
-        return orderId;
+    public String getId() {
+        return id;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getDeliveryCorp() {
-        return deliveryCorp;
+    public String getDeliverycorpCode() {
+        return deliverycorpCode;
     }
 
-    public void setDeliveryCorp(String deliveryCorp) {
-        this.deliveryCorp = deliveryCorp;
+    public void setDeliverycorpCode(String deliverycorpCode) {
+        this.deliverycorpCode = deliverycorpCode;
     }
 
-    public String getTrackingNo() {
-        return trackingNo;
+    public String getTrackNo() {
+        return trackNo;
     }
 
-    public void setTrackingNo(String trackingNo) {
-        this.trackingNo = trackingNo;
+    public void setTrackNo(String trackNo) {
+        this.trackNo = trackNo;
     }
 }

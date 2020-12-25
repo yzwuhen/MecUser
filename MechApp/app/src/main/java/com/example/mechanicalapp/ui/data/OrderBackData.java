@@ -39,6 +39,9 @@ public class OrderBackData implements Serializable {
     private String applyPhone;
     private String businessId;
     private String applyTime;
+    private String deliverycorpCode;
+    private String trackingNo;
+    private String writeTrackingNoTime;
 
     public String getId() {
         return id;
@@ -50,6 +53,30 @@ public class OrderBackData implements Serializable {
 
     public String getCreateBy() {
         return createBy;
+    }
+
+    public String getDeliverycorpCode() {
+        return deliverycorpCode;
+    }
+
+    public void setDeliverycorpCode(String deliverycorpCode) {
+        this.deliverycorpCode = deliverycorpCode;
+    }
+
+    public String getWriteTrackingNoTime() {
+        return writeTrackingNoTime;
+    }
+
+    public void setWriteTrackingNoTime(String writeTrackingNoTime) {
+        this.writeTrackingNoTime = writeTrackingNoTime;
+    }
+
+    public String getTrackingNo() {
+        return trackingNo;
+    }
+
+    public void setTrackingNo(String trackingNo) {
+        this.trackingNo = trackingNo;
     }
 
     public void setCreateBy(String createBy) {

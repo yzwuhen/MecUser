@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,9 +33,14 @@ class PartsOrderAfterAdapter (
         when (mList[position].status) {
             0 -> {
                 holder.itemView.tv_order_num.text = "订单号：${mList[position].orderNum}"
-                holder.itemView.ly_bottom.visibility = View.VISIBLE
                 holder.itemView.tv_state_test.visibility=View.VISIBLE
-                holder.itemView.tv_state_test.text ="等待买家寄回商品"
+                if (TextUtils.isEmpty(mList[position].deliverycorpCode)){
+                    holder.itemView.ly_bottom.visibility = View.VISIBLE
+                    holder.itemView.tv_state_test.text ="等待买家回寄商品"
+                }else{
+                    holder.itemView.ly_bottom.visibility = View.GONE
+                    holder.itemView.tv_state_test.text ="等待物流退货"
+                }
             }
             1 -> {
                 holder.itemView.tv_order_num.text = "订单号：${mList[position].orderNum}"

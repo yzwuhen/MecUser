@@ -1324,9 +1324,23 @@ interface AppService {
     /**
      * 添加物流信息
      */
-    @POST("/jeecg-boot/shop/mecOrderShipping/add")
+    @FormUrlEncoded
+    @POST("/jeecg-boot/shop/mecOrderBack/writeTrackNo")
     fun postExpress(
         @Header("X-Access-Token") token: String?,
-        @Body body: ReExpress?
-    ): Observable<NetData>
+       @Field("id")id:String?,
+        @Field("deliverycorpCode")deliverycorpCode:String?,
+        @Field("trackNo")trackNo:String?
+    ): Observable<PostExpressBean>
+
+    /**
+     * 取消售后
+     */
+    @FormUrlEncoded
+    @POST("/jeecg-boot/shop/mecOrderBack/cancel")
+    fun cancelRefund(
+        @Header("X-Access-Token") token: String?,
+        @Field("id") id:String?
+    ): Observable<ReCancelRefundBean>
+
 }

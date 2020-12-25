@@ -130,6 +130,10 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
 
     private fun applyRefund() {
         if (datas!=null){
+            if (datas.isBackOrder=="1"){
+                ToastUtils.showText("已经申请过售后，请耐心等待结果")
+                return
+            }
             var bundle = Bundle()
             bundle.putSerializable("data",mList as Serializable)
             bundle.putInt("num",datas.quantity)

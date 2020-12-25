@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReExpress
 import com.example.mechanicalapp.ui.data.request.RePay
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
@@ -14,6 +15,8 @@ import com.example.mechanicalapp.ui.mvp.v.ReleaseView
 
 /**
  * 都是维修订单
+ *
+ * 不改了=。= 写两套
  */
 class OrderPresenter(
     private var baseView: BaseView<NetData>
@@ -136,7 +139,27 @@ class OrderPresenter(
             })
         )
     }
+    fun postExpress(mReExpress: ReExpress) {
+        baseView.hiedLoading()
+        baseModel.postExpress(
+            App.getInstance().token,
+            mReExpress,
+            NetSubscribe<PostExpressBean>(object : ISubscriberListener<PostExpressBean> {
+                override fun onNext(t: PostExpressBean?) {
+                   (baseView as OrderView<PostExpressBean>).showData(t)
+                }
 
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
+    }
     fun payWx(orderId: String) {
         var mRePay = RePay()
         mRePay.id = orderId
@@ -227,14 +250,14 @@ class OrderPresenter(
         )
     }
 
-    fun applyRefund(orderId: String){
+    fun cancelRefund(id: String?) {
         baseView.hiedLoading()
-        baseModel.cancelOrder(
+        baseModel.cancelRefund(
             App.getInstance().token,
-            orderId,
-            NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
-                    (baseView as OrderView<NetData>).showData(t)
+            id,
+            NetSubscribe<ReCancelRefundBean>(object : ISubscriberListener<ReCancelRefundBean> {
+                override fun onNext(t: ReCancelRefundBean?) {
+                    (baseView as OrderView<ReCancelRefundBean>).showData(t)
                 }
 
                 override fun onError(e: Throwable?) {
@@ -246,5 +269,7 @@ class OrderPresenter(
                 }
             })
         )
+
     }
+
 }

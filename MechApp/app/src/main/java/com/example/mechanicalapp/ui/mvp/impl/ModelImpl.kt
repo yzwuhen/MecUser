@@ -1312,11 +1312,19 @@ class ModelImpl : BaseModel {
 
     }
 
-    fun postExpress(token: String?, mReExpress: ReExpress, netSubscribe: NetSubscribe<NetData>) {
-        appsService?.postExpress(token,mReExpress)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+    fun postExpress(token: String?, mReExpress: ReExpress, netSubscribe: NetSubscribe<PostExpressBean>) {
+        appsService?.postExpress(token,mReExpress.id,mReExpress.deliverycorpCode,mReExpress.trackNo)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)
 
+    }
+
+    fun cancelRefund(token: String?, id: String?, netSubscribe: NetSubscribe<ReCancelRefundBean>) {
+
+        appsService?.cancelRefund(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
     }
 }

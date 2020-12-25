@@ -6,12 +6,16 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PartsOrderChildAdapter
+import com.example.mechanicalapp.ui.adapter.RefundPicAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.OrderBackData
 import com.example.mechanicalapp.ui.data.PartsOrderDetailsBean
+import com.example.mechanicalapp.ui.data.ReCancelRefundBean
 import com.example.mechanicalapp.ui.data.request.ReExpress
 import com.example.mechanicalapp.ui.mvp.impl.OrderDetailsPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
@@ -20,7 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_parts_order_after.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener, NetDataView<NetData> {
+class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemClickListener, NetDataView<NetData> {
 
     private var orderType: Int = 0
     private var orderId = ""
@@ -49,21 +53,17 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener, NetDataV
         orderType = intent.getIntExtra("order_type", 0)
         orderId = intent.getStringExtra("order_id").toString()
 
-        mReExpress.orderId =orderId
+
 
         if (orderType == 0) {
             tv_title.text = "售后中"
             ly_order1.visibility = View.VISIBLE
             ly_contact_cus_server.visibility =View.GONE
             ly_post_address.visibility =View.VISIBLE
-            //寄回后才显示
-            ly_send_back_time.visibility =View.VISIBLE
         } else if (orderType == 1) {
             tv_title.text = "售后成功"
-            ly_send_back_time.visibility =View.VISIBLE
             ly_refund_time.visibility =View.VISIBLE
         } else if (orderType == 2) {
-            ly_send_back_time.visibility =View.VISIBLE
             tv_title.text = "售后失败"
 
         } else if (orderType == 3) {
@@ -107,6 +107,7 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener, NetDataV
     }
 
     private fun cancelRefund() {
+        mPresenter?.cancelRefund(mOrderBackData?.id)
     }
 
     //提交快递信息
@@ -116,12 +117,13 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener, NetDataV
             ToastUtils.showText("请输入运输公司名称")
             return
         }
-        mReExpress.deliveryCorp =mDialogEtExpressName?.text.toString()
+        mReExpress.deliverycorpCode =mDialogEtExpressName?.text.toString()
         if (TextUtils.isEmpty(mDialogEtExpressNum?.text.toString())){
             ToastUtils.showText("请输入快递单号")
             return
         }
-        mReExpress.trackingNo =mDialogEtExpressNum?.text.toString()
+        mReExpress.id =mOrderBackData?.id
+        mReExpress.trackNo =mDialogEtExpressNum?.text.toString()
         mPresenter?.postExpress(mReExpress)
     }
 
@@ -146,6 +148,24 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener, NetDataV
         if (data != null && data is PartsOrderDetailsBean && data.result != null) {
             showData(data.result)
         }
+        else if (data is ReCancelRefundBean){
+            ToastUtils.showText(data.message)
+            if (data.code==200){
+                finish()
+            }
+        }else{
+            //提交快递信息返回
+            ToastUtils.showText(data?.message)
+            if (data?.code==200){
+                ly_send_back_time.visibility =View.VISIBLE
+                ly_contact_cus_server.visibility =View.VISIBLE
+                ly_post_address.visibility =View.GONE
+                ly_post_info.visibility=View.VISIBLE
+                tv_post_company.text="快递公司：${mReExpress.deliverycorpCode}"
+                tv_post_num.text ="快递单号：${mReExpress.trackNo}"
+
+            }
+        }
     }
 
     private fun showData(data: PartsOrderDetailsBean.ResultBean) {
@@ -164,9 +184,41 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener, NetDataV
             tv_apply_time.text =mOrderBackData?.applyTime
             tv_send_back_user_name.text =data.orderDelivery.consignee
             tv_send_back_user_address.text ="${data.orderDelivery.areaName}${data.orderDelivery.address}"
+
+
+            //售后订单号
+            tv_after_order_num.text="售后订单号：${mOrderBackData?.mecOrderId}"
+
+            tv_refund_reason.text =data.orderBack.backReason
+            if (!TextUtils.isEmpty(data.orderBack.imgs)){
+                ly_refund_pic.visibility =View.VISIBLE
+             var   mPicAdapter = RefundPicAdapter(this, data.orderBack.imgs.split(","), this)
+                var layoutManager = LinearLayoutManager(this)
+                layoutManager.orientation = RecyclerView.HORIZONTAL
+                rv_pic.layoutManager =layoutManager
+                rv_pic.adapter = mPicAdapter
+            }
+
+            if (!TextUtils.isEmpty(mOrderBackData?.deliverycorpCode)){
+                ly_post_info.visibility=View.VISIBLE
+                tv_post_company.text="快递公司：${mOrderBackData?.deliverycorpCode}"
+                tv_post_num.text ="快递单号：${mOrderBackData?.trackingNo}"
+                //寄回后才显示
+                ly_send_back_time.visibility =View.VISIBLE
+                ly_order1.visibility =View.GONE
+                ly_contact_cus_server.visibility =View.VISIBLE
+                ly_post_address.visibility =View.GONE
+                //邮寄时间
+                tv_send_back_time.text ="邮寄时间：${mOrderBackData?.writeTrackingNoTime}"
+            }
         }
     }
 
     override fun loadMore(data: NetData?) {
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+
+
     }
 }

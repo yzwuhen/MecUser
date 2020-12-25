@@ -113,8 +113,6 @@ public class PartsOrderDetailsBean extends NetData {
             private String id;
             private String createBy;
             private String createTime;
-            private Object updateBy;
-            private Object updateTime;
             private String sysOrgCode;
             private String orderNum;
             private String createUserName;
@@ -125,31 +123,17 @@ public class PartsOrderDetailsBean extends NetData {
             private String receiverAreaName;
             private String receiverPhone;
             private String receiverAddress;
-            private Object receiveTime;
-            private Object freight;
-            private Object tax;
-            private Object fee;
             private int productAmount;
             private double amount;
             private int weight;
             private int quantity;
             private String memo;
             private String isAllocatedstock;
-            private Object paymentType;
             private String paymentTime;
-            private Object shippingName;
-            private Object completeDate;
             private String expire;
-            private Object sn;
-            private Object type;
             private int status;
             private String statusName;
-            private Object paymentTypeName;
-            private Object skuIds;
-            private Object orderItemList;
-            private Object picUrl;
-            private Object orderTitle;
-            private Object skuName;
+            private String isBackOrder;
 
             public String getId() {
                 return id;
@@ -173,22 +157,6 @@ public class PartsOrderDetailsBean extends NetData {
 
             public void setCreateTime(String createTime) {
                 this.createTime = createTime;
-            }
-
-            public Object getUpdateBy() {
-                return updateBy;
-            }
-
-            public void setUpdateBy(Object updateBy) {
-                this.updateBy = updateBy;
-            }
-
-            public Object getUpdateTime() {
-                return updateTime;
-            }
-
-            public void setUpdateTime(Object updateTime) {
-                this.updateTime = updateTime;
             }
 
             public String getSysOrgCode() {
@@ -271,38 +239,6 @@ public class PartsOrderDetailsBean extends NetData {
                 this.receiverAddress = receiverAddress;
             }
 
-            public Object getReceiveTime() {
-                return receiveTime;
-            }
-
-            public void setReceiveTime(Object receiveTime) {
-                this.receiveTime = receiveTime;
-            }
-
-            public Object getFreight() {
-                return freight;
-            }
-
-            public void setFreight(Object freight) {
-                this.freight = freight;
-            }
-
-            public Object getTax() {
-                return tax;
-            }
-
-            public void setTax(Object tax) {
-                this.tax = tax;
-            }
-
-            public Object getFee() {
-                return fee;
-            }
-
-            public void setFee(Object fee) {
-                this.fee = fee;
-            }
-
             public int getProductAmount() {
                 return productAmount;
             }
@@ -351,14 +287,6 @@ public class PartsOrderDetailsBean extends NetData {
                 this.isAllocatedstock = isAllocatedstock;
             }
 
-            public Object getPaymentType() {
-                return paymentType;
-            }
-
-            public void setPaymentType(Object paymentType) {
-                this.paymentType = paymentType;
-            }
-
             public String getPaymentTime() {
                 return paymentTime;
             }
@@ -367,44 +295,12 @@ public class PartsOrderDetailsBean extends NetData {
                 this.paymentTime = paymentTime;
             }
 
-            public Object getShippingName() {
-                return shippingName;
-            }
-
-            public void setShippingName(Object shippingName) {
-                this.shippingName = shippingName;
-            }
-
-            public Object getCompleteDate() {
-                return completeDate;
-            }
-
-            public void setCompleteDate(Object completeDate) {
-                this.completeDate = completeDate;
-            }
-
             public String getExpire() {
                 return expire;
             }
 
             public void setExpire(String expire) {
                 this.expire = expire;
-            }
-
-            public Object getSn() {
-                return sn;
-            }
-
-            public void setSn(Object sn) {
-                this.sn = sn;
-            }
-
-            public Object getType() {
-                return type;
-            }
-
-            public void setType(Object type) {
-                this.type = type;
             }
 
             public int getStatus() {
@@ -423,54 +319,15 @@ public class PartsOrderDetailsBean extends NetData {
                 this.statusName = statusName;
             }
 
-            public Object getPaymentTypeName() {
-                return paymentTypeName;
+            public String getIsBackOrder() {
+                return isBackOrder;
             }
 
-            public void setPaymentTypeName(Object paymentTypeName) {
-                this.paymentTypeName = paymentTypeName;
-            }
-
-            public Object getSkuIds() {
-                return skuIds;
-            }
-
-            public void setSkuIds(Object skuIds) {
-                this.skuIds = skuIds;
-            }
-
-            public Object getOrderItemList() {
-                return orderItemList;
-            }
-
-            public void setOrderItemList(Object orderItemList) {
-                this.orderItemList = orderItemList;
-            }
-
-            public Object getPicUrl() {
-                return picUrl;
-            }
-
-            public void setPicUrl(Object picUrl) {
-                this.picUrl = picUrl;
-            }
-
-            public Object getOrderTitle() {
-                return orderTitle;
-            }
-
-            public void setOrderTitle(Object orderTitle) {
-                this.orderTitle = orderTitle;
-            }
-
-            public Object getSkuName() {
-                return skuName;
-            }
-
-            public void setSkuName(Object skuName) {
-                this.skuName = skuName;
+            public void setIsBackOrder(String isBackOrder) {
+                this.isBackOrder = isBackOrder;
             }
         }
+
 
     }
 }

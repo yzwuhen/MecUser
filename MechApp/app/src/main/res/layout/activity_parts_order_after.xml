@@ -148,7 +148,7 @@
 
                     <TextView
                         style="@style/tv_order_style_left"
-                        android:text="收货关闭时间：：" />
+                        android:text="收货关闭时间：" />
 
                     <TextView
                         android:id="@+id/tv_close_time"
@@ -275,14 +275,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:paddingLeft="@dimen/dp_15"
-                android:text="退款原因xxxxxxxxxxxxx"
+                android:text=""
                 android:textColor="@color/color_999"
                 android:textSize="13sp" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/ly_refund_pic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_15"
                 android:orientation="vertical">
 
                 <TextView

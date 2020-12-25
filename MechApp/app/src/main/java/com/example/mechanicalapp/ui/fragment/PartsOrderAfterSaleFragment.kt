@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -14,9 +15,9 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.PartsOrderAfterDetails
 import com.example.mechanicalapp.ui.adapter.PartsOrderAfterAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.PartOrderListBean
-import com.example.mechanicalapp.ui.data.PartsOrderData
+import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReExpress
+import com.example.mechanicalapp.ui.mvp.impl.OrderDetailsPresenter
 import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -47,8 +48,7 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
     private var mDialogEtExpressNum: EditText?=null
     private var mDialogClose: ImageView?=null
     private var mDialogSure:TextView?=null
-
-
+    private var mReExpress= ReExpress()
     private var clickPosition=0
     private var api: IWXAPI?=null
     override fun initView() {
@@ -62,6 +62,7 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
                 spring_list.isEnable = false
+                (mPresenter as OrderPresenter).resetPage()
                 getDataList()
             }
 
@@ -75,6 +76,7 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
 
     override fun onResume() {
         super.onResume()
+        (mPresenter as OrderPresenter).resetPage()
         getDataList()
     }
     fun getDataList(){
@@ -103,6 +105,18 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
     private fun postExpressInfo() {
         //clickPosition
         mExpressDialog?.dismiss()
+        if (TextUtils.isEmpty(mDialogEtExpressName?.text.toString())){
+            ToastUtils.showText("请输入运输公司名称")
+            return
+        }
+        mReExpress.deliverycorpCode =mDialogEtExpressName?.text.toString()
+        if (TextUtils.isEmpty(mDialogEtExpressNum?.text.toString())){
+            ToastUtils.showText("请输入快递单号")
+            return
+        }
+        mReExpress.id =mList[clickPosition]?.id
+        mReExpress.trackNo =mDialogEtExpressNum?.text.toString()
+        (mPresenter as OrderPresenter)?.postExpress(mReExpress)
     }
 
     private fun showInputDialog(position: Int) {
@@ -191,8 +205,7 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
 
     //取消售后
     private fun cancleSh() {
-
-
+        (mPresenter as OrderPresenter)?.cancelRefund(mList[clickPosition].id)
     }
 
 
@@ -205,6 +218,16 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
                 mList.addAll(data?.result?.records!!)
             }
             mAdapter?.notifyDataSetChanged()
+        }
+        else if (data is ReCancelRefundBean){
+            ToastUtils.showText(data.message)
+            if (data.code==200){
+             spring_list?.callFresh()
+            }
+        }
+        else if (data is PostExpressBean){
+            ToastUtils.showText(data?.message)
+            spring_list?.callFresh()
         }
         else{
             ToastUtils.showText(data?.message)

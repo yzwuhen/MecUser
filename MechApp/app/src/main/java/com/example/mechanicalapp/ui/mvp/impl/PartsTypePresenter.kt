@@ -2,12 +2,14 @@ package com.example.mechanicalapp.ui.mvp.impl
 
 import android.content.Context
 import android.util.Log
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import com.example.mechanicalapp.ui.mvp.v.MecTypeView
+import com.example.mechanicalapp.ui.mvp.v.TypeView
 
 class PartsTypePresenter(
     private var mContext: Context,
@@ -56,68 +58,23 @@ class PartsTypePresenter(
 
 
     fun getPartsTypeList() {
-        baseModel?.getPartsTypeList(
-            page,
-            pageSize,
-            object : ISubscriberListener<MecTypeParentBean> {
-                override fun onNext(t: MecTypeParentBean?) {
-                    if (t?.code == 200 && t?.result != null) {
-                        t?.result?.records?.let {
-                            (baseView as MecTypeView<BaseData>)?.refreshLeftUI(
-                                it
-                            )
-                        }
-                        if (t?.result?.records?.size!! > 0) {
-                            t?.result?.records?.get(0)?.id?.let { getPartsTypeChildList(it) }
-                        }
-
-                        baseView?.hiedLoading()
-                    } else {
-                        baseView?.err()
-                    }
-
-                }
-
-                override fun onError(e: Throwable?) {
-                    baseView?.err()
-                }
-
-                override fun onCompleted() {
-                }
-            })
+        baseView.showLoading()
+        baseModel?.getPartType(App.getInstance().token,object :
+            ISubscriberListener<MecTypeBean> {
+            override fun onNext(t: MecTypeBean?) {
+                (baseView as TypeView<MecTypeBean>).refreshLeftUI(t)
+            }
+            override fun onError(e: Throwable?) {
+                baseView.hiedLoading()
+                baseView.err()
+            }
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        })
     }
 
 
-    fun getPartsTypeChildList(pid: String) {
-
-        baseModel?.getPartsTypeChildList(
-            page,
-            pageSize,
-            pid,
-            object : ISubscriberListener<MecTypeChildBean> {
-                override fun onNext(t: MecTypeChildBean?) {
-                    if (t?.code == 200 && t?.result != null) {
-
-                        t?.result?.records?.let {
-                            (baseView as MecTypeView<BaseData>)?.refreshRightUI(
-                                it
-                            )
-                        }
-
-                        baseView?.hiedLoading()
-                    } else {
-                        baseView?.err()
-                    }
-                }
-
-                override fun onError(e: Throwable?) {
-                    baseView?.err()
-                }
-
-                override fun onCompleted() {
-                }
-            })
-    }
 
     override fun onDestroy() {
     }

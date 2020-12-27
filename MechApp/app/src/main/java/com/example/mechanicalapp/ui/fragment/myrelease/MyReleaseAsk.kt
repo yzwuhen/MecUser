@@ -45,18 +45,18 @@ class MyReleaseAsk(var type: Int) : BaseCusFragment(), OnItemClickListener, PopU
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
                 spring_list.isEnable = false
-                (mPresenter as MyReleasePresenterImpl).getLeaseList(2)
+                (mPresenter as MyReleasePresenterImpl).getMyLeaseList(2)
             }
 
             override fun onLoadmore() {
                 (mPresenter as MyReleasePresenterImpl).resetPage()
-                (mPresenter as MyReleasePresenterImpl).getLeaseList(2)
+                (mPresenter as MyReleasePresenterImpl).getMyLeaseList(2)
             }
         })
 
 
         mPresenter = MyReleasePresenterImpl(mContext, this)
-        (mPresenter as MyReleasePresenterImpl).getLeaseList(2)
+        (mPresenter as MyReleasePresenterImpl).getMyLeaseList(2)
     }
 
     fun closeRefreshView() {

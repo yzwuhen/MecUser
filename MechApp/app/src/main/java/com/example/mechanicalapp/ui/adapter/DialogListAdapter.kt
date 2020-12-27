@@ -29,7 +29,7 @@ class DialogListAdapter (var mContext: Context, var mList: MutableList<String>, 
 
     class DialogListVh(itemView: View, mOnItemClickListener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         init {
-            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView, adapterPosition) })
+            itemView.setOnClickListener(View.OnClickListener { mOnItemClickListener.onItemClick(itemView.tv_test, adapterPosition) })
 
         }
     }

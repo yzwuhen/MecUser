@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
@@ -77,7 +78,7 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
         et_contacts.addTextChangedListener(this)
         et_phone.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
-
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
         mReBean.recruitType ="1"
         mPresenter = AddManagePresenterImpl(this,this)
         (mPresenter as AddManagePresenterImpl).getWorkExp()
@@ -347,7 +348,7 @@ class RecruitActivity :BaseCusActivity(), View.OnClickListener, OnItemClickListe
 
         mReBean.content = et_input.text.toString().trim()
 
-
+        tv_tip.text="${et_input.text.length}/200"
         return true
     }
 

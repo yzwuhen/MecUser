@@ -7,6 +7,8 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bigkoo.pickerview.builder.TimePickerBuilder
 import com.bigkoo.pickerview.listener.OnTimeSelectListener
 import com.bigkoo.pickerview.view.TimePickerView
@@ -48,6 +50,7 @@ import kotlinx.android.synthetic.main.activity_add_mec.ry_pic
 import kotlinx.android.synthetic.main.activity_add_mec.tv_submit
 import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -80,7 +83,9 @@ class AddMecActivity : BaseCusActivity(), View.OnClickListener, OnItemClickListe
         super.initView()
 
         mPicAdapter = PicAdapter(this, mPicList as ArrayList<String>, this)
-        ry_pic.layoutManager = GridLayoutManager(this, 3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
@@ -197,7 +202,11 @@ class AddMecActivity : BaseCusActivity(), View.OnClickListener, OnItemClickListe
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -213,7 +222,11 @@ class AddMecActivity : BaseCusActivity(), View.OnClickListener, OnItemClickListe
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {

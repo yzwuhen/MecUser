@@ -9,7 +9,6 @@
 
     <TextView
         android:id="@+id/tv_city"
-
         android:text="广州"
         android:background="#fff"
         android:paddingLeft="@dimen/dp_17"

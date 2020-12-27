@@ -8,6 +8,7 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.fragment.PartsOrderAfterSaleFragment
 import com.example.mechanicalapp.ui.fragment.PartsOrderFragment
 import kotlinx.android.synthetic.main.activity_parts_order.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -30,7 +31,7 @@ class PartsOrderActivity:BaseActivity<NetData>(),View.OnClickListener ,ViewPager
         mFragmentList?.add(PartsOrderFragment(1))
         mFragmentList?.add(PartsOrderFragment(2))
         mFragmentList?.add(PartsOrderFragment(3))
-        mFragmentList?.add(PartsOrderFragment(4))
+        mFragmentList?.add(PartsOrderAfterSaleFragment())
 
         mTextViewList.add(tv_order1)
         mTextViewList.add(tv_order2)

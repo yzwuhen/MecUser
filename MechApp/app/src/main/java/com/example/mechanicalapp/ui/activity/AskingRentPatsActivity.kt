@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
@@ -33,6 +34,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_ask_rent_parts.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener,ReleaseView<List<CodeData>>,TextWatcher {
@@ -63,7 +65,9 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
         super.initView()
 
         mPicAdapter = PicAdapter(this, mPicList, this)
-        ry_pic.layoutManager = GridLayoutManager(this, 3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation =RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
@@ -87,7 +91,7 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
         et_name.addTextChangedListener(this)
         et_phone.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
-
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
     }
 
     override fun initPresenter() {
@@ -140,7 +144,11 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -156,7 +164,11 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -375,6 +387,7 @@ class AskingRentPatsActivity : BaseCusActivity(), OnItemClickListener, View.OnCl
         if (mPicList.size == 0) {
             return false
         }
+        tv_tip.text="${et_input.text.length}/200"
         return true
     }
 

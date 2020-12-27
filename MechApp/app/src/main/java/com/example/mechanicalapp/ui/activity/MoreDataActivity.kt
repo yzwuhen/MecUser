@@ -23,11 +23,13 @@ import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.appbar.AppBarLayout
 import com.liaoinstan.springview.widget.SpringView
+import com.luck.picture.lib.PictureSelector
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_more_data.*
 import kotlinx.android.synthetic.main.layout_more_data_title.*
 
-class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
+class MoreDataActivity : BaseCusActivity(), View.OnClickListener,OnBannerListener<BannerData>,
     ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener, NetDataView<BannerBean> {
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment>()
@@ -75,6 +77,7 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
         imageAdapter = ImageAdapter(mList)
         banner.adapter = imageAdapter
         banner.indicator = CircleIndicator(this)
+        banner.setOnBannerListener(this)
 
 
         iv_back.setOnClickListener(this)
@@ -200,5 +203,11 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,
     }
 
     override fun loadMore(data: BannerBean?) {
+    }
+
+    override fun OnBannerClick(data: BannerData?, position: Int) {
+        if (data?.img?.endsWith("mp4")!!){
+            PictureSelector.create(this).externalPictureVideo(data.img);
+        }
     }
 }

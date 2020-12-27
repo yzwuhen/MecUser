@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/dp_10"
-    android:orientation="vertical">
+    android:orientation="vertical"
+  >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/dp_50"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp_10"
@@ -23,20 +23,32 @@
 
 
         <TextView
-            android:id="@+id/tv_text_right1"
+            android:id="@+id/tv_all_money"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
             android:layout_weight="1"
-            android:drawableRight="@mipmap/tip_down"
-            android:drawablePadding="@dimen/dp_10"
             android:gravity="right"
             android:text="￥2000"
             android:textColor="@color/color_9a"
             android:textSize="16sp" />
 
+
+        <ImageView
+            android:id="@+id/iv_right_list"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:paddingLeft="@dimen/dp_10"
+            android:src="@mipmap/tip_down" />
+
     </LinearLayout>
 
-    <View style="@style/h_view_1" />
+    <View
+        style="@style/h_view_1"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15" />
+
 
     <LinearLayout
         android:id="@+id/ly_info"
@@ -93,5 +105,10 @@
             android:text="备注：发动机常见故障及维修建议 发动机常见故障及维修建议完 全暖机后发动机转速提高时,发动机机油报警 面对这种情况,我们一 般"
             android:textColor="@color/color_9a"
             android:textSize="@dimen/sp_16" />
+        <View
+            style="@style/h_view_1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_15" />
     </LinearLayout>
 </LinearLayout>

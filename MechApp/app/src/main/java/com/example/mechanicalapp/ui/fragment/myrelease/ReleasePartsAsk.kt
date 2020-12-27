@@ -49,17 +49,17 @@ class ReleasePartsAsk : BaseCusFragment(), OnItemClickListener, PopUtils.onViewL
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as MyReleasePresenterImpl).resetPage()
-                (mPresenter as MyReleasePresenterImpl).getPartsList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyPartsList(2)
             }
 
             override fun onLoadmore() {
-                (mPresenter as MyReleasePresenterImpl).getPartsList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyPartsList(2)
             }
         })
 
 
         mPresenter = MyReleasePresenterImpl(mContext, this)
-        (mPresenter as MyReleasePresenterImpl).getPartsList(1)
+        (mPresenter as MyReleasePresenterImpl).getMyPartsList(2)
     }
 
     fun closeRefreshView() {

@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.ApplyInfoBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCer
 import com.example.mechanicalapp.ui.mvp.impl.PersonCerPresenter
@@ -22,6 +23,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_company_certify.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerView,
     TextWatcher {
@@ -56,7 +58,9 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
         iv_side_pic.setOnClickListener(this)
         iv_company_pic.setOnClickListener(this)
         tv_submit.setOnClickListener(this)
-
+        tv_modify.setOnClickListener(this)
+        ly_cus_server1.setOnClickListener(this)
+        ly_cus_server.setOnClickListener(this)
         et_company_name.addTextChangedListener(this)
         et_user_name.addTextChangedListener(this)
         et_company_code.addTextChangedListener(this)
@@ -66,6 +70,8 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
 
     override fun initPresenter() {
         mPresenter = PersonCerPresenter(this, this)
+
+        (mPresenter as PersonCerPresenter).getApporve("3")
     }
 
 
@@ -82,9 +88,17 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
             R.id.tv_dialog_item2 -> setItem1()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
             R.id.tv_submit->submit()
+            R.id.tv_modify->modify()
+            R.id.ly_cus_server->openCall("400-654-9874")
+            R.id.ly_cus_server1->openCall("400-654-9874")
         }
     }
+    private fun modify() {
 
+        ly_not_apply.visibility =View.VISIBLE
+        ly_apply_fail.visibility =View.GONE
+
+    }
     private fun submit() {
         mPresenter?.submitCer(reCompanyCer)
 
@@ -103,7 +117,11 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -147,7 +165,11 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    (mPresenter as PersonCerPresenter).upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        (mPresenter as PersonCerPresenter)?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -209,9 +231,29 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
     }
 
     override fun success(netData: NetData?) {
-        ToastUtils.showText(netData?.message)
-        if (netData?.code==200){
-            finish()
+        if (netData!=null&& netData is ApplyInfoBean){
+            if (netData.result==null||netData.result.records==null||netData.result.records.size==0){
+                ly_not_apply.visibility =View.VISIBLE
+            }else{
+                reCompanyCer =netData.result.records[0]
+                if (reCompanyCer.apporveStatus==1){
+                    ly_apply_ing.visibility =View.VISIBLE
+                }else if  (reCompanyCer.apporveStatus==2){
+                    ly_apply_success.visibility =View.VISIBLE
+                    tv_success_name.text ="真实姓名：${reCompanyCer.name}"
+                    tv_success_id_code.text ="身份证：${reCompanyCer.idCard}"
+                    tv_success_company.text ="公司名:${reCompanyCer.companyName}"
+                    tv_success_company_code.text="社会信用代码：${reCompanyCer.companyId}"
+                }else{
+                    ly_apply_fail.visibility =View.VISIBLE
+                }
+            }
+
+        }else{
+            ToastUtils.showText(netData?.message)
+            if (netData?.code==200){
+                finish()
+            }
         }
     }
 

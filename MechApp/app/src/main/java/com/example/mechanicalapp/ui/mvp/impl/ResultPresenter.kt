@@ -1,10 +1,14 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import android.util.Log
 import com.amap.api.location.DPoint
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.ui.mvp.v.OrderView
 
 class ResultPresenter (
     private var baseView: NetDataView<NetData>
@@ -35,6 +39,13 @@ class ResultPresenter (
     private var lat:String?=null
 
     private var type :String?=null
+
+    private var repaireType:String?=null//机械类型 （维修类型）
+    private var  componentType:String?=null //配件类型
+
+    private var city: String? = null
+    private var typeWork: String? = null
+    private var typeWorkId:String?=null
 
     init {
         baseModel = ModelImpl()
@@ -182,8 +193,8 @@ class ResultPresenter (
         baseModel?.getFactoryList(
             page,
             pageSize,
-            null,
-            null,
+            repaireType,
+            componentType,
             sort.toString(),
             title,
             isMap,
@@ -221,9 +232,9 @@ class ResultPresenter (
         baseModel?.getRecruitList(type,
             page,
             pageSize,
-            null,
-            null,
-            null,
+            city,
+            typeWork,
+            typeWorkId,
             sort,
             title,
             isMap,
@@ -254,7 +265,33 @@ class ResultPresenter (
                 }
             })
     }
+    fun getEngList() {
+        baseView.showLoading()
+        baseModel?.getEng(App.getInstance().token, title,page,pageSize ,NetSubscribe<EngListBean>(object :
+            ISubscriberListener<EngListBean> {
+            override fun onNext(t: EngListBean?) {
+                if (t?.code == 200 && t.result != null) {
+                    if (page==1){
+                        baseView.refreshUI(t)
+                    }else{
+                        baseView.loadMore(t)
+                    }
+                    page++
+                } else {
+                    baseView.err()
+                }
+            }
 
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
 
     override fun onDestroy() {
     }
@@ -321,8 +358,110 @@ class ResultPresenter (
         resetPage()
     }
 
+    fun setRepaireType(mecType:String?){
+        repaireType =mecType
+        resetPage()
+    }
+    fun setComponentType(partsType:String?){
+        componentType =partsType
+        resetPage()
+    }
+
     fun setIsMap() {
         isMap ="1"
     }
+    fun workType(type:String?,id:String?){
+        typeWork =type
+        typeWorkId =id
+        resetPage()
+    }
+    fun setCity(str:String?){
+        city =str
+        resetPage()
+    }
 
+    fun getHotCode() {
+        baseView.showLoading()
+        baseModel?.getHotCode(NetSubscribe(object :ISubscriberListener<HotCodeBean>{
+            override fun onNext(t: HotCodeBean?) {
+                baseView.refreshUI(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+
+    }
+
+
+    fun getMecList() {
+        baseView.showLoading()
+        baseModel?.getMyMecList(
+            App.getInstance().token,
+            title,
+            page,
+            pageSize,
+            object : ISubscriberListener<MyMecListBean> {
+                override fun onNext(t: MyMecListBean?) {
+                    if (t?.code == 200 && t.result != null) {
+                        if (page==1){
+                            baseView.refreshUI(t)
+                        }else{
+                            baseView.loadMore(t)
+                        }
+                        page++
+                    } else {
+                        baseView.err()
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
+    }
+
+    fun getOrderList(modelName: String?) {
+        baseModel?.getOrderList(
+            App.getInstance().token,
+            "",
+            modelName,
+            page,
+            pageSize,
+            NetSubscribe<OrderBean>(object :
+                ISubscriberListener<OrderBean> {
+                override fun onNext(t: OrderBean?) {
+                    if (t?.code == 200 && t.result != null) {
+                        if (page==1){
+                            baseView.refreshUI(t)
+                        }else{
+                            baseView.loadMore(t)
+                        }
+                        page++
+                    } else {
+                        baseView.err()
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+
+            })
+        )
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment.store
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
@@ -9,9 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.GoodsListActivity
+import com.example.mechanicalapp.ui.activity.HistorySearchActivity
 import com.example.mechanicalapp.ui.activity.ShopCarActivity
 import com.example.mechanicalapp.ui.adapter.*
 import com.example.mechanicalapp.ui.base.BaseCusFragment
@@ -26,6 +29,7 @@ import kotlinx.android.synthetic.main.activity_ec_type.*
 import kotlinx.android.synthetic.main.fragment_store.*
 import kotlinx.android.synthetic.main.fragment_store.recycler_list_left
 import kotlinx.android.synthetic.main.fragment_store.recycler_list_right
+import java.lang.Exception
 
 
 class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewListener,OnItemClickLevelListener,
@@ -67,6 +71,7 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
 
         fl_shop_car.setOnClickListener(this)
         iv_phone.setOnClickListener(this)
+        ly_search.setOnClickListener(this)
 
         mPresenter = StorePresenterImpl(mContext,this)
         mPresenter?.request()
@@ -85,7 +90,8 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
                 super.onScrolled(recyclerView, dx, dy)
                 var layoutManager = recyclerView.layoutManager
                 if (layoutManager is LinearLayoutManager) {
-                    rightIndex =(layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                    rightIndex =(layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+
                 }
             }
         })
@@ -100,16 +106,22 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
     }
 
     private fun selectLeft(position: Int, b: Boolean) {
-        if (selectIndex!=position){
-            mLeftList[selectIndex].isSelect =false
-            mLeftAdapter?.notifyItemChanged(selectIndex)
-            mLeftList[position].isSelect =true
-            mLeftAdapter?.notifyItemChanged(position)
-            selectIndex =position
-            if (b){
-                scrollRight()
+
+        try {
+            if (selectIndex!=position){
+                mLeftList[selectIndex].isSelect =false
+                mLeftAdapter?.notifyItemChanged(selectIndex)
+                mLeftList[position].isSelect =true
+                mLeftAdapter?.notifyItemChanged(position)
+                selectIndex =position
+                if (b){
+                    scrollRight()
+                }
             }
+        }catch (e:Exception){
+
         }
+
     }
     private fun scrollRight(){
         if (selectIndex< recycler_list_right?.adapter?.itemCount!!){
@@ -152,6 +164,11 @@ class StoreFragment : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLis
                 null,
                 ShopCarActivity::class.java
             )
+            R.id.ly_search->{
+                var bundle  = Bundle()
+                bundle.putInt(Configs.HISTORY_TYPE,11)
+                jumpActivity(bundle, HistorySearchActivity::class.java)
+            }
             R.id.iv_phone -> showPhone()
             R.id.tv_pop_sure -> activity?.let { PopUtils.dismissPop(it) }
             R.id.tv_pop_cancel -> activity?.let { PopUtils.dismissPop(it) }

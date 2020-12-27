@@ -30,7 +30,7 @@ class MoreUserRentAdapter  (var mContext: Context, var mList:MutableList<MecLeas
 
         holder.itemView.tv_rent_address_data.text="${mList[position].city} | 租用时间：${mList[position].tenancy}天"
 
-        holder.itemView.tv_rent_equipment.text ="${mList[position].modelName}${mList[position].cateName}"
+        holder.itemView.tv_rent_equipment.text ="${mList[position].title}"
 
         holder.itemView.tv_rent_distance.text = "距离：${StringUtils.getDistance(
             CoordinateConverter.calculateLineDistance(

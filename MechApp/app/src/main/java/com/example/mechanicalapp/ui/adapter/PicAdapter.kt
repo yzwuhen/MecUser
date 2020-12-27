@@ -2,7 +2,6 @@ package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,39 +19,39 @@ class PicAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return PicVh(LayoutInflater.from(mContext).inflate(R.layout.item_pic, parent, false),
-            mOnItemClickListener)
+       return PicVh(View.inflate(mContext,R.layout.item_pic,null),mOnItemClickListener)
+//        return PicVh(LayoutInflater.from(mContext).inflate(R.layout.item_pic, parent, false),
+//            mOnItemClickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (mList.isEmpty()) {
+         if (mList.isEmpty()) {
             holder.itemView.iv_del.visibility = View.GONE
             holder.itemView.iv_pic.setImageResource(R.mipmap.add_pic_n)
         } else {
-            if (mList.size < 3) {
+            if (position< 5) {
                 if (position == mList.size) {
                     holder.itemView.iv_del.visibility = View.GONE
                     holder.itemView.iv_pic.setImageResource(R.mipmap.add_pic_n)
                 } else {
                     holder.itemView.iv_del.visibility = View.VISIBLE
-                    ImageLoadUtils.loadImageCenterCrop(
-                        mContext,
-                        holder.itemView.iv_pic,
-                        mList[position],
-                        R.mipmap.add_pic_n
-                    )
-                }
-            } else {
-                holder.itemView.iv_del.visibility = View.VISIBLE
-                ImageLoadUtils.loadImageCenterCrop(
-                    mContext,
-                    holder.itemView.iv_pic,
-                    mList[position],
-                    R.mipmap.add_pic_n
-                )
-            }
+                    if (mList[position].endsWith("mp4")){
+                        ImageLoadUtils.loadVideo(mContext,holder.itemView.iv_pic,mList[position])
+                        holder.itemView.iv_video.visibility =View.VISIBLE
+                    }else{
+                        ImageLoadUtils.loadImageCenterCrop(
+                            mContext,
+                            holder.itemView.iv_pic,
+                            mList[position],
+                            R.mipmap.add_pic_n
+                        )
+                        holder.itemView.iv_video.visibility =View.GONE
+                    }
 
+                }
+            }
         }
+        Log.v("ssss","$position=============${holder.itemView.width}=====${holder.itemView.height}")
 
     }
 

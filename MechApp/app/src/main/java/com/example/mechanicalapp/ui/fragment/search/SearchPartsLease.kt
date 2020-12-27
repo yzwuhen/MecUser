@@ -12,18 +12,36 @@ import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsBean
 import com.example.mechanicalapp.ui.data.PartsData
+import com.example.mechanicalapp.ui.data.java.EventSearch
 import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.fragment_search_all_result.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class SearchPartsLease (var title:String?) : BaseCusFragment() , OnItemClickListener,NetDataView<NetData> {
 
 
     var mList: MutableList<PartsData> = ArrayList<PartsData>()
     private var mAdapter: PartsAdapter? = null
-
+    init {
+        EventBus.getDefault().register(this)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public fun onFresh(msg: EventSearch) {
+        if (mPresenter!=null){
+            title =msg.title
+            (mPresenter as ResultPresenter).setTitle(title)
+            (mPresenter as ResultPresenter).getPartsLeaseList("1")
+        }
+    }
     override fun getLayoutId(): Int {
         return R.layout.fragment_search_all_result
     }
@@ -59,8 +77,8 @@ class SearchPartsLease (var title:String?) : BaseCusFragment() , OnItemClickList
     }
 
     fun closeRefreshView() {
-        spring_list.isEnable =true
-        spring_list.onFinishFreshAndLoad()
+        spring_list?.isEnable =true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     override fun onItemClick(view: View, position: Int) {

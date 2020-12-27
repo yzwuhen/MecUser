@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.*
@@ -38,26 +39,12 @@ class ModelImpl : BaseModel {
     fun getWorkTypeList(
         page: Int,
         pageSize: Int,
-        iSubscriberListener: ISubscriberListener<MecTypeParentBean>
+        iSubscriberListener: ISubscriberListener<WorkTypeBean>
     ) {
         appsService?.getWorkTypeList(page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeParentBean>(iSubscriberListener))
-
-    }
-
-    //获取工种子级
-    fun getWorkTypeChildList(
-        page: Int,
-        pageSize: Int,
-        pid: String,
-        iSubscriberListener: ISubscriberListener<MecTypeChildBean>
-    ) {
-        appsService?.getWorkTypeChildList(page, pageSize, pid)
-            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-                AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeChildBean>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<WorkTypeBean>(iSubscriberListener))
 
     }
 
@@ -233,7 +220,7 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
-    fun getLeaseList(
+    fun getMyLeaseList(
         token: String?,
         type: Int,
         page: Int,
@@ -246,7 +233,7 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<MoreLeaseData>(iSubscriberListener))
     }
 
-    fun getBusinessList(
+    fun getMyBusinessList(
         token: String?,
         type: Int,
         page: Int,
@@ -424,7 +411,7 @@ class ModelImpl : BaseModel {
     }
 
 
-    fun getPartsList(
+    fun getMyPartsList(
         token: String?,
         type: Int,
         page: Int,
@@ -476,7 +463,7 @@ class ModelImpl : BaseModel {
     }
 
 
-    fun getWorkList(
+    fun getMyWorkList(
         token: String?,
         type: Int,
         page: Int,
@@ -603,11 +590,12 @@ class ModelImpl : BaseModel {
 
     fun getMyMecList(
         token: String?,
+        title: String?,
         page: Int,
         pageSize: Int,
         iSubscriberListener: ISubscriberListener<MyMecListBean>
     ) {
-        appsService?.getMyMecList(token, page, pageSize)
+        appsService?.getMyMecList(token,title, page, pageSize)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<MyMecListBean>(iSubscriberListener))
@@ -942,12 +930,13 @@ class ModelImpl : BaseModel {
     fun getOrderList(
         token: String?,
         state: String?,
+        modelName:String?,
         page: Int,
         pageSize: Int,
         netSubscribe: NetSubscribe<OrderBean>
     ) {
 
-        appsService?.getOrderList(token, state, page, pageSize)?.subscribeOn(Schedulers.io())
+        appsService?.getOrderList(token, state,modelName, page, pageSize)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -1026,7 +1015,17 @@ class ModelImpl : BaseModel {
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
     }
-
+    fun getPartsOrderAfterSaleList(
+        token: String?,
+        page: Int,
+        pageSize: Int,
+        netSubscribe: NetSubscribe<PartOrderListBean>
+    ) {
+        appsService?.getPartsOrderAfterSaleList(token, page, pageSize)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
     fun getOrderDetails(
         token: String?,
         orderId: String?,
@@ -1050,7 +1049,17 @@ class ModelImpl : BaseModel {
             )?.subscribe(netSubscribe)
 
     }
+    fun getPartsOrderAfterDetails(
+        token: String?,
+        orderId: String?,
+        netSubscribe: NetSubscribe<PartsOrderDetailsBean>
+    ) {
+        appsService?.getPartsOrderAfterDetails(token, orderId)?.subscribeOn(Schedulers.io())
+            ?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
 
+    }
     fun cancelOrder(
         token: String?,
         orderId: String?,
@@ -1067,7 +1076,7 @@ class ModelImpl : BaseModel {
         orderId: String?,
         netSubscribe: NetSubscribe<NetData>
     ) {
-        appsService?.cancelOrder(token, orderId)?.subscribeOn(Schedulers.io())
+        appsService?.cancelPartsOrder(token, orderId)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -1075,9 +1084,9 @@ class ModelImpl : BaseModel {
 
     fun getGoodsList(
         token: String?,
-        orderByPrice: Int,
-        orderByScale: Int,
-        orderType: Int,
+        orderByPrice: String?,
+        orderByScale: String?,
+        orderType: String?,
         title: String?,
         page: Int,
         pageSize: Int,
@@ -1206,7 +1215,123 @@ class ModelImpl : BaseModel {
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<RecruitBean>(mISubscriberListener))
+    }
+
+    fun getHotCode(netSubscribe: NetSubscribe<HotCodeBean>) {
+        appsService?.getHotCode(App.getInstance().token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(netSubscribe)
+    }
+    //清单列表
+    fun getList(token:String?,type:Int,id: String?,mNetSubscribe:NetSubscribe<ListBean>){
+        appsService?.getList(token,type,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //获取评论信息
+    fun getEvaluate(token:String?,id: String?,mNetSubscribe:NetSubscribe<ListBean>){
+        appsService?.getEvaluate(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //提交维修订单评论
+    fun postEvaluate(token:String?,reEvaluate: ReEvaluate?,mNetSubscribe:NetSubscribe<NetData>){
+        appsService?.postEvaluate(token,reEvaluate)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+    //提交配件订单评论
+    fun postEvaluateParts(token:String?,reEvaluate: ReEvaluateParts?,mNetSubscribe:NetSubscribe<NetData>){
+        appsService?.postEvaluateParts(token,reEvaluate)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+    //微信支付
+    fun payWx(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<WxPayBean>){
+        appsService?.payWx(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //获取工程师列表
+    fun getEng(token: String?, title: String?,mNetSubscribe: NetSubscribe<EngListBean>) {
+        appsService?.getEngList(token,title)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //获取工程师列表 带字母
+    fun getEngLetter(token: String?,mNetSubscribe: NetSubscribe<EngListLetterBean>) {
+        appsService?.getEngListLetter(token)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+    //获取工程师列表
+    fun getEng(token: String?, title: String?,page: Int,pageSize: Int,mNetSubscribe: NetSubscribe<EngListBean>) {
+        appsService?.getEngList(token,title,page,pageSize)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    fun applyRefund(
+        token: String?,
+        reApplyRefund: ReApplyRefund,
+        netSubscribe: NetSubscribe<NetData>
+    ) {
+        appsService?.applyRefund(token,reApplyRefund)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+        Schedulers.io())?.observeOn(
+        AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
 
 
+    }
+
+    fun getApplyInfo(
+        token: String?,
+        type: String,
+        createBy: String?,
+        netSubscribe: NetSubscribe<ApplyInfoBean>
+    ) {
+
+        appsService?.getApplyInfo(token,type,createBy)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+
+    }
+
+    fun postExpress(token: String?, mReExpress: ReExpress, netSubscribe: NetSubscribe<PostExpressBean>) {
+        appsService?.postExpress(token,mReExpress.id,mReExpress.deliverycorpCode,mReExpress.trackNo)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+
+    }
+
+    fun cancelRefund(token: String?, id: String?, netSubscribe: NetSubscribe<ReCancelRefundBean>) {
+
+        appsService?.cancelRefund(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
     }
 }

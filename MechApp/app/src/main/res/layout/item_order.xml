@@ -5,10 +5,10 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_marginTop="@dimen/dp_10"
         android:layout_width="match_parent"
         android:layout_height="168dp"
         android:layout_marginLeft="@dimen/dp_17"
-        android:layout_marginBottom="@dimen/dp_12"
         android:layout_marginRight="@dimen/dp_17"
         android:background="@mipmap/order_bg"
         android:orientation="vertical">

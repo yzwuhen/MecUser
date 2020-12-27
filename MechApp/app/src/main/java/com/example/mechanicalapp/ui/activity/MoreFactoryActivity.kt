@@ -186,14 +186,25 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
         when (requestCode) {
             Configs.EC_TYPE_RESULT_CODE -> {
                 tv_ec_type.text = extra
+                if (extra =="不限"){
+                    (mPresenter as FactoryPresenter)?.setRepaireType(null)
+                }else{
+                    (mPresenter as FactoryPresenter)?.setRepaireType(extra)
+                }
+
             }
             Configs.PARTS_TYPE_RESULT_CODE -> {
                 tv_parts_type.text = extra
-
+                if (extra =="不限"){
+                    (mPresenter as FactoryPresenter)?.setComponentType(null)
+                }else{
+                    (mPresenter as FactoryPresenter)?.setComponentType(extra)
+                }
             }
 
         }
 
+        (mPresenter as FactoryPresenter)?.getFactoryList()
     }
 
 }

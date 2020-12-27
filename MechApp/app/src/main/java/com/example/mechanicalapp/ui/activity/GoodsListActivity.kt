@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,9 +23,7 @@ import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_goods_list.*
-import kotlinx.android.synthetic.main.activity_goods_list.spring_list
-import kotlinx.android.synthetic.main.layout_search_et.*
-import kotlinx.android.synthetic.main.layout_spring_list.*
+import kotlinx.android.synthetic.main.title_goods.*
 
 class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListener,NetDataView<NetData>,
     PopUtils.onViewListener {
@@ -38,6 +37,12 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
 
     private var title=""
     private var mPresenter: GoodsListPresenter?=null
+
+    private var orderByPrice:String?=null
+    private var orderByScale:String?=null
+    private var orderType:String?=null
+
+
     override fun getLayoutId(): Int {
 
         return R.layout.activity_goods_list
@@ -82,7 +87,7 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
         ly_sales.setOnClickListener(this)
         ly_sort.setOnClickListener(this)
         ly_search.setOnClickListener(this)
-
+        iv_back.setOnClickListener(this)
         title=  intent.getStringExtra("title").toString()
 
 
@@ -112,10 +117,20 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
     }
 
     override fun onItemClick(view: View, position: Int) {
-        val bundle = Bundle()
-        bundle.putString(Configs.MEC_ID, mList[position].id)
-        jumpActivity(bundle,GoodsDetailsActivity::class.java)
-
+        when(view.id){
+            R.id.tv_screen->{
+                orderByScale= null
+                orderByPrice= null
+                orderType=position.toString()
+                mPresenter?.setOrderType(orderType)
+                mPresenter?.getGoodsList()
+            }
+            R.id.root_view->{
+                val bundle = Bundle()
+                bundle.putString(Configs.MEC_ID, mList[position].id)
+                jumpActivity(bundle,GoodsDetailsActivity::class.java)
+            }
+        }
     }
     private fun showInput() {
 
@@ -131,15 +146,43 @@ class GoodsListActivity:BaseCusActivity(),OnItemClickListener ,View.OnClickListe
 
     override fun onClick(view: View?) {
         when(view?.id){
-         //  R.id.ly_search ->jumAct()
-            R.id.ly_price->selectText(0);
-            R.id.ly_sales->selectText(1);
+            R.id.iv_back->finish()
+          R.id.ly_search ->jumAct()
+            R.id.ly_price->
+            {
+                selectText(0)
+                if (TextUtils.isEmpty(orderByPrice)){
+                    orderByPrice= "2"
+                }else if (orderByPrice=="1"){
+                    orderByPrice= "2"
+                }else{
+                    orderByPrice= "1"
+                }
+                orderByScale= null
+                orderType=null
+                mPresenter?.setOrderByPrice(orderByPrice)
+                mPresenter?.getGoodsList()
+            }
+            R.id.ly_sales->
+            {
+                selectText(1)
+                if (TextUtils.isEmpty(orderByScale)){
+                    orderByScale= "1"
+
+                }else{
+                    orderByScale= null
+                }
+                orderByPrice= null
+                orderType=null
+                mPresenter?.setOrderByScale(orderByScale)
+                mPresenter?.getGoodsList()
+            }
             R.id.ly_sort->selectText(2);
         }
     }
     private fun  jumAct(){
         var bundle  = Bundle()
-        bundle.putInt(Configs.HISTORY_TYPE,3)
+        bundle.putInt(Configs.HISTORY_TYPE,11)
         jumpActivity(bundle, HistorySearchActivity::class.java)
     }
 

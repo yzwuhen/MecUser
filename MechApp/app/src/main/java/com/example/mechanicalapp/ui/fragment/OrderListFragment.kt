@@ -75,8 +75,6 @@ class OrderListFragment(var type: String) : BaseCusFragment(), OnItemClickListen
     }
 
     override fun err() {
-
-
     }
 
     override fun showData(data: OrderBean?) {

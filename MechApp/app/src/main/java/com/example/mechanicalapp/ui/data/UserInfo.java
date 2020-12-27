@@ -70,6 +70,24 @@ public class UserInfo implements Serializable {
     private String isPerson;
     private String isEnterprise;
     private String isRepair;
+    private String imId;
+    private String imToken;
+
+    public String getImToken() {
+        return imToken;
+    }
+
+    public void setImToken(String imToken) {
+        this.imToken = imToken;
+    }
+
+    public String getImId() {
+        return imId;
+    }
+
+    public void setImId(String imId) {
+        this.imId = imId;
+    }
 
     public String getId() {
         return id;

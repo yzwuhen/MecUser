@@ -113,7 +113,7 @@ class SidleView(var mContext: Context, attrs: AttributeSet? = null) : View(
         // drawText(canvas)
         frontPaint?.let {
             canvas?.drawRoundRect(
-                rectLeft?.left.toFloat() + bitMapSize,
+                rectLeft?.left.toFloat() ,
                 0f,
                 width * 1f,
                 height * 1f,
@@ -218,6 +218,13 @@ class SidleView(var mContext: Context, attrs: AttributeSet? = null) : View(
 
         }
 
+    }
+
+    public fun resetView(){
+        rectLeft.left =0
+        rectLeft.right =bitMapSize
+        str="滑动滑块完成验证"
+        invalidate()
     }
 
     private fun down(x: Float) {

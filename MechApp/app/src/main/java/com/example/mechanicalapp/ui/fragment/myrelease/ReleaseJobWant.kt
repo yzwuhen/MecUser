@@ -51,17 +51,17 @@ class ReleaseJobWant : BaseCusFragment(), OnItemClickListener, PopUtils.onViewLi
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as MyReleasePresenterImpl).resetPage()
-                (mPresenter as MyReleasePresenterImpl).getWorkList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyWorkList(2)
             }
 
             override fun onLoadmore() {
-                (mPresenter as MyReleasePresenterImpl).getWorkList(1)
+                (mPresenter as MyReleasePresenterImpl).getMyWorkList(2)
             }
         })
 
 
         mPresenter = MyReleasePresenterImpl(mContext, this)
-        (mPresenter as MyReleasePresenterImpl).getWorkList(1)
+        (mPresenter as MyReleasePresenterImpl).getMyWorkList(2)
 
     }
 

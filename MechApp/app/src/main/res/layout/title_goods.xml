@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:background="@drawable/title_bg"
+    android:layout_height="@dimen/dp_45">
+    <ImageView
+        android:layout_marginLeft="17dp"
+        android:id="@+id/iv_back"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@mipmap/back"/>
+
+    <LinearLayout
+        android:id="@+id/ly_search"
+        android:layout_width="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="37dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:layout_weight="1"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/rect_radio_7">
+        <TextView
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableLeft="@mipmap/ser"
+            android:gravity="center_vertical"
+            android:drawablePadding="10dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:hint="请输入关键词进行搜索"
+            android:textColor="#999999"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="68dp"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:text="搜索"/>
+
+</LinearLayout>

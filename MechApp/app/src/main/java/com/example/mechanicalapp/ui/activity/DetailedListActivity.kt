@@ -3,28 +3,31 @@ package com.example.mechanicalapp.ui.activity
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickLevelListener
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.adapter.OtherAdapter
-import com.example.mechanicalapp.ui.adapter.PartsDetailsListAdapter
-import com.example.mechanicalapp.ui.adapter.TravelAdapter
-import com.example.mechanicalapp.ui.adapter.WorkTimeAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.adapter.PreviewListAdapter
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.ListBean
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.utils.RefreshHeaderUtils
+import com.liaoinstan.springview.widget.SpringView
 import kotlinx.android.synthetic.main.activity_details_list.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 /**
  * 维修清单
  */
-class DetailedListActivity:BaseActivity<NetData>() ,View.OnClickListener,OnItemClickListener{
+class DetailedListActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickLevelListener,NetDataView<NetData>{
 
-    private var mPartsDetailsListAdapter: PartsDetailsListAdapter? = null
-    private var mWorkTimeAdapter: WorkTimeAdapter? = null
-    private var mTravelAdapter: TravelAdapter? = null
-    private var mOtherAdapter: OtherAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
 
+    private var mAdapter: PreviewListAdapter? = null
+    private var mList = ArrayList<ListBean.ResultBean>()
+
+    private var repairOrderId=""
+
+    private var mPresenter:MecAppPresenter?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_details_list
     }
@@ -35,42 +38,43 @@ class DetailedListActivity:BaseActivity<NetData>() ,View.OnClickListener,OnItemC
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
         tv_title.text = "查看清单"
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-
-        mPartsDetailsListAdapter = PartsDetailsListAdapter(this, mList, this)
-        recycler_parts.layoutManager = LinearLayoutManager(this)
-        recycler_parts.adapter = mPartsDetailsListAdapter
+        repairOrderId = intent.getStringExtra("id").toString()
 
 
-        mWorkTimeAdapter = WorkTimeAdapter(this, mList, this)
-        recycler_work.layoutManager = LinearLayoutManager(this)
-        recycler_work.adapter = mWorkTimeAdapter
+        mAdapter = PreviewListAdapter(this, mList, this)
+        recycle_list.layoutManager = LinearLayoutManager(this)
+        recycle_list.adapter = mAdapter
+        spring_list.type = SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(this)
+        spring_list.setListener(object : SpringView.OnFreshListener {
+            override fun onRefresh() {
+                spring_list.isEnable = false
+                mPresenter?.getList(2, repairOrderId)
+            }
 
-        mTravelAdapter = TravelAdapter(this, mList, this)
-        recycler_travel.layoutManager = LinearLayoutManager(this)
-        recycler_travel.adapter = mTravelAdapter
-
-        mOtherAdapter = OtherAdapter(this, mList, this)
-        recycler_other.layoutManager = LinearLayoutManager(this)
-        recycler_other.adapter = mOtherAdapter
+            override fun onLoadmore() {
+            }
+        })
     }
 
     override fun initPresenter() {
+        mPresenter = MecAppPresenter(this)
+        mPresenter?.getList(2, repairOrderId)
+    }
+
+    private fun closeRefreshView() {
+        spring_list?.isEnable = true
+        spring_list?.onFinishFreshAndLoad()
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
+        closeRefreshView()
     }
-
     override fun err()  {
     }
 
@@ -79,8 +83,33 @@ class DetailedListActivity:BaseActivity<NetData>() ,View.OnClickListener,OnItemC
         finish()
     }
 
-    override fun onItemClick(view: View, position: Int) {
+    override fun onItemClick(view: View, position: Int, childPosition: Int) {
+        when (view.id) {
+            R.id.iv_right_list -> {
+                mList[position].data[childPosition].isShow =
+                    !mList[position].data[childPosition].isShow
+                mAdapter?.refreshAdapter(position, childPosition)
+            }
 
+        }
 
+    }
+    override fun refreshUI(netData: NetData?) {
+        if (netData != null && netData is ListBean &&netData.result!=null) {
+            mList.clear()
+            mAdapter?.clearAdapter()
+            mList.addAll(netData.result)
+            mAdapter?.notifyDataSetChanged()
+            if (mList.size>0){
+                var price=0
+                for (data in mList){
+                    price +=data.total
+                }
+                tv_all_money.text="￥${price}"
+            }
+        }
+    }
+
+    override fun loadMore(data: NetData?) {
     }
 }

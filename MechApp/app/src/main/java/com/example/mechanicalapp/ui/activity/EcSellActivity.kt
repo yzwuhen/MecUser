@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
@@ -37,6 +38,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_ec_sell.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -74,7 +76,9 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         super.initView()
 
         mPicAdapter = PicAdapter(this, mPicList, this)
-        ry_pic.layoutManager = GridLayoutManager(this, 3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation =RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
 
@@ -114,7 +118,7 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         et_production_time.addTextChangedListener(this)
         et_address.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
-
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
         (mPresenter as AddManagePresenterImpl).getPayWay()
     }
 
@@ -313,7 +317,11 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -329,7 +337,11 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
 //                                        mPicList?.add(result[0]?.realPath.toString())
 //                    mPicAdapter?.notifyDataSetChanged()
                 }
@@ -419,7 +431,7 @@ class EcSellActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListe
         if (mPicList.size == 0) {
             return false
         }
-
+        tv_tip.text="${et_input.text.length}/200"
         return true
     }
 

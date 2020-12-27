@@ -38,13 +38,10 @@
                 style="@style/tv_setting_style_left"
                 android:text="震动提示" />
             <ImageView
-                android:layout_width="@dimen/dp_63"
-                android:layout_height="@dimen/dp_35"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_30"
                 android:src="@drawable/swtich_icon"/>
 
-<!--            <TextView-->
-<!--                style="@style/tv_setting_style_right"-->
-<!--                android:drawableRight="@drawable/swtich_icon" />-->
         </LinearLayout>
 
         <View style="@style/h_view_1" />
@@ -58,8 +55,8 @@
                 android:text="消息声音" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_30"
                 android:src="@drawable/swtich_icon"/>
         </LinearLayout>
 

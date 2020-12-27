@@ -23,9 +23,9 @@ class MyReleasePresenterImpl(
     override fun request() {
     }
 
-    fun getLeaseList(type: Int) {
+    fun getMyLeaseList(type: Int) {
         baseView.showLoading()
-        baseModel.getLeaseList(
+        baseModel.getMyLeaseList(
             App.getInstance().token,
             type,
             page,
@@ -128,9 +128,9 @@ class MyReleasePresenterImpl(
 
 
     //出售 求购
-    fun getBusinessSellList(type: Int) {
+    fun getMyBusinessSellList(type: Int) {
         baseView.showLoading()
-        baseModel.getBusinessList(
+        baseModel.getMyBusinessList(
             App.getInstance().token,
             type,
             page,
@@ -233,9 +233,9 @@ class MyReleasePresenterImpl(
     }
 
 
-    fun getPartsList(type: Int) {
+    fun getMyPartsList(type: Int) {
         baseView.showLoading()
-        baseModel.getPartsList(
+        baseModel.getMyPartsList(
             App.getInstance().token,
             type,
             page,
@@ -338,9 +338,9 @@ class MyReleasePresenterImpl(
             })
     }
 
-    fun getWorkList(type: Int) {
+    fun getMyWorkList(type: Int) {
         baseView.showLoading()
-        baseModel.getWorkList(
+        baseModel.getMyWorkList(
             App.getInstance().token,
             type,
             page,

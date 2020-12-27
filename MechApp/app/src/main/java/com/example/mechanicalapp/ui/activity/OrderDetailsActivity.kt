@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
+import com.netease.nim.uikit.api.NimUIKit
 import kotlinx.android.synthetic.main.activity_order_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
@@ -38,6 +40,8 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     private var mPresenter:OrderPresenter?=null
     private var orderData:OrderDetailsData?=null
+
+    private var mMecRepairEngineerBean: OrderDetailsData.MecRepairEngineerBean?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_order_details
     }
@@ -89,11 +93,11 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         ly_look_details2.setOnClickListener(this)
         ly_pay.setOnClickListener(this)
 
-        mPresenter = OrderPresenter(this)
-        mPresenter?.getOrderDetails(orderId)
     }
 
     override fun initPresenter() {
+        mPresenter = OrderPresenter(this)
+        mPresenter?.getOrderDetails(orderId)
     }
 
     override fun showLoading() {
@@ -112,31 +116,47 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             R.id.ly_right -> share()
             R.id.iv_look -> showPop(1)
             R.id.tv_cancel_order -> showPop(0)
+            R.id.tv_letter1->goToChat()
             R.id.ly_letter -> goToChat()
             R.id.ly_call -> call()
+            R.id.tv_call1->call()
             R.id.tv_letter -> goToChat()
             R.id.tv_call -> call()
-            R.id.ly_look_details -> jumpActivity(null, DetailedListActivity::class.java)
-            R.id.ly_look_details1 -> jumpActivity(null, DetailedListActivity::class.java)
-            R.id.ly_evaluate -> jumpActivity(null, EvaluateActivity::class.java)
+            R.id.ly_look_details ->  jumDetailedList()
+            R.id.ly_look_details1 ->  jumDetailedList()
+            R.id.ly_evaluate ->
+            {
+                var bundle =Bundle()
+                bundle.putSerializable("key",orderData)
+                jumpActivity(bundle, EvaluateActivity::class.java)
+            }
             R.id.tv_pop_sure -> dismissPop()
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.tv_pop_input_cancel -> goVideo()
             R.id.tv_pop_input_sure -> goVideo()
-            R.id.ly_look_details2 -> jumpActivity(null, DetailedListActivity::class.java)
+            R.id.ly_look_details2 -> jumDetailedList()
 //            R.id.ly_pay -> jumpActivity(null, null)
         }
+    }
+    private fun jumDetailedList(){
+        var bundle =Bundle()
+        bundle.putString("id",orderData?.id)
+        jumpActivity(bundle, DetailedListActivity::class.java)
     }
 
     private fun call() {
         //工程师电话没有
-//        if (orderData!=null){
-//            openCall(orderData.re)
-//        }
+        if (orderData!=null&&orderData?.mecRepairEngineer!=null&& orderData?.mecRepairEngineer!!.size>0){
+            openCall(orderData?.mecRepairEngineer!![0].phone)
+        }
     }
 
     private fun goToChat() {
-
+        if (orderData!=null&&orderData?.mecRepairEngineer!=null&& orderData?.mecRepairEngineer!!.size>0){
+            if (!TextUtils.isEmpty(orderData?.mecRepairEngineer!![0].engineerImId)){
+                NimUIKit.startP2PSession(this, orderData?.mecRepairEngineer!![0].engineerImId)
+            }
+        }
 
     }
 
@@ -232,35 +252,41 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     private fun showOrderInfo(result: OrderDetailsData?) {
 
-        orderData =result
-        if (!TextUtils.isEmpty(result?.orderNum)){
-            tv_order_num.text = "订单号：${result?.orderNum}"
-        }else{
-            tv_order_num.text = ""
+        if (result!=null){
+            orderData =result
+            if (!TextUtils.isEmpty(result?.orderNum)){
+                tv_order_num.text = "订单号：${result?.orderNum}"
+            }else{
+                tv_order_num.text = ""
+            }
+            tv_order_state.text =result?.statusName
+
+            tv_ec_type.text = result?.productType
+            tv_ec_brand.text  =result?.productBrand
+            tv_ec_model.text =result?.productModel
+
+            tv_user_name.text =result?.customerName
+            tv_user_phone.text =result?.customerPhone
+
+            tv_company_name.text =result?.companyName
+            tv_company_address.text =result?.adress
+
+            tv_order_type.text =result?.repairTypeName
+            tv_progress.text =result?.progressName
+            tv_created_time.text =result?.createTime
+            tv_info.text =result?.orderDesc
+
+            tv_factory_name.text =result?.mecRepaireFactory?.name
+            tv_score.text ="${result?.mecRepaireFactory?.star}分"
+            ratingBar.rating = result?.mecRepaireFactory?.star?.toFloat()!!
+            if (result?.mecRepairEngineer!=null&&result.mecRepairEngineer.size>0){
+                mMecRepairEngineerBean =result?.mecRepairEngineer[0]
+                tv_worker_name.text =mMecRepairEngineerBean?.name
+                //  tv_worker_type.text =
+                tv_worker_time.text="${mMecRepairEngineerBean?.repairAge}年"
+            }
         }
-        tv_order_state.text =result?.statusName
 
-        tv_ec_type.text = result?.productType
-        tv_ec_brand.text  =result?.productBrand
-        tv_ec_model.text =result?.productModel
-
-        tv_user_name.text =result?.customerName
-        tv_user_phone.text =result?.customerPhone
-
-        tv_company_name.text =result?.companyName
-        tv_company_address.text =result?.adress
-
-//        tv_order_type.text =result?.orderNum
-        tv_progress.text =result?.progress
-        tv_created_time.text =result?.createTime
-        tv_info.text =result?.orderDesc
-
-        tv_factory_name.text =result?.repairFactoryName
-      //  tv_score.text =result?.
-        //ratingBar
-        tv_worker_name.text =result?.repairName
-      //  tv_worker_type.text =result?.
-        //tv_worker_time
     }
 
 

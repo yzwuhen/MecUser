@@ -1,43 +1,32 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import kotlinx.android.synthetic.main.item_parts_details_list.view.*
+import com.example.mechanicalapp.ui.data.WorkTypeBean
+import kotlinx.android.synthetic.main.item_ec_type_left.view.*
 
-class WorkTimeAdapter(
+class LeftWorkAdapter(
     var mContext: Context,
-    var mList: MutableList<String>,
+    var mList: MutableList<WorkTypeBean.ResultBean>,
     var mOnItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return WorkTimeVh(
-            LayoutInflater.from(mContext).inflate(R.layout.item_work_time, parent, false),
+        return LeftWorktVh(
+            View.inflate(parent.context, R.layout.item_ec_type_left, null),
             mOnItemClickListener
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.itemView.tv_type.text = mList[position].cateName
+        holder.itemView.tv_type.isSelected = mList[position].isSelect
 
-        if (position % 2 == 0) {
-            holder.itemView.tv_text_right1.setCompoundDrawablesWithIntrinsicBounds(
-                0, 0,
-                R.mipmap.tip_up, 0
-            )
-            holder.itemView.ly_info.visibility = View.VISIBLE
-        } else {
-            holder.itemView.tv_text_right1.setCompoundDrawablesWithIntrinsicBounds(
-                0, 0,
-                R.mipmap.tip_down, 0
-            )
-            holder.itemView.ly_info.visibility = View.GONE
-        }
     }
 
     override fun getItemCount(): Int {
@@ -45,12 +34,12 @@ class WorkTimeAdapter(
         return mList.size
     }
 
-    class WorkTimeVh(itemView: View, mOnItemClickListener: OnItemClickListener) :
+    class LeftWorktVh(itemView: View, mOnItemClickListener: OnItemClickListener) :
         RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener(View.OnClickListener {
                 mOnItemClickListener.onItemClick(
-                    itemView,
+                    itemView.tv_type,
                     adapterPosition
                 )
             })

@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecTypeChildData
+import com.example.mechanicalapp.ui.data.WorkTypeData
 import kotlinx.android.synthetic.main.item_work_type.view.*
 
-class WorkTypeAdapter (var mContext: Context, var mList:MutableList<MecTypeChildData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class WorkTypeAdapter (var mContext: Context, var mList:MutableList<WorkTypeData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

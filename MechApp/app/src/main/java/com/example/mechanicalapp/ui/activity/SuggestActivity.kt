@@ -4,18 +4,16 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PicAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.CodeData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.request.ReSuggest
 import com.example.mechanicalapp.ui.mvp.impl.SuggestPresenter
 import com.example.mechanicalapp.ui.mvp.v.ReleaseView
-import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.GlideEngine
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -25,6 +23,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_suggest.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class SuggestActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListener,
     ReleaseView<NetData> {
@@ -57,7 +56,9 @@ class SuggestActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListene
         tv_title.text ="意见反馈"
 
         mPicAdapter = PicAdapter(this, mPicList,this)
-        ry_pic.layoutManager = GridLayoutManager(this,3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
         tv_submit.setOnClickListener(this)
@@ -138,7 +139,11 @@ class SuggestActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListene
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -154,7 +159,11 @@ class SuggestActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListene
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {

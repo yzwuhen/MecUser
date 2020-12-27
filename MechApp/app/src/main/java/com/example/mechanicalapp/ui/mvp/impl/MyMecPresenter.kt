@@ -14,6 +14,7 @@ class MyMecPresenter(
     private var baseModel = ModelImpl()
     private var page: Int = 1
     private var pageSize: Int = 30
+    private var tittle:String?=null
     override fun request() {
     }
 
@@ -21,6 +22,7 @@ class MyMecPresenter(
         baseView.showLoading()
         baseModel.getMyMecList(
             App.getInstance().token,
+            null,
             page,
             pageSize,
             object : ISubscriberListener<MyMecListBean> {
@@ -104,5 +106,9 @@ class MyMecPresenter(
 
     fun reset() {
         page = 1
+    }
+    fun setTitle(s:String?){
+        tittle =s
+        reset()
     }
 }

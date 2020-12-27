@@ -26,7 +26,7 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/tv_ec_type"
-                android:text="机械类型"
+                android:text="机型"
                 android:textSize="@dimen/sp_16"
                 android:drawablePadding="@dimen/dp_10"
                 android:drawableRight="@drawable/sel_tip"

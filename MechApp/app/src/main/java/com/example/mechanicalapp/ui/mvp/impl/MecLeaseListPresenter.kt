@@ -172,21 +172,21 @@ class MecLeaseListPresenter(
         resetPage()
     }
     fun setPriceQJ(startPrice:String?,endPrice:String?){
-        mSGriceLe =endPrice
-        mSPriceGe =startPrice
+        mSGriceLe =startPrice
+        mSPriceGe =endPrice
         resetPage()
         getLeaseList(type)
     }
 
     fun setJL(startJL:String?,endJL:String?){
-        mSTenancyLe =endJL
-        mSTenancyGe =startJL
+        mSTenancyLe =startJL
+        mSTenancyGe =endJL
         resetPage()
         getLeaseList(type)
     }
     fun setWorkTime(startWork:String?,endWork:String?){
-        mSWorkTimeLe =endWork
-        mSWorkTimeGe =startWork
+        mSWorkTimeLe =startWork
+        mSWorkTimeGe =endWork
         resetPage()
         getLeaseList(type)
     }

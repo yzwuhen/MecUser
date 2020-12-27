@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
@@ -26,6 +27,7 @@ import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_ask_rent.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.lang.Exception
 
 class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener, MecMecAskRentView, TextWatcher {
@@ -84,6 +86,7 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
         et_name.addTextChangedListener(this)
         et_phone.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
     }
 
     override fun initPresenter() {
@@ -190,11 +193,12 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
 
     private fun selectTime() {
         mButtDialog?.dismiss()
-        if (index > 0) {
+        try {
             et_production_time.text = mYears[index].itemText
             mReMecLease.facTime = mYears[index].itemValue
-        }
+        }catch (e:Exception){
 
+        }
     }
 
     private fun showInput() {
@@ -372,7 +376,7 @@ class AskingRentActivity : BaseCusActivity(), OnItemClickListener, View.OnClickL
         }
         mReMecLease.address = et_address.text.toString().trim()
         mReMecLease.briefDesc = et_input.text.toString().trim()
-
+        tv_tip.text="${et_input.text.length}/200"
         return true
     }
 }

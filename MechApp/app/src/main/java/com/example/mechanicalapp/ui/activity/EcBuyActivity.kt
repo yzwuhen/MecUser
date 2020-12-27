@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
@@ -56,7 +57,7 @@ class EcBuyActivity : BaseCusActivity(), View.OnClickListener,TextWatcher,
         et_name.addTextChangedListener(this)
         et_price.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
-
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
     }
 
     override fun initPresenter() {
@@ -227,7 +228,7 @@ class EcBuyActivity : BaseCusActivity(), View.OnClickListener,TextWatcher,
         mReMecBusiness.price = et_price.text.toString().trim()
 
         mReMecBusiness.briefDesc =et_input.text.toString().trim()
-
+        tv_tip.text="${et_input.text.length}/200"
         return true
     }
 

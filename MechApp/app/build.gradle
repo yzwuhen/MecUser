@@ -14,6 +14,11 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders= [qqappid: "101830139"]
+        ndk {
+            //设置支持的SO库架构
+            abiFilters "armeabi-v7a", "x86","arm64-v8a","x86_64"
+        }
     }
     signingConfigs {
         debug {
@@ -63,6 +68,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation project(path: ':uikit')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -87,4 +93,17 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation "com.orhanobut:hawk:2.0.1"
+
+    implementation  'com.umeng.umsdk:common:9.3.2'
+    implementation "com.umeng.umsdk:asms:1.1.3" // asms包依赖(必选)
+    implementation "com.umeng.umsdk:crash:0.0.4" // native crash包依赖(必选)
+    implementation  'com.umeng.umsdk:share-core:7.1.3'
+    implementation  'com.umeng.umsdk:share-board:7.1.3'
+    implementation  'com.umeng.umsdk:share-qq:7.1.3'
+    implementation  'com.umeng.umsdk:share-wx:7.1.3'
+    implementation  'com.umeng.umsdk:share-sina:7.1.3'
+    // 基础功能 (必需)
+//    implementation 'com.netease.nimlib:basesdk:8.1.2'
+    // 聊天室需要
+//    implementation 'com.netease.nimlib:chatroom:8.1.2'
 }

@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 
 import android.content.Context
 import android.util.Log
+import com.amap.api.location.DPoint
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.RecruitBean
@@ -22,6 +23,8 @@ class RecruitPresenter (
     private var typeWorkId:String?=null
     private var sort: Int=0
     private var jobTitle:String?=null
+    private var lon :String?=null
+    private var lat:String?=null
 
     init {
         baseModel = RecruitModelImpl()
@@ -61,18 +64,20 @@ class RecruitPresenter (
             })
     }
 
-
     fun workType(type:String?,id:String?){
         typeWork =type
         typeWorkId =id
+        resetPage()
     }
     fun setCity(str:String?){
         city =str
+        resetPage()
     }
 
 
     fun setTitle(s:String){
         this.jobTitle = s
+        resetPage()
     }
     fun resetPage(){
         page=1
@@ -83,5 +88,6 @@ class RecruitPresenter (
 
     fun setScreen(position: Int) {
         sort =position
+        resetPage()
     }
 }

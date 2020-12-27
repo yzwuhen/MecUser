@@ -25,6 +25,29 @@ interface AppService {
     @POST("/jeecg-boot/sys/register")
     fun register(@Body requestBody: ReRegister): Observable<LoginCodeBean>
 
+
+    @POST("/jeecg-boot/sys/appLoginByThirdId")
+    fun loginThree(@Body requestBody: ReLoginThree): Observable<LoginCodeBean>
+
+    @POST("/jeecg-boot/sys/appBindUserByThirdId")
+    fun bindThree(@Body requestBody: ReLoginThree?): Observable<LoginCodeBean>
+
+    @POST("/jeecg-boot/sys/user/appChangePassword")
+    fun resetPwd(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: ResetPwd
+    ): Observable<LoginCodeBean>
+
+    @POST("/jeecg-boot/sys/sms")
+    fun getMsgCode(@Body requestBody: ReGetMsgCode): Observable<NetData>
+
+
+    @POST("/jeecg-boot/sys/user/checkCaptcha")
+    fun verifyCode(@Body requestBody: ReGetMsgCode): Observable<NetData>
+
+    @POST("/jeecg-boot/sys/user/forgotPassword")
+    fun forgotPwd(@Body requestBody: ReGetMsgCode): Observable<NetData>
+
     /*
     * 首页数据
     * */
@@ -67,7 +90,7 @@ interface AppService {
      * 租赁机械表-分页列表查询
      * 出租求组
      */
-    @GET("/jeecg-boot/market/mecMarketMechanics/list")
+    @GET("/jeecg-boot/market/mecMarketRecruit/getMyList")
     fun getMyLeaseList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,
@@ -80,7 +103,7 @@ interface AppService {
      * 租赁机械表-分页列表查询
      * 出售 求购
      */
-    @GET("/jeecg-boot/market/mecMarketOldMechanics/list")
+    @GET("/jeecg-boot/market/mecMarketOldMechanics/getMyList")
     fun getMyBusinessList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,
@@ -156,7 +179,7 @@ interface AppService {
      * 出租 求租
      * bussiessType 1出租2求租
      */
-    @GET("/jeecg-boot/market/mecMarketParts/list")
+    @GET("/jeecg-boot/market/mecMarketParts/getMyList")
     fun getReleasePartsList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,
@@ -199,12 +222,12 @@ interface AppService {
     /**
      * 求职招聘-分页列表查询
      * 求职招聘
-     * bussiessType 1出租2求租
+     * recruitType
      */
-    @GET("/jeecg-boot/market/mecMarketRecruit/list")
+    @GET("/jeecg-boot/market/mecMarketRecruit/getMyList")
     fun getReleaseWorkList(
         @Header("X-Access-Token") token: String?,
-        @Query("bussiessType") bussiessType: Int,
+        @Query("recruitType") recruitType: Int,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<RecruitBean>
@@ -318,7 +341,7 @@ interface AppService {
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
         @Query("recruitType") recruitType: String,
-        @Query(" region") region: String?,
+        @Query("city") region: String?,
         @Query("cateName") typeWork: String?,
         @Query("cateId") typeWorkId: String?,
         @Query("sort") sort: Int,
@@ -330,24 +353,6 @@ interface AppService {
 
 
     /**
-     * 求职列表
-     * region：地区
-     */
-    @GET("/jeecg-boot/market/mecMarketRecruit/list")
-    fun getWantWorkList(
-        @Query("pageNo") pageNo: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("recruitType") recruitType: String,
-        @Query(" region") region: String?,
-        @Query("typeWork") typeWork: String?,
-        @Query(
-            "sort"
-        ) sort: String?,
-        @Query("jobtitle") jobtitle: String?
-    ): Observable<NetData>
-
-
-    /**
      * 工厂列表
      * region：地区
      */
@@ -355,8 +360,8 @@ interface AppService {
     fun getFactoryList(
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int,
-        @Query("mecType") mecType: String?,
-        @Query(" partsType") partsType: String?,
+        @Query("repaireType") mecType: String?,//机械类型
+        @Query("componentType") partsType: String?,
         @Query("sort") sort: String?,
         @Query("name") name: String?,
         @Query("isMap") isMap: String?,
@@ -370,23 +375,11 @@ interface AppService {
      * region：地区
      * 返回格式与机械类型差不多 就直接用了
      */
-    @GET("/jeecg-boot/market/mecMarketRecruitCate/rootList")
+    @GET("/jeecg-boot/market/mecMarketRecruitCate/getTreeList")
     fun getWorkTypeList(
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
-    ): Observable<MecTypeParentBean>
-
-    /**
-     * 获取工种 子级
-     * region：地区
-     * 返回格式与机械类型差不多 就直接用了
-     */
-    @GET("/jeecg-boot/market/mecMarketRecruitCate/rootList")
-    fun getWorkTypeChildList(
-        @Query("pageNo") pageNo: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("id") id: String
-    ): Observable<MecTypeChildBean>
+    ): Observable<WorkTypeBean>
 
 
     /**
@@ -791,6 +784,7 @@ interface AppService {
     @GET("/jeecg-boot/machine/mecMachine/list")
     fun getMyMecList(
         @Header("X-Access-Token") token: String?,
+        @Query("title") title: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<MyMecListBean>
@@ -1054,6 +1048,7 @@ interface AppService {
     fun getOrderList(
         @Header("X-Access-Token") token: String?,
         @Query("status") state: String?,
+        @Query("productType") productType: String?,
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int?
     ): Observable<OrderBean>
@@ -1069,13 +1064,23 @@ interface AppService {
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int?
     ): Observable<PartOrderListBean>
+    /**
+     *
+     *获取售后配件订单
+     */
+    @GET("/jeecg-boot/shop/mecOrderBack/queryMyPageList")
+    fun getPartsOrderAfterSaleList(
+        @Header("X-Access-Token") token: String?,
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int?
+    ): Observable<PartOrderListBean>
 
 
     /**
      *
      *取消配件订单
      */
-    @GET("/jeecg-boot/repair/mecRepairOrder/delete")
+    @GET("/jeecg-boot/shop/mecOrder/deleteGet")
     fun cancelPartsOrder(
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
@@ -1108,9 +1113,9 @@ interface AppService {
     @GET("/jeecg-boot/shop/mecProd/appListPage")
     fun getGoodsList(
         @Header("X-Access-Token") token: String?,
-        @Query("orderByPrice") orderByPrice: Int,
-        @Query("orderByScale") orderByScale: Int,
-        @Query("orderType") orderType: Int,
+        @Query("orderByPrice") orderByPrice: String?,
+        @Query("orderByScale") orderByScale: String?,
+        @Query("orderType") orderType: String?,
         @Query("title") title: String?,
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
@@ -1131,7 +1136,7 @@ interface AppService {
      *
      *购物车里生成订单
      */
-    @POST("/jeecg-boot/shop/mecOrder/add")
+    @POST("/jeecg-boot/shop/mecOrder/addOrderByShoppingCart")
     fun addCarOrder(
         @Header("X-Access-Token") token: String?,
         @Body reOrder: ReOrderCar?
@@ -1188,6 +1193,15 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<PartsOrderDetailsBean>
+    /**
+     *
+     *获取售后订单详情
+     */
+    @GET("/jeecg-boot/shop/mecOrderBack/detail")
+    fun getPartsOrderAfterDetails(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<PartsOrderDetailsBean>
 
 
     /**
@@ -1210,4 +1224,133 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Body reSuggest: ReSuggest?
     ): Observable<NetData>
+
+
+    /**
+     *
+     *获取热门搜索关键词
+     */
+    @GET("/jeecg-boot/shop/mecHotSearchKeyword/keywords")
+    fun getHotCode(
+        @Header("X-Access-Token") token: String?
+    ): Observable<HotCodeBean>
+
+    /*
+* 清单列表
+* */
+    @GET("/jeecg-boot/repair/mecRepairOrderDetail/queryByRepairOrderId")
+    fun getList(
+        @Header("X-Access-Token") token: String?,
+        @Query("status") status: Int,
+        @Query("repairOrderId") repairOrderId: String?
+    ): Observable<ListBean>
+
+    /* 工程订单评论
+    * */
+    @GET("/jeecg-boot/repair/mecRepairComment/queryById")
+    fun getEvaluate(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<ListBean>
+
+    /*提交工程订单评论
+  * */
+    @POST("/jeecg-boot/repair/mecRepairComment/add")
+    fun postEvaluate(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: ReEvaluate?
+    ): Observable<NetData>
+
+
+    /**
+     * 提交配件订单评价
+     */
+    @POST("/jeecg-boot/shop/mecProductComment/addBatch")
+    fun postEvaluateParts(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: ReEvaluateParts?
+    ): Observable<NetData>
+
+
+    /*微信支付
+  * */
+    @POST("/jeecg-boot/shop/mecOrder/wxPay")
+    fun payWx(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: RePay?
+    ): Observable<WxPayBean>
+
+    /* 获取工程师列表
+* */
+    @GET("/jeecg-boot/repair/mecRepairEngineer/list")
+    fun getEngList(
+        @Header("X-Access-Token") token: String?,
+        @Query("name") name: String?
+    ): Observable<EngListBean>
+
+    /* 获取工程师列表
+* */
+    @GET("/jeecg-boot/repair/mecRepairEngineer/list")
+    fun getEngList(
+        @Header("X-Access-Token") token: String?,
+        @Query("name") name: String?,
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int
+    ): Observable<EngListBean>
+
+    /**
+     * 带首字母的工程师列表
+     */
+    @GET("jeecg-boot/repair/mecRepairEngineer/groupList")
+    fun getEngListLetter(
+        @Header("X-Access-Token") token: String?
+    ): Observable<EngListLetterBean>
+
+    /**
+     * 申请售后
+     */
+    @POST(
+        "/jeecg-boot/shop/mecOrderBack/add"
+    )
+    fun applyRefund(
+        @Header("X-Access-Token") token: String?,
+        @Body reApplyRefund: ReApplyRefund?
+    ): Observable<NetData>
+
+
+    /**
+     * 获取认证信息 (2个人,3企业,4维修厂)
+     */
+    @GET("/jeecg-boot/market/mecUserApprove/list")
+    fun getApplyInfo(
+        @Header("X-Access-Token") token: String?,
+        @Query("apporveType") apporveType: String?,
+        @Query("createBy") createBy: String?
+    ): Observable<ApplyInfoBean>
+
+
+
+
+    /**
+     * 添加物流信息
+     */
+    @FormUrlEncoded
+    @POST("/jeecg-boot/shop/mecOrderBack/writeTrackNo")
+    fun postExpress(
+        @Header("X-Access-Token") token: String?,
+       @Field("id")id:String?,
+        @Field("deliverycorpCode")deliverycorpCode:String?,
+        @Field("trackNo")trackNo:String?
+    ): Observable<PostExpressBean>
+
+    /**
+     * 取消售后
+     */
+    @FormUrlEncoded
+    @POST("/jeecg-boot/shop/mecOrderBack/cancel")
+    fun cancelRefund(
+        @Header("X-Access-Token") token: String?,
+        @Field("id") id:String?
+    ): Observable<ReCancelRefundBean>
+
 }

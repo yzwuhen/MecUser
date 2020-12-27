@@ -8,78 +8,71 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.OnItemLongClick
 import com.example.mechanicalapp.ui.adapter.ChatAdapter
 import com.example.mechanicalapp.ui.adapter.DialogListAdapter
-import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.base.BaseCusFragment
+import com.example.mechanicalapp.ui.mvp.p.MsgPresenter
+import com.example.mechanicalapp.ui.mvp.v.MsgView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
+import com.netease.nim.uikit.api.NimUIKit
+import com.netease.nimlib.sdk.msg.model.RecentContact
+import com.netease.nimlib.sdk.util.NIMUtil
 import kotlinx.android.synthetic.main.fragment_msg_list.*
 
 
-class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClick {
+class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgView {
 
     private var mChatAdapter:ChatAdapter?=null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList: MutableList<RecentContact> = ArrayList<RecentContact>()
 
     private var mTipDialog: BottomSheetDialog?=null
     private var mTipView: View?=null
     private var mDialogRecycle : RecyclerView?=null
     private var mDialogList: MutableList<String> = ArrayList<String>()
     private var mDialogAdapter : DialogListAdapter?=null
-
-    override fun showLoading() {
-    }
-
-    override fun hiedLoading() {
-    }
-
-
-
     override fun getLayoutId(): Int {
         return R.layout.fragment_msg_list
     }
-    init {
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-    }
+
     override fun initView() {
         super.initView()
 
         recycle_list.layoutManager = LinearLayoutManager(mContext)
-        mChatAdapter = ChatAdapter(mContext, mList, this,this)
+        mChatAdapter = ChatAdapter(mContext, mList, this, this)
         recycle_list.adapter = mChatAdapter
 
-        spring_list.setType(SpringView.Type.FOLLOW)
-        spring_list.setHeader(RefreshHeaderUtils.getHeaderView(mContext))
+        spring_list.type=SpringView.Type.FOLLOW
+        spring_list.header=RefreshHeaderUtils.getHeaderView(mContext)
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
-                spring_list.setEnable(false)
+                spring_list.isEnable = false
                 //  initData()
-                closeRefreshView()
+                (mPresenter as MsgPresenter).request()
             }
 
             override fun onLoadmore() {}
         })
 
+        mPresenter = MsgPresenter(this)
+        mPresenter?.request()
     }
 
     fun closeRefreshView() {
-        spring_list.setEnable(true)
+        spring_list.isEnable =true
         spring_list.onFinishFreshAndLoad()
     }
 
 
     override fun onItemClick(view: View, position: Int) {
 
+        when(view.id){
+            R.id.item_chat_root -> jumChat(position)
+        }
+    }
 
+    private fun jumChat(position: Int) {
+       // NimUIKit.startP2PSession(context, mList[position]?.fromAccount);
     }
 
     override fun onItemLongClick(view: View, position: Int) {
@@ -90,7 +83,7 @@ class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClic
 
         if (mTipDialog ==null){
             mTipDialog = BottomSheetDialog(mContext)
-            mTipView = View.inflate(mContext, R.layout.dialog_list,null)
+            mTipView = View.inflate(mContext, R.layout.dialog_list, null)
             mTipDialog?.setContentView(mTipView!!)
 
             mDialogRecycle = mTipView?.findViewById(R.id.dialog_recycle_list)
@@ -101,7 +94,7 @@ class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClic
 //            mDialogList.add("黑名单")
 
             mDialogRecycle?.layoutManager =LinearLayoutManager(mContext)
-            mDialogAdapter = DialogListAdapter(mContext,mDialogList,this)
+            mDialogAdapter = DialogListAdapter(mContext, mDialogList, this)
             mDialogRecycle?.adapter =mDialogAdapter
 
         }
@@ -109,7 +102,13 @@ class ChatMsgFragment:BaseFragment<NetData>(),OnItemClickListener,OnItemLongClic
 
     }
 
-    override fun err() {
 
+    override fun refreshUI(list: List<RecentContact>?) {
+        mList.clear()
+        if (list!=null){
+            mList.addAll(list)
+        }
+        mChatAdapter?.notifyDataSetChanged()
+        closeRefreshView()
     }
 }

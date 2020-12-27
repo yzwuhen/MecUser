@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,8 +26,8 @@ class TypeRightAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (mList[position].childList.size>0){
-            holder.itemView.tv_type.text = "${mList[position].cateName}$position"
+       // if (mList[position].childList.size>0){
+            holder.itemView.tv_type.text = "${mList[position].cateName}"
             var mRightAdapter = MoreSelMecTypeAdapter(
                 mContext,
                 mList[position].childList,
@@ -35,7 +36,7 @@ class TypeRightAdapter(
             )
             holder.itemView.item_recycler.layoutManager = GridLayoutManager(mContext, 3)
             holder.itemView.item_recycler.adapter = mRightAdapter
-        }
+      //  }
     }
 
     override fun getItemCount(): Int {

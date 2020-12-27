@@ -16,9 +16,10 @@ class GoodsListPresenter (
     private var baseModel = ModelImpl()
     private var page: Int = 1
     private var pageSize: Int = 30
-    private var orderByPrice=0
-    private var orderByScale=0
-    private var orderType=0
+    //条件三选一
+    private var orderByPrice:String?=null
+    private var orderByScale:String?=null
+    private var orderType:String?=null
     private var title=""
 
     fun getGoodsList() {
@@ -61,8 +62,27 @@ class GoodsListPresenter (
     }
 
     fun setTitle(title: String) {
-
         this.title =title
+    }
+    fun setOrderByPrice(str: String?){
+        orderByPrice =str
+        orderByScale =null
+        orderType=null
+        resetPage()
+    }
+
+    fun setOrderByScale(str: String?){
+        orderByPrice =null
+        orderByScale =str
+        orderType=null
+        resetPage()
+    }
+
+    fun setOrderType(str: String?){
+        orderByPrice =null
+        orderByScale =null
+        orderType=str
+        resetPage()
     }
 
     fun resetPage() {

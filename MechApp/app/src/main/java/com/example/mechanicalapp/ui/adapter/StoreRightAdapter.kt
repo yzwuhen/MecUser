@@ -26,7 +26,7 @@ class StoreRightAdapter (
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (mList[position].children.size>0){
-            holder.itemView.tv_type.text = "${mList[position].name}$position"
+            holder.itemView.tv_type.text = "${mList[position].name}"
             var mRightAdapter = StoreRightChildAdapter(
                 mContext,
                 mList[position].children,

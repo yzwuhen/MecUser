@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -7,11 +8,11 @@ import android.view.View
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.base.WeakHandler
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReGetMsgCode
 import com.example.mechanicalapp.ui.data.request.ReRegister
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
@@ -19,7 +20,7 @@ import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<NetData> {
+class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView{
     private var isCheck: Boolean = false
     private var isEyes1: Boolean = false
     private var isEyes2: Boolean = false
@@ -75,9 +76,11 @@ class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err() {
@@ -173,10 +176,20 @@ class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<
 
     private fun getCodes() {
 
+        phone = et_phone.text.toString().trim()
+
+        if (TextUtils.isEmpty(phone)){
+            ToastUtils.showText("请输入手机号码")
+            return
+        }
+
         sTime = 60
         handler.sendEmptyMessage(1)
         tv_get_code.setEnabled(false)
-
+        var mReGetMsgCode = ReGetMsgCode()
+        mReGetMsgCode.mobile =phone
+        mReGetMsgCode.smsmode="1"
+        mPresenter?.getMsgCode(mReGetMsgCode)
     }
 
     private fun check() {
@@ -188,15 +201,19 @@ class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<
         }
     }
 
-    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
-        if (mLoginCodeBean.code == 200) {
-            jumpActivity(null, MainActivity::class.java)
-            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
-            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
-            App.getInstance().token = mLoginCodeBean.result?.token
-            finish()
-        } else {
-            ToastUtils.showText(mLoginCodeBean.message)
+    override fun success(netData: NetData) {
+        if (netData!=null&&netData is LoginCodeBean){
+            if (netData.code == 200) {
+                var bundle =Bundle()
+                bundle.putString("phone",phone)
+                bundle.putString("pwd",pwd1)
+                jumpActivity(bundle, LoginPwdActivity::class.java)
+                // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
+//                App.getInstance().setUser(netData.result?.userInfo)
+//                App.getInstance().token = netData.result?.token
+                finish()
+            } 
+            ToastUtils.showText(netData.message)
         }
 
     }

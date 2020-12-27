@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ly_city_root"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
@@ -19,20 +20,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
         android:orientation="horizontal">
         <TextView
             android:id="@+id/tv_text1"
             android:text="xxx"
             android:paddingLeft="@dimen/dp_17"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="16sp"
             android:gravity="start|center_vertical"
             android:textColor="#222222"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="44dp"/>
 
         <TextView
-            android:layout_marginLeft="@dimen/dp_50"
             android:id="@+id/tv_text2"
             android:text="工种：电焊工"
             android:paddingLeft="@dimen/dp_17"

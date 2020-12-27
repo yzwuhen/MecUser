@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
@@ -32,6 +33,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_parts_rental.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
 class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener,
     PopUtils.onViewListener, ReleaseView<List<CodeData>>, TextWatcher {
@@ -65,7 +67,9 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
         super.initView()
 
         mPicAdapter = PicAdapter(this, mPicList, this)
-        ry_pic.layoutManager = GridLayoutManager(this, 3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation =RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
@@ -98,6 +102,7 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
         et_phone.addTextChangedListener(this)
         et_address.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
+        et_input.filters=arrayOf(InputFilter.LengthFilter(200))
     }
 
     override fun initPresenter() {
@@ -240,7 +245,11 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -256,7 +265,11 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mUpLoadFilePresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -357,7 +370,7 @@ class PartsRentalActivity : BaseCusActivity(), OnItemClickListener, View.OnClick
         if (mPicList.size == 0) {
             return false
         }
-
+        tv_tip.text="${et_input.text.length}/200"
         return true
     }
 

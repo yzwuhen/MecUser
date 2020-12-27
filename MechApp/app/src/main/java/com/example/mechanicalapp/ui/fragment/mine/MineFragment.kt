@@ -40,12 +40,10 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     private fun showInfo() {
 
         if (TextUtils.isEmpty(App.getInstance().token)){
-            tv_user_nick.visibility =View.GONE
             iv_sex.visibility=View.GONE
             iv_user_sr.visibility =View.GONE
             tv_phone.visibility=View.GONE
         }else{
-            tv_user_nick.visibility =View.VISIBLE
             iv_sex.visibility=View.VISIBLE
             iv_user_sr.visibility =View.VISIBLE
             tv_phone.visibility=View.VISIBLE

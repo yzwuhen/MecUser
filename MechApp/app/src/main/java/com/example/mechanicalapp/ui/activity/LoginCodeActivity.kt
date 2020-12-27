@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
@@ -9,13 +10,20 @@ import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.base.WeakHandler
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.UserInfo
+import com.example.mechanicalapp.ui.data.request.ReGetMsgCode
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.auth.AuthService
+import com.netease.nimlib.sdk.auth.LoginInfo
 import kotlinx.android.synthetic.main.activity_login_code.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView<NetData> {
+class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView,
+    RequestCallback<LoginInfo> {
     private var isCheck:Boolean=false
     private var mPresenter:LoginCodePresenter?=null
     private var phone:String?=null
@@ -58,8 +66,6 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
         tv_pwd_login.setOnClickListener(this)
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
-//        et_phone.setText("13751773402")
-//        et_code.setText("123456")
 
     }
 
@@ -111,9 +117,20 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
 
     private fun getCodes() {
 
+        phone = et_phone.text.toString().trim()
+
+        if (TextUtils.isEmpty(phone)){
+            ToastUtils.showText("请输入手机号码")
+            return
+        }
+
         sTime = 60
         handler.sendEmptyMessage(1)
         tv_get_code.setEnabled(false)
+        var mReGetMsgCode =ReGetMsgCode()
+        mReGetMsgCode.mobile =phone
+        mReGetMsgCode.smsmode="0"
+        mPresenter?.getMsgCode(mReGetMsgCode)
     }
 
     private fun check() {
@@ -151,22 +168,40 @@ class LoginCodeActivity : BaseCusActivity(), View.OnClickListener ,LoginCodeView
         return true
     }
 
-    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
-        if (mLoginCodeBean.code==200){
-            jumpActivity(null, MainActivity::class.java)
-            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
-            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
-            App.getInstance().token=mLoginCodeBean.result?.token
-            finish()
-        }else{
-            ToastUtils.showText(mLoginCodeBean.message)
+    override fun success(netData: NetData) {
+        if (netData!=null &&netData is LoginCodeBean){
+            if (netData.code==200){
+                jumpActivity(null, MainActivity::class.java)
+                // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
+                App.getInstance().setUser(netData.result?.userInfo)
+                App.getInstance().token=netData.result?.token
+                logIm(netData.result?.userInfo)
+            }else{
+                ToastUtils.showText(netData.message)
+            }
+
         }
 
+    }
+    private fun logIm(userInfo: UserInfo?) {
+        var mLoginInfo = LoginInfo(userInfo?.imId,userInfo?.imToken)
+        NIMClient.getService(AuthService::class.java).login(mLoginInfo).setCallback(this)
     }
 
     override fun loginErr(exception: String?) {
 
         ToastUtils.showText(exception)
+    }
+
+    override fun onSuccess(p0: LoginInfo?) {
+
+        Log.v("ssss","ssssssssss===im登陆成功")
+    }
+
+    override fun onFailed(p0: Int) {
+    }
+
+    override fun onException(p0: Throwable?) {
     }
 
 

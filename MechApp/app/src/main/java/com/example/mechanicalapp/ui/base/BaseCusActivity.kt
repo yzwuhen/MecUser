@@ -163,7 +163,6 @@ abstract class BaseCusActivity : AppCompatActivity() {
             ))
             startActivity(intent)
         }catch (e: java.lang.Exception){
-
             Log.v("sssss", "ssssssssss$e")
             ToastUtils.showText("跳转失败")
         }

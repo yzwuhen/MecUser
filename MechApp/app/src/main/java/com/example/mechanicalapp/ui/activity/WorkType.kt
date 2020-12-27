@@ -10,22 +10,23 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.EcTypeLeftAdapter
+import com.example.mechanicalapp.ui.adapter.LeftWorkAdapter
 import com.example.mechanicalapp.ui.adapter.WorkTypeAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.MecTypeChildData
-import com.example.mechanicalapp.ui.data.MecTypeParentData
-import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import com.example.mechanicalapp.ui.mvp.v.MecTypeView
+import com.example.mechanicalapp.ui.mvp.v.TypeView
 import kotlinx.android.synthetic.main.activity_ec_type.*
+import kotlinx.android.synthetic.main.item_work_type.view.*
 
-class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData>,View.OnClickListener{
+class WorkType : BaseCusActivity(), OnItemClickListener, TypeView<NetData>,View.OnClickListener{
 
 
-    private var mLeftAdapter: EcTypeLeftAdapter? = null
+    private var mLeftAdapter: LeftWorkAdapter? = null
     private var mRightAdapter: WorkTypeAdapter? = null
-    private var mRightList: MutableList<MecTypeChildData> = ArrayList<MecTypeChildData>()
-    var mLeftList: MutableList<MecTypeParentData> = ArrayList<MecTypeParentData>()
+    private var mRightList: MutableList<WorkTypeData> = ArrayList<WorkTypeData>()
+    var mLeftList: MutableList<WorkTypeBean.ResultBean> = ArrayList<WorkTypeBean.ResultBean>()
 
     private var mPresenter: AddManagePresenterImpl ?=null
     private var index:Int=0
@@ -39,7 +40,7 @@ class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData>,Vi
         super.initView()
 
 
-        mLeftAdapter = EcTypeLeftAdapter(this, mLeftList, this)
+        mLeftAdapter = LeftWorkAdapter(this, mLeftList, this)
         recycler_list_left.layoutManager = LinearLayoutManager(this)
         recycler_list_left.adapter = mLeftAdapter
 
@@ -80,7 +81,10 @@ class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData>,Vi
                     mLeftAdapter?.notifyItemChanged(index)
                     mLeftList[position].isSelect =true
                     mLeftAdapter?.notifyItemChanged(position)
-                    (mPresenter as AddManagePresenterImpl)?.getWorkTypeChildList(mLeftList[position].id)
+
+                    mRightList.clear()
+                    mRightList.addAll(mLeftList[position].childList)
+                    mRightAdapter?.notifyDataSetChanged()
                     index = position
                 }
             }
@@ -99,31 +103,23 @@ class WorkType : BaseCusActivity(), OnItemClickListener, MecTypeView<NetData>,Vi
         finish()
     }
 
-    override fun refreshLeftUI(list: List<MecTypeParentData>) {
-        mLeftList.clear()
-        mLeftList.addAll(list)
-        mLeftList[0].isSelect =true
-        mLeftAdapter?.notifyDataSetChanged()
-    }
-
-    override fun loadLeftMore(list: List<MecTypeParentData>) {
-        mLeftList.addAll(list)
-        mLeftAdapter?.notifyDataSetChanged()
-    }
-
-    override fun refreshRightUI(list: MutableList<MecTypeChildData>) {
-        mRightList.clear()
-        mRightList.addAll(list)
-        mRightAdapter?.notifyDataSetChanged()
-    }
-
-    override fun loadRightMore(list: List<MecTypeChildData>) {
-        mRightList.addAll(list)
-        mRightAdapter?.notifyDataSetChanged()
-    }
-
     override fun onClick(p0: View?) {
 
         callback(null,null)
+    }
+
+    override fun refreshLeftUI(data: NetData?) {
+        if (data!=null&&data is WorkTypeBean &&data.result!=null){
+            mLeftList.clear()
+            mLeftList.addAll(data.result)
+            mLeftAdapter?.notifyDataSetChanged()
+
+            if (mLeftList.size>0){
+                mLeftList[0].isSelect=true
+            }
+            mRightList.clear()
+            mRightList.addAll(mLeftList[0].childList)
+            mRightAdapter?.notifyDataSetChanged()
+        }
     }
 }

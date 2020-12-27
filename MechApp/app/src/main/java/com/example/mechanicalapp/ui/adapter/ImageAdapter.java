@@ -1,5 +1,7 @@
 package com.example.mechanicalapp.ui.adapter;
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -8,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mechanicalapp.App;
+import com.example.mechanicalapp.R;
 import com.example.mechanicalapp.ui.data.BannerData;
+import com.example.mechanicalapp.utils.ImageLoadUtils;
 import com.youth.banner.adapter.BannerAdapter;
 
 import java.util.List;
@@ -23,35 +27,30 @@ public class ImageAdapter extends BannerAdapter<BannerData, ImageAdapter.BannerV
     //创建ViewHolder，可以用viewType这个字段来区分不同的ViewHolder
     @Override
     public BannerViewHolder onCreateHolder(ViewGroup parent, int viewType) {
-        ImageView imageView = new ImageView(parent.getContext());
-        //注意，必须设置为match_parent，这个是viewpager2强制要求的
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        return new BannerViewHolder(imageView);
+
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner_layout,parent,false);
+        return new BannerViewHolder(view);
     }
-
-
 
     @Override
     public void onBindView(BannerViewHolder holder, BannerData data, int position, int size) {
-       // holder.imageView.setImageResource(data.getImg_path());
-//        Glide.with(holder.itemView)
-//                .load(data.getImg_path())
-//                .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
-//                .into(holder.imageView);
         BannerViewHolder bannerViewHolder = holder;
-//        Log.v("sssss","sssssssssss======$"+data.getImg());
-        Glide.with(App.getInstance().getApplicationContext()).load(data.getImg()).into(bannerViewHolder.imageView);
+        if (data.getImg().endsWith("mp4")){
+            ImageLoadUtils.loadVideo(App.getInstance().getApplicationContext(),bannerViewHolder.imageView,data.getImg());
+            bannerViewHolder.ivIcon.setVisibility(View.VISIBLE);
+        }else {
+            bannerViewHolder.ivIcon.setVisibility(View.GONE);
+            ImageLoadUtils.loadImageCenterCrop(App.getInstance().getApplicationContext(),bannerViewHolder.imageView,data.getImg(),R.mipmap.ic_launcher);
+        }
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-
-        public BannerViewHolder(@NonNull ImageView view) {
+        ImageView ivIcon;
+        public BannerViewHolder(@NonNull View view) {
             super(view);
-            this.imageView = view;
+            imageView = view.findViewById(R.id.iv_banner);
+            ivIcon = view.findViewById(R.id.iv_video);
         }
     }
 }

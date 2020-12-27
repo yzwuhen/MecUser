@@ -38,13 +38,7 @@ class MecAttrsModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<MecTypeRootBean>(mISubscriberListener))
     }
 
-    fun getMecTypeChildList(pageIndex:Int,pageSize:Int,pid:String,mISubscriberListener: ISubscriberListener<MecTypeChildBean>) {
 
-        appsService?.getMecChildType(pageIndex,pageSize,pid)
-            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-                AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeChildBean>(mISubscriberListener))
-    }
 
     fun getPartsModelList(pageIndex:Int,pageSize:Int,mISubscriberListener: ISubscriberListener<MecModelBean>) {
 
@@ -56,22 +50,13 @@ class MecAttrsModelImpl : BaseModel {
 
     }
 
-    fun getPartsTypeList(pageIndex:Int,pageSize:Int,mISubscriberListener: ISubscriberListener<MecTypeParentBean>) {
-
-        appsService?.getPartsParentType(pageIndex,pageSize)
+    fun getPartType(token: String?, iSubscriberListener: ISubscriberListener<MecTypeBean>) {
+        appsService?.getPartType(token)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeParentBean>(mISubscriberListener))
+            )?.subscribe(NetSubscribe<MecTypeBean>(iSubscriberListener))
+
     }
-
-    fun getPartsTypeChildList(pageIndex:Int,pageSize:Int,pid:String,mISubscriberListener: ISubscriberListener<MecTypeChildBean>) {
-
-        appsService?.getPartsChildType(pageIndex,pageSize,pid)
-            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
-                AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<MecTypeChildBean>(mISubscriberListener))
-    }
-
 
 
 

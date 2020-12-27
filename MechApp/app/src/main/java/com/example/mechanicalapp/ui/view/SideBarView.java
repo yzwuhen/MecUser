@@ -58,6 +58,9 @@ public class SideBarView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
+        if (mContentDataList.isEmpty()){
+            return;
+        }
         mWidth = MeasureSpec.getSize(widthMeasureSpec);
         mHeight = MeasureSpec.getSize(heightMeasureSpec);
         if (mIsEqualItemSpace) {//均分Item间距模式

@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.activity
 import android.text.TextUtils
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
@@ -10,20 +11,19 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.LoginCodeBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.UserInfo
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
-import kotlinx.android.synthetic.main.activity_login_code.*
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.RequestCallback
+import com.netease.nimlib.sdk.auth.AuthService
+import com.netease.nimlib.sdk.auth.LoginInfo
 import kotlinx.android.synthetic.main.activity_login_pwd.*
-import kotlinx.android.synthetic.main.activity_login_pwd.et_phone
-import kotlinx.android.synthetic.main.activity_login_pwd.tv_agreement
-import kotlinx.android.synthetic.main.activity_login_pwd.tv_check
-import kotlinx.android.synthetic.main.activity_login_pwd.tv_login
-import kotlinx.android.synthetic.main.activity_login_pwd.tv_privacy
-import kotlinx.android.synthetic.main.activity_login_pwd.tv_register
 import kotlinx.android.synthetic.main.layout_title.*
 
-class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<NetData> {
+
+class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView,RequestCallback<LoginInfo>{
 
     private var isCheck: Boolean = false
     private var isEyes: Boolean = false
@@ -47,6 +47,14 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<
         tv_code_login.setOnClickListener(this)
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
+
+        phone =intent.getStringExtra("phone")
+        pwd =intent.getStringExtra("pwd")
+
+        if (!TextUtils.isEmpty(phone)){
+            et_phone.setText(phone)
+            et_pwd.setText(pwd)
+        }
 
 //        et_phone.setText("13886943851")
 //        et_pwd.setText("123456")
@@ -129,7 +137,7 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<
             return false
         }
         if (TextUtils.isEmpty(pwd)) {
-            ToastUtils.showText("请输入m密码")
+            ToastUtils.showText("请输入密码")
             return false
         }
         if (!isCheck) {
@@ -139,22 +147,38 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView<
         return true
     }
 
-    override fun loginSuccess(mLoginCodeBean: LoginCodeBean) {
-        if (mLoginCodeBean.code == 200) {
-            jumpActivity(null, MainActivity::class.java)
-            // Hawk.put(Configs.TOKEN,mLoginCodeBean.result?.token)
-            App.getInstance().setUser(mLoginCodeBean.result?.userInfo)
-            App.getInstance().token = mLoginCodeBean.result?.token
-            finish()
-        } else {
-            ToastUtils.showText(mLoginCodeBean.message)
-        }
+    override fun success(netData: NetData) {
+        if (netData!=null&&netData is LoginCodeBean){
+            if (netData.code == 200) {
+                jumpActivity(null, MainActivity::class.java)
+                App.getInstance().setUser(netData.result?.userInfo)
+                App.getInstance().token = netData.result?.token
+                logIm(netData.result?.userInfo)
+             //   finish()
+            } else {
+                ToastUtils.showText(netData.message)
+            }
 
+        }
+    }
+
+    private fun logIm(userInfo: UserInfo?) {
+        var mLoginInfo =LoginInfo(userInfo?.imId,userInfo?.imToken)
+        NIMClient.getService(AuthService::class.java).login(mLoginInfo).setCallback(this)
     }
 
     override fun loginErr(exception: String?) {
-
         ToastUtils.showText(exception)
+    }
+
+    override fun onSuccess(param: LoginInfo?) {
+
+    }
+
+    override fun onFailed(code: Int) {
+    }
+
+    override fun onException(exception: Throwable?) {
     }
 
 }

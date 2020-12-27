@@ -18,8 +18,8 @@ class FactoryPresenter(
     private var baseModel: ModelImpl? = null
     private var page: Int = 1
     private var pageSize: Int = 30
-    private var mecType: String? = null
-    private var partsType: String? = null
+    private var repaireType: String? = null
+    private var componentType: String? = null
     private var sort: String? = null
     private var name: String? = null
     init {
@@ -36,8 +36,8 @@ class FactoryPresenter(
         baseModel?.getFactoryList(
             page,
             pageSize,
-            mecType,
-            partsType,
+            repaireType,
+            componentType,
             sort,
             name,null,null,null,
             object : ISubscriberListener<MoreFactoryBean> {
@@ -71,7 +71,14 @@ class FactoryPresenter(
 
         page =1
     }
-
+    fun setRepaireType(mecType:String?){
+        repaireType =mecType
+        resetPage()
+    }
+    fun setComponentType(partsType:String?){
+        componentType =partsType
+        resetPage()
+    }
     fun setSort(position: Int) {
 
         sort =position.toString()

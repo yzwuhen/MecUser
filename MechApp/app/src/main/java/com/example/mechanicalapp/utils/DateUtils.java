@@ -35,6 +35,30 @@ public class DateUtils {
     }
 
     /**
+     * 掉此方法输入所要转换的时间输入例如（"2014年06月14日16时09分00秒"）返回时间戳
+     *
+     * @param time
+     * @return
+     */
+    public static String transTimes(String time) {
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+                Locale.CHINA);
+        Date date;
+        String times = null;
+        try {
+            date = sdr.parse(time);
+            long l = date.getTime();
+            String stf = String.valueOf(l);
+            times = stf.substring(0, 10);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return times;
+    }
+
+
+
+    /**
      * 获取两个时间之间的差
      *
      * @param date1
@@ -614,7 +638,13 @@ public class DateUtils {
             mydate = myFormatter.parse(date2);
         } catch (Exception e) {
         }
-        long hours = (date.getTime() - mydate.getTime()) / (60 * 60 * 1000);
+        long hours =0;
+        try {
+            hours=  (date.getTime() - mydate.getTime()) / (60 * 60 * 1000);
+        }catch (Exception e){
+
+        }
+
         return hours;
     }
 

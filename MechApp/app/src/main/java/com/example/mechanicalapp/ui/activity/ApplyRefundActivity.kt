@@ -1,9 +1,13 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PartsOrderChildAdapter
@@ -13,6 +17,7 @@ import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsOrderGoodsList
 import com.example.mechanicalapp.ui.data.ShopCarData
+import com.example.mechanicalapp.ui.data.request.ReApplyRefund
 import com.example.mechanicalapp.ui.mvp.impl.ApplyRefundPresenter
 import com.example.mechanicalapp.ui.mvp.v.ApplyRefundView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -28,8 +33,9 @@ import kotlinx.android.synthetic.main.activity_apply_refund.ry_pic
 import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.item_parts_order.view.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.io.File
 
-class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClickListener,
+class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClickListener,TextWatcher,
     ApplyRefundView {
 
     private var mPicAdapter: PicAdapter? = null
@@ -38,8 +44,9 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
 
     private var orderItemList: List<PartsOrderGoodsList>? = null
 
-    private var price=0
+    private var price=0.0
     private var num=0
+    private var orderId=""
 
     private var mButtDialog: BottomSheetDialog? = null
     private var mDialogView: View? = null
@@ -48,6 +55,8 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
     private var mDialogTv3: TextView? = null
 
     private var mPresenter:ApplyRefundPresenter?=null
+    private var mReApplyRefund  = ReApplyRefund()
+    private var mIsOk=false
 
     override fun getLayoutId(): Int {
 
@@ -62,19 +71,28 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
         tv_title.text = "申请退款"
 
         mPicAdapter = PicAdapter(this, mPicList, this)
-        ry_pic.layoutManager = GridLayoutManager(this, 3)
+        var layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = RecyclerView.HORIZONTAL
+        ry_pic.layoutManager =layoutManager
         ry_pic.adapter = mPicAdapter
 
 
         orderItemList = intent.getSerializableExtra("data") as List<PartsOrderGoodsList>?
-        price =intent.getIntExtra("price",0)
+        price =intent.getDoubleExtra("price",0.0)
         num =intent.getIntExtra("num",0)
+        orderId =intent.getStringExtra("id").toString()
+
         recycle_list.layoutManager = LinearLayoutManager(this)
-        var mPartsOrderChildAdapter = orderItemList?.let { PartsOrderChildAdapter(this, it) }
+        var mPartsOrderChildAdapter = orderItemList?.let { PartsOrderChildAdapter(this, it,0,null) }
         recycle_list.adapter =mPartsOrderChildAdapter
 
         tv_all_nun.text ="共${num}件商品"
         tv_money.text ="￥${price}"
+
+
+        mReApplyRefund.mecOrderId = orderId
+
+        tv_info.addTextChangedListener(this)
 
         tv_btn.setOnClickListener(this)
     }
@@ -105,7 +123,11 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
             .openCamera(PictureMimeType.ofImage())
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: MutableList<LocalMedia?>) {
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -121,7 +143,11 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
             .forResult(object : OnResultCallbackListener<LocalMedia?> {
                 override fun onResult(result: List<LocalMedia?>) {
                     // 结果回调
-                    mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    if (File(result[0]?.realPath.toString()).exists()){
+                        mPresenter?.upLoadFile(result[0]?.realPath.toString())
+                    }else{
+                        mPresenter?.upLoadFile(result[0]?.path.toString())
+                    }
                 }
 
                 override fun onCancel() {
@@ -157,7 +183,14 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
     }
     private fun submit() {
 
-
+        if (mPicList.size>0){
+            mReApplyRefund.imgs=""
+            for (str in mPicList){
+                mReApplyRefund.imgs +="$str,"
+            }
+            mReApplyRefund.imgs=mReApplyRefund.imgs.substring(0,mReApplyRefund.imgs.length-1)
+        }
+        mPresenter?.applyRefund(mReApplyRefund)
     }
 
     override fun onItemClick(view: View, position: Int) {
@@ -176,10 +209,18 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
         }
     }
 
+    override fun successData(date: NetData?) {
+        ToastUtils.showText(date?.message)
+        if (date?.code==200){
+            finish()
+        }
+    }
+
     override fun showImg(netData: NetData?) {
         if (netData != null && netData.code == 200) {
             mPicList?.add(netData.message)
             mPicAdapter?.notifyDataSetChanged()
+            changeBtn()
         }
     }
 
@@ -196,5 +237,31 @@ class ApplyRefundActivity : BaseCusActivity(), View.OnClickListener ,OnItemClick
     }
 
     override fun err() {
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        changeBtn()
+    }
+    private fun changeBtn() {
+        mIsOk =checkInfo()
+        tv_btn.isSelected =mIsOk
+        tv_btn.isEnabled =mIsOk
+    }
+    private fun checkInfo() :Boolean{
+        if (TextUtils.isEmpty(tv_info.text.toString().trim())){
+            return false
+        }
+        mReApplyRefund.backReason = tv_info.text.toString().trim()
+//        if (mPicList.size==0){
+//            return false
+//        }
+        return true
     }
 }

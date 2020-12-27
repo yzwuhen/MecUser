@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
+import com.example.mechanicalapp.ui.data.MecTypeData
 import com.example.mechanicalapp.ui.data.MecTypeParentData
 import kotlinx.android.synthetic.main.item_ec_type_left.view.*
 
-class PartsTypeLeftAdapter  (var mContext: Context, var mList:MutableList<MecTypeParentData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PartsTypeLeftAdapter  (var mContext: Context, var mList:MutableList<MecTypeData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

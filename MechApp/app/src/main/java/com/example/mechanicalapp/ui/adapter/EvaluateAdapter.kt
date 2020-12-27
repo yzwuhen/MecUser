@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemChangeListener
 import com.example.mechanicalapp.ui.data.PartsOrderGoodsList
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_order_evaluate.view.*
 
 class EvaluateAdapter(
     var mContext: Context,
-    var mList: List<PartsOrderGoodsList>?,var onItemChangeListener: OnItemChangeListener
+    var mList: List<PartsOrderGoodsList>, private var onItemChangeListener: OnItemChangeListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -27,17 +28,24 @@ class EvaluateAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
+        ImageLoadUtils.loadImageCenterCrop(mContext,holder.itemView.iv_pic,mList[position].productSkuImg,R.mipmap.ic_launcher)
+        holder.itemView.tv_goods_title.text =mList[position].prodName
+        holder.itemView.tv_attr.text =mList[position].skuName
+        holder.itemView.tv_num.text="x${mList[position].quantity}"
+        holder.itemView.tv_all_nun.text ="共${mList[position].quantity}件商品"
+        holder.itemView.tv_money.text="￥${mList[position].price}*${mList[position].quantity}"
+
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return mList.size
     }
     class EvaluateVh(itemView: View, onItemChangeListener: OnItemChangeListener) :
         RecyclerView.ViewHolder(itemView){
         init {
             itemView.ratingBar.setOnRatingBarChangeListener(object :RatingBar.OnRatingBarChangeListener{
                 override fun onRatingChanged(p0: RatingBar?, p1: Float, p2: Boolean) {
-                    onItemChangeListener.onItemClick(itemView.ratingBar,adapterPosition,p1)
+                    onItemChangeListener.onItemClick(itemView.ratingBar,adapterPosition,p1.toString())
                 }
             })
             itemView.tv_info.addTextChangedListener(object :TextWatcher{

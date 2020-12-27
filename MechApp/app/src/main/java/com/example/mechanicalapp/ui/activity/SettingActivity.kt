@@ -5,22 +5,22 @@ import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
 import com.example.mechanicalapp.App
-import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.UserInfo
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.MyDataCleanManager
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.auth.AuthService
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.layout_title.*
-import kotlinx.android.synthetic.main.layout_title.rl_title
-import kotlinx.android.synthetic.main.layout_title.tv_title
 
-class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onViewListener {
 
-    private var type: Int = 0
+class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.onViewListener {
+
     private var popInfo: TextView? = null
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
@@ -52,7 +52,7 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
 
         try {
             dataSize = MyDataCleanManager.getTotalCacheSize(applicationContext)
-            tv_cache.text=dataSize
+            tv_cache.text = dataSize
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -67,25 +67,25 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
     override fun hiedLoading() {
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     override fun onClick(v: View?) {
 
 
-        when(v?.id){
-            R.id.iv_back->finish()
-            R.id.ly_shock->shock()
-            R.id.ly_voice->voice()
-            R.id.ly_modify_phone->jumpActivity(null,ModifyPhoneGetCodeActivity::class.java)
-            R.id.ly_modify_pwd->jumpActivity(null,ModifyPwdActivity::class.java)
-            R.id.ly_clear->clearAppCache()
-            R.id.ly_update->updateApp()
-            R.id.ly_about_us->jumpActivity(null,AboutUsActivity::class.java)
-            R.id.ly_reset_user->resetUser()
-            R.id.ly_login_out->loginout()
-            R.id.tv_agreement->jumpActivity(null,AgreementActivity::class.java)
-            R.id.tv_privacy->jumpActivity(null,PrivacyActivity::class.java)
+        when (v?.id) {
+            R.id.iv_back -> finish()
+            R.id.ly_shock -> shock()
+            R.id.ly_voice -> voice()
+            R.id.ly_modify_phone -> jumpActivity(null, ModifyPhoneGetCodeActivity::class.java)
+            R.id.ly_modify_pwd -> jumpActivity(null, ModifyPwdActivity::class.java)
+            R.id.ly_clear -> clearAppCache()
+            R.id.ly_update -> updateApp()
+            R.id.ly_about_us -> jumpActivity(null, AboutUsActivity::class.java)
+            R.id.ly_reset_user -> resetUser()
+            R.id.ly_login_out -> loginout()
+            R.id.tv_agreement -> jumpActivity(null, AgreementActivity::class.java)
+            R.id.tv_privacy -> jumpActivity(null, PrivacyActivity::class.java)
             R.id.tv_pop_sure -> dismiss()
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
         }
@@ -113,7 +113,7 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
             popSure?.text = "确定"
         }
 
-        this?.let { PopUtils.showPopupWindow(ly_login_out, it) }
+        this?.let { PopUtils.showPopupWindow(ly_left, it) }
 
     }
 
@@ -125,11 +125,15 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
         popCancel?.setOnClickListener(this)
         popSure?.setOnClickListener(this)
     }
-    private fun dismiss(){
+
+    private fun dismiss() {
         PopUtils.dismissPop(this)
-        App.getInstance().token=""
+        App.getInstance().token = ""
         App.getInstance().setUser(UserInfo())
-    finish()
+        Hawk.delete(Configs.TOKEN)
+        Hawk.delete(Configs.USER_INFO)
+        NIMClient.getService(AuthService::class.java).logout()
+        finish()
     }
 
     private fun loginout() {
@@ -147,7 +151,7 @@ class SettingActivity:BaseActivity<NetData>(),View.OnClickListener,PopUtils.onVi
     private fun clearAppCache() {
 
         MyDataCleanManager.clearAllCache(this)
-        tv_cache.text="0B"
+        tv_cache.text = "0B"
     }
 
     private fun voice() {

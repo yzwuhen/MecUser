@@ -200,69 +200,6 @@ class AskingRentPresenterImpl(
             })
     }
 
-    //工种父类
-    fun getWorkType() {
-        baseView.showLoading()
-        baseModel.getWorkTypeList(
-            0,
-            30,
-            object : ISubscriberListener<MecTypeParentBean> {
-                override fun onNext(t: MecTypeParentBean?) {
-                    if (t?.code == 200 && t?.result != null) {
-                        t?.result?.records?.let {
-                            (baseView as MecTypeView<BaseData>)?.refreshLeftUI(
-                                it
-                            )
-                        }
-                        if (t?.result?.records?.size!! > 0) {
-                            t?.result?.records?.get(0)?.id?.let { getWorkTypeChildList(it) }
-                        }
-
-                    } else {
-                        baseView?.err()
-                    }
-
-                }
-
-                override fun onError(e: Throwable?) {
-                }
-
-                override fun onCompleted() {
-                    baseView?.hiedLoading()
-                }
-            })
-    }
-
-    fun getWorkTypeChildList(pid: String) {
-        baseModel?.getWorkTypeChildList(
-            1,
-            30,
-            pid,
-            object : ISubscriberListener<MecTypeChildBean> {
-                override fun onNext(t: MecTypeChildBean?) {
-                    if (t?.code == 200 && t?.result != null) {
-
-                        t?.result?.records?.let {
-                            (baseView as MecTypeView<BaseData>)?.refreshRightUI(
-                                it
-                            )
-                        }
-
-                        baseView?.hiedLoading()
-                    } else {
-                        baseView?.err()
-                    }
-                }
-
-                override fun onError(e: Throwable?) {
-                    baseView?.err()
-                }
-
-                override fun onCompleted() {
-                }
-            })
-
-    }
 
     override fun onDestroy() {
     }

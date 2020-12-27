@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -31,13 +32,22 @@ class MoreSelMecTypeAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.iv_check.isSelected = mList[position].isSelect
-        holder.itemView.tv_type_name.text = mList[position].cateName
-        ImageLoadUtils.loadImageCenterCrop(
-            mContext,
-            holder.itemView.iv_pic,
-            mList[position].cateLogo,
-            R.mipmap.ic_launcher
-        )
+        holder.itemView.tv_type_name.text = mList[position].name
+        if (TextUtils.isEmpty(mList[position].cateLogo)){
+            ImageLoadUtils.loadImageCenterCrop(
+                mContext,
+                holder.itemView.iv_pic,
+                mList[position].pictures,
+                R.mipmap.ic_launcher
+            )
+        }else{
+            ImageLoadUtils.loadImageCenterCrop(
+                mContext,
+                holder.itemView.iv_pic,
+                mList[position].cateLogo,
+                R.mipmap.ic_launcher
+            )
+        }
     }
 
     override fun getItemCount(): Int {

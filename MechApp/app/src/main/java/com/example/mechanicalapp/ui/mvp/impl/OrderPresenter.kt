@@ -1,16 +1,22 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReExpress
+import com.example.mechanicalapp.ui.data.request.RePay
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.mvp.v.ReleaseView
 
 /**
  * 都是维修订单
+ *
+ * 不改了=。= 写两套
  */
 class OrderPresenter(
     private var baseView: BaseView<NetData>
@@ -25,6 +31,7 @@ class OrderPresenter(
         baseModel.getOrderList(
             App.getInstance().token,
             state,
+            null,
             page,
             pageSize,
             NetSubscribe<OrderBean>(object :
@@ -70,9 +77,15 @@ class OrderPresenter(
 
     fun getPartsOrderList(state: String) {
         baseView.showLoading()
+        var type:String?=null
+        type = if (state=="0"){
+            null
+        }else{
+            state
+        }
         baseModel.getPartsOrderList(
             App.getInstance().token,
-            state,
+            type,
             page,
             pageSize,
             NetSubscribe<PartOrderListBean>(object :
@@ -96,6 +109,76 @@ class OrderPresenter(
 
             })
         )
+    }
+
+    fun getPartsOrderAfterSaleList() {
+        baseView.showLoading()
+        baseModel.getPartsOrderAfterSaleList(
+            App.getInstance().token,
+            page,
+            pageSize,
+            NetSubscribe<PartOrderListBean>(object :
+                ISubscriberListener<PartOrderListBean> {
+                override fun onNext(t: PartOrderListBean?) {
+                    if (page == 1) {
+                        (baseView as OrderView<NetData>).showData(t)
+                    } else {
+                        (baseView as OrderView<NetData>).showDataMore(t)
+                    }
+                    page++
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+
+            })
+        )
+    }
+    fun postExpress(mReExpress: ReExpress) {
+        baseView.hiedLoading()
+        baseModel.postExpress(
+            App.getInstance().token,
+            mReExpress,
+            NetSubscribe<PostExpressBean>(object : ISubscriberListener<PostExpressBean> {
+                override fun onNext(t: PostExpressBean?) {
+                   (baseView as OrderView<PostExpressBean>).showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
+    }
+    fun payWx(orderId: String) {
+        var mRePay = RePay()
+        mRePay.id = orderId
+        baseView.showLoading()
+        baseModel.payWx(App.getInstance().token, mRePay, NetSubscribe<WxPayBean>(object :
+            ISubscriberListener<WxPayBean> {
+            override fun onNext(t: WxPayBean?) {
+                (baseView as OrderView<NetData>).showData(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
     }
 
     override fun request() {
@@ -148,7 +231,7 @@ class OrderPresenter(
 
     fun cancelPartsOrder(orderId: String) {
         baseView.hiedLoading()
-        baseModel.cancelOrder(
+        baseModel.cancelPartsOrder(
             App.getInstance().token,
             orderId,
             NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
@@ -167,14 +250,14 @@ class OrderPresenter(
         )
     }
 
-    fun applyRefund(orderId: String){
+    fun cancelRefund(id: String?) {
         baseView.hiedLoading()
-        baseModel.cancelOrder(
+        baseModel.cancelRefund(
             App.getInstance().token,
-            orderId,
-            NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
-                    (baseView as OrderView<NetData>).showData(t)
+            id,
+            NetSubscribe<ReCancelRefundBean>(object : ISubscriberListener<ReCancelRefundBean> {
+                override fun onNext(t: ReCancelRefundBean?) {
+                    (baseView as OrderView<ReCancelRefundBean>).showData(t)
                 }
 
                 override fun onError(e: Throwable?) {
@@ -186,5 +269,7 @@ class OrderPresenter(
                 }
             })
         )
+
     }
+
 }

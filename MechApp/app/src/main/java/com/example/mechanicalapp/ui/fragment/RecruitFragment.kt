@@ -183,10 +183,12 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
         tv_screen3.text = homeCityData.name
         if (TextUtils.isEmpty(homeCityData.name)) {
             tv_screen1.text = "地区"
+            (mPresenter as RecruitPresenter)?.setCity(null)
         } else {
             tv_screen1.text = homeCityData.name
+            (mPresenter as RecruitPresenter)?.setCity(homeCityData.name)
         }
-        (mPresenter as RecruitPresenter)?.setCity(homeCityData.name)
+
     }
 
 
@@ -196,10 +198,12 @@ class RecruitFragment : BaseCusFragment(), OnItemClickListener, View.OnClickList
             Configs.WORK_TYPE_RESULT_CODE -> {
                 if (TextUtils.isEmpty(extra)) {
                     tv_screen2.text = "不限"
+                    (mPresenter as RecruitPresenter)?.workType(null, null)
                 } else {
                     tv_screen2.text = extra
+                    (mPresenter as RecruitPresenter)?.workType(extra, extraId)
                 }
-                (mPresenter as RecruitPresenter)?.workType(extra, extraId)
+
             }
 
         }

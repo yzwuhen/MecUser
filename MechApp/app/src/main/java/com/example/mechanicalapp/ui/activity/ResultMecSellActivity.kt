@@ -74,7 +74,7 @@ class ResultMecSellActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.iv_back -> finish()
-            R.id.tv_screen -> search(et_search.text.toString())
+            R.id.tv_search -> search(et_search.text.toString())
         }
 
     }
@@ -90,6 +90,7 @@ class ResultMecSellActivity  : BaseCusActivity(), OnItemClickListener, View.OnCl
 
     private fun search(toString: String) {
         mPresenter?.setTitle(toString)
+        mPresenter?.getSellList("1")
     }
 
     override fun onItemClick(view: View, position: Int) {

@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +33,8 @@ public abstract class BaseCusFragment extends Fragment {
 
     protected View mLoadingView;
     private View mEmptyView;
+    private ImageView mIvNoData;
+    private TextView mTvNoData;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -143,6 +147,22 @@ public abstract class BaseCusFragment extends Fragment {
             mContanier.addView(mEmptyView);
         }
     }
+    public void showEmptyView(Integer res,String text){
+        if (mEmptyView == null) {
+            mEmptyView = View.inflate(mContext, R.layout.empty_view, null);
+            mIvNoData =mEmptyView.findViewById(R.id.iv_no_data);
+            mTvNoData =mEmptyView.findViewById(R.id.tv_no_data);
+        }
+        if (mIvNoData!=null){
+            mIvNoData.setImageResource(res);
+            mTvNoData.setText(text);
+        }
+        if (mEmptyView.getParent() == null) {
+            mContanier.addView(mEmptyView);
+        }
+    }
+
+
     public void hideEmptyView(){
         if (mEmptyView != null) {
             if (mEmptyView.getParent() != null) {

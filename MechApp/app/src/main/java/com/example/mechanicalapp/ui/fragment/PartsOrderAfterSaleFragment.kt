@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.fragment
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
@@ -95,6 +96,19 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
     override fun hiedLoading() {
         hideLoadingView()
         closeRefreshView()
+        if (mList.size==0){
+            showEmptyView(R.mipmap.no_order,"还没有下单，快去下单吧")
+        }else{
+            hideEmptyView()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        hideEmptyView()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     override fun getLayoutId(): Int {
@@ -150,6 +164,7 @@ class PartsOrderAfterSaleFragment  : BaseCusFragment(), OnItemClickListener,
         var bundle = Bundle()
         bundle.putInt("order_type", mList[position].status)
         bundle.putString("order_id",mList[position].id)
+        bundle.putInt("order_status",mList[position].deliveryStatus)//审核状态
         jumpActivity(bundle, PartsOrderAfterDetails::class.java)
     }
 

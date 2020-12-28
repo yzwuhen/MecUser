@@ -50,9 +50,9 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     private var mDialogTv3: TextView? = null
     private var mDialogTv4: TextView? = null
 
-    private var popType=0
-    private var clickPosition=0
-    private var api: IWXAPI?=null
+    private var popType = 0
+    private var clickPosition = 0
+    private var api: IWXAPI? = null
     override fun initView() {
         super.initView()
         mAdapter = PartsOrderAdapter(mContext, mList, this)
@@ -79,11 +79,11 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     override fun onResume() {
         super.onResume()
         (mPresenter as OrderPresenter).resetPage()
-      getDataList()
+        getDataList()
     }
 
-    fun getDataList(){
-      (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
+    fun getDataList() {
+        (mPresenter as OrderPresenter).getPartsOrderList(type.toString())
     }
 
     fun closeRefreshView() {
@@ -98,8 +98,17 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     override fun hiedLoading() {
         hideLoadingView()
         closeRefreshView()
+        if (mList.size==0){
+            showEmptyView(R.mipmap.no_order,"还没有下单，快去下单吧")
+        }else{
+            hideEmptyView()
+        }
     }
 
+    override fun onStop() {
+        super.onStop()
+        hideEmptyView()
+    }
     override fun getLayoutId(): Int {
         return R.layout.layout_spring_list
     }
@@ -109,33 +118,34 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
         when (view?.id) {
 //            R.id.tv_look_logistics->jumpActivity(null,null)
-            R.id.tv_apply_refund -> showPop(1,position)
-            R.id.tv_cancel_order -> showPop(0,position)
-            R.id.tv_confirm -> showPop(3,position)
+            R.id.tv_apply_refund -> showPop(1, position)
+            R.id.tv_cancel_order -> showPop(0, position)
+            R.id.tv_confirm -> showPop(3, position)
             R.id.tv_pay -> showBtnDialog(position)
             R.id.tv_evaluate -> jumEvaluate(position)
             R.id.tv_look_evaluate -> jumLookEvaluate(position)
             R.id.ly_root -> jumAct(position)
-            R.id.item_child_root->jumAct(position)
+            R.id.item_child_root -> jumAct(position)
         }
 
     }
-    private fun  jumLookEvaluate(position: Int) {
+
+    private fun jumLookEvaluate(position: Int) {
         jumpActivity(null, EvaluateActivity::class.java)
     }
 
-    private fun  jumEvaluate(position: Int) {
+    private fun jumEvaluate(position: Int) {
         var bundle = Bundle()
-        bundle.putSerializable("data",mList[clickPosition].orderItemList as Serializable)
-        bundle.putInt("num",mList[clickPosition].quantity)
-        bundle.putString("id",mList[clickPosition].id)
+        bundle.putSerializable("data", mList[clickPosition].orderItemList as Serializable)
+        bundle.putInt("num", mList[clickPosition].quantity)
+        bundle.putString("id", mList[clickPosition].id)
         jumpActivity(bundle, EvaluatePartsActivity::class.java)
     }
 
     private fun jumAct(position: Int) {
         var bundle = Bundle()
         bundle.putInt("order_type", mList[position].status)
-        bundle.putString("order_id",mList[position].id)
+        bundle.putString("order_id", mList[position].id)
         jumpActivity(bundle, PartsOrderDetails::class.java)
     }
 
@@ -154,11 +164,11 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             mDialogTv3?.setOnClickListener(this)
             mDialogTv4?.setOnClickListener(this)
         }
-        clickPosition =position
+        clickPosition = position
         mButtDialog?.show()
     }
 
-    private fun showPop(i: Int,position: Int) {
+    private fun showPop(i: Int, position: Int) {
 
         if (mPopwindow == null) {
             mPopwindow = activity?.let {
@@ -170,8 +180,8 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
                 )
             }
         }
-        popType= i
-        clickPosition =position
+        popType = i
+        clickPosition = position
         if (i == 0) {
             popInfo?.text = "确认取消订单吗？"
             popCancel?.text = "取消"
@@ -212,7 +222,8 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             R.id.tv_dialog_item1 -> mButtDialog?.dismiss()
             R.id.tv_dialog_item2 -> {
                 payWx()
-                mButtDialog?.dismiss()}
+                mButtDialog?.dismiss()
+            }
 
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
             R.id.tv_dialog_item4 -> mButtDialog?.dismiss()
@@ -230,11 +241,11 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     private fun popYes() {
         activity?.let { PopUtils.dismissPop(it) }
-        when(popType){
-            0->cancelOrder()
-            1->applyRefund()
-            3->getGoods()
-            4->cancleSh()
+        when (popType) {
+            0 -> cancelOrder()
+            1 -> applyRefund()
+            3 -> getGoods()
+            4 -> cancleSh()
         }
 
     }
@@ -253,27 +264,27 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     private fun applyRefund() {
 
-        if (mList[clickPosition].isBackOrder=="1"){
+        if (mList[clickPosition].isBackOrder == "1") {
             ToastUtils.showText("已经申请过售后，请耐心等待结果")
             return
         }
         var bundle = Bundle()
-        bundle.putSerializable("data",mList[clickPosition].orderItemList as Serializable)
-        bundle.putInt("num",mList[clickPosition].quantity)
-        bundle.putDouble("price",mList[clickPosition].amount)
-        bundle.putString("id",mList[clickPosition].id)
+        bundle.putSerializable("data", mList[clickPosition].orderItemList as Serializable)
+        bundle.putInt("num", mList[clickPosition].quantity)
+        bundle.putDouble("price", mList[clickPosition].amount)
+        bundle.putString("id", mList[clickPosition].id)
         jumpActivity(bundle, ApplyRefundActivity::class.java)
     }
 
     private fun payToWx(msg: WxPayBean.ResultBean.MsgBean?) {
-        var request= PayReq();
+        var request = PayReq();
         request.appId = msg?.appid;
         request.partnerId = msg?.partnerid;
-        request.prepayId= msg?.prepayid;
+        request.prepayId = msg?.prepayid;
         request.packageValue = msg?.packageX;
-        request.nonceStr= msg?.noncestr;
-        request.timeStamp= msg?.timestamp;
-        request.sign= msg?.sign;
+        request.nonceStr = msg?.noncestr;
+        request.timeStamp = msg?.timestamp;
+        request.sign = msg?.sign;
         api?.sendReq(request);
 
     }
@@ -284,6 +295,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     override fun err() {
     }
+
     override fun showData(data: NetData?) {
         if (data != null && data is PartOrderListBean) {
             mList.clear()
@@ -291,11 +303,9 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
                 mList.addAll(data?.result?.records!!)
             }
             mAdapter?.notifyDataSetChanged()
-        }
-        else if (data is WxPayBean){
+        } else if (data is WxPayBean) {
             payToWx(data?.result?.msg)
-        }
-        else{
+        } else {
             ToastUtils.showText(data?.message)
             spring_list?.callFresh()
         }

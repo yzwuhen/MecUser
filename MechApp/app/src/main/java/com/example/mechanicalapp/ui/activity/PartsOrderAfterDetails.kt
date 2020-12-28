@@ -22,12 +22,14 @@ import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_parts_order_after.*
+import kotlinx.android.synthetic.main.item_parts_order_after.view.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemClickListener, NetDataView<NetData> {
 
     private var orderType: Int = 0
     private var orderId = ""
+    private var orderStatus=0
     private var mPresenter: OrderDetailsPresenter? = null
 
     private var mExpressDialog: BottomSheetDialog? = null
@@ -52,14 +54,27 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemCli
 
         orderType = intent.getIntExtra("order_type", 0)
         orderId = intent.getStringExtra("order_id").toString()
-
+        orderStatus =intent.getIntExtra("order_status",0)
 
 
         if (orderType == 0) {
             tv_title.text = "售后中"
-            ly_order1.visibility = View.VISIBLE
-            ly_contact_cus_server.visibility =View.GONE
-            ly_post_address.visibility =View.VISIBLE
+            if (orderStatus==0){
+                tv_state_test.visibility =View.VISIBLE
+                ly_cancel.visibility =View.VISIBLE
+                //审核时间
+                ly_examine_time.visibility =View.GONE
+                ly_contact_cus_server.visibility =View.GONE
+            }
+            else if (orderStatus==2){
+                tv_state_test.visibility =View.VISIBLE
+                tv_state_test.text ="审核不通过"
+                ly_post_address.visibility =View.GONE
+            }else{
+                ly_order1.visibility = View.VISIBLE
+                ly_post_address.visibility =View.VISIBLE
+                ly_contact_cus_server.visibility =View.GONE
+            }
         } else if (orderType == 1) {
             tv_title.text = "售后成功"
             ly_refund_time.visibility =View.VISIBLE
@@ -69,11 +84,15 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemCli
         } else if (orderType == 3) {
             tv_title.text = "售后关闭"
             ly_close_time.visibility =View.VISIBLE
+        }else{
+            tv_title.text = "售后关闭"
+            ly_close_time.visibility =View.VISIBLE
         }
 
         tv_cancel_refund.setOnClickListener(this)
         tv_contact_cus_server.setOnClickListener(this)
         tv_fill_order_num.setOnClickListener(this)
+        ly_cancel.setOnClickListener(this)
 
     }
 
@@ -98,6 +117,7 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemCli
         when (v?.id) {
             R.id.iv_back -> finish()
             R.id.tv_contact_cus_server->openCall("400800")
+            R.id.ly_cancel->cancelRefund()
             R.id.tv_cancel_refund->cancelRefund()
             R.id.tv_fill_order_num->showInputDialog()
             R.id.iv_dialog_close->mExpressDialog?.dismiss()
@@ -187,7 +207,7 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemCli
 
 
             //售后订单号
-            tv_after_order_num.text="售后订单号：${mOrderBackData?.mecOrderId}"
+            tv_after_order_num.text="${mOrderBackData?.mecOrderId}"
 
             tv_refund_reason.text =data.orderBack.backReason
             if (!TextUtils.isEmpty(data.orderBack.imgs)){

@@ -30,10 +30,10 @@ class PartsOrderAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_order_state.text = mList[position].status_dictText
-
+        holder.itemView.tv_order_num.text = "订单号：${mList[position].orderNum}"
         when (mList[position].status) {
             0 -> {
-                holder.itemView.tv_order_num.text = "订单号：${mList[position].orderNum}"
+
                 holder.itemView.ly_bottom.visibility = View.VISIBLE
                 holder.itemView.tv_look_logistics.visibility = View.GONE
                 holder.itemView.tv_apply_refund.visibility = View.GONE
@@ -46,7 +46,6 @@ class PartsOrderAdapter(
                 holder.itemView.tv_cancel_sale.visibility = View.GONE
             }
             1 -> {
-                holder.itemView.tv_order_num.text = "订单号：${mList[position].orderNum}"
                 holder.itemView.ly_bottom.visibility = View.VISIBLE
                 holder.itemView.tv_look_logistics.visibility = View.GONE
                 holder.itemView.tv_apply_refund.visibility = View.VISIBLE
@@ -60,7 +59,6 @@ class PartsOrderAdapter(
 
             }
             2 -> {
-                holder.itemView.tv_order_num.text = ""
                 holder.itemView.ly_bottom.visibility = View.VISIBLE
                 holder.itemView.tv_look_logistics.visibility = View.VISIBLE
                 holder.itemView.tv_apply_refund.visibility = View.VISIBLE
@@ -73,7 +71,6 @@ class PartsOrderAdapter(
                 holder.itemView.tv_cancel_sale.visibility = View.GONE
             }
             3 -> {
-                holder.itemView.tv_order_num.text = ""
                 holder.itemView.ly_bottom.visibility = View.VISIBLE
                 holder.itemView.tv_look_logistics.visibility = View.GONE
                 holder.itemView.tv_apply_refund.visibility = View.GONE
@@ -86,7 +83,6 @@ class PartsOrderAdapter(
                 holder.itemView.tv_cancel_sale.visibility = View.GONE
             }
             4 -> {
-                holder.itemView.tv_order_num.text = ""
                 holder.itemView.ly_bottom.visibility = View.VISIBLE
                 holder.itemView.tv_look_logistics.visibility = View.GONE
                 holder.itemView.tv_apply_refund.visibility = View.GONE
@@ -100,7 +96,6 @@ class PartsOrderAdapter(
                 holder.itemView.tv_cancel_sale.visibility = View.GONE
             }
             5 -> {
-                holder.itemView.tv_order_num.text = ""
                 holder.itemView.ly_bottom.visibility = View.GONE
             }
         }

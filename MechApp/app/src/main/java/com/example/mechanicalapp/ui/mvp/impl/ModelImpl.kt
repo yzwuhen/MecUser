@@ -1250,8 +1250,8 @@ class ModelImpl : BaseModel {
 
     }
     //提交配件订单评论
-    fun postEvaluateParts(token:String?,reEvaluate: ReEvaluateParts?,mNetSubscribe:NetSubscribe<NetData>){
-        appsService?.postEvaluateParts(token,reEvaluate)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+    fun postEvaluateParts(token:String?,mList: List<ReEvaluateParts>,mNetSubscribe:NetSubscribe<NetData>){
+        appsService?.postEvaluateParts(token,mList)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(mNetSubscribe)

@@ -34,6 +34,7 @@ class EvaluateAdapter(
         holder.itemView.tv_num.text="x${mList[position].quantity}"
         holder.itemView.tv_all_nun.text ="共${mList[position].quantity}件商品"
         holder.itemView.tv_money.text="￥${mList[position].price}*${mList[position].quantity}"
+     //   holder.itemView.tv_score.text ="${mList[position].start}分"
 
     }
 
@@ -45,7 +46,7 @@ class EvaluateAdapter(
         init {
             itemView.ratingBar.setOnRatingBarChangeListener(object :RatingBar.OnRatingBarChangeListener{
                 override fun onRatingChanged(p0: RatingBar?, p1: Float, p2: Boolean) {
-                    onItemChangeListener.onItemClick(itemView.ratingBar,adapterPosition,p1.toString())
+                    onItemChangeListener.onItemClick(itemView.ratingBar,adapterPosition,p1.toInt().toString())
                 }
             })
             itemView.tv_info.addTextChangedListener(object :TextWatcher{

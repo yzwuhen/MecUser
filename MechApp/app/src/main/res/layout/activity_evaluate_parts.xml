@@ -15,7 +15,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_list"
-            android:layout_marginBottom="110dp"
+            android:layout_marginBottom="100dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -23,11 +23,10 @@
             android:id="@+id/tv_btn"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="@dimen/dp_50"
             android:layout_marginLeft="@dimen/dp_10"
-            android:layout_marginTop="60dp"
             android:layout_marginRight="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_50"
+            android:layout_marginBottom="@dimen/dp_40"
             android:background="@drawable/rect_radio_6_y"
             android:gravity="center"
             android:text="评价"

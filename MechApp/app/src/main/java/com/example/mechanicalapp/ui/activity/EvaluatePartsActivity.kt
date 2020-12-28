@@ -1,22 +1,23 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemChangeListener
 import com.example.mechanicalapp.ui.adapter.EvaluateAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.PartsOrderGoodsList
-import com.example.mechanicalapp.ui.data.request.ReEvaluate
 import com.example.mechanicalapp.ui.data.request.ReEvaluateParts
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_evaluate_parts.*
-import kotlinx.android.synthetic.main.item_order_evaluate.view.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener,OnItemChangeListener {
+class EvaluatePartsActivity: BaseCusActivity(), View.OnClickListener,OnItemChangeListener ,
+    NetDataView<NetData> {
 
     private var orderItemList=ArrayList<PartsOrderGoodsList>()
     private var price=0.0
@@ -24,6 +25,7 @@ class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener,OnIte
     private var orderId=""
     private var mEvaList =ArrayList<ReEvaluateParts>()
     private var mPresenter: MecAppPresenter?=null
+    private var mAdapter : EvaluateAdapter?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_evaluate_parts
@@ -56,7 +58,8 @@ class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener,OnIte
         }
 
         recycle_list.layoutManager =LinearLayoutManager(this)
-        recycle_list.adapter = EvaluateAdapter(this,orderItemList,this)
+        mAdapter =EvaluateAdapter(this,orderItemList,this)
+        recycle_list.adapter = mAdapter
     }
 
     override fun initPresenter() {
@@ -83,19 +86,27 @@ class EvaluatePartsActivity: BaseActivity<NetData>(), View.OnClickListener,OnIte
     private fun submit() {
 
         //未完成 提交数组
-        mPresenter?.postPartsEvaluate(mEvaList[0])
+        mPresenter?.postPartsEvaluate(mEvaList)
     }
 
     override fun onItemClick(view: View, position: Int, any: String) {
         when(view?.id){
             R.id.ratingBar->{
-                Log.v("ssss","ssss====== ${any}")
                 mEvaList[position].star =any
             }
             R.id.tv_info->{
-                Log.v("ssss","ssss====== ${any}")
                 mEvaList[position].content =any
             }
         }
+    }
+
+    override fun refreshUI(data: NetData?) {
+        ToastUtils.showText(data?.message)
+        if (data?.code==200){
+            finish()
+        }
+    }
+
+    override fun loadMore(data: NetData?) {
     }
 }

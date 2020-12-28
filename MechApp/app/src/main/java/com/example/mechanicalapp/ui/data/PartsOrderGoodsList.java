@@ -27,6 +27,15 @@ public class PartsOrderGoodsList implements Serializable {
     private String sysOrgCode;
     private String id;
     private String mecProductSkuId;
+    private String start="3";
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
 
     public int getProductSum() {
         return productSum;

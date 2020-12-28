@@ -85,9 +85,9 @@ class MecAppPresenter(
         }))
     }
 
-    fun postPartsEvaluate(mReEvaluate: ReEvaluateParts?) {
+    fun postPartsEvaluate(mList: List<ReEvaluateParts>) {
         baseView.showLoading()
-        baseModel.postEvaluateParts(App.getInstance().token, mReEvaluate, NetSubscribe<NetData>(object :
+        baseModel.postEvaluateParts(App.getInstance().token, mList, NetSubscribe<NetData>(object :
             ISubscriberListener<NetData> {
             override fun onNext(t: NetData?) {
                 (baseView as NetDataView<NetData>).refreshUI(t)

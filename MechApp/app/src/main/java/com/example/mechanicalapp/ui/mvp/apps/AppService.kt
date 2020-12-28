@@ -1268,7 +1268,7 @@ interface AppService {
     @POST("/jeecg-boot/shop/mecProductComment/addBatch")
     fun postEvaluateParts(
         @Header("X-Access-Token") token: String?,
-        @Body requestBody: ReEvaluateParts?
+        @Body body: @JvmSuppressWildcards List<ReEvaluateParts>?
     ): Observable<NetData>
 
 

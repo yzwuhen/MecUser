@@ -66,6 +66,11 @@ public class PartsOrderData implements Serializable {
     private List<PartsOrderGoodsList> orderItemList;
     private String deliverycorpCode;
     private String trackingNo;
+    private int deliveryStatus;
+
+    public int getDeliveryStatus() {
+        return deliveryStatus;
+    }
 
     public String getDeliverycorpCode() {
         return deliverycorpCode;

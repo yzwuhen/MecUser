@@ -4,7 +4,7 @@ public class ReEvaluateParts {
     private String mecProdId;
     private String mecProductSkuId;
     private String mecProductSkuName;
-    private String star;
+    private String star="3";
     private String content;
 
     public String getContent() {

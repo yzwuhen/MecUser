@@ -35,14 +35,6 @@ class PartsAdapter (var mContext: Context, var mList:MutableList<PartsData>, var
             holder.itemView.ly_check.visibility =View.GONE
         }
 
-//        ImageLoadUtils.loadImage(mContext,holder.itemView.iv_pic,mList[position].pic,R.mipmap.ic_launcher)
-//
-//        holder.itemView.tv_title.text =mList[position].title
-//        holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].partsType}"
-//        // holder.itemView.tv_distance.text ="距离${mList[position].}"
-//        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
-//        holder.itemView.tv_time.text = DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
-
         ImageLoadUtils.loadImageCenterCrop(
             mContext, holder.itemView.iv_pic,
             StringUtils.getImgStr(mList[position].pic), R.mipmap.ic_launcher

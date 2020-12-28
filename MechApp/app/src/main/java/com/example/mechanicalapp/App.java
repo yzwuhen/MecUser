@@ -28,6 +28,7 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         Hawk.init(this).build();
+
         initSDK();
         initIMSDK();
     }
@@ -39,6 +40,7 @@ public class App extends Application {
             // 在主进程中初始化UI组件，判断所属进程方法请参见demo源码。
             initUiKit();
         }
+
     }
 
     private void initUiKit() {

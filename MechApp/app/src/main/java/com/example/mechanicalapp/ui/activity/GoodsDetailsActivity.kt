@@ -26,6 +26,10 @@ import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
+import com.umeng.socialize.ShareAction
+import com.umeng.socialize.bean.SHARE_MEDIA
+import com.umeng.socialize.media.UMImage
+import com.umeng.socialize.media.UMWeb
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_goods_details.*
@@ -122,15 +126,23 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
             R.id.ly_comment -> jumComment()
             R.id.ly_add_shop_car -> addCar()
             R.id.ly_buy -> buy()
-            R.id.ly_wx -> mShareDialog?.dismiss()
-            R.id.ly_qq -> mShareDialog?.dismiss()
-            R.id.ly_sina -> mShareDialog?.dismiss()
+            R.id.ly_wx -> shareThree(SHARE_MEDIA.WEIXIN)
+            R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
+            R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
             R.id.tv_cancel -> mShareDialog?.dismiss()
             R.id.iv_dialog_close -> mSpecsDialog?.dismiss()
             R.id.tv_dialog_submit -> mSpecsDialog?.dismiss()
             R.id.ly_user_info -> jumHomePage()
             R.id.tv_collected -> collect()
         }
+    }
+    private fun shareThree(type: SHARE_MEDIA){
+        mShareDialog?.dismiss()
+        val web = UMWeb(Configs.BASE_URL+goodsProduct?.shareUrl)
+        web.title = goodsProduct?.title//标题
+        web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
+        web.description = goodsProduct?.title//描述
+        ShareAction(this).withMedia(web).setPlatform(type).share()
     }
 
     private fun collect() {

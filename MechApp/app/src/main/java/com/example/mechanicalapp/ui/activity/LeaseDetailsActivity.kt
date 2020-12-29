@@ -25,6 +25,10 @@ import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
+import com.umeng.socialize.ShareAction
+import com.umeng.socialize.bean.SHARE_MEDIA
+import com.umeng.socialize.media.UMImage
+import com.umeng.socialize.media.UMWeb
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_lease_details.*
@@ -99,9 +103,9 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
                 jumpActivity(bundle, ReportActivity::class.java)
             }
             R.id.ly_call -> showPhone()
-            R.id.ly_wx -> mShareDialog?.dismiss()
-            R.id.ly_qq -> mShareDialog?.dismiss()
-            R.id.ly_sina -> mShareDialog?.dismiss()
+            R.id.ly_wx -> shareThree(SHARE_MEDIA.WEIXIN)
+            R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
+            R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
             R.id.tv_cancel -> mShareDialog?.dismiss()
             R.id.tv_pop_sure -> PopUtils.dismissPop(this)
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
@@ -109,6 +113,14 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
             R.id.tv_collected->collect()
             R.id.tv_address->jumThreeMap(mData?.gpsLat,mData?.gpsLon,mData?.address)
         }
+    }
+    private fun shareThree(type: SHARE_MEDIA){
+        mShareDialog?.dismiss()
+        val web = UMWeb(Configs.BASE_URL+mData?.shareUrl)
+        web.title = mData?.title//标题
+        web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
+        web.description = mData?.title//描述
+        ShareAction(this).withMedia(web).setPlatform(type).share()
     }
 
     private fun collect() {

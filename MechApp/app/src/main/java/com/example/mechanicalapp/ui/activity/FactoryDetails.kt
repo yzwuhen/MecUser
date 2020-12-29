@@ -9,6 +9,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.BannerData
@@ -22,6 +23,10 @@ import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
+import com.umeng.socialize.ShareAction
+import com.umeng.socialize.bean.SHARE_MEDIA
+import com.umeng.socialize.media.UMImage
+import com.umeng.socialize.media.UMWeb
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_factory_details.*
@@ -93,16 +98,23 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
                 jumpActivity(bundle, ReportActivity::class.java)
             }
             R.id.ly_call -> showPhone()
-            R.id.ly_wx -> mShareDialog?.dismiss()
-            R.id.ly_qq -> mShareDialog?.dismiss()
-            R.id.ly_sina -> mShareDialog?.dismiss()
+            R.id.ly_wx -> shareThree(SHARE_MEDIA.WEIXIN)
+            R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
+            R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
             R.id.tv_cancel -> mShareDialog?.dismiss()
             R.id.tv_pop_sure -> PopUtils.dismissPop(this)
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.tv_collected->collect()
         }
     }
-
+    private fun shareThree(type: SHARE_MEDIA){
+        mShareDialog?.dismiss()
+        val web = UMWeb(Configs.BASE_URL+mData?.shareUrl)
+        web.title = mData?.companyName//标题
+        web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
+        web.description = mData?.companyName//描述
+        ShareAction(this).withMedia(web).setPlatform(type).share()
+    }
     private fun collect() {
         if (TextUtils.isEmpty(App.getInstance().token)){
             ToastUtils.showText("请先登陆后再操作")

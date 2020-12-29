@@ -67,6 +67,25 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
                     Manifest.permission.READ_PHONE_STATE
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
+
+                Log.v("=s===========","====们没有权限1============${ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_SMS
+                ) != PackageManager.PERMISSION_GRANTED}")
+
+                Log.v("=s===========","====们没有权限2============${ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_PHONE_NUMBERS
+                ) != PackageManager.PERMISSION_GRANTED}")
+
+
+                Log.v("=s===========","====们没有权限=3===========${ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_PHONE_STATE
+                ) != PackageManager.PERMISSION_GRANTED}")
+
+
+                Log.v("=s===========","====们没有权限=5===========${telephonyManager?.line1Number}")
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -76,9 +95,11 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
                 // for ActivityCompat#requestPermissions for more details.
                 return
             }
+            Log.v("=s===========","===============${telephonyManager?.line1Number}")
             tv_phone.text = "本机号码${telephonyManager?.line1Number}"
         } catch (e: Exception) {
 
+            Log.v("=s===========","================$e")
         }
 
     }

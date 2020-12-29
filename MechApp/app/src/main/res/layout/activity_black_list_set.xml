@@ -26,6 +26,7 @@
 
 
         <ImageView
+            android:id="@+id/iv_switch"
             android:layout_width="62dp"
             android:layout_height="34dp"
             android:src="@drawable/swtich_icon" />

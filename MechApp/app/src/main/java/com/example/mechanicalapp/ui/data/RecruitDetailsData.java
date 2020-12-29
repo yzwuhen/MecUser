@@ -92,6 +92,11 @@ public class RecruitDetailsData implements Serializable {
     private String jobtitle;
     private String contactPhone;
     private Object age;
+    private String shareUrl;
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
 
     public String getBirthday() {
         return birthday;

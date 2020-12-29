@@ -16,11 +16,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nimlib.sdk.msg.model.RecentContact
-import com.netease.nimlib.sdk.util.NIMUtil
 import kotlinx.android.synthetic.main.fragment_msg_list.*
 
 
-class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgView {
+class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgView<List<RecentContact>> {
 
     private var mChatAdapter:ChatAdapter?=null
     var mList: MutableList<RecentContact> = ArrayList<RecentContact>()
@@ -30,6 +29,7 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
     private var mDialogRecycle : RecyclerView?=null
     private var mDialogList: MutableList<String> = ArrayList<String>()
     private var mDialogAdapter : DialogListAdapter?=null
+    private var clickPosition=0
     override fun getLayoutId(): Int {
         return R.layout.fragment_msg_list
     }
@@ -48,7 +48,7 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
             override fun onRefresh() {
                 spring_list.isEnable = false
                 //  initData()
-                (mPresenter as MsgPresenter).request()
+                (mPresenter as MsgPresenter<List<RecentContact>>).request()
             }
 
             override fun onLoadmore() {}
@@ -68,19 +68,26 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
 
         when(view.id){
             R.id.item_chat_root -> jumChat(position)
+            R.id.tv_test->dialogClick(position)
         }
+    }
+
+    private fun dialogClick(position: Int) {
+        mTipDialog?.dismiss()
+        (mPresenter as MsgPresenter<List<RecentContact>>)?.addBlackList(mList[clickPosition].contactId)
     }
 
     private fun jumChat(position: Int) {
        // NimUIKit.startP2PSession(context, mList[position]?.fromAccount);
+        NimUIKit.startP2PSession(activity, mList[position]?.contactId)
     }
 
     override fun onItemLongClick(view: View, position: Int) {
-        showShare()
+        showShare(position)
 
     }
-    private fun showShare() {
-
+    private fun showShare(position: Int) {
+        clickPosition =position
         if (mTipDialog ==null){
             mTipDialog = BottomSheetDialog(mContext)
             mTipView = View.inflate(mContext, R.layout.dialog_list, null)
@@ -91,8 +98,7 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
             mDialogList.add("标记已读")
             mDialogList.add("置顶聊天")
             mDialogList.add("删除聊天记录")
-//            mDialogList.add("黑名单")
-
+            mDialogList.add("黑名单")
             mDialogRecycle?.layoutManager =LinearLayoutManager(mContext)
             mDialogAdapter = DialogListAdapter(mContext, mDialogList, this)
             mDialogRecycle?.adapter =mDialogAdapter
@@ -110,5 +116,9 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
         }
         mChatAdapter?.notifyDataSetChanged()
         closeRefreshView()
+    }
+
+    override fun success() {
+        spring_list?.callFresh()
     }
 }

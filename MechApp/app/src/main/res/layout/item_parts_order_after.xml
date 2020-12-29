@@ -20,7 +20,7 @@
         android:paddingRight="@dimen/dp_10">
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             android:orientation="horizontal"
@@ -29,12 +29,14 @@
 
             <TextView
                 android:id="@+id/tv_order_num"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:minWidth="@dimen/dp_size_200"
-                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/tv_order_state"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:minWidth="@dimen/dp_size_200"
                 android:text="订单号：123456789774"
                 android:textColor="#9a9a9a"
                 android:textSize="16sp" />
@@ -42,14 +44,15 @@
             <TextView
                 android:id="@+id/tv_order_state"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:drawableRight="@mipmap/right_tip"
                 android:drawablePadding="@dimen/dp_10"
-                android:gravity="right|center_vertical"
                 android:text="售后中"
                 android:textColor="#FC3E39"
                 android:textSize="16sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView

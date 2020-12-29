@@ -84,6 +84,11 @@ public class MecDetailsData implements Serializable {
     private String realname;
     private String priceUnit_dictText;
     private String viewNum;
+    private String shareUrl;
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
 
     public String getViewNum() {
         return viewNum;

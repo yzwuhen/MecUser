@@ -56,7 +56,6 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemCli
         orderId = intent.getStringExtra("order_id").toString()
         orderStatus =intent.getIntExtra("order_status",0)
 
-
         if (orderType == 0) {
             tv_title.text = "售后中"
             if (orderStatus==0){
@@ -193,7 +192,7 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemCli
         if (data.order != null) {
             datas = data.order
             mOrderBackData =data.orderBack;
-            tv_order_num.text = data.order.orderNum
+
 
             recycle_list.layoutManager = LinearLayoutManager(this)
             var mPartsOrderChildAdapter = PartsOrderChildAdapter(this, data.productList, 0, null)
@@ -205,11 +204,18 @@ class PartsOrderAfterDetails : BaseCusActivity(), View.OnClickListener,OnItemCli
             tv_send_back_user_name.text =data.orderDelivery.consignee
             tv_send_back_user_address.text ="${data.orderDelivery.areaName}${data.orderDelivery.address}"
 
-
+            //订单id
+            tv_order_num.text = mOrderBackData?.mecOrderId
             //售后订单号
-            tv_after_order_num.text="${mOrderBackData?.mecOrderId}"
+            tv_after_order_num.text="${mOrderBackData?.id}"
 
             tv_refund_reason.text =data.orderBack.backReason
+
+            if (data.orderBackLogList.size==3){
+
+                tv_examine_time.text =data.orderBackLogList[2].handleTime
+            }
+
             if (!TextUtils.isEmpty(data.orderBack.imgs)){
                 ly_refund_pic.visibility =View.VISIBLE
              var   mPicAdapter = RefundPicAdapter(this, data.orderBack.imgs.split(","), this)

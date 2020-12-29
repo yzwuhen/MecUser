@@ -31,7 +31,15 @@ public class PartsOrderDetailsBean extends NetData {
         private OrderBackData orderBack;
         private OrderBean order;
         private List<PartsOrderGoodsList> productList;
+        private List<OrderBackLogBean>orderBackLogList;
 
+        public List<OrderBackLogBean> getOrderBackLogList() {
+            return orderBackLogList;
+        }
+
+        public void setOrderBackLogList(List<OrderBackLogBean> orderBackLogList) {
+            this.orderBackLogList = orderBackLogList;
+        }
 
         public OrderBackData getOrderBack() {
             return orderBack;

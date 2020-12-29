@@ -79,6 +79,11 @@ public class PartsDetailsData implements Serializable {
     private String sysOrgCode;
     private Object isEnterprise;
     private String contactPhone;
+    private String shareUrl;
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
 
     public String getPriceUnit_dictText() {
         return priceUnit_dictText;

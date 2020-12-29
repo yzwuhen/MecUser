@@ -22,8 +22,13 @@ import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.umeng.socialize.ShareAction
+import com.umeng.socialize.bean.SHARE_MEDIA
+import com.umeng.socialize.media.UMImage
+import com.umeng.socialize.media.UMWeb
 import kotlinx.android.synthetic.main.activity_ask_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
+
 
 class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,
     MecDetailsView<MecDetailsData> {
@@ -67,7 +72,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
         tv_address.setOnClickListener(this)
         ly_user_info.setOnClickListener(this)
 
-        intentType = intent.getIntExtra(Configs.MEC_ASK_DETAILS_TYPE,0)
+        intentType = intent.getIntExtra(Configs.MEC_ASK_DETAILS_TYPE, 0)
         mecId = intent.getStringExtra(Configs.MEC_ID)
         mReCollect.type=4
         mReCollect.storeId =mecId
@@ -76,31 +81,39 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
     override fun initPresenter() {
         mPresenter = DetailsPresenter(this)
          mPresenter?.getLeaseDetails(mecId)
-        mPresenter?.judgeCollect(mecId,4)
+        mPresenter?.judgeCollect(mecId, 4)
     }
 
     override fun onClick(v: View?) {
 
         when(v?.id){
-            R.id.iv_left->finish()
-            R.id.iv_right->showShare()
-            R.id.tv_report->{
-                var bundle =Bundle()
-                bundle.putString("id",mecId)
-                bundle.putInt("type",4)
-                jumpActivity(bundle,ReportActivity::class.java)
+            R.id.iv_left -> finish()
+            R.id.iv_right -> showShare()
+            R.id.tv_report -> {
+                var bundle = Bundle()
+                bundle.putString("id", mecId)
+                bundle.putInt("type", 4)
+                jumpActivity(bundle, ReportActivity::class.java)
             }
-            R.id.ly_call->showPhone()
-            R.id.ly_wx->mShareDialog?.dismiss()
-            R.id.ly_qq->mShareDialog?.dismiss()
-            R.id.ly_sina->mShareDialog?.dismiss()
-            R.id.tv_cancel->mShareDialog?.dismiss()
-            R.id.tv_pop_sure-> PopUtils.dismissPop(this)
-            R.id.tv_pop_cancel-> PopUtils.dismissPop(this)
-            R.id.ly_user_info->jumHomePage()
-            R.id.tv_collected->collect()
-            R.id.tv_address->jumThreeMap(mData?.gpsLat,mData?.gpsLon,mData?.address)
+            R.id.ly_call -> showPhone()
+            R.id.ly_wx -> shareThree(SHARE_MEDIA.WEIXIN)
+            R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
+            R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
+            R.id.tv_cancel -> mShareDialog?.dismiss()
+            R.id.tv_pop_sure -> PopUtils.dismissPop(this)
+            R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
+            R.id.ly_user_info -> jumHomePage()
+            R.id.tv_collected -> collect()
+            R.id.tv_address -> jumThreeMap(mData?.gpsLat, mData?.gpsLon, mData?.address)
         }
+    }
+    private fun shareThree(type: SHARE_MEDIA){
+        mShareDialog?.dismiss()
+        val web = UMWeb(Configs.BASE_URL+mData?.shareUrl)
+        web.title = mData?.title//标题
+        web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
+        web.description = mData?.title//描述
+        ShareAction(this).withMedia(web).setPlatform(type).share()
     }
 
     private fun collect() {
@@ -117,13 +130,13 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
     private fun jumHomePage() {
         var bundle =Bundle()
         if (intentType==0){
-            bundle.putInt(Configs.USER_HOME_PAGE,3)
+            bundle.putInt(Configs.USER_HOME_PAGE, 3)
         }else{
-            bundle.putInt(Configs.USER_HOME_PAGE,2)
+            bundle.putInt(Configs.USER_HOME_PAGE, 2)
         }
-        bundle.putInt(Configs.USER_HOME_PAGE_Index,1)
-        bundle.putString(Configs.USER_HOME_PAGE_NAME,mData?.createBy)
-        jumpActivity(bundle,UserHomePage::class.java)
+        bundle.putInt(Configs.USER_HOME_PAGE_Index, 1)
+        bundle.putString(Configs.USER_HOME_PAGE_NAME, mData?.createBy)
+        jumpActivity(bundle, UserHomePage::class.java)
 
     }
 
@@ -131,10 +144,12 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
 
         if (mPopwindow ==null){
             mPopwindow =  this?.let {
-                PopUtils.init(this,
+                PopUtils.init(
+                    this,
                     it, R.layout.pop_center_phone,
                     ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT,true,this)
+                    ViewGroup.LayoutParams.MATCH_PARENT, true, this
+                )
             }
         }
 
@@ -145,7 +160,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
 
         if (mShareDialog ==null){
             mShareDialog = BottomSheetDialog(this)
-            mShareView = View.inflate(this, R.layout.dialog_share,null)
+            mShareView = View.inflate(this, R.layout.dialog_share, null)
             mShareDialog?.setContentView(mShareView!!)
 
             mLyWx = mShareView?.findViewById(R.id.ly_wx)
@@ -199,11 +214,11 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
             }
 
             tv_browse.text = "浏览量：${data.viewNum}"
-            tv_browse_time.text = DateUtils.dateDiffs(data.createTime,System.currentTimeMillis())
+            tv_browse_time.text = DateUtils.dateDiffs(data.createTime, System.currentTimeMillis())
 
 
-            ImageLoadUtils.loadCircle(this,iv_ask_user_pic,data.avatar)
-            ImageLoadUtils.loadCircle(this,iv_user_pic,data.avatar)
+            ImageLoadUtils.loadCircle(this, iv_ask_user_pic, data.avatar)
+            ImageLoadUtils.loadCircle(this, iv_user_pic, data.avatar)
 
             tv_address.text="所在地：${data.address}"
 

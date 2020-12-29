@@ -23,7 +23,7 @@ class ChatAdapter(var mContext: Context, var mList: MutableList<RecentContact>, 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.tv_user_nick.text = mList[position]?.fromNick
+        holder.itemView.tv_user_nick.text = mList[position]?.contactId
         holder.itemView.tv_msg.text = mList[position]?.content
         if (mList[position]?.unreadCount!! >0){
             holder.itemView.tv_msg_num.visibility =View.VISIBLE
@@ -34,7 +34,6 @@ class ChatAdapter(var mContext: Context, var mList: MutableList<RecentContact>, 
 
         holder.itemView.tv_time.text =
             mList[position]?.time?.let { TimeUtil.getTimeShowString(it, true) };
-     //   holder.itemView.tv_time.text =DateUtils.dateDiff(mList[position]?.time, System.currentTimeMillis())
     }
 
     override fun getItemCount(): Int {

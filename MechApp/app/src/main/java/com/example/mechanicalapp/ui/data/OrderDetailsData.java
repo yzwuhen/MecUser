@@ -99,6 +99,11 @@ public class OrderDetailsData implements Serializable {
     private Object city;
     private MecRepaireFactoryBean mecRepaireFactory;
     private List<MecRepairEngineerBean> mecRepairEngineer;
+    private String shareUrl;
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
 
     public String getId() {
         return id;

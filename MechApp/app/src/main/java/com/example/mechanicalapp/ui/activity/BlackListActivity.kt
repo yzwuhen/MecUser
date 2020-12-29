@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,18 +8,22 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.BlackListAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.mvp.p.MsgPresenter
+import com.example.mechanicalapp.ui.mvp.v.MsgView
 import com.example.mechanicalapp.ui.view.SideBarView
+import com.netease.nimlib.sdk.msg.model.RecentContact
 import kotlinx.android.synthetic.main.activity_search_city.*
 import kotlinx.android.synthetic.main.layout_search_title.iv_back
 import kotlinx.android.synthetic.main.layout_title.*
 
-class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnClickListener ,SideBarView.OnClickListener{
+class BlackListActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListener ,SideBarView.OnClickListener,MsgView<List<String>>{
 
     private var mBlackListAdapter : BlackListAdapter?=null
     private var mCityLinearLayoutManager : LinearLayoutManager?=null
 
-    private var mCityList :MutableList<String> ?=null
+    private var mBlackList = ArrayList<String>()
     private val items = listOf(
         "A",
         "B",
@@ -31,6 +36,7 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
         "I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Z"
     )
 
+    private var mPresenter:MsgPresenter<List<String>>?=null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_black_list;
@@ -45,25 +51,7 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
         mCityLinearLayoutManager?.orientation = LinearLayoutManager.VERTICAL
 
 
-        mCityList = ArrayList<String>()
-        mCityList?.add("陈生")
-        mCityList?.add("陈生")
-        mCityList?.add("陈生")
-        mCityList?.add("陈生")
-        mCityList?.add("陈阿斯顿")
-        mCityList?.add("戴文")
-        mCityList?.add("戴文")
-        mCityList?.add("戴尔")
-        mCityList?.add("阿迪斯")
-        mCityList?.add("阿斯顿")
-        mCityList?.add("戴文")
-        mCityList?.add("戴文")
-        mCityList?.add("戴尔")
-        mCityList?.add("阿迪斯")
-        mCityList?.add("阿斯顿")
-
-
-        mBlackListAdapter = BlackListAdapter(this, mCityList as MutableList<String>,this)
+        mBlackListAdapter = BlackListAdapter(this, mBlackList as MutableList<String>,this)
 
         ry_city.layoutManager = mCityLinearLayoutManager
 
@@ -77,41 +65,52 @@ class BlackListActivity:BaseActivity<NetData>() , OnItemClickListener,View.OnCli
     }
 
     override fun initPresenter() {
+        mPresenter = MsgPresenter<List<String>>(this)
+
     }
 
-    override fun showLoading() {
+    override fun onResume() {
+        super.onResume()
+        mPresenter?.getBlackList()
     }
-
-    override fun hiedLoading() {
-    }
-
-    override fun err()  {
-    }
-
 
     override fun onClick(view: View?) {
         if (view?.id== R.id.iv_back){
             finish()
         }
-
-
     }
 
     override fun onItemDown(position: Int, itemContent: String?) {
-        Log.v("sssss","onItemDown====$position")
     }
 
     override fun onItemMove(position: Int, itemContent: String?) {
-        Log.v("sssss","onItemMove====$position")
     }
 
     override fun onItemUp(position: Int, itemContent: String?) {
-        Log.v("sssss","onItemUp====$position")
     }
     override fun onItemClick(view: View, position: Int) {
 
         when(view?.id){
-            R.id.ly_city_root->jumpActivity(null,BlackListSettActivity::class.java)
+            R.id.ly_city_root->{
+                var  bundle =Bundle()
+               bundle.putString("id",mBlackList[position])
+                jumpActivity(bundle,BlackListSettActivity::class.java)
+            }
         }
+    }
+
+    override fun refreshUI(t: List<String>?) {
+        mBlackList.clear()
+        if (t!=null){
+            mBlackList.addAll(t)
+        }
+        mBlackListAdapter?.notifyDataSetChanged()
+        if (mBlackList.size==0){
+            showEmptyView()
+        }
+    }
+
+    override fun success() {
+
     }
 }

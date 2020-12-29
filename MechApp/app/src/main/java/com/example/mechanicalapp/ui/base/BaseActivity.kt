@@ -21,7 +21,7 @@ abstract  class BaseActivity<T> : AppCompatActivity() ,BaseView<T>{
     private val PERMISSIONS_STORAGE = arrayOf(
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.CAMERA","android.permission.ACCESS_COARSE_LOCATION","android.permission.ACCESS_FINE_LOCATION"
+        "android.permission.CAMERA","android.permission.ACCESS_COARSE_LOCATION","android.permission.ACCESS_FINE_LOCATION","android.permission.READ_PHONE_STATE"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

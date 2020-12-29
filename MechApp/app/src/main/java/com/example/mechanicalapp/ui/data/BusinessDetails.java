@@ -83,6 +83,15 @@ public class BusinessDetails implements Serializable {
     private String bussiessType_dictText;
     private String contactPhone;
     private String viewNum;
+    private String shareUrl;
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
+
+    public void setShareUrl(String shareUrl) {
+        this.shareUrl = shareUrl;
+    }
 
     public String getViewNum() {
         return viewNum;

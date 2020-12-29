@@ -22,6 +22,11 @@ public class GoodsProduct implements Serializable {
     private String detail;
     private String title;
     private String status;
+    private String shareUrl;
+
+    public String getShareUrl() {
+        return shareUrl;
+    }
 
     public String getImages() {
         return images;

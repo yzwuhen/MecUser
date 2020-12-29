@@ -74,6 +74,15 @@ public class FactoryDetailsBean extends NetData {
         private String city;
         private float star;
         private int viewNum;
+        private String shareUrl;
+
+        public String getShareUrl() {
+            return shareUrl;
+        }
+
+        public void setShareUrl(String shareUrl) {
+            this.shareUrl = shareUrl;
+        }
 
         public String getId() {
             return id;

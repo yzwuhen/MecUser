@@ -1,7 +1,13 @@
 package com.example.mechanicalapp;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 import com.amap.api.location.DPoint;
 import com.example.mechanicalapp.config.Configs;
@@ -9,11 +15,15 @@ import com.example.mechanicalapp.ui.data.HomeCityData;
 import com.example.mechanicalapp.ui.data.UserInfo;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.SDKOptions;
+import com.netease.nimlib.sdk.StatusCode;
+import com.netease.nimlib.sdk.auth.AuthServiceObserver;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.orhanobut.hawk.Hawk;
 import com.umeng.commonsdk.UMConfigure;
+import com.umeng.commonsdk.debug.E;
 import com.umeng.socialize.PlatformConfig;
 
 public class App extends Application {
@@ -31,6 +41,22 @@ public class App extends Application {
 
         initSDK();
         initIMSDK();
+        //  registerImListener();
+    }
+
+    //报错 显示SDK not initialized or invoked in wrong process!
+    private void registerImListener() {
+        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(
+                new Observer<StatusCode>() {
+                    public void onEvent(StatusCode status) {
+                        //获取状态的描述
+                        Log.v("sss=========","========App===="+status);
+//                        String desc = status.getDesc();
+//                        if (status.wontAutoLogin()) {
+//                            // 被踢出、账号被禁用、密码错误等情况，自动登录失败，需要返回到登录界面进行重新登录操作
+//                        }
+                    }
+                }, true);
     }
 
     private void initIMSDK() {

@@ -5,9 +5,11 @@ import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.*
@@ -16,7 +18,12 @@ import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.netease.nim.uikit.api.NimUIKit
+import com.umeng.socialize.ShareAction
+import com.umeng.socialize.bean.SHARE_MEDIA
+import com.umeng.socialize.media.UMImage
+import com.umeng.socialize.media.UMWeb
 import kotlinx.android.synthetic.main.activity_order_details.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
@@ -27,6 +34,13 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
     private var popCancel: TextView? = null
     private var popSure: TextView? = null
     private var mPopwindow: PopupWindow? = null
+
+    private var mShareDialog: BottomSheetDialog?=null
+    private var mShareView: View?=null
+    private var mLyWx: LinearLayout?=null
+    private var mLyQq: LinearLayout?=null
+    private var mLySina: LinearLayout?=null
+    private var mTvCancelShare: TextView?=null
 
 
     private var popInputInfo: EditText? = null
@@ -135,9 +149,46 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             R.id.tv_pop_input_cancel -> goVideo()
             R.id.tv_pop_input_sure -> goVideo()
             R.id.ly_look_details2 -> jumDetailedList()
+            R.id.iv_right -> showShare()
+            R.id.ly_wx -> shareThree(SHARE_MEDIA.WEIXIN)
+            R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
+            R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
+            R.id.tv_cancel -> mShareDialog?.dismiss()
 //            R.id.ly_pay -> jumpActivity(null, null)
         }
     }
+    private fun shareThree(type: SHARE_MEDIA){
+        mShareDialog?.dismiss()
+        val web = UMWeb(Configs.BASE_URL+orderData?.shareUrl)
+        web.title = "订单：${orderData?.orderNum}"//标题
+        web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
+        web.description = "订单：${orderData?.orderNum}"//描述
+        ShareAction(this).withMedia(web).setPlatform(type).share()
+    }
+
+
+    private fun showShare() {
+
+        if (mShareDialog ==null){
+            mShareDialog = BottomSheetDialog(this)
+            mShareView = View.inflate(this, R.layout.dialog_share, null)
+            mShareDialog?.setContentView(mShareView!!)
+
+            mLyWx = mShareView?.findViewById(R.id.ly_wx)
+            mLyQq = mShareView?.findViewById(R.id.ly_qq)
+            mLySina = mShareView?.findViewById(R.id.ly_sina)
+            mTvCancelShare = mShareView?.findViewById(R.id.tv_cancel)
+
+            mLyWx?.setOnClickListener(this)
+            mLyQq?.setOnClickListener(this)
+            mLySina?.setOnClickListener(this)
+            mTvCancelShare?.setOnClickListener(this)
+        }
+        mShareDialog?.show()
+
+    }
+
+
     private fun jumDetailedList(){
         var bundle =Bundle()
         bundle.putString("id",orderData?.id)

@@ -118,7 +118,14 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
         when (view?.id) {
 //            R.id.tv_look_logistics->jumpActivity(null,null)
-            R.id.tv_apply_refund -> showPop(1, position)
+            R.id.tv_apply_refund ->
+            {
+                if (mList[clickPosition].isBackOrder == "1") {
+                    ToastUtils.showText("一张订单只能申请一次退款")
+                    return
+                }
+                showPop(1, position)
+            }
             R.id.tv_cancel_order -> showPop(0, position)
             R.id.tv_confirm -> showPop(3, position)
             R.id.tv_pay -> showBtnDialog(position)
@@ -263,11 +270,6 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     }
 
     private fun applyRefund() {
-
-        if (mList[clickPosition].isBackOrder == "1") {
-            ToastUtils.showText("已经申请过售后，请耐心等待结果")
-            return
-        }
         var bundle = Bundle()
         bundle.putSerializable("data", mList[clickPosition].orderItemList as Serializable)
         bundle.putInt("num", mList[clickPosition].quantity)

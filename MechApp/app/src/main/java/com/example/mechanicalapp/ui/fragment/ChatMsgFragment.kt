@@ -78,8 +78,8 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
     }
 
     private fun jumChat(position: Int) {
-       // NimUIKit.startP2PSession(context, mList[position]?.fromAccount);
         NimUIKit.startP2PSession(activity, mList[position]?.contactId)
+
     }
 
     override fun onItemLongClick(view: View, position: Int) {

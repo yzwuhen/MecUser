@@ -8,7 +8,6 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.UserInfo
-import com.example.mechanicalapp.ui.mvp.impl.PersonCerPresenter
 import com.example.mechanicalapp.ui.mvp.impl.UserInfoPresenter
 import com.example.mechanicalapp.ui.mvp.v.UserView
 import com.example.mechanicalapp.utils.GlideEngine
@@ -33,6 +32,7 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
     private var mDialogTv3:TextView ?= null
 
     private var dialogType:Int =0
+    private var picType=0
 
     private var mPresenter:UserInfoPresenter?=null
     private var userInfo:UserInfo?=null
@@ -88,6 +88,7 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
           userInfo?.avatar =netData.message
             ImageLoadUtils.loadCircle(this,iv_user_pic,netData.message)
             mPresenter?.editUserInfo(userInfo)
+            mPresenter?.upImHeaderImg(netData.message)
         }
     }
 
@@ -122,8 +123,9 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
     private fun setItem1() {
         mButtDialog?.dismiss()
         if (dialogType==0){
-            takePicture()
+            picType =0
             verifyStoragePermissions(this)
+          //  takePicture()
         }else{
             tv_user_sex.text ="女"
             userInfo?.sex =2
@@ -135,6 +137,7 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
     private fun setItem() {
         mButtDialog?.dismiss()
         if (dialogType==0){
+            picType =1
             verifyStoragePermissions(this)
         }else{
             tv_user_sex.text ="男"
@@ -182,7 +185,13 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
 
     override fun hasPermissions() {
         super.hasPermissions()
-        takePoto()
+        Log.v("=======","=========申请选取")
+        if (picType==0){
+            takePicture()
+        }else{
+            takePoto()
+        }
+
     }
 
      private fun showDialogType(type:Int){

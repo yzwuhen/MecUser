@@ -6,6 +6,15 @@ public class ReEvaluateParts {
     private String mecProductSkuName;
     private String star="3";
     private String content;
+    private String mecOrderId;
+
+    public String getMecOrderId() {
+        return mecOrderId;
+    }
+
+    public void setMecOrderId(String mecOrderId) {
+        this.mecOrderId = mecOrderId;
+    }
 
     public String getContent() {
         return content;

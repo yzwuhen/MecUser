@@ -936,7 +936,7 @@ class ModelImpl : BaseModel {
         netSubscribe: NetSubscribe<OrderBean>
     ) {
 
-        appsService?.getOrderList(token, state,modelName, page, pageSize)?.subscribeOn(Schedulers.io())
+        appsService?.getOrderList(token,App.getInstance().userInfo.username, state,modelName, page, pageSize)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -1004,13 +1004,14 @@ class ModelImpl : BaseModel {
 
     fun getPartsOrderList(
         token: String?,
+        createBy: String?,
         state: String?,
         page: Int,
         pageSize: Int,
         netSubscribe: NetSubscribe<PartOrderListBean>
     ) {
 
-        appsService?.getPartsOrderList(token, state, page, pageSize)?.subscribeOn(Schedulers.io())
+        appsService?.getPartsOrderList(token, createBy,state, page, pageSize)?.subscribeOn(Schedulers.io())
             ?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(netSubscribe)
@@ -1328,8 +1329,13 @@ class ModelImpl : BaseModel {
     }
 
     fun cancelRefund(token: String?, id: String?, netSubscribe: NetSubscribe<ReCancelRefundBean>) {
-
         appsService?.cancelRefund(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+    }
+    fun sureGetGoods(token: String?, id: String?, netSubscribe: NetSubscribe<NetData>) {
+        appsService?.sureGetGoods(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)

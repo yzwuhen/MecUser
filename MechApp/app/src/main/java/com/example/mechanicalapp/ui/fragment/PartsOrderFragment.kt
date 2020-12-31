@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
@@ -120,7 +121,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 //            R.id.tv_look_logistics->jumpActivity(null,null)
             R.id.tv_apply_refund ->
             {
-                if (mList[clickPosition].isBackOrder == "1") {
+                if (mList[position].isBackOrder == "1") {
                     ToastUtils.showText("一张订单只能申请一次退款")
                     return
                 }
@@ -138,7 +139,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     }
 
     private fun jumLookEvaluate(position: Int) {
-        jumpActivity(null, EvaluateActivity::class.java)
+       // jumpActivity(null, EvaluateActivity::class.java)
     }
 
     private fun jumEvaluate(position: Int) {
@@ -252,21 +253,12 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
             0 -> cancelOrder()
             1 -> applyRefund()
             3 -> getGoods()
-            4 -> cancleSh()
         }
 
     }
-
-    //取消售后
-    private fun cancleSh() {
-
-
-    }
-
     //确认收货
     private fun getGoods() {
-
-
+        (mPresenter as OrderPresenter).sureGetGoods(mList[clickPosition].id)
     }
 
     private fun applyRefund() {

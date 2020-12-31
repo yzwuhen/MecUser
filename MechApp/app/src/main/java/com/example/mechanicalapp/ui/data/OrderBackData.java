@@ -42,6 +42,21 @@ public class OrderBackData implements Serializable {
     private String deliverycorpCode;
     private String trackingNo;
     private String writeTrackingNoTime;
+    private String backAddress;
+    private String backPersonName;
+    private String backPersonPhone;
+
+    public String getBackAddress() {
+        return backAddress;
+    }
+
+    public String getBackPersonName() {
+        return backPersonName;
+    }
+
+    public String getBackPersonPhone() {
+        return backPersonPhone;
+    }
 
     public String getId() {
         return id;

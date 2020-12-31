@@ -119,7 +119,7 @@
         <activity android:name=".ui.activity.MoreSelPartsType" />
         <activity android:name=".ui.activity.MoreSelectMecType" />
         <activity android:name=".ui.activity.MyLookActivity" />
-        <activity android:name=".ui.activity.PartsOrderActivity" android:launchMode="singleTop" />
+        <activity android:name=".ui.activity.PartsOrderActivity" android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.PartsOrderDetails" />
         <activity android:name=".ui.activity.EvaluatePartsActivity" />
         <activity android:name=".ui.activity.ApplyRefundActivity" />

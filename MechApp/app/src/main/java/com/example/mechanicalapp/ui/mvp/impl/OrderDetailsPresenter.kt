@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
@@ -52,6 +53,7 @@ class OrderDetailsPresenter(
 
     //获取售后配件订单详情
     fun getPartsOrderAfterDetails(orderId: String) {
+        Log.v("sss","sss====token===${App.getInstance().token}")
         baseView.showLoading()
         baseModel.getPartsOrderAfterDetails(
             App.getInstance().token,
@@ -130,6 +132,26 @@ class OrderDetailsPresenter(
                     (baseView as NetDataView<ReCancelRefundBean>).refreshUI(t)
                 }
 
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
+    }
+    fun sureGetGoods(id: String?) {
+        baseView.hiedLoading()
+        baseModel.sureGetGoods(
+            App.getInstance().token,
+            id,
+            NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as NetDataView<NetData>).refreshUI(t)
+                }
                 override fun onError(e: Throwable?) {
                     baseView.hiedLoading()
                 }

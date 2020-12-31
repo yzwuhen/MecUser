@@ -53,6 +53,7 @@ class EvaluatePartsActivity: BaseCusActivity(), View.OnClickListener,OnItemChang
                 var mReEvaluate =ReEvaluateParts()
                 mReEvaluate.mecProductSkuId =orderItem.mecProductSkuId
                 mReEvaluate.mecProductSkuName =orderItem.skuName
+                mReEvaluate.mecOrderId =orderId
                 mEvaList.add(mReEvaluate)
             }
         }

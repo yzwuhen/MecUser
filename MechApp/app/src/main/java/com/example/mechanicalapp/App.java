@@ -38,12 +38,10 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         Hawk.init(this).build();
-
         initSDK();
         initIMSDK();
         //  registerImListener();
     }
-
     //报错 显示SDK not initialized or invoked in wrong process!
     private void registerImListener() {
         NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(

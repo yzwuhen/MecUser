@@ -1047,6 +1047,7 @@ interface AppService {
     @GET("/jeecg-boot/repair/mecRepairOrder/list")
     fun getOrderList(
         @Header("X-Access-Token") token: String?,
+        @Query("createBy") createBy: String?,
         @Query("status") state: String?,
         @Query("productType") productType: String?,
         @Query("pageNo") pageNo: Int?,
@@ -1060,6 +1061,7 @@ interface AppService {
     @GET("/jeecg-boot/shop/mecOrder/list")
     fun getPartsOrderList(
         @Header("X-Access-Token") token: String?,
+        @Query("createBy") createBy: String?,
         @Query("status") state: String?,
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int?
@@ -1353,4 +1355,12 @@ interface AppService {
         @Field("id") id:String?
     ): Observable<ReCancelRefundBean>
 
+    /**
+     * 确认收货
+     */
+    @GET("/jeecg-boot/shop/mecOrder/sureReceived")
+    fun sureGetGoods(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id:String?
+    ): Observable<NetData>
 }

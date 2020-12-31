@@ -72,6 +72,9 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
             ly_send_goods_time.visibility = View.VISIBLE
             ly_get_goods_time.visibility = View.VISIBLE
             ly_evaluate_time.visibility = View.VISIBLE
+
+            //已完成 显示查看评价
+            ly_order5.visibility =View.VISIBLE
         } else if (orderType == 5) {
             tv_title.text = "已关闭订单"
             ly_tip.visibility = View.GONE
@@ -116,16 +119,22 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
 //            R.id.tv_look_logistics->finish()
             R.id.tv_apply_refund3 -> applyRefund()
             R.id.tv_confirm -> confirm()
-            R.id.tv_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
+            R.id.tv_evaluate -> jumEvaluate()
             R.id.tv_look_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
 
         }
 
     }
-
+    private fun jumEvaluate() {
+        var bundle = Bundle()
+        bundle.putSerializable("data", mList as Serializable)
+        bundle.putInt("num", datas.quantity)
+        bundle.putString("id", datas.id)
+        jumpActivity(bundle, EvaluatePartsActivity::class.java)
+    }
+    //确认收货
     private fun confirm() {
-
-
+        mPresenter?.sureGetGoods(orderId)
     }
 
     private fun applyRefund() {
@@ -160,7 +169,7 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
         if (data != null && data is PartsOrderDetailsBean && data.result != null) {
             showData(data.result)
         } else {
-            //取消订单
+            //取消订单\确认收货
             if (data?.code == 200) {
                 finish()
             }

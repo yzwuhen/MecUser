@@ -82,6 +82,7 @@ class PartsOrderAdapter(
                 holder.itemView.tv_input_odd_num.visibility = View.GONE
                 holder.itemView.tv_cancel_sale.visibility = View.GONE
             }
+            //已完成订单（已评价）
             4 -> {
                 holder.itemView.ly_bottom.visibility = View.VISIBLE
                 holder.itemView.tv_look_logistics.visibility = View.GONE
@@ -91,7 +92,6 @@ class PartsOrderAdapter(
                 holder.itemView.tv_pay.visibility = View.GONE
                 holder.itemView.tv_evaluate.visibility = View.GONE
                 holder.itemView.tv_look_evaluate.visibility = View.VISIBLE
-
                 holder.itemView.tv_input_odd_num.visibility = View.GONE
                 holder.itemView.tv_cancel_sale.visibility = View.GONE
             }

@@ -1,9 +1,8 @@
 package com.example.mechanicalapp.config
 
 object Configs {
-    //tye== 0 出租出售 1 招牌  2 求职 3 商品（配件） 4 配件求租 5 配件出租   6是搜索我的设备 7是搜索维修订单 8是工程师
-    //9 是home 搜索 热门搜索跳转到多配件页  10跳转到维修厂
-    //重新规划上面部分暂时保留 0 机械出租 1 机械求租 2 机械出售 3 机械求购  4配件出租 5 配件求租 6维修厂 7搜索我的设备 8 搜索维修订单 9 工程师 10home搜索  11 搜索商品
+
+    // 0 机械出租 1 机械求租 2 机械出售 3 机械求购  4配件出租 5 配件求租 6维修厂 7搜索我的设备 8 搜索维修订单 9 工程师 10home搜索  11 搜索商品
     //12 求职 13 招聘
     const val HISTORY_TYPE :String ="history_type"
     const val SEARCH_TYPE :String="type"

@@ -85,6 +85,7 @@ class OrderPresenter(
         }
         baseModel.getPartsOrderList(
             App.getInstance().token,
+            App.getInstance().userInfo.username,
             type,
             page,
             pageSize,
@@ -258,6 +259,28 @@ class OrderPresenter(
             NetSubscribe<ReCancelRefundBean>(object : ISubscriberListener<ReCancelRefundBean> {
                 override fun onNext(t: ReCancelRefundBean?) {
                     (baseView as OrderView<ReCancelRefundBean>).showData(t)
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+        )
+
+    }
+
+    fun sureGetGoods(id: String?) {
+        baseView.hiedLoading()
+        baseModel.sureGetGoods(
+            App.getInstance().token,
+            id,
+            NetSubscribe<NetData>(object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                    (baseView as OrderView<NetData>).showData(t)
                 }
 
                 override fun onError(e: Throwable?) {

@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.fragment.mine
 
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mechanicalapp.App
@@ -35,6 +36,8 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
     override fun onResume() {
         super.onResume()
         showInfo()
+
+        Log.v("===","=========OnResume")
     }
 
     private fun showInfo() {

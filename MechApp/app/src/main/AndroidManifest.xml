@@ -194,6 +194,8 @@
         <activity android:name=".ui.activity.MapJobAboutActivity" />
         <activity android:name=".ui.activity.MapFactoryActivity" />
         <activity android:name=".ui.activity.BindPhoneActivity" />
+        <activity android:name=".ui.activity.LogisticsActivity"/>
+        <activity android:name=".ui.activity.MyEvaluatePartsActivity"/>
         <activity
             android:name=".ui.activity.ResultEngineerActivity"
             android:windowSoftInputMode="adjustPan" />

@@ -1340,4 +1340,19 @@ class ModelImpl : BaseModel {
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)
     }
+
+    fun getLogistics(token: String?, id: String?,netSubscribe: NetSubscribe<LogisticsBean>) {
+        appsService?.getLogistics(token,id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+    }
+
+    fun getMyPartsEvaluate(token: String?, orderId: String, netSubscribe: NetSubscribe<NetData>) {
+        appsService?.getMyPartsEvaluate(token,orderId)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+
+    }
 }

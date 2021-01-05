@@ -46,8 +46,8 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
         } else if (orderType == 1) {
             tv_title.text = "待发货订单"
             ly_tip.visibility = View.GONE
-            ly_order2.visibility = View.VISIBLE
-
+               ly_order2.visibility = View.VISIBLE
+            //   ly_order3.visibility = View.VISIBLE
             ly_pay_time.visibility = View.VISIBLE
         } else if (orderType == 2) {
             tv_title.text = "待收货订单"
@@ -116,7 +116,7 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
             R.id.tv_cancel_order -> cancelOrder()
             R.id.tv_pay -> goPay()
             R.id.tv_apply_refund -> applyRefund()
-//            R.id.tv_look_logistics->finish()
+           R.id.tv_look_logistics->jumLogistics()
             R.id.tv_apply_refund3 -> applyRefund()
             R.id.tv_confirm -> confirm()
             R.id.tv_evaluate -> jumEvaluate()
@@ -125,6 +125,13 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
         }
 
     }
+
+    private fun jumLogistics() {
+        var bundle = Bundle()
+        bundle.putString("order_id", datas.id)
+        jumpActivity(bundle, LogisticsActivity::class.java)
+    }
+
     private fun jumEvaluate() {
         var bundle = Bundle()
         bundle.putSerializable("data", mList as Serializable)

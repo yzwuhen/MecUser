@@ -7,6 +7,15 @@ public class ReEvaluateParts {
     private String star="3";
     private String content;
     private String mecOrderId;
+    private String mecOrderItemId;
+
+    public String getMecOrderItemId() {
+        return mecOrderItemId;
+    }
+
+    public void setMecOrderItemId(String mecOrderItemId) {
+        this.mecOrderItemId = mecOrderItemId;
+    }
 
     public String getMecOrderId() {
         return mecOrderId;

@@ -1,14 +1,11 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemChangeListener
 import com.example.mechanicalapp.ui.adapter.EvaluateAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.PartsOrderGoodsList
 import com.example.mechanicalapp.ui.data.request.ReEvaluateParts
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
@@ -16,12 +13,10 @@ import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_evaluate_parts.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class EvaluatePartsActivity: BaseCusActivity(), View.OnClickListener,OnItemChangeListener ,
+class MyEvaluatePartsActivity : BaseCusActivity(), View.OnClickListener, OnItemChangeListener,
     NetDataView<NetData> {
 
-    private var orderItemList=ArrayList<PartsOrderGoodsList>()
-    private var price=0.0
-    private var num=0
+
     private var orderId=""
     private var mEvaList =ArrayList<ReEvaluateParts>()
     private var mPresenter: MecAppPresenter?=null
@@ -39,33 +34,14 @@ class EvaluatePartsActivity: BaseCusActivity(), View.OnClickListener,OnItemChang
         tv_btn.setOnClickListener(this)
         tv_title.text = "我的评价"
 
-        if (intent.getSerializableExtra("data") as List<PartsOrderGoodsList>?!=null){
-            orderItemList.addAll(intent.getSerializableExtra("data") as List<PartsOrderGoodsList>)
-        }
 
-        price =intent.getDoubleExtra("price",0.0)
-        num =intent.getIntExtra("num",0)
-        orderId =intent.getStringExtra("id").toString()
+        orderId =intent.getStringExtra("order_id").toString()
 
-
-        if (orderItemList.size>0){
-            for (orderItem in orderItemList){
-                var mReEvaluate =ReEvaluateParts()
-                mReEvaluate.mecProductSkuId =orderItem.mecProductSkuId
-                mReEvaluate.mecProductSkuName =orderItem.skuName
-                mReEvaluate.mecOrderId =orderId
-                mReEvaluate.mecOrderItemId =orderItem.id
-                mEvaList.add(mReEvaluate)
-            }
-        }
-
-        recycle_list.layoutManager =LinearLayoutManager(this)
-        mAdapter =EvaluateAdapter(this,orderItemList,this)
-        recycle_list.adapter = mAdapter
     }
 
     override fun initPresenter() {
         mPresenter = MecAppPresenter(this)
+        mPresenter?.getMyPartsEvaluate(orderId)
     }
 
     override fun showLoading() {
@@ -86,9 +62,7 @@ class EvaluatePartsActivity: BaseCusActivity(), View.OnClickListener,OnItemChang
     }
 
     private fun submit() {
-
-        //未完成 提交数组
-        mPresenter?.postPartsEvaluate(mEvaList)
+       finish()
     }
 
     override fun onItemClick(view: View, position: Int, any: String) {

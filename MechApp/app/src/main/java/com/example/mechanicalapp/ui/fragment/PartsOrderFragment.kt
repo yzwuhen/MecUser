@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
-import com.example.mechanicalapp.ui.activity.ApplyRefundActivity
-import com.example.mechanicalapp.ui.activity.EvaluateActivity
-import com.example.mechanicalapp.ui.activity.EvaluatePartsActivity
-import com.example.mechanicalapp.ui.activity.PartsOrderDetails
+import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.PartsOrderAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.*
@@ -118,7 +115,7 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
     override fun onItemClick(view: View, position: Int) {
 
         when (view?.id) {
-//            R.id.tv_look_logistics->jumpActivity(null,null)
+           R.id.tv_look_logistics->jumLogistics(position)
             R.id.tv_apply_refund ->
             {
                 if (mList[position].isBackOrder == "1") {
@@ -138,8 +135,16 @@ class PartsOrderFragment(var type: Int) : BaseCusFragment(), OnItemClickListener
 
     }
 
+    private fun jumLogistics(position: Int) {
+        var bundle = Bundle()
+        bundle.putString("order_id", mList[position].id)
+        jumpActivity(bundle, LogisticsActivity::class.java)
+    }
+
     private fun jumLookEvaluate(position: Int) {
-       // jumpActivity(null, EvaluateActivity::class.java)
+        var bundle = Bundle()
+        bundle.putString("order_id", mList[position].id)
+        jumpActivity(bundle, MyEvaluatePartsActivity::class.java)
     }
 
     private fun jumEvaluate(position: Int) {

@@ -142,4 +142,45 @@ class MecAppPresenter(
             }
         }))
     }
+
+    fun getLogistics(orderId: String) {
+        baseView.showLoading()
+        baseModel.getLogistics(App.getInstance().token, orderId,NetSubscribe<LogisticsBean>(object :
+            ISubscriberListener<LogisticsBean> {
+            override fun onNext(t: LogisticsBean?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+
+    }
+
+    //获取订单评价
+    fun getMyPartsEvaluate(orderId: String) {
+        baseView.showLoading()
+        baseModel.getMyPartsEvaluate(App.getInstance().token, orderId,NetSubscribe<NetData>(object :
+            ISubscriberListener<NetData> {
+            override fun onNext(t: NetData?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+
+    }
 }

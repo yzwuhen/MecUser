@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <TextView
+        android:id="@+id/tv_logistics"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_17"
+        android:text="物流公司：圆通快递"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:id="@+id/tv_logistics_code"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_17"
+        android:text="物流单号：02020202"
+        android:textColor="@color/color_222"
+        android:textSize="@dimen/sp_14" />
+    <View
+       style="@style/h_view_6"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

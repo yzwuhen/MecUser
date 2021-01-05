@@ -1363,4 +1363,25 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id:String?
     ): Observable<NetData>
+
+
+
+    /**
+     * 查看物流
+     */
+    @GET("/jeecg-boot/shop/mecOrder/searchWL")
+    fun getLogistics(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id:String?
+    ): Observable<LogisticsBean>
+
+
+    /**
+     * 获取订单的评价
+     */
+    @GET("/jeecg-boot/shop/mecProductComment/queryByOrderId")
+    fun getMyPartsEvaluate(
+        @Header("X-Access-Token") token: String?,
+        @Query("orderId") id:String?
+    ): Observable<LogisticsBean>
 }

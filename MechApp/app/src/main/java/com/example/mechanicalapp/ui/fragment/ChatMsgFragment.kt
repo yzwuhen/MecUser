@@ -77,20 +77,20 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
         service.observeReceiveMessage(object : Observer<List<IMMessage>> {
             override fun onEvent(imMessages: List<IMMessage>?) {
                 if (imMessages != null) {
-                    for (imMessage in imMessages) {
-                        if (!TeamMemberAitHelper.isAitMessage(imMessage)) {
-                            continue
-                        }
-                        var cacheMessageSet=
-                            cacheMessages[imMessage.sessionId]
-                        if (cacheMessageSet == null) {
-                            cacheMessageSet = HashSet()
-                            cacheMessages[imMessage.sessionId] = cacheMessageSet
-                        }
-                        cacheMessageSet.add(imMessage)
+                for (imMessage in imMessages) {
+                    if (!TeamMemberAitHelper.isAitMessage(imMessage)) {
+                        continue
                     }
+                    var cacheMessageSet=
+                        cacheMessages[imMessage.sessionId]
+                    if (cacheMessageSet == null) {
+                        cacheMessageSet = HashSet()
+                        cacheMessages[imMessage.sessionId] = cacheMessageSet
+                    }
+                  //  cacheMessageSet.add(imMessage)
                 }
             }
+        }
         }, register)
         service.observeRecentContact({ }, register)
         service.observeMsgStatus({ }, register)

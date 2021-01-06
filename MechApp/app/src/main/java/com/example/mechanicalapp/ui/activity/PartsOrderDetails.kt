@@ -46,7 +46,7 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
         } else if (orderType == 1) {
             tv_title.text = "待发货订单"
             ly_tip.visibility = View.GONE
-               ly_order2.visibility = View.VISIBLE
+            ly_order2.visibility = View.VISIBLE
             //   ly_order3.visibility = View.VISIBLE
             ly_pay_time.visibility = View.VISIBLE
         } else if (orderType == 2) {
@@ -74,7 +74,7 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
             ly_evaluate_time.visibility = View.VISIBLE
 
             //已完成 显示查看评价
-            ly_order5.visibility =View.VISIBLE
+            ly_order5.visibility = View.VISIBLE
         } else if (orderType == 5) {
             tv_title.text = "已关闭订单"
             ly_tip.visibility = View.GONE
@@ -116,14 +116,20 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
             R.id.tv_cancel_order -> cancelOrder()
             R.id.tv_pay -> goPay()
             R.id.tv_apply_refund -> applyRefund()
-           R.id.tv_look_logistics->jumLogistics()
+            R.id.tv_look_logistics -> jumLogistics()
             R.id.tv_apply_refund3 -> applyRefund()
             R.id.tv_confirm -> confirm()
             R.id.tv_evaluate -> jumEvaluate()
-            R.id.tv_look_evaluate -> jumpActivity(null, EvaluatePartsActivity::class.java)
+            R.id.tv_look_evaluate -> jumLookEvaluate()
 
         }
 
+    }
+
+    private fun jumLookEvaluate() {
+        var bundle = Bundle()
+        bundle.putString("order_id", datas.id)
+        jumpActivity(bundle, MyEvaluatePartsActivity::class.java)
     }
 
     private fun jumLogistics() {
@@ -139,22 +145,23 @@ class PartsOrderDetails : BaseCusActivity(), View.OnClickListener, NetDataView<N
         bundle.putString("id", datas.id)
         jumpActivity(bundle, EvaluatePartsActivity::class.java)
     }
+
     //确认收货
     private fun confirm() {
         mPresenter?.sureGetGoods(orderId)
     }
 
     private fun applyRefund() {
-        if (datas!=null){
-            if (datas.isBackOrder=="1"){
+        if (datas != null) {
+            if (datas.isBackOrder == "1") {
                 ToastUtils.showText("已经申请过售后，请耐心等待结果")
                 return
             }
             var bundle = Bundle()
-            bundle.putSerializable("data",mList as Serializable)
-            bundle.putInt("num",datas.quantity)
+            bundle.putSerializable("data", mList as Serializable)
+            bundle.putInt("num", datas.quantity)
             bundle.putDouble("price", datas.amount)
-            bundle.putString("id",datas.id)
+            bundle.putString("id", datas.id)
             jumpActivity(bundle, ApplyRefundActivity::class.java)
         }
     }

@@ -1,17 +1,23 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.os.Handler
+import android.os.Message
+import android.text.TextUtils
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alipay.sdk.app.PayTask
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.alipay.AuthResult
+import com.example.mechanicalapp.alipay.PayResult
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PayAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.PayData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
-import com.example.mechanicalapp.ui.data.WxPayBean
+import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.DateUtils
@@ -32,6 +38,58 @@ class PayActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListener,Ne
     private var createdTime=""
     private var type=0
     private var api:IWXAPI?=null
+
+
+    @SuppressLint("HandlerLeak")
+    private val mHandler: Handler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            when (msg.what) {
+                Configs.SDK_PAY_FLAG-> {
+                    val payResult = PayResult(msg.obj as Map<String?, String?>)
+                    /**
+                     * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
+                    val resultInfo: String = payResult.result // 同步返回需要验证的信息
+                    val resultStatus: String = payResult.resultStatus
+
+                    var bundle = Bundle()
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        bundle.putInt("type", 0)
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        bundle.putInt("type", 1)
+                    }
+                    jumpActivity(bundle, PayResultActivity::class.java)
+                    finish()
+                }
+                Configs.SDK_AUTH_FLAG-> {
+                    val authResult = AuthResult(msg.obj as Map<String?, String?>, true)
+                    val resultStatus: String = authResult.resultStatus
+
+                    // 判断resultStatus 为“9000”且result_code
+                    // 为“200”则代表授权成功，具体状态码代表含义可参考授权接口文档
+                    if (TextUtils.equals(
+                            resultStatus,
+                            "9000"
+                        ) && TextUtils.equals(authResult.resultCode, "200")
+                    ) {
+                        // 获取alipay_open_id，调支付时作为参数extern_token 的value
+                        // 传入，则支付账户为该授权账户
+
+                    } else {
+                        // 其他状态值则为授权失败
+                    }
+                }
+                else -> {
+                }
+            }
+        }
+    }
+
+
+
     override fun getLayoutId(): Int {
         return R.layout.activity_pay
     }
@@ -130,18 +188,29 @@ class PayActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListener,Ne
     }
 
     private fun payAlly() {
-
-
+        mMecAppPresenter?.payAlly(orderId)
     }
 
     override fun refreshUI(data: NetData?) {
         if (data!=null &&data is WxPayBean){
             payToWx(data?.result?.msg)
+        }  else if (data is AliPayBean) {
+            payToAlly(data?.result)
         }
+    }
+    private fun payToAlly(msg: String?) {
+        var thread =Thread {
+            var aliPay = PayTask(this@PayActivity)
+            var result =aliPay.payV2(msg, true)
+            var msg = Message.obtain()
+            msg.what =1
+            msg.obj =result
+            mHandler.handleMessage(msg)
+        }
+        thread.start()
     }
 
     private fun payToWx(msg: WxPayBean.ResultBean.MsgBean?) {
-
 
         var request= PayReq();
         request.appId = msg?.appid;

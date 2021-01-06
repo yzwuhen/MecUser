@@ -1266,7 +1266,14 @@ class ModelImpl : BaseModel {
         )?.subscribe(mNetSubscribe)
 
     }
+    //支付宝支付
+    fun payAlly(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<AliPayBean>){
+        appsService?.payAlly(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
 
+    }
     //获取工程师列表
     fun getEng(token: String?, title: String?,mNetSubscribe: NetSubscribe<EngListBean>) {
         appsService?.getEngList(token,title)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
@@ -1348,7 +1355,7 @@ class ModelImpl : BaseModel {
         )?.subscribe(netSubscribe)
     }
 
-    fun getMyPartsEvaluate(token: String?, orderId: String, netSubscribe: NetSubscribe<NetData>) {
+    fun getMyPartsEvaluate(token: String?, orderId: String, netSubscribe: NetSubscribe<LookEvaluateBean>) {
         appsService?.getMyPartsEvaluate(token,orderId)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()

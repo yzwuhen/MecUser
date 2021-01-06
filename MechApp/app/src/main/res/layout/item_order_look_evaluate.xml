@@ -54,6 +54,7 @@
             android:id="@+id/tv_attr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:background="@drawable/rect_radio_2_g"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_10"
@@ -127,26 +128,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
+            android:isIndicator="true"
             android:stepSize="1"
             android:numStars="5"
             android:rating="3" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tv_score"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="15dp"-->
-<!--            android:layout_marginLeft="@dimen/dp_8"-->
-<!--            android:layout_marginTop="@dimen/dp_10"-->
-<!--            android:text="3分"-->
-<!--            android:textColor="#FFB923"-->
-<!--            android:textSize="13sp" />-->
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="3分"
+                    android:textColor="#FFB923"
+                    android:textSize="13sp" />
     </LinearLayout>
 
-    <EditText
+    <TextView
 
         android:id="@+id/tv_info"
         android:layout_width="match_parent"
-        android:layout_height="174dp"
+        android:layout_height="@dimen/dp_size_125"
         android:layout_marginTop="@dimen/dp_35"
         android:background="@drawable/rect_radio_6_g"
         android:gravity="start"

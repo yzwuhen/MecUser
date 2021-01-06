@@ -15,8 +15,16 @@ import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import com.netease.nim.uikit.api.NimUIKit
+import com.netease.nim.uikit.api.model.contact.ContactChangedObserver
+import com.netease.nim.uikit.business.recent.TeamMemberAitHelper
+import com.netease.nimlib.sdk.NIMClient
+import com.netease.nimlib.sdk.Observer
+import com.netease.nimlib.sdk.msg.MsgServiceObserve
+import com.netease.nimlib.sdk.msg.model.IMMessage
 import com.netease.nimlib.sdk.msg.model.RecentContact
 import kotlinx.android.synthetic.main.fragment_msg_list.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgView<List<RecentContact>> {
@@ -56,30 +64,102 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
 
         mPresenter = MsgPresenter(this)
         mPresenter?.request()
+
     }
+
+    // 暂存消息，当RecentContact 监听回来时使用，结束后清掉
+    private val cacheMessages=TreeMap<String, Set<IMMessage>>()
+    /**
+     * ********************** 收消息，处理状态变化 ************************
+     */
+    private fun registerObservers(register: Boolean) {
+        val service = NIMClient.getService(MsgServiceObserve::class.java)
+        service.observeReceiveMessage(object : Observer<List<IMMessage>> {
+            override fun onEvent(imMessages: List<IMMessage>?) {
+                if (imMessages != null) {
+                    for (imMessage in imMessages) {
+                        if (!TeamMemberAitHelper.isAitMessage(imMessage)) {
+                            continue
+                        }
+                        var cacheMessageSet=
+                            cacheMessages[imMessage.sessionId]
+                        if (cacheMessageSet == null) {
+                            cacheMessageSet = HashSet()
+                            cacheMessages[imMessage.sessionId] = cacheMessageSet
+                        }
+                        cacheMessageSet.add(imMessage)
+                    }
+                }
+            }
+        }, register)
+        service.observeRecentContact({ }, register)
+        service.observeMsgStatus({ }, register)
+        service.observeRecentContactDeleted({ }, register)
+        NimUIKit.getContactChangedObservable().registerObserver(object : ContactChangedObserver {
+            override fun onAddedOrUpdatedFriends(accounts: MutableList<String>?) {
+            }
+
+            override fun onDeletedFriends(accounts: MutableList<String>?) {
+            }
+
+            override fun onAddUserToBlackList(accounts: MutableList<String>?) {
+            }
+
+            override fun onRemoveUserFromBlackList(accounts: MutableList<String>?) {
+
+            }
+        }, register)
+    }
+
+
 
     fun closeRefreshView() {
         spring_list.isEnable =true
         spring_list.onFinishFreshAndLoad()
     }
 
-
     override fun onItemClick(view: View, position: Int) {
 
         when(view.id){
             R.id.item_chat_root -> jumChat(position)
-            R.id.tv_test->dialogClick(position)
+            R.id.tv_test -> dialogClick(position)
         }
     }
 
     private fun dialogClick(position: Int) {
         mTipDialog?.dismiss()
+        when(position){
+            0 -> readText()
+            1 -> topMsg()
+            2 -> delMsg()
+            3 -> addBlackList()
+        }
+
+    }
+    private fun addBlackList() {
         (mPresenter as MsgPresenter<List<RecentContact>>)?.addBlackList(mList[clickPosition].contactId)
+    }
+
+    //删除聊天
+    private fun delMsg() {
+        (mPresenter as MsgPresenter<List<RecentContact>>)?.delChat(mList[clickPosition])
+        mList.removeAt(clickPosition)
+        mChatAdapter?.notifyDataSetChanged()
+    }
+
+    //置顶
+    private fun topMsg() {
+        //通过tag置顶
+        //mList[clickPosition].tag=0
+
+    }
+    //标记已读
+    private fun readText() {
+        (mPresenter as MsgPresenter<List<RecentContact>>)?.clearUnreadCount(mList[clickPosition])
     }
 
     private fun jumChat(position: Int) {
         NimUIKit.startP2PSession(activity, mList[position]?.contactId)
-
     }
 
     override fun onItemLongClick(view: View, position: Int) {

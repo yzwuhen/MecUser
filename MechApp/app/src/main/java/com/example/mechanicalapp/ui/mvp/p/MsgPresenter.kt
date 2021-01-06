@@ -63,4 +63,12 @@ class MsgPresenter<T>(
 
     override fun onDestroy() {
     }
+
+    fun delChat(recentContact: RecentContact) {
+        NIMClient.getService(MsgService::class.java).deleteRecentContact(recentContact)
+    }
+
+    fun clearUnreadCount(recentContact: RecentContact) {
+        NIMClient.getService(MsgService::class.java).clearUnreadCount(recentContact.fromAccount,recentContact.sessionType)
+    }
 }

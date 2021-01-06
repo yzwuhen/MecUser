@@ -35,7 +35,7 @@ class LogisticsActivity :BaseCusActivity(),NetDataView<LogisticsBean>,OnItemClic
 
         ly_left.setOnClickListener(this)
         tv_title.text ="物流信息"
-        rl_title.setBackgroundColor(Color.parseColor("FFB923"))
+        rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
 
     }
 
@@ -48,7 +48,7 @@ class LogisticsActivity :BaseCusActivity(),NetDataView<LogisticsBean>,OnItemClic
     override fun refreshUI(data: LogisticsBean?) {
 
         if (data!=null&&data.result!=null){
-            tv_logistics.text="物流公司：${data.result.shipperCode}"
+            tv_logistics.text="物流公司：${data.result.shipperName}"
             tv_logistics_code.text="物流单号：${data.result.logisticCode}"
             mList.clear()
             mList.addAll(data.result.traces)

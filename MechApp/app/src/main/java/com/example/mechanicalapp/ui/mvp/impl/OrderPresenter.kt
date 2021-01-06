@@ -181,7 +181,25 @@ class OrderPresenter(
             }
         }))
     }
+    fun payAlly(orderId: String) {
+        var mRePay = RePay()
+        mRePay.id = orderId
+        baseView.showLoading()
+        baseModel.payAlly(App.getInstance().token, mRePay, NetSubscribe<AliPayBean>(object :
+            ISubscriberListener<AliPayBean> {
+            override fun onNext(t: AliPayBean?) {
+                (baseView as OrderView<NetData>).showData(t)
+            }
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
 
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
     override fun request() {
     }
 

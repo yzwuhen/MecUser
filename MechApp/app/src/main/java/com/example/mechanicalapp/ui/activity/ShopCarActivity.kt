@@ -182,15 +182,6 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
         var mgoList: MutableList<ShopCarData> = ArrayList<ShopCarData>()
         for (data in mList) {
             if (data.isSelect) {
-//                var skuBean = SkuBean()
-//                skuBean.num = data.quantity
-//                var skuList =SkuListData()
-//                skuList.price =data.price
-//                skuList.picture =data.picture
-//                skuList.mecProductName =data.productName
-//                skuList.name =data.skuName
-//                skuList.id =data.skuId
-//                skuBean.skuListData=skuList
                 mgoList.add(data)
             }
         }
@@ -223,7 +214,6 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     }
 
     override fun onItemClick(view: View, position: Int) {
-
         when (view?.id) {
             R.id.tv_attr -> getGoodsAttr(position)
             R.id.item_root -> {
@@ -243,7 +233,6 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     }
 
     private fun showDel(position: Int) {
-
         popDelIndex = position
         if (mPopwindow == null) {
             mPopwindow = this?.let {
@@ -277,13 +266,24 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
         }
         isCheckAll = !isCheckAll
         mShopCarAdapter?.notifyDataSetChanged()
+        calculate()
     }
 
     private fun selectList(position: Int) {
         isCheckAll = false
         mList[position].isSelect = !mList[position].isSelect
         mShopCarAdapter?.notifyItemChanged(position)
+        calculate()
+    }
 
+    private fun calculate(){
+        var amount =0
+        for (data in mList) {
+           if (data.isSelect){
+               amount +=data.quantity*data.price
+           }
+        }
+        tv_amount.text="合计：￥$amount"
     }
 
     private fun addNum(position: Int) {
@@ -292,6 +292,7 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
         mShopCarAdapter?.notifyItemChanged(carIndex)
         handler.removeMessages(1)
         handler.sendEmptyMessageDelayed(1, 300)
+        calculate()
     }
 
     private fun reduceNum(position: Int) {
@@ -301,6 +302,7 @@ class ShopCarActivity : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             mShopCarAdapter?.notifyItemChanged(carIndex)
             handler.removeMessages(1)
             handler.sendEmptyMessageDelayed(1, 300)
+            calculate()
         }
     }
 

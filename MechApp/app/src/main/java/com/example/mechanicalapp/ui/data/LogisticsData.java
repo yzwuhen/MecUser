@@ -16,10 +16,15 @@ public class LogisticsData implements Serializable {
 
     private String LogisticCode;
     private String ShipperCode;
+    private String ShipperName;
     private String State;
     private String EBusinessID;
     private boolean Success;
     private List<TracesBean> Traces;
+
+    public String getShipperName() {
+        return ShipperName;
+    }
 
     public String getLogisticCode() {
         return LogisticCode;

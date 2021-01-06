@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.impl.ModelImpl
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.ui.mvp.v.OrderView
 
 class MecAppPresenter(
     private var baseView: BaseView<NetData>
@@ -123,7 +124,25 @@ class MecAppPresenter(
             }
         }))
     }
+    fun payAlly(orderId: String) {
+        var mRePay = RePay()
+        mRePay.id = orderId
+        baseView.showLoading()
+        baseModel.payAlly(App.getInstance().token, mRePay, NetSubscribe<AliPayBean>(object :
+            ISubscriberListener<AliPayBean> {
+            override fun onNext(t: AliPayBean?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+                baseView.hiedLoading()
+            }
 
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
     fun getEngList() {
         baseView.showLoading()
         baseModel.getEngLetter(App.getInstance().token, NetSubscribe<EngListLetterBean>(object :
@@ -166,9 +185,9 @@ class MecAppPresenter(
     //获取订单评价
     fun getMyPartsEvaluate(orderId: String) {
         baseView.showLoading()
-        baseModel.getMyPartsEvaluate(App.getInstance().token, orderId,NetSubscribe<NetData>(object :
-            ISubscriberListener<NetData> {
-            override fun onNext(t: NetData?) {
+        baseModel.getMyPartsEvaluate(App.getInstance().token, orderId,NetSubscribe<LookEvaluateBean>(object :
+            ISubscriberListener<LookEvaluateBean> {
+            override fun onNext(t: LookEvaluateBean?) {
                 (baseView as NetDataView<NetData>).refreshUI(t)
             }
 

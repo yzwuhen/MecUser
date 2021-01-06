@@ -1,26 +1,26 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.`interface`.OnItemChangeListener
-import com.example.mechanicalapp.ui.adapter.EvaluateAdapter
+import com.example.mechanicalapp.ui.adapter.LookEvaluateAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.request.ReEvaluateParts
+import com.example.mechanicalapp.ui.data.EvaluateData
+import com.example.mechanicalapp.ui.data.LookEvaluateBean
+import com.example.mechanicalapp.ui.data.PartsOrderGoodsList
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
-import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_evaluate_parts.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class MyEvaluatePartsActivity : BaseCusActivity(), View.OnClickListener, OnItemChangeListener,
-    NetDataView<NetData> {
+class MyEvaluatePartsActivity : BaseCusActivity(), View.OnClickListener,
+    NetDataView<LookEvaluateBean> {
 
 
     private var orderId=""
-    private var mEvaList =ArrayList<ReEvaluateParts>()
+    private var orderItemList=ArrayList<EvaluateData>()
     private var mPresenter: MecAppPresenter?=null
-    private var mAdapter : EvaluateAdapter?=null
+    private var mAdapter : LookEvaluateAdapter?=null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_evaluate_parts
@@ -37,6 +37,11 @@ class MyEvaluatePartsActivity : BaseCusActivity(), View.OnClickListener, OnItemC
 
         orderId =intent.getStringExtra("order_id").toString()
 
+        recycle_list.layoutManager = LinearLayoutManager(this)
+        mAdapter =LookEvaluateAdapter(this,orderItemList)
+        recycle_list.adapter = mAdapter
+
+        tv_btn.text ="返回订单"
     }
 
     override fun initPresenter() {
@@ -45,44 +50,37 @@ class MyEvaluatePartsActivity : BaseCusActivity(), View.OnClickListener, OnItemC
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err()  {
     }
-
     override fun onClick(v: View?) {
-
         when(v?.id){
             R.id.iv_back->finish()
             R.id.tv_btn ->submit()
         }
     }
-
     private fun submit() {
        finish()
     }
 
-    override fun onItemClick(view: View, position: Int, any: String) {
-        when(view?.id){
-            R.id.ratingBar->{
-                mEvaList[position].star =any
+
+    override fun refreshUI(data: LookEvaluateBean?) {
+        if (data!=null&&data.code==200){
+            orderItemList.clear()
+            if (data.result!=null&&data.result.size>0){
+                orderItemList.addAll(data.result)
             }
-            R.id.tv_info->{
-                mEvaList[position].content =any
-            }
+            mAdapter?.notifyDataSetChanged()
         }
+
     }
 
-    override fun refreshUI(data: NetData?) {
-        ToastUtils.showText(data?.message)
-        if (data?.code==200){
-            finish()
-        }
-    }
-
-    override fun loadMore(data: NetData?) {
+    override fun loadMore(data: LookEvaluateBean?) {
     }
 }

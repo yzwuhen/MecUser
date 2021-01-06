@@ -1282,6 +1282,15 @@ interface AppService {
         @Body requestBody: RePay?
     ): Observable<WxPayBean>
 
+    /*支付宝支付支付
+* */
+    @POST("/jeecg-boot/shop/mecOrder/alipay")
+    fun payAlly(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: RePay?
+    ): Observable<AliPayBean>
+
+
     /* 获取工程师列表
 * */
     @GET("/jeecg-boot/repair/mecRepairEngineer/list")
@@ -1364,8 +1373,6 @@ interface AppService {
         @Query("id") id:String?
     ): Observable<NetData>
 
-
-
     /**
      * 查看物流
      */
@@ -1375,7 +1382,6 @@ interface AppService {
         @Query("id") id:String?
     ): Observable<LogisticsBean>
 
-
     /**
      * 获取订单的评价
      */
@@ -1383,5 +1389,5 @@ interface AppService {
     fun getMyPartsEvaluate(
         @Header("X-Access-Token") token: String?,
         @Query("orderId") id:String?
-    ): Observable<LogisticsBean>
+    ): Observable<LookEvaluateBean>
 }

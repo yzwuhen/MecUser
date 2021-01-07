@@ -15,29 +15,24 @@ import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
 import com.netease.nim.uikit.api.NimUIKit
-import com.netease.nim.uikit.api.model.contact.ContactChangedObserver
-import com.netease.nim.uikit.business.recent.TeamMemberAitHelper
 import com.netease.nimlib.sdk.NIMClient
-import com.netease.nimlib.sdk.Observer
 import com.netease.nimlib.sdk.msg.MsgServiceObserve
-import com.netease.nimlib.sdk.msg.model.IMMessage
 import com.netease.nimlib.sdk.msg.model.RecentContact
 import kotlinx.android.synthetic.main.fragment_msg_list.*
-import java.util.*
-import kotlin.collections.ArrayList
 
 
-class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgView<List<RecentContact>> {
+class ChatMsgFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
+    MsgView<List<RecentContact>> {
 
-    private var mChatAdapter:ChatAdapter?=null
+    private var mChatAdapter: ChatAdapter? = null
     var mList: MutableList<RecentContact> = ArrayList<RecentContact>()
 
-    private var mTipDialog: BottomSheetDialog?=null
-    private var mTipView: View?=null
-    private var mDialogRecycle : RecyclerView?=null
+    private var mTipDialog: BottomSheetDialog? = null
+    private var mTipView: View? = null
+    private var mDialogRecycle: RecyclerView? = null
     private var mDialogList: MutableList<String> = ArrayList<String>()
-    private var mDialogAdapter : DialogListAdapter?=null
-    private var clickPosition=0
+    private var mDialogAdapter: DialogListAdapter? = null
+    private var clickPosition = 0
     override fun getLayoutId(): Int {
         return R.layout.fragment_msg_list
     }
@@ -49,8 +44,8 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
         mChatAdapter = ChatAdapter(mContext, mList, this, this)
         recycle_list.adapter = mChatAdapter
 
-        spring_list.type=SpringView.Type.FOLLOW
-        spring_list.header=RefreshHeaderUtils.getHeaderView(mContext)
+        spring_list.type = SpringView.Type.FOLLOW
+        spring_list.header = RefreshHeaderUtils.getHeaderView(mContext)
 
         spring_list.setListener(object : SpringView.OnFreshListener {
             override fun onRefresh() {
@@ -65,62 +60,34 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
         mPresenter = MsgPresenter(this)
         mPresenter?.request()
 
+        registerObservers(true)
     }
 
-    // 暂存消息，当RecentContact 监听回来时使用，结束后清掉
-    private val cacheMessages=TreeMap<String, Set<IMMessage>>()
     /**
      * ********************** 收消息，处理状态变化 ************************
+     *  好像只需要监听会话列表就行。
      */
     private fun registerObservers(register: Boolean) {
         val service = NIMClient.getService(MsgServiceObserve::class.java)
-        service.observeReceiveMessage(object : Observer<List<IMMessage>> {
-            override fun onEvent(imMessages: List<IMMessage>?) {
-                if (imMessages != null) {
-                for (imMessage in imMessages) {
-                    if (!TeamMemberAitHelper.isAitMessage(imMessage)) {
-                        continue
+        service.observeRecentContact({ recentContacts ->
+            mList.clear()
+            if (recentContacts != null) {
+                for (recent in recentContacts){
+                    if (recent.contactId.split("-").size==3){
+                        mList.add(recent)
                     }
-                    var cacheMessageSet=
-                        cacheMessages[imMessage.sessionId]
-                    if (cacheMessageSet == null) {
-                        cacheMessageSet = HashSet()
-                        cacheMessages[imMessage.sessionId] = cacheMessageSet
-                    }
-                  //  cacheMessageSet.add(imMessage)
                 }
             }
-        }
-        }, register)
-        service.observeRecentContact({ }, register)
-        service.observeMsgStatus({ }, register)
-        service.observeRecentContactDeleted({ }, register)
-        NimUIKit.getContactChangedObservable().registerObserver(object : ContactChangedObserver {
-            override fun onAddedOrUpdatedFriends(accounts: MutableList<String>?) {
-            }
-
-            override fun onDeletedFriends(accounts: MutableList<String>?) {
-            }
-
-            override fun onAddUserToBlackList(accounts: MutableList<String>?) {
-            }
-
-            override fun onRemoveUserFromBlackList(accounts: MutableList<String>?) {
-
-            }
+            mChatAdapter?.notifyDataSetChanged()
         }, register)
     }
-
-
-
     fun closeRefreshView() {
-        spring_list.isEnable =true
+        spring_list.isEnable = true
         spring_list.onFinishFreshAndLoad()
     }
 
     override fun onItemClick(view: View, position: Int) {
-
-        when(view.id){
+        when (view.id) {
             R.id.item_chat_root -> jumChat(position)
             R.id.tv_test -> dialogClick(position)
         }
@@ -128,14 +95,14 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
 
     private fun dialogClick(position: Int) {
         mTipDialog?.dismiss()
-        when(position){
+        when (position) {
             0 -> readText()
             1 -> topMsg()
             2 -> delMsg()
             3 -> addBlackList()
         }
-
     }
+
     private fun addBlackList() {
         (mPresenter as MsgPresenter<List<RecentContact>>)?.addBlackList(mList[clickPosition].contactId)
     }
@@ -153,6 +120,7 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
         //mList[clickPosition].tag=0
 
     }
+
     //标记已读
     private fun readText() {
         (mPresenter as MsgPresenter<List<RecentContact>>)?.clearUnreadCount(mList[clickPosition])
@@ -166,9 +134,10 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
         showShare(position)
 
     }
+
     private fun showShare(position: Int) {
-        clickPosition =position
-        if (mTipDialog ==null){
+        clickPosition = position
+        if (mTipDialog == null) {
             mTipDialog = BottomSheetDialog(mContext)
             mTipView = View.inflate(mContext, R.layout.dialog_list, null)
             mTipDialog?.setContentView(mTipView!!)
@@ -179,20 +148,29 @@ class ChatMsgFragment:BaseCusFragment(),OnItemClickListener,OnItemLongClick,MsgV
             mDialogList.add("置顶聊天")
             mDialogList.add("删除聊天记录")
             mDialogList.add("黑名单")
-            mDialogRecycle?.layoutManager =LinearLayoutManager(mContext)
+            mDialogRecycle?.layoutManager = LinearLayoutManager(mContext)
             mDialogAdapter = DialogListAdapter(mContext, mDialogList, this)
-            mDialogRecycle?.adapter =mDialogAdapter
+            mDialogRecycle?.adapter = mDialogAdapter
 
         }
         mTipDialog?.show()
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //反注册x
+        registerObservers(false)
+    }
 
     override fun refreshUI(list: List<RecentContact>?) {
         mList.clear()
-        if (list!=null){
-            mList.addAll(list)
+        if (list != null&&list.size>0) {
+          for (recent in list){
+             if (recent.contactId.split("-").size<3){
+                 mList.add(recent)
+             }
+          }
         }
         mChatAdapter?.notifyDataSetChanged()
         closeRefreshView()

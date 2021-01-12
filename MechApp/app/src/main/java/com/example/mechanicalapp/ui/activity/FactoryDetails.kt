@@ -18,6 +18,7 @@ import com.example.mechanicalapp.ui.data.IsCollectBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.ToastUtils
@@ -50,7 +51,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
 
     var mList: MutableList<BannerData>? = ArrayList<BannerData>()
 
-
+    private var mMecPresenter: MecAppPresenter?=null
     private var mPresenter: DetailsPresenter? = null
     private var id: String? = null
     private var mData:FactoryDetailsBean.ResultBean?=null
@@ -114,6 +115,10 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
         web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
         web.description = mData?.companyName//描述
         ShareAction(this).withMedia(web).setPlatform(type).share()
+        if (mMecPresenter==null){
+            mMecPresenter = MecAppPresenter(this)
+        }
+        mMecPresenter?.shareTo()
     }
     private fun collect() {
         if (TextUtils.isEmpty(App.getInstance().token)){

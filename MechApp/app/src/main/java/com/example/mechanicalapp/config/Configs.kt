@@ -63,6 +63,7 @@ object Configs {
 
     const val TOKEN:String="token"
     const val USER_INFO:String="user_info"
+    const val THREE_PHONE:String="three_phone"//一键登陆时记录的手机号
     
     const val WX_APP_ID="wxcee9e76d06d68a8f"
 

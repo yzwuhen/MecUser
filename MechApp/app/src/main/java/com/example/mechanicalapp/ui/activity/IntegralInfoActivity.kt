@@ -87,6 +87,7 @@ class IntegralInfoActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
 
     override fun hiedLoading() {
         hideLoadingView()
+        closeRefreshView()
     }
 
     override fun err() {

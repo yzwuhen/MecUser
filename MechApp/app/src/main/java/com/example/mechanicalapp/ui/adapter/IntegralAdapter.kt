@@ -20,6 +20,7 @@ class IntegralAdapter (var mContext: Context, var mList:MutableList<IntegralData
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_integral_info.text =mList[position].updateAction
 
+        holder.itemView.tv_time.text =mList[position].createTime
     }
 
     override fun getItemCount(): Int {

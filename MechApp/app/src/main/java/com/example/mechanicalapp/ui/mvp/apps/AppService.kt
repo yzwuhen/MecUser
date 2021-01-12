@@ -1390,4 +1390,12 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("orderId") id:String?
     ): Observable<LookEvaluateBean>
+
+    /**
+     * 分享得积分
+     */
+    @GET("/jeecg-boot/market/mecMarketPoints/shareMarketAuthPoints")
+    fun shareTo(
+        @Header("X-Access-Token") token: String?
+    ): Observable<NetData>
 }

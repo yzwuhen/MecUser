@@ -1,14 +1,10 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.telephony.TelephonyManager
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import androidx.core.app.ActivityCompat
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.R
@@ -20,6 +16,9 @@ import com.example.mechanicalapp.ui.data.request.ReLoginThree
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
 import com.example.mechanicalapp.utils.ToastUtils
+import com.mobile.auth.gatewayauth.PhoneNumberAuthHelper
+import com.mobile.auth.gatewayauth.TokenResultListener
+import com.mobile.auth.gatewayauth.model.TokenRet
 import com.orhanobut.hawk.Hawk
 import com.umeng.socialize.UMAuthListener
 import com.umeng.socialize.UMShareAPI
@@ -29,11 +28,12 @@ import kotlinx.android.synthetic.main.activity_login_third.*
 import kotlinx.android.synthetic.main.layout_title.*
 
 
-class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UMAuthListener {
-    private var isCheck:Boolean=false
-    private var telephonyManager: TelephonyManager? = null
-    private var mPresenter:LoginCodePresenter?=null
-    private var reLoginThree =ReLoginThree()
+class LoginActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView, UMAuthListener {
+    private var isCheck: Boolean = false
+    private var mPresenter: LoginCodePresenter? = null
+    private var reLoginThree = ReLoginThree()
+
+    var mAlicomAuthHelper: PhoneNumberAuthHelper? = null
     override fun getLayoutId(): Int {
 
         return R.layout.activity_login_third
@@ -52,60 +52,36 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
         tv_agreement.setOnClickListener(this)
         tv_privacy.setOnClickListener(this)
         tv_other_login.setOnClickListener(this)
-
-        telephonyManager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager?
-
-        try {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_SMS
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_PHONE_NUMBERS
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_PHONE_STATE
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-
-                Log.v("=s===========","====们没有权限1============${ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_SMS
-                ) != PackageManager.PERMISSION_GRANTED}")
-
-                Log.v("=s===========","====们没有权限2============${ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_PHONE_NUMBERS
-                ) != PackageManager.PERMISSION_GRANTED}")
-
-
-                Log.v("=s===========","====们没有权限=3===========${ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_PHONE_STATE
-                ) != PackageManager.PERMISSION_GRANTED}")
-
-
-                Log.v("=s===========","====们没有权限=5===========${telephonyManager?.line1Number}")
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-            Log.v("=s===========","===============${telephonyManager?.line1Number}")
-            tv_phone.text = "本机号码${telephonyManager?.line1Number}"
-        } catch (e: Exception) {
-
-            Log.v("=s===========","================$e")
+        if (TextUtils.isEmpty(Hawk.get(Configs.THREE_PHONE))) {
+            tv_phone.visibility = View.INVISIBLE
+        } else {
+            tv_phone.text = Hawk.get(Configs.THREE_PHONE)
         }
 
     }
 
+    private fun auth() {
+        mAlicomAuthHelper = PhoneNumberAuthHelper.getInstance(this, object : TokenResultListener {
+            override fun onTokenSuccess(success: String?) {
+
+                val pTokenRet = TokenRet.fromJson(success)
+                if (pTokenRet.code == "600000") {
+                    mAlicomAuthHelper?.quitLoginPage()
+                    mAlicomAuthHelper?.hideLoginLoading()
+                    Log.v("获取token 成功 ", "================${pTokenRet.token}")
+                }
+            }
+            override fun onTokenFailed(failed: String?) {
+                Log.v("onTokenFailed 失败 ", "================$failed")
+            }
+        })
+        mAlicomAuthHelper?.setAuthSDKInfo("drnki1YtLe9L4+1S1HHSSgcZPiXwXcad2mYVO3OmiVjU/5pQZWFD7JpozZtwiLNIeZvjw/ZD4tRhbT0uAoI0e2z12kn/ONYjgpYa0oI3PNVTvP2Ir1Z0kuAA5SjhuPXY53YjRUgnhaVQLO+8SirvzJSJ7efbxqNBMRd3ZaYqubCNiy9Km4xCbS+HseMKitIyJmYu71LCBS3MHpoJAU17lmVwiGBcgv4F1KI/cs6b2kTa9yN1k3HDGHE3V/KDdNuelQedU7hYOdFSJkjqNhXTnujklHjh2VLkEw+t23iebr3aWY9RXdOnzzpR0fsAFfm8")
+        mAlicomAuthHelper?.checkEnvAvailable(PhoneNumberAuthHelper.SERVICE_TYPE_LOGIN)
+        mAlicomAuthHelper?.getLoginToken(this, 5000)
+    }
+
     override fun initPresenter() {
-        mPresenter=  LoginCodePresenter(this,this)
+        mPresenter = LoginCodePresenter(this, this)
     }
 
     override fun showLoading() {
@@ -114,7 +90,7 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
     override fun hiedLoading() {
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     override fun onClick(v: View?) {
@@ -138,10 +114,10 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
     }
 
     private fun check() {
-        isCheck =!isCheck
-        if (isCheck){
+        isCheck = !isCheck
+        if (isCheck) {
             tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check_s, 0, 0, 0)
-        }else{
+        } else {
             tv_check.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.login_check, 0, 0, 0)
         }
 
@@ -156,7 +132,7 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
     }
 
     private fun LoginWx() {
-        if (!isCheck){
+        if (!isCheck) {
             ToastUtils.showText("请先阅读并同意用户协议")
             return
         }
@@ -168,7 +144,11 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
     }
 
     private fun login() {
-
+        if (TextUtils.isEmpty(Hawk.get(Configs.THREE_PHONE))) {
+            auth()
+        } else {
+            //调一键登陆
+        }
 
     }
 
@@ -176,18 +156,22 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
 
     }
 
-    override fun onComplete(platform: SHARE_MEDIA?, action: Int, data: MutableMap<String, String>?) {
+    override fun onComplete(
+        platform: SHARE_MEDIA?,
+        action: Int,
+        data: MutableMap<String, String>?
+    ) {
         Log.v("sss", "==============================")
 
-        if (platform==SHARE_MEDIA.QQ){
-            reLoginThree.type ="2"
+        if (platform == SHARE_MEDIA.QQ) {
+            reLoginThree.type = "2"
 
-        }else if (platform ==SHARE_MEDIA.WEIXIN){
-            reLoginThree.type ="1"
-            reLoginThree.thirdId=data?.get("openid")
-            App.getInstance().userInfo.sex=1
-            App.getInstance().userInfo.avatar=data?.get("profile_image_url")
-            App.getInstance().userInfo.realname=data?.get("name")
+        } else if (platform == SHARE_MEDIA.WEIXIN) {
+            reLoginThree.type = "1"
+            reLoginThree.thirdId = data?.get("openid")
+            App.getInstance().userInfo.sex = 1
+            App.getInstance().userInfo.avatar = data?.get("profile_image_url")
+            App.getInstance().userInfo.realname = data?.get("name")
         }
         mPresenter?.loginThree(reLoginThree)
     }
@@ -200,20 +184,19 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener , LoginCodeView,UM
     }
 
     override fun success(netData: NetData) {
-        if (netData!=null &&netData is LoginCodeBean){
-            if (netData.code==200){
+        if (netData != null && netData is LoginCodeBean) {
+            if (netData.code == 200) {
                 jumpActivity(null, MainActivity::class.java)
                 App.getInstance().setUser(netData.result?.userInfo)
-                App.getInstance().token=netData.result?.token
+                App.getInstance().token = netData.result?.token
 
                 finish()
-            }else if (netData.code==201){
-                var bundle =Bundle()
-                bundle.putSerializable("data",reLoginThree)
+            } else if (netData.code == 201) {
+                var bundle = Bundle()
+                bundle.putSerializable("data", reLoginThree)
                 jumpActivity(bundle, BindPhoneActivity::class.java)
                 finish()
-            }
-            else{
+            } else {
                 ToastUtils.showText(netData.message)
             }
         }

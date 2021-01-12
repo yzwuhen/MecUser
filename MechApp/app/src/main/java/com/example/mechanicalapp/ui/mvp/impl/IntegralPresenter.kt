@@ -43,15 +43,14 @@ class IntegralPresenter (
     }
 
     fun resetPage() {
-        page=0
+        page=1
     }
 
     fun getIntegralList() {
-        Log.v("sss","sssssssssss=====${App.getInstance().token}")
         baseView.showLoading()
         baseModel.getIntegralList(App.getInstance().token,App.getInstance().userInfo.username,page,pageSize,object :ISubscriberListener<IntegralListBean>{
             override fun onNext(t: IntegralListBean?) {
-                if (page==0){
+                if (page==1){
                     if (t?.code==200){
                         (baseView as IntegralView<List<IntegralData>>).showData(t?.result?.records)
                     }

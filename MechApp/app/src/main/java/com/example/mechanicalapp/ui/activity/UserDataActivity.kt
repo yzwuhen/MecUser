@@ -18,6 +18,7 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
+import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_user_data.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.io.File
@@ -48,13 +49,9 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
         iv_back.setOnClickListener(this)
         tv_title.text = "个人资料"
 
-
         ly_user_pic.setOnClickListener(this)
         ly_sex.setOnClickListener(this)
         ly_nick.setOnClickListener(this)
-
-
-
         userInfo =App.getInstance().userInfo
     }
 
@@ -79,7 +76,6 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
 
     }
     override fun success(netData: NetData?) {
-
         ToastUtils.showText(netData?.message)
     }
 
@@ -91,9 +87,7 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
             mPresenter?.upImHeaderImg(netData.message)
         }
     }
-
     override fun uploadFail(str: String) {
-
         ToastUtils.showText(str)
     }
 
@@ -185,7 +179,6 @@ class UserDataActivity : BaseCusActivity(), View.OnClickListener, UserView {
 
     override fun hasPermissions() {
         super.hasPermissions()
-        Log.v("=======","=========申请选取")
         if (picType==0){
             takePicture()
         }else{

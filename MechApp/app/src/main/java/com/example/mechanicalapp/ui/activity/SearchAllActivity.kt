@@ -1,6 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.util.Log
+import android.text.TextUtils
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -11,11 +11,9 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.java.EventFresh
 import com.example.mechanicalapp.ui.data.java.EventSearch
 import com.example.mechanicalapp.ui.fragment.search.*
 import kotlinx.android.synthetic.main.activity_search_all.*
-import kotlinx.android.synthetic.main.layout_left_right_title.*
 import kotlinx.android.synthetic.main.layout_search_et.*
 import org.greenrobot.eventbus.EventBus
 
@@ -67,6 +65,9 @@ class SearchAllActivity : BaseCusActivity(), View.OnClickListener, TextView.OnEd
         cus_page.addOnPageChangeListener(this)
 
         et_search.setOnEditorActionListener(this)
+        if (!TextUtils.isEmpty(title)){
+            et_search.setText(title)
+        }
     }
 
     override fun initPresenter() {

@@ -91,6 +91,7 @@ class MyIntegralActivity : BaseCusActivity(), View.OnClickListener,IntegralView<
         if (netData?.code==200){
             tv_sign.text="已签到"
             tv_sign.isEnabled= false
+            tv_integral.text = (tv_integral.text.toString().toInt()+10).toString()
         }
     }
 }

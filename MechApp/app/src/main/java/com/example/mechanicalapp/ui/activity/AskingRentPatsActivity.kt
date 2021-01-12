@@ -23,6 +23,7 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.RePartsLease
 import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import com.example.mechanicalapp.ui.mvp.impl.UpdateFilePresenterImpl
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.ReleaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.GlideEngine

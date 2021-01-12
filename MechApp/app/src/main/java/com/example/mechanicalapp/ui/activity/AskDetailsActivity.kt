@@ -16,6 +16,7 @@ import com.example.mechanicalapp.ui.data.MecDetailsData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
@@ -52,7 +53,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
     private var mecId: String? = null
     private var mData:MecDetailsData?=null
     private var mReCollect = ReCollect()
-
+    private var mMecPresenter: MecAppPresenter?=null
     private var isCollect=false
     override fun getLayoutId(): Int {
         return R.layout.activity_ask_details
@@ -114,6 +115,10 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
         web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
         web.description = mData?.title//描述
         ShareAction(this).withMedia(web).setPlatform(type).share()
+        if (mMecPresenter==null){
+            mMecPresenter = MecAppPresenter(this)
+        }
+        mMecPresenter?.shareTo()
     }
 
     private fun collect() {

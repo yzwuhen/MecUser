@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.impl.OrderPresenter
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -54,7 +55,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     private var mPresenter:OrderPresenter?=null
     private var orderData:OrderDetailsData?=null
-
+    private var mMecPresenter: MecAppPresenter?=null
     private var mMecRepairEngineerBean: OrderDetailsData.MecRepairEngineerBean?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_order_details
@@ -127,7 +128,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
         when (v?.id) {
             R.id.iv_left -> finish()
-            R.id.ly_right -> share()
+            R.id.ly_right -> showShare()
             R.id.iv_look -> showPop(1)
             R.id.tv_cancel_order -> showPop(0)
             R.id.tv_letter1->goToChat()
@@ -149,7 +150,6 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             R.id.tv_pop_input_cancel -> goVideo()
             R.id.tv_pop_input_sure -> goVideo()
             R.id.ly_look_details2 -> jumDetailedList()
-            R.id.iv_right -> showShare()
             R.id.ly_wx -> shareThree(SHARE_MEDIA.WEIXIN)
             R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
             R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
@@ -164,6 +164,10 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
         web.description = "订单：${orderData?.orderNum}"//描述
         ShareAction(this).withMedia(web).setPlatform(type).share()
+        if (mMecPresenter==null){
+            mMecPresenter = MecAppPresenter(this)
+        }
+        mMecPresenter?.shareTo()
     }
 
 
@@ -273,12 +277,6 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         }
 
         this?.let { PopUtils.showPopupWindow(ly_right, it) }
-    }
-
-
-    private fun share() {
-
-
     }
 
     override fun getView(view: View?) {

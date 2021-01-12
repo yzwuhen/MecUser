@@ -119,7 +119,9 @@
         <activity android:name=".ui.activity.MoreSelPartsType" />
         <activity android:name=".ui.activity.MoreSelectMecType" />
         <activity android:name=".ui.activity.MyLookActivity" />
-        <activity android:name=".ui.activity.PartsOrderActivity" android:launchMode="singleTask"/>
+        <activity
+            android:name=".ui.activity.PartsOrderActivity"
+            android:launchMode="singleTask" />
         <activity android:name=".ui.activity.PartsOrderDetails" />
         <activity android:name=".ui.activity.EvaluatePartsActivity" />
         <activity android:name=".ui.activity.ApplyRefundActivity" />
@@ -157,7 +159,7 @@
         <activity android:name=".ui.activity.MyMecRelease" />
         <activity android:name=".ui.activity.SureOrderCarActivity" />
         <activity android:name=".ui.activity.FactoryDetails" />
-        <activity android:name=".ui.activity.PartsOrderAfterDetails"/>
+        <activity android:name=".ui.activity.PartsOrderAfterDetails" />
         <activity
             android:name=".ui.activity.ResultMecLeaseActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -194,8 +196,8 @@
         <activity android:name=".ui.activity.MapJobAboutActivity" />
         <activity android:name=".ui.activity.MapFactoryActivity" />
         <activity android:name=".ui.activity.BindPhoneActivity" />
-        <activity android:name=".ui.activity.LogisticsActivity"/>
-        <activity android:name=".ui.activity.MyEvaluatePartsActivity"/>
+        <activity android:name=".ui.activity.LogisticsActivity" />
+        <activity android:name=".ui.activity.MyEvaluatePartsActivity" />
         <activity
             android:name=".ui.activity.ResultEngineerActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -242,6 +244,28 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <!--        =================一键登陆授权页===================-->
+        <!--联通电信授权页-->
+        <activity
+            android:name="com.mobile.auth.gatewayauth.LoginAuthActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/authsdk_activity_dialog" />
+        <!--协议页面webview-->
+        <activity
+            android:name="com.mobile.auth.gatewayauth.activity.AuthWebVeiwActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="behind" />
+        <!--移动授权页-->
+        <activity
+            android:name="com.cmic.sso.sdk.activity.LoginAuthActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:launchMode="singleTop" />
+        <!--        =================一键登陆授权页===================-->
         <!--==================================网易云信=========================================-->
         <!-- APP key, 可以在这里设置，也可以在 SDKOptions 中提供。
       如果 SDKOptions 中提供了，则取 SDKOptions 中的值。 -->
@@ -293,9 +317,9 @@
         <!-- 云信内部使用的进程间通信provider -->
         <!-- SDK启动时会强制检测该组件的声明是否配置正确，如果检测到该声明不正确，SDK会主动抛出异常引发崩溃 -->
         <provider
-        android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider"
-        android:authorities="com.example.mechanicalapp.ipc.provider.preference"
-        android:exported="false"/>
+            android:name="com.netease.nimlib.ipc.cp.provider.PreferenceContentProvider"
+            android:authorities="com.example.mechanicalapp.ipc.provider.preference"
+            android:exported="false" />
         <!--==================================网易云信=========================================-->
     </application>
 

@@ -16,6 +16,8 @@ import com.example.mechanicalapp.ui.fragment.home.HomeFragment
 import com.example.mechanicalapp.ui.fragment.mine.MineFragment
 import com.example.mechanicalapp.ui.fragment.msg.MsgFragment
 import com.example.mechanicalapp.ui.fragment.store.StoreFragment
+import com.mobile.auth.gatewayauth.PhoneNumberAuthHelper
+import com.mobile.auth.gatewayauth.TokenResultListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -55,6 +57,7 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
          ly_msg?.setOnClickListener(this)
 
          verifyStoragePermissions(this)
+
      }
 
     override fun onNewIntent(intent: Intent?) {

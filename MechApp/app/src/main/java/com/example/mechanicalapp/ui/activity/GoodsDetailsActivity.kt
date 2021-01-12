@@ -20,6 +20,7 @@ import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReAddCar
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.GoodsDetailsView
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
@@ -70,7 +71,7 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         ArrayList<SkuListData>()
     var mList2: MutableList<BannerData>? = ArrayList<BannerData>()
 
-
+    private var mMecPresenter: MecAppPresenter?=null
     private var mPresenter: DetailsPresenter? = null
     private var mecId: String? = null
     private var mReCollect = ReCollect()
@@ -143,6 +144,10 @@ class GoodsDetailsActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
         web.description = goodsProduct?.title//描述
         ShareAction(this).withMedia(web).setPlatform(type).share()
+        if (mMecPresenter==null){
+            mMecPresenter = MecAppPresenter(this)
+        }
+        mMecPresenter?.shareTo()
     }
 
     private fun collect() {

@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
@@ -47,7 +48,7 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
     private var isCollect=false
     private var id =""
     private var mPresenter : DetailsPresenter?=null
-
+    private var mMecPresenter: MecAppPresenter?=null
     private var mData: RecruitDetailsData?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_job_want_details
@@ -128,6 +129,10 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
         web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
         web.description = mData?.jobtitle//描述
         ShareAction(this).withMedia(web).setPlatform(type).share()
+        if (mMecPresenter==null){
+            mMecPresenter = MecAppPresenter(this)
+        }
+        mMecPresenter?.shareTo()
     }
     private fun showPhone() {
 

@@ -1360,6 +1360,12 @@ class ModelImpl : BaseModel {
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)
+    }
 
+    fun shareTo(token: String?,netSubscribe: NetSubscribe<NetData>) {
+        appsService?.shareTo(token)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
     }
 }

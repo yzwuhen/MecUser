@@ -18,6 +18,7 @@ import com.example.mechanicalapp.ui.data.MecDetailsData
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
@@ -52,7 +53,7 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
 
     var mList: MutableList<BannerData>? = ArrayList<BannerData>()
 
-
+    private var mMecPresenter: MecAppPresenter?=null
     private var mPresenter: DetailsPresenter? = null
     private var intentType: Int? = 0
     private var mecId: String? = null
@@ -121,6 +122,10 @@ class LeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtils.o
         web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
         web.description = mData?.title//描述
         ShareAction(this).withMedia(web).setPlatform(type).share()
+        if (mMecPresenter==null){
+            mMecPresenter = MecAppPresenter(this)
+        }
+        mMecPresenter?.shareTo()
     }
 
     private fun collect() {

@@ -1,16 +1,21 @@
 package com.example.mechanicalapp.ui.view
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.config.Configs
+import com.example.mechanicalapp.ui.activity.SearchAllActivity
 import com.example.mechanicalapp.ui.data.HotMechineCate
 import kotlinx.android.synthetic.main.layout_hot_apparatus.view.*
 
 class HotApparatusView(var mContext :Context) :FrameLayout(mContext),View.OnClickListener {
     var hView : View?=null
+    var list= listOf<String>("挖掘机","旋挖机","推土机","汽车吊","泵车","装载机")
     init {
         this.clipChildren=false;
         this.clipToPadding =false;
@@ -37,17 +42,16 @@ class HotApparatusView(var mContext :Context) :FrameLayout(mContext),View.OnClic
 
     }
 
-    private fun jumAct(type: Int) {
-
-//        val intent = Intent()
-//        val bundle =Bundle()
-//        bundle.putInt(Configs.SEARCH_TYPE,type)
-//        intent.setClass(mContext, SearchMecActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-//        if (bundle != null) {
-//            intent.putExtras(bundle)
-//        }
-//        mContext.startActivity(intent)
+    private fun jumAct(index: Int) {
+        var bundle: Bundle = Bundle()
+        bundle.putString(Configs.SEARCH_RESULT_TITLE,list[index])
+        val intent = Intent()
+        intent.setClass(mContext, SearchAllActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
+        mContext.startActivity(intent)
     }
 
     fun setData(hotMec: List<HotMechineCate>) {

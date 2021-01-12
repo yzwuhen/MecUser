@@ -8,6 +8,42 @@ public class ReEvaluateParts {
     private String content;
     private String mecOrderId;
     private String mecOrderItemId;
+    private String commentUserHeader;
+    private String commentUserId;
+    private String commentUserName;
+    private String commentUserPhone;
+
+    public String getCommentUserHeader() {
+        return commentUserHeader;
+    }
+
+    public void setCommentUserHeader(String commentUserHeader) {
+        this.commentUserHeader = commentUserHeader;
+    }
+
+    public String getCommentUserId() {
+        return commentUserId;
+    }
+
+    public void setCommentUserId(String commentUserId) {
+        this.commentUserId = commentUserId;
+    }
+
+    public String getCommentUserName() {
+        return commentUserName;
+    }
+
+    public void setCommentUserName(String commentUserName) {
+        this.commentUserName = commentUserName;
+    }
+
+    public String getCommentUserPhone() {
+        return commentUserPhone;
+    }
+
+    public void setCommentUserPhone(String commentUserPhone) {
+        this.commentUserPhone = commentUserPhone;
+    }
 
     public String getMecOrderItemId() {
         return mecOrderItemId;

@@ -3,6 +3,7 @@ package com.example.mechanicalapp.ui.mvp.impl
 import android.content.Context
 import android.util.Log
 import com.example.mechanicalapp.App
+import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.UserInfo
@@ -13,8 +14,7 @@ import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
 import com.netease.nimlib.sdk.uinfo.UserService
 import com.netease.nimlib.sdk.uinfo.constant.UserInfoFieldEnum
-
-
+import com.orhanobut.hawk.Hawk
 
 
 class UserInfoPresenter(
@@ -31,8 +31,8 @@ class UserInfoPresenter(
         baseModel.editUser(App.getInstance().token, userInfo, NetSubscribe<NetData>(object :
             ISubscriberListener<NetData> {
             override fun onNext(t: NetData?) {
-
                 (baseView as UserView).success(t)
+                Hawk.put(Configs.USER_INFO,userInfo)
             }
 
             override fun onError(e: Throwable?) {

@@ -53,7 +53,7 @@ class SureOrderActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLi
         ly_address.setOnClickListener(this)
         tv_settlement.setOnClickListener(this)
         tv_freight_rule.setOnClickListener(this)
-
+        ly_add_address.setOnClickListener(this)
 
         data = intent.getSerializableExtra("data") as List<SkuBean>?
         data?.let { mList.addAll(it) }
@@ -68,7 +68,7 @@ class SureOrderActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLi
                 num += sku.num
                 var reOrderItemList = ReOrderItemList()
                 reOrderItemList.mecProductSkuId = sku.skuListData.id
-                reOrderItemList.quantity =sku.num
+                reOrderItemList.quantity = sku.num
                 skuList.add(reOrderItemList)
             }
         }
@@ -106,9 +106,17 @@ class SureOrderActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLi
             R.id.ly_address -> {
                 var bundle = Bundle()
                 bundle.putInt("type", 1)
-                jumpActivityForResult(Configs.ADDRESS_LIST_SELECT_RESULT,1, MyAddressActivity::class.java)
+                jumpActivityForResult(
+                    Configs.ADDRESS_LIST_SELECT_RESULT,
+                    1,
+                    MyAddressActivity::class.java
+                )
             }
-            R.id.ly_add_address -> jumpActivity(null, MyAddressActivity::class.java)
+            R.id.ly_add_address -> jumpActivityForResult(
+                Configs.ADDRESS_LIST_SELECT_RESULT,
+                1,
+                MyAddressActivity::class.java
+            )
             R.id.tv_settlement -> creatOrder()
             R.id.tv_freight_rule -> jumpActivity(null, FreightRuleActivity::class.java)
         }
@@ -139,41 +147,48 @@ class SureOrderActivity : BaseCusActivity(), View.OnClickListener, OnItemClickLi
                 ly_address.visibility = View.VISIBLE
                 showAddress(data.result.records[0])
             }
-        }
-        else if (data !=null && data is CreatOrderBean){
+        } else if (data != null && data is CreatOrderBean) {
             ToastUtils.showText(data.message)
-            if (data.code==200){
+            if (data.code == 200) {
                 jumAct(data.result)
             }
 
-        }
-        else {
+        } else {
             ly_add_address.visibility = View.VISIBLE
             ly_address.visibility = View.GONE
         }
     }
 
     private fun jumAct(result: CreatOrderBean.ResultBean?) {
-        var bundle =Bundle()
-        bundle.putString("order_num",result?.orderNum)
-        bundle.putString("order_id",result?.id)
-        bundle.putString("created_time",result?.createTime)
+        var bundle = Bundle()
+        bundle.putString("order_num", result?.orderNum)
+        bundle.putString("order_id", result?.id)
+        bundle.putString("created_time", result?.createTime)
         result?.amount?.let { bundle.putDouble("order_price", it) }
         jumpActivity(bundle, PayActivity::class.java)
     }
 
     private fun showAddress(reAddress: ReAddress) {
+        if (ly_add_address.visibility == View.VISIBLE) {
+            ly_add_address.visibility = View.GONE
+            ly_address.visibility = View.VISIBLE
+        }
         tv_user_name.text = reAddress.name
         tv_address.text = "${reAddress.area}${reAddress.adress}"
         tv_user_phone.text = reAddress.phone
-
         reOrder.receiverId = reAddress.id
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
         if (requestCode == Configs.ADDRESS_LIST_SELECT_RESULT) {
-            showAddress(data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra) as ReAddress)
+            if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra) != null) {
+                showAddress(data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra) as ReAddress)
+            }else{
+                ly_add_address.visibility = View.VISIBLE
+                ly_address.visibility = View.GONE
+                reOrder.receiverId = null
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
 

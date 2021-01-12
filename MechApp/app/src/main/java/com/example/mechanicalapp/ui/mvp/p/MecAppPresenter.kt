@@ -200,6 +200,19 @@ class MecAppPresenter(
                 baseView.hiedLoading()
             }
         }))
+    }
 
+    //分享获得积分
+    fun shareTo() {
+        baseModel.shareTo(App.getInstance().token,NetSubscribe<NetData>(object :
+            ISubscriberListener<NetData> {
+            override fun onNext(t: NetData?) {
+            }
+            override fun onError(e: Throwable?) {
+                Log.v("ssss", "sss=========$e")
+            }
+            override fun onCompleted() {
+            }
+        }))
     }
 }

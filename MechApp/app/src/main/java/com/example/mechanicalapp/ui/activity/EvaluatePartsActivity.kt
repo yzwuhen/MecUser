@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemChangeListener
 import com.example.mechanicalapp.ui.adapter.EvaluateAdapter
@@ -55,6 +56,10 @@ class EvaluatePartsActivity: BaseCusActivity(), View.OnClickListener,OnItemChang
                 mReEvaluate.mecProductSkuName =orderItem.skuName
                 mReEvaluate.mecOrderId =orderId
                 mReEvaluate.mecOrderItemId =orderItem.id
+                mReEvaluate.commentUserHeader = App.getInstance().userInfo.avatar
+                mReEvaluate.commentUserName =App.getInstance().userInfo.realname
+                mReEvaluate.commentUserPhone =App.getInstance().userInfo.phone
+                mReEvaluate.commentUserId =App.getInstance().userInfo.id
                 mEvaList.add(mReEvaluate)
             }
         }

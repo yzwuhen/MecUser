@@ -69,7 +69,8 @@ class PartsAskDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtil
         tv_address.setOnClickListener(this)
         ly_user_info.setOnClickListener(this)
         partId = intent.getStringExtra(Configs.MEC_ID).toString()
-
+        mReCollect.type = 2
+        mReCollect.storeId = partId
     }
 
     override fun initPresenter() {

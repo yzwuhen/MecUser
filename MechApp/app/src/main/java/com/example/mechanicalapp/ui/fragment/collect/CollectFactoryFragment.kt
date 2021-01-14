@@ -154,7 +154,7 @@ class CollectFactoryFragment : BaseCusFragment(), OnItemClickListener, CollectVi
             }
         }
 
-        (mPresenter as PresenterImpl).del(ids)
+        (mPresenter as PresenterImpl).del(ids,1)
 
     }
 

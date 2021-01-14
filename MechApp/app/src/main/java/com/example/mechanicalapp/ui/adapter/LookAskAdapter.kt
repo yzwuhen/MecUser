@@ -12,8 +12,19 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_look_rent.view.*
+import kotlinx.android.synthetic.main.item_look_rent.view.iv_rent_sr
+import kotlinx.android.synthetic.main.item_look_rent.view.iv_rent_user
+import kotlinx.android.synthetic.main.item_look_rent.view.tv_rent
+import kotlinx.android.synthetic.main.item_look_rent.view.tv_rent_address_data
+import kotlinx.android.synthetic.main.item_look_rent.view.tv_rent_distance
+import kotlinx.android.synthetic.main.item_look_rent.view.tv_rent_equipment
+import kotlinx.android.synthetic.main.item_look_rent.view.tv_rent_price
+import kotlinx.android.synthetic.main.item_look_rent.view.tv_rent_time
+import kotlinx.android.synthetic.main.item_look_rent.view.tv_rent_user_nick
+import kotlinx.android.synthetic.main.item_more_user_rent.view.*
 
 
 class LookAskAdapter  (var mContext: Context, var mList:MutableList<MecLeaseData>,var type:Int, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -32,7 +43,7 @@ class LookAskAdapter  (var mContext: Context, var mList:MutableList<MecLeaseData
         }
 
 
-        holder.itemView.tv_rent_equipment.text =mList[position].brandName
+        holder.itemView.tv_rent_equipment.text ="${mList[position].title}"
 
         holder.itemView.tv_rent_distance.text = "距离：${StringUtils.getDistance(
             CoordinateConverter.calculateLineDistance(
@@ -56,6 +67,7 @@ class LookAskAdapter  (var mContext: Context, var mList:MutableList<MecLeaseData
             holder.itemView.tv_rent.visibility =View.VISIBLE
             holder.itemView.tv_rent.text ="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
         }
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_rent_user,mList[position].avatar)
     }
 
     override fun getItemCount(): Int {

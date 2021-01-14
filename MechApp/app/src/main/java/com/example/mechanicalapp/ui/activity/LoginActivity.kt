@@ -61,22 +61,26 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView, UM
     }
 
     private fun auth() {
-        mAlicomAuthHelper = PhoneNumberAuthHelper.getInstance(this, object : TokenResultListener {
-            override fun onTokenSuccess(success: String?) {
+        if (mAlicomAuthHelper==null){
+            mAlicomAuthHelper = PhoneNumberAuthHelper.getInstance(this, object : TokenResultListener {
+                override fun onTokenSuccess(success: String?) {
 
-                val pTokenRet = TokenRet.fromJson(success)
-                if (pTokenRet.code == "600000") {
-                    mAlicomAuthHelper?.quitLoginPage()
-                    mAlicomAuthHelper?.hideLoginLoading()
-                    Log.v("获取token 成功 ", "================${pTokenRet.token}")
+                    val pTokenRet = TokenRet.fromJson(success)
+                    if (pTokenRet.code == "600000") {
+                        mAlicomAuthHelper?.quitLoginPage()
+                        mAlicomAuthHelper?.hideLoginLoading()
+                        Log.v("获取token 成功 ", "================${pTokenRet.token}")
+                        mPresenter?.loginAli(pTokenRet.token)
+                    }
+                    Log.v("onTokenSuccess === ", "================$success")
                 }
-            }
-            override fun onTokenFailed(failed: String?) {
-                Log.v("onTokenFailed 失败 ", "================$failed")
-            }
-        })
-        mAlicomAuthHelper?.setAuthSDKInfo("drnki1YtLe9L4+1S1HHSSgcZPiXwXcad2mYVO3OmiVjU/5pQZWFD7JpozZtwiLNIeZvjw/ZD4tRhbT0uAoI0e2z12kn/ONYjgpYa0oI3PNVTvP2Ir1Z0kuAA5SjhuPXY53YjRUgnhaVQLO+8SirvzJSJ7efbxqNBMRd3ZaYqubCNiy9Km4xCbS+HseMKitIyJmYu71LCBS3MHpoJAU17lmVwiGBcgv4F1KI/cs6b2kTa9yN1k3HDGHE3V/KDdNuelQedU7hYOdFSJkjqNhXTnujklHjh2VLkEw+t23iebr3aWY9RXdOnzzpR0fsAFfm8")
-        mAlicomAuthHelper?.checkEnvAvailable(PhoneNumberAuthHelper.SERVICE_TYPE_LOGIN)
+                override fun onTokenFailed(failed: String?) {
+                    Log.v("onTokenFailed 失败 ", "================$failed")
+                }
+            })
+            mAlicomAuthHelper?.setAuthSDKInfo("drnki1YtLe9L4+1S1HHSSgcZPiXwXcad2mYVO3OmiVjU/5pQZWFD7JpozZtwiLNIeZvjw/ZD4tRhbT0uAoI0e2z12kn/ONYjgpYa0oI3PNVTvP2Ir1Z0kuAA5SjhuPXY53YjRUgnhaVQLO+8SirvzJSJ7efbxqNBMRd3ZaYqubCNiy9Km4xCbS+HseMKitIyJmYu71LCBS3MHpoJAU17lmVwiGBcgv4F1KI/cs6b2kTa9yN1k3HDGHE3V/KDdNuelQedU7hYOdFSJkjqNhXTnujklHjh2VLkEw+t23iebr3aWY9RXdOnzzpR0fsAFfm8")
+            mAlicomAuthHelper?.checkEnvAvailable(PhoneNumberAuthHelper.SERVICE_TYPE_LOGIN)
+        }
         mAlicomAuthHelper?.getLoginToken(this, 5000)
     }
 
@@ -85,9 +89,11 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView, UM
     }
 
     override fun showLoading() {
+        showLoadView()
     }
 
     override fun hiedLoading() {
+        hideLoadingView()
     }
 
     override fun err() {
@@ -144,6 +150,10 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView, UM
     }
 
     private fun login() {
+        if (!isCheck) {
+            ToastUtils.showText("请先阅读并同意用户协议")
+            return
+        }
         if (TextUtils.isEmpty(Hawk.get(Configs.THREE_PHONE))) {
             auth()
         } else {
@@ -189,7 +199,6 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView, UM
                 jumpActivity(null, MainActivity::class.java)
                 App.getInstance().setUser(netData.result?.userInfo)
                 App.getInstance().token = netData.result?.token
-
                 finish()
             } else if (netData.code == 201) {
                 var bundle = Bundle()

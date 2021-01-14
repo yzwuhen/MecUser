@@ -8,11 +8,8 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.look.*
-
 import kotlinx.android.synthetic.main.activity_my_collected.*
-import kotlinx.android.synthetic.main.activity_my_collected.cus_page
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 
@@ -60,7 +57,7 @@ class MyLookActivity : BaseActivity<NetData>(), View.OnClickListener ,ViewPager.
         iv_left.setOnClickListener(this)
 
         tv_mec_rent.performClick()
-
+        cus_page.offscreenPageLimit=6
         cus_page.setTouchEvent(true)
         cus_page.addOnPageChangeListener(this)
 

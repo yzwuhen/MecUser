@@ -72,7 +72,7 @@ class RecruitDetailsActivity  : BaseCusActivity(), View.OnClickListener, PopUtil
 
 
         id = intent.getStringExtra("id").toString()
-        mReCollect.type = 0
+        mReCollect.type = 5
         mReCollect.storeId = id
     }
 

@@ -26,6 +26,7 @@ import com.luck.picture.lib.listener.OnResultCallbackListener
 import kotlinx.android.synthetic.main.activity_factory_apply.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.io.File
+import java.lang.Exception
 
 class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerView,
     TextWatcher {
@@ -286,6 +287,14 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
                     ly_apply_ing.visibility = View.VISIBLE
                 } else if (reCompanyCer.apporveStatus == 2) {
                     ly_apply_success.visibility = View.VISIBLE
+
+                    try {
+                        tv_success_id_code.text="您的申请已通过，账号为：${netData.result.records[0].contactPhone}，" +
+                                "初始密码是123456 。为保证账号安全性，请记得修改密码~ 维修厂管理官网地址：http：XXX"
+                    }catch (e:Exception){
+
+                    }
+
                 } else {
                     ly_apply_fail.visibility = View.VISIBLE
                 }

@@ -38,17 +38,17 @@ class LookAsk(var type: Int) : BaseCusFragment(), OnItemClickListener, MyRelease
             override fun onRefresh() {
                 spring_list.isEnable = false
                 (mPresenter as MyLookPresenter).resetPage()
-                (mPresenter as MyLookPresenter).getLookLeaseList(1)
+                (mPresenter as MyLookPresenter).getLookLeaseList(2)
             }
 
             override fun onLoadmore() {
-                (mPresenter as MyLookPresenter).getLookLeaseList(1)
+                (mPresenter as MyLookPresenter).getLookLeaseList(2)
             }
         })
 
 
         mPresenter = MyLookPresenter(this)
-        (mPresenter as MyLookPresenter).getLookLeaseList(1)
+        (mPresenter as MyLookPresenter).getLookLeaseList(2)
     }
 
     fun closeRefreshView() {

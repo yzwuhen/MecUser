@@ -151,7 +151,7 @@ class CollectBuyFragment : BaseCusFragment(), OnItemClickListener,View.OnClickLi
             }
         }
 
-        (mPresenter as PresenterImpl).del(ids)
+        (mPresenter as PresenterImpl).del(ids,3)
 
     }
 

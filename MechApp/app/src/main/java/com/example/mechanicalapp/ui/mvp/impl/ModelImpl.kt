@@ -211,10 +211,11 @@ class ModelImpl : BaseModel {
     fun delCollect(
         token: String?,
         ids: String?,
+        type:Int,
         iSubscriberListener: ISubscriberListener<NetData>
     ) {
 
-        appsService?.delCollect(token, ids)
+        appsService?.delBatchCollect(token, ids,type)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
@@ -1364,6 +1365,14 @@ class ModelImpl : BaseModel {
 
     fun shareTo(token: String?,netSubscribe: NetSubscribe<NetData>) {
         appsService?.shareTo(token)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(netSubscribe)
+    }
+
+    //获取用户个人信息
+    fun getMySelf(token: String?, netSubscribe: NetSubscribe<MySelfInfoBean>) {
+        appsService?.getMySelf(token)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)

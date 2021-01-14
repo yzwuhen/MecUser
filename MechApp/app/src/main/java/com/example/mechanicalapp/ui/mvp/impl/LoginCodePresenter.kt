@@ -175,7 +175,6 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
 
     }
     fun resetPwd(resetPwd: ResetPwd) {
-
         baseView.showLoading()
         appsService?.resetPwd(App.getInstance().token,resetPwd)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
@@ -251,7 +250,6 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
             }))
     }
     fun forgotPwd(requestBody: ReGetMsgCode) {
-
         baseView.showLoading()
         appsService?.forgotPwd(requestBody)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
@@ -276,6 +274,33 @@ class LoginCodePresenter(private var mContext: Context, private var baseView: Lo
                     baseView.hiedLoading()
                 }
             }))
+    }
+
+    fun loginAli(token: String?) {
+        baseView.showLoading()
+
+        appsService?.loginAli(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<LoginCodeBean>(object : ISubscriberListener<LoginCodeBean> {
+                override fun onNext(t: LoginCodeBean?) {
+                    if (t != null) {
+                        baseView.success(t)
+                    }else{
+                        baseView.loginErr("数据是空")
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                    baseView.loginErr(e?.message)
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            }))
+
     }
 
 }

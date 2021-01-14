@@ -5,5 +5,5 @@ class LoginCode {
     var loginWhere:Int=0
     var mobile:String ?=null
     var password:String?=null
-
+    var accessToken:String?=null
 }

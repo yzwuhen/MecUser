@@ -155,7 +155,7 @@ class CollectJobWant  : BaseCusFragment() , OnItemClickListener ,CollectView<Rec
             }
         }
 
-        (mPresenter as PresenterImpl).del(ids)
+        (mPresenter as PresenterImpl).del(ids,5)
 
     }
 

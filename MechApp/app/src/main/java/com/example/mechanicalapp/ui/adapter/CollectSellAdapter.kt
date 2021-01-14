@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.amap.api.location.CoordinateConverter
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_collect_sell.view.*
 
 class CollectSellAdapter  (var mContext: Context, var mList:MutableList<MecSellData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -37,7 +41,13 @@ class CollectSellAdapter  (var mContext: Context, var mList:MutableList<MecSellD
 
         holder.itemView.tv_address_data.text="${mList[position].city} | ${mList[position].facDate}"
 
-        holder.itemView.tv_distance.text="距离：${mList[position].gpsLon}"
+        holder.itemView.tv_distance.text="距离：${
+            StringUtils.getDistance(
+            CoordinateConverter.calculateLineDistance(
+                App.getInstance().thisPoint,
+                GdMapUtils.getPoint(mList[position].gpsLat, mList[position].gpsLon)
+            )
+        )}km"
 
         if (mList[position].isNew == "1"){
             holder.itemView.tv_label.visibility= View.VISIBLE

@@ -68,7 +68,7 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
         ly_user_info.setOnClickListener(this)
 
         id = intent.getStringExtra("id").toString()
-        mReCollect.type = 0
+        mReCollect.type = 5
         mReCollect.storeId = id
     }
 

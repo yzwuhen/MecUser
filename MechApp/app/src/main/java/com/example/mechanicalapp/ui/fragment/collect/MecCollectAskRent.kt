@@ -150,7 +150,7 @@ class MecCollectAskRent (var type:Int):BaseCusFragment() , OnItemClickListener,V
             }
         }
 
-        (mPresenter as PresenterImpl).del(ids)
+        (mPresenter as PresenterImpl).del(ids,4)
 
     }
 

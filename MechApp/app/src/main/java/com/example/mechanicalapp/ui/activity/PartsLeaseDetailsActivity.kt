@@ -79,7 +79,7 @@ class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUt
 
         partId = intent.getStringExtra(Configs.MEC_ID).toString()
 
-        mReCollect.type = 0
+        mReCollect.type = 2
         mReCollect.storeId = partId
     }
 

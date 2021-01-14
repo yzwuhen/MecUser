@@ -9,35 +9,32 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.MineMenuAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
 
-class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickListener {
+class MineFragment :BaseCusFragment(), OnItemClickListener, View.OnClickListener ,NetDataView<NetData>{
 
     private var mineMenuAdapter: MineMenuAdapter? = null
 
-    override fun showLoading() {
-
-    }
-
-    override fun hiedLoading() {
-
-    }
 
     override fun getLayoutId(): Int {
-
         return R.layout.fragment_mine
     }
 
+
     override fun onResume() {
         super.onResume()
-        showInfo()
-
-        Log.v("===","=========OnResume")
+        Log.v("===","=========OnResume=="+App.getInstance().token)
+        if (mPresenter!=null){
+            (mPresenter as MecAppPresenter).getUserInfo()
+        }
     }
 
     private fun showInfo() {
@@ -46,36 +43,41 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
             iv_sex.visibility=View.GONE
             iv_user_sr.visibility =View.GONE
             tv_phone.visibility=View.GONE
+            tv_company.visibility =View.GONE
+            tv_user_nick.text = ""
+            iv_user_pic.setImageResource(R.mipmap.user_default)
+
         }else{
             iv_sex.visibility=View.VISIBLE
             iv_user_sr.visibility =View.VISIBLE
             tv_phone.visibility=View.VISIBLE
+
+            tv_user_nick.text = App.getInstance().userInfo.realname
+            tv_phone.text = App.getInstance().userInfo.phone
+            if (App.getInstance().userInfo.isEnterprise=="1"){
+                tv_company.visibility =View.VISIBLE
+                tv_company.text =App.getInstance().userInfo.commpany
+            }else{
+                tv_company.visibility =View.GONE
+            }
+            if (App.getInstance().userInfo.sex==1){
+                iv_sex.setImageResource(R.mipmap.sex_man)
+            }else{
+                iv_sex.setImageResource(R.mipmap.sex_women)
+            }
+
+            if (TextUtils.isEmpty(App.getInstance().userInfo.avatar)){
+                iv_user_pic.setImageResource(R.mipmap.user_default)
+            }else{
+                ImageLoadUtils.loadImageCenterCrop(
+                    mContext,
+                    iv_user_pic,
+                    App.getInstance().userInfo.avatar,
+                    R.mipmap.user_default
+                )
+            }
         }
 
-        tv_user_nick.text = App.getInstance().userInfo.realname
-        tv_phone.text = App.getInstance().userInfo.phone
-        if (App.getInstance().userInfo.isEnterprise=="1"){
-            tv_company.visibility =View.VISIBLE
-                  tv_company.text =App.getInstance().userInfo.realname
-        }else{
-            tv_company.visibility =View.GONE
-        }
-        if (App.getInstance().userInfo.sex==1){
-            iv_sex.setImageResource(R.mipmap.sex_man)
-        }else{
-            iv_sex.setImageResource(R.mipmap.sex_women)
-        }
-
-        if (TextUtils.isEmpty(App.getInstance().userInfo.avatar)){
-            iv_user_pic.setImageResource(R.mipmap.user_default)
-        }else{
-            ImageLoadUtils.loadImageCenterCrop(
-                mContext,
-                iv_user_pic,
-                App.getInstance().userInfo.avatar,
-                R.mipmap.user_default
-            )
-        }
     }
 
     override fun initView() {
@@ -91,9 +93,8 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
         ly_address.setOnClickListener(this)
         ly_release.setOnClickListener(this)
         iv_user_pic.setOnClickListener(this)
-    }
-
-    override fun err() {
+        showInfo()
+        mPresenter = MecAppPresenter(this)
     }
 
     override fun onItemClick(view: View, position: Int) {
@@ -127,6 +128,8 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
             9 -> if (isLogin()) {
                 jumpActivity(null, SuggestActivity::class.java)
             }
+            10 ->   jumpActivity(null, ProblemActivity::class.java)
+
         }
     }
 
@@ -172,5 +175,23 @@ class MineFragment : BaseFragment<NetData>(), OnItemClickListener, View.OnClickL
             return false
         }
         return true
+    }
+
+    override fun refreshUI(data: NetData?) {
+
+        showInfo()
+    }
+
+    override fun loadMore(data: NetData?) {
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hiedLoading() {
+    }
+
+    override fun err() {
+        showInfo()
     }
 }

@@ -354,11 +354,12 @@ class PresenterImpl(
     override fun onDestroy() {
     }
 
-    fun del(ids: String?) {
+    fun del(ids: String?,type: Int) {
         baseView.showLoading()
         baseModel.delCollect(
             App.getInstance().token,
-            ids,
+            ids?.substring(1,ids.length),
+            type,
             object : ISubscriberListener<NetData> {
                 override fun onNext(t: NetData?) {
                     if (t != null) {

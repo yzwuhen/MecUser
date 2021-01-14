@@ -51,6 +51,11 @@ class LookLeasingFragment : BaseFragment<NetData>(), View.OnClickListener, ViewP
         cus_page.addOnPageChangeListener(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun err()  {
     }
 

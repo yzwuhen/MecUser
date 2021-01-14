@@ -148,7 +148,7 @@ class CollectPartsLease : BaseCusFragment() , OnItemClickListener,CollectView<Pa
             }
         }
 
-        (mPresenter as PresenterImpl).del(ids)
+        (mPresenter as PresenterImpl).del(ids,2)
 
     }
 

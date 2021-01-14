@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.mvp.p
 
 import android.util.Log
 import com.example.mechanicalapp.App
+import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReEvaluate
@@ -210,6 +211,23 @@ class MecAppPresenter(
             }
             override fun onError(e: Throwable?) {
                 Log.v("ssss", "sss=========$e")
+            }
+            override fun onCompleted() {
+            }
+        }))
+    }
+
+    fun getUserInfo(){
+        baseModel.getMySelf(App.getInstance().token,NetSubscribe<MySelfInfoBean>(object :
+            ISubscriberListener<MySelfInfoBean> {
+            override fun onNext(netData: MySelfInfoBean?) {
+                if (netData?.code == 200) {
+                    App.getInstance().setUser(netData.result)
+                }
+                (baseView as NetDataView<NetData>).refreshUI(netData)
+            }
+            override fun onError(e: Throwable?) {
+                (baseView as NetDataView<NetData>).err()
             }
             override fun onCompleted() {
             }

@@ -72,6 +72,7 @@ public class UserInfo implements Serializable {
     private String isRepair;
     private String imId;
     private String imToken;
+    private String commpany;
 
     public String getImToken() {
         return imToken;
@@ -335,5 +336,13 @@ public class UserInfo implements Serializable {
 
     public void setIsRepair(String isRepair) {
         this.isRepair = isRepair;
+    }
+
+    public String getCommpany() {
+        return commpany;
+    }
+
+    public void setCommpany(String commpany) {
+        this.commpany = commpany;
     }
 }

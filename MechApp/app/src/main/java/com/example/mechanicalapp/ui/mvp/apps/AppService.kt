@@ -26,6 +26,10 @@ interface AppService {
     fun register(@Body requestBody: ReRegister): Observable<LoginCodeBean>
 
 
+    @FormUrlEncoded
+    @POST("/jeecg-boot/sys/loginByAliToken")
+    fun loginAli(@Field("accessToken")accessToken:String?): Observable<LoginCodeBean>
+
     @POST("/jeecg-boot/sys/appLoginByThirdId")
     fun loginThree(@Body requestBody: ReLoginThree): Observable<LoginCodeBean>
 
@@ -593,12 +597,13 @@ interface AppService {
 
 
     /**
-     * 收藏的 商品租赁
+     * 批量删除收藏
      */
-    @GET("/jeecg-boot/my/mecMyStore/appQueryPageList")
-    fun delCollect(
+    @GET("/jeecg-boot/my/mecMyStore/delBystoreIds")
+    fun delBatchCollect(
         @Header("X-Access-Token") token: String?,
-        @Query("ids") ids: String?
+        @Query("storeIds") ids: String?,
+        @Query("type")  type: Int?
     ): Observable<NetData>
 
 
@@ -1398,4 +1403,23 @@ interface AppService {
     fun shareTo(
         @Header("X-Access-Token") token: String?
     ): Observable<NetData>
+
+    /**
+     * 分享得积分
+     */
+    @GET("/jeecg-boot/sys/user/getUserInfoByToken")
+    fun getMySelf(
+        @Header("X-Access-Token") token: String?
+    ): Observable<MySelfInfoBean>
+
+
+
+    /**
+     * 添加浏览记录
+     */
+    @POST("/jeecg-boot/my/mecMyViewed/add")
+    fun addRecordView(
+        @Body reRecordView: ReRecordView?,
+        @Header("X-Access-Token") token: String?
+    ): Observable<MySelfInfoBean>
 }

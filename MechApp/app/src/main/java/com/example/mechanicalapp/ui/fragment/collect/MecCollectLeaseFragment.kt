@@ -153,7 +153,7 @@ class MecCollectLeaseFragment(var type: Int) : BaseCusFragment(), OnItemClickLis
             }
         }
 
-        (mPresenter as PresenterImpl).del(ids)
+        (mPresenter as PresenterImpl).del(ids,4)
 
     }
 

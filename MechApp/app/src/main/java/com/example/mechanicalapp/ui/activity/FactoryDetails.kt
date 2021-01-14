@@ -77,7 +77,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
 
         id = intent.getStringExtra("id")
 
-        mReCollect.type=4
+        mReCollect.type=1
         mReCollect.storeId =id
     }
 

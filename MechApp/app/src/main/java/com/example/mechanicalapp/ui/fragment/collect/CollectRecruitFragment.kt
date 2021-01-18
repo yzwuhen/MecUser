@@ -38,7 +38,8 @@ class CollectRecruitFragment : BaseFragment<NetData>(), View.OnClickListener , V
         super.initView()
         mTextViewList.add(tv_screen_left)
         mTextViewList.add(tv_screen_right)
-
+        tv_screen_left.text ="求职"
+        tv_screen_right.text ="招聘"
         mTabPageAdapter = FragmentListPageAdapter(childFragmentManager,mFragmentList!!)
 
         cus_page.adapter = mTabPageAdapter

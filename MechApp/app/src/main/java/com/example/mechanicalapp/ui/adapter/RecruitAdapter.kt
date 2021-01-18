@@ -9,6 +9,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_recruit.view.*
 
 class RecruitAdapter(
@@ -50,6 +51,8 @@ class RecruitAdapter(
         holder.itemView.tv_recruit_user.text = "${mList[position].contactName}·招聘者"
         holder.itemView.tv_recruit_time.text =
             DateUtils.dateDiffs(mList[position].updateTime, System.currentTimeMillis())
+
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_recruit_pic,mList[position].avatar)
     }
 
     override fun getItemCount(): Int {

@@ -148,6 +148,7 @@ class CollectFactoryFragment : BaseCusFragment(), OnItemClickListener, CollectVi
     }
 
     private fun delSelect() {
+        ids=""
         for (index in mList.indices){
             if (mList[index].isSelect){
                 ids ="$ids,${mList[index].id}"

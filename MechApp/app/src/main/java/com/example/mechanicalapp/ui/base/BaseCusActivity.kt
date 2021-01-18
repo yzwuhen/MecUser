@@ -19,6 +19,7 @@ import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.utils.Density
 import com.example.mechanicalapp.utils.ToastUtils
+import com.umeng.analytics.MobclickAgent
 import kotlinx.android.synthetic.main.act_base.*
 
 abstract class BaseCusActivity : AppCompatActivity() {
@@ -160,7 +161,8 @@ abstract class BaseCusActivity : AppCompatActivity() {
                 ("intent://map/direction?destination=latlng:${lat},${lon}|name:${name}&mode=driving&" +  //选择导航方式 此处为驾驶
                         "region=" +  //
                         "&src=#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end"
-            ))
+                        )
+            )
             startActivity(intent)
         }catch (e: java.lang.Exception){
             Log.v("sssss", "ssssssssss$e")
@@ -188,7 +190,15 @@ abstract class BaseCusActivity : AppCompatActivity() {
             !TextUtils.isEmpty(locationProviders)
         }
     }
+    override fun onResume() {
+        super.onResume()
+        MobclickAgent.onResume(this)
+    }
 
+    override fun onPause() {
+        super.onPause()
+        MobclickAgent.onPause(this)
+    }
 
     open fun showLoadView() {
         if (mLoadingView == null) {

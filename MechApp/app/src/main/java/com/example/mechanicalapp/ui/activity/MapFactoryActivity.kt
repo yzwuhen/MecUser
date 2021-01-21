@@ -333,10 +333,10 @@ class MapFactoryActivity  : BaseCusActivity(), View.OnClickListener, GdMapUtils.
             return
         }
         root_view.visibility =View.VISIBLE
-       tv_item_title.text =mList[position].companyName
+       tv_item_title.text =mList[position].name
        ratingBar.rating =mList[position].star
         tv_score.text="${mList[position].star}分"
-        tv_address.text ="${mList[position].city}  | "
+        tv_address.text ="${mList[position].address}  | "
         tv_distance.text="距离：${
             StringUtils.getDistance(
                 CoordinateConverter.calculateLineDistance(

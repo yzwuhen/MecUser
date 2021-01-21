@@ -119,8 +119,8 @@
         <TextView
             android:id="@+id/tv_distance"
             android:layout_marginLeft="@dimen/dp_5"
-            app:layout_constraintStart_toEndOf="@+id/tv_address"
-            app:layout_constraintTop_toTopOf="@+id/tv_address"
+            app:layout_constraintStart_toEndOf="@+id/tv_score"
+            app:layout_constraintTop_toTopOf="@+id/tv_score"
             style="@style/distance_style"/>
 
         <TextView
@@ -132,7 +132,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_address"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="32dp"
-            android:text="简介：公司致力于工程机械行业的销售、服务维 修、配件、二手机等业务…"
+            android:text=""
             android:textSize="13sp"
             android:textColor="@color/color_666"
             android:maxLines="1"

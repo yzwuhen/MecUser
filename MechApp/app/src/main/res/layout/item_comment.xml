@@ -57,7 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_8"
-        android:text="这海鲜很鲜美，很棒很棒，我下次再来购买的，配 送也很快速，配送人员也很有亲和力~"
+        android:text=""
         android:textColor="@color/color_222"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -57,9 +57,7 @@ class LoginActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView, UM
         } else {
             tv_phone.text = Hawk.get(Configs.THREE_PHONE)
         }
-
     }
-
     private fun auth() {
         if (mAlicomAuthHelper==null){
             mAlicomAuthHelper = PhoneNumberAuthHelper.getInstance(this, object : TokenResultListener {

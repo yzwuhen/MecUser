@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 
+//整套乱了。随便了
 class MecAppPresenter(
     private var baseView: BaseView<NetData>
 ) : BasePresenter {

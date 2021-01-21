@@ -23,10 +23,10 @@ class LookFactoryAdapter  (var mContext: Context, var mList:MutableList<FactoryD
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.tv_item_title.text =mList[position].companyName
+        holder.itemView.tv_item_title.text =mList[position].name
         holder.itemView.ratingBar.rating =mList[position].star
         holder.itemView.tv_score.text="${mList[position].star}分"
-        holder.itemView.tv_address.text ="${mList[position].city}  | "
+        holder.itemView.tv_address.text ="${mList[position].address}"
         holder.itemView.tv_distance.text="距离：${
             StringUtils.getDistance(
                 CoordinateConverter.calculateLineDistance(

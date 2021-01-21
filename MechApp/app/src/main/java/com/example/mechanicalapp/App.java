@@ -1,13 +1,8 @@
 package com.example.mechanicalapp;
 
 import android.app.Application;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
 
 import com.amap.api.location.DPoint;
 import com.example.mechanicalapp.config.Configs;
@@ -23,8 +18,9 @@ import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.orhanobut.hawk.Hawk;
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.commonsdk.debug.E;
 import com.umeng.socialize.PlatformConfig;
+
+import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
     private static App instance;
@@ -99,6 +95,19 @@ public class App extends Application {
         PlatformConfig.setQQZone("101830139", "5d63ae8858f1caab67715ccd6c18d7a5");
         PlatformConfig.setQQFileProvider("com.example.mechanicalapp.fileprovider");
 
+        //初始化极光推送
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+        if (!TextUtils.isEmpty(getUserInfo().getPhone())){
+            JPushInterface.setAlias(this,0,getUserInfo().getPhone());
+//            JPushInterface.setAlias(this, getUserInfo().getPhone(), new TagAliasCallback() {
+//                @Override
+//                public void gotResult(int i, String s, Set<String> set) {
+//                    Log.v("sssssss=========",i+"=====gotResult========"+s);
+//                    Log.v("sssssss=========",i+"=====gotResult========"+set);
+//                }
+//            });
+        }
     }
 
     public static App getInstance() {

@@ -7,11 +7,8 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
 import com.example.mechanicalapp.ui.adapter.LookGoodsAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
-import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.FactoryData
 import com.example.mechanicalapp.ui.data.GoodsData
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.mvp.impl.MyLookPresenter
 import com.example.mechanicalapp.ui.mvp.v.MyReleaseView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils

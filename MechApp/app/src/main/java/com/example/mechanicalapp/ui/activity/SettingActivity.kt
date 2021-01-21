@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
+import cn.jpush.android.api.JPushInterface
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
@@ -133,6 +134,7 @@ class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.
         Hawk.delete(Configs.TOKEN)
         Hawk.delete(Configs.USER_INFO)
         NIMClient.getService(AuthService::class.java).logout()
+        JPushInterface.deleteAlias(App.getInstance().applicationContext,0)
         finish()
     }
 

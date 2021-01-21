@@ -53,7 +53,7 @@ public class FactoryData implements Serializable {
     private Object responsePersonName;
     private String address;
     private double lng;
-    private float star;
+    private String star;
     private String updateTime;
     private Object userId;
     private Object isApprove;
@@ -193,10 +193,10 @@ public class FactoryData implements Serializable {
     }
 
     public float getStar() {
-        return star;
+        return TextUtils.isEmpty(star)?3:Float.valueOf(star);
     }
 
-    public void setStar(float star) {
+    public void setStar(String star) {
         this.star = star;
     }
 

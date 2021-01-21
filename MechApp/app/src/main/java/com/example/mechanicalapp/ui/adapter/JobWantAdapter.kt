@@ -10,11 +10,7 @@ import com.example.mechanicalapp.ui.data.RecruitData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import kotlinx.android.synthetic.main.item_job_want.view.*
-import kotlinx.android.synthetic.main.item_job_want.view.iv_check
-import kotlinx.android.synthetic.main.item_job_want.view.ly_check
-import kotlinx.android.synthetic.main.item_job_want.view.root_view
-import kotlinx.android.synthetic.main.item_job_want.view.tv_label
-import kotlinx.android.synthetic.main.item_recruit.view.*
+
 
 
 class JobWantAdapter  (var mContext: Context, var mList:MutableList<RecruitData>, var mOnItemClickListener: OnItemClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -43,7 +39,7 @@ class JobWantAdapter  (var mContext: Context, var mList:MutableList<RecruitData>
         }
 
         //   holder.itemView.tv_recruit_exp.text =mList[position].
-        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_recruit_pic,mList[position].avatar)
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_job_pic,mList[position].avatar)
         holder.itemView.tv_age.text ="${mList[position].needNumber}岁"
         holder.itemView.tv_job_seekers.text="求职者·${mList[position].contactName}"
         holder.itemView.tv_time.text = DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())

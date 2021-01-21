@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ly_comment_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_size_12"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_comment_pic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_size_10"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/user_default"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dp_size_10">
+
+            <TextView
+                android:id="@+id/tv_comment_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="咸湿姐"
+                android:textColor="@color/color_222"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_comment_pic"
+                app:layout_constraintTop_toTopOf="@+id/iv_comment_pic" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    style="@style/App_RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp_17"
+                    android:isIndicator="true"
+                    android:numStars="5"
+                    android:rating="2.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_comment_pic" />
+
+                <TextView
+                    android:id="@+id/tv_comment_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/dp_15"
+                    android:text="16点20分"
+                    android:textColor="#cacaca"
+                    android:textSize="@dimen/sp_13"
+                    app:layout_constraintStart_toStartOf="@+id/tv_comment_user_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_comment_user_name" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:paddingLeft="@dimen/dp_70"
+        android:text="1111111"
+        android:textColor="@color/color_222"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_comment_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_buy_info" />
+
+    <View
+        style="@style/h_view_6"
+        android:layout_marginTop="@dimen/dp_5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_comment" />
+
+</LinearLayout>

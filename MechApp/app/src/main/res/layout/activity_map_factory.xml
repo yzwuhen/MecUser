@@ -202,8 +202,8 @@
             android:id="@+id/tv_distance"
             style="@style/distance_style"
             android:layout_marginLeft="@dimen/dp_5"
-            app:layout_constraintStart_toEndOf="@+id/tv_address"
-            app:layout_constraintTop_toTopOf="@+id/tv_address" />
+            app:layout_constraintStart_toEndOf="@+id/tv_score"
+            app:layout_constraintTop_toTopOf="@+id/tv_score" />
 
         <ImageView
             android:id="@+id/iv_ser"
@@ -221,7 +221,7 @@
             android:layout_marginTop="1dp"
             android:src="@drawable/jk"
             app:layout_constraintEnd_toEndOf="@+id/tv_need"
-            app:layout_constraintTop_toTopOf="@+id/tv_distance" />
+            app:layout_constraintTop_toTopOf="@+id/tv_address" />
 
         <TextView
             android:id="@+id/tv_introduce"
@@ -231,7 +231,7 @@
             android:layout_marginRight="32dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="简介：公司致力于工程机械行业的销售、服务维 修、配件、二手机等业务…"
+            android:text=""
             android:textColor="@color/color_666"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"

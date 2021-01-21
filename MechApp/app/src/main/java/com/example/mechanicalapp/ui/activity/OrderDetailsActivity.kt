@@ -80,12 +80,12 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             tv_cancel_order.visibility = View.GONE
             ly_state2.visibility = View.VISIBLE
             ly_factory.visibility = View.VISIBLE
-        } else if (type == 3) {
+        } else if (type == 4) {
             tv_cancel_order.visibility = View.GONE
             ly_state3.visibility = View.VISIBLE
             ly_factory.visibility = View.VISIBLE
         }
-        else if (type == 4) {
+        else if (type == 3) {
             tv_cancel_order.visibility = View.GONE
             ly_state4.visibility = View.VISIBLE
             ly_factory.visibility = View.VISIBLE

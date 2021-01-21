@@ -347,7 +347,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:text="卡特彼勒D11T推土机主要用来开挖路堑、构筑路堤、回填基坑、铲除障碍、清除积雪、乎整场地等，也可完成短距离松散物料"
+                    android:text=""
                     android:textColor="@color/color_222"
                     android:textSize="16sp" />
 

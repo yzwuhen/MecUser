@@ -6,6 +6,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {url 'http://developer.huawei.com/repo/'}
         maven { url 'https://dl.bintray.com/umsdk/release' }
     }
     dependencies {
@@ -25,6 +26,7 @@ allprojects {
         flatDir {
             dirs 'libs'
         }
+        maven {url 'http://developer.huawei.com/repo/'}
     }
 }
 

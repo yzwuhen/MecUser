@@ -11,7 +11,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.OnItemLongClick
 import com.netease.nim.uikit.common.util.sys.TimeUtil
 import com.netease.nimlib.sdk.msg.model.RecentContact
-import kotlinx.android.synthetic.main.item_chat.view.*
+import kotlinx.android.synthetic.main.item_chat_en.view.*
 
 class ChatEnAdapter (var mContext: Context, var mList: MutableList<RecentContact>, var mOnItemClickListener: OnItemClickListener, var mOnItemLongClick: OnItemLongClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

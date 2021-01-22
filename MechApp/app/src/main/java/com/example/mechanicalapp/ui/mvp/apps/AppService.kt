@@ -841,7 +841,7 @@ interface AppService {
      *
      * 获取维修厂详情
      */
-    @GET("/jeecg-boot/repair/mecRepaireFactory/queryById")
+    @GET("/jeecg-boot/repair/mecRepaireFactory/queryInfoById")
     fun getFactoryDetails(
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
@@ -1422,4 +1422,26 @@ interface AppService {
         @Body reRecordView: ReRecordView?,
         @Header("X-Access-Token") token: String?
     ): Observable<MySelfInfoBean>
+
+    /**
+     *
+     * 获取维修厂评论列表
+     */
+    @GET("/jeecg-boot/repair/mecRepaireFactory/commentList")
+    fun getFactoryCommentList(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?,
+        @Query("pageNo") page: Int,
+        @Query("pageSize") pageSize: Int
+    ): Observable<FactoryCommentListBean>
+
+    /**
+     *
+     * im工程人员列表-分页列表查询
+     */
+    @GET("/jeecg-boot/repair/mecRepairEngineer/listByIds")
+    fun getEngInfo(
+        @Header("X-Access-Token") token: String?,
+        @Query("ids") id: String?
+    ): Observable<NetData>
 }

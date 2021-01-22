@@ -12,15 +12,13 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
-import com.example.mechanicalapp.ui.data.BannerData
-import com.example.mechanicalapp.ui.data.FactoryDetailsBean
-import com.example.mechanicalapp.ui.data.IsCollectBean
-import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReCollect
 import com.example.mechanicalapp.ui.mvp.impl.DetailsPresenter
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
@@ -31,6 +29,8 @@ import com.umeng.socialize.media.UMWeb
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnBannerListener
 import kotlinx.android.synthetic.main.activity_factory_details.*
+import kotlinx.android.synthetic.main.activity_factory_details.ratingBar
+import kotlinx.android.synthetic.main.item_factory_comment.*
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickListener,OnBannerListener<BannerData>,
@@ -54,10 +54,11 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
     private var mMecPresenter: MecAppPresenter?=null
     private var mPresenter: DetailsPresenter? = null
     private var id: String? = null
-    private var mData:FactoryDetailsBean.ResultBean?=null
+    private var mData:FactoryDetailData?=null
 
     private var mReCollect = ReCollect()
     private var isCollect=false
+    private var mFactoryCommentData:FactoryCommentData?=null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_factory_details
@@ -74,6 +75,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
         ly_chat.setOnClickListener(this)
         ly_call.setOnClickListener(this)
         tv_address.setOnClickListener(this)
+        ly_comment.setOnClickListener(this)
 
         id = intent.getStringExtra("id")
 
@@ -106,8 +108,16 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
             R.id.tv_pop_sure -> PopUtils.dismissPop(this)
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.tv_collected->collect()
+            R.id.ly_comment ->jumFactoryComment()
         }
     }
+
+    private fun jumFactoryComment() {
+        var bundle =Bundle()
+        bundle.putSerializable("id",id)
+        jumpActivity(bundle,FactoryCommentActivity::class.java)
+    }
+
     private fun shareThree(type: SHARE_MEDIA){
         mShareDialog?.dismiss()
         val web = UMWeb(Configs.BASE_URL+mData?.shareUrl)
@@ -194,7 +204,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
 
     override fun showData(data: NetData?) {
         if (data != null &&data is FactoryDetailsBean) {
-            mData =data.result
+            mData =data.result.factory
             if (!TextUtils.isEmpty(mData?.factoryPicture)) {
                 mList?.clear()
                 for (index in mData?.factoryPicture?.split(",")!!) {
@@ -214,8 +224,32 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
             tv_details.text =mData?.introduction
 
             tv_browse.text ="浏览量：${mData?.viewNum}"
+            if (data.result.comment!=null&&data.result.comment.size>0){
+                mFactoryCommentData = data.result.comment[0]
+                showComment()
+            }
         }
     }
+
+    private fun showComment() {
+        if (mFactoryCommentData == null) {
+            ly_comment_parent.visibility = View.GONE
+        } else {
+            ly_comment_parent.visibility = View.VISIBLE
+            ImageLoadUtils.loadImageCenterCrop(
+                this,
+                iv_comment_pic,
+                mFactoryCommentData?.customerHeadPic,
+                R.mipmap.ic_launcher
+            )
+            tv_comment_user_name.text = mFactoryCommentData?.customerName
+            tv_comment.text = mFactoryCommentData?.commentContent
+            comment_ratingBar.rating = mFactoryCommentData?.starLevel!!
+            tv_comment_time.text =mFactoryCommentData?.createTime
+        }
+
+    }
+
 
     override fun collectSuccess(netData: NetData?) {
         if (netData is IsCollectBean){

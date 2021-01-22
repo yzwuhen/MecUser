@@ -1377,4 +1377,30 @@ class ModelImpl : BaseModel {
             AndroidSchedulers.mainThread()
         )?.subscribe(netSubscribe)
     }
+
+    fun getFactoryCommentList(
+        token: String?,
+        id: String?,
+        page: Int,
+        pageSize: Int,
+        iSubscriberListener: ISubscriberListener<FactoryCommentListBean>
+    ) {
+        appsService?.getFactoryCommentList(token, id, page, pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<FactoryCommentListBean>(iSubscriberListener))
+    }
+
+    fun getEngInfo(
+        token: String?,
+        ids: String?,
+        iSubscriberListener: ISubscriberListener<NetData>
+    ) {
+        appsService?.getEngInfo(token,ids)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+
+    }
+
 }

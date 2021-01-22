@@ -195,7 +195,7 @@ public class MecSellData {
     }
 
     public String getFacDate() {
-        return TextUtils.isEmpty(facDate)?"":facDate;
+        return TextUtils.isEmpty(facDate)?"":(facDate.split("-")[0]+"年");
     }
 
     public void setFacDate(String facDate) {

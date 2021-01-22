@@ -61,7 +61,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         ly_root.addView(mHosPartsView)
 
         tv_address.setOnClickListener(this)
-        tv_search.setOnClickListener(this)
+        ly_search.setOnClickListener(this)
         tv_map.setOnClickListener(this)
         mPresenter.request()
         spring_list.type=SpringView.Type.FOLLOW
@@ -89,7 +89,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
 
         when (view?.id) {
             R.id.tv_address -> jumCity()
-            R.id.tv_search -> jumpSearch()
+            R.id.ly_search -> jumpSearch()
             R.id.tv_map -> jumMap()
         }
 

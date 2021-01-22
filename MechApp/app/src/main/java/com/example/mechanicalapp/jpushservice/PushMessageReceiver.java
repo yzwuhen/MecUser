@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.mechanicalapp.MainActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,14 +30,14 @@ public class PushMessageReceiver extends JPushMessageReceiver{
         Log.e(TAG,"[onNotifyMessageOpened] "+message);
         try{
             //打开自定义的Activity
-//            Intent i = new Intent(context, TestActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE,message.notificationTitle);
-//            bundle.putString(JPushInterface.EXTRA_ALERT,message.notificationContent);
-//            i.putExtras(bundle);
-//            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//            context.startActivity(i);
+            Intent i = new Intent(context, MainActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE,message.notificationTitle);
+            bundle.putString(JPushInterface.EXTRA_ALERT,message.notificationContent);
+            i.putExtras(bundle);
+            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            context.startActivity(i);
         }catch (Throwable throwable){
 
         }

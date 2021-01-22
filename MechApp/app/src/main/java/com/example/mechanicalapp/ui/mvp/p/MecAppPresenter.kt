@@ -11,6 +11,7 @@ import com.example.mechanicalapp.ui.data.request.RePay
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.impl.ModelImpl
 import com.example.mechanicalapp.ui.mvp.v.BaseView
+import com.example.mechanicalapp.ui.mvp.v.CommentView
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 
@@ -233,5 +234,54 @@ class MecAppPresenter(
             override fun onCompleted() {
             }
         }))
+    }
+
+    fun getFactoryCommentList(page: Int,id: String?) {
+        baseModel.getFactoryCommentList(
+            App.getInstance().token,
+            id,page,30,
+            object : ISubscriberListener<FactoryCommentListBean> {
+                override fun onNext(t: FactoryCommentListBean?) {
+                    if (t?.code==200&&t?.result!=null&&t?.result?.pages!=null){
+                        if (page==1){
+                           (baseView as NetDataView<NetData>).refreshUI(t)
+                        }else{
+                          (baseView as NetDataView<NetData>).loadMore(t)
+                        }
+                    }else{
+                        if (page==1){
+                            (baseView as CommentView).refreshUI(null)
+                        }
+                    }
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    fun getEngMsg(ids: String?) {
+        baseModel.getEngInfo(
+            App.getInstance().token,
+            ids,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+
+                }
+
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
     }
 }

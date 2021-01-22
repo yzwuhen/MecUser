@@ -23,111 +23,60 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cd_digger"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hot_apparatus"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="@dimen/dp_5"
-        >
         <ImageView
+            android:id="@+id/cd_digger"
             android:src="@mipmap/wjj"
-            android:layout_width="165dp"
-            android:layout_height="185dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hot_apparatus"
             />
-    </androidx.cardview.widget.CardView>
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cd_rotary_machine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_10"
-        app:layout_constraintStart_toEndOf="@+id/cd_digger"
-        app:layout_constraintTop_toTopOf="@+id/cd_digger"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="@dimen/dp_5"
-        >
         <ImageView
+            android:id="@+id/cd_rotary_machine"
             android:src="@mipmap/xwj"
-            android:layout_width="210dp"
-            android:layout_height="89dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/cd_digger"
+            app:layout_constraintTop_toTopOf="@+id/cd_digger"
             />
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cd_bulldozer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_10"
-        app:layout_constraintStart_toEndOf="@+id/cd_digger"
-       app:layout_constraintBottom_toBottomOf="@+id/cd_digger"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="@dimen/dp_5"
-        >
         <ImageView
+            android:id="@+id/cd_bulldozer"
             android:src="@mipmap/ttj"
-            android:layout_width="210dp"
-            android:layout_height="89dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/cd_digger"
+            app:layout_constraintBottom_toBottomOf="@+id/cd_digger"
             />
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cd_truck_crane"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        app:layout_constraintStart_toStartOf="@+id/cd_digger"
-        app:layout_constraintTop_toBottomOf="@+id/cd_digger"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="@dimen/dp_5"
-        >
         <ImageView
+            android:id="@+id/cd_truck_crane"
             android:src="@mipmap/qcd"
-            android:layout_width="123dp"
-            android:layout_height="172dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/cd_digger"
+            app:layout_constraintTop_toBottomOf="@+id/cd_digger"
             />
-    </androidx.cardview.widget.CardView>
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cd_bc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginLeft="@dimen/dp_10"
-        app:layout_constraintStart_toEndOf="@+id/cd_truck_crane"
-        app:layout_constraintTop_toBottomOf="@+id/cd_digger"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="@dimen/dp_5"
-        >
         <ImageView
+            android:id="@+id/cd_bc"
             android:src="@mipmap/bc"
-            android:layout_width="123dp"
-            android:layout_height="172dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/cd_truck_crane"
+            app:layout_constraintTop_toBottomOf="@+id/cd_digger"
             />
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cd_zzj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:layout_marginLeft="@dimen/dp_10"
-        app:layout_constraintStart_toEndOf="@+id/cd_bc"
-        app:layout_constraintTop_toBottomOf="@+id/cd_digger"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="@dimen/dp_5"
-        >
         <ImageView
+            android:id="@+id/cd_zzj"
             android:src="@mipmap/zzj"
-            android:layout_width="123dp"
-            android:layout_height="172dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/cd_bc"
+            app:layout_constraintTop_toBottomOf="@+id/cd_digger"
             />
-    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

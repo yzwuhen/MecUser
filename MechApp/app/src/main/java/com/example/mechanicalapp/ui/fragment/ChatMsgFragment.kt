@@ -163,9 +163,9 @@ class ChatMsgFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
         registerObservers(false)
     }
 
-    override fun refreshUI(list: List<RecentContact>?) {
+    override fun refreshChartUI(list: List<RecentContact>?) {
         mList.clear()
-        if (list != null&&list.size>0) {
+        if (list != null&& list.isNotEmpty()) {
           for (recent in list){
              if (recent.contactId.split("-").size<3){
                  mList.add(recent)
@@ -176,7 +176,7 @@ class ChatMsgFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
         closeRefreshView()
     }
 
-    override fun success() {
+    override fun successChart() {
         spring_list?.callFresh()
     }
 }

@@ -75,8 +75,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/dp_17"
+        android:paddingLeft="@dimen/dp_size_5"
+        android:paddingRight="@dimen/dp_size_5"
         android:text="￥1000/月"
-        android:textColor="#FC3D38"
+        android:textColor="#FE9418"
+        android:background="@drawable/label_bg"
         android:textSize="13sp"
         app:layout_constraintTop_toTopOf="@+id/tv_rent_address_data"
         app:layout_constraintEnd_toEndOf="parent"/>

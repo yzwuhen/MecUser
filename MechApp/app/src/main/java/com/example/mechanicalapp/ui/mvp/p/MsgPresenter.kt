@@ -17,13 +17,13 @@ class MsgPresenter<T>(
     }
 
     private fun getMsgList() {
-        (baseView as MsgView<List<RecentContact>>).refreshUI(
+        (baseView as MsgView<List<RecentContact>>).refreshChartUI(
             NIMClient.getService(MsgService::class.java).queryRecentContactsBlock()
         )
     }
 
     fun getBlackList() {
-        (baseView as MsgView<List<String>>).refreshUI(
+        (baseView as MsgView<List<String>>).refreshChartUI(
             NIMClient.getService(
                 FriendService::class.java
             ).blackList)
@@ -33,7 +33,7 @@ class MsgPresenter<T>(
         NIMClient.getService(FriendService::class.java).addToBlackList(account).setCallback(object :RequestCallback<Void>{
             override fun onSuccess(p0: Void?) {
                 Log.v("ssss","sssssss================success")
-                baseView.success()
+                baseView.successChart()
             }
 
             override fun onFailed(p0: Int) {
@@ -49,7 +49,7 @@ class MsgPresenter<T>(
     fun removeBlackList(account:String){
         NIMClient.getService(FriendService::class.java).removeFromBlackList(account).setCallback(object :RequestCallback<Void>{
             override fun onSuccess(p0: Void?) {
-                baseView.success()
+                baseView.successChart()
             }
 
             override fun onFailed(p0: Int) {
@@ -71,4 +71,6 @@ class MsgPresenter<T>(
     fun clearUnreadCount(recentContact: RecentContact) {
         NIMClient.getService(MsgService::class.java).clearUnreadCount(recentContact.fromAccount,recentContact.sessionType)
     }
+
+
 }

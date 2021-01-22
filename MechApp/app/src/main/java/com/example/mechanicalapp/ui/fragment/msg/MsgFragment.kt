@@ -109,34 +109,15 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
         tv_sys_msg.isSelected = position==2
 
         if (position ==0){
-
             tv_chat_msg.isSelected =true
             tv_eng_msg.isSelected =false
             tv_sys_msg.isSelected =false
-//            tv_chat_msg?.setTextColor(Color.parseColor("#222222"))
-//            tv_eng_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-//            tv_sys_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-//            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
-//            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-//            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
 
         }else if (position ==1){
-//            tv_eng_msg?.setTextColor(Color.parseColor("#222222"))
-//            tv_chat_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-//            tv_sys_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-//            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-//            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
-//            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
             tv_chat_msg.isSelected =false
             tv_eng_msg.isSelected =true
             tv_sys_msg.isSelected =false
         }else{
-//            tv_sys_msg?.setTextColor(Color.parseColor("#222222"))
-//            tv_eng_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-//            tv_chat_msg?.setTextColor(Color.parseColor("#9a9a9a"))
-//            tv_chat_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-//            tv_eng_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-//            tv_sys_msg?.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.tv_under_ine)
             tv_chat_msg.isSelected =false
             tv_eng_msg.isSelected =false
             tv_sys_msg.isSelected =true

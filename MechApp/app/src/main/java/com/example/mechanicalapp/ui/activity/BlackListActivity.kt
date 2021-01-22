@@ -99,7 +99,7 @@ class BlackListActivity:BaseCusActivity() , OnItemClickListener,View.OnClickList
         }
     }
 
-    override fun refreshUI(t: List<String>?) {
+    override fun refreshChartUI(t: List<String>?) {
         mBlackList.clear()
         if (t!=null){
             mBlackList.addAll(t)
@@ -110,7 +110,7 @@ class BlackListActivity:BaseCusActivity() , OnItemClickListener,View.OnClickList
         }
     }
 
-    override fun success() {
+    override fun successChart() {
 
     }
 }

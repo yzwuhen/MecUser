@@ -14,8 +14,10 @@ import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.p.MsgPresenter
 import com.example.mechanicalapp.ui.mvp.v.MsgView
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.utils.RefreshHeaderUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.liaoinstan.springview.widget.SpringView
@@ -26,8 +28,8 @@ import com.netease.nimlib.sdk.msg.model.RecentContact
 import kotlinx.android.synthetic.main.fragment_msg_list.*
 
 
-    class ChatEnFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
-    MsgView<List<RecentContact>> {
+class ChatEnFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
+    MsgView<List<RecentContact>>,NetDataView<NetData> {
 
     private var mChatAdapter: ChatEnAdapter? = null
     var mList: MutableList<RecentContact> = ArrayList<RecentContact>()
@@ -38,6 +40,8 @@ import kotlinx.android.synthetic.main.fragment_msg_list.*
     private var mDialogList: MutableList<String> = ArrayList<String>()
     private var mDialogAdapter: DialogListAdapter? = null
     private var clickPosition = 0
+    private var ids: String? = null
+    private var mMsgPresenter: MecAppPresenter? = null
     override fun getLayoutId(): Int {
         return R.layout.fragment_msg_list
     }
@@ -63,6 +67,7 @@ import kotlinx.android.synthetic.main.fragment_msg_list.*
         })
 
         mPresenter = MsgPresenter(this)
+        mMsgPresenter = MecAppPresenter(this)
         mPresenter?.request()
 
         registerObservers(true)
@@ -77,8 +82,8 @@ import kotlinx.android.synthetic.main.fragment_msg_list.*
         service.observeRecentContact({ recentContacts ->
             mList.clear()
             if (recentContacts != null) {
-                for (recent in recentContacts){
-                    if (recent.contactId.split("-").size==3){
+                for (recent in recentContacts) {
+                    if (recent.contactId.split("-").size == 3) {
                         mList.add(recent)
                     }
                 }
@@ -86,6 +91,7 @@ import kotlinx.android.synthetic.main.fragment_msg_list.*
             mChatAdapter?.notifyDataSetChanged()
         }, register)
     }
+
     fun closeRefreshView() {
         spring_list.isEnable = true
         spring_list.onFinishFreshAndLoad()
@@ -168,20 +174,41 @@ import kotlinx.android.synthetic.main.fragment_msg_list.*
         registerObservers(false)
     }
 
-    override fun refreshUI(list: List<RecentContact>?) {
+    override fun refreshChartUI(list: List<RecentContact>?) {
         mList.clear()
-        if (list != null&& list.isNotEmpty()) {
-            for (recent in list){
-                if (recent.contactId.split("-").size==3){
+        ids = ""
+        if (list != null && list.isNotEmpty()) {
+            for (recent in list) {
+                if (recent.contactId.split("-").size == 3) {
                     mList.add(recent)
+                    ids += recent.contactId
+                    ids += ","
                 }
             }
+            mMsgPresenter?.getEngMsg(ids)
         }
         mChatAdapter?.notifyDataSetChanged()
         closeRefreshView()
+
     }
 
-    override fun success() {
+    override fun successChart() {
         spring_list?.callFresh()
+    }
+
+    override fun refreshUI(data: NetData?) {
+
+    }
+
+    override fun loadMore(data: NetData?) {
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hiedLoading() {
+    }
+
+    override fun err() {
     }
 }

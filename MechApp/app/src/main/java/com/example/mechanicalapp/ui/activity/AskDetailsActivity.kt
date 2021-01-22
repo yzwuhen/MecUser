@@ -225,7 +225,7 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
             ImageLoadUtils.loadCircle(this, iv_ask_user_pic, data.avatar)
             ImageLoadUtils.loadCircle(this, iv_user_pic, data.avatar)
 
-            tv_address.text="所在地：${data.address}"
+            tv_address.text="施工地：${data.address}"
 
             tv_mec_type.text=data.cateName
             tv_mec_brand.text =data.brandName

@@ -40,7 +40,7 @@ class MoreBuyAdapter  (var mContext: Context, var mList:MutableList<MecSellData>
 
         holder.itemView.tv_rent_price.visibility =View.GONE
         holder.itemView.tv_rent.visibility =View.VISIBLE
-        holder.itemView.tv_rent.text ="￥${mList[position].price}"
+        holder.itemView.tv_rent.text ="￥${mList[position].price}/元"
 
 
         holder.itemView.tv_rent_distance.text ="距离：${

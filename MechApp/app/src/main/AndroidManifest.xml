@@ -163,6 +163,7 @@
         <activity android:name=".ui.activity.SureOrderCarActivity" />
         <activity android:name=".ui.activity.FactoryDetails" />
         <activity android:name=".ui.activity.PartsOrderAfterDetails" />
+        <activity android:name=".ui.activity.FactoryCommentActivity"/>
         <activity
             android:name=".ui.activity.ResultMecLeaseActivity"
             android:windowSoftInputMode="adjustPan" />

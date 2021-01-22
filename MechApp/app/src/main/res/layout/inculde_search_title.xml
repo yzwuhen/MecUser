@@ -18,16 +18,35 @@
         android:textSize="@dimen/sp_18">
 
     </TextView>
-    <TextView
-        android:id="@+id/tv_search"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+
+    <LinearLayout
+        android:id="@+id/ly_search"
         android:layout_width="0dp"
         android:layout_height="37dp"
-        android:background="@drawable/search_et_bg"
-        android:layout_weight="1">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="17dp"
+        android:layout_weight="1"
+        android:background="@drawable/rect_radio_7"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingLeft="15dp">
 
-    </TextView>
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:drawableLeft="@mipmap/ser"
+            android:drawablePadding="10dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:hint="请输入关键词进行搜索"
+            android:textColor="#999999"
+            android:textSize="15sp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_map"

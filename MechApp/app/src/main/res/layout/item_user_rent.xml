@@ -76,6 +76,7 @@
         />
 
     <TextView
+
         android:id="@+id/tv_rent_price"
         android:layout_width="39dp"
         android:layout_height="22dp"
@@ -89,13 +90,16 @@
         />
 
     <TextView
-        android:id="@+id/tv_rent"
         android:visibility="gone"
+        android:id="@+id/tv_rent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_size_5"
+        android:paddingRight="@dimen/dp_size_5"
         android:text="￥1000/月"
-        android:textColor="#FC3D38"
+        android:textColor="#FE9418"
         android:textSize="13sp"
+        android:background="@drawable/label_bg"
         app:layout_constraintTop_toTopOf="@+id/tv_rent_address_data"
         app:layout_constraintEnd_toEndOf="parent"/>
 

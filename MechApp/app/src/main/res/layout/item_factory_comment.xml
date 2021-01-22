@@ -49,7 +49,7 @@
                 android:orientation="horizontal">
 
                 <RatingBar
-                    android:id="@+id/ratingBar"
+                    android:id="@+id/comment_ratingBar"
                     style="@style/App_RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

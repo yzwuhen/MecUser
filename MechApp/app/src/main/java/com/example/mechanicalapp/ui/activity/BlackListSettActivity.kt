@@ -52,11 +52,11 @@ class BlackListSettActivity:BaseCusActivity(),View.OnClickListener, MsgView<NetD
 
     }
 
-    override fun refreshUI(t: NetData?) {
+    override fun refreshChartUI(t: NetData?) {
 
     }
 
-    override fun success() {
+    override fun successChart() {
         isBlackList =!isBlackList
         iv_switch.isSelected =isBlackList
     }

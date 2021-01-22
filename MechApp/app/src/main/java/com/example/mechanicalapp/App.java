@@ -116,6 +116,7 @@ public class App extends Application {
 
     public void setUser(UserInfo user) {
         Hawk.put(Configs.USER_INFO, user);
+        JPushInterface.setAlias(this,0,user.getPhone());
         this.userInfoBean = user;
     }
 

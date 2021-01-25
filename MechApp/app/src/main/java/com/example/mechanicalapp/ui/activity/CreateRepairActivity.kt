@@ -59,6 +59,7 @@ class CreateRepairActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
         et_phone.addTextChangedListener(this)
         et_company_name.addTextChangedListener(this)
         et_input.addTextChangedListener(this)
+        ly_parts_type.setOnClickListener(this)
 
         mPresenter = AddManagePresenterImpl(this, this)
     }
@@ -127,6 +128,11 @@ class CreateRepairActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
                 Configs.EC_MODEL_RESULT_CODE,
                 1,
                 EcModel::class.java
+            )
+            R.id.ly_parts_type-> jumpActivityForResult(
+                Configs.PARTS_TYPE_RESULT_CODE,
+                1,
+                PartsTypeActivity::class.java
             )
             R.id.ly_address -> jumpActivityForResult(
                 Configs.ADDRESS_RESULT_CODE,
@@ -226,6 +232,11 @@ class CreateRepairActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
                 et_ec_model.text = extra
                 mBean.productModel = extra
                 mBean.productModelId = extraId
+            }
+            Configs.PARTS_TYPE_RESULT_CODE -> {
+                et_parts_type.text = extra
+                mBean.partName = extra
+                mBean.partId = extraId
             }
         }
 

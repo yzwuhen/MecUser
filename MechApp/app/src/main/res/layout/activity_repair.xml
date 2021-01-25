@@ -78,15 +78,33 @@
 
             <View style="@style/h_view_1" />
             <LinearLayout
-                android:id="@+id/ly_ec_model"
+            android:id="@+id/ly_ec_model"
+            style="@style/ly_style_h">
+
+            <TextView
+                style="@style/tv_style_left"
+                android:text="机械型号" />
+            <TextView
+                android:hint="请选择机械型号"
+                android:id="@+id/et_ec_model"
+                style="@style/et_style" />
+            <TextView
+                android:text=">"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+            <View style="@style/h_view_1" />
+            <LinearLayout
+                android:id="@+id/ly_parts_type"
                 style="@style/ly_style_h">
 
                 <TextView
                     style="@style/tv_style_left"
-                    android:text="机械型号" />
+                    android:text="配件类型" />
                 <TextView
-                    android:hint="请选择机械型号"
-                    android:id="@+id/et_ec_model"
+                    android:hint="请选择配件类型"
+                    android:id="@+id/et_parts_type"
                     style="@style/et_style" />
                 <TextView
                     android:text=">"

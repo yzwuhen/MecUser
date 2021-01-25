@@ -39,6 +39,7 @@ class MecFactoryShopAdapter (var mContext: Context, var mList:MutableList<Factor
         }km"
         holder.itemView.tv_introduce.text ="简介：${mList[position].introduction}"
 
+        holder.itemView.iv_check.isSelected =mList[position].isSelect
         ImageLoadUtils.loadImage(mContext,holder.itemView.iv_item_pic,mList[position].factoryPicture,R.mipmap.ic_launcher)
     }
 

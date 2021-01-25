@@ -12,8 +12,7 @@ import com.example.mechanicalapp.ui.adapter.DialogListAdapter
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.p.MsgPresenter
 import com.example.mechanicalapp.ui.mvp.v.MsgView
@@ -29,11 +28,11 @@ import kotlinx.android.synthetic.main.fragment_msg_list.*
 
 
 class ChatEnFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
-    MsgView<List<RecentContact>>,NetDataView<NetData> {
+    MsgView<List<RecentContact>>,NetDataView<EnMsgBean> {
 
     private var mChatAdapter: ChatEnAdapter? = null
     var mList: MutableList<RecentContact> = ArrayList<RecentContact>()
-
+    var mEngList: MutableList<EngineerData> = ArrayList<EngineerData>()
     private var mTipDialog: BottomSheetDialog? = null
     private var mTipView: View? = null
     private var mDialogRecycle: RecyclerView? = null
@@ -50,7 +49,7 @@ class ChatEnFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
         super.initView()
 
         recycle_list.layoutManager = LinearLayoutManager(mContext)
-        mChatAdapter = ChatEnAdapter(mContext, mList, this, this)
+        mChatAdapter = ChatEnAdapter(mContext, mList, mEngList,this, this)
         recycle_list.adapter = mChatAdapter
 
         spring_list.type = SpringView.Type.FOLLOW
@@ -196,11 +195,15 @@ class ChatEnFragment : BaseCusFragment(), OnItemClickListener, OnItemLongClick,
         spring_list?.callFresh()
     }
 
-    override fun refreshUI(data: NetData?) {
-
+    override fun refreshUI(data: EnMsgBean?) {
+        if (data!=null&&data.result!=null&&data.result.size>0){
+            mEngList.clear()
+            mEngList.addAll(data.result)
+            mChatAdapter?.notifyDataSetChanged()
+        }
     }
 
-    override fun loadMore(data: NetData?) {
+    override fun loadMore(data: EnMsgBean?) {
     }
 
     override fun showLoading() {

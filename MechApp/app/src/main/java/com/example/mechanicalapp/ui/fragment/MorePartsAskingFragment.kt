@@ -10,8 +10,6 @@ import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.activity.EcType
 import com.example.mechanicalapp.ui.activity.PartsAskDetailsActivity
-import com.example.mechanicalapp.ui.activity.PartsLeaseDetailsActivity
-import com.example.mechanicalapp.ui.activity.PartsModel
 import com.example.mechanicalapp.ui.adapter.MorePartsAskAdapter
 import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
@@ -21,7 +19,6 @@ import com.example.mechanicalapp.ui.mvp.impl.MorePartsPresenter
 import com.example.mechanicalapp.ui.mvp.v.MorePartsLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_more_parts_lease.*
-import kotlinx.android.synthetic.main.item_more_parts_ask.view.*
 
 /**
  * 求组 配件

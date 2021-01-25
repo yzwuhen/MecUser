@@ -23,7 +23,7 @@ import cn.jpush.android.helper.Logger;
  * 2) 接收不到自定义消息
  */
 public class MyReceiver extends BroadcastReceiver {
-	private static final String TAG = "JIGUANG-Example";
+	private static final String TAG = "PushMessageReceiver-Example";
 
 	@Override
 	public void onReceive(Context context, Intent intent) {

@@ -1394,12 +1394,12 @@ class ModelImpl : BaseModel {
     fun getEngInfo(
         token: String?,
         ids: String?,
-        iSubscriberListener: ISubscriberListener<NetData>
+        iSubscriberListener: ISubscriberListener<EnMsgBean>
     ) {
         appsService?.getEngInfo(token,ids)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
-            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+            )?.subscribe(NetSubscribe<EnMsgBean>(iSubscriberListener))
 
     }
 

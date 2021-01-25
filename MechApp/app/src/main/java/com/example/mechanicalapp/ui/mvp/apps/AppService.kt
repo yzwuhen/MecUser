@@ -1442,6 +1442,6 @@ interface AppService {
     @GET("/jeecg-boot/repair/mecRepairEngineer/listByIds")
     fun getEngInfo(
         @Header("X-Access-Token") token: String?,
-        @Query("ids") id: String?
-    ): Observable<NetData>
+        @Query("imIds") id: String?
+    ): Observable<EnMsgBean>
 }

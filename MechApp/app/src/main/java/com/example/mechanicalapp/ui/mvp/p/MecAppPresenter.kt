@@ -19,10 +19,8 @@ import com.example.mechanicalapp.ui.mvp.v.OrderView
 class MecAppPresenter(
     private var baseView: BaseView<NetData>
 ) : BasePresenter {
-
     var baseModel = ModelImpl()
     override fun request() {
-
     }
 
     fun getList(type: Int, id: String?) {
@@ -269,9 +267,9 @@ class MecAppPresenter(
         baseModel.getEngInfo(
             App.getInstance().token,
             ids,
-            object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
-
+            object : ISubscriberListener<EnMsgBean> {
+                override fun onNext(t: EnMsgBean?) {
+                    (baseView as NetDataView<EnMsgBean>).refreshUI(t)
                 }
 
                 override fun onError(e: Throwable?) {

@@ -80,6 +80,24 @@ public class ReFactoryOrder {
     private String status;
     private String statusName;
     private String companyName;
+    private String partId;
+    private String partName;
+
+    public String getPartId() {
+        return partId;
+    }
+
+    public void setPartId(String partId) {
+        this.partId = partId;
+    }
+
+    public String getPartName() {
+        return partName;
+    }
+
+    public void setPartName(String partName) {
+        this.partName = partName;
+    }
 
     public String getCompanyName() {
         return companyName;

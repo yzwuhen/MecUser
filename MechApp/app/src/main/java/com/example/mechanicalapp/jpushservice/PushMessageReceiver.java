@@ -3,9 +3,14 @@ package com.example.mechanicalapp.jpushservice;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.example.mechanicalapp.MainActivity;
+import com.example.mechanicalapp.ui.activity.OrderDetailsActivity;
+import com.example.mechanicalapp.ui.data.NotificationData;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +35,19 @@ public class PushMessageReceiver extends JPushMessageReceiver{
         Log.e(TAG,"[onNotifyMessageOpened] "+message);
         try{
             //打开自定义的Activity
+            if (!TextUtils.isEmpty(message.notificationExtras)){
+                Gson gson = new Gson();
+                NotificationData res = gson.fromJson(message.notificationExtras, NotificationData.class);
+                Intent i = new Intent(context, OrderDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id",res.getRepairOrder().getOrderId());
+                bundle.putInt("status",res.getRepairOrder().getStatus());
+                i.putExtras(bundle);
+                //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                context.startActivity(i);
+
+            }else {
             Intent i = new Intent(context, MainActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE,message.notificationTitle);
@@ -38,6 +56,8 @@ public class PushMessageReceiver extends JPushMessageReceiver{
             //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
             context.startActivity(i);
+            }
+
         }catch (Throwable throwable){
 
         }

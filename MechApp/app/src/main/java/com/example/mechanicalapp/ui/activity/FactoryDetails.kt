@@ -220,6 +220,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
             tv_factory_name.text =mData?.name
             ratingBar.rating = mData?.star!!
             tv_type.text ="维修类型：${mData?.repaireType}"
+            tv_part_type.text="配件类型：${mData?.componentType}"
             tv_address.text =mData?.address
             tv_details.text =mData?.introduction
 

@@ -23,6 +23,9 @@ class MecAppPresenter(
     override fun request() {
     }
 
+    private var pageNo=1
+    private var pageSize =30
+
     fun getList(type: Int, id: String?) {
         baseView.showLoading()
         baseModel.getList(App.getInstance().token, type, id, NetSubscribe<ListBean>(object :
@@ -32,7 +35,6 @@ class MecAppPresenter(
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -57,7 +59,6 @@ class MecAppPresenter(
                 }
 
                 override fun onError(e: Throwable?) {
-                    Log.v("ssss", "sss=========$e")
                     baseView.hiedLoading()
                 }
 
@@ -116,7 +117,6 @@ class MecAppPresenter(
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -135,7 +135,6 @@ class MecAppPresenter(
                 (baseView as NetDataView<NetData>).refreshUI(t)
             }
             override fun onError(e: Throwable?) {
-                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -153,7 +152,6 @@ class MecAppPresenter(
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -172,7 +170,6 @@ class MecAppPresenter(
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -193,7 +190,6 @@ class MecAppPresenter(
             }
 
             override fun onError(e: Throwable?) {
-                Log.v("ssss", "sss=========$e")
                 baseView.hiedLoading()
             }
 
@@ -210,7 +206,6 @@ class MecAppPresenter(
             override fun onNext(t: NetData?) {
             }
             override fun onError(e: Throwable?) {
-                Log.v("ssss", "sss=========$e")
             }
             override fun onCompleted() {
             }
@@ -272,6 +267,52 @@ class MecAppPresenter(
                     (baseView as NetDataView<EnMsgBean>).refreshUI(t)
                 }
 
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+
+    }
+
+    fun getNotifyMsgList() {
+        baseModel.getNotifyMsgList(
+            App.getInstance().token,
+            App.getInstance().userInfo.phone,
+            pageNo,pageSize,
+            object : ISubscriberListener<SysMsgBean> {
+                override fun onNext(t: SysMsgBean?) {
+                    if (pageNo==1){
+                        (baseView as NetDataView<NetData>).refreshUI(t)
+                        pageNo++
+                    }else{
+                        (baseView as NetDataView<NetData>).loadMore(t)
+                    }
+                }
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+    fun resetPage(){
+        pageNo=1
+    }
+
+    fun getSysMsgDetails(id: String?) {
+        baseModel.getSysMsgDetails(
+            App.getInstance().token,
+            id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+
+                }
                 override fun onError(e: Throwable?) {
                     baseView.hiedLoading()
                 }

@@ -1403,4 +1403,28 @@ class ModelImpl : BaseModel {
 
     }
 
+    fun getNotifyMsgList(
+        token: String?,
+        phone: String?,
+        pageNo: Int,
+        pageSize: Int,
+        iSubscriberListener: ISubscriberListener<SysMsgBean>
+    ) {
+        appsService?.getNotifyMsgList(token,null,pageNo,pageSize)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<SysMsgBean>(iSubscriberListener))
+    }
+
+    fun getSysMsgDetails(
+        token: String?,
+        id: String?,
+        iSubscriberListener: ISubscriberListener<NetData>
+    ) {
+        appsService?.getNotifyMsgDetails(token,id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
 }

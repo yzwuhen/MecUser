@@ -1444,4 +1444,28 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("imIds") id: String?
     ): Observable<EnMsgBean>
+
+
+
+    /**
+     *
+     * 获取系统消息列表
+     */
+    @GET("/jeecg-boot/notice/mecNotice/appList")
+    fun getNotifyMsgList(
+        @Header("X-Access-Token") token: String?,
+        @Query("createBy") createBy: String?,
+        @Query("pageNo") pageNo: Int?,
+    @Query("pageSize") pageSize: Int?
+    ): Observable<SysMsgBean>
+
+    /**
+     *
+     * 获取系统消息详情
+     */
+    @GET("/jeecg-boot/notice/mecNotice/queryById")
+    fun getNotifyMsgDetails(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id: String?
+    ): Observable<NetData>
 }

@@ -19,6 +19,9 @@
         android:layout_marginRight="12dp"
         android:layout_width="0dp"
         android:layout_height="37dp"
+        android:hint="请输入关键字进行搜索"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_size_8"
         android:background="@drawable/search_et_bg"
         android:layout_weight="1">
 

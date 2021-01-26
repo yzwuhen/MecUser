@@ -36,11 +36,6 @@ class ChatAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        Log.v("====Adapter", "======================${mList[position].contactId}")
-        Log.v("====Adapter", "============子账号==========${mList[position].fromAccount}")
-        Log.v("====Adapter", "============msgType==========${mList[position].msgType}")
-        Log.v("====Adapter", "============sessionType==========${mList[position].sessionType}")
-        Log.v("====Adapter", "============扩展字段==========${mList[position].extension}")
         if (!TextUtils.isEmpty(mList[position].contactId)){
             val userInfo= NimUIKit.getUserInfoProvider().getUserInfo(mList[position].contactId)
             if (userInfo!=null){

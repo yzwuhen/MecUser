@@ -54,10 +54,8 @@ class PartsAskDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUtil
     override fun getLayoutId(): Int {
         return R.layout.activity_parts_ask_details
     }
-
     override fun initView() {
         super.initView()
-
         iv_right.setImageResource(R.mipmap.title_share)
         tv_title.text="求租详情"
         iv_left.setOnClickListener(this)

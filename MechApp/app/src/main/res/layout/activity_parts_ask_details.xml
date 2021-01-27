@@ -161,13 +161,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
+                        android:text="机械类型:"
+                        android:textColor="@color/color_666"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mec_type"
+                        android:layout_width="140dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
+                        android:text="履带挖掘机"
+                        android:textColor="@color/color_222"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_10"
                         android:text="租赁价格:"
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_coast_money"
-                        android:layout_width="140dp"
+                       android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
                         android:ellipsize="end"
@@ -176,22 +192,7 @@
                         android:textColor="@color/color_222"
                         android:textSize="15sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="机械类型:"
-                        android:textColor="@color/color_666"
-                        android:textSize="15sp" />
 
-                    <TextView
-                        android:id="@+id/tv_mec_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_10"
-                        android:text="履带挖掘机"
-                        android:textColor="@color/color_222"
-                        android:textSize="15sp" />
                 </LinearLayout>
 
 
@@ -223,7 +224,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="配件型号:"
+                        android:text=" 配件型号:"
                         android:textColor="@color/color_666"
                         android:textSize="15sp" />
 

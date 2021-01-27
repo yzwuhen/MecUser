@@ -44,7 +44,7 @@ class MorePartsAskAdapter (
                 )
             )
         }km"
-        holder.itemView.tv_rent.text="￥${mList[position].price}/${mList[position].priceUnit_dictText}"
+        holder.itemView.tv_rent.text="￥${mList[position].price}${mList[position].priceUnit_dictText}"
         holder.itemView.tv_time.text = DateUtils.dateDiffs(mList[position].updateTime,System.currentTimeMillis())
         if (mList[position].isPerson==1){
             holder.itemView.iv_sr.visibility =View.VISIBLE

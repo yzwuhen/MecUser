@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
 import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +27,12 @@ class ChatSysAdapter (var mContext: Context, var mList:MutableList<SysMsgData>, 
         holder.itemView.tv_msg.text =Html.fromHtml(mList[position].content)
         holder.itemView.tv_time.text =
             mList[position]?.createTime
-        if (mList[position].isRead=="1"){
-            holder.itemView.tv_title.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-        }else{
-            holder.itemView.tv_title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.circle_red,0,0,0)
-        }
+        holder.itemView.tv_title.isSelected = mList[position].isRead!="1"
+//        if (mList[position].isRead=="1"){
+//            holder.itemView.tv_title.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+//        }else{
+//            holder.itemView.tv_title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.circle_red,0,0,0)
+//        }
     }
 
     override fun getItemCount(): Int {

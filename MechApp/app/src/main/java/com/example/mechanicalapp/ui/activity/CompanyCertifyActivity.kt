@@ -209,7 +209,7 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
         if (TextUtils.isEmpty(et_company_code.text.toString().trim())) {
             return false
         }
-        reCompanyCer.companyId = et_company_code.text.toString().trim()
+        reCompanyCer.socialNo = et_company_code.text.toString().trim()
 
         if (TextUtils.isEmpty(et_company_address.text.toString().trim())) {
             return false
@@ -243,7 +243,7 @@ class CompanyCertifyActivity:BaseCusActivity(),View.OnClickListener, PersonCerVi
                     tv_success_name.text ="真实姓名：${reCompanyCer.name}"
                     tv_success_id_code.text ="身份证：${reCompanyCer.idCard}"
                     tv_success_company.text ="公司名:${reCompanyCer.companyName}"
-                    tv_success_company_code.text="社会信用代码：${reCompanyCer.companyId}"
+                    tv_success_company_code.text="社会信用代码：${reCompanyCer.socialNo}"
                 }else{
                     ly_apply_fail.visibility =View.VISIBLE
                 }

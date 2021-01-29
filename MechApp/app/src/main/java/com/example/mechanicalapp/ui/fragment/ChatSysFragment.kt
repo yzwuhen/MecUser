@@ -73,7 +73,7 @@ class ChatSysFragment : BaseCusFragment(), OnItemClickListener ,NetDataView<SysM
     }
 
     override fun refreshUI(data: SysMsgBean?) {
-        if (data!=null){
+        if (data!=null&&data.result!=null){
             mList.clear()
             mList.addAll(data.result)
             mChatAdapter?.notifyDataSetChanged()
@@ -82,7 +82,7 @@ class ChatSysFragment : BaseCusFragment(), OnItemClickListener ,NetDataView<SysM
     }
 
     override fun loadMore(data: SysMsgBean?) {
-        if (data!=null){
+        if (data!=null&&data.result!=null){
             mList.addAll(data.result)
             mChatAdapter?.notifyDataSetChanged()
         }

@@ -133,4 +133,5 @@ dependencies {
     implementation  'com.umeng.umsdk:share-sina:7.1.3'
 
     implementation(name: 'com.heytap.msp-push-2.1.0', ext: 'aar')
+
 }

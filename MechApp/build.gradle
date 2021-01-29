@@ -27,6 +27,7 @@ allprojects {
             dirs 'libs'
         }
         maven {url 'http://developer.huawei.com/repo/'}
+
     }
 }
 

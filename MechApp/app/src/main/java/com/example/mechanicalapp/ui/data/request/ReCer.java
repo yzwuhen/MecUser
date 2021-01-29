@@ -36,7 +36,7 @@ public class ReCer {
     private String idCardFrontPic;
     private String idCardBackPic;
     private String companyName;
-    private String companyId;
+    private String socialNo;
     private String companyAddress;
     private String socialPic;
     private String componentType;
@@ -157,12 +157,12 @@ public class ReCer {
         this.companyName = companyName;
     }
 
-    public String getCompanyId() {
-        return companyId;
+    public String getSocialNo() {
+        return socialNo;
     }
 
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
+    public void setSocialNo(String socialNo) {
+        this.socialNo = socialNo;
     }
 
     public String getCompanyAddress() {

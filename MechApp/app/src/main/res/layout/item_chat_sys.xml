@@ -5,7 +5,7 @@
     android:paddingRight="@dimen/dp_14"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,11 +18,11 @@
             android:layout_height="44dp"
             android:gravity="center_vertical"
             android:text="标题标题标题标题标题"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:textColor="@color/color_222"
-            android:drawableLeft="@drawable/circle_red"
-            android:drawablePadding="@dimen/dp_20"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:drawableLeft="@drawable/circle_msg"
+            android:drawablePadding="@dimen/dp_18"
             android:textSize="16sp"/>
         <TextView
             android:id="@+id/tv_time"

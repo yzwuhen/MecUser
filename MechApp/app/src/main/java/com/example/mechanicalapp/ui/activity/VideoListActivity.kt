@@ -51,8 +51,7 @@ class VideoListActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClick
     }
 
     override fun onItemClick(view: View, position: Int) {
-
-
+        jumpActivity(null,VideoPlayerActivity::class.java)
     }
 
     override fun onClick(v: View?) {

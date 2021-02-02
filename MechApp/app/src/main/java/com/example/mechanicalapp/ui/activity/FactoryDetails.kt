@@ -76,6 +76,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
         ly_call.setOnClickListener(this)
         tv_address.setOnClickListener(this)
         ly_comment.setOnClickListener(this)
+        iv_player.setOnClickListener(this)
 
         id = intent.getStringExtra("id")
 
@@ -109,7 +110,12 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.tv_collected->collect()
             R.id.ly_comment ->jumFactoryComment()
+            R.id.iv_player->jumPlayer()
         }
+    }
+
+    private fun jumPlayer() {
+        jumpActivity(null,VideoListActivity::class.java)
     }
 
     private fun jumFactoryComment() {

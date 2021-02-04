@@ -1,19 +1,31 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
+import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.VideoListAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import kotlinx.android.synthetic.main.fragment_more_data.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class VideoListActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClickListener {
+class VideoListActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClickListener {
     var mAdapter: VideoListAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
+
+    @SuppressLint("WrongConstant")
+    var channel: NotificationChannel? = null
+    private var notificationManager: NotificationManager? = null
     override fun getLayoutId(): Int {
         return R.layout.activity_video_list
     }
@@ -47,11 +59,12 @@ class VideoListActivity:BaseActivity<NetData>(),OnItemClickListener,View.OnClick
     override fun hiedLoading() {
     }
 
-    override fun err()  {
+    override fun err() {
     }
 
     override fun onItemClick(view: View, position: Int) {
-        jumpActivity(null,VideoPlayerActivity::class.java)
+          jumpActivity(null, VideoPlayerActivity::class.java)
+
     }
 
     override fun onClick(v: View?) {

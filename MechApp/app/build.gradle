@@ -133,6 +133,5 @@ dependencies {
     implementation  'com.umeng.umsdk:share-sina:7.1.3'
 
     implementation(name: 'com.heytap.msp-push-2.1.0', ext: 'aar')
-    compile 'com.ezviz.sdk:ezuikit:2.2.1'//萤石
-
+    implementation 'com.ezviz.sdk:ezuikit:2.2.1'//萤石
 }

@@ -16,6 +16,7 @@ import com.example.mechanicalapp.ui.activity.MoreDataActivity
 import com.example.mechanicalapp.ui.adapter.HomeDemandAdapter
 import com.example.mechanicalapp.ui.adapter.UserRentAdapter
 import com.example.mechanicalapp.ui.data.MecLeaseData
+import com.example.mechanicalapp.ui.widget.HomeLayoutManager
 import kotlinx.android.synthetic.main.layout_user_demand.view.*
 
 /**
@@ -38,7 +39,7 @@ class UserDemandKtView(var mContext: Context) : LinearLayout(mContext), OnItemCl
 
         mRentAdapter = UserRentAdapter(mContext,mRentList,this)
 
-        recycler_demand.layoutManager = LinearLayoutManager(mContext)
+        recycler_demand.layoutManager = HomeLayoutManager(mContext)
         recycler_demand.adapter = mAdapter
 
         tv_lease.setOnClickListener(this)

@@ -26,10 +26,12 @@
             android:src="@drawable/check_icon" />
     </LinearLayout>
 
-    <ImageView
+    <com.example.mechanicalapp.ui.view.CusImageView
         android:id="@+id/iv_goods_pic"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        app:shape_type="rectangle"
+        app:radius="@dimen/dp_5"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintStart_toEndOf="@+id/ly_check"
         app:layout_constraintTop_toTopOf="@+id/ly_check" />

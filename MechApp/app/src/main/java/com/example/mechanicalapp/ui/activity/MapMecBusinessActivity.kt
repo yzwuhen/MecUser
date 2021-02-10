@@ -2,10 +2,14 @@ package com.example.mechanicalapp.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +29,7 @@ import com.example.mechanicalapp.ui.data.HomeCityData
 import com.example.mechanicalapp.ui.data.MecSellData
 import com.example.mechanicalapp.ui.data.MoreSellBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReScreenData
 import com.example.mechanicalapp.ui.mvp.impl.ResultPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -33,7 +38,6 @@ import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
 import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_map_business.*
 import kotlinx.android.synthetic.main.layout_search_title.*
 import kotlin.math.ceil
@@ -54,8 +58,8 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
     private var markerLocat: Marker? = null
 
 
-    private var mButtDialog: BottomSheetDialog? = null
-    private var mDialogView: View? = null
+    private var mReScreenData: ReScreenData? = null
+    private var mScreenPop: PopupWindow? = null
     private var mDialogTvRest: TextView? = null
 
     private var mDialogTvSure: TextView? = null
@@ -101,68 +105,104 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
         initListener()
     }
     private fun showDialogType() {
-        if (mButtDialog == null) {
-            mButtDialog = BottomSheetDialog(this)
-            mDialogView = View.inflate(this, R.layout.dialog_screen, null)
-            mButtDialog?.setContentView(mDialogView!!)
-
-            mDialogTvRest = mDialogView?.findViewById(R.id.tv_reset)
-            mDialogTvSure = mDialogView?.findViewById(R.id.tv_sure)
-
-
-            mTvProgress1 =mDialogView?.findViewById(R.id.tv_progress1)
-            mTvProgress2 =mDialogView?.findViewById(R.id.tv_progress2)
-            mTvProgress3 =mDialogView?.findViewById(R.id.tv_progress3)
-
-            mLyAddress =mDialogView?.findViewById(R.id.ly_address)
-            mLyAddress?.visibility =View.GONE
-
-            list1.add("￥0")
-            list1.add("￥10")
-            list1.add("￥20")
-            list1.add("￥30")
-            list1.add("￥40")
-            list1.add("￥50")
-            list1.add("不限")
-
-            list2.add("0")
-            list2.add("1")
-            list2.add("2")
-            list2.add("3")
-            list2.add("4")
-            list2.add("5")
-            list2.add("6")
-            list2.add("7")
-            list2.add("8")
-            list2.add("9")
-            list2.add("10")
-            list2.add("不限")
-
-            list3.add("0")
-            list3.add("2000")
-            list3.add("4000")
-            list3.add("6000")
-            list3.add("8000")
-            list3.add("不限")
-
-            mProgress1 = mDialogView?.findViewById(R.id.progress1)
-            mProgress2 = mDialogView?.findViewById(R.id.progress2)
-            mProgress3 = mDialogView?.findViewById(R.id.progress3)
-
-
-            mProgress1?.setTextList(list1)
-            mProgress2?.setTextList(list2)
-            mProgress3?.setTextList(list3)
-
-            mProgress1?.addProgressListener(this)
-            mProgress2?.addProgressListener(this)
-            mProgress3?.addProgressListener(this)
-
-            mDialogTvRest?.setOnClickListener(this)
-            mDialogTvSure?.setOnClickListener(this)
+        if (mReScreenData == null) {
+            mReScreenData = ReScreenData()
         }
-        mButtDialog?.show()
+        if (mScreenPop == null) {
+            mScreenPop = this?.let {
+                PopUtils.init(this,
+                    it,
+                    R.layout.dialog_screen,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    true,
+                    false,
+                    object : PopUtils.onViewListener {
+                        override fun getView(view: View?) {
+                            mDialogTvRest = view?.findViewById(R.id.tv_reset)
+                            mDialogTvSure = view?.findViewById(R.id.tv_sure)
+
+
+                            mTvProgress1 = view?.findViewById(R.id.tv_progress1)
+                            mTvProgress2 = view?.findViewById(R.id.tv_progress2)
+                            mTvProgress3 = view?.findViewById(R.id.tv_progress3)
+
+
+                            list1.add("￥0")
+                            list1.add("￥10")
+                            list1.add("￥20")
+                            list1.add("￥30")
+                            list1.add("￥40")
+                            list1.add("￥50")
+                            list1.add("不限")
+
+                            list2.add("0")
+                            list2.add("1")
+                            list2.add("2")
+                            list2.add("3")
+                            list2.add("4")
+                            list2.add("5")
+                            list2.add("6")
+                            list2.add("7")
+                            list2.add("8")
+                            list2.add("9")
+                            list2.add("10")
+                            list2.add("不限")
+
+                            list3.add("0")
+                            list3.add("2000")
+                            list3.add("4000")
+                            list3.add("6000")
+                            list3.add("8000")
+                            list3.add("不限")
+
+                            mProgress1 = view?.findViewById(R.id.progress1)
+                            mProgress2 = view?.findViewById(R.id.progress2)
+                            mProgress3 = view?.findViewById(R.id.progress3)
+
+
+                            mProgress1?.setTextList(list1)
+                            mProgress2?.setTextList(list2)
+                            mProgress3?.setTextList(list3)
+
+                            mProgress1?.addProgressListener(this@MapMecBusinessActivity)
+                            mProgress2?.addProgressListener(this@MapMecBusinessActivity)
+                            mProgress3?.addProgressListener(this@MapMecBusinessActivity)
+
+                            mDialogTvRest?.setOnClickListener(this@MapMecBusinessActivity)
+                            mDialogTvSure?.setOnClickListener(this@MapMecBusinessActivity)
+                        }
+
+                    })
+            }
+        }
+        showScreenPop(tv_screen1)
     }
+
+    private fun showScreenPop(parent: View) {
+        if (mScreenPop?.isShowing == false) {
+            val location = IntArray(2)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                mScreenPop?.showAsDropDown(
+                    parent,
+                    Gravity.BOTTOM,
+                    location[0],
+                    location[1]
+                )
+            } else {
+                mScreenPop?.showAtLocation(parent, Gravity.BOTTOM, 0, 0)
+            }
+            this?.let { PopUtils.backgroundAlpha(0.5f, it) }
+        } else {
+            mScreenPop?.dismiss()
+        }
+    }
+
+    private fun disScreenPop() {
+        mScreenPop?.dismiss()
+        this?.let { PopUtils.backgroundAlpha(1f, it) }
+    }
+
     override fun initPresenter() {
         mPresenter = ResultPresenter(this)
         mPresenter?.setIsMap()
@@ -205,54 +245,53 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
     override fun progress(leftPos: Double, rightPos: Double,isUp:Boolean,view: View) {
 
         when(view?.id){
-            R.id.progress1->{
-                if (rightPos==0.0){
-                    if (isUp){
-                        mPresenter?.setPriceQJ(ceil((1-leftPos)*60).toString(),null)
-                        getData()
+            R.id.progress1 -> {
+                if (rightPos == 0.0) {
+                    if (isUp) {
+                        mReScreenData?.priceStart = ceil((1 - leftPos) * 60).toInt().toString()
+                        mReScreenData?.priceEnd = null
                     }
-                    mTvProgress1?.text ="不限"
-                }else{
-                    if (isUp){
-                        mPresenter?.setPriceQJ(
-                            ceil((1-leftPos)*60).toString(),
-                            ceil((1-rightPos)*60).toString())
-                        getData()
+                    mTvProgress1?.text = "不限"
+                } else {
+                    if (isUp) {
+                        mReScreenData?.priceStart = ceil((1 - leftPos) * 60).toInt().toString()
+                        mReScreenData?.priceEnd = ceil((1 - rightPos) * 60).toInt().toString()
                     }
-                    mTvProgress1?.text ="￥${ceil((1-rightPos)*60).toInt()}"
+                    mTvProgress1?.text = "￥${ceil((1 - rightPos) * 60).toInt()}"
                 }
 
             }
-            R.id.progress2->{
-                if (rightPos==0.0){
-                    mTvProgress2?.text ="不限"
-                    if (isUp){
-                        mPresenter?.setJL(ceil((1-leftPos)*10).toInt().toString(),null)
-                        getData()
+            R.id.progress2 -> {
+                if (rightPos == 0.0) {
+                    mTvProgress2?.text = "不限"
+                    if (isUp) {
+                        mReScreenData?.engAgeStart = ceil((1 - leftPos) * 10).toInt().toString()
+                        mReScreenData?.engAgeEnd = null
                     }
-                }else{
-                    if (isUp){
-                        mPresenter?.setJL(
-                            ceil((1-leftPos)*10).toInt().toString(),
-                            ceil((1-rightPos)*10).toInt().toString())
-                        getData()
+                } else {
+                    if (isUp) {
+                        mReScreenData?.engAgeStart = ceil((1 - leftPos) * 10).toInt().toString()
+                        mReScreenData?.engAgeEnd = ceil((1 - rightPos) * 10).toInt().toString()
                     }
-                    mTvProgress2?.text ="${ceil((1-rightPos)*10).toInt()}年"
+                    mTvProgress2?.text = "${ceil((1 - rightPos) * 10).toInt()}年"
                 }
             }
-            R.id.progress3->{
-                if (rightPos==0.0){
-                    if (isUp){
-                        mPresenter?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),null)
-                        getData()
+            R.id.progress3 -> {
+                if (rightPos == 0.0) {
+                    if (isUp) {
+                        mReScreenData?.workTimeStart =
+                            (ceil((1 - leftPos) * 5).toInt() * 2000).toString()
+                        mReScreenData?.workTimeEnd = null
                     }
-                    mTvProgress3?.text="不限"
-                }else{
-                    if (isUp){
-                        mPresenter?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),(ceil((1-rightPos)*5).toInt()*2000).toString())
-                        getData()
+                    mTvProgress3?.text = "不限"
+                } else {
+                    if (isUp) {
+                        mReScreenData?.workTimeStart =
+                            (ceil((1 - leftPos) * 5).toInt() * 2000).toString()
+                        mReScreenData?.workTimeEnd =
+                            (ceil((1 - rightPos) * 5).toInt() * 2000).toString()
                     }
-                    mTvProgress3?.text ="${ceil((1-rightPos)*5).toInt()*2000}小时"
+                    mTvProgress3?.text = "${ceil((1 - rightPos) * 5).toInt() * 2000}小时"
                 }
             }
         }
@@ -291,6 +330,22 @@ class MapMecBusinessActivity : BaseCusActivity(), View.OnClickListener, GdMapUti
             R.id.tv_condition2 -> showView(2)
             R.id.iv_locat -> locat()
             R.id.item_root -> jum()
+            R.id.tv_sure -> {
+                mPresenter?.setScreen(mReScreenData)
+                disScreenPop()
+                getData()
+            }
+            R.id.tv_reset -> {
+                mPresenter?.setScreen(null)
+                mReScreenData = null
+                mProgress1?.reset()
+                mProgress2?.reset()
+                mProgress3?.reset()
+                mTvProgress1?.text = "不限"
+                mTvProgress2?.text = "不限"
+                mTvProgress3?.text = "不限"
+                getData()
+            }
         }
     }
 

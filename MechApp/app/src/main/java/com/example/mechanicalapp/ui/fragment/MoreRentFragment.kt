@@ -1,8 +1,12 @@
 package com.example.mechanicalapp.ui.fragment
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +23,7 @@ import com.example.mechanicalapp.ui.adapter.ScreenAdapter
 import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReScreenData
 import com.example.mechanicalapp.ui.mvp.impl.MecLeaseListPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -37,9 +42,9 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
 
     private var mStringList :MutableList<String> = ArrayList<String>()
 
-    private var mButtDialog: BottomSheetDialog?=null
-    private var mDialogView:View?=null
 
+    private var mReScreenData:ReScreenData?=null
+    private var mScreenPop : PopupWindow?=null
     private var mDialogTvRest: TextView?=null
     private var mDialogTvSure: TextView?=null
     private var mProgress1: TwoWayProgressBar?=null
@@ -115,71 +120,118 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
             )
             R.id.ly_screen4->showInput()
             R.id.ly_screen5->showDialogType()
-            R.id.tv_sure->mButtDialog?.dismiss()
-            R.id.tv_reset->mButtDialog?.dismiss()
+            R.id.tv_sure -> {
+                (mPresenter as MecLeaseListPresenter)?.setScreen(mReScreenData)
+                disScreenPop()
+            }
+            R.id.tv_reset ->   {
+                (mPresenter as MecLeaseListPresenter)?.setScreen(null)
+                mReScreenData =null
+                mProgress1?.reset()
+                mProgress2?.reset()
+                mProgress3?.reset()
+                mTvProgress1?.text ="不限"
+                mTvProgress2?.text ="不限"
+                mTvProgress3?.text ="不限"
+            }
         }
     }
-    private fun showDialogType(){
-        if (mButtDialog ==null){
-            mButtDialog = BottomSheetDialog(mContext)
-            mDialogView = View.inflate(mContext,R.layout.dialog_screen,null)
-            mButtDialog?.setContentView(mDialogView!!)
-
-            mDialogTvRest = mDialogView?.findViewById(R.id.tv_reset)
-            mDialogTvSure = mDialogView?.findViewById(R.id.tv_sure)
-
-            mTvProgress1 =mDialogView?.findViewById(R.id.tv_progress1)
-            mTvProgress2 =mDialogView?.findViewById(R.id.tv_progress2)
-            mTvProgress3 =mDialogView?.findViewById(R.id.tv_progress3)
-            list1.add("￥0")
-            list1.add("￥10")
-            list1.add("￥20")
-            list1.add("￥30")
-            list1.add("￥40")
-            list1.add("￥50")
-            list1.add("不限")
-
-            list2.add("0")
-            list2.add("1")
-            list2.add("2")
-            list2.add("3")
-            list2.add("4")
-            list2.add("5")
-            list2.add("6")
-            list2.add("7")
-            list2.add("8")
-            list2.add("9")
-            list2.add("10")
-            list2.add("不限")
-
-            list3.add("0")
-            list3.add("2000")
-            list3.add("4000")
-            list3.add("6000")
-            list3.add("8000")
-            list3.add("不限")
-
-            mProgress1 = mDialogView?.findViewById(R.id.progress1)
-            mProgress2 = mDialogView?.findViewById(R.id.progress2)
-            mProgress3 = mDialogView?.findViewById(R.id.progress3)
 
 
-            mProgress1?.setTextList(list1)
-            mProgress2?.setTextList(list2)
-            mProgress3?.setTextList(list3)
-
-            mProgress1?.addProgressListener(this)
-            mProgress2?.addProgressListener(this)
-            mProgress3?.addProgressListener(this)
-
-            mDialogTvRest?.setOnClickListener(this)
-            mDialogTvSure?.setOnClickListener(this)
+    private fun showDialogType() {
+        if (mReScreenData==null){
+            mReScreenData = ReScreenData()
         }
+        if (mScreenPop == null) {
+            mScreenPop= activity?.let {
+                PopUtils.init(mContext,
+                    it,R.layout.dialog_screen,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,true,false,object :PopUtils.onViewListener{
+                        override fun getView(view: View?) {
+                            mDialogTvRest = view?.findViewById(R.id.tv_reset)
+                            mDialogTvSure = view?.findViewById(R.id.tv_sure)
 
 
+                            mTvProgress1 =view?.findViewById(R.id.tv_progress1)
+                            mTvProgress2 =view?.findViewById(R.id.tv_progress2)
+                            mTvProgress3 =view?.findViewById(R.id.tv_progress3)
 
-        mButtDialog?.show()
+
+                            list1.add("￥0")
+                            list1.add("￥10")
+                            list1.add("￥20")
+                            list1.add("￥30")
+                            list1.add("￥40")
+                            list1.add("￥50")
+                            list1.add("不限")
+
+                            list2.add("0")
+                            list2.add("1")
+                            list2.add("2")
+                            list2.add("3")
+                            list2.add("4")
+                            list2.add("5")
+                            list2.add("6")
+                            list2.add("7")
+                            list2.add("8")
+                            list2.add("9")
+                            list2.add("10")
+                            list2.add("不限")
+
+                            list3.add("0")
+                            list3.add("2000")
+                            list3.add("4000")
+                            list3.add("6000")
+                            list3.add("8000")
+                            list3.add("不限")
+
+                            mProgress1 = view?.findViewById(R.id.progress1)
+                            mProgress2 = view?.findViewById(R.id.progress2)
+                            mProgress3 = view?.findViewById(R.id.progress3)
+
+
+                            mProgress1?.setTextList(list1)
+                            mProgress2?.setTextList(list2)
+                            mProgress3?.setTextList(list3)
+
+                            mProgress1?.addProgressListener(this@MoreRentFragment)
+                            mProgress2?.addProgressListener(this@MoreRentFragment)
+                            mProgress3?.addProgressListener(this@MoreRentFragment)
+
+                            mDialogTvRest?.setOnClickListener(this@MoreRentFragment)
+                            mDialogTvSure?.setOnClickListener(this@MoreRentFragment)
+                        }
+
+                    })
+            }
+        }
+        showScreenPop(tv_screen1)
     }
+    private fun showScreenPop(parent: View) {
+        if (mScreenPop?.isShowing==false) {
+            val location = IntArray(2)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                mScreenPop?.showAsDropDown(
+                    parent,
+                    Gravity.BOTTOM,
+                    location[0],
+                    location[1]
+                )
+            } else {
+                mScreenPop?.showAtLocation(parent, Gravity.BOTTOM, 0, 0)
+            }
+            activity?.let { PopUtils.backgroundAlpha(0.5f, it) }
+        }else{
+            mScreenPop?.dismiss()
+        }
+    }
+
+    private fun disScreenPop(){
+        mScreenPop?.dismiss()
+        activity?.let { PopUtils.backgroundAlpha(1f, it) }
+    }
+
     override fun getView(view: View?) {
         popRecy =view?.findViewById(R.id.pop_recycler_list)
         mScreenAdapter = ScreenAdapter(mContext, mStringList, this)
@@ -209,27 +261,34 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
             R.id.progress1->{
                 if (rightPos==0.0){
                     if (isUp){
-                        (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),null)
+                        mReScreenData?.priceStart =ceil((1-leftPos)*60).toInt().toString()
+                        mReScreenData?.priceEnd =null
+                        //  (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),null)
                     }
                     mTvProgress1?.text ="不限"
                 }else{
                     if (isUp){
-                        (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),ceil((1-rightPos)*60).toString())
+                        mReScreenData?.priceStart =ceil((1-leftPos)*60).toInt().toString()
+                        mReScreenData?.priceEnd =ceil((1-rightPos)*60).toInt().toString()
+                        //   (mPresenter as MecLeaseListPresenter)?.setPriceQJ(ceil((1-leftPos)*60).toString(),ceil((1-rightPos)*60).toString())
                     }
                     mTvProgress1?.text ="￥${ceil((1-rightPos)*60).toInt()}"
                 }
 
             }
             R.id.progress2->{
-
                 if (rightPos==0.0){
                     mTvProgress2?.text ="不限"
                     if (isUp){
-                        (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),null)
+                        mReScreenData?.engAgeStart = ceil((1-leftPos)*10).toInt().toString()
+                        mReScreenData?.engAgeEnd =null
+                        //    (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),null)
                     }
                 }else{
                     if (isUp){
-                        (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),ceil((1-rightPos)*10).toInt().toString())
+                        mReScreenData?.engAgeStart = ceil((1-leftPos)*10).toInt().toString()
+                        mReScreenData?.engAgeEnd =ceil((1-rightPos)*10).toInt().toString()
+                        //      (mPresenter as MecLeaseListPresenter)?.setJL(ceil((1-leftPos)*10).toInt().toString(),ceil((1-rightPos)*10).toInt().toString())
                     }
                     mTvProgress2?.text ="${ceil((1-rightPos)*10).toInt()}年"
                 }
@@ -237,12 +296,16 @@ class MoreRentFragment (var type:Int): BaseCusFragment(), OnItemClickListener, V
             R.id.progress3->{
                 if (rightPos==0.0){
                     if (isUp){
-                        (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),null)
+                        mReScreenData?.workTimeStart =(ceil((1-leftPos)*5).toInt()*2000).toString()
+                        mReScreenData?.workTimeEnd = null
+                        //       (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),null)
                     }
                     mTvProgress3?.text="不限"
                 }else{
                     if (isUp){
-                        (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),(ceil((1-rightPos)*5).toInt()*2000).toString())
+                        mReScreenData?.workTimeStart =(ceil((1-leftPos)*5).toInt()*2000).toString()
+                        mReScreenData?.workTimeEnd = (ceil((1-rightPos)*5).toInt()*2000).toString()
+                        //     (mPresenter as MecLeaseListPresenter)?.setWorkTime((ceil((1-leftPos)*5).toInt()*2000).toString(),(ceil((1-rightPos)*5).toInt()*2000).toString())
                     }
                     mTvProgress3?.text ="${ceil((1-rightPos)*5).toInt()*2000}小时"
                 }

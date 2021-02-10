@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.activity.*
 import com.example.mechanicalapp.ui.adapter.BossBuyAdapter
 import com.example.mechanicalapp.ui.adapter.BossSellAdapter
 import com.example.mechanicalapp.ui.data.MecSellData
+import com.example.mechanicalapp.ui.widget.HomeLayoutManager
 import kotlinx.android.synthetic.main.layout_boss_denmand.view.*
 
 class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener,
@@ -35,7 +36,7 @@ class BossDemandView(var mContext: Context) : LinearLayout(mContext), OnItemClic
 
         mBuyAdapter = BossBuyAdapter(mContext, mList, this)
 
-        recycler_demand.layoutManager = LinearLayoutManager(mContext)
+        recycler_demand.layoutManager = HomeLayoutManager(mContext)
         recycler_demand.adapter = mAdapter
 
         tv_lease.setOnClickListener(this)

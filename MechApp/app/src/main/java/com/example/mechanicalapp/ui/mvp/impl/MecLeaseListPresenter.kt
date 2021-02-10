@@ -5,6 +5,8 @@ import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreLeaseData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.ScreenData
+import com.example.mechanicalapp.ui.data.request.ReScreenData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.MecLeaseView
 
@@ -171,24 +173,43 @@ class MecLeaseListPresenter(
         }
         resetPage()
     }
-    fun setPriceQJ(startPrice:String?,endPrice:String?){
-        mSGriceLe =startPrice
-        mSPriceGe =endPrice
+    fun setScreen(reScreenData: ReScreenData?){
+        if (reScreenData!=null){
+            mSGriceLe =reScreenData?.priceStart
+            mSPriceGe =reScreenData?.priceEnd
+            mSTenancyLe =reScreenData?.engAgeStart
+            mSTenancyGe =reScreenData?.engAgeEnd
+            mSWorkTimeLe =reScreenData?.workTimeStart
+            mSWorkTimeGe =reScreenData?.workTimeEnd
+        }else{
+            mSGriceLe =null
+            mSPriceGe =null
+            mSTenancyLe =null
+            mSTenancyGe =null
+            mSWorkTimeLe =null
+            mSWorkTimeGe =null
+        }
         resetPage()
         getLeaseList(type)
     }
-
-    fun setJL(startJL:String?,endJL:String?){
-        mSTenancyLe =startJL
-        mSTenancyGe =endJL
-        resetPage()
-        getLeaseList(type)
-    }
-    fun setWorkTime(startWork:String?,endWork:String?){
-        mSWorkTimeLe =startWork
-        mSWorkTimeGe =endWork
-        resetPage()
-        getLeaseList(type)
-    }
+//    fun setPriceQJ(startPrice:String?,endPrice:String?){
+//        mSGriceLe =startPrice
+//        mSPriceGe =endPrice
+//        resetPage()
+//        getLeaseList(type)
+//    }
+//
+//    fun setJL(startJL:String?,endJL:String?){
+//        mSTenancyLe =startJL
+//        mSTenancyGe =endJL
+//        resetPage()
+//        getLeaseList(type)
+//    }
+//    fun setWorkTime(startWork:String?,endWork:String?){
+//        mSWorkTimeLe =startWork
+//        mSWorkTimeGe =endWork
+//        resetPage()
+//        getLeaseList(type)
+//    }
 
 }

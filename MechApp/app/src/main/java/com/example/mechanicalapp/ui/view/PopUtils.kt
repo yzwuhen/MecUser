@@ -63,6 +63,26 @@ object PopUtils{
     }
 
 
+    fun init(mContext: Context,activity:Activity,res:Int,popWidth:Int,popHeight:Int,hsaBg:Boolean,hasPopClick:Boolean,listen:onViewListener ) :PopupWindow {
+        view= View.inflate(mContext,res,null)
+        popupWindow = PopupWindow(view,popWidth,popHeight,false)
+        popupWindow?.inputMethodMode =PopupWindow.INPUT_METHOD_NEEDED
+        popupWindow?.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        popupWindow?.isFocusable =true
+        popupWindow?.setBackgroundDrawable(BitmapDrawable())
+        listen.getView(view)
+
+        if (hasPopClick){
+            view?.setOnClickListener(View.OnClickListener {
+                dismissPop(activity)
+            })
+        }
+        if (hsaBg){
+            activity?.let { backgroundAlpha(0.5f, it) }
+        }
+        return popupWindow!!
+    }
+
 
 
     fun backgroundAlpha(bgAlpha: Float, activity: Activity) {
@@ -120,6 +140,7 @@ object PopUtils{
         popupWindow?.dismiss()
         activity?.let { backgroundAlpha(1f, it) }
     }
+
 
     /**
      * 返回View对象

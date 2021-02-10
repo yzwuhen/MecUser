@@ -3,12 +3,12 @@ package com.example.mechanicalapp.ui.fragment.home
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import com.amap.api.location.AMapLocation
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.activity.HistorySearchActivity
-import com.example.mechanicalapp.ui.activity.MapActivity
 import com.example.mechanicalapp.ui.activity.MapTypeSelActivity
 import com.example.mechanicalapp.ui.activity.SearchCityActivity
 import com.example.mechanicalapp.ui.base.BaseCusFragment
@@ -61,6 +61,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
         ly_root.addView(mHosPartsView)
 
         tv_address.setOnClickListener(this)
+        tv_search.setOnClickListener(this)
         ly_search.setOnClickListener(this)
         tv_map.setOnClickListener(this)
         mPresenter.request()
@@ -89,6 +90,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
 
         when (view?.id) {
             R.id.tv_address -> jumCity()
+            R.id.tv_search->jumpSearch()
             R.id.ly_search -> jumpSearch()
             R.id.tv_map -> jumMap()
         }
@@ -96,7 +98,6 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
 
     }
     private fun jumpSearch() {
-
         var bundle = Bundle()
         bundle.putInt(Configs.HISTORY_TYPE,10)
         jumpActivity(bundle, HistorySearchActivity::class.java)
@@ -116,6 +117,7 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
+        Log.v("yz_map","$resultCode=================$requestCode")
         if (Configs.CITY_RESULT_CODE == resultCode) {
             if (data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)!=null){
                 showResult(requestCode, data?.getSerializableExtra(Configs.SCREEN_RESULT_Extra)as HomeCityData)
@@ -175,6 +177,9 @@ class HomeFragment : BaseCusFragment(), View.OnClickListener, HomeBaseView<NetDa
     }
 
     override fun locationErr() {
+//        val intent = Intent(
+//            Settings.ACTION_LOCATION_SOURCE_SETTINGS
+//        )
+//        startActivityForResult(intent, 0) // 设置完成后返回到原来的界面
     }
-
 }

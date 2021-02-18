@@ -1468,4 +1468,34 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id: String?
     ): Observable<NetData>
+
+
+    /**
+     *
+     * 获取摄像头列表
+     */
+    @GET("/jeecg-boot/repair/mecRepairWebcam/list")
+    fun getCameraList(
+        @Header("X-Access-Token") token: String?
+    ): Observable<CameraListBean>
+
+
+    /**
+     *
+     * 获取AccessToken
+     */
+    @GET("/jeecg-boot/repair/mecRepairWebcam/getAccessToken")
+    fun getAccessToken(
+        @Header("X-Access-Token") token: String?
+    ): Observable<NetData>
+
+    /**
+     *
+     * 获取AccessToken
+     */
+    @GET("/jeecg-boot/repair/mecRepairWebcam/getWebcamUrl")
+    fun getCameraVideo(
+        @Header("X-Access-Token") token: String?,
+        @Query("id") id:String?
+    ): Observable<NetData>
 }

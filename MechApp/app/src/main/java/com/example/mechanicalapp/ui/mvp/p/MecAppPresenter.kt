@@ -321,6 +321,52 @@ class MecAppPresenter(
                     baseView.hiedLoading()
                 }
             })
+    }
 
+    //获取摄像头列表
+    fun getCameraList(){
+        baseView.showLoading()
+        baseModel.getCameraList(
+            App.getInstance().token,
+            object : ISubscriberListener<CameraListBean> {
+                override fun onNext(t: CameraListBean?) {
+                    (baseView as NetDataView<NetData>).refreshUI(t)
+                }
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    //获取视频token
+    fun getAccessToken() {
+        baseModel.getAccessToken(
+            App.getInstance().token,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                }
+                override fun onError(e: Throwable?) {
+                }
+
+                override fun onCompleted() {
+                }
+            })
+    }
+    fun getCameraVideo(id: String?) {
+        baseModel.getCameraVideo(
+            App.getInstance().token,id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                }
+                override fun onError(e: Throwable?) {
+                }
+
+                override fun onCompleted() {
+                }
+            })
     }
 }

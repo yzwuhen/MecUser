@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -128,7 +129,14 @@ class MoreFactoryActivity : BaseCusActivity() ,View.OnClickListener ,PopUtils.on
             )
             R.id.ly_sort ->showPop()
             R.id.tv_search ->jumAct()
-            R.id.tv_map->jumpActivity(null,MapFactoryActivity::class.java)
+            R.id.tv_map->{
+                if (isLocationEnabled(this)){
+                    jumpActivity(null,MapFactoryActivity::class.java)
+                }else{
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }
+            }
         }
     }
     private fun jumAct(){

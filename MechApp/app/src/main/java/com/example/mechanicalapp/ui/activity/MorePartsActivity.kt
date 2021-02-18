@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -141,7 +143,14 @@ class MorePartsActivity : BaseCusActivity(), View.OnClickListener, ViewPager.OnP
             R.id.tv_screen_right -> showView(1)
             R.id.iv_back -> finish()
             R.id.tv_search -> jump()
-            R.id.tv_map -> jumpActivity(null, MapPartsActivity::class.java)
+            R.id.tv_map -> {
+                if (isLocationEnabled(this)){
+                    jumpActivity(null, MapPartsActivity::class.java)
+                }else{
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }
+            }
         }
     }
 

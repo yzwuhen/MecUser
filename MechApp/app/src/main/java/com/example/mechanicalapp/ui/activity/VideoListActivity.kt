@@ -1,32 +1,32 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.VideoListAdapter
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.CameraListBean
+import com.example.mechanicalapp.ui.data.CameraListData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
 import kotlinx.android.synthetic.main.fragment_more_data.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class VideoListActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClickListener {
+class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickListener ,NetDataView<CameraListBean>{
     var mAdapter: VideoListAdapter? = null
-    var mList: MutableList<String> = ArrayList<String>()
+    var mList = ArrayList<CameraListData>()
+    var mPresenter : MecAppPresenter?=null
     override fun getLayoutId(): Int {
         return R.layout.activity_video_list
     }
 
     override fun initView() {
         super.initView()
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
-        mList.add("1")
+
 
         mAdapter = VideoListAdapter(this, mList, this)
         recycler_list.layoutManager = LinearLayoutManager(this)
@@ -38,22 +38,42 @@ class VideoListActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
     }
 
     override fun initPresenter() {
+        mPresenter = MecAppPresenter(this)
+        mPresenter?.getCameraList()
     }
 
-    override fun showLoading() {
-    }
 
-    override fun hiedLoading() {
-    }
-
-    override fun err() {
-    }
 
     override fun onItemClick(view: View, position: Int) {
-          jumpActivity(null, VideoPlayerActivity::class.java)
+        var bundle = Bundle()
+            bundle.putString("id",mList[position].id)
+          jumpActivity(bundle, VideoPlayerActivity::class.java)
     }
 
     override fun onClick(v: View?) {
         finish()
+    }
+
+    override fun refreshUI(data: CameraListBean?) {
+
+        mList.clear()
+        if (data?.result!=null&&data?.result.records!=null&&data?.result.records.size>0){
+            mList.addAll(data?.result.records)
+        }
+        mAdapter?.notifyDataSetChanged()
+    }
+
+    override fun loadMore(data: CameraListBean?) {
+    }
+
+    override fun showLoading() {
+        showLoadView()
+    }
+
+    override fun hiedLoading() {
+        hideLoadingView()
+    }
+
+    override fun err() {
     }
 }

@@ -24,7 +24,8 @@ class VideoPlayerActivity :BaseCusActivity(),EZUIPlayer.EZUIPlayerCallBack {
         //设置播放回调callback
         player_ui.setCallBack(this)
         //设置播放参数
-        player_ui.setUrl("https://hls01open.ys7.com/openlive/6e0b2be040a943489ef0b9bb344b96b8.hd.m3u8")
+        player_ui.setUrl("ezopen://open.ys7.com/E82901339/1.live")
+
     }
 
     override fun initPresenter() {

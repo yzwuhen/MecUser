@@ -1,15 +1,6 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.os.Build
-import android.util.Log
 import android.view.View
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
@@ -22,10 +13,6 @@ import kotlinx.android.synthetic.main.layout_title.*
 class VideoListActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnClickListener {
     var mAdapter: VideoListAdapter? = null
     var mList: MutableList<String> = ArrayList<String>()
-
-    @SuppressLint("WrongConstant")
-    var channel: NotificationChannel? = null
-    private var notificationManager: NotificationManager? = null
     override fun getLayoutId(): Int {
         return R.layout.activity_video_list
     }
@@ -64,12 +51,9 @@ class VideoListActivity : BaseActivity<NetData>(), OnItemClickListener, View.OnC
 
     override fun onItemClick(view: View, position: Int) {
           jumpActivity(null, VideoPlayerActivity::class.java)
-
     }
 
     override fun onClick(v: View?) {
-
         finish()
-
     }
 }

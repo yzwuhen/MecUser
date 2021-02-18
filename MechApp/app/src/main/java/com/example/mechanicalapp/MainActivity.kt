@@ -211,6 +211,11 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.v("yz_map","$resultCode=======main==========$requestCode")
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun showLoading() {
     }
 

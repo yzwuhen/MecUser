@@ -25,7 +25,7 @@
     </LinearLayout>
 
 
-    <ImageView
+    <com.example.mechanicalapp.ui.view.CusImageView
         android:id="@+id/iv_pic"
         android:layout_width="112dp"
         android:layout_height="112dp"
@@ -35,6 +35,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ly_check"
         app:layout_constraintTop_toTopOf="parent"
+        app:shape_type="rectangle"
+        app:radius="@dimen/dp_5"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 

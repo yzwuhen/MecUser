@@ -5,6 +5,7 @@ import com.amap.api.location.DPoint
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
+import com.example.mechanicalapp.ui.data.request.ReScreenData
 import com.example.mechanicalapp.ui.mvp.NetSubscribe
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
@@ -297,9 +298,9 @@ class ResultPresenter (
     }
 
 
-    fun setLocation(thisPoint: DPoint) {
-        this.lat =thisPoint.latitude.toString()
-        this.lon =thisPoint.longitude.toString()
+    fun setLocation(thisPoint: DPoint?) {
+        this.lat =thisPoint?.latitude.toString()
+        this.lon =thisPoint?.longitude.toString()
         resetPage()
     }
 
@@ -341,23 +342,40 @@ class ResultPresenter (
         }
         resetPage()
     }
-    fun setPriceQJ(startPrice:String?,endPrice:String?){
-        mSGriceLe =endPrice
-        mSPriceGe =startPrice
-        resetPage()
+//    fun setPriceQJ(startPrice:String?,endPrice:String?){
+//        mSGriceLe =endPrice
+//        mSPriceGe =startPrice
+//        resetPage()
+//    }
+//
+//    fun setJL(startJL:String?,endJL:String?){
+//        mSTenancyLe =endJL
+//        mSTenancyGe =startJL
+//        resetPage()
+//    }
+//    fun setWorkTime(startWork:String?,endWork:String?){
+//        mSWorkTimeLe =endWork
+//        mSWorkTimeGe =startWork
+//        resetPage()
+//    }
+fun setScreen(reScreenData: ReScreenData?){
+    if (reScreenData!=null){
+        mSGriceLe =reScreenData?.priceStart
+        mSPriceGe =reScreenData?.priceEnd
+        mSTenancyLe =reScreenData?.engAgeStart
+        mSTenancyGe =reScreenData?.engAgeEnd
+        mSWorkTimeLe =reScreenData?.workTimeStart
+        mSWorkTimeGe =reScreenData?.workTimeEnd
+    }else{
+        mSGriceLe =null
+        mSPriceGe =null
+        mSTenancyLe =null
+        mSTenancyGe =null
+        mSWorkTimeLe =null
+        mSWorkTimeGe =null
     }
-
-    fun setJL(startJL:String?,endJL:String?){
-        mSTenancyLe =endJL
-        mSTenancyGe =startJL
-        resetPage()
-    }
-    fun setWorkTime(startWork:String?,endWork:String?){
-        mSWorkTimeLe =endWork
-        mSWorkTimeGe =startWork
-        resetPage()
-    }
-
+    resetPage()
+}
     fun setRepaireType(mecType:String?){
         repaireType =mecType
         resetPage()

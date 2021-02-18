@@ -12,6 +12,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
@@ -95,6 +96,13 @@ public class ImageLoadUtils {
         Glide.with(mContext).load(url)
                 .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .error(R.mipmap.user_default)
+                .into(imageView);
+    }
+    public static void loadRound(Context mContext, ImageView imageView, String url,int norImage){
+
+        Glide.with(mContext).load(url)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
+                .error(norImage)
                 .into(imageView);
     }
 

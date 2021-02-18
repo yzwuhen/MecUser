@@ -33,11 +33,12 @@
         android:focusableInTouchMode="true"
         android:paddingLeft="15dp">
 
-        <EditText
-            android:id="@+id/et_search"
+        <TextView
+            android:id="@+id/tv_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
+            android:gravity="center_vertical"
             android:drawableLeft="@mipmap/ser"
             android:drawablePadding="10dp"
             android:imeOptions="actionSearch"

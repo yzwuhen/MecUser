@@ -6,6 +6,7 @@ import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreLeaseData
 import com.example.mechanicalapp.ui.data.MoreSellBean
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReScreenData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.MecSellView
 
@@ -115,25 +116,44 @@ class SellPresenter (
         resetPage()
     }
 
-    fun setPriceQJ(startPrice:String?,endPrice:String?){
-        mSGriceLe =endPrice.toString()
-        mSPriceGe =startPrice.toString()
+    fun setScreen(reScreenData: ReScreenData?){
+        if (reScreenData!=null){
+            mSGriceLe =reScreenData?.priceStart
+            mSPriceGe =reScreenData?.priceEnd
+            mSTenancyLe =reScreenData?.engAgeStart
+            mSTenancyGe =reScreenData?.engAgeEnd
+            mSWorkTimeLe =reScreenData?.workTimeStart
+            mSWorkTimeGe =reScreenData?.workTimeEnd
+        }else{
+            mSGriceLe =null
+            mSPriceGe =null
+            mSTenancyLe =null
+            mSTenancyGe =null
+            mSWorkTimeLe =null
+            mSWorkTimeGe =null
+        }
         resetPage()
         getSellList(type)
     }
-
-    fun setJL(startJL:String?,endJL:String?){
-        mSTenancyLe =endJL
-        mSTenancyGe =startJL
-        resetPage()
-        getSellList(type)
-    }
-    fun setWorkTime(startWork:String?,endWork:String?){
-        mSWorkTimeLe =endWork
-        mSWorkTimeGe =startWork
-        resetPage()
-        getSellList(type)
-    }
+//    fun setPriceQJ(startPrice:String?,endPrice:String?){
+//        mSGriceLe =endPrice.toString()
+//        mSPriceGe =startPrice.toString()
+//        resetPage()
+//        getSellList(type)
+//    }
+//
+//    fun setJL(startJL:String?,endJL:String?){
+//        mSTenancyLe =endJL
+//        mSTenancyGe =startJL
+//        resetPage()
+//        getSellList(type)
+//    }
+//    fun setWorkTime(startWork:String?,endWork:String?){
+//        mSWorkTimeLe =endWork
+//        mSWorkTimeGe =startWork
+//        resetPage()
+//        getSellList(type)
+//    }
 
     override fun onDestroy() {
     }

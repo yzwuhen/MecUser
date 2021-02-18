@@ -254,6 +254,14 @@ class TwoWayProgressBar(
             invalidate()
         }
     }
+    public fun reset(){
+        rectLeft?.left = 0
+        rectLeft?.right = bitMapSize
+
+        rectRight.left = width - bitMapSize
+        rectRight.right = width
+        invalidate()
+    }
 
     private fun down(x: Float) {
         if (x >= rectLeft?.left && x <= rectLeft?.right) {

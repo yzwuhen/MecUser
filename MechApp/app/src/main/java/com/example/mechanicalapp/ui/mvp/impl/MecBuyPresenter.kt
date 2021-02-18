@@ -5,6 +5,7 @@ import android.util.Log
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.MoreBusinessData
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.request.ReScreenData
 import com.example.mechanicalapp.ui.mvp.p.BasePresenter
 import com.example.mechanicalapp.ui.mvp.v.MecBuyView
 
@@ -112,26 +113,45 @@ class MecBuyPresenter(
         resetPage()
     }
 
-
-    fun setPriceQJ(startPrice:String?,endPrice:String?){
-        mSGriceLe =endPrice
-        mSPriceGe =startPrice
+    fun setScreen(reScreenData: ReScreenData?){
+        if (reScreenData!=null){
+            mSGriceLe =reScreenData?.priceStart
+            mSPriceGe =reScreenData?.priceEnd
+            mSTenancyLe =reScreenData?.engAgeStart
+            mSTenancyGe =reScreenData?.engAgeEnd
+            mSWorkTimeLe =reScreenData?.workTimeStart
+            mSWorkTimeGe =reScreenData?.workTimeEnd
+        }else{
+            mSGriceLe =null
+            mSPriceGe =null
+            mSTenancyLe =null
+            mSTenancyGe =null
+            mSWorkTimeLe =null
+            mSWorkTimeGe =null
+        }
         resetPage()
         getBuyList(type)
     }
-
-    fun setJL(startJL:String?,endJL:String?){
-        mSTenancyLe =endJL
-        mSTenancyGe =startJL
-        resetPage()
-        getBuyList(type)
-    }
-    fun setWorkTime(startWork:String?,endWork:String?){
-        mSWorkTimeLe =endWork
-        mSWorkTimeGe =startWork
-        resetPage()
-        getBuyList(type)
-    }
+//
+//    fun setPriceQJ(startPrice:String?,endPrice:String?){
+//        mSGriceLe =endPrice
+//        mSPriceGe =startPrice
+//        resetPage()
+//        getBuyList(type)
+//    }
+//
+//    fun setJL(startJL:String?,endJL:String?){
+//        mSTenancyLe =endJL
+//        mSTenancyGe =startJL
+//        resetPage()
+//        getBuyList(type)
+//    }
+//    fun setWorkTime(startWork:String?,endWork:String?){
+//        mSWorkTimeLe =endWork
+//        mSWorkTimeGe =startWork
+//        resetPage()
+//        getBuyList(type)
+//    }
 
 
     override fun onDestroy() {

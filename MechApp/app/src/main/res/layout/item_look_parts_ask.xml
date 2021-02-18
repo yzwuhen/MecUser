@@ -17,13 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.example.mechanicalapp.ui.view.CusImageView
         android:id="@+id/iv_pic"
         android:layout_width="112dp"
         android:layout_height="112dp"
         android:layout_marginTop="@dimen/dp_17"
         android:layout_marginBottom="@dimen/dp_10"
         android:scaleType="center"
+        app:shape_type="rectangle"
+        app:radius="@dimen/dp_5"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="@dimen/dp_17"
         app:layout_constraintTop_toBottomOf="@+id/tv_date"

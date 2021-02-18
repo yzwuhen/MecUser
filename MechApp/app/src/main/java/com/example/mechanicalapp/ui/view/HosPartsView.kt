@@ -13,6 +13,7 @@ import com.example.mechanicalapp.ui.activity.GoodsDetailsActivity
 import com.example.mechanicalapp.ui.activity.MorePartsActivity
 import com.example.mechanicalapp.ui.adapter.HotPartsAdapter
 import com.example.mechanicalapp.ui.data.HomePartsData
+import com.example.mechanicalapp.ui.widget.HomeGridLayoutManager
 import kotlinx.android.synthetic.main.layout_hot_parts.view.*
 
 class HosPartsView(var mContext: Context) : LinearLayout(mContext), OnItemClickListener {
@@ -26,7 +27,7 @@ class HosPartsView(var mContext: Context) : LinearLayout(mContext), OnItemClickL
 
         mAdapter = HotPartsAdapter(mContext, mList, this)
        recy_hot_parts.addItemDecoration(MyDecoration(2))
-        recy_hot_parts.layoutManager = GridLayoutManager(mContext, 2)
+        recy_hot_parts.layoutManager = HomeGridLayoutManager(mContext, 2)
         recy_hot_parts.adapter = mAdapter
 
         tv_parts_more.setOnClickListener(View.OnClickListener { jumAct() })

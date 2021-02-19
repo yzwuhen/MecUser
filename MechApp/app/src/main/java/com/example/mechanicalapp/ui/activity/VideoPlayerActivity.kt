@@ -35,7 +35,9 @@ class VideoPlayerActivity :BaseCusActivity(),EZUIPlayer.EZUIPlayerCallBack ,NetD
 
     override fun initPresenter() {
         mPresenter = MecAppPresenter(this)
+        var id = intent.getStringExtra("id")
         mPresenter?.getAccessToken()
+        mPresenter?.getCameraVideo(id)
     }
 
     override fun onPlaySuccess() {

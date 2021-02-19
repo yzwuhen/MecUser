@@ -1,8 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.p
 
-import android.util.Log
 import com.example.mechanicalapp.App
-import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReEvaluate
@@ -13,7 +11,6 @@ import com.example.mechanicalapp.ui.mvp.impl.ModelImpl
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.CommentView
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
-import com.example.mechanicalapp.ui.mvp.v.OrderView
 
 //整套乱了。随便了
 class MecAppPresenter(

@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -8,15 +10,12 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
 import com.example.mechanicalapp.ui.adapter.ImageAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.BannerBean
 import com.example.mechanicalapp.ui.data.BannerData
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.fragment.MoreBuyFragment
-import com.example.mechanicalapp.ui.fragment.MoreDataSellFragment
 import com.example.mechanicalapp.ui.fragment.MoreDataFragment
+import com.example.mechanicalapp.ui.fragment.MoreDataSellFragment
 import com.example.mechanicalapp.ui.fragment.MoreRentFragment
 import com.example.mechanicalapp.ui.mvp.impl.BannerPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
@@ -157,10 +156,15 @@ class MoreDataActivity : BaseCusActivity(), View.OnClickListener,OnBannerListene
             R.id.iv_back -> finish()
             R.id.tv_search ->jumSearch()
             R.id.tv_map -> {
-                if (type ==1){
-                    jumpActivity(null, MapActivity::class.java)
+                if (isLocationEnabled(this)){
+                    if (type ==1){
+                        jumpActivity(null, MapActivity::class.java)
+                    }else{
+                        jumpActivity(null, MapMecBusinessActivity::class.java)
+                    }
                 }else{
-                    jumpActivity(null, MapMecBusinessActivity::class.java)
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
                 }
             }
 

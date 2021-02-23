@@ -19,12 +19,12 @@ public class RefreshHeaderUtils {
     public static SpringView.DragHander getHeaderView(Context context){
         WeakReference<Context> weakReference = new WeakReference<Context>(context);
 
-        return new DefaultHeader(weakReference.get());
+        return new RefreshHeaderView(weakReference.get());
     }
 
     public static SpringView.DragHander getFooterView(Context context){
         WeakReference<Context> weakReference = new WeakReference<Context>(context);
 
-        return new DefaultFooter(weakReference.get());
+        return new RefreshFooterView(weakReference.get());
     }
 }

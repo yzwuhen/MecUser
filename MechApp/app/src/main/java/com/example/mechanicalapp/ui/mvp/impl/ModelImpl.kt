@@ -1427,4 +1427,24 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
+    fun getCameraList(token: String?, iSubscriberListener: ISubscriberListener<CameraListBean>) {
+        appsService?.getCameraList(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<CameraListBean>(iSubscriberListener))
+
+    }
+
+    fun getAccessToken(token: String?, iSubscriberListener: ISubscriberListener<NetData>) {
+        appsService?.getAccessToken(token)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+    fun getCameraVideo(token: String?, id: String?,iSubscriberListener: ISubscriberListener<NetData>) {
+        appsService?.getCameraVideo(token,id)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
 }

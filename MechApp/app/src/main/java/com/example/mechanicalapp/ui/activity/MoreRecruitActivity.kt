@@ -1,6 +1,8 @@
 package com.example.mechanicalapp.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
@@ -129,7 +131,14 @@ class MoreRecruitActivity :BaseCusActivity(), View.OnClickListener,OnBannerListe
             R.id.tv_screen_right -> showView(1)
             R.id.iv_back -> finish()
             R.id.tv_search -> jumAct()
-            R.id.tv_map -> jumpActivity(null, MapJobAboutActivity::class.java)
+            R.id.tv_map -> {
+                if (isLocationEnabled(this)){
+                    jumpActivity(null, MapJobAboutActivity::class.java)
+                }else{
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }
+            }
 
         }
     }

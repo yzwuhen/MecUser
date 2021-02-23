@@ -1,8 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.p
 
-import android.util.Log
 import com.example.mechanicalapp.App
-import com.example.mechanicalapp.MainActivity
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
 import com.example.mechanicalapp.ui.data.request.ReEvaluate
@@ -13,7 +11,6 @@ import com.example.mechanicalapp.ui.mvp.impl.ModelImpl
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.CommentView
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
-import com.example.mechanicalapp.ui.mvp.v.OrderView
 
 //整套乱了。随便了
 class MecAppPresenter(
@@ -321,6 +318,52 @@ class MecAppPresenter(
                     baseView.hiedLoading()
                 }
             })
+    }
 
+    //获取摄像头列表
+    fun getCameraList(){
+        baseView.showLoading()
+        baseModel.getCameraList(
+            App.getInstance().token,
+            object : ISubscriberListener<CameraListBean> {
+                override fun onNext(t: CameraListBean?) {
+                    (baseView as NetDataView<NetData>).refreshUI(t)
+                }
+                override fun onError(e: Throwable?) {
+                    baseView.hiedLoading()
+                }
+
+                override fun onCompleted() {
+                    baseView.hiedLoading()
+                }
+            })
+    }
+
+    //获取视频token
+    fun getAccessToken() {
+        baseModel.getAccessToken(
+            App.getInstance().token,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                }
+                override fun onError(e: Throwable?) {
+                }
+
+                override fun onCompleted() {
+                }
+            })
+    }
+    fun getCameraVideo(id: String?) {
+        baseModel.getCameraVideo(
+            App.getInstance().token,id,
+            object : ISubscriberListener<NetData> {
+                override fun onNext(t: NetData?) {
+                }
+                override fun onError(e: Throwable?) {
+                }
+
+                override fun onCompleted() {
+                }
+            })
     }
 }

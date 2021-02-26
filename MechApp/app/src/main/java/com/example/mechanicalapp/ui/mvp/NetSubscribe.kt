@@ -1,10 +1,8 @@
 package com.example.mechanicalapp.ui.mvp
 
-import android.content.Intent
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.config.Configs
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
-import com.example.mechanicalapp.ui.activity.LoginActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.orhanobut.hawk.Hawk
 import io.reactivex.Observer

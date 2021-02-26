@@ -3,4 +3,5 @@
     <external-files-path name="opensdk_external" path="Images/tmp"/>
     <external-files-path name="umeng_cache" path="umeng_cache/"/>
     <root-path name="opensdk_root" path=""/>
+    <cache-path name="cache" path="." />
 </paths>

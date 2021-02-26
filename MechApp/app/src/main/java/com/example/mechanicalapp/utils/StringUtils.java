@@ -1,6 +1,9 @@
 package com.example.mechanicalapp.utils;
 
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
@@ -195,5 +198,20 @@ public class StringUtils {
             return 0;
         }
 
+    }
+    /**
+     * 返回当前程序版本号
+     */
+    public static String getAppVersionCode() {
+        int versioncode = 0;
+        try {
+            PackageManager pm = App.getInstance().getApplicationContext().getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(App.getInstance().getApplicationContext().getPackageName(), 0);
+            // versionName = pi.versionName;
+            versioncode = pi.versionCode;
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+        return versioncode + "";
     }
 }

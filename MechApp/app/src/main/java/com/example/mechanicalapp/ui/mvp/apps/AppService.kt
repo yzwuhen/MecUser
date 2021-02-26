@@ -1498,4 +1498,13 @@ interface AppService {
         @Header("X-Access-Token") token: String?,
         @Query("id") id:String?
     ): Observable<NetData>
+
+    /**
+     *
+     * 获取版本信息
+     */
+    @POST("/jeecg-boot/version/mecAppVersion/getAppVersion")
+    fun getVersion(
+        @Body reAppVersion: ReAppVersion?
+    ): Observable<AppVersionBean>
 }

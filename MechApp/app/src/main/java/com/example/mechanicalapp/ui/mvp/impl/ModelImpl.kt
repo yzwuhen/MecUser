@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
+import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
@@ -9,9 +10,11 @@ import com.example.mechanicalapp.ui.mvp.api.AppsApi
 import com.example.mechanicalapp.ui.mvp.apps.AppService
 import com.example.mechanicalapp.ui.mvp.m.BaseModel
 import com.example.mechanicalapp.utils.StringUtils
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
+import java.util.concurrent.TimeUnit
 
 class ModelImpl : BaseModel {
 
@@ -1446,5 +1449,19 @@ class ModelImpl : BaseModel {
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
+    }
+
+    fun getVersion(iSubscriberListener: ISubscriberListener<AppVersionBean>) {
+        var mReAppVersion =ReAppVersion()
+        mReAppVersion.appType="1"
+        mReAppVersion.mobileType="2"
+        Observable.timer(3, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe {
+            appsService?.getVersion(mReAppVersion)
+                ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                    AndroidSchedulers.mainThread()
+                )?.subscribe(NetSubscribe<AppVersionBean>(iSubscriberListener))
+        }
+
+
     }
 }

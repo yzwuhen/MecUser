@@ -128,7 +128,25 @@ object PopUtils{
             popupWindow?.dismiss()
         }
     }
-
+    fun showPopupWindow(parent: View,activity: Activity,gravity: Int) {
+        if (popupWindow?.isShowing==false) {
+            val location = IntArray(2)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                popupWindow?.showAtLocation(
+                    parent,
+                    gravity,
+                    location[0],
+                    location[1]
+                )
+            } else {
+                popupWindow?.showAtLocation(parent, gravity, 0, 0)
+            }
+            activity?.let { backgroundAlpha(0.5f, it) }
+        }else{
+            activity?.let { backgroundAlpha(1f, it) }
+            popupWindow?.dismiss()
+        }
+    }
 
     fun dismissPop(){
         popupWindow?.dismiss()

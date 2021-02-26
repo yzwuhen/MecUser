@@ -366,4 +366,18 @@ class MecAppPresenter(
                 }
             })
     }
+
+    fun getVersion() {
+        baseModel.getVersion(
+            object : ISubscriberListener<AppVersionBean> {
+                override fun onNext(t: AppVersionBean?) {
+                    (baseView as NetDataView<NetData>).refreshUI(t)
+                }
+                override fun onError(e: Throwable?) {
+                }
+                override fun onCompleted() {
+                }
+            })
+
+    }
 }

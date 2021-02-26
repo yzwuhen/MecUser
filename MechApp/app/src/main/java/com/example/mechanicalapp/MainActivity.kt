@@ -1,27 +1,41 @@
 package com.example.mechanicalapp
 
 import android.content.Intent
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mechanicalapp.ui.activity.ReleaseActivity
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.AppVersionBean
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.request.ReAppVersion
 import com.example.mechanicalapp.ui.fragment.home.HomeFragment
 import com.example.mechanicalapp.ui.fragment.mine.MineFragment
 import com.example.mechanicalapp.ui.fragment.msg.MsgFragment
 import com.example.mechanicalapp.ui.fragment.store.StoreFragment
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.ui.service.DownLoadService
+import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.DownLoadUtils
 import com.mobile.auth.gatewayauth.PhoneNumberAuthHelper
 import com.mobile.auth.gatewayauth.TokenResultListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
+class MainActivity : BaseCusActivity() ,View.OnClickListener,NetDataView<AppVersionBean>,PopUtils.onViewListener{
 
      private var mManager: FragmentManager? = null
 
@@ -31,6 +45,13 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
      private var mMineFragment:Fragment?=null
 
     private var mTextViews:MutableList<TextView> = ArrayList<TextView>()
+
+    private var mPresenter :MecAppPresenter?=null
+    private var mReAppVersion:ReAppVersion?=null
+
+    private var mTvPopSure :TextView ?=null
+    private var mTvPopCancel:TextView?=null
+    private var mTvPopContext :TextView ?=null
 
      override fun getLayoutId(): Int {
 
@@ -183,32 +204,41 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
              transaction.add(R.id.main_frame, fragment);
          }
      }
-
      override fun initPresenter() {
-
+         mPresenter =MecAppPresenter(this)
+         mPresenter?.getVersion()
      }
 
-    override fun onClick(p0: View?) {
-        if (p0?.id == R.id.ly_home){
-            clickTabHome();
-            selectText(0);
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.ly_home->{
+                clickTabHome();
+                selectText(0);
+            }
+            R.id.ly_store->{
+                clickTabStore();
+                selectText(1);
+            }
+            R.id.ly_release->{
+                clickTabRelease();
+            }
+            R.id.ly_msg->{
+                clickTabMsg();
+                selectText(3);
+            }
+            R.id.ly_mine->{
+                clickTabMine();
+                selectText(4);
+            }
+            R.id.tv_pop_sure->{
+               var downLoadUtils =DownLoadUtils()
+                downLoadUtils.startDownLoad(this,mReAppVersion?.downUrl)
+            }
+            R.id.tv_pop_cancel->{
+
+            }
         }
-        if (p0?.id == R.id.ly_store){
-            clickTabStore();
-            selectText(1);
-        }
-        if (p0?.id == R.id.ly_release){
-            clickTabRelease();
-          //  selectText(2);
-        }
-        if (p0?.id == R.id.ly_msg){
-            clickTabMsg();
-            selectText(3);
-        }
-        if (p0?.id == R.id.ly_mine){
-            clickTabMine();
-            selectText(4);
-        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -223,6 +253,35 @@ class MainActivity : BaseActivity<NetData>() ,View.OnClickListener{
     }
 
     override fun err()  {
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun refreshUI(data: AppVersionBean?) {
+        if (data!=null&&data.result!=null){
+            mReAppVersion =data.result
+            if (data.result.isUpdate=="1"){
+                PopUtils.init(this,this,R.layout.pop_app_version, ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    true,
+                    false,this)
+                PopUtils.showPopupWindow(ly_home,this,Gravity.TOP)
+            }
+        }
+
+    }
+
+    override fun loadMore(data: AppVersionBean?) {
+    }
+
+    override fun getView(view: View?) {
+
+        mTvPopSure= view?.findViewById(R.id.tv_pop_sure)
+        mTvPopCancel =view?.findViewById(R.id.tv_pop_cancel)
+        mTvPopContext =view?.findViewById(R.id.tv_pop_content)
+
+        mTvPopSure?.setOnClickListener(this)
+        mTvPopCancel?.setOnClickListener(this)
+
     }
 
 }

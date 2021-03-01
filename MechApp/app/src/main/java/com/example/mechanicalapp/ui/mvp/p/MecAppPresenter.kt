@@ -339,20 +339,6 @@ class MecAppPresenter(
             })
     }
 
-    //获取视频token
-    fun getAccessToken() {
-        baseModel.getAccessToken(
-            App.getInstance().token,
-            object : ISubscriberListener<NetData> {
-                override fun onNext(t: NetData?) {
-                }
-                override fun onError(e: Throwable?) {
-                }
-
-                override fun onCompleted() {
-                }
-            })
-    }
     fun getCameraVideo(id: String?) {
         baseModel.getCameraVideo(
             App.getInstance().token,id,

@@ -209,7 +209,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
     }
 
     override fun showData(data: NetData?) {
-        if (data != null &&data is FactoryDetailsBean&&data.result!=null) {
+        if (data != null &&data is FactoryDetailsBean&&data.result!=null&&data.result.factory!=null) {
             mData =data.result.factory
             if (!TextUtils.isEmpty(mData?.factoryPicture)) {
                 mList?.clear()

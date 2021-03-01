@@ -36,7 +36,7 @@ class VideoPlayerActivity :BaseCusActivity(), EZUIPlayer.EZUIPlayerCallBack ,Net
         //设置播放回调callback
         player_ui.setCallBack(this)
         //设置播放参数
-        player_ui.setUrl("ezopen://open.ys7.com/E82901339/1.live")
+        player_ui.setUrl("ezopen://open.ys7.com/E82901339/1.rec")
 
     }
 
@@ -66,7 +66,6 @@ class VideoPlayerActivity :BaseCusActivity(), EZUIPlayer.EZUIPlayerCallBack ,Net
     override fun initPresenter() {
         mPresenter = MecAppPresenter(this)
         var id = intent.getStringExtra("id")
-        mPresenter?.getAccessToken()
         mPresenter?.getCameraVideo(id)
     }
 

@@ -2,24 +2,18 @@ package com.example.mechanicalapp
 
 import android.content.Intent
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.mechanicalapp.ui.activity.ReleaseActivity
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.AppVersionBean
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
 import com.example.mechanicalapp.ui.data.request.ReAppVersion
 import com.example.mechanicalapp.ui.fragment.home.HomeFragment
 import com.example.mechanicalapp.ui.fragment.mine.MineFragment
@@ -27,11 +21,8 @@ import com.example.mechanicalapp.ui.fragment.msg.MsgFragment
 import com.example.mechanicalapp.ui.fragment.store.StoreFragment
 import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.NetDataView
-import com.example.mechanicalapp.ui.service.DownLoadService
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DownLoadUtils
-import com.mobile.auth.gatewayauth.PhoneNumberAuthHelper
-import com.mobile.auth.gatewayauth.TokenResultListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -206,7 +197,7 @@ class MainActivity : BaseCusActivity() ,View.OnClickListener,NetDataView<AppVers
      }
      override fun initPresenter() {
          mPresenter =MecAppPresenter(this)
-         mPresenter?.getVersion()
+       //  mPresenter?.getVersion()
      }
 
     override fun onClick(view: View?) {

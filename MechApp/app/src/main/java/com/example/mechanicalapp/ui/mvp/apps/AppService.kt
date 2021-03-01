@@ -1491,9 +1491,9 @@ interface AppService {
 
     /**
      *
-     * 获取AccessToken
+     * 查询摄像头
      */
-    @GET("/jeecg-boot/repair/mecRepairWebcam/getWebcamUrl")
+    @GET("/jeecg-boot/repair/mecRepairWebcam/queryById")
     fun getCameraVideo(
         @Header("X-Access-Token") token: String?,
         @Query("id") id:String?

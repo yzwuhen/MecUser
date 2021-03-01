@@ -1,5 +1,4 @@
 include ':jiguang'
-include ':jiguang'
 include ':app'
 rootProject.name = "MechanicalApp"
 include ':im'

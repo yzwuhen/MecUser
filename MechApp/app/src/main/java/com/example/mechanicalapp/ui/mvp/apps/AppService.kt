@@ -1480,18 +1480,11 @@ interface AppService {
     ): Observable<CameraListBean>
 
 
-    /**
-     *
-     * 获取AccessToken
-     */
-    @GET("/jeecg-boot/repair/mecRepairWebcam/getAccessToken")
-    fun getAccessToken(
-        @Header("X-Access-Token") token: String?
-    ): Observable<NetData>
 
     /**
      *
      * 查询摄像头
+     * 获取Url
      */
     @GET("/jeecg-boot/repair/mecRepairWebcam/queryById")
     fun getCameraVideo(

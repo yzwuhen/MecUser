@@ -1483,6 +1483,7 @@ interface AppService {
 
     /**
      *
+     * 查询摄像头
      * 获取Url
      */
     @GET("/jeecg-boot/repair/mecRepairWebcam/queryById")

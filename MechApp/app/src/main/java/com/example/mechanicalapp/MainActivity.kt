@@ -206,7 +206,7 @@ class MainActivity : BaseCusActivity() ,View.OnClickListener,NetDataView<AppVers
      }
      override fun initPresenter() {
          mPresenter =MecAppPresenter(this)
-         mPresenter?.getVersion()
+    //     mPresenter?.getVersion()
      }
 
     override fun onClick(view: View?) {

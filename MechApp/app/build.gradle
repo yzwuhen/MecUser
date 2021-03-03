@@ -134,4 +134,6 @@ dependencies {
 
     implementation(name: 'com.heytap.msp-push-2.1.0', ext: 'aar')
     implementation 'com.ezviz.sdk:ezuikit:2.2.1'//萤石
+    //蒲公英
+    implementation files('libs/pgy_analytics_sdk.jar')
 }

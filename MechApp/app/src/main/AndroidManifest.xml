@@ -43,6 +43,11 @@
     <!-- 8.0+系统需要-->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+
     <permission
         android:name="com.netease.nim.demo.permission.RECEIVE_MSG"
         android:protectionLevel="signature" />
@@ -365,6 +370,14 @@
             </intent-filter>
         </receiver>
         <!--==================================极光推送=========================================-->
+
+
+        <meta-data
+            android:name="PGYER_API_KEY"
+            android:value="b951e33fd46ef7f4747505e5889dc769"></meta-data>
+        <meta-data
+            android:name="PGYER_FRONTJS_KEY"
+            android:value="186f2c3946ed44cda01c69d550683b70"></meta-data>
 
     </application>
 

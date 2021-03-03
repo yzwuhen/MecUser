@@ -17,6 +17,8 @@ import com.netease.nimlib.sdk.auth.AuthServiceObserver;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.util.NIMUtil;
 import com.orhanobut.hawk.Hawk;
+import com.pgyer.pgyersdk.PgyerSDKManager;
+import com.pgyer.pgyersdk.pgyerenum.FeatureEnum;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
@@ -37,7 +39,17 @@ public class App extends Application {
         initSDK();
         initIMSDK();
         //  registerImListener();
+        initpgy(this);
     }
+
+    //初始化
+    private static void initpgy(App app){
+        new PgyerSDKManager.InitSdk()
+                .setContext(app) //设置上下问对象
+                .enable(FeatureEnum.CHECK_UPDATE)  //添加检查新版本
+                .build();
+    }
+
     //报错 显示SDK not initialized or invoked in wrong process!
     private void registerImListener() {
         NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(

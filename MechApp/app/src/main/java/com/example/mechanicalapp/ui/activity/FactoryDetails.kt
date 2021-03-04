@@ -115,7 +115,7 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
     }
 
     private fun jumPlayer() {
-        jumpActivity(null,VideoListActivity::class.java)
+      //  jumpActivity(null,VideoListActivity::class.java)
     }
 
     private fun jumFactoryComment() {

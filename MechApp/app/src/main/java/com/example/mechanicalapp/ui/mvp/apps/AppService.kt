@@ -1474,7 +1474,7 @@ interface AppService {
      *
      * 获取摄像头列表
      */
-    @GET("/jeecg-boot/repair/mecRepairWebcam/list")
+    @GET("/jeecg-boot/repair/mecRepairWebcam/listOffline")
     fun getCameraList(
         @Header("X-Access-Token") token: String?
     ): Observable<CameraListBean>

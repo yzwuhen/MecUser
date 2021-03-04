@@ -129,7 +129,10 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
         when (v?.id) {
             R.id.iv_left -> finish()
             R.id.ly_right -> showShare()
-            R.id.iv_look -> showPop(1)
+            R.id.iv_look -> {
+                jumpActivity(null,VideoListActivity::class.java)
+              //  showPop(1)
+            }
             R.id.tv_cancel_order -> showPop(0)
             R.id.tv_letter1->goToChat()
             R.id.ly_letter -> goToChat()

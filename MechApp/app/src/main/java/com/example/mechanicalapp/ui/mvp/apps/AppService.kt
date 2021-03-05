@@ -1287,10 +1287,26 @@ interface AppService {
         @Body requestBody: RePay?
     ): Observable<WxPayBean>
 
+
+    /*微信支付
+  * */
+    @POST("/jeecg-boot/repair/mecRepairOrder/wxPay")
+    fun payRepairWx(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: RePay?
+    ): Observable<WxPayBean>
+
     /*支付宝支付支付
 * */
     @POST("/jeecg-boot/shop/mecOrder/alipay")
     fun payAlly(
+        @Header("X-Access-Token") token: String?,
+        @Body requestBody: RePay?
+    ): Observable<AliPayBean>
+    /*支付宝支付支付
+* */
+    @POST("/jeecg-boot/repair/mecRepairOrder/alipay")
+    fun payRepairAlly(
         @Header("X-Access-Token") token: String?,
         @Body requestBody: RePay?
     ): Observable<AliPayBean>

@@ -157,7 +157,15 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
             R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
             R.id.tv_cancel -> mShareDialog?.dismiss()
-//            R.id.ly_pay -> jumpActivity(null, null)
+            R.id.ly_pay -> {
+                var bundle = Bundle()
+                bundle.putString("order_num", orderData?.orderNum)
+                bundle.putString("order_id", orderData?.id)
+                bundle.putString("created_time", orderData?.createTime)
+                bundle.putInt("order_type", 1)
+                orderData?.orderSum?.let { bundle.putDouble("order_price", it) }
+                jumpActivity(bundle, PayActivity::class.java)
+            }
         }
     }
     private fun shareThree(type: SHARE_MEDIA){

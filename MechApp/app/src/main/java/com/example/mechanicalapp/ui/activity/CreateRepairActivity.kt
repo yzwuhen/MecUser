@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -134,11 +135,18 @@ class CreateRepairActivity : BaseCusActivity(), View.OnClickListener, OnItemClic
                 1,
                 PartsTypeActivity::class.java
             )
-            R.id.ly_address -> jumpActivityForResult(
-                Configs.ADDRESS_RESULT_CODE,
-                1,
-                AddressSelActivity::class.java
-            )
+            R.id.ly_address ->{
+                if (isLocationEnabled(this)){
+                    jumpActivityForResult(
+                        Configs.ADDRESS_RESULT_CODE,
+                        1,
+                        AddressSelActivity::class.java
+                    )
+                }else{
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }
+            }
             R.id.tv_submit -> submit()
             R.id.tv_pop_sure ->{
                 openCall("400989564")

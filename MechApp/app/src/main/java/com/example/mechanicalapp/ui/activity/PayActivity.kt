@@ -38,6 +38,7 @@ class PayActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListener,Ne
     private var createdTime=""
     private var type=0
     private var api:IWXAPI?=null
+    private var orderType=0;//订单类型  维修单1 普通订单0
 
 
     @SuppressLint("HandlerLeak")
@@ -102,18 +103,22 @@ class PayActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListener,Ne
         orderNum = intent.getStringExtra("order_num").toString()
         orderId =intent.getStringExtra("order_id").toString()
         createdTime =intent.getStringExtra("created_time").toString()
-
+        orderType =intent.getIntExtra("order_type",0)
         tv_tip_info.text ="￥$price"
         tv_tip_info1.text ="订单号：$orderNum"
 
-        if (createdTime!=null){
-            tv_time_out.text="${
-                DateUtils.getHours(
-                    createdTime,
-                    DateUtils.getDateByLongWithFormat(System.currentTimeMillis(), 
-                    "yyyy-MM-dd hh:mm:ss"))}小时后关闭订单，请尽快付款"
-        }
+        if (orderType==1){
+            tv_time_out.visibility =View.GONE
 
+        }else{
+            if (createdTime!=null){
+                tv_time_out.text="${
+                    DateUtils.getHours(
+                        createdTime,
+                        DateUtils.getDateByLongWithFormat(System.currentTimeMillis(),
+                            "yyyy-MM-dd hh:mm:ss"))}小时后关闭订单，请尽快付款"
+            }
+        }
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
         tv_pay.setOnClickListener(this)
@@ -183,12 +188,19 @@ class PayActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListener,Ne
     }
 
     private fun payWx() {
-
-        mMecAppPresenter?.payWx(orderId)
+        if (orderType==0){
+            mMecAppPresenter?.payWx(orderId)
+        }else{
+            mMecAppPresenter?.payRepairWx(orderId)
+        }
     }
 
     private fun payAlly() {
-        mMecAppPresenter?.payAlly(orderId)
+        if (orderType==0){
+            mMecAppPresenter?.payAlly(orderId)
+        }else{
+            mMecAppPresenter?.payRepairAlly(orderId)
+        }
     }
 
     override fun refreshUI(data: NetData?) {

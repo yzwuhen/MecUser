@@ -1270,9 +1270,26 @@ class ModelImpl : BaseModel {
         )?.subscribe(mNetSubscribe)
 
     }
+    //微信支付
+    fun payRepairWx(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<WxPayBean>){
+        appsService?.payRepairWx(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
     //支付宝支付
     fun payAlly(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<AliPayBean>){
         appsService?.payAlly(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+            Schedulers.io())?.observeOn(
+            AndroidSchedulers.mainThread()
+        )?.subscribe(mNetSubscribe)
+
+    }
+
+    //支付宝支付
+    fun payRepairAlly(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<AliPayBean>){
+        appsService?.payRepairAlly(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(mNetSubscribe)

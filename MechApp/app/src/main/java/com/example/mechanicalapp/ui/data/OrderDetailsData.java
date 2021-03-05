@@ -66,7 +66,7 @@ public class OrderDetailsData implements Serializable {
     private String orderNum;
     private String repairType;
     private String repairTypeName;
-    private Object orderSum;
+    private double orderSum;
     private Object payTime;
     private Object payType;
     private Object payTypeName;
@@ -201,11 +201,11 @@ public class OrderDetailsData implements Serializable {
         this.repairTypeName = repairTypeName;
     }
 
-    public Object getOrderSum() {
+    public double getOrderSum() {
         return orderSum;
     }
 
-    public void setOrderSum(Object orderSum) {
+    public void setOrderSum(double orderSum) {
         this.orderSum = orderSum;
     }
 

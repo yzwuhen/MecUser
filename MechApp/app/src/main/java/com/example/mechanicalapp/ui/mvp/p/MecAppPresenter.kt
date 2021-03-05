@@ -112,7 +112,6 @@ class MecAppPresenter(
             override fun onNext(t: WxPayBean?) {
                 (baseView as NetDataView<NetData>).refreshUI(t)
             }
-
             override fun onError(e: Throwable?) {
                 baseView.hiedLoading()
             }
@@ -122,6 +121,27 @@ class MecAppPresenter(
             }
         }))
     }
+
+    fun payRepairWx(orderId: String) {
+        var mRePay = RePay()
+        mRePay.id = orderId
+        baseView.showLoading()
+        baseModel.payRepairWx(App.getInstance().token, mRePay, NetSubscribe<WxPayBean>(object :
+            ISubscriberListener<WxPayBean> {
+            override fun onNext(t: WxPayBean?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+            override fun onError(e: Throwable?) {
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
+
+
     fun payAlly(orderId: String) {
         var mRePay = RePay()
         mRePay.id = orderId
@@ -140,6 +160,26 @@ class MecAppPresenter(
             }
         }))
     }
+
+    fun payRepairAlly(orderId: String) {
+        var mRePay = RePay()
+        mRePay.id = orderId
+        baseView.showLoading()
+        baseModel.payRepairAlly(App.getInstance().token, mRePay, NetSubscribe<AliPayBean>(object :
+            ISubscriberListener<AliPayBean> {
+            override fun onNext(t: AliPayBean?) {
+                (baseView as NetDataView<NetData>).refreshUI(t)
+            }
+            override fun onError(e: Throwable?) {
+                baseView.hiedLoading()
+            }
+
+            override fun onCompleted() {
+                baseView.hiedLoading()
+            }
+        }))
+    }
+
     fun getEngList() {
         baseView.showLoading()
         baseModel.getEngLetter(App.getInstance().token, NetSubscribe<EngListLetterBean>(object :

@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -99,11 +100,18 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
             R.id.tv_dialog_item2 -> setItem()
             R.id.tv_dialog_item3 -> mButtDialog?.dismiss()
             R.id.tv_submit -> submit()
-            R.id.ly_address -> jumpActivityForResult(
-                Configs.ADDRESS_RESULT_CODE,
-                1,
-                AddressSelActivity::class.java
-            )
+            R.id.ly_address -> {
+                if (isLocationEnabled(this)){
+                    jumpActivityForResult(
+                        Configs.ADDRESS_RESULT_CODE,
+                        1,
+                        AddressSelActivity::class.java
+                    )
+                }else{
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(intent)
+                }
+            }
             R.id.tv_modify -> modify()
             R.id.ly_cus_server -> openCall("400-654-9874")
             R.id.ly_cus_server1 -> openCall("400-654-9874")

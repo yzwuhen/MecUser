@@ -50,7 +50,7 @@ class PersonalCertification : BaseCusActivity(), View.OnClickListener, PersonCer
 
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
-        tv_title.text = "个人认证"
+        tv_title.text = "实名认证"
         tv_sketch.setOnClickListener(this)
         iv_positive_pic.setOnClickListener(this)
         iv_side_pic.setOnClickListener(this)

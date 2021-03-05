@@ -40,9 +40,9 @@ class ChatAdapter(
             val userInfo= NimUIKit.getUserInfoProvider().getUserInfo(mList[position].contactId)
             if (userInfo!=null){
                 ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_user_pic,userInfo.avatar)
+                holder.itemView.tv_user_nick.text = userInfo.name
             }
         }
-        holder.itemView.tv_user_nick.text = mList[position]?.contactId
         holder.itemView.tv_msg.text = mList[position]?.content
         if (mList[position]?.unreadCount!! >0){
             holder.itemView.tv_msg_num.visibility =View.VISIBLE

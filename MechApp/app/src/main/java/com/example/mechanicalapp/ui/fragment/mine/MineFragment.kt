@@ -49,7 +49,12 @@ class MineFragment :BaseCusFragment(), OnItemClickListener, View.OnClickListener
 
         }else{
             iv_sex.visibility=View.VISIBLE
-            iv_user_sr.visibility =View.VISIBLE
+            if (App.getInstance().userInfo.isPerson=="1"){
+                iv_user_sr.visibility =View.VISIBLE
+            }else{
+                iv_user_sr.visibility =View.GONE
+            }
+
             tv_phone.visibility=View.VISIBLE
 
             tv_user_nick.text = App.getInstance().userInfo.realname

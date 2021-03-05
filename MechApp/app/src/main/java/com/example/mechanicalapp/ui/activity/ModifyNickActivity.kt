@@ -89,5 +89,6 @@ class ModifyNickActivity: BaseCusActivity() ,View.OnClickListener, UserView {
         }
         App.getInstance().userInfo.realname =et_nick.text.toString()
         mPresenter?.editUserInfo(App.getInstance().userInfo)
+        mPresenter?.upImNick(App.getInstance().userInfo.realname )
     }
 }

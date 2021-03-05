@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.activity
 
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.example.mechanicalapp.App
@@ -18,7 +17,6 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
-import com.orhanobut.hawk.Hawk
 import kotlinx.android.synthetic.main.activity_user_data.*
 import kotlinx.android.synthetic.main.layout_title.*
 import java.io.File

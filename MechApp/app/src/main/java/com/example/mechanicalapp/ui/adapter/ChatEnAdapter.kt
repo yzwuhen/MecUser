@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.adapter
 
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,8 @@ import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.`interface`.OnItemLongClick
 import com.example.mechanicalapp.ui.data.EngineerData
+import com.example.mechanicalapp.utils.ImageLoadUtils
+import com.netease.nim.uikit.api.NimUIKit
 import com.netease.nim.uikit.common.util.sys.TimeUtil
 import com.netease.nimlib.sdk.msg.model.RecentContact
 import kotlinx.android.synthetic.main.item_chat_en.view.*
@@ -23,7 +26,16 @@ class ChatEnAdapter (var mContext: Context, var mList: MutableList<RecentContact
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-        holder.itemView.tv_user_nick.text = mList[position]?.contactId
+        if (!TextUtils.isEmpty(mList[position].contactId)){
+            val userInfo= NimUIKit.getUserInfoProvider().getUserInfo(mList[position].contactId)
+            if (userInfo!=null){
+                ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_user_pic,userInfo.avatar)
+                holder.itemView.tv_user_nick.text = userInfo.name
+            }else{
+                holder.itemView.tv_user_nick.text = "工程师"
+            }
+        }
+
         holder.itemView.tv_msg.text = mList[position]?.content
         if (mList[position]?.unreadCount!! >0){
             holder.itemView.tv_msg_num.visibility =View.VISIBLE

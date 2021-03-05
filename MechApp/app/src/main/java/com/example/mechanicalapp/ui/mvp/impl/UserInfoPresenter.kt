@@ -49,7 +49,6 @@ class UserInfoPresenter(
     }
 
     fun upImHeaderImg(message: String) {
-
         val fields: MutableMap<UserInfoFieldEnum, Any> = HashMap(1)
         fields.put(UserInfoFieldEnum.AVATAR,message)
         NIMClient.getService(UserService::class.java).updateUserInfo(fields).setCallback(object :RequestCallback<Void>{
@@ -59,6 +58,24 @@ class UserInfoPresenter(
 
             override fun onFailed(p0: Int) {
                 Log.v("===========","ssssssssss==============更新IM头像失败")
+            }
+
+            override fun onException(p0: Throwable?) {
+            }
+        })
+//        fields[UserInfoFieldEnum.AVATAR] =message
+    }
+
+    fun upImNick(message: String) {
+        val fields: MutableMap<UserInfoFieldEnum, Any> = HashMap(1)
+        fields.put(UserInfoFieldEnum.Name,message)
+        NIMClient.getService(UserService::class.java).updateUserInfo(fields).setCallback(object :RequestCallback<Void>{
+            override fun onSuccess(p0: Void?) {
+                Log.v("===========","ssssssssss==============更新IM昵称成功")
+            }
+
+            override fun onFailed(p0: Int) {
+                Log.v("===========","ssssssssss==============更新IM昵称失败")
             }
 
             override fun onException(p0: Throwable?) {

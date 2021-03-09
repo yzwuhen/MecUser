@@ -1,6 +1,7 @@
 package com.example.mechanicalapp.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -30,6 +31,7 @@ class SearchGoodsResult : BaseCusActivity(), OnItemClickListener, TextView.OnEdi
     private var mAdapter: GoodsListAdapter? = null
     var mList: MutableList<GoodsData> = ArrayList<GoodsData>()
     private var mPresenter: GoodsListPresenter? = null
+    private var title=""
     override fun getLayoutId(): Int {
         return R.layout.activity_search_goods_result
     }
@@ -81,6 +83,7 @@ class SearchGoodsResult : BaseCusActivity(), OnItemClickListener, TextView.OnEdi
     override fun initPresenter() {
 
         mPresenter = GoodsListPresenter(this)
+        mPresenter?.setTitle(title)
         mPresenter?.getGoodsList()
     }
 

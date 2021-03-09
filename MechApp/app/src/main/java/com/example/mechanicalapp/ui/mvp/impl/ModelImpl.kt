@@ -1446,8 +1446,8 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
-    fun getCameraList(token: String?, iSubscriberListener: ISubscriberListener<CameraListBean>) {
-        appsService?.getCameraList(token)
+    fun getCameraList(token: String?,id: String?, iSubscriberListener: ISubscriberListener<CameraListBean>) {
+        appsService?.getCameraList(token,id)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<CameraListBean>(iSubscriberListener))

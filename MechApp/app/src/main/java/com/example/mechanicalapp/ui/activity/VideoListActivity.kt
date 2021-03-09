@@ -20,6 +20,7 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     var mAdapter: VideoListAdapter? = null
     var mList = ArrayList<CameraListData>()
     var mPresenter : MecAppPresenter?=null
+    private var id=""
     override fun getLayoutId(): Int {
         return R.layout.activity_video_list
     }
@@ -38,8 +39,9 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     }
 
     override fun initPresenter() {
+        id =intent.getStringExtra("id").toString()
         mPresenter = MecAppPresenter(this)
-        mPresenter?.getCameraList()
+        mPresenter?.getCameraList(id)
     }
 
 

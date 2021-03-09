@@ -361,10 +361,10 @@ class MecAppPresenter(
     }
 
     //获取摄像头列表
-    fun getCameraList(){
+    fun getCameraList(id: String?){
         baseView.showLoading()
         baseModel.getCameraList(
-            App.getInstance().token,
+            App.getInstance().token,id,
             object : ISubscriberListener<CameraListBean> {
                 override fun onNext(t: CameraListBean?) {
                     (baseView as NetDataView<NetData>).refreshUI(t)

@@ -1290,10 +1290,11 @@ interface AppService {
 
     /*微信支付
   * */
+    @FormUrlEncoded
     @POST("/jeecg-boot/repair/mecRepairOrder/wxPay")
     fun payRepairWx(
         @Header("X-Access-Token") token: String?,
-        @Body requestBody: RePay?
+        @Field("id") id: String?
     ): Observable<WxPayBean>
 
     /*支付宝支付支付
@@ -1305,10 +1306,11 @@ interface AppService {
     ): Observable<AliPayBean>
     /*支付宝支付支付
 * */
+    @FormUrlEncoded
     @POST("/jeecg-boot/repair/mecRepairOrder/alipay")
     fun payRepairAlly(
         @Header("X-Access-Token") token: String?,
-        @Body requestBody: RePay?
+        @Field("id") id: String?
     ): Observable<AliPayBean>
 
 

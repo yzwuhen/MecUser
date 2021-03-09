@@ -92,7 +92,7 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
             )
             R.id.ly_parts_type -> jumpActivityForReSult(
                 Configs.PARTS_RESULT_CODE,
-                MoreSelPartsType::class.java
+                SelPartsType::class.java
             )
             R.id.iv_license_pic -> showDialogType(1)
             R.id.iv_factory_pic -> showDialogType(2)

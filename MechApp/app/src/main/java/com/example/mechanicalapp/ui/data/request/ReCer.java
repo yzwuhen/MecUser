@@ -47,7 +47,16 @@ public class ReCer {
     private double gpsLat;
     private double gpsLon;
     private String id;
+    private String content;
     private int apporveStatus;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getId() {
         return id;

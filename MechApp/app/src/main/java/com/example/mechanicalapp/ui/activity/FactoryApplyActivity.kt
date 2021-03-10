@@ -229,6 +229,8 @@ class FactoryApplyActivity : BaseCusActivity(), View.OnClickListener, PersonCerV
     }
 
     override fun afterTextChanged(p0: Editable?) {
+        reCompanyCer.content = et_input.text.toString()
+        tv_tip_text.text ="${reCompanyCer.content .toString().length}/200"
         changeBtn()
     }
 

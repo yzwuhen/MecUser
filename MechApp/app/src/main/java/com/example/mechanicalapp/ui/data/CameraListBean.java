@@ -6,122 +6,243 @@ public class CameraListBean extends NetData {
 
     /**
      * success : true
-     * result : {"records":[{"serialNum":"","webcamAreaName":"区域1","webcamNum":"sfsdfsfs","updateTime":"2020-11-08 14:48:24","status_dictText":"已分配","webcamAreaChannelName":"圆通","checkCode":"","repairFactoryName":"维修厂1","createBy":"admin","webcamAreaChannelId":"1325264156229296129","createTime":"2020-11-08 13:19:30","updateBy":"admin","webcamUrl":"","repairFactoryId":"1","name":"摄像头22","sysOrgCode":"A01A03","id":"1325306930987204609","status":"1","webcamAreaId":"1325262509709123586"}],"total":1,"size":10,"current":1,"orders":[],"optimizeCountSql":true,"hitCount":false,"searchCount":true,"pages":1}
-     * timestamp : 1613617351577
+     * result : [{"id":"1325306930987204609","createBy":"admin","createTime":"2020-11-08 13:19:30","updateBy":"wxc","updateTime":"2021-03-01 11:02:57","sysOrgCode":"A01A03","name":"摄像头22","webcamNum":"sfsdfsfs","status":"0","isOnline":"离线","repairFactoryId":"1332262998391255042","repairFactoryName":"维修厂1","checkCode":"","webcamAreaId":"1325262509709123586","webcamAreaName":"维修区1","webcamAreaChannelId":"1325264156229296129","channelNo":"1","channelName":"通道1","webcamAreaChannelName":"","serialNum":"E82901339","webcamUrl":"","accessToken":"at.8by79blt7c0dubo956wgsmihcpjzttmo-4n69dhugvi-0cicct3-y2yzyrcbd"}]
+     * timestamp : 1615341806605
      */
 
-    private boolean success;
-    private ResultBean result;
-    private long timestamp;
+    private List<CameraListData> result;
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public ResultBean getResult() {
+    public List<CameraListData> getResult() {
         return result;
     }
 
-    public void setResult(ResultBean result) {
+    public void setResult(List<CameraListData> result) {
         this.result = result;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
     }
 
     public static class ResultBean {
         /**
-         * records : [{"serialNum":"","webcamAreaName":"区域1","webcamNum":"sfsdfsfs","updateTime":"2020-11-08 14:48:24","status_dictText":"已分配","webcamAreaChannelName":"圆通","checkCode":"","repairFactoryName":"维修厂1","createBy":"admin","webcamAreaChannelId":"1325264156229296129","createTime":"2020-11-08 13:19:30","updateBy":"admin","webcamUrl":"","repairFactoryId":"1","name":"摄像头22","sysOrgCode":"A01A03","id":"1325306930987204609","status":"1","webcamAreaId":"1325262509709123586"}]
-         * total : 1
-         * size : 10
-         * current : 1
-         * orders : []
-         * optimizeCountSql : true
-         * hitCount : false
-         * searchCount : true
-         * pages : 1
+         * id : 1325306930987204609
+         * createBy : admin
+         * createTime : 2020-11-08 13:19:30
+         * updateBy : wxc
+         * updateTime : 2021-03-01 11:02:57
+         * sysOrgCode : A01A03
+         * name : 摄像头22
+         * webcamNum : sfsdfsfs
+         * status : 0
+         * isOnline : 离线
+         * repairFactoryId : 1332262998391255042
+         * repairFactoryName : 维修厂1
+         * checkCode :
+         * webcamAreaId : 1325262509709123586
+         * webcamAreaName : 维修区1
+         * webcamAreaChannelId : 1325264156229296129
+         * channelNo : 1
+         * channelName : 通道1
+         * webcamAreaChannelName :
+         * serialNum : E82901339
+         * webcamUrl :
+         * accessToken : at.8by79blt7c0dubo956wgsmihcpjzttmo-4n69dhugvi-0cicct3-y2yzyrcbd
          */
 
-        private int total;
-        private int size;
-        private int current;
-        private boolean optimizeCountSql;
-        private boolean hitCount;
-        private boolean searchCount;
-        private int pages;
-        private List<CameraListData> records;
+        private String id;
+        private String createBy;
+        private String createTime;
+        private String updateBy;
+        private String updateTime;
+        private String sysOrgCode;
+        private String name;
+        private String webcamNum;
+        private String status;
+        private String isOnline;
+        private String repairFactoryId;
+        private String repairFactoryName;
+        private String checkCode;
+        private String webcamAreaId;
+        private String webcamAreaName;
+        private String webcamAreaChannelId;
+        private String channelNo;
+        private String channelName;
+        private String webcamAreaChannelName;
+        private String serialNum;
+        private String webcamUrl;
+        private String accessToken;
 
-        public int getTotal() {
-            return total;
+        public String getId() {
+            return id;
         }
 
-        public void setTotal(int total) {
-            this.total = total;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public int getSize() {
-            return size;
+        public String getCreateBy() {
+            return createBy;
         }
 
-        public void setSize(int size) {
-            this.size = size;
+        public void setCreateBy(String createBy) {
+            this.createBy = createBy;
         }
 
-        public int getCurrent() {
-            return current;
+        public String getCreateTime() {
+            return createTime;
         }
 
-        public void setCurrent(int current) {
-            this.current = current;
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
         }
 
-        public boolean isOptimizeCountSql() {
-            return optimizeCountSql;
+        public String getUpdateBy() {
+            return updateBy;
         }
 
-        public void setOptimizeCountSql(boolean optimizeCountSql) {
-            this.optimizeCountSql = optimizeCountSql;
+        public void setUpdateBy(String updateBy) {
+            this.updateBy = updateBy;
         }
 
-        public boolean isHitCount() {
-            return hitCount;
+        public String getUpdateTime() {
+            return updateTime;
         }
 
-        public void setHitCount(boolean hitCount) {
-            this.hitCount = hitCount;
+        public void setUpdateTime(String updateTime) {
+            this.updateTime = updateTime;
         }
 
-        public boolean isSearchCount() {
-            return searchCount;
+        public String getSysOrgCode() {
+            return sysOrgCode;
         }
 
-        public void setSearchCount(boolean searchCount) {
-            this.searchCount = searchCount;
+        public void setSysOrgCode(String sysOrgCode) {
+            this.sysOrgCode = sysOrgCode;
         }
 
-        public int getPages() {
-            return pages;
+        public String getName() {
+            return name;
         }
 
-        public void setPages(int pages) {
-            this.pages = pages;
+        public void setName(String name) {
+            this.name = name;
         }
 
-        public List<CameraListData> getRecords() {
-            return records;
+        public String getWebcamNum() {
+            return webcamNum;
         }
 
-        public void setRecords(List<CameraListData> records) {
-            this.records = records;
+        public void setWebcamNum(String webcamNum) {
+            this.webcamNum = webcamNum;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public String getIsOnline() {
+            return isOnline;
+        }
+
+        public void setIsOnline(String isOnline) {
+            this.isOnline = isOnline;
+        }
+
+        public String getRepairFactoryId() {
+            return repairFactoryId;
+        }
+
+        public void setRepairFactoryId(String repairFactoryId) {
+            this.repairFactoryId = repairFactoryId;
+        }
+
+        public String getRepairFactoryName() {
+            return repairFactoryName;
+        }
+
+        public void setRepairFactoryName(String repairFactoryName) {
+            this.repairFactoryName = repairFactoryName;
+        }
+
+        public String getCheckCode() {
+            return checkCode;
+        }
+
+        public void setCheckCode(String checkCode) {
+            this.checkCode = checkCode;
+        }
+
+        public String getWebcamAreaId() {
+            return webcamAreaId;
+        }
+
+        public void setWebcamAreaId(String webcamAreaId) {
+            this.webcamAreaId = webcamAreaId;
+        }
+
+        public String getWebcamAreaName() {
+            return webcamAreaName;
+        }
+
+        public void setWebcamAreaName(String webcamAreaName) {
+            this.webcamAreaName = webcamAreaName;
+        }
+
+        public String getWebcamAreaChannelId() {
+            return webcamAreaChannelId;
+        }
+
+        public void setWebcamAreaChannelId(String webcamAreaChannelId) {
+            this.webcamAreaChannelId = webcamAreaChannelId;
+        }
+
+        public String getChannelNo() {
+            return channelNo;
+        }
+
+        public void setChannelNo(String channelNo) {
+            this.channelNo = channelNo;
+        }
+
+        public String getChannelName() {
+            return channelName;
+        }
+
+        public void setChannelName(String channelName) {
+            this.channelName = channelName;
+        }
+
+        public String getWebcamAreaChannelName() {
+            return webcamAreaChannelName;
+        }
+
+        public void setWebcamAreaChannelName(String webcamAreaChannelName) {
+            this.webcamAreaChannelName = webcamAreaChannelName;
+        }
+
+        public String getSerialNum() {
+            return serialNum;
+        }
+
+        public void setSerialNum(String serialNum) {
+            this.serialNum = serialNum;
+        }
+
+        public String getWebcamUrl() {
+            return webcamUrl;
+        }
+
+        public void setWebcamUrl(String webcamUrl) {
+            this.webcamUrl = webcamUrl;
+        }
+
+        public String getAccessToken() {
+            return accessToken;
+        }
+
+        public void setAccessToken(String accessToken) {
+            this.accessToken = accessToken;
         }
     }
 }

@@ -49,6 +49,8 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun onItemClick(view: View, position: Int) {
         var bundle = Bundle()
             bundle.putString("id",mList[position].id)
+        bundle.putString("accessToken",mList[position].accessToken)
+        bundle.putString("serialNum",mList[position].serialNum)
           jumpActivity(bundle, VideoPlayerActivity::class.java)
     }
 
@@ -59,8 +61,8 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun refreshUI(data: CameraListBean?) {
 
         mList.clear()
-        if (data?.result!=null&&data?.result.records!=null&&data?.result.records.size>0){
-            mList.addAll(data?.result.records)
+        if (data?.result!=null&&data?.result.size>0){
+            mList.addAll(data?.result)
         }
         mAdapter?.notifyDataSetChanged()
     }

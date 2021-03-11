@@ -2,6 +2,7 @@ package com.example.mechanicalapp.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
@@ -13,8 +14,12 @@ import com.example.mechanicalapp.ui.data.BrandData
 import com.example.mechanicalapp.ui.mvp.impl.MecModelPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecAttrsView
 import com.example.mechanicalapp.ui.view.SideBarView
+import com.example.mechanicalapp.utils.PinyinUtils
+import com.example.mechanicalapp.utils.SortPy
 import kotlinx.android.synthetic.main.activity_brand.*
 import kotlinx.android.synthetic.main.layout_title.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Brand : BaseCusActivity() , OnItemClickListener, SideBarView.OnClickListener, View.OnClickListener,MecAttrsView<BrandData> {
 
@@ -126,6 +131,7 @@ class Brand : BaseCusActivity() , OnItemClickListener, SideBarView.OnClickListen
     override fun refreshUI(list: List<BrandData>) {
         mBrandList.clear()
         mBrandList.addAll(list)
+        sortList()
         mBrandAdapter?.notifyDataSetChanged()
 
 //        for (position in mBrandList.indices){
@@ -154,6 +160,11 @@ class Brand : BaseCusActivity() , OnItemClickListener, SideBarView.OnClickListen
 
     override fun loadMore(list: List<BrandData>) {
         mBrandList.addAll(list)
+        sortList()
         mBrandAdapter?.notifyDataSetChanged()
+    }
+
+    private fun  sortList(){
+        Collections.sort(mBrandList,SortPy())
     }
 }

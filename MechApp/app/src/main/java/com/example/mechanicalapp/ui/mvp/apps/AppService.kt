@@ -1185,7 +1185,7 @@ interface AppService {
      *
      *获取举报说明列表
      */
-    @GET("/jeecg-boot/report/mecReport/list")
+    @GET("/jeecg-boot/report/mecReportReason/list")
     fun getReportList(
         @Header("X-Access-Token") token: String?
     ): Observable<ReportBean>

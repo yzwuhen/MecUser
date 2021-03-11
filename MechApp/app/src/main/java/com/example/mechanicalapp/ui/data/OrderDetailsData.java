@@ -764,7 +764,16 @@ public class OrderDetailsData implements Serializable {
         private int repairNum;
         private int repairAge;
         private String post;
+        private String post_dictText;
         private Object userId;
+
+        public String getPost_dictText() {
+            return post_dictText;
+        }
+
+        public void setPost_dictText(String post_dictText) {
+            this.post_dictText = post_dictText;
+        }
 
         private String engineerImId;
 

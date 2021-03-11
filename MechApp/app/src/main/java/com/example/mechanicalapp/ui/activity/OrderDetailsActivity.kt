@@ -89,6 +89,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             tv_cancel_order.visibility = View.GONE
             ly_state4.visibility = View.VISIBLE
             ly_factory.visibility = View.VISIBLE
+            tv_all_price.visibility =View.VISIBLE
         }
 
 
@@ -322,6 +323,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
                 tv_order_num.text = ""
             }
             tv_order_state.text =result?.statusName
+            tv_title.text = "${result?.statusName}订单"
 
             tv_ec_type.text = result?.productType
             tv_ec_brand.text  =result?.productBrand
@@ -338,13 +340,15 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             tv_created_time.text =result?.createTime
             tv_info.text =result?.orderDesc
 
+            tv_all_price.text="维修金额：￥${result.orderSum}"
+
             tv_factory_name.text =result?.mecRepaireFactory?.name
             tv_score.text ="${result?.mecRepaireFactory?.star}分"
             ratingBar.rating = result?.mecRepaireFactory?.star?.toFloat()!!
             if (result?.mecRepairEngineer!=null&&result.mecRepairEngineer.size>0){
                 mMecRepairEngineerBean =result?.mecRepairEngineer[0]
                 tv_worker_name.text =mMecRepairEngineerBean?.name
-                //  tv_worker_type.text =
+                  tv_worker_type.text =mMecRepairEngineerBean?.post_dictText
                 tv_worker_time.text="${mMecRepairEngineerBean?.repairAge}年"
             }
         }

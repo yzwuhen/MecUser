@@ -156,6 +156,9 @@ public class App extends Application {
     }
 
     public DPoint getThisPoint() {
+        if (thisPoint==null){
+            thisPoint = new DPoint();
+        }
         return thisPoint;
     }
 

@@ -34,8 +34,8 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
 
         iv_back.setOnClickListener(this)
 
-        mFragmentList?.add(OrderFragment())
-        mFragmentList?.add(EngineerFragment())
+        mFragmentList?.add(OrderFragment.getInstance())
+        mFragmentList?.add(EngineerFragment.getInstance())
 
         mTabPageAdapter = FragmentListPageAdapter(supportFragmentManager, mFragmentList!!)
         cus_page.adapter=mTabPageAdapter

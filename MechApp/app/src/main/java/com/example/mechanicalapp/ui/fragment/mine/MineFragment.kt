@@ -31,7 +31,6 @@ class MineFragment :BaseCusFragment(), OnItemClickListener, View.OnClickListener
 
     override fun onResume() {
         super.onResume()
-        Log.v("===","=========OnResume=="+App.getInstance().token)
         if (mPresenter!=null){
             (mPresenter as MecAppPresenter).getUserInfo()
         }

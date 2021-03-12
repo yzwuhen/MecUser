@@ -94,7 +94,7 @@ interface AppService {
      * 租赁机械表-分页列表查询
      * 出租求组
      */
-    @GET("/jeecg-boot/market/mecMarketRecruit/getMyList")
+    @GET("/jeecg-boot/market/mecMarketMechanics/getMyList")
     fun getMyLeaseList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,

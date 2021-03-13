@@ -94,7 +94,7 @@ interface AppService {
      * 租赁机械表-分页列表查询
      * 出租求组
      */
-    @GET("/jeecg-boot/market/mecMarketRecruit/getMyList")
+    @GET("/jeecg-boot/market/mecMarketMechanics/getMyList")
     fun getMyLeaseList(
         @Header("X-Access-Token") token: String?,
         @Query("bussiessType") bussiessType: Int,
@@ -1185,7 +1185,7 @@ interface AppService {
      *
      *获取举报说明列表
      */
-    @GET("/jeecg-boot/report/mecReport/list")
+    @GET("/jeecg-boot/report/mecReportReason/list")
     fun getReportList(
         @Header("X-Access-Token") token: String?
     ): Observable<ReportBean>
@@ -1290,10 +1290,11 @@ interface AppService {
 
     /*微信支付
   * */
+    @FormUrlEncoded
     @POST("/jeecg-boot/repair/mecRepairOrder/wxPay")
     fun payRepairWx(
         @Header("X-Access-Token") token: String?,
-        @Body requestBody: RePay?
+        @Field("id") id: String?
     ): Observable<WxPayBean>
 
     /*支付宝支付支付
@@ -1305,10 +1306,11 @@ interface AppService {
     ): Observable<AliPayBean>
     /*支付宝支付支付
 * */
+    @FormUrlEncoded
     @POST("/jeecg-boot/repair/mecRepairOrder/alipay")
     fun payRepairAlly(
         @Header("X-Access-Token") token: String?,
-        @Body requestBody: RePay?
+        @Field("id") id: String?
     ): Observable<AliPayBean>
 
 
@@ -1490,9 +1492,10 @@ interface AppService {
      *
      * 获取摄像头列表
      */
-    @GET("/jeecg-boot/repair/mecRepairWebcam/listOffline")
+    @GET("/jeecg-boot/repair/mecRepairWebcam/getRepairOrderWebCam")
     fun getCameraList(
-        @Header("X-Access-Token") token: String?
+        @Header("X-Access-Token") token: String?,
+        @Query("id")id: String?
     ): Observable<CameraListBean>
 
 

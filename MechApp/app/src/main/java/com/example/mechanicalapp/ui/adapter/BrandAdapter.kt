@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.BrandData
+import com.example.mechanicalapp.utils.PinyinUtils
+import com.netease.nim.uikit.business.contact.core.query.PinYin
 import kotlinx.android.synthetic.main.item_brand.view.*
 
 class BrandAdapter(
@@ -25,13 +27,13 @@ class BrandAdapter(
       holder.itemView.tv_city.text = mList[position].brandName
         if (position == 0) {
             holder.itemView.tv_letter.visibility = View.VISIBLE
-            holder.itemView.tv_letter.text = mList[position].brandFirst
+            holder.itemView.tv_letter.text = PinyinUtils.getPinYinAllChar(mList[position].brandName,0)
         } else {
-            if (mList[position].brandFirst == mList[position - 1].brandFirst||mList[position].brandFirst==null) {
+            if (PinyinUtils.getPinYinAllChar(mList[position].brandName,0)== PinyinUtils.getPinYinAllChar(mList[position-1].brandName,0)) {
                 holder.itemView.tv_letter.visibility = View.GONE
             } else {
                 holder.itemView.tv_letter.visibility = View.VISIBLE
-                holder.itemView.tv_letter.text = mList[position].brandFirst
+                holder.itemView.tv_letter.text = PinyinUtils.getPinYinAllChar(mList[position].brandName,0)
             }
         }
     }

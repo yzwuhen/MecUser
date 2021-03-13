@@ -5,21 +5,17 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.R
+import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.adapter.PicAdapter
 import com.example.mechanicalapp.ui.adapter.ReportPopAdapter
-import com.example.mechanicalapp.ui.adapter.ScreenAdapter
-import com.example.mechanicalapp.ui.base.BaseActivity
 import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.ReportBean
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.ReportData
 import com.example.mechanicalapp.ui.data.request.ReReport
-import com.example.mechanicalapp.ui.mvp.impl.AddManagePresenterImpl
 import com.example.mechanicalapp.ui.mvp.impl.ReportPresenter
 import com.example.mechanicalapp.ui.mvp.v.ReportView
 import com.example.mechanicalapp.ui.view.PopUtils
@@ -30,15 +26,10 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
-import kotlinx.android.synthetic.main.activity_ec_lease.*
 import kotlinx.android.synthetic.main.activity_report.*
-import kotlinx.android.synthetic.main.activity_report.et_input
-import kotlinx.android.synthetic.main.activity_report.ry_pic
-import kotlinx.android.synthetic.main.activity_report.tv_submit
 import kotlinx.android.synthetic.main.layout_search_et.iv_back
 import kotlinx.android.synthetic.main.layout_title.*
 import java.io.File
-import java.net.IDN
 
 class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListener,
     PopUtils.onViewListener ,TextWatcher, ReportView {
@@ -46,7 +37,7 @@ class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListene
     private var mPicAdapter :PicAdapter?=null
 
     private var mPicList :MutableList<String> = ArrayList<String>()
-    private var mStringList :MutableList<ReportBean.ResultBean.RecordsBean> = ArrayList<ReportBean.ResultBean.RecordsBean>()
+    private var mStringList :MutableList<ReportData> = ArrayList<ReportData>()
     private var popRecy : RecyclerView?=null
     private var mScreenAdapter : ReportPopAdapter?=null
 
@@ -180,8 +171,8 @@ class ReportActivity:BaseCusActivity() , OnItemClickListener,View.OnClickListene
 
             R.id.tv_screen->{
                 PopUtils.dismissPop(this)
-                reReport.reportId =mStringList[position].reportReasonId
-                tv_report_reason.text =mStringList[position].reportReasonId_dictText
+                reReport.reportId =mStringList[position].id
+                tv_report_reason.text =mStringList[position].name
             }
             R.id.iv_del -> {
                 mPicList?.removeAt(position)

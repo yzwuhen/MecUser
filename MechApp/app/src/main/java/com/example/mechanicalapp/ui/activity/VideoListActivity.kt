@@ -20,6 +20,7 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     var mAdapter: VideoListAdapter? = null
     var mList = ArrayList<CameraListData>()
     var mPresenter : MecAppPresenter?=null
+    private var id=""
     override fun getLayoutId(): Int {
         return R.layout.activity_video_list
     }
@@ -38,8 +39,9 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     }
 
     override fun initPresenter() {
+        id =intent.getStringExtra("id").toString()
         mPresenter = MecAppPresenter(this)
-        mPresenter?.getCameraList()
+        mPresenter?.getCameraList(id)
     }
 
 
@@ -47,6 +49,8 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun onItemClick(view: View, position: Int) {
         var bundle = Bundle()
             bundle.putString("id",mList[position].id)
+        bundle.putString("accessToken",mList[position].accessToken)
+        bundle.putString("serialNum",mList[position].serialNum)
           jumpActivity(bundle, VideoPlayerActivity::class.java)
     }
 
@@ -57,8 +61,8 @@ class VideoListActivity : BaseCusActivity(), OnItemClickListener, View.OnClickLi
     override fun refreshUI(data: CameraListBean?) {
 
         mList.clear()
-        if (data?.result!=null&&data?.result.records!=null&&data?.result.records.size>0){
-            mList.addAll(data?.result.records)
+        if (data?.result!=null&&data?.result.size>0){
+            mList.addAll(data?.result)
         }
         mAdapter?.notifyDataSetChanged()
     }

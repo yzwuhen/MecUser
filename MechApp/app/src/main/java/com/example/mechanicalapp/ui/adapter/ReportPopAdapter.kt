@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.ReportBean
+import com.example.mechanicalapp.ui.data.ReportData
 import kotlinx.android.synthetic.main.item_screen.view.*
 
 class ReportPopAdapter (
     var mContext: Context,
-    var mList: MutableList<ReportBean.ResultBean.RecordsBean>,
+    var mList: MutableList<ReportData>,
     var mOnItemClickListener: OnItemClickListener
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -21,7 +22,7 @@ class ReportPopAdapter (
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.tv_screen.text =mList[position].reportReasonId_dictText
+        holder.itemView.tv_screen.text =mList[position].name
     }
 
     override fun getItemCount(): Int {

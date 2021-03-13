@@ -65,6 +65,7 @@ public class AppsApi extends BaseApi<AppService> {
             String bodyString = response.body().string();
             String beautyPrint;
             long t2 = System.nanoTime();
+            Log.v(TAG,"--------------REQUEST Headers-----------"+param1);
             if (bodyString.startsWith("{") || bodyString.startsWith("[")) {
                 beautyPrint = "--------------REQUEST START------------" + "\n"
                         + String.format("---URL：%s %s in %.1fms", request.url(), request.method(), (t2 - t1) / 1e6d) + "\n"

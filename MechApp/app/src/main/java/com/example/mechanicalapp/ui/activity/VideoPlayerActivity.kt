@@ -18,13 +18,17 @@ import java.util.*
 
 class VideoPlayerActivity :BaseCusActivity(), EZUIPlayer.EZUIPlayerCallBack ,NetDataView<NetData>{
     private var mPresenter : MecAppPresenter?=null
+    private var serialNum=""
+    private var token=""
     override fun getLayoutId(): Int {
        return R.layout.activity_video_player
     }
 
     override fun initView() {
         super.initView()
-
+        var id = intent.getStringExtra("id")
+        serialNum = intent.getStringExtra("serialNum").toString()
+        token = intent.getStringExtra("accessToken").toString()
         //设置加载需要显示的view
         //设置加载需要显示的view
         player_ui.setLoadingView(initProgressBar())
@@ -32,11 +36,11 @@ class VideoPlayerActivity :BaseCusActivity(), EZUIPlayer.EZUIPlayerCallBack ,Net
         //初始化EZUIKit
         EZUIKit.initWithAppKey(application, "ca60c005fe454770ac6fd81fd03a6164")
         //设置授权token
-        EZUIKit.setAccessToken("at.dz6duz29dd1s8cyh3dsg2tbtc9rqxdts-58fwd7gbn7-12omb3y-gpaxvhcr2")
+        EZUIKit.setAccessToken(token)
         //设置播放回调callback
         player_ui.setCallBack(this)
         //设置播放参数
-        player_ui.setUrl("ezopen://open.ys7.com/E82901339/1.rec")
+        player_ui.setUrl("ezopen://open.ys7.com/${serialNum}/1.live")
 
     }
 
@@ -65,8 +69,8 @@ class VideoPlayerActivity :BaseCusActivity(), EZUIPlayer.EZUIPlayerCallBack ,Net
 
     override fun initPresenter() {
         mPresenter = MecAppPresenter(this)
-        var id = intent.getStringExtra("id")
-        mPresenter?.getCameraVideo(id)
+
+     //   mPresenter?.getCameraVideo(id)
     }
 
     override fun onPlaySuccess() {

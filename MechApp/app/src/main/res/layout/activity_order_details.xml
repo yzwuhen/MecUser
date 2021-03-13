@@ -476,6 +476,15 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/tv_all_price"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_14"
+                android:textColor="@color/color_red"
+                android:text="维修金额：306"/>
+
         </LinearLayout>
 
     </ScrollView>

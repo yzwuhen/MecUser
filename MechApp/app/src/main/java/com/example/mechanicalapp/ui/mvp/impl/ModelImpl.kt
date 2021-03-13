@@ -1,6 +1,5 @@
 package com.example.mechanicalapp.ui.mvp.impl
 
-import android.util.Log
 import com.example.mechanicalapp.App
 import com.example.mechanicalapp.ui.`interface`.ISubscriberListener
 import com.example.mechanicalapp.ui.data.*
@@ -1272,7 +1271,7 @@ class ModelImpl : BaseModel {
     }
     //微信支付
     fun payRepairWx(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<WxPayBean>){
-        appsService?.payRepairWx(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+        appsService?.payRepairWx(token,rePay.id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(mNetSubscribe)
@@ -1289,7 +1288,7 @@ class ModelImpl : BaseModel {
 
     //支付宝支付
     fun payRepairAlly(token:String?,rePay: RePay,mNetSubscribe:NetSubscribe<AliPayBean>){
-        appsService?.payRepairAlly(token,rePay)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
+        appsService?.payRepairAlly(token,rePay.id)?.subscribeOn(Schedulers.io())?.unsubscribeOn(
             Schedulers.io())?.observeOn(
             AndroidSchedulers.mainThread()
         )?.subscribe(mNetSubscribe)
@@ -1447,8 +1446,8 @@ class ModelImpl : BaseModel {
             )?.subscribe(NetSubscribe<NetData>(iSubscriberListener))
     }
 
-    fun getCameraList(token: String?, iSubscriberListener: ISubscriberListener<CameraListBean>) {
-        appsService?.getCameraList(token)
+    fun getCameraList(token: String?,id: String?, iSubscriberListener: ISubscriberListener<CameraListBean>) {
+        appsService?.getCameraList(token,id)
             ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
                 AndroidSchedulers.mainThread()
             )?.subscribe(NetSubscribe<CameraListBean>(iSubscriberListener))

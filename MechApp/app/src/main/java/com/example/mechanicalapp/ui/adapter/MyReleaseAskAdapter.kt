@@ -12,6 +12,7 @@ import com.example.mechanicalapp.ui.`interface`.OnItemClickListener
 import com.example.mechanicalapp.ui.data.MecLeaseData
 import com.example.mechanicalapp.utils.DateUtils
 import com.example.mechanicalapp.utils.GdMapUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.StringUtils
 import kotlinx.android.synthetic.main.item_release_ask.view.*
 
@@ -27,6 +28,7 @@ class MyReleaseAskAdapter (var mContext: Context, var mList:MutableList<MecLease
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_rent_user_nick.text =mList[position].contactName
+        ImageLoadUtils.loadCircle(mContext,holder.itemView.iv_rent_user,mList[position].avatar)
 
         holder.itemView.tv_rent_address_data.text="${mList[position].city} | 租用时间：${mList[position].tenancy}天"
 

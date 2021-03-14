@@ -23,7 +23,7 @@ class OrderFragment : BaseCusFragment(), ViewPager.OnPageChangeListener, OnItemC
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mList = ArrayList<CodeData>()
     private var mAdapter: OrderTitleAdapter? = null
-
+    private var index=0
     companion object {
         fun getInstance(bundle: Bundle = Bundle()): OrderFragment {
             val fragment = OrderFragment()
@@ -46,6 +46,7 @@ class OrderFragment : BaseCusFragment(), ViewPager.OnPageChangeListener, OnItemC
 
     override fun initView() {
         super.initView()
+        index =arguments!!.getInt("index",0)
 
         mAdapter = OrderTitleAdapter(mContext, mList, this)
 
@@ -106,7 +107,7 @@ class OrderFragment : BaseCusFragment(), ViewPager.OnPageChangeListener, OnItemC
         cus_page.setTouchEvent(true)
         cus_page.addOnPageChangeListener(this)
         cus_page.offscreenPageLimit = mList.size
-        showView(0)
+        showView(index)
     }
 
     override fun showDataMore(data: CodeBean?) {

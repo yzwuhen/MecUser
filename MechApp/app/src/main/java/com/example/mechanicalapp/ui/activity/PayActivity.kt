@@ -62,6 +62,7 @@ class PayActivity:BaseCusActivity() ,View.OnClickListener,OnItemClickListener,Ne
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         bundle.putInt("type", 1)
                     }
+                    bundle.putInt("order_type", orderType)
                     jumpActivity(bundle, PayResultActivity::class.java)
                     finish()
                 }

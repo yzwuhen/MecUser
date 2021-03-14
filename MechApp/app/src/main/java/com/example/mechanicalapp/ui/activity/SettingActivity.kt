@@ -157,10 +157,11 @@ class SettingActivity : BaseActivity<NetData>(), View.OnClickListener, PopUtils.
     }
 
     private fun voice() {
+        iv_voice.isSelected = !iv_voice.isSelected
 
     }
 
     private fun shock() {
-
+        iv_shock.isSelected = !iv_shock.isSelected
     }
 }

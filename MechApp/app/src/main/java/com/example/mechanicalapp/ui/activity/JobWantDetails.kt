@@ -135,7 +135,10 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
         mMecPresenter?.shareTo()
     }
     private fun showPhone() {
-
+        if (mData==null||TextUtils.isEmpty(mData?.contactPhone)){
+            ToastUtils.showText("该用户设置不可通过电话联系")
+            return
+        }
         if (mPopwindow ==null){
             mPopwindow =  this?.let {
                 PopUtils.init(this,
@@ -177,6 +180,8 @@ class JobWantDetails: BaseCusActivity(), View.OnClickListener, PopUtils.onViewLi
         popTvInfo = view?.findViewById(R.id.tv_pop_info)
 
 
+        popTvTitle?.text=mData?.realname
+        popTvInfo?.text ="请问是否呼叫 ${mData?.contactPhone}"
         popCancel?.setOnClickListener(this)
         popSure?.setOnClickListener(this)
     }

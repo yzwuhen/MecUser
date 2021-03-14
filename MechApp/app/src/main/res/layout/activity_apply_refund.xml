@@ -84,7 +84,7 @@
             android:background="@drawable/rect_radio_6_g"
             android:gravity="start"
             android:padding="@dimen/dp_10"
-            android:text="......"
+            android:text=""
             android:textColor="@color/color_222"
             android:textSize="14sp" />
         <LinearLayout

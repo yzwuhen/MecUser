@@ -84,6 +84,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             tv_cancel_order.visibility = View.GONE
             ly_state3.visibility = View.VISIBLE
             ly_factory.visibility = View.VISIBLE
+            tv_all_price.visibility =View.VISIBLE
         }
         else if (type == 3) {
             tv_cancel_order.visibility = View.GONE
@@ -342,9 +343,13 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
             tv_all_price.text="维修金额：￥${result.orderSum}"
 
-            tv_factory_name.text =result?.mecRepaireFactory?.name
-            tv_score.text ="${result?.mecRepaireFactory?.star}分"
-            ratingBar.rating = result?.mecRepaireFactory?.star?.toFloat()!!
+            iv_look.isSelected = result.isHasCamWeb=="1"
+
+            if (result?.mecRepaireFactory!=null){
+                tv_factory_name.text =result?.mecRepaireFactory?.name
+                tv_score.text ="${result?.mecRepaireFactory?.star}分"
+                ratingBar.rating = result?.mecRepaireFactory?.star?.toFloat()!!
+            }
             if (result?.mecRepairEngineer!=null&&result.mecRepairEngineer.size>0){
                 mMecRepairEngineerBean =result?.mecRepairEngineer[0]
                 tv_worker_name.text =mMecRepairEngineerBean?.name

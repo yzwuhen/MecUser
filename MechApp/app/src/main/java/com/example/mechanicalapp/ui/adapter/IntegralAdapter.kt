@@ -19,6 +19,13 @@ class IntegralAdapter (var mContext: Context, var mList:MutableList<IntegralData
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder.itemView.tv_integral_info.text =mList[position].updateAction
+        if (mList[position].updatePoints<0){
+            holder.itemView.tv_integral.text =mList[position].updatePoints.toString()
+            holder.itemView.tv_integral.setTextColor(mContext.resources.getColor(R.color.color_green_59C44B))
+        }else{
+            holder.itemView.tv_integral.text ="+${mList[position].updatePoints}"
+            holder.itemView.tv_integral.setTextColor(mContext.resources.getColor(R.color.color_red_ccfa3c55))
+        }
 
         holder.itemView.tv_time.text =mList[position].createTime
     }

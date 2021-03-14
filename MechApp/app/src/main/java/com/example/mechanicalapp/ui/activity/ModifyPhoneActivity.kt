@@ -19,6 +19,7 @@ class ModifyPhoneActivity : BaseActivity<NetData>() , View.OnClickListener{
         rl_title.setBackgroundColor(resources.getColor(R.color.color_ffb923))
         iv_back.setOnClickListener(this)
         tv_title.text ="更改手机号"
+
     }
 
     override fun initPresenter() {

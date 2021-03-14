@@ -148,7 +148,10 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
         }
     }
     private fun showPhone() {
-
+        if (mData==null||TextUtils.isEmpty(mData?.responsePersonPhone)){
+            ToastUtils.showText("该用户设置不可通过电话联系")
+            return
+        }
         if (mPopwindow == null) {
             mPopwindow = this?.let {
                 PopUtils.init(

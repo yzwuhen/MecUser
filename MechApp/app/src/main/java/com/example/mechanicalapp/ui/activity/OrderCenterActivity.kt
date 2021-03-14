@@ -22,6 +22,7 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
     private var mTabPageAdapter: FragmentListPageAdapter?=null
     private var mTextViewList:MutableList<TextView>  =ArrayList<TextView>()
 
+    private var index=0
     override fun getLayoutId(): Int {
 
         return R.layout.activity_order
@@ -29,16 +30,21 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
 
     override fun initView() {
         super.initView()
+        index =intent.getIntExtra("index",0)
         mTextViewList.add(tv_repair)
         mTextViewList.add(tv_engineer)
 
         iv_back.setOnClickListener(this)
 
-        mFragmentList?.add(OrderFragment.getInstance())
+        var bundle =Bundle()
+        bundle.putInt("index",index)
+        mFragmentList?.add(OrderFragment.getInstance(bundle))
         mFragmentList?.add(EngineerFragment.getInstance())
 
         mTabPageAdapter = FragmentListPageAdapter(supportFragmentManager, mFragmentList!!)
         cus_page.adapter=mTabPageAdapter
+
+
 
         ly_search.setOnClickListener(this)
         tv_repair.setOnClickListener(this)
@@ -46,6 +52,7 @@ class OrderCenterActivity:BaseActivity<NetData>() ,View.OnClickListener,ViewPage
         tv_repair.performClick()
         cus_page.setTouchEvent(true)
         cus_page.addOnPageChangeListener(this)
+
     }
     override fun onClick(p0: View?) {
         when(p0?.id){

@@ -165,7 +165,10 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
     }
 
     private fun showPhone() {
-
+        if (mData==null||TextUtils.isEmpty(mData?.contactPhone)){
+            ToastUtils.showText("该用户设置不可通过电话联系")
+            return
+        }
         if (mPopwindow == null) {
             mPopwindow = this?.let {
                 PopUtils.init(

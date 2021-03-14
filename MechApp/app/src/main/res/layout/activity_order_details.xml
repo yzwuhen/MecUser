@@ -370,7 +370,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/jk_s"/>
+                    android:src="@drawable/jk"/>
 
                 <RatingBar
                     android:id="@+id/ratingBar"

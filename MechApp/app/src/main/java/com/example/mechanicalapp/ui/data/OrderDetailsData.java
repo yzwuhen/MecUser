@@ -101,6 +101,16 @@ public class OrderDetailsData implements Serializable {
     private List<MecRepairEngineerBean> mecRepairEngineer;
     private String shareUrl;
 
+    private String isHasCamWeb;
+
+    public String getIsHasCamWeb() {
+        return isHasCamWeb;
+    }
+
+    public void setIsHasCamWeb(String isHasCamWeb) {
+        this.isHasCamWeb = isHasCamWeb;
+    }
+
     public String getShareUrl() {
         return shareUrl;
     }

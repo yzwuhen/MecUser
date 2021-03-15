@@ -80,6 +80,11 @@ public class PartsDetailsData implements Serializable {
     private Object isEnterprise;
     private String contactPhone;
     private String shareUrl;
+    private String imId;
+
+    public String getImId() {
+        return imId;
+    }
 
     public String getShareUrl() {
         return shareUrl;

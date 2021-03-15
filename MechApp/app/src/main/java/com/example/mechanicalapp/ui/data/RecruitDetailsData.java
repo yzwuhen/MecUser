@@ -93,6 +93,11 @@ public class RecruitDetailsData implements Serializable {
     private String contactPhone;
     private Object age;
     private String shareUrl;
+    private String imId;
+
+    public String getImId() {
+        return imId;
+    }
 
     public String getShareUrl() {
         return shareUrl;

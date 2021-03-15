@@ -252,7 +252,6 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
                 NimUIKit.startP2PSession(this, orderData?.mecRepairEngineer!![0].engineerImId)
             }
         }
-
     }
 
     private fun setPwdVideo(){

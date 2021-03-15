@@ -84,6 +84,15 @@ public class BusinessDetails implements Serializable {
     private String contactPhone;
     private String viewNum;
     private String shareUrl;
+    private String imId;
+
+    public String getImId() {
+        return imId;
+    }
+
+    public void setImId(String imId) {
+        this.imId = imId;
+    }
 
     public String getShareUrl() {
         return shareUrl;

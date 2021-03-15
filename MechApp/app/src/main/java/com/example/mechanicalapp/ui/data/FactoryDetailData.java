@@ -64,6 +64,11 @@ public class FactoryDetailData implements Serializable {
     private int viewNum;
     private String shareUrl;
     private String companyName;
+    private String imId;
+
+    public String getImId() {
+        return imId;
+    }
 
     public String getCompanyName() {
         return companyName;

@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.fragment
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +23,14 @@ class OrderFragment : BaseCusFragment(), ViewPager.OnPageChangeListener, OnItemC
     private var mTabPageAdapter: FragmentListPageAdapter? = null
     private var mList = ArrayList<CodeData>()
     private var mAdapter: OrderTitleAdapter? = null
+
+    companion object {
+        fun getInstance(bundle: Bundle = Bundle()): OrderFragment {
+            val fragment = OrderFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
     override fun showLoading() {
 

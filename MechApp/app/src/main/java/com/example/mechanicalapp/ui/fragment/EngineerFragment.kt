@@ -1,5 +1,6 @@
 package com.example.mechanicalapp.ui.fragment
 
+import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mechanicalapp.R
@@ -35,7 +36,13 @@ class EngineerFragment :BaseCusFragment(), SideBarView.OnClickListener,OnItemCli
         "H",
         "I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Z"
     )
-
+    companion object {
+        fun getInstance(bundle: Bundle = Bundle()): EngineerFragment {
+            val fragment = EngineerFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
     override fun initView() {
         super.initView()
 

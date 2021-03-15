@@ -51,6 +51,7 @@ public abstract class BaseCusFragment extends Fragment {
         initView();
     }
 
+
     protected void initView() {
 
     }

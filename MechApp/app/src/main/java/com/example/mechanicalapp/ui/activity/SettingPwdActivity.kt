@@ -10,6 +10,7 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.request.ReGetMsgCode
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
+import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_setting_pwd.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -113,7 +114,7 @@ class SettingPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeVie
             return
         }
 
-        mReGetMsgCode.password = pwd
+        mReGetMsgCode.password = StringUtils.MD5(pwd)
         mPresenter?.forgotPwd(mReGetMsgCode)
     }
 }

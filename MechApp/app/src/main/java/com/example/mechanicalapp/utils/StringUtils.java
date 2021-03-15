@@ -1,7 +1,6 @@
 package com.example.mechanicalapp.utils;
 
 
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -11,8 +10,6 @@ import android.util.Log;
 
 import com.example.mechanicalapp.App;
 import com.example.mechanicalapp.config.Configs;
-import com.example.mechanicalapp.ui.activity.SearchGoodsResult;
-import com.example.mechanicalapp.ui.data.NetData;
 import com.example.mechanicalapp.ui.mvp.NetSubscribe;
 
 import org.jetbrains.annotations.Nullable;
@@ -22,9 +19,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.RoundingMode;
+import java.security.MessageDigest;
 import java.text.DecimalFormat;
-import java.util.HashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -213,5 +209,24 @@ public class StringUtils {
             Log.e("VersionInfo", "Exception", e);
         }
         return versioncode + "";
+    }
+
+    public final static String MD5(String s) {
+        try {
+            byte[] btInput = s.getBytes();
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(btInput);
+            byte[] md = md5.digest();
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < md.length; i++) {
+                int val = md[i]  & 0xff;
+                if (val < 16)
+                    sb.append("0");
+                sb.append(Integer.toHexString(val));
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

@@ -14,6 +14,7 @@ import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.UserInfo
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
+import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.netease.nimlib.sdk.NIMClient
 import com.netease.nimlib.sdk.RequestCallback
@@ -124,7 +125,7 @@ class LoginPwdActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView,
     private fun login() {
 
         if (verification()) {
-            mPresenter?.loginPwd(phone, pwd)
+            mPresenter?.loginPwd(phone, StringUtils.MD5(pwd))
         }
     }
 

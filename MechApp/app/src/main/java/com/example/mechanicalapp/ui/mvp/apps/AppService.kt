@@ -1519,4 +1519,13 @@ interface AppService {
     fun getVersion(
         @Body reAppVersion: ReAppVersion?
     ): Observable<AppVersionBean>
+
+    /**
+     *
+     * 获取一些配置页面
+     */
+    @GET("/jeecg-boot/article/mecArticle/queryById")
+    fun getPageInfo(
+        @Query("id") id:Int?
+    ): Observable<PageData>
 }

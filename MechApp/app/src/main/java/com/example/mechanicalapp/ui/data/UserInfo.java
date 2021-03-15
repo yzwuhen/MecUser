@@ -73,6 +73,16 @@ public class UserInfo implements Serializable {
     private String imId;
     private String imToken;
     private String commpany;
+    private String isPrivacy;
+
+
+    public String getIsPrivacy() {
+        return isPrivacy;
+    }
+
+    public void setIsPrivacy(String isPrivacy) {
+        this.isPrivacy = isPrivacy;
+    }
 
     public String getImToken() {
         return imToken;

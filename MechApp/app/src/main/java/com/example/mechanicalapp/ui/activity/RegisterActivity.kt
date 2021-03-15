@@ -16,6 +16,7 @@ import com.example.mechanicalapp.ui.data.request.ReGetMsgCode
 import com.example.mechanicalapp.ui.data.request.ReRegister
 import com.example.mechanicalapp.ui.mvp.impl.LoginCodePresenter
 import com.example.mechanicalapp.ui.mvp.v.LoginCodeView
+import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.layout_title.*
@@ -168,7 +169,7 @@ class RegisterActivity : BaseCusActivity(), View.OnClickListener, LoginCodeView{
 
         reRegister.phone = phone
         reRegister.captcha = code
-        reRegister.password = pwd2
+        reRegister.password = StringUtils.MD5(pwd2)
 
         return true
     }

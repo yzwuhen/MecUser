@@ -2,12 +2,15 @@ package com.example.mechanicalapp.ui.activity
 
 import android.view.View
 import com.example.mechanicalapp.R
-import com.example.mechanicalapp.ui.base.BaseActivity
-import com.example.mechanicalapp.ui.data.NetData
-import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.base.BaseCusActivity
+import com.example.mechanicalapp.ui.data.PageData
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import kotlinx.android.synthetic.main.activity_integral_rule.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class IntegralRuleActivity :BaseActivity<NetData>() ,View.OnClickListener{
+class IntegralRuleActivity :BaseCusActivity() ,View.OnClickListener,NetDataView<PageData>{
+    private lateinit var mecPresenter : MecAppPresenter
     override fun getLayoutId(): Int {
         return R.layout.activity_integral_rule
     }
@@ -20,6 +23,8 @@ class IntegralRuleActivity :BaseActivity<NetData>() ,View.OnClickListener{
     }
 
     override fun initPresenter() {
+        mecPresenter= MecAppPresenter(this)
+        mecPresenter.getPageInfo(7)
     }
 
     override fun showLoading() {
@@ -34,5 +39,14 @@ class IntegralRuleActivity :BaseActivity<NetData>() ,View.OnClickListener{
     override fun onClick(p0: View?) {
 
         finish()
+    }
+
+    override fun refreshUI(data: PageData?) {
+        if (data?.result!=null){
+            tv_info.text =data?.result.content
+        }
+    }
+
+    override fun loadMore(data: PageData?) {
     }
 }

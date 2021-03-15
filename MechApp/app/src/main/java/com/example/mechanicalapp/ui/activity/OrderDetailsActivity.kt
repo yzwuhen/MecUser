@@ -18,6 +18,7 @@ import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.BaseView
 import com.example.mechanicalapp.ui.mvp.v.OrderView
 import com.example.mechanicalapp.ui.view.PopUtils
+import com.example.mechanicalapp.utils.StringUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.netease.nim.uikit.api.NimUIKit
@@ -57,6 +58,8 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
     private var orderData:OrderDetailsData?=null
     private var mMecPresenter: MecAppPresenter?=null
     private var mMecRepairEngineerBean: OrderDetailsData.MecRepairEngineerBean?=null
+    private var isSharePwd =false
+    private var sharePwd=""
     override fun getLayoutId(): Int {
         return R.layout.activity_order_details
     }
@@ -129,7 +132,12 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
         when (v?.id) {
             R.id.iv_left -> finish()
-            R.id.ly_right -> showShare()
+            R.id.ly_right -> {
+                isSharePwd =false
+                sharePwd=""
+                showPop(1)
+            }
+                //showShare()
             R.id.iv_look -> {
                 var  bundle =Bundle()
                 bundle.putString("id",orderId)
@@ -151,15 +159,27 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
                 bundle.putSerializable("key",orderData)
                 jumpActivity(bundle, EvaluateActivity::class.java)
             }
-            R.id.tv_pop_sure -> dismissPop()
-            R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
-            R.id.tv_pop_input_cancel -> goVideo()
-            R.id.tv_pop_input_sure -> goVideo()
+            R.id.tv_pop_sure -> {
+                dismissPop()
+            }
+            R.id.tv_pop_cancel ->
+            {
+                PopUtils.dismissPop(this)
+                if (popIndex==1){
+                    showShare()
+                }
+            }
+            R.id.tv_pop_input_cancel ->  {
+                PopUtils.dismissPop(this)
+            }
+            R.id.tv_pop_input_sure -> setPwdVideo()
             R.id.ly_look_details2 -> jumDetailedList()
             R.id.ly_wx -> shareThree(SHARE_MEDIA.WEIXIN)
             R.id.ly_qq -> shareThree(SHARE_MEDIA.QQ)
             R.id.ly_sina -> shareThree(SHARE_MEDIA.SINA)
-            R.id.tv_cancel -> mShareDialog?.dismiss()
+            R.id.tv_cancel -> {
+                mShareDialog?.dismiss()
+            }
             R.id.ly_pay -> {
                 var bundle = Bundle()
                 bundle.putString("order_num", orderData?.orderNum)
@@ -171,9 +191,16 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             }
         }
     }
+    lateinit var web:UMWeb
     private fun shareThree(type: SHARE_MEDIA){
         mShareDialog?.dismiss()
-        val web = UMWeb(Configs.BASE_URL+orderData?.shareUrl)
+
+        if (isSharePwd){
+            web = UMWeb("${Configs.BASE_URL}${orderData?.shareUrl}&mecToken=${StringUtils.MD5(sharePwd)}")
+        }else{
+            web = UMWeb("${Configs.BASE_URL}${orderData?.shareUrl}")
+        }
+
         web.title = "订单：${orderData?.orderNum}"//标题
         web.setThumb(UMImage(this,R.mipmap.app_logo)) //缩略图
         web.description = "订单：${orderData?.orderNum}"//描述
@@ -186,7 +213,6 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
 
     private fun showShare() {
-
         if (mShareDialog ==null){
             mShareDialog = BottomSheetDialog(this)
             mShareView = View.inflate(this, R.layout.dialog_share, null)
@@ -229,12 +255,20 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     }
 
-    private fun goVideo(){
+    private fun setPwdVideo(){
+        if (TextUtils.isEmpty(popInputInfo?.text)){
+            ToastUtils.showText("请设置密码")
+            return
+        }
+        isSharePwd =true
+        sharePwd = popInputInfo?.text.toString()
         PopUtils.dismissPop(this)
-        jumpActivity(null,VideoListActivity::class.java)
+        showShare()
+     //   jumpActivity(null,VideoListActivity::class.java)
     }
 
     private fun showPop(i: Int) {
+
         popIndex =i
         if (mPopwindow == null) {
             mPopwindow = this?.let {
@@ -254,6 +288,7 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
             popInfo?.text = "视频查看是否加密？"
             popCancel?.text = "不加密"
             popSure?.text = "加密"
+            popInputInfo?.setText("")
         }
 
         this?.let { PopUtils.showPopupWindow(ly_right, it) }
@@ -270,7 +305,8 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
     }
 
     private fun showPop() {
-
+        mPopwindow =null
+        PopUtils.clearPop()
         if (mInputPopwindow == null) {
             mInputPopwindow = this?.let {
                 PopUtils.init(this,
@@ -355,6 +391,10 @@ class OrderDetailsActivity : BaseCusActivity(), View.OnClickListener,
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        PopUtils.clearPop()
+    }
 
     override fun showDataMore(data: NetData?) {
     }

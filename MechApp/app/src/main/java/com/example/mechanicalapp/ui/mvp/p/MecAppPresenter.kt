@@ -406,4 +406,18 @@ class MecAppPresenter(
             })
 
     }
+
+    // 1 关于我们 2用户协议 3 隐私协议 4 常见问题  5 联系电话 6 寄回地址 7 积分规则
+    fun getPageInfo(type: Int) {
+        baseModel.getPageInfo(type,
+            object : ISubscriberListener<PageData> {
+                override fun onNext(t: PageData?) {
+                    (baseView as NetDataView<PageData>).refreshUI(t)
+                }
+                override fun onError(e: Throwable?) {
+                }
+                override fun onCompleted() {
+                }
+            })
+    }
 }

@@ -107,11 +107,18 @@ class AskDetailsActivity: BaseCusActivity(), View.OnClickListener, PopUtils.onVi
             R.id.ly_user_info -> jumHomePage()
             R.id.tv_collected -> collect()
             R.id.tv_address -> jumThreeMap(mData?.gpsLat, mData?.gpsLon, mData?.address)
-            R.id.ly_chat->{
-              //  NimUIKit.startP2PSession(this, mList[position]?.contactId)
+            R.id.ly_chat->goToChat()
+        }
+    }
+
+    private fun goToChat() {
+        if (mData!=null&&mData?.imId!=null){
+            if (!TextUtils.isEmpty(mData?.imId)){
+                NimUIKit.startP2PSession(this, mData?.imId)
             }
         }
     }
+
     private fun shareThree(type: SHARE_MEDIA){
         mShareDialog?.dismiss()
         val web = UMWeb(Configs.BASE_URL+mData?.shareUrl)

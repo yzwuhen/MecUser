@@ -6,28 +6,37 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.example.mechanicalapp.App
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.activity.BlackListActivity
 import com.example.mechanicalapp.ui.adapter.FragmentListPageAdapter
+import com.example.mechanicalapp.ui.base.BaseCusFragment
 import com.example.mechanicalapp.ui.base.BaseFragment
 import com.example.mechanicalapp.ui.data.NetData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.data.UserInfo
 import com.example.mechanicalapp.ui.fragment.ChatEnFragment
 import com.example.mechanicalapp.ui.fragment.ChatMsgFragment
 import com.example.mechanicalapp.ui.fragment.ChatSysFragment
+import com.example.mechanicalapp.ui.mvp.impl.UserInfoPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import com.example.mechanicalapp.ui.mvp.v.UserView
 import com.example.mechanicalapp.ui.view.PopUtils
 import kotlinx.android.synthetic.main.fragment_msg.*
 
-class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewListener, ViewPager.OnPageChangeListener{
+class MsgFragment:BaseCusFragment() ,View.OnClickListener,PopUtils.onViewListener, ViewPager.OnPageChangeListener,
+    UserView {
 
     private val mFragmentList: MutableList<Fragment>? = ArrayList<androidx.fragment.app.Fragment> ()
     private var mTabPageAdapter: FragmentListPageAdapter?=null
 
-    private var type:Int?=0
 
     private var tvPopTip:TextView ?=null
     private var tvPopCancle:TextView ?=null
+    private var tvPopSure :TextView?=null
     private var mPopwindow:PopupWindow?=null
+
+    private var userInfo: UserInfo?=null
     override fun getLayoutId(): Int {
 
         return R.layout.fragment_msg
@@ -56,17 +65,12 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
 
         cus_page.setTouchEvent(true)
         cus_page.addOnPageChangeListener(this)
-    }
 
-    override fun showLoading() {
-    }
+        userInfo = App.getInstance().userInfo
 
-    override fun hiedLoading() {
+        mPresenter = UserInfoPresenter(mContext,this)
+        privacyStatus()
     }
-
-    override fun err()  {
-    }
-
     override fun onClick(view: View?) {
 
         when(view?.id){
@@ -75,8 +79,25 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
             R.id.ly_sys_msg->showPage(2)
             R.id.iv_left->jumpActivity(null,BlackListActivity::class.java)
             R.id.ly_right ->showTip()
+            R.id.tv_pop_sure->{
+                PopUtils.dismissPop(activity!!,mPopwindow!!)
+                if (userInfo?.isPrivacy=="1"){
+                    userInfo?.isPrivacy="0"
+                }else{
+                    userInfo?.isPrivacy="1"
+                }
+                (mPresenter as UserInfoPresenter).editUserInfo(userInfo)
+                privacyStatus()
+            }
+            R.id.tv_pop_cancel->{
+              PopUtils.dismissPop(activity!!,mPopwindow!!)
+            }
         }
 
+    }
+    private fun privacyStatus(){
+
+        iv_privacy.isSelected = userInfo?.isPrivacy=="1"
     }
 
     private fun showTip() {
@@ -89,12 +110,10 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
         }
         activity?.let { PopUtils.showPopupWindow(tv_right, it) }
 
-        if (type ==0){
-            type =1
+        if (userInfo?.isPrivacy!="1"){
             tvPopCancle?.visibility =View.VISIBLE
             tvPopTip?.text ="您发帖中的联系电话对方将无法获取 只能通过在线聊天跟您联系！"
         }else{
-            type =0
             tvPopCancle?.visibility =View.GONE
             tvPopTip?.text ="由于对方隐私设置，暂时无法获取号码 您可以通过在线聊天沟通。"
         }
@@ -107,20 +126,10 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
         tv_chat_msg.isSelected = position==0
         tv_eng_msg.isSelected = position==1
         tv_sys_msg.isSelected = position==2
-
-        if (position ==0){
-            tv_chat_msg.isSelected =true
-            tv_eng_msg.isSelected =false
-            tv_sys_msg.isSelected =false
-
-        }else if (position ==1){
-            tv_chat_msg.isSelected =false
-            tv_eng_msg.isSelected =true
-            tv_sys_msg.isSelected =false
+        if (position!=2){
+            ly_right.visibility =View.VISIBLE
         }else{
-            tv_chat_msg.isSelected =false
-            tv_eng_msg.isSelected =false
-            tv_sys_msg.isSelected =true
+            ly_right.visibility =View.GONE
         }
     }
 
@@ -129,6 +138,10 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
 
         tvPopTip = view?.findViewById(R.id.tv_pop_tip)
         tvPopCancle = view?.findViewById(R.id.tv_pop_cancel)
+        tvPopSure =view?.findViewById(R.id.tv_pop_sure)
+
+        tvPopCancle?.setOnClickListener(this)
+        tvPopSure?.setOnClickListener(this)
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -141,6 +154,26 @@ class MsgFragment:BaseFragment<NetData>() ,View.OnClickListener,PopUtils.onViewL
     }
 
     override fun onPageScrollStateChanged(state: Int) {
+    }
+
+
+    override fun success(netData: NetData?) {
+
+    }
+
+    override fun showImg(netData: NetData?) {
+    }
+
+    override fun uploadFail(str: String) {
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun hiedLoading() {
+    }
+
+    override fun err() {
     }
 
 }

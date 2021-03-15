@@ -3,11 +3,17 @@ package com.example.mechanicalapp.ui.activity
 import android.view.View
 import com.example.mechanicalapp.R
 import com.example.mechanicalapp.ui.base.BaseActivity
+import com.example.mechanicalapp.ui.base.BaseCusActivity
 import com.example.mechanicalapp.ui.data.NetData
+import com.example.mechanicalapp.ui.data.PageData
 import com.example.mechanicalapp.ui.data.StoreLeftBean
+import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
+import com.example.mechanicalapp.ui.mvp.v.NetDataView
+import kotlinx.android.synthetic.main.activity_about_us.*
 import kotlinx.android.synthetic.main.layout_title.*
 
-class PrivacyActivity : BaseActivity<NetData>(), View.OnClickListener {
+class PrivacyActivity : BaseCusActivity(), View.OnClickListener,NetDataView<PageData> {
+    private lateinit var mecPresenter : MecAppPresenter
     override fun getLayoutId(): Int {
         return R.layout.activity_about_us
     }
@@ -20,6 +26,8 @@ class PrivacyActivity : BaseActivity<NetData>(), View.OnClickListener {
     }
 
     override fun initPresenter() {
+        mecPresenter = MecAppPresenter(this)
+        mecPresenter.getPageInfo(3)
     }
 
     override fun showLoading() {
@@ -33,6 +41,15 @@ class PrivacyActivity : BaseActivity<NetData>(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         finish()
+    }
+
+    override fun refreshUI(data: PageData?) {
+        if (data?.result!=null){
+            tv_info.text =data?.result.content
+        }
+    }
+
+    override fun loadMore(data: PageData?) {
     }
 
 }

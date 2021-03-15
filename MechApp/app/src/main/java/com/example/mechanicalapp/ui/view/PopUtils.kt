@@ -16,8 +16,6 @@ object PopUtils{
     private var view: View? = null
     private var popupWindow:PopupWindow?=null
 
-
-
      fun init(mContext: Context, activity: Activity, listen:onViewListener ) :PopupWindow {
         view= View.inflate(mContext,R.layout.pop_recycler,null)
 
@@ -157,6 +155,16 @@ object PopUtils{
     fun dismissPop(activity: Activity){
         popupWindow?.dismiss()
         activity?.let { backgroundAlpha(1f, it) }
+    }
+    fun dismissPop(activity: Activity,mPop :PopupWindow){
+        mPop?.dismiss()
+        activity?.let { backgroundAlpha(1f, it) }
+    }
+
+    fun clearPop() {
+        if (popupWindow!=null){
+            popupWindow = null
+        }
     }
 
 

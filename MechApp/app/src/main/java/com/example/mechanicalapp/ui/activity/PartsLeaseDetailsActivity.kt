@@ -26,6 +26,7 @@ import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
+import com.netease.nim.uikit.api.NimUIKit
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
@@ -110,6 +111,14 @@ class PartsLeaseDetailsActivity : BaseCusActivity(), View.OnClickListener, PopUt
             R.id.ly_user_info->jumHomePage()
             R.id.tv_collected->collect()
             R.id.tv_address->jumThreeMap(mData?.gpsLat,mData?.gpsLon,mData?.address)
+            R.id.ly_chat->goToChat()
+        }
+    }
+    private fun goToChat() {
+        if (mData!=null&&mData?.imId!=null){
+            if (!TextUtils.isEmpty(mData?.imId)){
+                NimUIKit.startP2PSession(this, mData?.imId)
+            }
         }
     }
     private fun shareThree(type: SHARE_MEDIA){

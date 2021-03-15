@@ -22,6 +22,7 @@ import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
+import com.netease.nim.uikit.api.NimUIKit
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
@@ -111,6 +112,14 @@ class FactoryDetails :BaseCusActivity() , PopUtils.onViewListener,View.OnClickLi
             R.id.tv_collected->collect()
             R.id.ly_comment ->jumFactoryComment()
             R.id.iv_player->jumPlayer()
+            R.id.ly_chat->goToChat()
+        }
+    }
+    private fun goToChat() {
+        if (mData!=null&&mData?.imId!=null){
+            if (!TextUtils.isEmpty(mData?.imId)){
+                NimUIKit.startP2PSession(this, mData?.imId)
+            }
         }
     }
 

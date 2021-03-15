@@ -22,32 +22,18 @@ import com.example.mechanicalapp.ui.mvp.p.MecAppPresenter
 import com.example.mechanicalapp.ui.mvp.v.MecDetailsView
 import com.example.mechanicalapp.ui.view.PopUtils
 import com.example.mechanicalapp.utils.DateUtils
+import com.example.mechanicalapp.utils.ImageLoadUtils
 import com.example.mechanicalapp.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.luck.picture.lib.PictureSelector
+import com.netease.nim.uikit.api.NimUIKit
 import com.umeng.socialize.ShareAction
 import com.umeng.socialize.bean.SHARE_MEDIA
 import com.umeng.socialize.media.UMImage
 import com.umeng.socialize.media.UMWeb
 import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.listener.OnBannerListener
-import kotlinx.android.synthetic.main.activity_mec_buy_details.*
 import kotlinx.android.synthetic.main.activity_mec_sell_details.*
-import kotlinx.android.synthetic.main.activity_mec_sell_details.iv_sr
-import kotlinx.android.synthetic.main.activity_mec_sell_details.ly_call
-import kotlinx.android.synthetic.main.activity_mec_sell_details.ly_chat
-import kotlinx.android.synthetic.main.activity_mec_sell_details.ly_user_info
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_address
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_browse
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_browse_time
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_collected
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_details
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_mec_brand
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_mec_model
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_mec_type
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_report
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_user_nick
-import kotlinx.android.synthetic.main.activity_mec_sell_details.tv_work_time
 import kotlinx.android.synthetic.main.layout_left_right_title.*
 
 class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onViewListener,OnBannerListener<BannerData>,
@@ -125,6 +111,14 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             R.id.tv_pop_cancel -> PopUtils.dismissPop(this)
             R.id.ly_user_info -> jumHomePage()
             R.id.tv_collected->collect()
+            R.id.ly_chat->goToChat()
+        }
+    }
+    private fun goToChat() {
+        if (mData!=null&&mData?.imId!=null){
+            if (!TextUtils.isEmpty(mData?.imId)){
+                NimUIKit.startP2PSession(this, mData?.imId)
+            }
         }
     }
     private fun shareThree(type: SHARE_MEDIA){
@@ -262,7 +256,8 @@ class MecSellDetails  : BaseCusActivity(), View.OnClickListener, PopUtils.onView
             tv_user_nick.text ="昵称：${data.contactName}"
             tv_lease_user_nick.text =data.contactName
 
-
+            ImageLoadUtils.loadCircle(this,iv_lease_user_pic,data.avatar)
+            ImageLoadUtils.loadCircle(this,iv_user_pic,data.avatar)
             if (data.isNew == "1"){
                tv_label.visibility=View.VISIBLE
             }else{

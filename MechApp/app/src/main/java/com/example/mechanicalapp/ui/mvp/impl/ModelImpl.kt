@@ -1474,4 +1474,11 @@ class ModelImpl : BaseModel {
 
 
     }
+
+    fun getPageInfo(type: Int, iSubscriberListener: ISubscriberListener<PageData>) {
+        appsService?.getPageInfo(type)
+            ?.subscribeOn(Schedulers.io())?.unsubscribeOn(Schedulers.io())?.observeOn(
+                AndroidSchedulers.mainThread()
+            )?.subscribe(NetSubscribe<PageData>(iSubscriberListener))
+    }
 }
